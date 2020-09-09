@@ -489,7 +489,7 @@ Sorting
 ^^^^^^^
 
 Arrays can be sorted in either ascending or descending order using `array.sort() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}sort>`__. 
-The ``order`` parameter is optional and defaults to `order.ascending <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}order.ascending>`__. 
+The ``order`` parameter is optional and defaults to `order.ascending <https://www.tradingview.com/pine-script-reference/v4/#var_order{dot}ascending>`__. 
 As all ``array.*()`` function arguments, it is of form *series*, so can be determined at runtime, as is done here. 
 Note that in the example, which array is sorted is also determined at runtime::
 
