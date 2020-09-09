@@ -176,17 +176,17 @@ is an example of a script causing this problem::
     study("Requires max_bars_back")
     test = 0.0
     if bar_index > 1000
-        test := vwma(close, 20)
+        test := roc(close, 20)
     plot(test)
 
 In order to help Pine with detection, you should add the ``max_bars_back`` 
 parameter to the script's ``study`` or ``strategy`` function::
 
     //@version=4
-    study("Requires max_bars_back", max_bars_back=3000)
+    study("Requires max_bars_back", max_bars_back=20)
     test = 0.0
     if bar_index > 1000
-        test := vwma(close, 20)
+        test := roc(close, 20)
     plot(test)
 
 You may also resolve the issue by taking the problematic 
@@ -196,9 +196,9 @@ parameter is not required::
     //@version=4
     study("Requires max_bars_back")
     test = 0.0
-    vwma20 = vwma(close, 20)
+    roc20 = roc(close, 20)
     if bar_index > 1000
-        test := vwma20
+        test := roc20
     plot(test)
     
 In cases where the problem is caused by a **variable** rather than a built-in **function** (``vwma`` in our example), 

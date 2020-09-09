@@ -305,21 +305,6 @@ others are cancelled.
 The same is true for price type exits. Orders will be placed once their
 conditions are met, i.e., an entry order with a matching ID is filled.
 
-Example::
-
-    //@version=4
-    strategy("order place demo")
-    var counter = 0
-    counter := counter + 1
-    strategy.exit("bracket", "buy", profit=10, stop=10, when = counter == 1)
-    strategy.entry("buy", strategy.long, when=counter > 2)
-
-If you apply this example to a chart, you can see that the exit order
-is filled despite the fact that it has been generated only once,
-before the entry order to be closed was placed. However, the next entry
-was not closed before the end of the calculation, as the exit command has
-already been triggered.
-
 
 Closing market position
 -----------------------

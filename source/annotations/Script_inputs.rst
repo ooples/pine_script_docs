@@ -78,7 +78,7 @@ Session input
 ::
 
     s = input(title="Session", type=input.session, defval="24x7")
-    plot(time(period, s))
+    plot(time(timeframe.period, s))
 
 .. figure:: images/Inputs_of_indicator_5.png
 
