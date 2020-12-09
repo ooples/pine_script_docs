@@ -54,8 +54,11 @@ function call is assigned to ``prices``::
 
 Similar array creation functions exist for the other types of array elements: 
 `array.new_int() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}new_int>`__,
-`array.new_bool() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}new_bool>`__ and 
-`array.new_color() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}new_color>`__.
+`array.new_bool() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}new_bool>`__, 
+`array.new_color() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}new_color>`__,
+`array.new_line() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}new_line>`__,
+`array.new_label() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}new_label>`__ and 
+`array.new_string() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}new_string>`__.
 
 When declaring an array, you can initialize all elements in the array using the ``initial_value`` parameter. 
 When no argument is supplied for ``initial_value``, the array elements are initialized to ``na``.
@@ -429,7 +432,8 @@ to operate on all of an array's values. The available functions are:
 `array.stdev() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}stdev>`__, 
 `array.sum() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}sum>`__, 
 `array.variance() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}variance>`__, 
-`array.covariance() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}covariance>`__.
+`array.covariance() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}covariance>`__,
+`array.range() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}range>`__.
 
 Note that contrary to the usual mathematical functions in Pine, those used on arrays do not return ``na`` when some of the values they 
 calculate on have ``na`` values. There are a few exceptions to this rule:
@@ -484,6 +488,23 @@ Note that simply using ``_b = a`` in the previous example would not have copied 
 From thereon, both variables would point to the same array, so using either one would affect the same array.
 
 |Arrays-ManipulatingArrays-Copy.png|
+
+Joining
+^^^^^^^^^
+
+Use ``array.join`` to concatenate all of the elements in the array into a string and separate these elements with the specified separator::
+
+    //@version=4
+    study("")
+    v1 = array.new_string(10, "test")
+    v2 = array.new_string(10, "test")
+    array.push(v2, "test1")
+    v3 = array.new_float(5, 5)
+    v4 = array.new_int(5, 5)
+    l1 = label.new(bar_index, close, array.join(v1))
+    l2 = label.new(bar_index, close, array.join(v2, ","))
+    l3 = label.new(bar_index, close, array.join(v3, ","))
+    l4 = label.new(bar_index, close, array.join(v4, ","))
 
 Sorting
 ^^^^^^^

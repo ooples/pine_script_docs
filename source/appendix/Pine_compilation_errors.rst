@@ -194,7 +194,7 @@ expression out of the conditional branch, in which case the ``max_bars_back``
 parameter is not required::
 
     //@version=4
-    study("Requires max_bars_back")
+    study("My Script")
     test = 0.0
     roc20 = roc(close, 20)
     if bar_index > 1000

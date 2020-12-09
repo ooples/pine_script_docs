@@ -14,6 +14,7 @@ cannot be inferred at compile time, it can be explicitly defined using the ``typ
 Pine supports the following types of input:
 
 -  input.bool,
+-  input.color,
 -  input.integer,
 -  input.float,
 -  input.string,
@@ -35,6 +36,14 @@ Boolean input
 
 .. figure:: images/Inputs_of_indicator_1.png
 
+Color input
+^^^^^^^^^^^
+::
+
+    c = input(title="Color", type=input.color, defval=color.red)
+    plot(close, color=c)
+
+.. figure:: images/Inputs_of_indicator_8.png
 
 Integer input
 ^^^^^^^^^^^^^

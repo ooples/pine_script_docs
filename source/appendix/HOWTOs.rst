@@ -33,6 +33,22 @@ combination with ``tickerid`` function. Here is an example::
 
 In a similar way we may get other OHLC prices: *open*, *high* and *low*.
 
+Get non-standard OHLC values on a standard chart
+------------------------------------------
+
+Backtesting on non-standard chart types (e.g. Heikin Ashi or Renko) is not recommended because the bars on these kinds of charts do not represent real price movement that you would encounter while trading. If you want your strategy to enter and exit on real prices but still use Heikin Ashi-based signals, you can use the same method to get Heikin Ashi values on a regular candlestick chart::
+
+    //@version=4
+    strategy("BarUpDn Strategy", overlay=true, default_qty_type = strategy.percent_of_equity, default_qty_value = 10)
+    maxIdLossPcnt = input(1, "Max Intraday Loss(%)", type=input.float)
+    strategy.risk.max_intraday_loss(maxIdLossPcnt, strategy.percent_of_equity)
+    needTrade() => close > open and open > close[1] ? 1 : close < open and open < close[1] ? -1 : 0
+    trade = security(heikinashi(syminfo.tickerid), timeframe.period, needTrade())
+    if (trade == 1)
+        strategy.entry("BarUp", strategy.long)
+    if (trade == -1)
+        strategy.entry("BarDn", strategy.short)
+
 Plot arrows on the chart
 ------------------------
 
