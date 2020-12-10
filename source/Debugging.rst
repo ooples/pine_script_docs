@@ -32,6 +32,14 @@ subsequent bar::
 
 |Debugging-PlottingNumericValues-BarIndex1.png|
 
+Note the following in the screenshot:
+
+1. The chart's cursor is on the dataset's first bar.
+1. The Data Window is show in a pane, to the right of the chart. The fourth icon down to the right is used to display the Data Window.
+1. In the Data Window, the value of our plot is displayed. Because our cursor is on the first bar, the value of ``bar_index`` on that bar is displayed, i.e., zero. Moving your cursor on other bars will update the value shown so that it always represents the value of the plot on that bar.
+1. Our ``plot()`` plots the value of ``bar_index`` as it increases by one on each bar.
+
+
 
 Many experienced programmers first look for a debugging console when they begin coding in Pine. While a console concept does not exist 
 
