@@ -16,8 +16,8 @@ If you are not yet familiar with Pine's execution model, it is important that yo
 so that you can understand how your debugging code will behave in the Pine environment.
 
 
-Plotting numerical values
--------------------------
+Plotting numeric values
+-----------------------
 
 The simplest way to inspect numerical values is to just plot them in your script's display area. Whether your script is in a pane or on the chart, 
 you will be able to see the variable's value on each bar.
@@ -30,7 +30,7 @@ subsequent bar::
     study("Plot `bar_index`")
     plot(bar_index)
 
-
+|Arrays-Scope-Bands.png|
 
 
 Many experienced programmers first look for a debugging console when they begin coding in Pine. While a console concept does not exist 
