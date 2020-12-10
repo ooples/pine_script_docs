@@ -50,7 +50,3 @@ Good to know:
 
 Many experienced programmers first look for a debugging console when they begin coding in Pine. While a console concept does not exist 
 
-
-
-
-.. |Debugging-PlottingNumericValues-BarIndex1.png| image:: ../images/Debugging-PlottingNumericValues-BarIndex1.png
