@@ -9,6 +9,26 @@ Debugging
 Introduction
 ------------
 
+The close integration in TradingView between the Pine Editor and charts allows for efficient and interactive debugging of Pine code. 
+Once a Pine programmer understands the most appropriate technique to debug each type of situation, he will be able to debug quickly and thoroughly. 
+
+If you are not yet familiar with Pine's execution model, it is important that you read the 
+
+
+Plotting numerical values
+-------------------------
+
+You can plot any numerical value directly in your script's display area, whether your script is in a pane or on the chart. 
+This script 
+
+
+
+Many experienced programmers first look for a debugging console when they begin coding in Pine. While a console concept does not exist 
+
+
+
+For this, it is essential to learn  it an ideal environment to debug Pine code.write Pine code makes it particularly well-suited to debugging
+
 Arrays can be used to store multiple values in one data structure. Think of them as a better way to handle cases where you would
 otherwise need a set of variables named ``price00``, ``price01`` and ``price02``. Arrays are an advanced feature used for scripts 
 requiring intricate data-handling. If you are a beginning Pine programmer, we recommend you become familiar with other, 
