@@ -30,7 +30,7 @@ subsequent bar::
     study("Plot `bar_index`")
     plot(bar_index)
 
-|Arrays-Scope-Bands.png|
+|Debugging-PlottingNumericValues-BarIndex1.png|
 
 
 Many experienced programmers first look for a debugging console when they begin coding in Pine. While a console concept does not exist 
@@ -749,6 +749,8 @@ the parent array's indices 3 to 4, is pointing out of the parent array's boundar
     array.remove(a, 0)
     c = array.indexof(b, 2)
     plot(c)
+
+.. |Debugging-PlottingNumericValues-BarIndex1.png| image:: ../images/Debugging-PlottingNumericValues-BarIndex1.png
 
 
 
