@@ -41,6 +41,7 @@ Note the following in the preceding screenshot:
   - By using the ``precision`` parameter in your script's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__ or `strategy() <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy>`__ declaration statement. This method allows specifying up to 16 digits precision.
 
 - The `plot() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ call in our script plots the value of ``bar_index`` in the indicator's pane, which shows the increasing value of the variable.
+- The scale of the script's pane is automatically sized to accommodate the smallest and largest values plotted by all ``plot()`` calls in the script.
 
 
 Displaying numeric values
@@ -74,10 +75,10 @@ Running the script on a dataset containing a large number of bars yields the fol
 
 where:
 
-1. The RSI line in black is flat.
+1. The RSI line in black is flat because it varies between zero and 100, but the indicator's pane is scaled to show the maximum value of ``bar_index``, which is ``25692.0000``.
 2. The value of ``bar_index`` on the bar the cursor is on is displayed next to the indicator's name, and its blue plot in the script's pane is flat.
 3. The ``25692.0000`` value of ``bar_index`` shown in the scale represents its value on the last bar, so the dataset contains 25693 bars.
-4. The value of ``bar_index`` on the bar the cursor is on is also displayed in the Data Window.
+4. The value of ``bar_index`` on the bar the cursor is on is also displayed in the Data Window, along with that bar's value for RSI just above it.
 
 In order to preserve our plot of RSI while still being able to inspect the value or ``bar_index``, we will plot the variable using `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ like this::
 
@@ -89,9 +90,15 @@ In order to preserve our plot of RSI while still being able to inspect the value
 
 .. image:: images/Debugging-PreservingTheScriptsScale-2.png
 
+where:
 
-Preserving the script's scale
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- Because the value of ``bar_index`` is no longer being plotted in the script's pane, the pane's boundaries are now those of RSI, which displays normally.
+- The value plotted using ``plotchar()`` is displayed next to the script's name and in the Data Window.
+- We are not plotting a character with our ``plotchar()`` call, so the third argument is an empty string (``""``). We are also specifying ``location.top`` as the ``location`` argument, so that we do not put the symbol's price in play in the calculation of the display area's boundaries.
+
+
+Plotting similar values
+^^^^^^^^^^^^^^^^^^^^^^^
 
 
 
