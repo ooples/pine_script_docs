@@ -375,8 +375,8 @@ and using it on an empty array would provoke a runtime error when the maximum nu
 
 When a new pivot is detected, we create a label for it, saving the label's id in the ``pLabel`` variable. 
 We then de-queue the oldest label by removing the array's first element using 
-`array.shift() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}shift>`__ and delete the label referenced by that array element's value. 
-Note that until the maximum number of labels have been created we will be deleting ``na`` label id's 
+`array.shift() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}shift>`__ and deleting the label referenced by that array element's value. 
+Note that until the maximum number of labels has been created we will be deleting ``na`` label id's 
 because the array's first element will contain an ``na`` value, but this does not cause runtime errors.
 
 As we have now de-queued an element from our queue, the array contains ``i_pivotCount - 1`` elements. 
