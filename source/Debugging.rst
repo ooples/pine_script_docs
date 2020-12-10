@@ -52,7 +52,7 @@ When the script's scale is unimportant
 
 The script in the preceding screenshot used the simplest way to inspect numerical values: a ``plot()`` call, 
 which plots a line corresponding to the variable's value in the script's display area. Our example script plotted the value of the `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__ builtin variable, which contains the bar's number, a value beginning at zero on the dataset's first bar and increased by one on each 
-subsequent bar. We used a ``plot()`` call to plot the variable we wanted to inspect because our script was not plotting anything else; 
+subsequent bar. We used a ``plot()`` call to plot the variable to inspect because our script was not plotting anything else; 
 we were not preoccupied with preserving the scale for other plots to continue to plot normally. This is the script we used::
 
     //@version=4
