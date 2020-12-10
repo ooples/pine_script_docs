@@ -79,7 +79,15 @@ where:
 3. The ``25692.0000`` value of ``bar_index`` shown in the scale represents its value on the last bar, so the dataset contains 25693 bars.
 4. The value of ``bar_index`` on the bar the cursor is on is also displayed in the Data Window.
 
+In order to preserve our plot of RSI while still being able to inspect the value or ``bar_index``, we will plot the variable using `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ like this::
 
+    //@version=4
+    study("Plot RSI and `bar_index`")
+    r = rsi(close, 20)
+    plot(r, "RSI", color.black)
+    plotchar(bar_index, "Bar index", "", location.top)
+
+.. image:: images/Debugging-PreservingTheScriptsScale-2.png
 
 
 Preserving the script's scale
