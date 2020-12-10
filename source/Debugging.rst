@@ -17,6 +17,7 @@ If you are not yet familiar with Pine's execution model, it is important that yo
 so you understand how your debugging code will behave in the Pine environment.
 
 
+
 The lay of the land
 -------------------
 
@@ -29,15 +30,6 @@ Values plotted by Pine scripts can be displayed in four distinct places:
 
 .. image:: images/Debugging-TheLayOfTheLand-1.png
 
-Our script uses the simplest way to inspect numerical values: using `plot() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ 
-to just plot them in the script's display area. We use this technique to plot the value of `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__ 
-on each bar. ``bar_index`` is a built-in variable in Pine. It contains a bar's number, which begins at zero on the dataset's first bar and increases by one on each 
-subsequent bar::
-
-    //@version=4
-    study("Plot `bar_index`")
-    plot(bar_index)
-
 Note the following in the preceding screenshot:
 
 - The chart's cursor is on the dataset's first bar, where ``bar_index`` is zero. That value is reflected in its display next to the indicator's name and in the Data Window. **Moving your cursor on other bars would update the value shown so that it always represents the value of the plot on that bar.** This is a good way to inspect the value of a variable as the script's execution progresses from bar to bar.
@@ -49,17 +41,30 @@ Note the following in the preceding screenshot:
   - By using the ``precision`` parameter in your script's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__ or `strategy() <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy>`__ declaration statement. This method allows specifying up to 16 digits precision.
 
 
-Displaying strings
-------------------
+
+Displaying numeric values
+-------------------------
+
+The script used in the preceding screenshot uses the simplest way to inspect numerical values: a `plot() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ 
+call, which plots a line corresponding to the variable's value.  in the script's display area. We use this technique to plot the value of `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__ 
+on each bar. ``bar_index`` is a built-in variable in Pine. It contains a bar's number, which begins at zero on the dataset's first bar and increases by one on each 
+subsequent bar::
+
+    //@version=4
+    study("Plot `bar_index`")
+    plot(bar_index)
+
+
+Preserving the script's scale
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Plotting values in the script's scale is not always possible, as they may distort the script's scale and make other plots unreadable.
 Displaying values 
 
-Good to know:
 
+Preserving the script's scale
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-
-Many experienced programmers first look for a debugging console when they begin coding in Pine. While a console concept does not exist 
 
 
 Displaying strings
