@@ -43,7 +43,9 @@ Note the following in the screenshot:
 Good to know:
 
 - The precision of the values displayed in the Data Window is dependent on the chart symbol's tick value. You can modify it in two ways:
+
   - By changing the value of the "Precision" field in the script's "Settings/Style" tab. You can obtain up to eight digits of precision using this method.
+
   - By using the ``precision`` parameter in your script's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__ or `strategy() <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy>`__ declaration statement. This method allows specifying up to 16 digits precision.
 
 Many experienced programmers first look for a debugging console when they begin coding in Pine. While a console concept does not exist 
