@@ -30,7 +30,7 @@ subsequent bar::
     study("Plot `bar_index`")
     plot(bar_index)
 
-|Debugging-PlottingNumericValues-BarIndex1.png|
+.. image:: images/Debugging-PlottingNumericValues-BarIndex1.png
 
 Note the following in the screenshot:
 
