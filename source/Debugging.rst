@@ -100,24 +100,23 @@ where:
 - We are not plotting a character with our ``plotchar()`` call, so the third argument is an empty string (``""``). We are also specifying ``location.top`` as the ``location`` argument, so that we do not put the symbol's price in play in the calculation of the display area's boundaries.
 
 
-Plotting similar values
-^^^^^^^^^^^^^^^^^^^^^^^
-
-
 
 Displaying strings
 ------------------
+
+
+
+Debugging conditions
+--------------------
+
 
 
 Debugging from inside functions
 -------------------------------
 
 
+
 Debugging from inside 'for' loops
 ---------------------------------
-
-
-Debugging conditions
---------------------
 
 
