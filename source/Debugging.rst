@@ -22,7 +22,7 @@ Displaying plotted values
 
 Values plotted by Pine scripts can be displayed in four distinct places:
 
-#. In the script's pane, whether your script is in a separate pane or on the chart.
+#. In the script's pane, whether your script is an overlay on the chart or in a separate pane.
 #. Next to the script's name (controlled by the *Indicator Values* checkbox in the *Chart settings/Status Line* tab).
 #. In the Data Window (which you can bring up using the fourth icon down to the right of your chart).
 #. In the scale (only displays the last bar's value and is controlled by the *Indicator Last Value Label* in the *Chart settings/Scale* tab).
