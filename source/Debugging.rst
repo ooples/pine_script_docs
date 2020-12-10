@@ -40,27 +40,46 @@ Note the following in the preceding screenshot:
 
   - By using the ``precision`` parameter in your script's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__ or `strategy() <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy>`__ declaration statement. This method allows specifying up to 16 digits precision.
 
-- The ``plot()`` call in our script plots the value of ``bar_index`` in the indicator's pane, which shows the increasing value of the variable.
+- The `plot() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ call in our script plots the value of ``bar_index`` in the indicator's pane, which shows the increasing value of the variable.
 
 
 Displaying numeric values
 -------------------------
 
-The script used in the preceding screenshot uses the simplest way to inspect numerical values: a `plot() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ 
-call, which plots a line corresponding to the variable's value.  in the script's display area. We use this technique to plot the value of `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__ 
-on each bar. ``bar_index`` is a built-in variable in Pine. It contains a bar's number, which begins at zero on the dataset's first bar and increases by one on each 
-subsequent bar::
+The script used in the preceding screenshot uses the simplest way to inspect numerical values: a ``plot()`` call, 
+which plots a line corresponding to the variable's value in the script's display area. The script plots the value of `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__. ``bar_index`` is a built-in variable which contains a bar's number. It begins at zero on the dataset's first bar and increases by one on each 
+subsequent bar. This is the script we used::
 
     //@version=4
     study("Plot `bar_index`")
-    plot(bar_index)
+    plot(bar_index, "Bar Index")
 
 
 Preserving the script's scale
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Plotting values in the script's scale is not always possible, as they may distort the script's scale and make other plots unreadable.
-Displaying values 
+Plotting values in the script's display area is not always possible. When we already have other plots going on and adding debugging plots of variables whose values fall outside the script's plotting boundaries would make the plots unreadable, another technique must be used to inspect values if we want to preserve the scale of the other plots.
+
+Suppose we want to continue inspecting the value of ``bar_index``, but this time in a script where we are also plotting RSI::
+
+    //@version=4
+    study("Plot RSI and `bar_index`")
+    r = rsi(close, 20)
+    plot(r, "RSI", color.black)
+    plot(bar_index, "Bar Index")
+
+Running the script on a dataset containing a large number of bars yields the following display::
+
+.. image:: images/Debugging-PreservingTheScriptsScale-1.png
+
+where:
+
+1. The RSI line in black is flat.
+2. The value of ``bar_index`` on the bar where the cursor is displayed next to the indicator's name and its blue plot in the script's pane is also flat.
+3. The ``25692.0000`` value of ``bar_index`` shown in the scale represents its value on the last bar, so the dataset contains 25693 bars.
+4. The value of ``bar_index`` on the bar where the cursor is also displayed in the Data Window.
+
+
 
 
 Preserving the script's scale
