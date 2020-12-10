@@ -75,9 +75,9 @@ Running the script on a dataset containing a large number of bars yields the fol
 where:
 
 1. The RSI line in black is flat.
-2. The value of ``bar_index`` on the bar where the cursor is displayed next to the indicator's name and its blue plot in the script's pane is also flat.
+2. The value of ``bar_index`` on the bar the cursor is on is displayed next to the indicator's name, and its blue plot in the script's pane is flat.
 3. The ``25692.0000`` value of ``bar_index`` shown in the scale represents its value on the last bar, so the dataset contains 25693 bars.
-4. The value of ``bar_index`` on the bar where the cursor is also displayed in the Data Window.
+4. The value of ``bar_index`` on the bar the cursor is on is also displayed in the Data Window.
 
 
 
