@@ -9,12 +9,28 @@ Debugging
 Introduction
 ------------
 
-The close integration in TradingView between the Pine Editor and charts allows for efficient and interactive debugging of Pine code. 
+TradingView's close integration between the Pine Editor and charts allows for efficient and interactive debugging of Pine code. 
 Once a Pine programmer understands the most appropriate technique to debug each type of situation, he will be able to debug quickly and thoroughly. 
+This page demonstrates the most useful techniques to debug Pine code.
 
 If you are not yet familiar with Pine's execution model, it is important that you read the :doc:`/language/Execution_model` page of this User Manual 
-so that you can understand how your debugging code will behave in the Pine environment.
+so you understand how your debugging code will behave in the Pine environment.
 
+
+Displaying plotted values
+-------------------------
+
+Values plotted by Pine scripts can be displayed in four distinct places:
+
+#. In the script's pane, whether your script is in a separate pane or on the chart.
+#. Next to the script's name (controlled by the *Indicator Values* checkbox in the *Chart settings/Status Line* tab).
+#. In the Data Window (which you can bring up using the fourth icon down to the right of your chart).
+#. In the scale (only displays the last bar's value and is controlled by the *Indicator Last Value Label* in the *Chart settings/Scale* tab).
+
+.. image:: images/Debugging-DisplayingPlottedValues-1.png
+
+Plotting values in the script's scale is not always possible, as they may distort the script's scale and make other plots unreadable.
+Displaying values 
 
 Plotting numeric values
 -----------------------
