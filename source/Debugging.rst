@@ -40,10 +40,12 @@ subsequent bar::
 
 Note the following in the preceding screenshot:
 
-#. The chart's cursor is on the dataset's first bar, where ``bar_index`` is zero. That value is reflected in the value next to the indicator's name and in the Data Window. Moving your cursor on other bars would update the value shown so that it always represents the value of the plot on that bar. This is a good way to inspect the value of a variable as the script's execution progresses from bar to bar.
-#. The `plot() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ call in our script plots the value of ``bar_index`` in the indicator's pane, which shows the increasing value of the variable.
-#. The precision of the values displayed in the Data Window is dependent on the chart symbol's tick value. You can modify it in two ways:
+- The chart's cursor is on the dataset's first bar, where ``bar_index`` is zero. That value is reflected in the value next to the indicator's name and in the Data Window. Moving your cursor on other bars would update the value shown so that it always represents the value of the plot on that bar. This is a good way to inspect the value of a variable as the script's execution progresses from bar to bar.
+- The `plot() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ call in our script plots the value of ``bar_index`` in the indicator's pane, which shows the increasing value of the variable.
+- The precision of the values displayed in the Data Window is dependent on the chart symbol's tick value. You can modify it in two ways:
+ 
   - By changing the value of the *Precision* field in the script's *Settings/Style* tab. You can obtain up to eight digits of precision using this method.
+
   - By using the ``precision`` parameter in your script's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__ or `strategy() 
 
 Plotting values in the script's scale is not always possible, as they may distort the script's scale and make other plots unreadable.
