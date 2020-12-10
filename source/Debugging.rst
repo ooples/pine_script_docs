@@ -75,7 +75,7 @@ Suppose we want to continue inspecting the value of ``bar_index``, but this time
 
 Running the script on a dataset containing a large number of bars yields the following display:
 
-.. image:: images/Debugging-PreservingTheScriptsScale-1.png
+.. image:: images/Debugging-DisplayingNumericValues-1.png
 
 where:
 
@@ -92,7 +92,7 @@ In order to preserve our plot of RSI while still being able to inspect the value
     plot(r, "RSI", color.black)
     plotchar(bar_index, "Bar index", "", location.top)
 
-.. image:: images/Debugging-PreservingTheScriptsScale-2.png
+.. image:: images/Debugging-DisplayingNumericValues-2.png
 
 where:
 
