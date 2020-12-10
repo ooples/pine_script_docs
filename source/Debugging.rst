@@ -47,6 +47,9 @@ Note the following in the preceding screenshot:
 Displaying numeric values
 -------------------------
 
+When the script's scale is unimportant
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 The script used in the preceding screenshot uses the simplest way to inspect numerical values: a ``plot()`` call, 
 which plots a line corresponding to the variable's value in the script's display area. The script plots the value of `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__. ``bar_index`` is a built-in variable which contains a bar's number. It begins at zero on the dataset's first bar and increases by one on each 
 subsequent bar. This is the script we used::
@@ -56,8 +59,8 @@ subsequent bar. This is the script we used::
     plot(bar_index, "Bar Index")
 
 
-Preserving the script's scale
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+When the script's scale must be preserved
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Plotting values in the script's display area is not always possible. When we already have other plots going on and adding debugging plots of variables whose values fall outside the script's plotting boundaries would make the plots unreadable, another technique must be used to inspect values if we want to preserve the scale of the other plots.
 
