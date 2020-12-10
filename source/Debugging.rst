@@ -46,14 +46,18 @@ Note the following in the preceding screenshot:
  
   - By changing the value of the *Precision* field in the script's *Settings/Style* tab. You can obtain up to eight digits of precision using this method.
 
-  - By using the ``precision`` parameter in your script's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__ or `strategy() 
+  - By using the ``precision`` parameter in your script's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__ or `strategy() <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy>`__ declaration statement. This method allows specifying up to 16 digits precision.
+
+
+Displaying strings
+------------------
 
 Plotting values in the script's scale is not always possible, as they may distort the script's scale and make other plots unreadable.
 Displaying values 
 
 Good to know:
 
-<https://www.tradingview.com/pine-script-reference/v4/#fun_strategy>`__ declaration statement. This method allows specifying up to 16 digits precision.
+
 
 Many experienced programmers first look for a debugging console when they begin coding in Pine. While a console concept does not exist 
 
