@@ -35,9 +35,7 @@ Displaying values
 Plotting numeric values
 -----------------------
 
-The simplest way to inspect numerical values is to just plot them in your script's display area. Whether your script is in a pane or on the chart, 
-you will be able to see the variable's value on each bar.
-
+The simplest way to inspect numerical values is to just plot them in your script's display area. 
 This script plots the value of `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__ on each bar. 
 ``bar_index`` is a built-in variable in Pine. It contains a bar's number, which begins at zero on the dataset's first bar and increases by one on each 
 subsequent bar::
