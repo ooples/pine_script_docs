@@ -12,14 +12,19 @@ Introduction
 The close integration in TradingView between the Pine Editor and charts allows for efficient and interactive debugging of Pine code. 
 Once a Pine programmer understands the most appropriate technique to debug each type of situation, he will be able to debug quickly and thoroughly. 
 
-If you are not yet familiar with Pine's execution model, it is important that you read the :doc:`/language/Execution_model` page of this User Manual.
+If you are not yet familiar with Pine's execution model, it is important that you read the :doc:`/language/Execution_model` page of this User Manual 
+so that you can understand how your debugging code will behave in the Pine environment.
 
 
 Plotting numerical values
 -------------------------
 
-You can plot any numerical value directly in your script's display area, whether your script is in a pane or on the chart. 
-This script 
+The simplest way to inspect numerical values is to just plot them in your script's display area. Whether your script is in a pane or on the chart, 
+you will be able to see the variable's value on each bar.
+
+This script plots the value of `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__ on each bar. ``bar_index``::
+
+
 
 
 
