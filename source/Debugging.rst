@@ -17,8 +17,8 @@ If you are not yet familiar with Pine's execution model, it is important that yo
 so you understand how your debugging code will behave in the Pine environment.
 
 
-Displaying plotted values
--------------------------
+The lay of the land
+-------------------
 
 Values plotted by Pine scripts can be displayed in four distinct places:
 
