@@ -24,27 +24,24 @@ Values plotted by Pine scripts can be displayed in four distinct places:
 
 #. In the script's pane, whether your script is an overlay on the chart or in a separate pane.
 #. Next to the script's name (controlled by the *Indicator Values* checkbox in the *Chart settings/Status Line* tab).
-#. In the Data Window (which you can bring up using the fourth icon down to the right of your chart).
 #. In the scale (only displays the last bar's value and is controlled by the *Indicator Last Value Label* in the *Chart settings/Scale* tab).
+#. In the Data Window (which you can bring up using the fourth icon down to the right of your chart).
 
 .. image:: images/Debugging-DisplayingPlottedValues-1.png
 
-Plotting values in the script's scale is not always possible, as they may distort the script's scale and make other plots unreadable.
-Displaying values 
-
-Plotting numeric values
------------------------
-
-The simplest way to inspect numerical values is to just plot them in your script's display area. 
-This script plots the value of `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__ on each bar. 
-``bar_index`` is a built-in variable in Pine. It contains a bar's number, which begins at zero on the dataset's first bar and increases by one on each 
+Our script uses the simplest way to inspect numerical values: using `plot() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ 
+to just plot them in the script's display area. We use this technique to plot the value of `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__ 
+on each bar. ``bar_index`` is a built-in variable in Pine. It contains a bar's number, which begins at zero on the dataset's first bar and increases by one on each 
 subsequent bar::
 
     //@version=4
     study("Plot `bar_index`")
     plot(bar_index)
 
-.. image:: images/Debugging-PlottingNumericValues-BarIndex1.png
+
+
+Plotting values in the script's scale is not always possible, as they may distort the script's scale and make other plots unreadable.
+Displaying values 
 
 Note the following in the screenshot:
 
@@ -63,4 +60,21 @@ Good to know:
   - By using the ``precision`` parameter in your script's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__ or `strategy() <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy>`__ declaration statement. This method allows specifying up to 16 digits precision.
 
 Many experienced programmers first look for a debugging console when they begin coding in Pine. While a console concept does not exist 
+
+
+Displaying strings
+------------------
+
+
+Debugging from inside functions
+-------------------------------
+
+
+Debugging from inside 'for' loops
+---------------------------------
+
+
+Debugging conditions
+--------------------
+
 
