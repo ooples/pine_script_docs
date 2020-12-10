@@ -38,26 +38,22 @@ subsequent bar::
     study("Plot `bar_index`")
     plot(bar_index)
 
+Note the following in the preceding screenshot:
 
+#. The chart's cursor is on the dataset's first bar, where ``bar_index`` is zero. That value is reflected in the value next to the indicator's name and in the Data Window. Moving your cursor on other bars would update the value shown so that it always represents the value of the plot on that bar. This is a good way to inspect the value of a variable as the script's execution progresses from bar to bar.
+#. The `plot() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ call in our script plots the value of ``bar_index`` in the indicator's pane, which shows the increasing value of the variable.
+#. The precision of the values displayed in the Data Window is dependent on the chart symbol's tick value. You can modify it in two ways:
+
+  - By changing the value of the *Precision* field in the script's *Settings/Style* tab. You can obtain up to eight digits of precision using this method.
+
+  - By using the ``precision`` parameter in your script's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__ or `strategy() 
 
 Plotting values in the script's scale is not always possible, as they may distort the script's scale and make other plots unreadable.
 Displaying values 
 
-Note the following in the screenshot:
-
-#. The chart's cursor is on the dataset's first bar.
-#. The Data Window is show in a vertical pane, to the right of the chart.
-#. The fourth icon down the right is used to display the Data Window.
-#. In the Data Window, the value of our plot is displayed. Because our cursor is on the first bar, the value of ``bar_index`` on that bar is displayed, i.e., zero. Moving your cursor on other bars will update the value shown so that it always represents the value of the plot on that bar.
-#. The `plot() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ call in our script plots the value of ``bar_index`` as it increases by one on each bar.
-
 Good to know:
 
-- The precision of the values displayed in the Data Window is dependent on the chart symbol's tick value. You can modify it in two ways:
-
-  - By changing the value of the *Precision* field in the script's *Settings/Style* tab. You can obtain up to eight digits of precision using this method.
-
-  - By using the ``precision`` parameter in your script's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__ or `strategy() <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy>`__ declaration statement. This method allows specifying up to 16 digits precision.
+<https://www.tradingview.com/pine-script-reference/v4/#fun_strategy>`__ declaration statement. This method allows specifying up to 16 digits precision.
 
 Many experienced programmers first look for a debugging console when they begin coding in Pine. While a console concept does not exist 
 
