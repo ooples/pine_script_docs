@@ -17,6 +17,7 @@ Pine Script |version| User Manual
    language/index
    essential/index
    annotations/index
+   Debugging
    Publishing_scripts
    Public_Library
    Release_notes
@@ -28,4 +29,3 @@ Pine Script |version| User Manual
 .. TODO: Delete gotcha - operation could not be reverted
 .. TODO: Notes about Pine souce code versioning. How to revert to any previous version
 .. TODO: Pine publishing gotcha https://jira.xtools.tv/browse/JV-193
-.. TODO: 2019.08.09 21:03 — Luc: Would be nice to have a page on debugging techniques
