@@ -68,7 +68,7 @@ Suppose we want to continue inspecting the value of ``bar_index``, but this time
     plot(r, "RSI", color.black)
     plot(bar_index, "Bar Index")
 
-Running the script on a dataset containing a large number of bars yields the following display::
+Running the script on a dataset containing a large number of bars yields the following display:
 
 .. image:: images/Debugging-PreservingTheScriptsScale-1.png
 
