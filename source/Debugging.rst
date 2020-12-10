@@ -12,7 +12,7 @@ Introduction
 The close integration in TradingView between the Pine Editor and charts allows for efficient and interactive debugging of Pine code. 
 Once a Pine programmer understands the most appropriate technique to debug each type of situation, he will be able to debug quickly and thoroughly. 
 
-If you are not yet familiar with Pine's execution model, it is important that you read the 
+If you are not yet familiar with Pine's execution model, it is important that you read the :doc:`/language/Execution_model` page of this User Manual.
 
 
 Plotting numerical values
