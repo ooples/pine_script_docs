@@ -126,8 +126,8 @@ The following script demonstrates the simplest way to repetitively draw a label 
 .. image:: images/Debugging-DisplayingStrings-1.png
 
 
-Simple labels on last bar
-^^^^^^^^^^^^^^^^^^^^^^^^^
+Labels on last bar
+^^^^^^^^^^^^^^^^^^
 
 As strings manipulated in Pine scripts often do not change bar to bar, the method most frequently used to visualize them is to draw a label on the dataset's last bar. 
 Here, we use a function to create a more sophisticated label that only appears on the chart's last bar. Our ``f_print()`` function has only one parameter: the text string to be displayed::
@@ -169,10 +169,6 @@ Note the following in our last code example:
     ^+p:: SendInput f_print(_text) => var _label = label.new(bar_index, na, _text, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left), label.set_xy(_label, bar_index, highest(10)[1]), label.set_text(_label, _text)`nf_print(){Left}
 
   AutoHotKey works only on Windows systems. Keyboard Maestro and others can be substituted on Apple systems.
-
-
-More flexible labels on last bar
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 
