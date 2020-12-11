@@ -212,7 +212,7 @@ Many methods can be used to display occurrences where one or multiple conditions
 Note:
 
 - We define our condition in the ``rIsLow`` boolean variable and it is evaluated on each bar. The ``r < 30`` expression used to assign a value to the variable evaluates to ``true`` or ``false`` (or ``na`` when ``r`` is ``na``, as is the case in the first bars of the dataset).
-- **Method #1** uses a change in the color of the RSI plot on the condition. When the plot's color changes, it colors the plot from the preceding bar.
+- **Method #1** uses a change in the color of the RSI plot on the condition. Whenever a plot's color changes, it colors the plot from the preceding bar.
 - **Method #2** uses ``plotchar()`` to plot an up triangle in the bottom part of the indicator's display. 
   Using different combinations of positions and characters allows the simultaneous identification of many different conditions on a single bar.
   This is one of our preferred methods for identifying areas of interest on the chart.
