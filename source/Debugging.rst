@@ -115,7 +115,23 @@ The following script demonstrates the simplest way to repetitively draw a label 
 
 .. image:: images/Debugging-DisplayingStrings-1.png
 
-As strings manipulated in Pine scripts usually do not change bar to bar, the method most frequently used to visualize them is to draw a label on the dataset's last bar. 
+As strings manipulated in Pine scripts often do not change bar to bar, the method most frequently used to visualize them is to draw a label on the dataset's last bar. 
+Here, we use a function to create a more sophisticated label that only appears on the chart's last bar. Our ``f_print()`` function has only one parameter: the text string to be displayed::
+
+    //@version=4
+    study("f_print()", "", true)
+    f_print(_text) =>
+        // Create label on the first bar.
+        var _lbl = label.new(bar_index, highest(10)[1], _text, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left)
+        // On next bars, update the label's x and y position, and the text it displays.
+        label.set_xy(_lbl, bar_index, highest(10)[1])
+        label.set_text(_lbl, _text)
+
+    f_print("Multiplier = " + tostring(timeframe.multiplier) + "\nPeriod = " + timeframe.period + "\nHigh = " + tostring(high))
+    f_print("Hello world!\n\n\n\n")
+
+.. image:: images/Debugging-DisplayingStrings-2.png
+
 
 Debugging conditions
 --------------------
