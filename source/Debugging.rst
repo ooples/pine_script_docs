@@ -179,6 +179,29 @@ Note the following in our last code example:
 Debugging conditions
 --------------------
 
+Many methods can be used to display occurrences where one or multiple conditions are meant. This code shows six ways to identify bars where RSI is smaller than 30::
+
+    //@version=4
+    study("Displaying conditions")
+    r = rsi(close, 20)
+    rIsLow = r < 30
+    hline(30)
+
+    // Method #1: Change the plot's color.
+    plot(r, "RSI", rIsLow ? color.fuchsia : color.black)
+    // Method #2: Plot a character in the bottom region of the display.
+    plotchar(rIsLow, "rIsLow char at bottom", "▲", location.bottom, size = size.tiny)
+    // Method #3: Plot a character on the RSI line.
+    plotchar(rIsLow ? r : na, "rIsLow char on line", "•", location.absolute, color.red, size = size.small)
+    // Method #4: Plot a shape in the top region of the display.
+    plotshape(rIsLow, "rIsLow shape", shape.arrowup, location.top)
+    // Method #5: Plot an arrow.
+    plotarrow(rIsLow ? 1 : na, "rIsLow arrow")
+    // Method #6: Change the background's color.
+    bgcolor(rIsLow ? color.green : na)
+
+.. image:: Debugging-DisplayingConditions-1.png
+
 
 
 Debugging from inside functions
