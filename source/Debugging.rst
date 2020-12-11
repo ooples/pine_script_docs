@@ -202,6 +202,7 @@ Many methods can be used to display occurrences where one or multiple conditions
 
 .. image:: Debugging-DisplayingConditions-1.png
 
+aa
 
 
 Debugging from inside functions
