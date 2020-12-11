@@ -223,10 +223,49 @@ Note:
 - **Method #5** uses ``plotarrow()`` to plot a green up arrow at the bottom of the display when our condition is met.
 - **Method #6** uses ``bgcolor`` to change the color of the background when our condition is met. The ternary operator is used once again to evaluate our condition. 
   It will return ``color.green`` when ``rIsLow`` is true, and the ``na`` color (which does not color the background) when ``rIsLow`` is false or ``na``.
+- Lastly, note how a boolean variable with a ``true`` value displays as ``1`` in the Data Window. ``false`` values are denoted by a zero value.
 
 
 Compound conditions
 ^^^^^^^^^^^^^^^^^^^
+
+Programmers needing to identify situations where more than one condition is met need to build compound conditions by aggregating individual conditions using the `and <https://www.tradingview.com/pine-script-reference/v4/#op_and>`__ logical operator. Before including compound conditions in your Pine code, however, 
+you will save lots of time if you test its individual conditions separately, to be sure they occur when you expect. Multiple conditions can be displayed using a technique like this one, where we account for four individual conditions making up a compound condition::
+
+    //@version=4
+    study("Compound conditions")
+    i_period    = input(20)
+    i_bullLevel = input(55)
+
+    r = rsi(close, i_period)
+
+    // Condition #1.
+    rsiBull = r > i_bullLevel
+    // Condition #2.
+    hiChannel = highest(r, i_period * 2)[1]
+    aboveHiChannel = r > hiChannel
+    // Condition #3.
+    channelIsOld = hiChannel >= hiChannel[i_period]
+    // Condition #4.
+    historyIsBull = sum(rsiBull ? 1 : -1, i_period * 3) > 0
+    // Compound condition.
+    bull = rsiBull and aboveHiChannel and channelIsOld and historyIsBull
+
+    hline(i_bullLevel)
+    plot(r, "RSI", color.black)
+    plot(hiChannel, "High Channel")
+
+    plotchar(rsiBull ? i_bullLevel : na, "rIsBull", "1", location.absolute, color.green, size = size.tiny)
+    plotchar(aboveHiChannel ? r : na, "aboveHiChannel", "2", location.absolute, size = size.tiny)
+    plotchar(channelIsOld, "channelIsOld", "3", location.bottom, size = size.tiny)
+    plotchar(historyIsBull, "historyIsBull", "4", location.top, size = size.tiny)
+    bgcolor(bull ? not bull[1] ? color.new(color.green, 50) : color.green : na)
+
+.. image:: images/Debugging-DisplayingConditions-2.png
+
+Note:
+
+- xxx
 
 
 
