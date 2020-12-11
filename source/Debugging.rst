@@ -189,7 +189,7 @@ Single conditions
 Many methods can be used to display occurrences where one or multiple conditions are meant. This code shows six ways to identify bars where RSI is smaller than 30::
 
     //@version=4
-    study("Displaying conditions")
+    study("Single conditions")
     r = rsi(close, 20)
     rIsLow = r < 30
     hline(30)
@@ -197,7 +197,7 @@ Many methods can be used to display occurrences where one or multiple conditions
     // Method #1: Change the plot's color.
     plot(r, "RSI", rIsLow ? color.fuchsia : color.black)
     // Method #2: Plot a character in the bottom region of the display.
-    plotchar(rIsLow, "rIsLow char at bottom", "▲", location.bottom, size = size.tiny)
+    plotchar(rIsLow, "rIsLow char at bottom", "▲", location.bottom, size = size.small)
     // Method #3: Plot a character on the RSI line.
     plotchar(rIsLow ? r : na, "rIsLow char on line", "•", location.absolute, color.red, size = size.small)
     // Method #4: Plot a shape in the top region of the display.
@@ -209,7 +209,9 @@ Many methods can be used to display occurrences where one or multiple conditions
 
 .. image:: Debugging-DisplayingConditions-1.png
 
-aa
+Note:
+
+- We define our condition in the ``rIsLow`` boolean variable and it is evaluated on each bar. The ``r < 30`` expression used to assign a value to the variable evaluates to ``true`` or ``false`` (or ``na`` when ``r`` is ``na``, as is the case in the first bars of the dataset).
 
 
 Compound conditions
