@@ -281,7 +281,7 @@ Debugging from inside functions
 Suppose we are using a function such as ``f_hlca()`` in this script::
 
     //@version=4
-    study("Debugging inside functions", "", true)
+    study("Debugging from inside functions", "", true)
     f_hlca() =>
         var float _avg = na
         _hlca = avg(high, low, close, nz(_avg, close))
@@ -296,7 +296,7 @@ We thus need another mechanism to pull that variable's value from inside the fun
 We can use Pine's ability to have functions return a tuple to gain access to the variable::
 
     //@version=4
-    study("Debugging inside functions", "", true)
+    study("Debugging from inside functions", "", true)
     f_hlca() =>
         var float _avg = na
         _instantVal = avg(high, low, close, nz(_avg, close))
@@ -312,7 +312,7 @@ Contrary to global scope variables, array elements of globally defined arrays ca
 We could use this feature to write a functionally equivalent script::
 
     //@version=4
-    study("Debugging inside functions", "", true)
+    study("Debugging from inside functions", "", true)
     // Create an array containing only one float element.
     instantVal = array.new_float(1)
     f_hlca() =>
