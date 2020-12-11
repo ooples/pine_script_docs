@@ -25,7 +25,7 @@ Values plotted by Pine scripts can be displayed in four distinct places:
 
 #. Next to the script's name (controlled by the *Indicator Values* checkbox in the *Chart settings/Status Line* tab).
 #. In the script's pane, whether your script is an overlay on the chart or in a separate pane.
-#. In the scale (only displays the last bar's value and is controlled by the *Indicator Last Value Label* in the *Chart settings/Scale* tab).
+#. In the scale (only displays the last bar's value and is controlled by the *Indicator Last Value Label* checkbox in the *Chart settings/Scale* tab).
 #. In the Data Window (which you can bring up using the fourth icon down to the right of your chart).
 
 .. image:: images/Debugging-TheLayOfTheLand-1.png
