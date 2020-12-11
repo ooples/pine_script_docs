@@ -207,7 +207,7 @@ Many methods can be used to display occurrences where one or multiple conditions
     // Method #6: Change the background's color.
     bgcolor(rIsLow ? color.green : na)
 
-.. image:: Debugging-DisplayingConditions-1.png
+.. image:: images/Debugging-DisplayingConditions-1.png
 
 Note:
 
