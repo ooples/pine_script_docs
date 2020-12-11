@@ -47,8 +47,10 @@ Note the following in the preceding screenshot:
 - The scale of the script's pane is automatically sized to accommodate the smallest and largest values plotted by all ``plot()`` calls in the script.
 
 
+
 Displaying numeric values
 -------------------------
+
 
 When the script's scale is unimportant
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -113,6 +115,7 @@ Displaying strings
 ------------------
 
 Pine labels must be used to display strings. Labels only appear in the script's display area; strings shown in labels will thus not appear in the Data Window or anywhere else.
+
 
 Labels on each bar
 ^^^^^^^^^^^^^^^^^^
@@ -179,6 +182,10 @@ Note the following in our last code example:
 Debugging conditions
 --------------------
 
+
+Single conditions
+^^^^^^^^^^^^^^^^^
+
 Many methods can be used to display occurrences where one or multiple conditions are meant. This code shows six ways to identify bars where RSI is smaller than 30::
 
     //@version=4
@@ -203,6 +210,11 @@ Many methods can be used to display occurrences where one or multiple conditions
 .. image:: Debugging-DisplayingConditions-1.png
 
 aa
+
+
+Compound conditions
+^^^^^^^^^^^^^^^^^^^
+
 
 
 Debugging from inside functions
