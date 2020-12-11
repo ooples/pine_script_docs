@@ -134,7 +134,7 @@ Labels on last bar
 ^^^^^^^^^^^^^^^^^^
 
 As strings manipulated in Pine scripts often do not change bar to bar, the method most frequently used to visualize them is to draw a label on the dataset's last bar. 
-Here, we use a function to create a more sophisticated label that only appears on the chart's last bar. Our ``f_print()`` function has only one parameter: the text string to be displayed::
+Here, we use a function to create a more sophisticated label that only appears on the chart's last bar. Our ``f_print()`` function has only one parameter, the text string to be displayed::
 
     //@version=4
     study("f_print()", "", true)
