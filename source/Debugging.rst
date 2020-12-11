@@ -186,7 +186,7 @@ Debugging conditions
 Single conditions
 ^^^^^^^^^^^^^^^^^
 
-Many methods can be used to display occurrences where one or multiple conditions are meant. This code shows six ways to identify bars where RSI is smaller than 30::
+Many methods can be used to display occurrences where a condition is met. This code shows six ways to identify bars where RSI is smaller than 30::
 
     //@version=4
     study("Single conditions")
