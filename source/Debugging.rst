@@ -278,6 +278,52 @@ Note that:
 Debugging from inside functions
 -------------------------------
 
+Suppose we are using a function such as::
+
+    //@version=4
+    study("Debugging inside functions", "", true)
+    f_hlca() =>
+        var float _avg = na
+        _hlca = avg(high, low, close, nz(_avg, close))
+        _avg := sma(_hlca, 20)
+
+    hlca = f_hlca()
+    plot(hlca)
+
+and we need to inspect the value of ``_hlca`` as the function calculates it, bar to bar, while still being able to use the function's result. 
+We cannot access the ``_hlca`` variable used inside the function from the script's global scope. 
+We thus need another mechanism to pull that variable's value from inside the function's local scope.
+We can use Pine's ability to have functions return a tuple to gain access to the variable::
+
+    //@version=4
+    study("Debugging inside functions", "", true)
+    f_hlca() =>
+        var float _avg = na
+        _instantVal = avg(high, low, close, nz(_avg, close))
+        _avg := sma(_instantVal, 20)
+        // Return two values instead of one.
+        [_avg, _instantVal]
+
+    [hlca, instantVal] = f_hlca()
+    plot(hlca, "hlca")
+    plot(instantVal, "instantVal", color.black)
+
+Contrary to global scope variables, array elements of globally defined arrays can be modified from within functions. We could use this feature to write a functionally equivalent script::
+
+    //@version=4
+    study("Debugging inside functions", "", true)
+    instantVal = array.new_float(1)
+    f_hlca() =>
+        var float _avg = na
+        _instantVal = avg(high, low, close, nz(_avg, close))
+        // Set array's only element to the current value of `_instantVal`.
+        array.set(instantVal, 0, _instantVal)
+        _avg := sma(_instantVal, 20)
+
+    hlca = f_hlca()
+    plot(hlca, "hlca")
+    // Retieve the value of the array's only element which was set from inside the function.
+    plot(array.get(instantVal, 0), "instantVal", color.black)
 
 
 
