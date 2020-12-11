@@ -136,7 +136,7 @@ Here, we use a function to create a more sophisticated label that only appears o
     study("f_print()", "", true)
     f_print(_text) =>
         // Create label on the first bar.
-        var _label = label.new(bar_index, highest(10)[1], _text, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left)
+        var _label = label.new(bar_index, na, _text, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left)
         // On next bars, update the label's x and y position, and the text it displays.
         label.set_xy(_label, bar_index, highest(10)[1])
         label.set_text(_label, _text)
@@ -152,14 +152,21 @@ Note the following in our last code example:
   the label is only created on the dataset's first bar because of our use of the 
   `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ keyword when declaring the ``_label`` variable inside the function. After creating it, 
   we only update the label's *x* and *y* coordinates and its text on each successive bar. If we did not update those values, the label would remain on the dataset's first bar
-  and would only display the text string's value on that bar.
+  and would only display the text string's value on that bar. Lastly, note that we use ``highest(10)[1]`` to position the label vertically, 
+  By using the highest high of the **previous** 10 bars, we prevent the label from moving during the realtime bar.
 
 - We call the ``f_print()`` function twice to show that if you make multiple calls because it makes debugging multiple strings easier, 
   you can superimpose their text by using the correct amount of newlines (``\n``) to separate it.
 
-- We use AutoHotKey to speed coding up and have this line in our AHK script, which we use to bring up the ``f_print()`` function in our script when we need to debug strings. This is the AutoHotKey line that allows us to use CTRL-SHIT-P to insert the one-line version of the function in our code::
+- We use the `tostring() <https://www.tradingview.com/pine-script-reference/v4/#fun_tostring>`__ function to convert numeric values to a string for inclusion in the text to be displayed.
 
-    ^+p:: SendInput f_print(_text) => var _label = label.new(bar_index, highest(10)[1], _text, xloc.bar_index, yloc.price, {#}00000000, label.style_none, color.gray, size.large, text.align_left), label.set_xy(_label, bar_index, highest(10)[1]), label.set_text(_label, _text)`nf_print(){Left}
+- You may need to change the *y* position where the label is drawn (``highest(10)[1]``) in certain conditions.
+
+- We use AutoHotKey to speed coding up and have this line in our AHK script, which we use to bring up the ``f_print()`` function in our script when we need to debug strings.
+  This is the AutoHotKey line that allows us to use CTRL-SHIT-P to insert the one-line version of the function in our code and create an empty call to the function, 
+  ready to for you to type the string you want to debug::
+
+    ^+p:: SendInput f_print(_text) => var _label = label.new(bar_index, na, _text, xloc.bar_index, yloc.price, {#}00000000, label.style_none, color.gray, size.large, text.align_left), label.set_xy(_label, bar_index, highest(10)[1]), label.set_text(_label, _text)`nf_print(){Left}
 
 
 More flexible labels on last bar
