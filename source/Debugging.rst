@@ -212,6 +212,12 @@ Many methods can be used to display occurrences where one or multiple conditions
 Note:
 
 - We define our condition in the ``rIsLow`` boolean variable and it is evaluated on each bar. The ``r < 30`` expression used to assign a value to the variable evaluates to ``true`` or ``false`` (or ``na`` when ``r`` is ``na``, as is the case in the first bars of the dataset).
+- **Method #1** uses a change in the color of the RSI plot on the condition. When the plot's color changes, it colors the plot from the preceding bar.
+- **Method #2** uses a change in the color of the RSI plot on the condition. When the plot's color changes, it colors the plot from the preceding bar.
+- **Method #3** uses a change in the color of the RSI plot on the condition. When the plot's color changes, it colors the plot from the preceding bar.
+- **Method #4** uses a change in the color of the RSI plot on the condition. When the plot's color changes, it colors the plot from the preceding bar.
+- **Method #5** uses a change in the color of the RSI plot on the condition. When the plot's color changes, it colors the plot from the preceding bar.
+- **Method #6** uses a change in the color of the RSI plot on the condition. When the plot's color changes, it colors the plot from the preceding bar.
 
 
 Compound conditions
