@@ -107,6 +107,9 @@ Displaying strings
 
 Pine labels must be used to display strings. Labels only appear in the script's display area; strings shown in labels will thus not appear in the Data Window or anywhere else.
 
+Labels on each bar
+^^^^^^^^^^^^^^^^^^
+
 The following script demonstrates the simplest way to repetitively draw a label showing the symbol's name::
 
     //@version=4
@@ -114,6 +117,10 @@ The following script demonstrates the simplest way to repetitively draw a label 
     label.new(bar_index, high, syminfo.ticker)
 
 .. image:: images/Debugging-DisplayingStrings-1.png
+
+
+Simple labels on last bar
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As strings manipulated in Pine scripts often do not change bar to bar, the method most frequently used to visualize them is to draw a label on the dataset's last bar. 
 Here, we use a function to create a more sophisticated label that only appears on the chart's last bar. Our ``f_print()`` function has only one parameter: the text string to be displayed::
@@ -131,6 +138,16 @@ Here, we use a function to create a more sophisticated label that only appears o
     f_print("Hello world!\n\n\n\n")
 
 .. image:: images/Debugging-DisplayingStrings-2.png
+
+Note the following in our last example:
+
+- aaa
+- bbb
+
+
+More flexible labels on last bar
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
 
 Debugging conditions
