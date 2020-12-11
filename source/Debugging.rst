@@ -167,8 +167,8 @@ Note the following in our last code example:
 - You may need to change the *y* position where the label is drawn (``highest(10)[1]``) in certain conditions.
 
 - We use AutoHotKey to speed coding up and have this line in our AHK script, which we use to bring up the ``f_print()`` function in our script when we need to debug strings.
-  This is the AutoHotKey line that allows us to use CTRL-SHIT-P to insert the one-line version of the function in our code and create an empty call to the function, 
-  ready to for you to type the string you want to debug::
+  This is the AutoHotKey line that allows us to use ``CTRL-SHIT-P`` to insert the one-line version of the function in our code and create a call to the function 
+  so all that's left to do is to type the string you want to display::
 
     ^+p:: SendInput f_print(_text) => var _label = label.new(bar_index, na, _text, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left), label.set_xy(_label, bar_index, highest(10)[1]), label.set_text(_label, _text)`nf_print(){Left}
 
