@@ -269,6 +269,9 @@ Note that:
   The first one which displays "1" when RSI is higher than the user-defined bull level for example, positions the "1" on the bull level.
 - We use two different shades of green to color the background: the brighter one indicates the first bar where our compound condition becomes ``true``, 
   the lighter green identifies subsequent bars where our compound condition continues to be true.
+- While it is not always strictly necessary to assign individual conditions to a variable because they can be used directly in boolean expressions, 
+  it makes for more readable code when you assign the condition to a variable name that will remind you and your readers of the condition. 
+  Readability considerations should always prevail in cases like this one, where the hit on performance is minimal or null.
 
 
 
