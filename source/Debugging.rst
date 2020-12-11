@@ -308,21 +308,23 @@ We can use Pine's ability to have functions return a tuple to gain access to the
     plot(hlca, "hlca")
     plot(instantVal, "instantVal", color.black)
 
-Contrary to global scope variables, array elements of globally defined arrays can be modified from within functions. We could use this feature to write a functionally equivalent script::
+Contrary to global scope variables, array elements of globally defined arrays can be modified from within functions. 
+We could use this feature to write a functionally equivalent script::
 
     //@version=4
     study("Debugging inside functions", "", true)
+    // Create an array containing only one float element.
     instantVal = array.new_float(1)
     f_hlca() =>
         var float _avg = na
         _instantVal = avg(high, low, close, nz(_avg, close))
-        // Set array's only element to the current value of `_instantVal`.
+        // Set the array's only element to the current value of `_instantVal`.
         array.set(instantVal, 0, _instantVal)
         _avg := sma(_instantVal, 20)
 
     hlca = f_hlca()
     plot(hlca, "hlca")
-    // Retieve the value of the array's only element which was set from inside the function.
+    // Retrieve the value of the array's only element which was set from inside the function.
     plot(array.get(instantVal, 0), "instantVal", color.black)
 
 
