@@ -308,6 +308,8 @@ We can use Pine's ability to have functions return a tuple to gain access to the
     plot(hlca, "hlca")
     plot(instantVal, "instantVal", color.black)
 
+.. image:: images/Debugging-DebuggingFromInsideFunctions-1.png
+
 Contrary to global scope variables, array elements of globally defined arrays can be modified from within functions. 
 We could use this feature to write a functionally equivalent script::
 
