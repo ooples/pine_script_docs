@@ -32,7 +32,9 @@ Values plotted by Pine scripts can be displayed in four distinct places:
 
 Note the following in the preceding screenshot:
 
-- The chart's cursor is on the dataset's first bar, where ``bar_index`` is zero. That value is reflected next to the indicator's name and in the Data Window. **Moving your cursor on other bars would update those values so they always represent the value of the plot on that bar.** This is a good way to inspect the value of a variable as the script's execution progresses from bar to bar.
+- The chart's cursor is on the dataset's first bar, where ``bar_index`` is zero. That value is reflected next to the indicator's name and in the Data Window. 
+  **Moving your cursor on other bars would update those values so they always represent the value of the plot on that bar.** 
+  This is a good way to inspect the value of a variable as the script's execution progresses from bar to bar.
 - The ``title`` argument of our `plot() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ call, "Bar Index", is used as the value's legend in the Data Window.
 - The precision of the values displayed in the Data Window is dependent on the chart symbol's tick value. You can modify it in two ways:
  
@@ -40,7 +42,8 @@ Note the following in the preceding screenshot:
 
   - By using the ``precision`` parameter in your script's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__ or `strategy() <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy>`__ declaration statement. This method allows specifying up to 16 digits precision.
 
-- The `plot() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ call in our script plots the value of ``bar_index`` in the indicator's pane, which shows the increasing value of the variable.
+- The `plot() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ call in our script plots the value of ``bar_index`` in the indicator's pane, 
+  which shows the increasing value of the variable.
 - The scale of the script's pane is automatically sized to accommodate the smallest and largest values plotted by all ``plot()`` calls in the script.
 
 
@@ -51,7 +54,9 @@ When the script's scale is unimportant
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The script in the preceding screenshot used the simplest way to inspect numerical values: a ``plot()`` call, 
-which plots a line corresponding to the variable's value in the script's display area. Our example script plotted the value of the `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__ builtin variable, which contains the bar's number, a value beginning at zero on the dataset's first bar and increased by one on each 
+which plots a line corresponding to the variable's value in the script's display area. 
+Our example script plotted the value of the `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__ builtin variable, 
+which contains the bar's number, a value beginning at zero on the dataset's first bar and increased by one on each 
 subsequent bar. We used a ``plot()`` call to plot the variable to inspect because our script was not plotting anything else; 
 we were not preoccupied with preserving the scale for other plots to continue to plot normally. This is the script we used::
 
@@ -84,7 +89,8 @@ where:
 3. The ``25692.0000`` value of ``bar_index`` shown in the scale represents its value on the last bar, so the dataset contains 25693 bars.
 4. The value of ``bar_index`` on the bar the cursor is on is also displayed in the Data Window, along with that bar's value for RSI just above it.
 
-In order to preserve our plot of RSI while still being able to inspect the value or ``bar_index``, we will plot the variable using `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ like this::
+In order to preserve our plot of RSI while still being able to inspect the value or ``bar_index``, 
+we will plot the variable using `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ like this::
 
     //@version=4
     study("Plot RSI and `bar_index`")
@@ -98,7 +104,8 @@ where:
 
 - Because the value of ``bar_index`` is no longer being plotted in the script's pane, the pane's boundaries are now those of RSI, which displays normally.
 - The value plotted using ``plotchar()`` is displayed next to the script's name and in the Data Window.
-- We are not plotting a character with our ``plotchar()`` call, so the third argument is an empty string (``""``). We are also specifying ``location.top`` as the ``location`` argument, so that we do not put the symbol's price in play in the calculation of the display area's boundaries.
+- We are not plotting a character with our ``plotchar()`` call, so the third argument is an empty string (``""``). 
+  We are also specifying ``location.top`` as the ``location`` argument, so that we do not put the symbol's price in play in the calculation of the display area's boundaries.
 
 
 
@@ -141,10 +148,13 @@ Here, we use a function to create a more sophisticated label that only appears o
 
 Note the following in our last code example:
 
-- We use a function to enclose the label-drawing code. While the function is called on each bar, the label is only created on the dataset's first bar because of our use of the `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ keyword when declaring the ``_label`` variable inside the function. After creating it, 
+- We use a function to enclose the label-drawing code. While the function is called on each bar, 
+  the label is only created on the dataset's first bar because of our use of the 
+  `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ keyword when declaring the ``_label`` variable inside the function. After creating it, 
   we only update the label's *x* and *y* coordinates and it's text on each successive bar. If we did not update those values, the label would remain on the dataset's first bar.
 
-- We call the ``f_print()`` function twice to show that if you take make multiple calls when this makes debugging multiple strings easier, as long as you take care to separate the text displayed by each call with the correct amount of newlines (``\n``).
+- We call the ``f_print()`` function twice to show that if you take make multiple calls when this makes debugging multiple strings easier, 
+  as long as you take care to separate the text displayed by each call with the correct amount of newlines (``\n``).
 
 
 More flexible labels on last bar
