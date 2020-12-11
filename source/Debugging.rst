@@ -209,7 +209,7 @@ Many methods can be used to display occurrences where a condition is met. This c
 
 .. image:: images/Debugging-DisplayingConditions-1.png
 
-Note:
+Note that:
 
 - We define our condition in the ``rIsLow`` boolean variable and it is evaluated on each bar. The ``r < 30`` expression used to assign a value to the variable evaluates to ``true`` or ``false`` (or ``na`` when ``r`` is ``na``, as is the case in the first bars of the dataset).
 - **Method #1** uses a change in the color of the RSI plot on the condition. Whenever a plot's color changes, it colors the plot starting from the preceding bar.
@@ -229,8 +229,7 @@ Note:
 Compound conditions
 ^^^^^^^^^^^^^^^^^^^
 
-Programmers needing to identify situations where more than one condition is met need to build compound conditions by aggregating individual conditions using the `and <https://www.tradingview.com/pine-script-reference/v4/#op_and>`__ logical operator. Before including compound conditions in your Pine code, however, 
-you will save lots of time if you test its individual conditions separately, to be sure they occur when you expect. Multiple conditions can be displayed using a technique like this one, where we account for four individual conditions making up a compound condition::
+Programmers needing to identify situations where more than one condition is met need to build compound conditions by aggregating individual conditions using the `and <https://www.tradingview.com/pine-script-reference/v4/#op_and>`__ logical operator. You will save yourself many headaches if you validate that each individual condition triggers when you expect before using the compound condition in your code. The state of multiple individual conditions can be displayed using a technique like this one, where four individual conditions make up our compound condition::
 
     //@version=4
     study("Compound conditions")
@@ -263,9 +262,11 @@ you will save lots of time if you test its individual conditions separately, to 
 
 .. image:: images/Debugging-DisplayingConditions-2.png
 
-Note:
+Note that:
 
-- xxx
+- We use a ``plotchar()`` call to display each condition's number, taking care to spread them over the indicator's *y* space so they don't overlap.
+- We use two different shades of green to color the backgorund: the brighter one indicates the first bar where our compound condition becomes ``true``, 
+  and the lighter green identifies subsequent bars where our compound condition continues to be true.
 
 
 
