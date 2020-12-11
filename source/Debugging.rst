@@ -265,6 +265,8 @@ Programmers needing to identify situations where more than one condition is met 
 Note that:
 
 - We use a ``plotchar()`` call to display each condition's number, taking care to spread them over the indicator's *y* space so they don't overlap.
+- The first two ``plotchar()`` calls use absolute positioning to place the condition number so that it helps us remember the corresponding condition. 
+  The first one which displays ``1`` when RSI is higher than the user-defined bull level for example, positions the ``1`` on the bull level.
 - We use two different shades of green to color the backgorund: the brighter one indicates the first bar where our compound condition becomes ``true``, 
   and the lighter green identifies subsequent bars where our compound condition continues to be true.
 
