@@ -213,11 +213,15 @@ Note:
 
 - We define our condition in the ``rIsLow`` boolean variable and it is evaluated on each bar. The ``r < 30`` expression used to assign a value to the variable evaluates to ``true`` or ``false`` (or ``na`` when ``r`` is ``na``, as is the case in the first bars of the dataset).
 - **Method #1** uses a change in the color of the RSI plot on the condition. When the plot's color changes, it colors the plot from the preceding bar.
-- **Method #2** uses a change in the color of the RSI plot on the condition. When the plot's color changes, it colors the plot from the preceding bar.
-- **Method #3** uses a change in the color of the RSI plot on the condition. When the plot's color changes, it colors the plot from the preceding bar.
-- **Method #4** uses a change in the color of the RSI plot on the condition. When the plot's color changes, it colors the plot from the preceding bar.
-- **Method #5** uses a change in the color of the RSI plot on the condition. When the plot's color changes, it colors the plot from the preceding bar.
-- **Method #6** uses a change in the color of the RSI plot on the condition. When the plot's color changes, it colors the plot from the preceding bar.
+- **Method #2** uses ``plotchar()`` to plot an up triangle in the bottom part of the indicator's display. 
+  Using different combinations of positions and characters allows the simultaneous identification of many different conditions on a single bar.
+  This is one of our preferred methods for identifying areas of interest on the chart.
+- **Method #3** also uses a ``plotchar()`` call, but this time the character's is positioned on the RSI line. 
+  In order to achieve this, we use ``location.absolute`` argument and use Pine's ternary conditional operator (``?``) to define a conditional expression 
+  where a *y* position is used only when our ``rIsLow`` condition is true. When it is not true, ``na`` is used, so no character is displayed.
+- **Method #4** uses ``plotshape()`` to plot a blue up arrow in the top part of the indicator's display area when our condition is met.
+- **Method #5** uses ``plotarrow()`` to plot a green up arrow at the bottom of the display when our condition is met.
+- **Method #6** uses ``bgcolor`` to change the color of the background when our condition is met. The ternary operator is used once again to evaluate our condition. It will return ``color.green`` when ``rIsLow`` is true, and the ``na`` color (which does not color the background) when ``rIsLow`` is false or ``na``.
 
 
 Compound conditions
