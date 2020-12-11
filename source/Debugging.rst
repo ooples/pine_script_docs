@@ -142,7 +142,7 @@ Here, we use a function to create a more sophisticated label that only appears o
 Note the following in our last code example:
 
 - We use a function to enclose the label-drawing code. While the function is called on each bar, the label is only created on the dataset's first bar because of our use of the `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ keyword when declaring the ``_label`` variable inside the function. After creating it, 
-we only update the label's *x* and *y* coordinates and it's text on each successive bar. If we did not update those values, the label would remain on the dataset's first bar.
+  we only update the label's *x* and *y* coordinates and it's text on each successive bar. If we did not update those values, the label would remain on the dataset's first bar.
 
 - We call the ``f_print()`` function twice to show that if you take make multiple calls when this makes debugging multiple strings easier, as long as you take care to separate the text displayed by each call with the correct amount of newlines (``\n``).
 
