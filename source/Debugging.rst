@@ -172,7 +172,7 @@ Note the following in our last code example:
 
     ^+p:: SendInput f_print(_text) => var _label = label.new(bar_index, na, _text, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left), label.set_xy(_label, bar_index, highest(10)[1]), label.set_text(_label, _text)`nf_print(){Left}
 
-  AutoHotKey works only on Windows systems. Keyboard Maestro and others can be substituted on Apple systems.
+  AutoHotKey works only on Windows systems. Keyboard Maestro or others can be substituted on Apple systems.
 
 
 
