@@ -105,7 +105,17 @@ where:
 Displaying strings
 ------------------
 
+Pine labels must be used to display strings. Labels only appear in the script's display area; strings shown in labels will thus not appear in the Data Window or anywhere else.
 
+The following script demonstrates the simplest way to repetitively draw a label showing the symbol's name::
+
+    //@version=4
+    study("Simple label", "", true)
+    label.new(bar_index, high, syminfo.ticker)
+
+.. image:: images/Debugging-DisplayingStrings-1.png
+
+As strings manipulated in Pine scripts usually do not change bar to bar, the method most frequently used to visualize them is to draw a label on the dataset's last bar. 
 
 Debugging conditions
 --------------------
