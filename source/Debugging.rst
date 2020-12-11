@@ -125,6 +125,10 @@ The following script demonstrates the simplest way to repetitively draw a label 
 
 .. image:: images/Debugging-DisplayingStrings-1.png
 
+By default, only the last 50 labels will be shown on the chart. You can increase this amount up to a maximum of 500 by using the ``max_labels_count`` in your script's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__ or `strategy() <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy>`__ declaration statement. For example::
+
+    study("Simple label", "", true, max_labels_count = 500)
+
 
 Labels on last bar
 ^^^^^^^^^^^^^^^^^^
