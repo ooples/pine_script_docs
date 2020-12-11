@@ -278,7 +278,7 @@ Note that:
 Debugging from inside functions
 -------------------------------
 
-Suppose we are using a function such as::
+Suppose we are using a function such as ``f_hlca()`` in this script::
 
     //@version=4
     study("Debugging inside functions", "", true)
