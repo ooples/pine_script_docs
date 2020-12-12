@@ -373,7 +373,10 @@ Here we use lines and labels to display a line and corresponding loop index and 
 
 .. image:: images/Debugging-DebuggingFromInsideForLoops-2.png
 
-The scale in the preceeding screenshot has been manually expanded to show more detail by clicking and dragging the scale area.
+Note that:
+
+- The scale in the preceeding screenshot has been manually expanded to show more detail by clicking and dragging the scale area.
+- We have used the ``max_lines_count = 500, max_labels_count = 500`` in our ``study()`` declaration statement to display the maximum number of lines and labels.
 
 
 
