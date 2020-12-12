@@ -367,7 +367,7 @@ If we want to inspect the value of a variable at a single point in the loop, we 
     plot(lowerRangeBalance)
     plot(val, "val", color.black)
 
-.. image:: images/Debugging-DebuggingFromInsideForLoops-2.png
+.. image:: images/Debugging-DebuggingFromInsideForLoops-1.png
 
 
 Using lines and labels
