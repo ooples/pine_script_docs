@@ -10,7 +10,7 @@ Introduction
 ------------
 
 TradingView's close integration between the Pine Editor and charts allows for efficient and interactive debugging of Pine code. 
-Once a Pine programmer understands the most appropriate technique to debug each type of situation, he will be able to debug quickly and thoroughly. 
+Once a Pine programmer understands the most appropriate technique to use in each situation, he will be able to debug scripts quickly and thoroughly. 
 This page demonstrates the most useful techniques to debug Pine code.
 
 If you are not yet familiar with Pine's execution model, it is important that you read the :doc:`/language/Execution_model` page of this User Manual 
@@ -24,9 +24,9 @@ The lay of the land
 Values plotted by Pine scripts can be displayed in four distinct places:
 
 #. Next to the script's name (controlled by the *Indicator Values* checkbox in the *Chart settings/Status Line* tab).
-#. In the script's pane, whether your script is an overlay on the chart or in a separate pane.
+#. In the script's pane, whether your script is a chart overlay or in a separate pane.
 #. In the scale (only displays the last bar's value and is controlled by the *Indicator Last Value Label* checkbox in the *Chart settings/Scale* tab).
-#. In the Data Window (which you can bring up using the fourth icon down to the right of your chart).
+#. In the Data Window (which you can bring up using the fourth icon down, to the right of your chart).
 
 .. image:: images/Debugging-TheLayOfTheLand-1.png
 
@@ -39,7 +39,6 @@ Note the following in the preceding screenshot:
 - The precision of the values displayed in the Data Window is dependent on the chart symbol's tick value. You can modify it in two ways:
  
   - By changing the value of the *Precision* field in the script's *Settings/Style* tab. You can obtain up to eight digits of precision using this method.
-
   - By using the ``precision`` parameter in your script's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__ or `strategy() <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy>`__ declaration statement. This method allows specifying up to 16 digits precision.
 
 - The `plot() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ call in our script plots the value of ``bar_index`` in the indicator's pane, 
@@ -57,7 +56,7 @@ When the script's scale is unimportant
 
 The script in the preceding screenshot used the simplest way to inspect numerical values: a ``plot()`` call, 
 which plots a line corresponding to the variable's value in the script's display area. 
-Our example script plotted the value of the `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__ builtin variable, 
+Our example script plotted the value of the `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__ built-in variable, 
 which contains the bar's number, a value beginning at zero on the dataset's first bar and increased by one on each 
 subsequent bar. We used a ``plot()`` call to plot the variable to inspect because our script was not plotting anything else; 
 we were not preoccupied with preserving the scale for other plots to continue to plot normally. This is the script we used::
@@ -114,7 +113,7 @@ where:
 Displaying strings
 ------------------
 
-Pine labels must be used to display strings. Labels only appear in the script's display area; strings shown in labels will thus not appear in the Data Window or anywhere else.
+Pine labels must be used to display strings. Labels only appear in the script's display area; strings shown in labels do not appear in the Data Window or anywhere else.
 
 
 Labels on each bar
@@ -137,7 +136,7 @@ Labels on last bar
 ^^^^^^^^^^^^^^^^^^
 
 As strings manipulated in Pine scripts often do not change bar to bar, the method most frequently used to visualize them is to draw a label on the dataset's last bar. 
-Here, we use a function to create a more sophisticated label that only appears on the chart's last bar. Our ``f_print()`` function has only one parameter, the text string to be displayed::
+Here, we use a function to create a label that only appears on the chart's last bar. Our ``f_print()`` function has only one parameter, the text string to be displayed::
 
     //@version=4
     study("f_print()", "", true)
@@ -160,22 +159,13 @@ Note the following in our last code example:
   `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ keyword when declaring the ``_label`` variable inside the function. After creating it, 
   we only update the label's *x* and *y* coordinates and its text on each successive bar. If we did not update those values, the label would remain on the dataset's first bar
   and would only display the text string's value on that bar. Lastly, note that we use ``highest(10)[1]`` to position the label vertically, 
-  By using the highest high of the **previous** 10 bars, we prevent the label from moving during the realtime bar.
+  By using the highest high of the **previous** 10 bars, we prevent the label from moving during the realtime bar. 
+  You may need to adapt this *y* position in other contexts.
 
 - We call the ``f_print()`` function twice to show that if you make multiple calls because it makes debugging multiple strings easier, 
-  you can superimpose their text by using the correct amount of newlines (``\n``) to separate it.
+  you can superimpose their text by using the correct amount of newlines (``\n``) to separate each one.
 
 - We use the `tostring() <https://www.tradingview.com/pine-script-reference/v4/#fun_tostring>`__ function to convert numeric values to a string for inclusion in the text to be displayed.
-
-- You may need to change the *y* position where the label is drawn (``highest(10)[1]``) in certain conditions.
-
-- We use AutoHotKey to speed coding up and have this line in our AHK script, which we use to bring up the ``f_print()`` function in our script when we need to debug strings.
-  This is the AutoHotKey line that allows us to use ``CTRL-SHIT-P`` to insert the one-line version of the function in our code and create a call to the function 
-  so all that's left to do is to type the string you want to display::
-
-    ^+p:: SendInput f_print(_text) => var _label = label.new(bar_index, na, _text, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left), label.set_xy(_label, bar_index, highest(10)[1]), label.set_text(_label, _text)`nf_print(){Left}
-
-  AutoHotKey works only on Windows systems. Keyboard Maestro or others can be substituted on Apple systems.
 
 
 
@@ -431,3 +421,16 @@ When loops with numerous iterations make displaying all their values impractical
         lowerRangeBalance := lowerRangeBalance + sign(tr - tr[_i])
         if _i % 2 == 0
             string := string + tostring(_i, "00") + "•" + tostring(tr[_i]) + "\n"
+
+Tips
+====
+
+We use AutoHotKey to speed coding and have this line in our AHK script, which we use to bring up the ``f_print()`` function in our script when we need to debug strings.
+  This is the AutoHotKey line that allows us to use ``CTRL-SHIT-P`` to insert the one-line version of the function in our code and create a call to the function 
+  so all that's left to do is to type the string you want to display::
+
+    ^+p:: SendInput f_print(_text) => var _label = label.new(bar_index, na, _text, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left), label.set_xy(_label, bar_index, highest(10)[1]), label.set_text(_label, _text)`nf_print(){Left}
+
+  AutoHotKey works only on Windows systems. Keyboard Maestro or others can be substituted on Apple systems.
+
+
