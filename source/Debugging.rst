@@ -351,6 +351,23 @@ Values inside `for <https://www.tradingview.com/pine-script-reference/v4/#op_for
 Extracting a single value
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
+If we want to inspect the value of a variable at a single point in the loop, we can save it and plot it once the loop is exited. Here, we save the value of ``tr`` at the loop's last iteration::
+
+    //@version=4
+    study("Debugging from inside `for` loops", max_lines_count = 500, max_labels_count = 500)
+    i_lookBack = input(20, minval = 0)
+
+    float val = na
+    float lowerRangeBalance = 0
+    for _i = 1 to i_lookBack
+        lowerRangeBalance := lowerRangeBalance + sign(tr - tr[_i])
+        if _i == i_lookBack
+            val := tr[_i]
+    hline(0)
+    plot(lowerRangeBalance)
+    plot(val, "val", color.black)
+
+.. image:: images/Debugging-DebuggingFromInsideForLoops-2.png
 
 
 Using lines and labels
@@ -376,7 +393,7 @@ Here we use lines and labels to display a line and corresponding loop index and 
 Note that:
 
 - The scale in the preceeding screenshot has been manually expanded to show more detail by clicking and dragging the scale area.
-- We have used the ``max_lines_count = 500, max_labels_count = 500`` in our ``study()`` declaration statement to display the maximum number of lines and labels.
+- We have used ``max_lines_count = 500, max_labels_count = 500`` in our ``study()`` declaration statement to display the maximum number of lines and labels.
 
 
 
