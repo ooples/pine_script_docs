@@ -422,3 +422,10 @@ Note that:
 
 - The scale in the preceeding screenshot has been manually expanded by clicking and dragging the scale area so the content of the indicator's display area content could be moved vertically to show only its relevant part.
 - We use ``tostring(_i, "00")`` to force the display of the loop's index to zero-padded two digits so they align neatly.
+
+When loops with numerous iterations make displaying all their values impractical, you can sample only a subset of the iterations. This code uses the `% <https://www.tradingview.com/pine-script-reference/v4/#op_{percent}>`__ (modulo) operator to only include values from every second loop iteration in the preceding code example::
+
+    for _i = 1 to i_lookBack
+        lowerRangeBalance := lowerRangeBalance + sign(tr - tr[_i])
+        if _i % 2 == 0
+            string := string + tostring(_i, "00") + "•" + tostring(tr[_i]) + "\n"
