@@ -356,7 +356,7 @@ Extracting a single value
 Using lines and labels
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Here we use lines and labels to display a line and corresponding loop index and ``tr`` value for each loop iteration.
+Here we use lines and labels to display a line and corresponding loop index and ``tr`` value for each loop iteration::
 
     //@version=4
     study("Debugging from inside `for` loops", max_lines_count = 500, max_labels_count = 500)
