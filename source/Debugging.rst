@@ -334,7 +334,7 @@ We could use this feature to write a functionally equivalent script::
 Debugging from inside 'for' loops
 ---------------------------------
 
-Values inside `for <https://www.tradingview.com/pine-script-reference/v4/#op_for>`__ loops cannot be plotted using ``plot()`` calls. Here, we explore three different techniques to inspect variable values originating from ``for`` loops, starting from this code example, which calculates the balance of bars in the look back period which have a higher/lower true range value than the current bar::
+Values inside `for <https://www.tradingview.com/pine-script-reference/v4/#op_for>`__ loops cannot be plotted using ``plot()`` calls. Here, we explore three different techniques to inspect variable values originating from ``for`` loops, starting from this code example, which calculates the balance of bars in the lookback period which have a higher/lower true range value than the current bar::
 
     //@version=4
     study("Debugging from inside `for` loops")
