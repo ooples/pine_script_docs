@@ -334,4 +334,46 @@ We could use this feature to write a functionally equivalent script::
 Debugging from inside 'for' loops
 ---------------------------------
 
+Values inside `for <https://www.tradingview.com/pine-script-reference/v4/#op_for>`__ loops cannot be plotted using ``plot()`` calls. Here, we explore three different techniques to inspect variable values originating from ``for`` loops, starting from this code example, which calculates the balance of bars in the look back period which have a higher/lower true range value than the current bar::
+
+    //@version=4
+    study("Debugging from inside `for` loops")
+    i_lookBack = input(20, minval = 0)
+
+    float lowerRangeBalance = 0
+    for _i = 1 to i_lookBack
+        lowerRangeBalance := lowerRangeBalance + sign(tr - tr[_i])
+
+    hline(0)
+    plot(lowerRangeBalance)
+
+
+Extracting a single value
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+Using lines and labels
+^^^^^^^^^^^^^^^^^^^^^^
+
+Here we use lines and labels to display a line and corresponding loop index and ``tr`` value for each loop iteration.
+
+    //@version=4
+    study("Debugging from inside `for` loops", max_lines_count = 500, max_labels_count = 500)
+    i_lookBack = input(20, minval = 0)
+
+    float lowerRangeBalance = 0
+    for _i = 1 to i_lookBack
+        lowerRangeBalance := lowerRangeBalance + sign(tr - tr[_i])
+        line.new(bar_index[1], tr[_i], bar_index, tr[_i], color = color.black)
+        label.new(bar_index, tr[_i], tostring(_i) + "•" + tostring(tr[_i]), style = label.style_none, size = size.small)
+
+    hline(0)
+    plot(lowerRangeBalance)
+
+.. image:: images/Debugging-DebuggingFromInsideForLoops-2.png
+
+The scale in the preceeding screenshot has been manually expanded to show more detail by clicking and dragging the scale area.
+
+
 
