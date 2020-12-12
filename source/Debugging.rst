@@ -397,3 +397,28 @@ Note that:
 - We could use the same technique while isolating a specific loop iteration as we did in the preceding example, to show only one level.
 
 
+Extracting multiple values
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+We can extract multiple values from loop iterations by building a single string which we will display using a label after the loop executes::
+
+    //@version=4
+    study("Debugging from inside `for` loops", max_lines_count = 500, max_labels_count = 500)
+    i_lookBack = input(20, minval = 0)
+
+    string = ""
+    float lowerRangeBalance = 0
+    for _i = 1 to i_lookBack
+        lowerRangeBalance := lowerRangeBalance + sign(tr - tr[_i])
+        string := string + tostring(_i, "00") + "•" + tostring(tr[_i]) + "\n"
+
+    label.new(bar_index, 0, string, style = label.style_none, size = size.small, textalign = text.align_left)
+    hline(0)
+    plot(lowerRangeBalance)
+
+.. image:: images/Debugging-DebuggingFromInsideForLoops-3.png
+
+Note that:
+
+- The scale in the preceeding screenshot has been manually expanded by clicking and dragging the scale area so the content of the indicator's display area content could be moved vertically to show only its relevant part.
+- We use ``tostring(_i, "00")`` to force the display of the loop's index to zero-padded two digits so they align neatly.
