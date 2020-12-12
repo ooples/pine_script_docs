@@ -395,6 +395,7 @@ Note that:
 
 - The scale in the preceeding screenshot has been manually expanded to show more detail by clicking and dragging the scale area.
 - We have used ``max_lines_count = 500, max_labels_count = 500`` in our ``study()`` declaration statement to display the maximum number of lines and labels.
+- Each loop iteration does not necessarily produce a distinct ``tr`` value, which is why we may not see 20 distinct lines for each bar.
 - We could use the same technique while isolating a specific loop iteration as we did in the preceding example, to show only one level.
 
 
