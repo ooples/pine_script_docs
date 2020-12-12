@@ -373,7 +373,8 @@ If we want to inspect the value of a variable at a single point in the loop, we 
 Using lines and labels
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Here we use lines and labels to display a line and corresponding loop index and ``tr`` value for each loop iteration. This gives us a general idea of the values being used in each loop iteration::
+Here we draw a line corresponding to the value of ``tr`` used in each loop iteration. We also use a label to display, for each line, the loop's index and the line's value. 
+This gives us a general idea of the values being used in each loop iteration::
 
     //@version=4
     study("Debugging from inside `for` loops", max_lines_count = 500, max_labels_count = 500)
