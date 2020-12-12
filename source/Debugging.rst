@@ -373,7 +373,7 @@ If we want to inspect the value of a variable at a single point in the loop, we 
 Using lines and labels
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Here we use lines and labels to display a line and corresponding loop index and ``tr`` value for each loop iteration::
+Here we use lines and labels to display a line and corresponding loop index and ``tr`` value for each loop iteration. This gives us a general idea of the values being used in each loop iteration::
 
     //@version=4
     study("Debugging from inside `for` loops", max_lines_count = 500, max_labels_count = 500)
@@ -394,6 +394,6 @@ Note that:
 
 - The scale in the preceeding screenshot has been manually expanded to show more detail by clicking and dragging the scale area.
 - We have used ``max_lines_count = 500, max_labels_count = 500`` in our ``study()`` declaration statement to display the maximum number of lines and labels.
-
+- We could use the same technique while isolating a specific loop iteration as we did in the preceding example, to show only one level.
 
 
