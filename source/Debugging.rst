@@ -431,24 +431,28 @@ Tips
 
 The two techniques we use most frequently to bebug our Pine code are::
 
-    plotchar(variableName, "variableName", "", location.top, size = size.tiny)
+    plotchar(v, "v", "", location.top, size = size.tiny)
 
-to debug variables of type *float*, *int* or *bool*, and the one-line version of our ``f_print()`` function to debug strings::
+to plot variables of type *float*, *int* or *bool* in the indicator's values and the Data Window, and the one-line version of our ``f_print()`` function to debug strings::
 
     f_print(_text) => var _label = label.new(bar_index, na, _text, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left), label.set_xy(_label, bar_index, highest(10)[1]), label.set_text(_label, _text)
     f_print(stringName)
 
-to plot a variable's value in the Data Window, or::
+As we use AutoHotKey for Windows to speed repetitive tasks, we include these lines in our AutoHotKey script::
 
-    plotchar(variableName, "variableName", "•", location.top, size = size.tiny)
-
-
-We use AutoHotKey to speed repetitive tasks. coding and have this line in our AHK script, which we use to bring up the ``f_print()`` function in our script when we need to debug strings.
-  This is the AutoHotKey line that allows us to use ``CTRL-SHIT-P`` to insert the one-line version of the function in our code and create a call to the function 
-  so all that's left to do is to type the string you want to display::
-
+    ^+f:: SendInput plotchar(^v, "^v", "", location.top, size = size.tiny){Return}
     ^+p:: SendInput f_print(_text) => var _label = label.new(bar_index, na, _text, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left), label.set_xy(_label, bar_index, highest(10)[1]), label.set_text(_label, _text)`nf_print(){Left}
 
-  AutoHotKey works only on Windows systems. Keyboard Maestro or others can be substituted on Apple systems.
+The first line will type a debugging ``plotchar()`` call including an expression or variable name previously copied to the clipboard when we use ``CTRL-SHIT-F``. 
+Copying the ``variableName`` variable name or a ``close > open`` to the clipboard and hitting ``CTRL-SHIT-F`` will, respectively, yield::
 
+    plotchar(variableName, "variableName", "", location.top, size = size.tiny)
+    plotchar(close > open, "close > open", "", location.top, size = size.tiny)
 
+The second line triggers on ``CTRL-SHIT-P``. It types our one-line ``f_print()`` function in our script and on a second line, 
+an empty call to the function with the cursor placed so all that's left to do is type the string we want to display::
+
+    f_print(_text) => var _label = label.new(bar_index, na, _text, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left), label.set_xy(_label, bar_index, highest(10)[1]), label.set_text(_label, _text)
+    f_print()
+
+Note: AutoHotKey works only on Windows systems. Keyboard Maestro or others can be substituted on Apple systems.
