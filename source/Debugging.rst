@@ -269,7 +269,7 @@ Note that:
 Debugging from inside functions
 -------------------------------
 
-Variables in function are local to the function, so not visible in the script's global scope from where they would be plotted. 
+Variables in function are local to the function, so not available for plotting from the script's global scope. 
 In this script we have written the ``f_hlca()`` function to calculate a weighed average::
 
     //@version=4
