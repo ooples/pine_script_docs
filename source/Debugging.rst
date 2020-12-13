@@ -203,10 +203,10 @@ Note that:
 - We define our condition in the ``rIsLow`` boolean variable and it is evaluated on each bar. The ``r < 30`` expression used to assign a value to the variable evaluates to ``true`` or ``false`` (or ``na`` when ``r`` is ``na``, as is the case in the first bars of the dataset).
 - **Method #1** uses a change in the color of the RSI plot on the condition. Whenever a plot's color changes, it colors the plot starting from the preceding bar.
 - **Method #2** uses ``plotchar()`` to plot an up triangle in the bottom part of the indicator's display. 
-  Using different combinations of positions and characters allows the simultaneous identification of many different conditions on a single bar.
-  This is one of our preferred methods for identifying areas of interest on the chart.
-- **Method #3** also uses a ``plotchar()`` call, but this time the character's is positioned on the RSI line. 
-  In order to achieve this, we use ``location.absolute`` argument and use Pine's ternary conditional operator (``?``) to define a conditional expression 
+  Using different combinations of positions and characters allows the simultaneous identification of multiple conditions on a single bar.
+  **This is one of our preferred methods to identify conditions on the chart.**
+- **Method #3** also uses a ``plotchar()`` call, but this time the character is positioned on the RSI line. 
+  In order to achieve this, we use ``location.absolute`` and Pine's ternary conditional operator (``?``) to define a conditional expression 
   where a *y* position is used only when our ``rIsLow`` condition is true. When it is not true, ``na`` is used, so no character is displayed.
 - **Method #4** uses ``plotshape()`` to plot a blue up arrow in the top part of the indicator's display area when our condition is met.
 - **Method #5** uses ``plotarrow()`` to plot a green up arrow at the bottom of the display when our condition is met.
@@ -218,7 +218,9 @@ Note that:
 Compound conditions
 ^^^^^^^^^^^^^^^^^^^
 
-Programmers needing to identify situations where more than one condition is met need to build compound conditions by aggregating individual conditions using the `and <https://www.tradingview.com/pine-script-reference/v4/#op_and>`__ logical operator. You will save yourself many headaches if you validate that each individual condition triggers when you expect before using the compound condition in your code. The state of multiple individual conditions can be displayed using a technique like this one, where four individual conditions make up our compound condition::
+Programmers needing to identify situations where more than one condition is met must build compound conditions by aggregating individual conditions using the `and <https://www.tradingview.com/pine-script-reference/v4/#op_and>`__ logical operator. Because compound conditions will only perform as expected if their individual conditions trigger correctly, you will save yourself many headaches if you validate the behavior of individual conditions before using a compound condition in your code.
+
+The state of multiple individual conditions can be displayed using a technique like this one, where four individual conditions are used to build our ``bull`` compound condition::
 
     //@version=4
     study("Compound conditions")
@@ -259,15 +261,16 @@ Note that:
 - We use two different shades of green to color the background: the brighter one indicates the first bar where our compound condition becomes ``true``, 
   the lighter green identifies subsequent bars where our compound condition continues to be true.
 - While it is not always strictly necessary to assign individual conditions to a variable because they can be used directly in boolean expressions, 
-  it makes for more readable code when you assign the condition to a variable name that will remind you and your readers of the condition. 
-  Readability considerations should always prevail in cases like this one, where the hit on performance is minimal or null.
+  it makes for more readable code when you assign a condition to a variable name that will remind you and your readers of what it represents. 
+  Readability considerations should always prevail in cases like this one, where the hit on performance of assigning conditions to variable names is minimal or null.
 
 
 
 Debugging from inside functions
 -------------------------------
 
-Suppose we are using a function such as ``f_hlca()`` in this script::
+Variables in function are local to the function, so not visible in the script's global scope from where they would be plotted. 
+In this script we have written the ``f_hlca()`` function to calculate a weighed average::
 
     //@version=4
     study("Debugging from inside functions", "", true)
@@ -279,9 +282,9 @@ Suppose we are using a function such as ``f_hlca()`` in this script::
     hlca = f_hlca()
     plot(hlca)
 
-and we need to inspect the value of ``_hlca`` as the function calculates it, bar to bar, while still being able to use the function's result. 
+We need to inspect the value of ``_hlca`` in the function's local scope as the function calculates, bar to bar. 
 We cannot access the ``_hlca`` variable used inside the function from the script's global scope. 
-We thus need another mechanism to pull that variable's value from inside the function's local scope.
+We thus need another mechanism to pull that variable's value from inside the function's local scope, while still being able to use the function's result.
 We can use Pine's ability to have functions return a tuple to gain access to the variable::
 
     //@version=4
@@ -300,7 +303,7 @@ We can use Pine's ability to have functions return a tuple to gain access to the
 .. image:: images/Debugging-DebuggingFromInsideFunctions-1.png
 
 Contrary to global scope variables, array elements of globally defined arrays can be modified from within functions. 
-We could use this feature to write a functionally equivalent script::
+We can use this feature to write a functionally equivalent script::
 
     //@version=4
     study("Debugging from inside functions", "", true)
@@ -323,18 +326,18 @@ We could use this feature to write a functionally equivalent script::
 Debugging from inside 'for' loops
 ---------------------------------
 
-Values inside `for <https://www.tradingview.com/pine-script-reference/v4/#op_for>`__ loops cannot be plotted using ``plot()`` calls. Here, we explore three different techniques to inspect variable values originating from ``for`` loops, starting from this code example, which calculates the balance of bars in the lookback period which have a higher/lower true range value than the current bar::
+Values inside `for <https://www.tradingview.com/pine-script-reference/v4/#op_for>`__ loops cannot be plotted using ``plot()`` calls in the loop. As in functions, such variables are also local to the loop's scope. Here, we explore three different techniques to inspect variable values originating from ``for`` loops, starting from this code example, which calculates the balance of bars in the lookback period which have a higher/lower true range value than the current bar::
 
     //@version=4
     study("Debugging from inside `for` loops")
     i_lookBack = input(20, minval = 0)
 
-    float lowerRangeBalance = 0
+    float trBalance = 0
     for _i = 1 to i_lookBack
-        lowerRangeBalance := lowerRangeBalance + sign(tr - tr[_i])
+        trBalance := trBalance + sign(tr - tr[_i])
 
     hline(0)
-    plot(lowerRangeBalance)
+    plot(trBalance)
 
 
 Extracting a single value
@@ -347,13 +350,13 @@ If we want to inspect the value of a variable at a single point in the loop, we 
     i_lookBack = input(20, minval = 0)
 
     float val = na
-    float lowerRangeBalance = 0
+    float trBalance = 0
     for _i = 1 to i_lookBack
-        lowerRangeBalance := lowerRangeBalance + sign(tr - tr[_i])
+        trBalance := trBalance + sign(tr - tr[_i])
         if _i == i_lookBack
             val := tr[_i]
     hline(0)
-    plot(lowerRangeBalance)
+    plot(trBalance)
     plot(val, "val", color.black)
 
 .. image:: images/Debugging-DebuggingFromInsideForLoops-1.png
@@ -362,50 +365,52 @@ If we want to inspect the value of a variable at a single point in the loop, we 
 Using lines and labels
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Here we draw a line corresponding to the value of ``tr`` used in each loop iteration. We also use a label to display, for each line, the loop's index and the line's value. 
+When we want to extract values from more than one loop iteration we can use lines and labels. 
+Here we draw a line corresponding to the value of ``tr`` used in each loop iteration. 
+We also use a label to display, for each line, the loop's index and the line's value. 
 This gives us a general idea of the values being used in each loop iteration::
 
     //@version=4
     study("Debugging from inside `for` loops", max_lines_count = 500, max_labels_count = 500)
     i_lookBack = input(20, minval = 0)
 
-    float lowerRangeBalance = 0
+    float trBalance = 0
     for _i = 1 to i_lookBack
-        lowerRangeBalance := lowerRangeBalance + sign(tr - tr[_i])
+        trBalance := trBalance + sign(tr - tr[_i])
         line.new(bar_index[1], tr[_i], bar_index, tr[_i], color = color.black)
         label.new(bar_index, tr[_i], tostring(_i) + "•" + tostring(tr[_i]), style = label.style_none, size = size.small)
 
     hline(0)
-    plot(lowerRangeBalance)
+    plot(trBalance)
 
 .. image:: images/Debugging-DebuggingFromInsideForLoops-2.png
 
 Note that:
 
-- The scale in the preceeding screenshot has been manually expanded to show more detail by clicking and dragging the scale area.
-- We have used ``max_lines_count = 500, max_labels_count = 500`` in our ``study()`` declaration statement to display the maximum number of lines and labels.
+- To show more detail, the scale in the preceding screenshot has been manually expanded by clicking and dragging the scale area.
+- We use ``max_lines_count = 500, max_labels_count = 500`` in our ``study()`` declaration statement to display the maximum number of lines and labels.
 - Each loop iteration does not necessarily produce a distinct ``tr`` value, which is why we may not see 20 distinct lines for each bar.
-- We could use the same technique while isolating a specific loop iteration as we did in the preceding example, to show only one level.
+- If we wanted to show only one level, we could use the same technique while isolating a specific loop iteration as we did in the preceding example.
 
 
 Extracting multiple values
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We can extract multiple values from loop iterations by building a single string which we will display using a label after the loop executes::
+We can also extract multiple values from loop iterations by building a single string which we will display using a label after the loop executes::
 
     //@version=4
     study("Debugging from inside `for` loops", max_lines_count = 500, max_labels_count = 500)
     i_lookBack = input(20, minval = 0)
 
     string = ""
-    float lowerRangeBalance = 0
+    float trBalance = 0
     for _i = 1 to i_lookBack
-        lowerRangeBalance := lowerRangeBalance + sign(tr - tr[_i])
+        trBalance := trBalance + sign(tr - tr[_i])
         string := string + tostring(_i, "00") + "•" + tostring(tr[_i]) + "\n"
 
     label.new(bar_index, 0, string, style = label.style_none, size = size.small, textalign = text.align_left)
     hline(0)
-    plot(lowerRangeBalance)
+    plot(trBalance)
 
 .. image:: images/Debugging-DebuggingFromInsideForLoops-3.png
 
@@ -414,7 +419,7 @@ Note that:
 - The scale in the preceeding screenshot has been manually expanded by clicking and dragging the scale area so the content of the indicator's display area content could be moved vertically to show only its relevant part.
 - We use ``tostring(_i, "00")`` to force the display of the loop's index to zero-padded two digits so they align neatly.
 
-When loops with numerous iterations make displaying all their values impractical, you can sample only a subset of the iterations. This code uses the `% <https://www.tradingview.com/pine-script-reference/v4/#op_{percent}>`__ (modulo) operator to only include values from every second loop iteration::
+When loops with numerous iterations make displaying all their values impractical, you can sample a subset of the iterations. This code uses the `% <https://www.tradingview.com/pine-script-reference/v4/#op_{percent}>`__ (modulo) operator to include values from every second loop iteration::
 
     for _i = 1 to i_lookBack
         lowerRangeBalance := lowerRangeBalance + sign(tr - tr[_i])
@@ -424,7 +429,21 @@ When loops with numerous iterations make displaying all their values impractical
 Tips
 ====
 
-We use AutoHotKey to speed coding and have this line in our AHK script, which we use to bring up the ``f_print()`` function in our script when we need to debug strings.
+The two techniques we use most frequently to bebug our Pine code are::
+
+    plotchar(variableName, "variableName", "", location.top, size = size.tiny)
+
+to debug variables of type float, int or bool, and the one-line version of our ``f_print()`` function to debug strings::
+
+    f_print(_text) => var _label = label.new(bar_index, na, _text, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left), label.set_xy(_label, bar_index, highest(10)[1]), label.set_text(_label, _text)
+    f_print(stringName)
+
+to plot a variable's value in the Data Window, or::
+
+    plotchar(variableName, "variableName", "•", location.top, size = size.tiny)
+
+
+We use AutoHotKey to speed repetitive tasks. coding and have this line in our AHK script, which we use to bring up the ``f_print()`` function in our script when we need to debug strings.
   This is the AutoHotKey line that allows us to use ``CTRL-SHIT-P`` to insert the one-line version of the function in our code and create a call to the function 
   so all that's left to do is to type the string you want to display::
 
