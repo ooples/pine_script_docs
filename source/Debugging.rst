@@ -433,7 +433,7 @@ The two techniques we use most frequently to bebug our Pine code are::
 
     plotchar(variableName, "variableName", "", location.top, size = size.tiny)
 
-to debug variables of type float, int or bool, and the one-line version of our ``f_print()`` function to debug strings::
+to debug variables of type *float*, *int* or *bool*, and the one-line version of our ``f_print()`` function to debug strings::
 
     f_print(_text) => var _label = label.new(bar_index, na, _text, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left), label.set_xy(_label, bar_index, highest(10)[1]), label.set_text(_label, _text)
     f_print(stringName)
