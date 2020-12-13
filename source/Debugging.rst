@@ -440,6 +440,7 @@ to plot variables of type *float*, *int* or *bool* in the indicator's values and
 
 As we use AutoHotkey for Windows to speed repetitive tasks, we include these lines in our AutoHotkey script (this is **not** Pine code)::
 
+    ; ————— This is AHK code, not Pine. —————
     ^+f:: SendInput plotchar(^v, "^v", "", location.top, size = size.tiny){Return}
     ^+p:: SendInput f_print(_text) => var _label = label.new(bar_index, na, _text, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left), label.set_xy(_label, bar_index, highest(10)[1]), label.set_text(_label, _text)`nf_print(){Left}
 
