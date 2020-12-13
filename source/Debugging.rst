@@ -438,7 +438,7 @@ to plot variables of type *float*, *int* or *bool* in the indicator's values and
     f_print(_text) => var _label = label.new(bar_index, na, _text, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left), label.set_xy(_label, bar_index, highest(10)[1]), label.set_text(_label, _text)
     f_print(stringName)
 
-As we use AutoHotKey for Windows to speed repetitive tasks, we include these lines in our AutoHotKey script::
+As we use AutoHotKey for Windows to speed repetitive tasks, we include these lines in our AutoHotKey script (this is **not** Pine code)::
 
     ^+f:: SendInput plotchar(^v, "^v", "", location.top, size = size.tiny){Return}
     ^+p:: SendInput f_print(_text) => var _label = label.new(bar_index, na, _text, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left), label.set_xy(_label, bar_index, highest(10)[1]), label.set_text(_label, _text)`nf_print(){Left}
