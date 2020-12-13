@@ -427,7 +427,7 @@ When loops with numerous iterations make displaying all their values impractical
             string := string + tostring(_i, "00") + "•" + tostring(tr[_i]) + "\n"
 
 Tips
-====
+----
 
 The two techniques we use most frequently to bebug our Pine code are::
 
