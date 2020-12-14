@@ -210,7 +210,7 @@ Note that:
   where a *y* position is used only when our ``rIsLow`` condition is true. When it is not true, ``na`` is used, so no character is displayed.
 - **Method #4** uses ``plotshape()`` to plot a blue up arrow in the top part of the indicator's display area when our condition is met.
 - **Method #5** uses ``plotarrow()`` to plot a green up arrow at the bottom of the display when our condition is met.
-- **Method #6** uses ``bgcolor`` to change the color of the background when our condition is met. The ternary operator is used once again to evaluate our condition. 
+- **Method #6** uses ``bgcolor()`` to change the color of the background when our condition is met. The ternary operator is used once again to evaluate our condition. 
   It will return ``color.green`` when ``rIsLow`` is true, and the ``na`` color (which does not color the background) when ``rIsLow`` is false or ``na``.
 - Lastly, note how a boolean variable with a ``true`` value displays as ``1`` in the Data Window. ``false`` values are denoted by a zero value.
 
