@@ -105,7 +105,7 @@ where:
 - Because the value of `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__ is no longer being plotted in the script's pane, the pane's boundaries are now those of RSI, which displays normally.
 - The value plotted using `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plotchar>`__ is displayed next to the script's name and in the Data Window.
 - We are not plotting a character with our `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plotchar>`__ call, so the third argument is an empty string (``""``). 
-  We are also specifying ``location.top`` as the ``location`` argument, so that we do not put the symbol's price in play in the calculation of the display area's boundaries.
+  We are also specifying `location.top <https://www.tradingview.com/pine-script-reference/v4/#var_location{dot}top>`__ as the ``location`` argument, so that we do not put the symbol's price in play in the calculation of the display area's boundaries.
 
 
 
