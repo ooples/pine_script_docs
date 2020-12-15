@@ -343,7 +343,7 @@ Values inside `for <https://www.tradingview.com/pine-script-reference/v4/#op_for
 Extracting a single value
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If we want to inspect the value of a variable at a single point in the loop, we can save it and plot it once the loop is exited. Here, we save the value of ``tr`` in the ``val`` variable at the loop's last iteration::
+If we want to inspect the value of a variable at a single point in the loop, we can save it and plot it once the loop is exited. Here, we save the value of `tr <https://www.tradingview.com/pine-script-reference/v4/#var_tr>`__ in the ``val`` variable at the loop's last iteration::
 
     //@version=4
     study("Debugging from inside `for` loops", max_lines_count = 500, max_labels_count = 500)
