@@ -326,7 +326,7 @@ We can use this feature to write a functionally equivalent script::
 Debugging from inside 'for' loops
 ---------------------------------
 
-Values inside `for <https://www.tradingview.com/pine-script-reference/v4/#op_for>`__ loops cannot be plotted using `plot() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ calls in the loop. As in functions, such variables are also local to the loop's scope. Here, we explore three different techniques to inspect variable values originating from ``for`` loops, starting from this code example, which calculates the balance of bars in the lookback period which have a higher/lower true range value than the current bar::
+Values inside `for <https://www.tradingview.com/pine-script-reference/v4/#op_for>`__ loops cannot be plotted using `plot() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ calls in the loop. As in functions, such variables are also local to the loop's scope. Here, we explore three different techniques to inspect variable values originating from `for <https://www.tradingview.com/pine-script-reference/v4/#op_for>`__ loops, starting from this code example, which calculates the balance of bars in the lookback period which have a higher/lower true range value than the current bar::
 
     //@version=4
     study("Debugging from inside `for` loops")
@@ -366,7 +366,7 @@ Using lines and labels
 ^^^^^^^^^^^^^^^^^^^^^^
 
 When we want to extract values from more than one loop iteration we can use lines and labels. 
-Here we draw a line corresponding to the value of ``tr`` used in each loop iteration. 
+Here we draw a line corresponding to the value of `tr <https://www.tradingview.com/pine-script-reference/v4/#var_tr>`__ used in each loop iteration. 
 We also use a label to display, for each line, the loop's index and the line's value. 
 This gives us a general idea of the values being used in each loop iteration::
 
@@ -388,8 +388,8 @@ This gives us a general idea of the values being used in each loop iteration::
 Note that:
 
 - To show more detail, the scale in the preceding screenshot has been manually expanded by clicking and dragging the scale area.
-- We use ``max_lines_count = 500, max_labels_count = 500`` in our ``study()`` declaration statement to display the maximum number of lines and labels.
-- Each loop iteration does not necessarily produce a distinct ``tr`` value, which is why we may not see 20 distinct lines for each bar.
+- We use ``max_lines_count = 500, max_labels_count = 500`` in our `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__ declaration statement to display the maximum number of lines and labels.
+- Each loop iteration does not necessarily produce a distinct `tr <https://www.tradingview.com/pine-script-reference/v4/#var_tr>`__ value, which is why we may not see 20 distinct lines for each bar.
 - If we wanted to show only one level, we could use the same technique while isolating a specific loop iteration as we did in the preceding example.
 
 
