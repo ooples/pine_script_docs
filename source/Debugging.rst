@@ -90,7 +90,7 @@ where:
 4. The value of `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__ on the bar the cursor is on is also displayed in the Data Window, along with that bar's value for RSI just above it.
 
 In order to preserve our plot of RSI while still being able to inspect the value or `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__, 
-we will plot the variable using `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ like this::
+we will plot the variable using `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plotchar>`__ like this::
 
     //@version=4
     study("Plot RSI and `bar_index`")
@@ -103,8 +103,8 @@ we will plot the variable using `plotchar() <https://www.tradingview.com/pine-sc
 where:
 
 - Because the value of `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__ is no longer being plotted in the script's pane, the pane's boundaries are now those of RSI, which displays normally.
-- The value plotted using `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ is displayed next to the script's name and in the Data Window.
-- We are not plotting a character with our `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ call, so the third argument is an empty string (``""``). 
+- The value plotted using `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plotchar>`__ is displayed next to the script's name and in the Data Window.
+- We are not plotting a character with our `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plotchar>`__ call, so the third argument is an empty string (``""``). 
   We are also specifying ``location.top`` as the ``location`` argument, so that we do not put the symbol's price in play in the calculation of the display area's boundaries.
 
 
@@ -202,10 +202,10 @@ Note that:
 
 - We define our condition in the ``rIsLow`` boolean variable and it is evaluated on each bar. The ``r < 30`` expression used to assign a value to the variable evaluates to ``true`` or ``false`` (or ``na`` when ``r`` is ``na``, as is the case in the first bars of the dataset).
 - **Method #1** uses a change in the color of the RSI plot on the condition. Whenever a plot's color changes, it colors the plot starting from the preceding bar.
-- **Method #2** uses `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ to plot an up triangle in the bottom part of the indicator's display. 
+- **Method #2** uses `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plotchar>`__ to plot an up triangle in the bottom part of the indicator's display. 
   Using different combinations of positions and characters allows the simultaneous identification of multiple conditions on a single bar.
   **This is one of our preferred methods to identify conditions on the chart.**
-- **Method #3** also uses a `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ call, but this time the character is positioned on the RSI line. 
+- **Method #3** also uses a `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plotchar>`__ call, but this time the character is positioned on the RSI line. 
   In order to achieve this, we use ``location.absolute`` and Pine's ternary conditional operator (``?``) to define a conditional expression 
   where a *y* position is used only when our ``rIsLow`` condition is true. When it is not true, ``na`` is used, so no character is displayed.
 - **Method #4** uses `plotshape() <https://www.tradingview.com/pine-script-reference/v4/#fun_plotshape>`__ to plot a blue up arrow in the top part of the indicator's display area when our condition is met.
@@ -255,8 +255,8 @@ The state of multiple individual conditions can be displayed using a technique l
 
 Note that:
 
-- We use a `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ call to display each condition's number, taking care to spread them over the indicator's *y* space so they don't overlap.
-- The first two `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ calls use absolute positioning to place the condition number so that it helps us remember the corresponding condition. 
+- We use a `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plotchar>`__ call to display each condition's number, taking care to spread them over the indicator's *y* space so they don't overlap.
+- The first two `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plotchar>`__ calls use absolute positioning to place the condition number so that it helps us remember the corresponding condition. 
   The first one which displays "1" when RSI is higher than the user-defined bull level for example, positions the "1" on the bull level.
 - We use two different shades of green to color the background: the brighter one indicates the first bar where our compound condition becomes ``true``, 
   the lighter green identifies subsequent bars where our compound condition continues to be true.
@@ -446,7 +446,7 @@ As we use AutoHotkey for Windows to speed repetitive tasks, we include these lin
     ^+f:: SendInput plotchar(^v, "^v", "", location.top, size = size.tiny){Return}
     ^+p:: SendInput f_print(_text) => var _label = label.new(bar_index, na, _text, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left), label.set_xy(_label, bar_index, highest(10)[1]), label.set_text(_label, _text)`nf_print(){Left}
 
-The second line will type a debugging `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ call including an expression or variable name previously copied to the clipboard when we use ``CTRL-SHIT-F``. 
+The second line will type a debugging `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plotchar>`__ call including an expression or variable name previously copied to the clipboard when we use ``CTRL-SHIT-F``. 
 Copying the ``variableName`` variable name or the ``close > open`` conditional expression to the clipboard and hitting ``CTRL-SHIT-F`` will, respectively, yield:
 
 .. code-block::
