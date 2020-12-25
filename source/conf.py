@@ -17,12 +17,13 @@ import sys
 sys.path.insert(0, os.path.abspath('./modules'))
 
 from sphinx.highlighting import lexers
+from datetime import datetime
 import pine_lexer
 
 # -- Project information -----------------------------------------------------
 
 project = u'Pine Script User Manual'
-copyright = u'2019, TradingView'
+copyright = str(datetime.now().year) + u', TradingView'
 author = u''
 
 # The short X.Y version
