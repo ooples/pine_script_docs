@@ -1,7 +1,7 @@
-# Pine Script documentation
+# Pine User Manual
 
-Official documentation of Pine Script language. You may read it [here](https://www.tradingview.com/pine-script-docs/en/v4/index.html).
-It's a replacement of [Pine Tutorial Wiki](https://www.tradingview.com/wiki/Pine_Script_Tutorial).
+This repo contains the source for the current [User Manual](https://www.tradingview.com/pine-script-docs/en/v4/index.html) of TradingView's Pine programming language. It deprecates the [Pine Tutorial Wiki](https://www.tradingview.com/wiki/Pine_Script_Tutorial). The source uses [reStructuredText markup](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html) and we use [Sphynx](https://www.sphinx-doc.org/en/master/) to build the final HTML product.
+
 
 ## How to build html docs
 Follow these steps:

@@ -365,23 +365,26 @@ Using an array as a queue
 
 Queues are FIFO (first in, first out) constructions. They behave somewhat like cars arriving at a red light. 
 New cars are queued at the end of the line, and the first car to leave will be the first one that arrived to the red light. 
-In the following code example, we will be starting with an empty queue. 
-We will add new values to the end of the array. When we remove a value from the queue, we will remove the oldest value, 
-which is always sitting at the beginning of the array, at index zero. 
-We can use `array.push() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}push>`__ 
-to append new values at the end of the array, and we will be using 
-`array.shift() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}shift>`__ 
-to remove the array's first element when we need to de-queue and element.
 
-Our next script will be plotting labels on recent high pivots while allowing the trader to limit the quantity of labels displayed. 
-In order to achieve this, every time we encounter a new pivot, we will use our queue to save the ``bar_index`` 
-of the bar where the pivot is found and its new label created. This way, when an old label needs to be deleted, 
-we will be able to know the bar number where it was created and derive an offset to refer to the corresponding 
-historical value of the the label id::
+In the following code example, we let users decide through the script's inputs how many labels they want to have on their chart.
+We use that quantity to determine the size of the array of labels we then create, initializing the array's elements to ``na``.
+
+When a new pivot is detected, we create a label for it, saving the label's id in the ``pLabel`` variable. 
+We then queue the id of that label by 
+using `array.push() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}push>`__ 
+to append the new label's id to the end of the array, making our array size one greater than the maximum number of labels to keep on the chart.
+
+Lastly, we de-queue the oldest label by removing the array's first element using 
+`array.shift() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}shift>`__ and deleting the label referenced by that array element's value. 
+As we have now de-queued an element from our queue, the array contains ``i_pivotCount`` elements once again. 
+Note that on the dataset's first bars we will be deleting ``na`` label id's until the maximum number of labels has been created, 
+but this does not cause runtime errors. Let's look at our code::
 
     //@version=4
-    study("Show Last n High Pivots", "", true)
-    i_pivotCount = input(5, "How many pivots to show", minval = 0, maxval = 50)
+    MAX_LABELS = 100
+    study("Show Last n High Pivots", "", true, max_labels_count = MAX_LABELS)
+
+    i_pivotCount = input(5, "How many pivots to show", minval = 0, maxval = MAX_LABELS)
     i_pivotLegs  = input(3, "Pivot legs", minval = 1, maxval = 5)
 
     // Format price to tick precision.
@@ -391,28 +394,17 @@ historical value of the the label id::
         _s := str.replace_all(_s, "5",  "0")
         _s := str.replace_all(_s, "1",  "0")
 
-    var pivotBars = array.new_int(0)
-    label pLabel = na
-    // Explicitly define the historical buffer size of label id.
-    max_bars_back(pLabel, 1000)
+    // Create an array containing the user-selected max count of label ids.
+    var labelIds = array.new_label(i_pivotCount)
 
     pHi = pivothigh(i_pivotLegs, i_pivotLegs)
     if not na(pHi)
-        // New pivot found; append the bar_index of the new pivot to the end of the array.
-        array.push(pivotBars, bar_index)
-        if array.size(pivotBars) > i_pivotCount
-            // The queue was already full; remove its oldest element,
-            // using its value to also delete the oldest label in the queue.
-            label.delete(pLabel[bar_index - array.shift(pivotBars)])
-        // Plot the new pivot's label `i_pivotLegs` bars back.
-        pLabel := label.new(bar_index[i_pivotLegs], pHi, tostring(pHi, f_tickFormat()), textcolor = color.white)
-
-Note that we explicitly define the historical buffer size for the ``pLabel`` variable using ``max_bars_back(pLabel, 1000)``, 
-otherwise the script will be referring to historical values which have not been buffered and throw a runtime error. 
-Using the `max_bars_back() <https://www.tradingview.com/pine-script-reference/v4/#fun_max_bars_back>`__ 
-function to do so, rather than the ``max_bars_back`` parameter in our 
-`study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__ 
-declaration statement, will decrease the amount of memory available for other script logic.
+        // New pivot found; plot its label `i_pivotLegs` bars back.
+        pLabel = label.new(bar_index[i_pivotLegs], pHi, tostring(pHi, f_tickFormat()), textcolor = color.white)
+        // Queue the new label's id by appending it to the end of the array.
+        array.push(labelIds, pLabel)
+        // De-queue the oldest label id from the queue and delete the corresponding label.
+        label.delete(array.shift(labelIds))
 
 |Arrays-InsertingAndRemovingArrayElements-ShowLastnHighPivots.png|
 
@@ -510,7 +502,7 @@ Sorting
 ^^^^^^^
 
 Arrays can be sorted in either ascending or descending order using `array.sort() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}sort>`__. 
-The ``order`` parameter is optional and defaults to `order.ascending <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}order.ascending>`__. 
+The ``order`` parameter is optional and defaults to `order.ascending <https://www.tradingview.com/pine-script-reference/v4/#var_order{dot}ascending>`__. 
 As all ``array.*()`` function arguments, it is of form *series*, so can be determined at runtime, as is done here. 
 Note that in the example, which array is sorted is also determined at runtime::
 
