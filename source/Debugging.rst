@@ -206,7 +206,7 @@ Note that:
   Using different combinations of positions and characters allows the simultaneous identification of multiple conditions on a single bar.
   **This is one of our preferred methods to identify conditions on the chart.**
 - **Method #3** also uses a `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plotchar>`__ call, but this time the character is positioned on the RSI line. 
-  In order to achieve this, we use `location.absolute <https://www.tradingview.com/pine-script-reference/v4/#var_location{dot}absolute>`__ and Pine's ternary conditional operator (``?``) to define a conditional expression 
+  In order to achieve this, we use `location.absolute <https://www.tradingview.com/pine-script-reference/v4/#var_location{dot}absolute>`__ and Pine's ternary conditional operator (``?:``) to define a conditional expression 
   where a *y* position is used only when our ``rIsLow`` condition is true. When it is not true, ``na`` is used, so no character is displayed.
 - **Method #4** uses `plotshape() <https://www.tradingview.com/pine-script-reference/v4/#fun_plotshape>`__ to plot a blue up arrow in the top part of the indicator's display area when our condition is met.
 - **Method #5** uses `plotarrow() <https://www.tradingview.com/pine-script-reference/v4/#fun_plotarrow>`__ to plot a green up arrow at the bottom of the display when our condition is met.
