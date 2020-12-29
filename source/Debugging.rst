@@ -416,7 +416,7 @@ We can also extract multiple values from loop iterations by building a single st
 
 Note that:
 
-- The scale in the preceeding screenshot has been manually expanded by clicking and dragging the scale area so the content of the indicator's display area content could be moved vertically to show only its relevant part.
+- The scale in the preceding screenshot has been manually expanded by clicking and dragging the scale area so the content of the indicator's display area content could be moved vertically to show only its relevant part.
 - We use ``tostring(_i, "00")`` to force the display of the loop's index to zero-padded two digits so they align neatly.
 
 When loops with numerous iterations make displaying all their values impractical, you can sample a subset of the iterations. This code uses the `% <https://www.tradingview.com/pine-script-reference/v4/#op_{percent}>`__ (modulo) operator to include values from every second loop iteration::
@@ -429,7 +429,7 @@ When loops with numerous iterations make displaying all their values impractical
 Tips
 ----
 
-The two techniques we use most frequently to bebug our Pine code are::
+The two techniques we use most frequently to debug our Pine code are::
 
     plotchar(v, "v", "", location.top, size = size.tiny)
 
