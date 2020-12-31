@@ -34,7 +34,7 @@ combination with ``tickerid`` function. Here is an example::
 In a similar way we may get other OHLC prices: *open*, *high* and *low*.
 
 Get non-standard OHLC values on a standard chart
-------------------------------------------
+------------------------------------------------
 
 Backtesting on non-standard chart types (e.g. Heikin Ashi or Renko) is not recommended because the bars on these kinds of charts do not represent real price movement that you would encounter while trading. If you want your strategy to enter and exit on real prices but still use Heikin Ashi-based signals, you can use the same method to get Heikin Ashi values on a regular candlestick chart::
 

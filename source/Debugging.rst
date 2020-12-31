@@ -447,9 +447,8 @@ As we use AutoHotkey for Windows to speed repetitive tasks, we include these lin
     ^+p:: SendInput f_print(_text) => var _label = label.new(bar_index, na, _text, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left), label.set_xy(_label, bar_index, highest(10)[1]), label.set_text(_label, _text)`nf_print(){Left}
 
 The second line will type a debugging `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plotchar>`__ call including an expression or variable name previously copied to the clipboard when we use ``CTRL-SHIT-F``. 
-Copying the ``variableName`` variable name or the ``close > open`` conditional expression to the clipboard and hitting ``CTRL-SHIT-F`` will, respectively, yield:
+Copying the ``variableName`` variable name or the ``close > open`` conditional expression to the clipboard and hitting ``CTRL-SHIT-F`` will, respectively, yield::
 
-.. code-block::
 
     plotchar(variableName, "variableName", "", location.top, size = size.tiny)
     plotchar(close > open, "close > open", "", location.top, size = size.tiny)
