@@ -693,12 +693,18 @@ Scrolling the chart left, one will see there are no drawings after approximately
 
 .. image:: images/drawings_total_number_limit.png
 
+You can change the drawing limit to a value in range from 1 to 500 using the max_lines_count and max_labels_count parameters for the study and strategy functions::
+
+    //@version=4
+    study("My Script", overlay=true, max_labels_count=100)
+    label.new(bar_index, high)
+
+.. image:: images/drawings_with_max_labels_count.png
 
 Additional securities
 ^^^^^^^^^^^^^^^^^^^^^
 
 Pine code sometimes uses additional symbols and/or timeframes with the :doc:`security <Context_switching_the_security_function>` function. Drawing functions can only be used in the main symbol's context.
-
 
 max_bars_back of time
 ^^^^^^^^^^^^^^^^^^^^^

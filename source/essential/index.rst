@@ -13,3 +13,4 @@ Essential features
    Strategies
    Indicator_repainting
    Drawings
+   Arrays

@@ -14,13 +14,15 @@ cannot be inferred at compile time, it can be explicitly defined using the ``typ
 Pine supports the following types of input:
 
 -  input.bool,
+-  input.color,
 -  input.integer,
 -  input.float,
 -  input.string,
 -  input.symbol,
 -  input.resolution,
 -  input.session,
--  input.source.
+-  input.source,
+-  input.time.
 
 The following examples show how to create each type of input and what
 its widget looks like.
@@ -35,6 +37,14 @@ Boolean input
 
 .. figure:: images/Inputs_of_indicator_1.png
 
+Color input
+^^^^^^^^^^^
+::
+
+    c = input(title="Color", type=input.color, defval=color.red)
+    plot(close, color=c)
+
+.. figure:: images/Inputs_of_indicator_8.png
 
 Integer input
 ^^^^^^^^^^^^^
@@ -78,10 +88,9 @@ Session input
 ::
 
     s = input(title="Session", type=input.session, defval="24x7")
-    plot(time(period, s))
+    plot(time(timeframe.period, s))
 
 .. figure:: images/Inputs_of_indicator_5.png
-
 
 
 Source input
@@ -93,6 +102,16 @@ Source input
     plot(ma)
 
 .. figure:: images/Inputs_of_indicator_6.png
+
+
+Time input
+^^^^^^^^^^^^^
+::
+
+    date = input(title="Date", type=input.time, defval=timestamp("20 Feb 2020 00:00 +0300"))
+    plot(date)
+
+.. figure:: images/Inputs_of_indicator_9.png
 
 
 options parameter

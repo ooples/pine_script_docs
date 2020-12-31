@@ -13,7 +13,7 @@ All of these types exist in several **forms**. There are 5 forms of types:
 The Pine compiler distinguishes
 between a *literal bool* type, an *input bool* type, a *series bool* type and so on.
 
-There is also a *void* type, a *na* (not available) value and a compound *tuple* type.
+There is also an *array* type, a *void* type, a *na* (not available) value and a compound *tuple* type.
 
 Type forms
 ----------
@@ -198,7 +198,7 @@ Examples::
     #808080                // gray color
     #3ff7a0                // some custom color
     #FF000080              // 50% transparent red color
-    #FF0000FF              // same as #00FF00, fully opaque red color
+    #FF0000FF              // same as #FF0000, fully opaque red color
     #FF000000              // completely transparent color
 
 .. note:: Hexadecimal notation is not case-sensitive.
@@ -295,6 +295,18 @@ or diagram on the chart. The function ``hline`` returns an object of the
 type *hline*, represented as a horizontal line. These objects can be
 passed to the `fill <https://www.tradingview.com/pine-script-reference/v4/#fun_fill>`__
 function to color the area in between them.
+
+array
+-----
+
+Arrays in Pine are identified by an *array id*. There is no single type representing an array id, 
+but rather an overloaded version of a subset of fundamental Pine types which reflects the type of an array's elements. 
+These type names are constructed by appending the ``[]`` suffix to one of the four fundamental types allowed in arrays:
+
+- ``int[]``
+- ``float[]``
+- ``bool[]``
+- ``color[]``
 
 void
 ----
