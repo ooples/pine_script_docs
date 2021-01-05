@@ -198,7 +198,7 @@ Examples::
     #808080                // gray color
     #3ff7a0                // some custom color
     #FF000080              // 50% transparent red color
-    #FF0000FF              // same as #00FF00, fully opaque red color
+    #FF0000FF              // same as #FF0000, fully opaque red color
     #FF000000              // completely transparent color
 
 .. note:: Hexadecimal notation is not case-sensitive.

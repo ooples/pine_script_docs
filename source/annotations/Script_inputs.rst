@@ -21,7 +21,8 @@ Pine supports the following types of input:
 -  input.symbol,
 -  input.resolution,
 -  input.session,
--  input.source.
+-  input.source,
+-  input.time.
 
 The following examples show how to create each type of input and what
 its widget looks like.
@@ -92,7 +93,6 @@ Session input
 .. figure:: images/Inputs_of_indicator_5.png
 
 
-
 Source input
 ^^^^^^^^^^^^^
 ::
@@ -102,6 +102,16 @@ Source input
     plot(ma)
 
 .. figure:: images/Inputs_of_indicator_6.png
+
+
+Time input
+^^^^^^^^^^^^^
+::
+
+    date = input(title="Date", type=input.time, defval=timestamp("20 Feb 2020 00:00 +0300"))
+    plot(date)
+
+.. figure:: images/Inputs_of_indicator_9.png
 
 
 options parameter
