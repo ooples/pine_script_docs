@@ -450,7 +450,7 @@ Note that users creating *alertcondition() alerts* from the "Create Alert" dialo
     Note that double quotation marks (``"``) **must** be used inside the placeholder to wrap the ``title`` argument. 
     This requires that a single quotation mark (``'``) be used to wrap the ``message`` string:
 
-    ::
+::
 
     //@version=4
     study("")
