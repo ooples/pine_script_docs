@@ -438,16 +438,18 @@ Note that users creating *alertcondition() alerts* from the "Create Alert" dialo
 
 ``{{plot_0}}``, ``{{plot_1}}``, [...], ``{{plot_19}}``
     Value of the corresponding plot number. Plots are numbered from zero to 19 in order of appearance in the script, so only one of the first 20 plots can be used.
-    For example, the built-in "Volume" indicator has two output series: Volume and Volume MA, so you could use the following::
+    For example, the built-in "Volume" indicator has two output series: Volume and Volume MA, so you could use the following:
 
+::
     alertcondition(volume > sma(volume,20), "Volume alert", "Volume ({{plot_0}}) > average ({{plot_1}})")
 
 ``{{plot("[plot_title]")}}``
     This placeholder can be used when one needs to refer to a plot using the ``title`` argument used in a 
     `plot() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`_ call. 
     Note that double quotation marks (``"``) **must** be used inside the placeholder to wrap the ``title`` argument. 
-    This requires that a single quotation mark (``'``) be used to wrap the ``message`` string::
+    This requires that a single quotation mark (``'``) be used to wrap the ``message`` string:
 
+::
     //@version=4
     study("")
     r = rsi(close, 14)
