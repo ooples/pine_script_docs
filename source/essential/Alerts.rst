@@ -232,8 +232,8 @@ Note how:
   A long entry on a crossover of the centerline only triggers the alert when long entries have been enabled in the script's Inputs.
 - If a user of this script wanted to create two distinct script alerts from this script, i.e., one triggering only on longs, 
   and one only on shorts, then he would need to:
-    1. Select only "Detect Longs" in the inputs and create a first *script alert* on the script.
-    2. Select only "Detect Shorts" in the Inputs and create another *script alert* on the script.
+    - Select only "Detect Longs" in the inputs and create a first *script alert* on the script.
+    - Select only "Detect Shorts" in the Inputs and create another *script alert* on the script.
 
 
 In strategies
@@ -440,8 +440,6 @@ Note that users creating *alertcondition() alerts* from the "Create Alert" dialo
     Value of the corresponding plot number. Plots are numbered from zero to 19 in order of appearance in the script, so only one of the first 20 plots can be used.
     For example, the built-in "Volume" indicator has two output series: Volume and Volume MA, so you could use the following::
 
-.. code-block::
-
     alertcondition(volume > sma(volume,20), "Volume alert", "Volume ({{plot_0}}) > average ({{plot_1}})")
 
 ``{{plot("[plot_title]")}}``
@@ -449,8 +447,6 @@ Note that users creating *alertcondition() alerts* from the "Create Alert" dialo
     `plot() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`_ call. 
     Note that double quotation marks (``"``) **must** be used inside the placeholder to wrap the ``title`` argument. 
     This requires that a single quotation mark (``'``) be used to wrap the ``message`` string::
-
-.. code-block::
 
     //@version=4
     study("")
