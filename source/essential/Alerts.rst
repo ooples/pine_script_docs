@@ -441,6 +441,7 @@ Note that users creating *alertcondition() alerts* from the "Create Alert" dialo
     For example, the built-in "Volume" indicator has two output series: Volume and Volume MA, so you could use the following:
 
 ::
+
     alertcondition(volume > sma(volume,20), "Volume alert", "Volume ({{plot_0}}) > average ({{plot_1}})")
 
 ``{{plot("[plot_title]")}}``
@@ -450,6 +451,7 @@ Note that users creating *alertcondition() alerts* from the "Create Alert" dialo
     This requires that a single quotation mark (``'``) be used to wrap the ``message`` string:
 
 ::
+
     //@version=4
     study("")
     r = rsi(close, 14)
