@@ -111,14 +111,14 @@ The `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`_
 
 .. code-block:: text
 
-    alertcondition(message, freq)
+    alert(message, freq)
 
 ``message``
     A "series string" representing the message text sent when the alert triggers.
     Because this argument can be of "series" form, it can be generated at runtime and differ bar to bar, making it dynamic.
 
 ``freq``
-    An "input int" specifying the triggering frequency of the alert. Valid arguments are:
+    An "input string" specifying the triggering frequency of the alert. Valid arguments are:
         ``alert.freq_once_per_bar``: Only the first call per realtime bar triggers the alert (default value).
 
         ``alert.freq_once_per_bar_close``: An alert is only triggered when the realtime bar closes and an 
@@ -177,7 +177,7 @@ Note that:
   If an `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ call was placed in the script's global scope at column 0, 
   it would execute on all bars, which would likely not be the desired behavior.
 - An `alertcondition() <https://www.tradingview.com/pine-script-reference/v4/#fun_alertcondition>`__ 
-  call cannot accept the same string we use for our alert's mesage because of its use of the 
+  could not accept the same string we use for our alert's message because of its use of the 
   `tostring() <https://www.tradingview.com/pine-script-reference/v4/#fun_tostring>`__ call. 
   `alertcondition() <https://www.tradingview.com/pine-script-reference/v4/#fun_alertcondition>`__ messages must be constant strings.
 
@@ -327,7 +327,7 @@ Note that:
 - We use the ``stop`` parameter in our `strategy.entry() <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy{dot}entry>`__ calls, 
   which creates stop-buy and stop-sell orders. This entails that buy orders will only execute once price is higher than the `high` on the bar where the order is placed, 
   and sell orders will only execute once price is lower than the `low` on the bar where the order is placed.
-- The up/down arrows which we plot with `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plotchar>`_ are plotted when oders are **placed**. 
+- The up/down arrows which we plot with `plotchar() <https://www.tradingview.com/pine-script-reference/v4/#fun_plotchar>`_ are plotted when orders are **placed**. 
   Any number of bars may elapse before the order is actually executed, and in some cases the order will never be executed because price does not meet 
   the required condition.
 - Because we use the same ``id`` argument for all buy orders, any new buy order placed before a previous order's condition is met will replace that order. 
@@ -376,8 +376,7 @@ The `alertcondition() <https://www.tradingview.com/pine-script-reference/v4/#fun
    A "const string" optional argument that specifies the text message to display when the alert triggers. 
    The text will appear in the *Message* field of the *Create Alert* dialog box, from where script users can then modify it when creating an alert. 
    **This string being "const string", it must be known at compilation time and thus cannot vary bar to bar.** 
-   It can, however, contain placeholders which will be replaced at runtime by dynamic values that may change bar to bar. See this page's `Placeholders`_ section. 
-   If a ``title`` argument is used and no ``message`` argument is supplied, the ``title`` argument will be used as the default message.
+   It can, however, contain placeholders which will be replaced at runtime by dynamic values that may change bar to bar. See this page's `Placeholders`_ section.
 
 
 Using one condition
