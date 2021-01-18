@@ -122,7 +122,8 @@ The `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`_
     Because this argument allows the "series" form, it can be generated at runtime and differ bar to bar, making it dynamic.
 
 ``freq``
-   An "input string" specifying the triggering frequency of the alert. Valid arguments are:
+    An "input string" specifying the triggering frequency of the alert. Valid arguments are:
+
         ``alert.freq_once_per_bar``: Only the first call per realtime bar triggers the alert (default value).
 
         ``alert.freq_once_per_bar_close``: An alert is only triggered when the realtime bar closes and an 
