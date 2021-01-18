@@ -14,4 +14,3 @@ Annotations overview
    Background_coloring_with_bgcolor
    Plotting_shapes_chars_and_arrows
    Custom_OHLC_bars_and_candles
-   Alert_conditions
