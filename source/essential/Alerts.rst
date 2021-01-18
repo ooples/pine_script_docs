@@ -310,7 +310,7 @@ Specifying custom alert messages for specific *order fill events* is done by mea
 `strategy.exit() <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy{dot}exit>`__ and 
 `strategy.order() <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy{dot}order>`__.
 
-The argument used for the ``alert_message`` parameter is a "series string", so it can be constructed dynamically from any variable available to the script, 
+The argument used for the ``alert_message`` parameter is a "series string", so it can be constructed dynamically using any variable available to the script, 
 as long as it is converted to string format.
 
 Let's look at a strategy where we use the ``alert_message`` parameter in both our 
