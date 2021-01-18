@@ -480,7 +480,7 @@ Note that users creating *alertcondition() alerts* from the "Create Alert" dialo
     
 
 ``{{exchange}}``
-    Exchange of the symbol used in the alert (NASDAQ, NYSE, MOEX, etc). Note that for delayed symbols, the exchange will end with “_DL” or “_DLY.” For example, “NYMEX_DL.”
+    Exchange of the symbol used in the alert (NASDAQ, NYSE, MOEX, etc.). Note that for delayed symbols, the exchange will end with “_DL” or “_DLY.” For example, “NYMEX_DL.”
 
 ``{{interval}}``
     Returns the timeframe of the chart the alert is created on. 
