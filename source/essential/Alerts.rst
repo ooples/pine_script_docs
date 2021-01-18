@@ -345,7 +345,7 @@ Note that:
   the required condition.
 - Because we use the same ``id`` argument for all buy orders, any new buy order placed before a previous order's condition is met will replace that order. 
   The same applies to sell orders.
-- Although the ``alert_message`` argument will only be included in the alert message when the order is executed, it is evaluated when the order is placed.
+- Variables included in the ``alert_message`` argument are evaluated when the order is executed, so when the alert triggers.
 
 When the ``alert_message`` parameter is used in a strategy's order-generating ``strategy.*()`` function calls, 
 script users must include the ``{{strategy.order.alert_message}}`` placeholder in the "Create Alert" dialog box's "Message" field 
