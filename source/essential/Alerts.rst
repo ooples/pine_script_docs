@@ -90,7 +90,7 @@ but it can also be used advantageously to generate distinct alerts available for
 Script alerts
 -------------
 
-When a script user creates a *script alert* using the *Create Alert* dialog box, 
+When a script user creates a *script alert* using the "Create Alert" dialog box, 
 the events able to trigger the alert will vary depending on whether the alert is created from a study or a strategy.
 
 A *script alert* created from a **study** will trigger when:
