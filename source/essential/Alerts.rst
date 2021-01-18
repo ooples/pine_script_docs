@@ -13,11 +13,11 @@ TradingView alerts run 24x7 on our servers and do not require users to be logged
 You will find all the information necessary to understand how alerts work and how to create them from the charts UI in the 
 Help Center's `About TradingView alerts <https://www.tradingview.com/?solution=43000520149>`__ page.
 
-Some of the alert types available on TradingView (*generic alerts*, *order fill alerts* and *drawing alerts*) are created from symbols or 
+Some of the alert types available on TradingView (*generic alerts*, *drawing alerts* and *script alerts* on order fill events) are created from symbols or 
 scripts loaded on the chart and do not require specific coding in Pine scripts. Any user can create these types of alerts from the charts UI.
 
 Other types of alerts 
-(*script alerts* triggering on *alert() function events*, and *alertcondition() alerts*) 
+(*script alerts* triggering on *alert() function calls*, and *alertcondition() alerts*) 
 require specific Pine code to be present in a script to create an *alert event* before script users can create alerts from them using the charts UI. 
 Additionally, while script users can create *script alerts* triggering on *order fill events* from the charts UI on any strategy loaded on their chart, 
 Pine coders can specify explicit order fill alert messages in their script for each type of order filled by the broker emulator. 
@@ -26,8 +26,8 @@ This page covers the different ways Pine programmers can code their scripts to c
 from which script users will in turn be able to create alerts from the charts UI. 
 We will cover:
 
-- How to use the `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ function to create *alert() function events* in studies or strategies, 
-  which can then be included in *script alerts* created from the charts UI.
+- How to use the `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ function to *alert() function calls* 
+  in studies or strategies, which can then be included in *script alerts* created from the charts UI.
 - How to add custom alert messages to be included in *script alerts* triggering on the *order fill events* of strategies.
 - How to use the `alertcondition() <https://www.tradingview.com/pine-script-reference/v4/#fun_alertcondition>`__ function to generate, 
   in studies only, *alertcondition() events* which can then be used to create *alertcondition() alerts* from the charts UI.
@@ -40,7 +40,7 @@ Keep in mind that:
 - When an alert is created in the charts UI, TradingView saves a mirror image of the script and its inputs, along with the chart’s main symbol and timeframe 
   to run the alert on its servers. Subsequent changes to your script's inputs or the chart will thus not affect running alerts previously created from them. 
   If you want any changes to your context to be reflected in a running alert’s behavior, 
-  you will need to either delete the alert and create a new one in the new context, or modify the alert.
+  you will need to delete the alert and create a new one in the new context.
 
 
 Background
@@ -65,7 +65,8 @@ Which type of alert is best?
 
 For Pine coders, the `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ function will generally be easier and more flexible to work with. 
 Contrary to `alertcondition() <https://www.tradingview.com/pine-script-reference/v4/#fun_alertcondition>`__, 
-it allows for dynamic alert messages and works in both studies and strategies.
+it allows for dynamic alert messages, works in both studies and strategies and the programmer decides on the frequency of 
+`alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ events.
 
 While `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ calls can be generated on any logic programmable in Pine, 
 including when orders are **sent** to the broker emulator in strategies, 
@@ -98,14 +99,17 @@ A *script alert* created from a **study** will trigger when:
 - The code's logic allows a specific `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ call to execute.
 - The frequency specified in the `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ call allows the alert to trigger.
 
-A *script alert* created from a **strategy** can trigger on *alert() events*, on *order fill events*, 
-or both. The script user creating an alert on a strategy decides which type of alerts he wishes to include in his *script alert*.
+A *script alert* created from a **strategy** can trigger on *alert() function calls*, on *order fill events*, 
+or both. The script user creating an alert on a strategy decides which type of events he wishes to include in his *script alert*. 
+While users can create a *script alert* on *order fill events* without the need for a strategy to include special code, 
+it must contain `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ calls for users to include 
+*alert() function calls* in their *script alert*.
 
 .. note:: Pine studies are often referred to as "indicators" in the charts UI and in the Help Center's user documentation.
 
 
-'alert()' function events
-^^^^^^^^^^^^^^^^^^^^^^^^^
+'alert()' function calls
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 The `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ function has the following signature:
 
