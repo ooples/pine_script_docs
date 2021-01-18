@@ -108,8 +108,8 @@ it must contain `alert() <https://www.tradingview.com/pine-script-reference/v4/#
 .. note:: Pine studies are often referred to as "indicators" in the charts UI and in the Help Center's user documentation.
 
 
-'alert()' function calls
-^^^^^^^^^^^^^^^^^^^^^^^^
+'alert()' function events
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ function has the following signature:
 
@@ -119,7 +119,7 @@ The `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`_
 
 ``message``
     A "series string" representing the message text sent when the alert triggers.
-    Because this argument can be of "series" form, it can be generated at runtime and differ bar to bar, making it dynamic.
+    Because this argument allows the "series" form, it can be generated at runtime and differ bar to bar, making it dynamic.
 
 ``freq``
     An "input string" specifying the triggering frequency of the alert. Valid arguments are:
@@ -131,7 +131,7 @@ The `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`_
         ``alert.freq_all``: All calls during the realtime bar trigger the alert.
 
 The `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ function can be used in both studies and strategies. 
-For an `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ call to trigger a *script alert* configured on *alert() function events*, 
+For an `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ call to trigger a *script alert* configured on *alert() function calls*, 
 the script's logic must allow the `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ call to execute, 
 **and** the frequency determined by the ``freq`` parameter must allow the alert to trigger.
 
@@ -164,14 +164,14 @@ If a *script alert* is created from this script:
 - When RSI crosses the centerline up, the *script alert* will trigger with the "Go long..." message. 
   When RSI crosses the centerline down, the *script alert* will trigger with the "Go short..." message.
 - Because no argument is specified for the ``freq`` parameter in the `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ call, 
-  the default value of ``alert.freq_once_per_bar`` will be used, so the alert will only trigger the first time one of the 
+  the default value of ``alert.freq_once_per_bar`` will be used, so the alert will only trigger the first time each of the 
   `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ calls is executed during the realtime bar.
 - The message sent with the alert is composed of two parts: a constant string and then the result of the 
   `tostring() <https://www.tradingview.com/pine-script-reference/v4/#fun_tostring>`__ call which will include the value of RSI at the moment where the 
   `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ call is executed by the script. An alert message for a cross up would look like: 
   "Go long (RSI is 53.41)".
 - Because a *script alert* always triggers on any occurrence of a call to `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__, 
-  as long as the frequency used in the call allows for it, this script does not allow a script user to restrict his *script alert* to longs only, for example.
+  as long as the frequency used in the call allows for it, this particular script does not allow a script user to restrict his *script alert* to longs only, for example.
 
 Note that:
 
@@ -199,8 +199,8 @@ Using selective 'alert()' calls
 
 When users create a *script alert* on *alert() function events*, the alert will trigger on any call the script makes to the 
 `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ function, provided its frequency constraints are met. 
-If you want to allow your script's users to select which conditions in your script will trigger a *script alert*, 
-you will need to provide them with the means to signify their choice in your script's inputs, 
+If you want to allow your script's users to select which `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ function call 
+in your script will trigger a *script alert*, you will need to provide them with the means to indicate their preference in your script's inputs, 
 and code the appropriate logic in your script. This way, script users will be able to create multiple *script alerts* from a single script, 
 each behaving differently as per the choices made in the script's inputs prior to creating the alert in the charts UI.
 
@@ -209,16 +209,17 @@ You could code your script like this::
 
     //@version=4
     study("Selective `alert()` calls")
-    i_detectLongs  = input(true, "Detect Longs")
-    i_detectShorts = input(true, "Detect Shorts")
+    i_detectLongs  = input(true,  "Detect Longs")
+    i_detectShorts = input(true,  "Detect Shorts")
+    i_repaint      = input(false, "Allow Repainting")
 
     r = rsi(close, 20)
     // Detect crosses.
     xUp = crossover( r, 50)
     xDn = crossunder(r, 50)
     // Only generate entries when the trade's direction is allowed in inputs.
-    enterLong  = i_detectLongs  and xUp
-    enterShort = i_detectShorts and xDn
+    enterLong  = i_detectLongs  and xUp and (i_repaint or barstate.isconfirmed)
+    enterShort = i_detectShorts and xDn and (i_repaint or barstate.isconfirmed)
     // Trigger the alerts only when the compound condition is met.
     if enterLong
         alert("Go long (RSI is " + tostring(r, "#.00)"))
@@ -234,6 +235,8 @@ Note how:
 
 - We create a compound condition that is met only when the user's selection allows for an entry in that direction. 
   A long entry on a crossover of the centerline only triggers the alert when long entries have been enabled in the script's Inputs.
+- We offer the user to indicate his repainting preference. When he does not allow the calculations to repaint, 
+  we wait until the bar's confirmation to trigger the compound condition. This way, the alert and the marker only appear at the end of the realtime bar.
 - If a user of this script wanted to create two distinct script alerts from this script, i.e., one triggering only on longs, 
   and one only on shorts, then he would need to:
     - Select only "Detect Longs" in the inputs and create a first *script alert* on the script.
@@ -247,7 +250,7 @@ In strategies
 While *script alerts* on strategies will use *order fill events* to trigger alerts when the broker emulator fills orders, 
 `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ can be used advantageously to generate other alert events in strategies.
 
-This strategy code produces *alert() function events* when RSI moves against the trade for three consecutive bars::
+This strategy creates *alert() function calls* when RSI moves against the trade for three consecutive bars::
 
     //@version=4
     strategy("Strategy with selective `alert()` calls")
@@ -277,7 +280,7 @@ This strategy code produces *alert() function events* when RSI moves against the
     hline(50)
     plot(r)
 
-If a user created a *script alert* from this strategy and included both *order fill events* and *alert() function events* in his alert, 
+If a user created a *script alert* from this strategy and included both *order fill events* and *alert() function calls* in his alert, 
 the alert would trigger whenever an order is executed, or when one of the `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ calls 
 was executed by the script on the realtime bar's closing iteration, i.e., when 
 `barstate.isrealtime <https://www.tradingview.com/pine-script-reference/v4/#var_barstate{dot}isrealtime>`__ and 
@@ -289,20 +292,22 @@ is the argument used for the ``freq`` parameter in the `alert() <https://www.tra
 Order fill events
 ^^^^^^^^^^^^^^^^^
 
-When a *script alert* is created from a study, it can only trigger on *alert() function events*. 
+When a *script alert* is created from a study, it can only trigger on *alert() function calls*. 
 However, when a *script alert* is created from a strategy, the user can specify that *order fill events* also trigger the *script alert*. 
 An *order fill event* is any event generated by the broker emulator which causes a simulated order to be executed. 
-It is the equivalent of a trade order being executed by your broker/exchange. Orders are not necessarily executed when they are placed. 
-In a strategy, the execution of orders can only be detected indirectly and after the fact, by analyzing changes in built-in variables such as `strategy.opentrades <https://www.tradingview.com/pine-script-reference/v4/#var_strategy{dot}opentrades>`__. 
+It is the equivalent of a trade order being filled by a broker/exchange. Orders are not necessarily executed when they are placed. 
+In a strategy, the execution of orders can only be detected indirectly and after the fact, by analyzing changes in built-in variables such as 
+`strategy.opentrades <https://www.tradingview.com/pine-script-reference/v4/#var_strategy{dot}opentrades>`__ or 
+`strategy.position_size <https://www.tradingview.com/pine-script-reference/v4/#var_strategy{dot}position_size>`__. 
 *Script alerts* configured on *order fill events* are thus useful in that they allow the triggering of alerts at the precise moment of an order's execution, 
 before a script's logic can detect it.
 
-Pine coders can customize the alert message sent when specific orders are executed. While this is not a pre-requisite for *order fill events* to trigger correctly, 
+Pine coders can customize the alert message sent when specific orders are executed. While this is not a pre-requisite for *order fill events* to trigger, 
 custom alert messages can be useful because they allow custom syntax to be included with alerts in order to route actual orders to a third-party execution engine, for example. 
 Specifying custom alert messages for specific *order fill events* is done by means of the ``alert_message`` parameter in functions which can generate orders: 
 `strategy.close() <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy{dot}close>`__, 
 `strategy.entry() <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy{dot}entry>`__, 
-`strategy.exit() <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy{dot}exit>`__, , and 
+`strategy.exit() <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy{dot}exit>`__ and 
 `strategy.order() <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy{dot}order>`__.
 
 Let's look at a strategy where we use the ``alert_message`` parameter in both our 
