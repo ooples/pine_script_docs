@@ -420,7 +420,7 @@ Here is an example of code creating *alertcondition() events*::
 Because we have two `alertcondition() <https://www.tradingview.com/pine-script-reference/v4/#fun_alertcondition>`__ calls in our script, 
 two different alerts will be available in the "Create Alert" dialog box's "Condition" field: "Long Alert" and "Short Alert".
 
-If we wanted to include the value of the volume when the cross occurs, we could not simply add its value to the ``message`` string using ``tostring(r)``, 
+If we wanted to include the value of RSI when the cross occurs, we could not simply add its value to the ``message`` string using ``tostring(r)``, 
 as we could in an `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ call or in an ``alert_message`` argument in a strategy. 
 We can, however, include it using a placeholder. This shows two alternatives::
 
