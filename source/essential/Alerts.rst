@@ -409,13 +409,13 @@ Here is an example of code creating *alertcondition() events*::
     xUp = crossover( r, 50)
     xDn = crossunder(r, 50)
 
+    plot(r, "RSI")
+    hline(50)
     plotchar(xUp, "Long",  "▲", location.bottom, color.lime, size = size.tiny)
     plotchar(xDn, "Short", "▼", location.top,    color.red,  size = size.tiny)
-    hline(50)
-    plot(r)
 
     alertcondition(xUp, "Long Alert",  "Go long")
-    alertcondition(xDn, "Short Alert", "Go short")
+    alertcondition(xDn, "Short Alert", "Go short ")
 
 Because we have two `alertcondition() <https://www.tradingview.com/pine-script-reference/v4/#fun_alertcondition>`__ calls in our script, 
 two different alerts will be available in the "Create Alert" dialog box's "Condition" field: "Long Alert" and "Short Alert".
@@ -431,13 +431,42 @@ Note that:
 
 - The first line uses the ``{{plot_0}}`` placeholder, where the plot number corresponds to the order of the plot in the script.
 - The second line uses the ``{{plot("[plot_title]")}}`` type of placeholder, 
-  which must include the ``title`` of the `plot() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`_ call used in our script to plot the volume. 
+  which must include the ``title`` of the `plot() <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`_ call used in our script to plot RSI. 
   Double quotes are used to wrap the plot's title inside the ``{{plot("RSI")}}`` placeholder. This requires that we use single quotes to wrap the ``message`` string.
-- Using one of these methods we can include any numeric value that is plotted by our study, but as strings cannot be plotted, no string variable can be used.
+- Using one of these methods, we can include any numeric value that is plotted by our study, but as strings cannot be plotted, no string variable can be used.
 
 
 Using compound conditions
 ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If we want to offer script users the possiblity of creating a single alert from a study using multiple 
+`alertcondition() <https://www.tradingview.com/pine-script-reference/v4/#fun_alertcondition>`_ calls, 
+we will need to provide options in the script's inputs through which users will indicate the conditions they want to trigger their alert before creating it.
+
+This script demonstrates one way to do it::
+
+    //@version=4
+    study("`alertcondition()` on multiple conditions")
+    i_detectLongs  = input(true, "Detect Longs")
+    i_detectShorts = input(true, "Detect Shorts")
+
+    r = rsi(close, 20)
+    // Detect crosses.
+    xUp = crossover( r, 50)
+    xDn = crossunder(r, 50)
+    // Only generate entries when the trade's direction is allowed in inputs.
+    enterLong  = i_detectLongs  and xUp
+    enterShort = i_detectShorts and xDn
+
+    plot(r)
+    plotchar(enterLong,  "Go Long",  "▲", location.bottom, color.lime, size = size.tiny)
+    plotchar(enterShort, "Go Short", "▼", location.top,    color.red,  size = size.tiny)
+    hline(50)
+    // Trigger the alert when one of the conditions is met.
+    alertcondition(enterLong or enterShort, "Compound alert", "Entry")
+
+Note how the `alertcondition() <https://www.tradingview.com/pine-script-reference/v4/#fun_alertcondition>`_ call is allowed to trigger on one of two conditions. 
+Each condition can only trigger the alert if the user enables it in the script's inputs before creating the alert.
 
 
 Placeholders
