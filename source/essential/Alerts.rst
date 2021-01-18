@@ -346,7 +346,7 @@ Note that:
 When the ``alert_message`` parameter is used in a strategy's order-generating ``strategy.*()`` function calls, 
 script users must include the ``{{strategy.order.alert_message}}`` placeholder in the "Create Alert" dialog box's "Message" field 
 when creating *script alerts* on *order fill events*. This is required so the ``alert_message`` argument used in the order-generating ``strategy.*()`` function calls 
-is used in the message of alerts triggering on each *order fill event*. When using the ``{{strategy.order.alert_message}}`` placeholder and the 
+is used in the message of alerts triggering on each *order fill event*. When only using the ``{{strategy.order.alert_message}}`` placeholder in the "Message" field and the 
 ``alert_message`` parameter is present in only some of the order-generating ``strategy.*()`` function calls in your strategy, 
 an empty string will replace the placeholder in the message of alerts triggered by any order-generating ``strategy.*()`` function call not using the ``alert_message`` parameter.
 
@@ -383,9 +383,12 @@ The `alertcondition() <https://www.tradingview.com/pine-script-reference/v4/#fun
 
 ``message``
    A "const string" optional argument that specifies the text message to display when the alert triggers. 
-   The text will appear in the *Message* field of the *Create Alert* dialog box, from where script users can then modify it when creating an alert. 
-   **This string being "const string", it must be known at compilation time and thus cannot vary bar to bar.** 
-   It can, however, contain placeholders which will be replaced at runtime by dynamic values that may change bar to bar. See this page's `Placeholders`_ section.
+   The text will appear in the "Message" field of the "Create Alert" dialog box, from where script users can then modify it when creating an alert. 
+   **As this argument must be a "const string", it must be known at compilation time and thus cannot vary bar to bar.** 
+   It can, however, contain placeholders which will be replaced at runtime by dynamic values that may change bar to bar. See this page's `Placeholders`_ section for a list.
+
+The `alertcondition() <https://www.tradingview.com/pine-script-reference/v4/#fun_alertcondition>`__ function does not include a ``freq`` parameter. 
+The frequency of *alertcondition() alerts* is determined by users in the "Create Alert" dialog box.
 
 
 Using one condition
@@ -481,7 +484,7 @@ Note that users creating *alertcondition() alerts* from the "Create Alert" dialo
 Avoiding repainting with alerts
 -------------------------------
 
-The most common instances of repainting traders want to avoid with alerts are ones where they must prevent an alert from triggering at some point during the realtime bar when it would not have triggered at its close. This can happen when these conditions are met:
+The most common instances of repainting traders want to avoid with alerts are ones where they must prevent an alert from triggering at some point during the realtime bar when it would **not** have triggered at its close. This can happen when these conditions are met:
 
 - The calculations used in the condition triggering the alert can vary during the realtime bar. 
   This will be the case with any calculation using ``high``, ``low`` or ``close``, for example, which includes almost all built-in indicators. 
@@ -493,8 +496,3 @@ The simplest way to avoid this type of repainting is to configure the triggering
 There is no panacea; avoiding this type of repainting **always** entails waiting for confirmed information, which means the trader must sacrifice immediacy to achieve reliability.
 
 Note that other types of repainting such as those documented in our :doc:`/essential/Indicator_repainting` section may not be preventable by simply triggering alerts on the close of realtime bars.
-
-Also note that in the case of strategies using the default values controlling the execution of orders on historical bars, 
-restricting alert triggers to the close of the realtime bar is the only way to ensure the strategy will behave the way it was tested on historical bars. 
-Strategies tested on OHLC information on historical bars will **not** perform the same way if they are allowed to run on every price update in the realtime bar, 
-thus compromising the reliability of test results.
