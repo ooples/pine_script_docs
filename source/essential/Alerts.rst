@@ -55,7 +55,7 @@ but by way of the ``alert_message`` parameter for order-generating ``strategy.*(
 programmers can customize the message of alerts triggering on *order fill events* by defining a distinct alert message for any number of order fulfillment events. 
 
 The `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ 
-function is the most recent addition to Pine. It more or less supercedes 
+function is the most recent addition to Pine. It more or less supersedes 
 `alertcondition() <https://www.tradingview.com/pine-script-reference/v4/#fun_alertcondition>`__, and when used in strategies, 
 provides a useful complement to alerts on *order fill events*.
 
