@@ -394,8 +394,8 @@ The `alertcondition() <https://www.tradingview.com/pine-script-reference/v4/#fun
    **As this argument must be a "const string", it must be known at compilation time and thus cannot vary bar to bar.** 
    It can, however, contain placeholders which will be replaced at runtime by dynamic values that may change bar to bar. See this page's `Placeholders`_ section for a list.
 
-The `alertcondition() <https://www.tradingview.com/pine-script-reference/v4/#fun_alertcondition>`__ function does not include a ``freq`` parameter. 
-The frequency of *alertcondition() alerts* is determined by users in the "Create Alert" dialog box.
+The `alertcondition() <https://www.tradingview.com/pine-script-reference/v4/#fun_alertcondition>`__ function does not include a 
+``freq`` parameter. The frequency of *alertcondition() alerts* is determined by users in the "Create Alert" dialog box.
 
 
 Using one condition
