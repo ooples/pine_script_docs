@@ -385,7 +385,7 @@ The `alertcondition() <https://www.tradingview.com/pine-script-reference/v4/#fun
    must start at column zero of a line, so cannot be placed in conditional blocks.
 
 ``title``
-   A "const string" optional argument that sets the name of the alert condition as it will appear in the *Create Alert* dialog box's "Condition" field in the charts UI. 
+   A "const string" optional argument that sets the name of the alert condition as it will appear in the "Create Alert" dialog box's "Condition" field in the charts UI. 
    If no argument is supplied, "Alert" will be used.
 
 ``message``
