@@ -400,7 +400,7 @@ The frequency of *alertcondition() alerts* is determined by users in the "Create
 Using one condition
 ^^^^^^^^^^^^^^^^^^^
 
-Here is an example of code creating `alertcondition() <https://www.tradingview.com/pine-script-reference/v4/#fun_alertcondition>`__ events::
+Here is an example of code creating *alertcondition() events*::
 
     //@version=4
     study("`alertcondition()` on single condition")
