@@ -354,7 +354,7 @@ is used in the message of alerts triggering on each *order fill event*. When onl
 ``alert_message`` parameter is present in only some of the order-generating ``strategy.*()`` function calls in your strategy, 
 an empty string will replace the placeholder in the message of alerts triggered by any order-generating ``strategy.*()`` function call not using the ``alert_message`` parameter.
 
-While other placeholders can be used in the "Create Alert" dialog box's "Message" field by users create alerts on *order fill events*, 
+While other placeholders can be used in the "Create Alert" dialog box's "Message" field by users creating alerts on *order fill events*, 
 they cannot be used in the argument of ``alert_message``.
 
 
