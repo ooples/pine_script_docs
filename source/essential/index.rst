@@ -14,3 +14,4 @@ Essential features
    Indicator_repainting
    Drawings
    Arrays
+   Alerts
