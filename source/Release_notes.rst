@@ -6,6 +6,14 @@ Release notes
 
 This page contains release notes of notable changes in Pine Script v4.
 
+
+January 2021
+--------------------------
+
+A new type of alerts was added - script alerts. More information can be found in our `Help Center <https://www.tradingview.com/chart/?solution=43000597494/>`__.
+
+
+
 December 2020
 --------------------------
 
