@@ -115,26 +115,19 @@ The `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`_
 
 .. code-block:: text
 
-    alert(message, freq)
+  alert(message, freq)
 
 ``message``
-    A "series string" representing the message text sent when the alert triggers.
-    Because this argument allows the "series" form, it can be generated at runtime and differ bar to bar, making it dynamic.
+  A "series string" representing the message text sent when the alert triggers. Because this argument allows the "series" form, it can be generated at runtime and differ bar to bar, making it dynamic.
 
 ``freq``
-    An "input string" specifying the triggering frequency of the alert. Valid arguments are:
+  An "input string" specifying the triggering frequency of the alert. Valid arguments are:
 
-        ``alert.freq_once_per_bar``: Only the first call per realtime bar triggers the alert (default value).
+  - ``alert.freq_once_per_bar``: Only the first call per realtime bar triggers the alert (default value).
+  - ``alert.freq_once_per_bar_close``: An alert is only triggered when the realtime bar closes and an `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ call is executed during that script iteration.
+  - ``alert.freq_all``: All calls during the realtime bar trigger the alert.
 
-        ``alert.freq_once_per_bar_close``: An alert is only triggered when the realtime bar closes and an 
-        `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ call is executed during that script iteration.
-
-        ``alert.freq_all``: All calls during the realtime bar trigger the alert.
-
-The `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ function can be used in both studies and strategies. 
-For an `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ call to trigger a *script alert* configured on *alert() function calls*, 
-the script's logic must allow the `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ call to execute, 
-**and** the frequency determined by the ``freq`` parameter must allow the alert to trigger.
+The `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ function can be used in both studies and strategies. For an `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ call to trigger a *script alert* configured on *alert() function calls*, the script's logic must allow the `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ call to execute, **and** the frequency determined by the ``freq`` parameter must allow the alert to trigger.
 
 
 Using all 'alert()' calls
@@ -238,10 +231,11 @@ Note how:
   A long entry on a crossover of the centerline only triggers the alert when long entries have been enabled in the script's Inputs.
 - We offer the user to indicate his repainting preference. When he does not allow the calculations to repaint, 
   we wait until the bar's confirmation to trigger the compound condition. This way, the alert and the marker only appear at the end of the realtime bar.
-- If a user of this script wanted to create two distinct script alerts from this script, i.e., one triggering only on longs, 
-  and one only on shorts, then he would need to:
-    - Select only "Detect Longs" in the inputs and create a first *script alert* on the script.
-    - Select only "Detect Shorts" in the Inputs and create another *script alert* on the script.
+- If a user of this script wanted to create two distinct script alerts from this script, i.e., one triggering only on longs, and one only on shorts, then he would need to:
+
+  - Select only "Detect Longs" in the inputs and create a first *script alert* on the script.
+
+  - Select only "Detect Shorts" in the Inputs and create another *script alert* on the script.
 
 
 In strategies
