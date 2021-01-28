@@ -6,6 +6,14 @@ Release notes
 
 This page contains release notes of notable changes in Pine Script v4.
 
+
+January 2021
+--------------------------
+
+A new type of alerts was added - script alerts. More information can be found in our `Help Center <https://www.tradingview.com/chart/?solution=43000597494/>`__.
+
+
+
 December 2020
 --------------------------
 
@@ -40,9 +48,7 @@ The behavior of ``rising`` and ``falling`` functions have changed. For example, 
 September 2020
 --------------------------
 
-Added support for ``input.color`` to the ``input()`` function. Now you can provide script users with color selection through the script’s "Settings/Inputs" tab with the same color widget used throughout the TradingView user interface. Learn more about this feature in our `blog <https://www.tradingview.com/blog/en/create-color-inputs-in-pine-20751/>`_:
-
-::
+Added support for ``input.color`` to the ``input()`` function. Now you can provide script users with color selection through the script’s "Settings/Inputs" tab with the same color widget used throughout the TradingView user interface. Learn more about this feature in our `blog <https://www.tradingview.com/blog/en/create-color-inputs-in-pine-20751/>`__::
 
     //@version=4
     study("My Script", overlay = true)
@@ -53,7 +59,7 @@ Added support for ``input.color`` to the ``input()`` function. Now you can provi
     
 .. image:: images/input_color.png
 
-Added support for arrays and functions for working with them. You can now use the powerful new array feature to build custom datasets. See our `User Manual page on arrays <https://www.tradingview.com/pine-script-docs/en/v4/essential/Arrays.html>`__ and our `blog <https://www.tradingview.com/blog/en/arrays-are-now-available-in-pine-script-20052/>`_::
+Added support for arrays and functions for working with them. You can now use the powerful new array feature to build custom datasets. See our `User Manual page on arrays <https://www.tradingview.com/pine-script-docs/en/v4/essential/Arrays.html>`__ and our `blog <https://www.tradingview.com/blog/en/arrays-are-now-available-in-pine-script-20052/>`__::
 
     //@version=4
     study("My Script")
@@ -62,7 +68,7 @@ Added support for arrays and functions for working with them. You can now use th
         array.push(a, close[i] - open[i])
     plot(array.get(a, 4))
 
-The following functions now accept a series length parameter. Learn more about this feature in our `blog <https://www.tradingview.com/blog/en/pine-functions-support-dynamic-length-arguments-20554/>`_:
+The following functions now accept a series length parameter. Learn more about this feature in our `blog <https://www.tradingview.com/blog/en/pine-functions-support-dynamic-length-arguments-20554/>`__:
 
 * `alma <https://www.tradingview.com/pine-script-reference/v4/#fun_alma>`__
 * `change <https://www.tradingview.com/pine-script-reference/v4/#fun_change>`__

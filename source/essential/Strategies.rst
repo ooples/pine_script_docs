@@ -380,8 +380,8 @@ Example::
     //@version=4
     strategy("oca_cancel demo")
     if year > 2014 and year < 2016
-        strategy.entry("LE", strategy.long, oca_type = strategy.oca.cancel, oca_name="Entry")
-        strategy.entry("SE", strategy.short, oca_type = strategy.oca.cancel, oca_name="Entry")
+        strategy.entry("LE", strategy.long)
+        strategy.entry("SE", strategy.short)
 
 You may think that this is a reverse strategy since pyramiding is not
 allowed, but in fact both orders will get filled because they are market
@@ -397,6 +397,14 @@ case market position is flat, therefore any entry order can be filled).
 At each tick calculation, firstly all orders with the satisfied
 conditions are executed and only then the orders from the group where an
 order was executed are cancelled.
+
+To turn the above strategy into a reverse strategy you need to place orders in the OCA group::
+
+    //@version=4
+    strategy("oca_cancel demo")
+    if year > 2014 and year < 2016
+        strategy.entry("LE", strategy.long, oca_type = strategy.oca.cancel, oca_name="Entry")
+        strategy.entry("SE", strategy.short, oca_type = strategy.oca.cancel, oca_name="Entry")
 
 `strategy.oca.reduce <https://www.tradingview.com/pine-script-reference/v4/#var_strategy{dot}oca{dot}reduce>`__
    This group type allows multiple orders
