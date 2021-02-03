@@ -9,6 +9,26 @@ This page contains release notes of notable changes in Pine Script v4.
 
 January 2021
 --------------------------
+The following functions now accept a series length parameter:
+
+* `bb <https://www.tradingview.com/pine-script-reference/v4/#fun_bb>`__
+* `bbw <https://www.tradingview.com/pine-script-reference/v4/#fun_bbw>`__
+* `cci <https://www.tradingview.com/pine-script-reference/v4/#fun_cci>`__
+* `cmo <https://www.tradingview.com/pine-script-reference/v4/#fun_cmo>`__
+* `cog <https://www.tradingview.com/pine-script-reference/v4/#fun_cog>`__
+* `correlation <https://www.tradingview.com/pine-script-reference/v4/#fun_correlation>`__
+* `dev <https://www.tradingview.com/pine-script-reference/v4/#fun_dev>`__
+* `falling <https://www.tradingview.com/pine-script-reference/v4/#fun_falling>`__
+* `mfi <https://www.tradingview.com/pine-script-reference/v4/#fun_mfi>`__
+* `percentile_linear_interpolation <https://www.tradingview.com/pine-script-reference/v4/#fun_percentile_linear_interpolation>`__
+* `percentile_nearest_rank <https://www.tradingview.com/pine-script-reference/v4/#fun_percentile_nearest_rank>`__
+* `percentrank <https://www.tradingview.com/pine-script-reference/v4/#fun_percentrank>`__
+* `rising <https://www.tradingview.com/pine-script-reference/v4/#fun_rising>`__
+* `roc <https://www.tradingview.com/pine-script-reference/v4/#fun_roc>`__
+* `stdev <https://www.tradingview.com/pine-script-reference/v4/#fun_stdev>`__
+* `stoch <https://www.tradingview.com/pine-script-reference/v4/#fun_stoch>`__
+* `variance <https://www.tradingview.com/pine-script-reference/v4/#fun_variance>`__
+* `wpr <https://www.tradingview.com/pine-script-reference/v4/#fun_wpr>`__
 
 A new type of alerts was added - script alerts. More information can be found in our `Help Center <https://www.tradingview.com/chart/?solution=43000597494/>`__.
 
