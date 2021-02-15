@@ -7,7 +7,7 @@ Release notes
 This page contains release notes of notable changes in Pine Script v4.
 
 
-January 2021
+February 2021
 --------------------------
 New variable was added:
 
