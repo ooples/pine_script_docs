@@ -9,6 +9,14 @@ This page contains release notes of notable changes in Pine Script v4.
 
 January 2021
 --------------------------
+New variable was added:
+
+* ``time_tradingday`` - the beginning time of the trading day the current bar belongs to.
+
+
+
+January 2021
+--------------------------
 The following functions now accept a series length parameter:
 
 * `bb <https://www.tradingview.com/pine-script-reference/v4/#fun_bb>`__
