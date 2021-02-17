@@ -179,9 +179,8 @@ In the Pine runtime environment, as your code is executed once for each historic
 starting from the left of the chart, Pine is adding a new element in the series at index 0
 and pushing the pre-existing elements in the series one index further away.
 Arrays, in comparison, are usually static in size and their content or indexing structure
-is not modified by the runtime environment. Pine series are thus different from arrays and
-share familiarity with them mostly through their indexing syntax; the array data structure
-does not exist in Pine.
+is not modified by the runtime environment. Pine series are thus very different from arrays and
+share familiarity with them mostly through their indexing syntax.
 
 At the realtime, ``close`` variable 
 represents the current price and will only contain the actual closing price of the
