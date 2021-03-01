@@ -6,6 +6,17 @@ Release notes
 
 This page contains release notes of notable changes in Pine Script v4.
 
+March 2021
+--------------------------
+A new function was added:
+
+* ``tonumber`` - converts a string value into a float.
+
+A new argument for the study() function was added:
+
+* ``resolution_gaps`` - fills the gaps between values fetched from higher timeframes when using ``resolution``.
+
+
 
 February 2021
 --------------------------
