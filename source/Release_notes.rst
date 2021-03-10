@@ -16,9 +16,11 @@ A new function was added:
 
 * ``tonumber`` - converts a string value into a float.
 
-A new argument for the study() function was added:
+A new arguments for the study() function was added:
 
 * ``resolution_gaps`` - fills the gaps between values fetched from higher timeframes when using ``resolution``.
+* ``format.percent``  allows formatting the script output values as a percentage when using ``format``. It adds a percent sign after values. 
+
 
 
 
