@@ -12,14 +12,15 @@ A new keyword was added:
 
 * ``varip`` - is similar to the ``var`` keyword, but variables declared with ``varip`` retain their values between the updates of a real-time bar.
 
-A new function was added:
+New functions were added:
 
 * ``tonumber`` - converts a string value into a float.
+* ``time_close`` - returns the UNIX timestamp of the close of the current bar, based on the resolution and session that is passed to the function.
 
-A new arguments for the study() function was added:
+New arguments for the study() function were added:
 
 * ``resolution_gaps`` - fills the gaps between values fetched from higher timeframes when using ``resolution``.
-* ``format.percent``  allows formatting the script output values as a percentage when using ``format``. It adds a percent sign after values. 
+* ``format.percent`` - formats the script output values as a percentage.
 
 
 
