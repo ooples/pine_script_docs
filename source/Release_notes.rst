@@ -22,29 +22,6 @@ New arguments for the study() function were added:
 * ``resolution_gaps`` - fills the gaps between values fetched from higher timeframes when using ``resolution``.
 * ``format.percent`` - formats the script output values as a percentage.
 
-New assignment operators were added:
-
-* ``+=``  - addition assignment
-* ``-=``  - subtraction assignment
-* ``*=``  - multiplication assignment
-* ``/=``  - division assignment
-* ``%=``  - modulus assignment
-An assignment operator assigns a value to its left operand based on the value of its right operand. New short forms of assigments and their traditional representation shown in the table below.
-
-+--------+-------------------------+---------+--------------------------------------------------------+-------------+
-|Operator|  Operator name          | Example |Description                                             |Equivalent of|
-+========+=========================+=========+========================================================+=============+
-|  *+=*  |addition assignment      | *a += b*|*a* becomes equal to the addition of *a* and *b*        | *a = a + b* |
-+--------+-------------------------+---------+--------------------------------------------------------+-------------+
-|  *-=*  |subtraction assignment   | *a -= b*|*a* becomes equal to the subtraction of *b* from *a*    | *a = a - b* |
-+--------+-------------------------+---------+--------------------------------------------------------+-------------+
-|  *\*=* |multiplication assignment| *a *= b*|*a* becomes equal to the product of *a* and *b*         | *a = a * b* |
-+--------+-------------------------+---------+--------------------------------------------------------+-------------+
-|  */=*  |division assignment      | *a /= b*|*a* becomes equal to the division of *a* by *b*         | *a = a / b* |
-+--------+-------------------------+---------+--------------------------------------------------------+-------------+
-|  *%=*  |modulo assignment        |*a%= b*  |*a* becomes equal to the remainder of *a* divided by *b*| *a = a % b* |
-+--------+-------------------------+---------+--------------------------------------------------------+-------------+
-Table 1. Assignment operators
 
 
 
