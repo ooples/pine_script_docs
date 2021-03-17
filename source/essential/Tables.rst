@@ -11,7 +11,7 @@ Introduction
 
 Tables are objects that can be used to position information in specific locations of the indicator's visual space, 
 regardless of the chart bars being viewed or the zoom factor used. Contrary to all other plots or objects drawn in Pine, 
-tables are not anchored to specific bars; they float in the indicator's space, whether in overlay or pane mode, in studies or strategies.
+tables are not anchored to specific bars; they *float* in the indicator's space, whether in overlay or pane mode, in studies or strategies. 
 
 Tables contain cells arranged in columns and rows. A table is created using ``table.new()``. A table is represented by a table id which acts as a pointer to the table, 
 just like label, line, or array ids do. The content of cells and their individual properties are specified using a ``table.cell()`` call for each cell. 
