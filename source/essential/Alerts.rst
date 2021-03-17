@@ -129,6 +129,8 @@ The `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`_
 
 The `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ function can be used in both studies and strategies. For an `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ call to trigger a *script alert* configured on *alert() function calls*, the script's logic must allow the `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ call to execute, **and** the frequency determined by the ``freq`` parameter must allow the alert to trigger.
 
+Note that by default, strategies are recalculated at the bar's close, so if the `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ function with the frequency ``alert.freq_all`` or ``alert.freq_once_per_bar`` is used in a strategy, then it will be called no more often than once at the bar's close.
+In order to enable the `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ function to be called during the bar construction process, you need to enable the ``calc_on_every_tick`` option.
 
 Using all 'alert()' calls
 """""""""""""""""""""""""
