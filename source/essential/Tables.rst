@@ -53,17 +53,7 @@ so table calculations will not revert to their state on past bars when those bar
 Pine scripts have no visibility on which bars are visible on the chart at any given time.
 
 
-
-
-
-
-
-
-
-
-
-
-
+————————————————————————————————————————————————————————————————
 
 
 TradingView alerts run 24x7 on our servers and do not require users to be logged in to execute. Alerts are created from the charts user interface (*UI*). 
@@ -98,21 +88,4 @@ Keep in mind that:
   to run the alert on its servers. Subsequent changes to your script's inputs or the chart will thus not affect running alerts previously created from them. 
   If you want any changes to your context to be reflected in a running alert’s behavior, 
   you will need to delete the alert and create a new one in the new context.
-
-
-Background
-^^^^^^^^^^
-
-The different methods Pine coders can use today to create alert events in their script are the result of successive enhancements deployed throughout Pine's evolution. 
-The `alertcondition() <https://www.tradingview.com/pine-script-reference/v4/#fun_alertcondition>`__ function, which works in studies only, 
-was the first feature allowing Pine programmers to create alert events. 
-Then came order fill alerts for strategies, which trigger when the broker emulator creates *order fill events*. 
-*Order fill events* require no special code for script users to create alerts on them, 
-but by way of the ``alert_message`` parameter for order-generating ``strategy.*()`` functions, 
-programmers can customize the message of alerts triggering on *order fill events* by defining a distinct alert message for any number of order fulfillment events. 
-
-The `alert() <https://www.tradingview.com/pine-script-reference/v4/#fun_alert>`__ 
-function is the most recent addition to Pine. It more or less supersedes 
-`alertcondition() <https://www.tradingview.com/pine-script-reference/v4/#fun_alertcondition>`__, and when used in strategies, 
-provides a useful complement to alerts on *order fill events*.
 
