@@ -10,9 +10,9 @@ March 2021
 --------------------------
 New parameters for inputs customization were added
 
-* ``inline`` - combines all the input calls using the same argument in one line.
-* ``group`` - creates a header above all inputs using the same group argument string. The string is also used as the header's text.
-* ``tooltip`` - adds a tooltip icon to the ``Inputs`` menu, when hovering over the tooltip icon the tooltip string will be shown to the user.
+* ``inline`` - combines all the input calls with the same inline value in one line.
+* ``group`` - creates a header above all inputs that use the same group string value. The string is also used as the header text.
+* ``tooltip`` - adds a tooltip icon to the ``Inputs`` menu. The tooltip string is shown when hovering over the tooltip icon.
 
 New argument for ``fill`` function was added:
 
