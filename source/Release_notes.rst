@@ -8,6 +8,12 @@ This page contains release notes of notable changes in Pine Script v4.
 
 March 2021
 --------------------------
+New parameters for inputs customization were added
+
+* ``inline`` - combines all the input calls using the same argument in one line.
+* ``group`` - creates a header above all inputs using the same group argument string. The string is also used as the header's text.
+* ``tooltip`` - adds a tooltip icon to the ``Inputs`` menu, when hovering over the tooltip icon the tooltip string will be shown to the user.
+
 New argument for ``fill`` function was added:
 
 * ``fillgaps`` - controls whether fills continue on gaps when one of the ``plot`` calls returns an ``na`` value. 
