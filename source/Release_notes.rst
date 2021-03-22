@@ -8,6 +8,8 @@ This page contains release notes of notable changes in Pine Script v4.
 
 March 2021
 --------------------------
+* New ``fillgaps`` parameter was added to the ``fill`` function. Parameter controls whether fills continue on gaps when one of the ``plot`` calls returns an ``na`` value. 
+
 A new keyword was added:
 
 * ``varip`` - is similar to the ``var`` keyword, but variables declared with ``varip`` retain their values between the updates of a real-time bar.
