@@ -26,6 +26,9 @@ New functions were added:
 
 * ``tonumber`` - converts a string value into a float.
 * ``time_close`` - returns the UNIX timestamp of the close of the current bar, based on the resolution and session that is passed to the function.
+* ``dividends`` - requests dividends data for the specified symbol.
+* ``earnings`` - requests earnings data for the specified symbol.
+* ``splits`` - requests splits data for the specified symbol.
 
 New arguments for the study() function were added:
 
