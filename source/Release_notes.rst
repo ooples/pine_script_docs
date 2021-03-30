@@ -8,7 +8,15 @@ This page contains release notes of notable changes in Pine Script v4.
 
 March 2021
 --------------------------
-New parameters for inputs customization were added
+New assignment operators were added:
+
+* ``+=``  - addition assignment
+* ``-=``  - subtraction assignment
+* ``*=``  - multiplication assignment
+* ``/=``  - division assignment
+* ``%=``  - modulus assignment
+
+New parameters for inputs customization were added:
 
 * ``inline`` - combines all the input calls with the same inline value in one line.
 * ``group`` - creates a header above all inputs that use the same group string value. The string is also used as the header text.
