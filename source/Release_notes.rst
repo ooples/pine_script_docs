@@ -8,7 +8,15 @@ This page contains release notes of notable changes in Pine Script v4.
 
 March 2021
 --------------------------
-New parameters for inputs customization were added
+New assignment operators were added:
+
+* ``+=``  - addition assignment
+* ``-=``  - subtraction assignment
+* ``*=``  - multiplication assignment
+* ``/=``  - division assignment
+* ``%=``  - modulus assignment
+
+New parameters for inputs customization were added:
 
 * ``inline`` - combines all the input calls with the same inline value in one line.
 * ``group`` - creates a header above all inputs that use the same group string value. The string is also used as the header text.
@@ -26,6 +34,9 @@ New functions were added:
 
 * ``tonumber`` - converts a string value into a float.
 * ``time_close`` - returns the UNIX timestamp of the close of the current bar, based on the resolution and session that is passed to the function.
+* ``dividends`` - requests dividends data for the specified symbol.
+* ``earnings`` - requests earnings data for the specified symbol.
+* ``splits`` - requests splits data for the specified symbol.
 
 New arguments for the study() function were added:
 
