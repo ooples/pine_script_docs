@@ -228,8 +228,8 @@ function:
 .. |label_style_circle| image:: images/label.style_circle.png
 .. |label_style_arrowup| image:: images/label.style_arrowup.png
 .. |label_style_arrowdown| image:: images/label.style_arrowdown.png
-.. |label_style_labelup| image:: images/label.style_labelup.png
-.. |label_style_labeldown| image:: images/label.style_labeldown.png
+.. |label_style_label_up| image:: images/label.style_labelup.png
+.. |label_style_label_down| image:: images/label.style_labeldown.png
 .. |label_style_square| image:: images/label.style_square.png
 .. |label_style_diamond| image:: images/label.style_diamond.png
 
