@@ -6,6 +6,34 @@ Release notes
 
 This page contains release notes of notable changes in Pine Script v4.
 
+April 2021
+--------------------------
+New math constants were added: 
+
+* ``math.pi`` - is a named constant for Archimedes' constant. It is equal to 3.1415926535897932.
+* ``math.phi`` - is a named constant for the golden ratio. It is equal to  1.6180339887498948.
+* ``math.rphi`` - is a named constant for the golden ratio conjugate. It is equal to 0.6180339887498948.
+* ``math.e`` - is a named constant for Euler's number. It is equal to 2.7182818284590452.
+
+New math functions were added: 
+
+* ``round(x, precision)`` - returns the value of ``x`` rounded to the nearest integer, with ties rounding up. If the precision parameter is used, returns a float value rounded to that number of decimal places.
+* ``median(source, length)`` - returns the median of the series.
+* ``mode(source, length)`` - returns the mode of the series. If there are several values with the same frequency, it returns the smallest value.
+* ``range(source, length)`` - returns the difference between the ``min`` and ``max`` values in a series.
+* ``todegrees(radians)`` - returns an approximately equivalent angle in degrees from an angle measured in radians.
+* ``toradians(degrees)`` - returns an approximately equivalent angle in radians from an angle measured in degrees.
+* ``random(min, max, seed)`` - returns a pseudo-random value. The function will generate a different sequence of values for each script execution. Using the same value for the optional seed argument will produce a repeatable sequence.
+
+New functions were added:
+
+* ``session.ismarket`` - returns ``true`` if the current bar is a part of the regular trading hours (i.e. market hours), ``false`` otherwise.
+* ``session.ispremarket`` - returns ``true`` if the current bar is a part of the pre-market, ``false`` otherwise.
+* ``session.ispostmarket`` - returns ``true`` if the current bar is a part of the post-market, ``false`` otherwise.
+* ``str.format``  - converts the values to strings based on the specified formats. Accepts certain ``number`` modifiers: ``integer``, ``currency``, ``percent``.
+
+
+
 March 2021
 --------------------------
 New assignment operators were added:
@@ -42,7 +70,6 @@ New arguments for the study() function were added:
 
 * ``resolution_gaps`` - fills the gaps between values fetched from higher timeframes when using ``resolution``.
 * ``format.percent`` - formats the script output values as a percentage.
-
 
 
 
