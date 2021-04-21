@@ -428,8 +428,8 @@ Pivot Points High/Low
         if isFound
             label.new(bar_index[len], p, tostring(p), style=_style, yloc=_yloc, color=_color)
     
-    fun(high, lenH, true, label.style_labeldown, yloc.abovebar, color.lime)
-    fun(low, lenL, false, label.style_labelup, yloc.belowbar, color.red)
+    fun(high, lenH, true, label.style_label_down, yloc.abovebar, color.lime)
+    fun(low, lenL, false, label.style_label_up, yloc.belowbar, color.red)
 
 
 Linear Regression
