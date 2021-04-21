@@ -299,7 +299,7 @@ Here is Pine code that keeps just one label drawing object on the current bar,
     c = close >= open ? color.lime : color.red
     l = label.new(bar_index, na,
       text=tostring(close), color=c,
-      style=label.style_labeldown, yloc=yloc.abovebar)
+      style=label.style_label_down, yloc=yloc.abovebar)
 
     label.delete(l[1])
 
