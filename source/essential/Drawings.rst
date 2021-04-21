@@ -211,9 +211,9 @@ function:
 +--------------------------------+-------------------------------------------------+-------------------------------------------------+
 | ``label.style_arrowdown``      | |label_style_arrowdown|                         | |label_style_arrowdown_t|                       |
 +--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| ``label.style_label_up``        | |label_style_labelup|                           | |label_style_labelup_t|                         |
+| ``label.style_labelup``        | |label_style_labelup|                           | |label_style_labelup_t|                         |
 +--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| ``label.style_label_down``      | |label_style_labeldown|                         | |label_style_labeldown_t|                       |
+| ``label.style_labeldown``      | |label_style_labeldown|                         | |label_style_labeldown_t|                       |
 +--------------------------------+-------------------------------------------------+-------------------------------------------------+
 | ``label.style_square``         | |label_style_square|                            | |label_style_square_t|                          |
 +--------------------------------+-------------------------------------------------+-------------------------------------------------+
@@ -228,8 +228,8 @@ function:
 .. |label_style_circle| image:: images/label.style_circle.png
 .. |label_style_arrowup| image:: images/label.style_arrowup.png
 .. |label_style_arrowdown| image:: images/label.style_arrowdown.png
-.. |label_style_label_up| image:: images/label.style_labelup.png
-.. |label_style_label_down| image:: images/label.style_labeldown.png
+.. |label_style_labelup| image:: images/label.style_labelup.png
+.. |label_style_labeldown| image:: images/label.style_labeldown.png
 .. |label_style_square| image:: images/label.style_square.png
 .. |label_style_diamond| image:: images/label.style_diamond.png
 
