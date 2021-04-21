@@ -228,8 +228,8 @@ function:
 .. |label_style_circle| image:: images/label.style_circle.png
 .. |label_style_arrowup| image:: images/label.style_arrowup.png
 .. |label_style_arrowdown| image:: images/label.style_arrowdown.png
-.. |label_style_label_up| image:: images/label.style_labelup.png
-.. |label_style_label_down| image:: images/label.style_labeldown.png
+.. |label_style_labelup| image:: images/label.style_labelup.png
+.. |label_style_labeldown| image:: images/label.style_labeldown.png
 .. |label_style_square| image:: images/label.style_square.png
 .. |label_style_diamond| image:: images/label.style_diamond.png
 
@@ -428,8 +428,8 @@ Pivot Points High/Low
         if isFound
             label.new(bar_index[len], p, tostring(p), style=_style, yloc=_yloc, color=_color)
     
-    fun(high, lenH, true, label.style_labeldown, yloc.abovebar, color.lime)
-    fun(low, lenL, false, label.style_labelup, yloc.belowbar, color.red)
+    fun(high, lenH, true, label.style_label_down, yloc.abovebar, color.lime)
+    fun(low, lenL, false, label.style_label_up, yloc.belowbar, color.red)
 
 
 Linear Regression
