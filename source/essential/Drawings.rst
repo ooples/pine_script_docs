@@ -130,12 +130,12 @@ For example::
         label.set_text(l, "green")
         label.set_color(l, color.green)
         label.set_yloc(l, yloc.belowbar)
-        label.set_style(l, label.style_labelup)
+        label.set_style(l, label.style_label_up)
     else
         label.set_text(l, "red")
         label.set_color(l, color.red)
         label.set_yloc(l, yloc.abovebar)
-        label.set_style(l, label.style_labeldown)
+        label.set_style(l, label.style_label_down)
 
 .. image:: images/label_changing_example.png
 
