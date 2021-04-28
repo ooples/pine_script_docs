@@ -651,7 +651,7 @@ When you size arrays dynamically using a field in your script's *Settings/Inputs
     plot(array.size(a))
 
 
-Cannot modify an array when its id is 'na'
+Cannot call array methods when id of array is 'na'
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 When an array id is initialized to ``na``, operations on it are not allowed, since no array exists. 
