@@ -211,9 +211,9 @@ function:
 +--------------------------------+-------------------------------------------------+-------------------------------------------------+
 | ``label.style_arrowdown``      | |label_style_arrowdown|                         | |label_style_arrowdown_t|                       |
 +--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| ``label.style_labelup``        | |label_style_labelup|                           | |label_style_labelup_t|                         |
+| ``label.style_label_up``       | |label_style_label_up|                          | |label_style_label_up_t|                        |
 +--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| ``label.style_labeldown``      | |label_style_labeldown|                         | |label_style_labeldown_t|                       |
+| ``label.style_label_down``     | |label_style_label_down|                        | |label_style_label_down_t|                      |
 +--------------------------------+-------------------------------------------------+-------------------------------------------------+
 | ``label.style_square``         | |label_style_square|                            | |label_style_square_t|                          |
 +--------------------------------+-------------------------------------------------+-------------------------------------------------+
@@ -228,8 +228,8 @@ function:
 .. |label_style_circle| image:: images/label.style_circle.png
 .. |label_style_arrowup| image:: images/label.style_arrowup.png
 .. |label_style_arrowdown| image:: images/label.style_arrowdown.png
-.. |label_style_labelup| image:: images/label.style_labelup.png
-.. |label_style_labeldown| image:: images/label.style_labeldown.png
+.. |label_style_label_up| image:: images/label.style_labelup.png
+.. |label_style_label_down| image:: images/label.style_labeldown.png
 .. |label_style_square| image:: images/label.style_square.png
 .. |label_style_diamond| image:: images/label.style_diamond.png
 
@@ -242,8 +242,8 @@ function:
 .. |label_style_circle_t| image:: images/label.style_circle_t.png
 .. |label_style_arrowup_t| image:: images/label.style_arrowup_t.png
 .. |label_style_arrowdown_t| image:: images/label.style_arrowdown_t.png
-.. |label_style_labelup_t| image:: images/label.style_labelup_t.png
-.. |label_style_labeldown_t| image:: images/label.style_labeldown_t.png
+.. |label_style_label_up_t| image:: images/label.style_labelup_t.png
+.. |label_style_label_down_t| image:: images/label.style_labeldown_t.png
 .. |label_style_square_t| image:: images/label.style_square_t.png
 .. |label_style_diamond_t| image:: images/label.style_diamond_t.png
 
@@ -324,7 +324,7 @@ The previous script's behavior can be reproduced using another approach::
     c = close >= open ? color.lime : color.red
     l := label.new(bar_index, na,
       text=tostring(close), color=c,
-      style=label.style_labeldown, yloc=yloc.abovebar)
+      style=label.style_label_down, yloc=yloc.abovebar)
 
 When the study "Last Bar Close 2" gets a new bar update, variable ``l`` is still referencing the old label object created on the previous bar. This label is deleted with the ``label.delete(l)`` call. A new label is then created and its id saved to ``l``. Using this approach there is no need to use the ``[]`` operator.
 
@@ -336,7 +336,7 @@ There is yet another way to achieve the same objective as in the two previous sc
     study("Last Bar Close 3", overlay=true)
 
     var label l = label.new(bar_index, na,
-      style=label.style_labeldown, yloc=yloc.abovebar)
+      style=label.style_label_down, yloc=yloc.abovebar)
 
     c = close >= open ? color.lime : color.red
     label.set_color(l, c)
@@ -554,7 +554,7 @@ Linear Regression
     transparent = color.new(color.white, 100)
     label.delete(r[1])
     if showPearson and not na(pearsonR)
-        r := label.new(bar_index - len + 1, lowerStartPrice, tostring(pearsonR, "#.################"), color=transparent, textcolor=#0000ff, size=size.normal, style=label.style_labelup)
+        r := label.new(bar_index - len + 1, lowerStartPrice, tostring(pearsonR, "#.################"), color=transparent, textcolor=#0000ff, size=size.normal, style=label.style_label_up)
 
 
 Zig Zag
