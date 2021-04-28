@@ -26,14 +26,14 @@ which will be calculated on the requested series *within* the ``security`` call.
 
 The name of the symbol can be defined using two variants: with a prefix that
 contains the exchange (or data provider), or without it. For example:
-``"NASDAQ:AAPL"``, ``"SIX:AAPL"`` or ``"AAPL"``. When an exchange is not provided,
-NASDAQ will be used as the default. The current symbol name is stored in the
+``"NYSE:IBM"``, ``"BATS:IBM"`` or ``"IBM"``. When an exchange is not provided,
+BATS will be used as the default. The current symbol name is stored in the
 `syminfo.ticker <https://www.tradingview.com/pine-script-reference/v4/#var_syminfo{dot}ticker>`__ and
 `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v4/#var_syminfo{dot}tickerid>`__
 built-in variables. ``syminfo.ticker`` contains the value of the
 symbol name without its exchange prefix, for example ``"MSFT"``.
 ``syminfo.tickerid`` contains the value of the symbol name with its exchange prefix, for example,
-``"NASDAQ:MSFT"`` or ``"SIX:MSFT"``. It is recommended to use ``syminfo.tickerid`` to avoid
+``"BATS:MSFT"`` or ``"NASDAQ:MSFT"``. It is recommended to use ``syminfo.tickerid`` to avoid
 ambiguity in the values returned by ``security``.
 
 .. TODO write about syminfo.tickerid in extended format and function tickerid
