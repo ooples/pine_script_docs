@@ -42,7 +42,7 @@ Here is an example of a script using ``barstate.*`` variables::
     t := t + (hist ? "\nhist" : rt ? "\nrt" : "")
     t := t + (first ? "\nfirst" : last ? "\nlast" : "")
     label.new(bar_index, na, yloc=yloc.abovebar, text=t,
-    color=hist ? color.green : color.red)
+              color=hist ? color.green : color.red)
 
 We begin by adding the "Bar States" study to a yearly chart and take a screenshot before any realtime update is received.
 This shows the *first* and the *last* bars, and the fact that all bars are *new* ones:
