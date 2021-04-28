@@ -528,7 +528,7 @@ Note that in the example, which array is sorted is also determined at runtime::
 Reversing
 ^^^^^^^^^
 
-Use ``array.reverse()`` to reverse an array::
+Use `array.reverse() <https://www.tradingview.com/pine-script-reference/v4/#fun_array{dot}reverse>`__  to reverse an array::
 
     //@version=4
     study("`array.reverse()`")
