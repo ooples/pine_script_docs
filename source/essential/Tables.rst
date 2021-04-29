@@ -17,8 +17,8 @@ independently of the chart bars being viewed or the zoom factor used.
 Tables contain cells arranged in columns and rows, much like a spreadsheet. 
 A table's structure and key attributes are defined using `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__, 
 which returns a table id that acts like a pointer to the table, just like label, line, or array ids do.
-The `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__ call will create the table and define its key attributes,
-but it does not display the table. Once the table is created, its cells must be populated using one 
+The `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__ call will create the table but does not display it.
+Once created, the table must be populated using one 
 `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__ call for each cell. 
 Table cells can contain text, or not.
 
@@ -39,6 +39,22 @@ Limits on memory use are determined by the quantity of cells in all tables used 
 
 Creating a table
 ----------------
+
+Placing a single value in a constant position
+=============================================
+
+Let's place the value of ATR in the upper-right corner of the chart::
+
+    //@version=4
+    study("ATR", "", true, precision = 10)
+    // We use `var` to only initialize the table on the first bar.
+    var table atrDisplay = table.new(position.top_right, 1, 1)
+    // We call `atr()` outside the `if` block so it executes on each bar.
+    myAtr = atr(14)
+    if barstate.islast
+        // We only populate the table on the last bar.
+        table.cell(atrDisplay, 0, 0, tostring(myAtr))
+
 
 
 Populating a table
