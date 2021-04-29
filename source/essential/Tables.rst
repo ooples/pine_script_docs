@@ -14,10 +14,14 @@ Contrary to all other plots or objects drawn in Pine,
 tables are not anchored to specific bars; they *float* in a script's space, whether in overlay or pane mode, in studies or strategies,
 independently of the chart bars being viewed or the zoom factor used. 
 
-Tables contain cells arranged in columns and rows. A table is created using `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__. 
-A table is represented by a table id which acts as a pointer to the table, 
-just like label, line, or array ids do. The content of cells and their individual properties are specified using a 
+Tables contain cells arranged in columns and rows, much like a spreadsheet. 
+A table's structure and key attributes are defined using `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__, 
+which returns a table id that acts like a pointer to the table, just like label, line, or array ids do.
+The `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__ call will create the table and define its key attributes,
+but it does not display the table. Once the table is created, its cells must be populated using one 
 `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__ call for each cell. 
+Table cells can contain text, or not.
+
 Some attributes of a previously created table or cell can be changed using ``table.set_*()`` or ``table.cell_set_*()`` setter functions.
 
 A table is positioned in an indicator's space by anchoring it to one of nine references: the four corners or a midpoint between two of them. 
