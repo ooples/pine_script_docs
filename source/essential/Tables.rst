@@ -56,6 +56,29 @@ Let's place the value of ATR in the upper-right corner of the chart::
         table.cell(atrDisplay, 0, 0, tostring(myAtr))
 
 
+Let's improve the aesthethics of our display::
+
+    //@version=4
+    study("ATR", "", true, precision = 10)
+    i_atrP      = input(14,  "ATR period", minval = 1)
+
+    // ————— Produces a string format usable with `tostring()` to restrict precision to ticks. Note that `tostring()` will also round the value.
+    f_tickFormat() =>
+        _s = tostring(syminfo.mintick)
+        _s := str.replace_all(_s, "25", "00")
+        _s := str.replace_all(_s, "5",  "0")
+        _s := str.replace_all(_s, "1",  "0")
+
+    var table atrDisplay = table.new(position.top_right, 1, 1, bgcolor = color.gray, frame_width = 2, frame_color = color.black)
+    myAtr = atr(i_atrP)
+    if barstate.islast
+        table.cell(atrDisplay, 0, 0, tostring(myAtr, f_tickFormat()), text_color = color.white)
+
+We used `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__
+to define a background color, a frame color and its width. 
+When populating the cell with `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__
+we set the text to display in white. Finally, we used the `f_tickFormat()` function to restrict the precision of ATR to the chart's tick precision.
+
 
 Populating a table
 ------------------
