@@ -60,7 +60,7 @@ Let's improve the aesthethics of our display::
 
     //@version=4
     study("ATR", "", true, precision = 10)
-    i_atrP      = input(14,  "ATR period", minval = 1)
+    i_atrP = input(14,  "ATR period", minval = 1)
 
     // ————— Produces a string format usable with `tostring()` to restrict precision to ticks. Note that `tostring()` will also round the value.
     f_tickFormat() =>
