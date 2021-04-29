@@ -29,7 +29,7 @@ A simple strategy example
 
     //@version=4
     strategy("test")
-    if bar_index > 4000
+    if bar_index < 100
         strategy.entry("buy", strategy.long, 10, when=strategy.position_size <= 0)
         strategy.entry("sell", strategy.short, 10, when=strategy.position_size > 0)
     plot(strategy.equity)
@@ -187,7 +187,7 @@ Example 1::
 
     //@version=4
     strategy("revers demo")
-    if bar_index > 4000
+    if bar_index  < 100
         strategy.entry("buy", strategy.long, 4, when=strategy.position_size <= 0)
         strategy.entry("sell", strategy.short, 6, when=strategy.position_size > 0)
     plot(strategy.equity)
@@ -211,7 +211,7 @@ Example 3::
 
     //@version=4
     strategy("Partial exit demo")
-    if bar_index > 4000
+    if bar_index < 100
         strategy.entry("buy", strategy.long, 4, when=strategy.position_size <= 0)
     strategy.exit("bracket1", "buy",  2, profit=10, stop=10)
     strategy.exit("bracket2", "buy",  profit=20, stop=20)
@@ -250,7 +250,7 @@ Example::
 
     //@version=4
     strategy("next bar open execution demo")
-    if bar_index > 4000
+    if bar_index < 100
         strategy.order("buy", strategy.long, when=strategy.position_size == 0)
         strategy.order("sell", strategy.short, when=strategy.position_size != 0)
 
@@ -268,7 +268,7 @@ Example (for MSFT, 1D)::
     //@version=4
     strategy("Priced Entry demo")
     var c = 0
-    if year > 2014
+    if year > 2020
         c := c + 1
     if c == 1
         strategy.entry("LE1", strategy.long, 2, stop = high + 35 * syminfo.mintick)
@@ -285,7 +285,7 @@ modified code::
     //@version=4
     strategy("Priced Entry demo")
     var c = 0
-    if year > 2014
+    if year > 2020
         c := c + 1
     if c == 1
         strategy.entry("LE1", strategy.long, 2, stop = high + 35 * syminfo.mintick, oca_type = strategy.oca.cancel, oca_name = "LE")
@@ -523,7 +523,7 @@ profit target or stop loss.
 
     //@version=4
     strategy("Currency test", currency=currency.EUR)
-    if year > 2014
+    if year > 2020
         strategy.entry("LE", true, 1000)
         strategy.exit("LX", "LE", profit=1, loss=1)
     profit = strategy.netprofit
