@@ -46,7 +46,7 @@ Placing a single value in a constant position
 Let's place the value of ATR in the upper-right corner of the chart::
 
     //@version=4
-    study("ATR", "", true, precision = 10)
+    study("ATR", "", true)
     // We use `var` to only initialize the table on the first bar.
     var table atrDisplay = table.new(position.top_right, 1, 1)
     // We call `atr()` outside the `if` block so it executes on each bar.
@@ -56,11 +56,11 @@ Let's place the value of ATR in the upper-right corner of the chart::
         table.cell(atrDisplay, 0, 0, tostring(myAtr))
 
 
-Let's improve the aesthethics of our display::
+Let's improve the usability and aesthethics of our script::
 
     //@version=4
-    study("ATR", "", true, precision = 10)
-    i_atrP = input(14,  "ATR period", minval = 1)
+    study("ATR", "", true)
+    i_atrP = input(14,  "ATR period", minval = 1, tooltip = "Using a period of 1 yields True Range.")
 
     // ————— Produces a string format usable with `tostring()` to restrict precision to ticks. Note that `tostring()` will also round the value.
     f_tickFormat() =>
