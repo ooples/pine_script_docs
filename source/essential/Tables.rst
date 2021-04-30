@@ -34,28 +34,16 @@ Two modes are available to determine the width/height of table cells:
 - An automatic mode calculates the width/height of cells in a column/row using the widest/highest text in them. 
 - An explicit mode allows programmers to define the width/height of cells using a percentage of the indicator's available x/y space.
 
-Multiple tables can be used in one script, each one identified by its own id.
-Limits on the quantity of cells in all tables are determined by the total number of cells used in one script.
-
-Displayed table contents always represent the last state of the table, as it was drawn on the script's last execution.
+Displayed table contents always represent the last state of the table, as it was drawn on the script's last execution, on the dataset's last bar.
 Contrary to values displayed in the Data Window or in indicator values, 
-variable contents displayed in tables will not change as the user moves his cursor over specific chart bars.
-For this reason, it is strongly recommended to always restrict execution of all ``table.*()`` calls to either the first or last bars of the dataset:
+variable contents displayed in tables will thus not change as a script user moves his cursor over specific chart bars.
+For this reason, it is strongly recommended to always restrict execution of all ``table.*()`` calls to either the first or last bars of the dataset. Accordingly:
 
 - Use the `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ keyword to declare tables.
 - Enclose all other calls inside an `if <https://www.tradingview.com/pine-script-reference/v4/#op_if>`__ `barstate.islast <https://www.tradingview.com/pine-script-reference/v4/#var_barstate{dot}islast>`__ block.
 
-Keep in mind that even when script users scroll back in the chart's history, they are always looking at the table as it was drawn on the dataset's last bar. 
-As the position of tables is unaffected by the specific chart bars visible at any given time, the state of tables is also not a function of visible chart bars. 
-Table calculations will not revert to their state on past bars when those bars become visible as a user scrolls his chart back in time. 
-Pine scripts have no visibility on which bars are visible on the chart at any given time.
-
-Tables should be created using the `var` keyword so they are created only once, when the script executes on the dataset's first bar. 
-This is not only more efficient, but it also avoids frequent issues with handling tables that are re-created on each bar.
-
-While table construction code can be executed on any bar the script is executing on, 
-it will usually be more efficient to restrict its execution to the dataset's last bar by enclosing the code in a block following an `if barstate.islast` statement.
-
+Multiple tables can be used in one script, each one identified by its own id.
+Limits on the quantity of cells in all tables are determined by the total number of cells used in one script.
 
 
 Creating tables
