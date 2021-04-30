@@ -31,7 +31,7 @@ down and left from that anchor.
 
 Two modes are available to determine the width/height of table cells:
 
-- An automatic mode calculates the width/height of cells in a column/row using the widest/highest text in them. 
+- A default automatic mode calculates the width/height of cells in a column/row using the widest/highest text in them. 
 - An explicit mode allows programmers to define the width/height of cells using a percentage of the indicator's available x/y space.
 
 Displayed table contents always represent the last state of the table, as it was drawn on the script's last execution, on the dataset's last bar.
@@ -49,6 +49,13 @@ Limits on the quantity of cells in all tables are determined by the total number
 Creating tables
 ---------------
 
+When creating a table using `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__, four parameters are mandatory: the table's id, position, and its number of columns and rows. Five other parameters are optional: the background color, the color and width of the table's outer frame, and the color and width of the borders around all cells, excluding the outer frame. All table attributes except its number of columns and rows can be modified using the relevant ``table.set_*()`` setter function:
+
+Tables can be deleted using `table.delete() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}delete>`__, and cleared using `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}clear>`__.
+
+When populating cells using `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__, you must identify the cell by column and row 
+using indices that start at zero. You can 
+
 Placing a single value in a constant position
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -64,10 +71,11 @@ Let's place the value of ATR in the upper-right corner of the chart::
         // We only populate the table on the last bar.
         table.cell(atrDisplay, 0, 0, tostring(myAtr))
 
-Note how we:
+Note how:
 
 - We use the `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ keyword to declare table with 
   `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__
+- We do not use the ```` supply an argument to the ``
 
 Let's improve the usability and aesthethics of our script::
 
