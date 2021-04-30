@@ -88,7 +88,7 @@ then populate that cell::
         // We only populate the table on the last bar.
         table.cell(atrDisplay, 0, 0, tostring(myAtr))
 
-Note the following:
+Note that:
 
 - We use the `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ keyword when creating the table with 
   `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__.
@@ -117,9 +117,11 @@ Let's improve the usability and aesthethics of our script::
     if barstate.islast
         table.cell(atrDisplay, 0, 0, tostring(myAtr, f_tickFormat()), text_color = color.white)
 
-We used `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__
+Note that:
+
+- We used `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__
 to define a background color, a frame color and its width. 
-When populating the cell with `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__
+- When populating the cell with `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__
 we set the text to display in white. Finally, we used the `f_tickFormat()` function to restrict the precision of ATR to the chart's tick precision.
 
 
