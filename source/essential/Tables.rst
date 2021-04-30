@@ -120,6 +120,8 @@ Let's improve the usability and aesthethics of our script::
     if barstate.islast
         table.cell(atrDisplay, 0, 0, tostring(myAtr, f_tickFormat()), text_color = color.white)
 
+.. image:: images/Tables-ATR-2.png
+
 Note that:
 
 - We used `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__ to define a background color, a frame color and its width.
