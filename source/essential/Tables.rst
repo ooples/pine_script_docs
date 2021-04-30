@@ -89,6 +89,8 @@ then populate that cell::
         // We only populate the table on the last bar.
         table.cell(atrDisplay, 0, 0, tostring(myAtr))
 
+.. image:: images/Tables-ATR-1.png
+
 Note that:
 
 - We use the `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ keyword when creating the table with 
