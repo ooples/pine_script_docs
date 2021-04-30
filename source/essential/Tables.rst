@@ -66,7 +66,8 @@ Let's place the value of ATR in the upper-right corner of the chart::
 
 Note how we:
 
-- We enclose 
+- We use the `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ keyword to declare table with  
+ `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__
 
 Let's improve the usability and aesthethics of our script::
 
