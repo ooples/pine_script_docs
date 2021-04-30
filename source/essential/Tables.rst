@@ -39,7 +39,7 @@ Limits on the quantity of cells in all tables are determined by the total number
 Displayed table contents always represent the last state of the table, as it was drawn on the script's last execution.
 Contrary to values displayed in the Data Window or in indicator values, 
 variable contents displayed in tables will not change as the user moves his cursor over specific chart bars.
-For this reason, it is strongly recommended to restrict execution of all `table.*()` calls to either the first or last bars of the dataset
+For this reason, it is strongly recommended to restrict execution of all ``table.*()`` calls to either the first or last bars of the dataset
 by systematically using `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ to declare tables and by enclosing 
 all other calls inside an `if <https://www.tradingview.com/pine-script-reference/v4/#op_if>`__ `barstate.islast <https://www.tradingview.com/pine-script-reference/v4/#var_barstate{dot}islast>`__ block.
 
