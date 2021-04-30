@@ -96,7 +96,7 @@ Note the following:
 - When populating the cell, we do not specify use the ``width`` or ``height``. The width and height of our cell will thus adjust automatically to the text it contains.
 - We call ``atr(14)`` prior to entry in our `if <https://www.tradingview.com/pine-script-reference/v4/#op_if>`__ block so that it evaluates on each bar. 
   If we used ``tostring(atr(14))`` inside the `if <https://www.tradingview.com/pine-script-reference/v4/#op_if>`__ block, 
-  the function would not evaluate correctly because it would not have calculated the values it needs from the previous bars.
+  the function would not evaluate correctly because it would be called on the dataset's last bar without having calculated the values it needs from the previous bars.
 
 
 Let's improve the usability and aesthethics of our script::
