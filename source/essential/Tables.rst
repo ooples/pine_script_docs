@@ -88,11 +88,12 @@ then populate that cell::
         // We only populate the table on the last bar.
         table.cell(atrDisplay, 0, 0, tostring(myAtr))
 
-Note how:
+Note the following:
 
-- We use the `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ keyword to declare table with 
-  `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__
-- We do not use the ```` supply an argument to the ``
+- We use the `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ keyword when creating the table with 
+  `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__.
+- When populating the cell, we do not specify use the ``width`` or ``height``. The width and height of our cell will thus adjust automatically to the text it contains.
+
 
 Let's improve the usability and aesthethics of our script::
 
