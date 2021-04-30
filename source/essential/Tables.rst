@@ -22,7 +22,8 @@ Once created, the table must be populated using one
 `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__ call for each cell. 
 Table cells can contain text, or not.
 
-Some attributes of a previously created table or cell can be changed using ``table.set_*()`` or ``table.cell_set_*()`` setter functions.
+Some attributes of a previously created table can be changed using ``table.set_*()`` setter functions.
+Attributes of previously populated cells can be modified using ``table.cell_set_*()`` functions.
 
 A table is positioned in an indicator's space by anchoring it to one of nine references: the four corners or a midpoint between two of them. 
 Tables are positioned by expanding the table from its anchor, so a table anchored to the ``middle_right`` reference will be drawn by expanding up, 
