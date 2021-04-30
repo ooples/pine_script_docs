@@ -92,7 +92,11 @@ Note the following:
 
 - We use the `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ keyword when creating the table with 
   `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__.
+- We populate the cell inside an `if <https://www.tradingview.com/pine-script-reference/v4/#op_if>`__ `barstate.islast <https://www.tradingview.com/pine-script-reference/v4/#var_barstate{dot}islast>`__ block using `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__.
 - When populating the cell, we do not specify use the ``width`` or ``height``. The width and height of our cell will thus adjust automatically to the text it contains.
+- We must call ``atr(14)`` prior to entry in our `if <https://www.tradingview.com/pine-script-reference/v4/#op_if>`__ block so that it can be evaluated on each bar. 
+  If we used ``tostring(atr(14))`` inside the `if <https://www.tradingview.com/pine-script-reference/v4/#op_if>`__ block, 
+  the function would not evaluate correctly because it would not have calculated the values it needs from the previous bars.
 
 
 Let's improve the usability and aesthethics of our script::
