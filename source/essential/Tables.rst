@@ -46,6 +46,7 @@ Multiple tables can be used in one script, each one identified by its own id.
 Limits on the quantity of cells in all tables are determined by the total number of cells used in one script.
 
 
+
 Creating tables
 ---------------
 
@@ -123,6 +124,18 @@ Note that:
 - When populating the cell with `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__, 
   we set the text to display in white.
 - We used the ``f_tickFormat()`` function to restrict the precision of ATR to the chart's tick precision.
+
+
+Creating a display panel
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Creating a debugging console
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Creating a heatmap
+^^^^^^^^^^^^^^^^^^
 
 
 
