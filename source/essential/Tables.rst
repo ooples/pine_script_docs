@@ -73,8 +73,8 @@ All cell attributes can be modified using setter functions:
 `table.cell_set_bgcolor() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell_set_bgcolor>`__.
 
 
-Placing a single value in a constant position
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Placing a single value in a fixed position
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Let's create our first table, which will place the value of ATR in the upper-right corner of the chart. We first create a one-cell table, 
 then populate that cell::
