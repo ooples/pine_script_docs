@@ -75,7 +75,8 @@ All cell attributes can be modified using setter functions:
 Placing a single value in a constant position
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Let's place the value of ATR in the upper-right corner of the chart::
+Let's create our first table, which will place the value of ATR in the upper-right corner of the chart. We first create a one-cell table, 
+then populate that cell::
 
     //@version=4
     study("ATR", "", true)
