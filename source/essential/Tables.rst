@@ -41,7 +41,7 @@ Creating a table
 ----------------
 
 Placing a single value in a constant position
-=============================================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Let's place the value of ATR in the upper-right corner of the chart::
 
