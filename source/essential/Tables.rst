@@ -128,6 +128,7 @@ Note that:
 - When populating the cell with `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__, 
   we set the text to display in white.
 - We used the ``f_tickFormat()`` function to restrict the precision of ATR to the chart's tick precision.
+- We now use an input to allow the script user to specify the period of ATR. The input also includes a tooltip, which the user can see when he hovers over the "i" icon.
 
 
 Creating a display panel
