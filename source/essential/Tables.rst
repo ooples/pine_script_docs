@@ -49,9 +49,15 @@ Limits on the quantity of cells in all tables are determined by the total number
 Creating tables
 ---------------
 
-When creating a table using `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__, four parameters are mandatory: the table's id, position, and its number of columns and rows. Five other parameters are optional: the background color, the color and width of the table's outer frame, and the color and width of the borders around all cells, excluding the outer frame. All table attributes except its number of columns and rows can be modified using the relevant ``table.set_*()`` setter function:
+When creating a table using `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__, four parameters are mandatory: the table's id, position, and its number of columns and rows. Five other parameters are optional: the background color, the color and width of the table's outer frame, and the color and width of the borders around all cells, excluding the outer frame. All table attributes except its number of columns and rows can be modified using the relevant ``table.set_*()`` setter function: 
+`table.set_position() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}set_position>`__, 
+`table.set_bgcolor() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}set_bgcolor>`__, 
+`table.set_frame_color() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}set_frame_color>`__, 
+`table.set_frame_width() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}set_frame_width>`__, 
+`table.set_border_color() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}set_border_color>`__ and 
+`table.set_border_width() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}set_border_width>`__.
 
-Tables can be deleted using `table.delete() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}delete>`__, and cleared using `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}clear>`__.
+Tables can be deleted using `table.delete() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}delete>`__, and cleared using `table.clear() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}clear>`__.
 
 When populating cells using `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__, you must identify the cell by column and row 
 using indices that start at zero. You can 
