@@ -6,6 +6,14 @@ Release notes
 
 This page contains release notes of notable changes in Pine Script v4.
 
+May 2021
+--------------------------
+New functions were added: 
+
+* ``array.from`` - takes a variable number of arguments with one of the types: ``int``, ``float``, ``bool``, ``string``, ``label``, ``line``, ``color``, and returns an array of the corresponding type. 
+
+
+
 April 2021
 --------------------------
 New math constants were added: 
