@@ -161,6 +161,10 @@ Note that:
 Creating a display panel
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+Tables are ideal to create sophisticated display panels. Not only do they make it possible for display panels to always be visible in a constant position, they allow for more formatting possiblities because each cell's properties are controlled separately: background, text color, size and alignment, etc.
+
+
+
 
 Creating a debugging console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
