@@ -135,7 +135,7 @@ Note that:
 Coloring the chart's background
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This example uses a one-cell table to color the chart's background on the bull/bear state of RSI:
+This example uses a one-cell table to color the chart's background on the bull/bear state of RSI::
 
     //@version=4
     study("Chart background", "", true)
