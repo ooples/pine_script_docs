@@ -26,7 +26,7 @@ Some attributes of a previously created table can be changed using ``table.set_*
 Attributes of previously populated cells can be modified using ``table.cell_set_*()`` functions.
 
 A table is positioned in an indicator's space by anchoring it to one of nine references: the four corners or a midpoint between two of them. 
-Tables are positioned by expanding the table from its anchor, so a table anchored to the ``middle_right`` reference will be drawn by expanding up, 
+Tables are positioned by expanding the table from its anchor, so a table anchored to the ``position.middle_right`` reference will be drawn by expanding up, 
 down and left from that anchor.
 
 Two modes are available to determine the width/height of table cells:
