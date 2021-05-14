@@ -108,7 +108,7 @@ Let's improve the usability and aesthethics of our script::
     study("ATR", "", true)
     i_atrP = input(14,  "ATR period", minval = 1, tooltip = "Using a period of 1 yields True Range.")
 
-    // ————— Produces a string format usable with `tostring()` to restrict precision to ticks. Note that `tostring()` will also round the value.
+    // ————— Produces a string format usable with `tostring()` to restrict precision to ticks.
     f_tickFormat() =>
         _s = tostring(syminfo.mintick)
         _s := str.replace_all(_s, "25", "00")
@@ -163,7 +163,65 @@ Creating a display panel
 
 Tables are ideal to create sophisticated display panels. Not only do they make it possible for display panels to always be visible in a constant position, they allow for more formatting possiblities because each cell's properties are controlled separately: background, text color, size and alignment, etc.
 
+Here, we create a display panel showing a user-selected quantity of MAs. We display their period in the first column, then their value with a green/red/gray background depending on price's position with regards to each MA::
 
+```js
+    //@version=4
+    study("Display panel", "", true)
+
+    int     i_masQty    = input(10, "Quantity of MAs", minval = 1, maxval = 40)
+    int     i_masPeriod = input(10, "Beginning at Period", minval = 1, maxval = 40)
+    int     i_masStep   = input(20,  "Increasing by", minval = 1, maxval = 25)
+
+    var string GP1 = "Display panel"
+    string  i_tableYpos = input("top", "Table position", inline = "21", options = ["top", "middle", "bottom"], group = GP1)
+    string  i_tableXpos = input("right", "", inline = "21", options = ["left", "center", "right"], group = GP1)
+    color   i_c_bull    = input(color.green, "Bull", inline = "1", group = GP1)
+    color   i_c_bear    = input(color.red, "Bear", inline = "1", group = GP1)
+    color   i_c_neutral = input(color.gray, "Neutral", inline = "1", group = GP1)
+
+    // ————— Function returns the table position from user selection.
+    f_tablePos(_tableXpos, _tableYpos) =>
+        _tableYpos   == "top"    and _tableXpos == "left"   ? position.top_left       :
+          _tableYpos == "top"    and _tableXpos == "center" ? position.top_center     :
+          _tableYpos == "top"    and _tableXpos == "right"  ? position.top_right      :
+          _tableYpos == "middle" and _tableXpos == "left"   ? position.middle_left    :
+          _tableYpos == "middle" and _tableXpos == "center" ? position.middle_center  :
+          _tableYpos == "middle" and _tableXpos == "right"  ? position.middle_right   :
+          _tableYpos == "bottom" and _tableXpos == "left"   ? position.bottom_left    :
+          _tableYpos == "bottom" and _tableXpos == "center" ? position.bottom_center  :
+          _tableYpos == "bottom" and _tableXpos == "right"  ? position.bottom_right   : na
+
+    // ————— Produces a string format usable with `tostring()` to restrict precision to ticks.
+    f_tickFormat() =>
+        _s = tostring(syminfo.mintick)
+        _s := str.replace_all(_s, "25", "00")
+        _s := str.replace_all(_s, "5",  "0")
+        _s := str.replace_all(_s, "1",  "0")
+
+    var table panel = table.new(f_tablePos(i_tableXpos, i_tableYpos), 2, i_masQty + 1, bgcolor = color.silver)
+
+    int _line = 1
+    int _period = i_masPeriod
+    for _i = 1 to i_masQty
+        _ma = sma(close, _period)
+        if barstate.islast
+            // Table header.
+            table.cell(panel, 0, 0, "MA")
+            table.cell(panel, 1, 0, "Value")
+            // Period in left column.
+            table.cell(panel, 0, _line, tostring(_period))
+            // If MA is between the open and close, use neutral color. If close is lower/higher than MA, use bull/bear color.
+            _c_bg = close > _ma ? open < _ma ? i_c_neutral : i_c_bull : open > _ma ? i_c_neutral : i_c_bear
+            // MA value in right column.
+            table.cell(panel, 1, _line, tostring(_ma, f_tickFormat()), bgcolor = _c_bg)
+        _line += 1
+        _period += i_masStep
+```
+
+Note that:
+
+- Users can select the table's position from the inputs, as well as the bull/bear/neutral colors to be used for the background of the right column's cells.
 
 
 Creating a debugging console
