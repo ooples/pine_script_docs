@@ -165,7 +165,6 @@ Tables are ideal to create sophisticated display panels. Not only do they make i
 
 Here, we create a display panel showing a user-selected quantity of MAs. We display their period in the first column, then their value with a green/red/gray background depending on price's position with regards to each MA::
 
-```js
     //@version=4
     study("Display panel", "", true)
 
@@ -217,7 +216,6 @@ Here, we create a display panel showing a user-selected quantity of MAs. We disp
             table.cell(panel, 1, _line, tostring(_ma, f_tickFormat()), bgcolor = _c_bg)
         _line += 1
         _period += i_masStep
-```
 
 Note that:
 
