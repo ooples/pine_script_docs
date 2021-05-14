@@ -220,7 +220,7 @@ Here, we create a display panel showing a user-selected quantity of MAs. We disp
 Note that:
 
 - Users can select the table's position from the inputs, as well as the bull/bear/neutral colors to be used for the background of the right column's cells.
-
+- The lines creating the table are actually quite few, in the last part of the script. Most of the other lines are to manage inputs and formats.
 
 Creating a debugging console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
