@@ -132,6 +132,32 @@ Note that:
   which the user can see when he hovers over the "i" icon in the script's "Settings/Inputs" tab.
 
 
+Coloring the chart's background
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This example uses a one-cell table to color the chart's background on the bull/bear state of RSI:
+
+    //@version=4
+    study("Chart background", "", true)
+    i_c_bull = input(color.new(color.green, 95), "Bull", inline = "1")
+    i_c_bear = input(color.new(color.red, 95), "Bear", inline = "1")
+    // ————— Function colors chart bg on RSI bull/bear state.
+    f_colorChartBg(_c_bull, _c_bear) =>
+        var table _chartBg = table.new(position.middle_center, 1, 1)
+        float _r = rsi(close, 20)
+        color _c_bg = _r > 50 ? _c_bull : _r < 50 ? _c_bear : na
+        if barstate.islast
+            table.cell(_chartBg, 0, 0, width = 100, height = 100, bgcolor = _c_bg)
+
+    f_colorChartBg(i_c_bull, i_c_bear)
+
+Note that:
+
+- We provide users with inputs allowing them to specify the bull/bear colors to use for the background, and send those input colors as arguments to our ``f_colorChartBg()`` function.
+- We create a new table only once, using the `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ keyword to declare the table.
+- We use `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__ on the last bar only, to specify the cell's properties. We make the cell the width and height of the indicator's space, so it covers the whole chart.
+
+
 Creating a display panel
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -140,8 +166,8 @@ Creating a debugging console
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
-Creating a heatmap
-^^^^^^^^^^^^^^^^^^
+Displaying a heatmap
+^^^^^^^^^^^^^^^^^^^^
 
 
 
