@@ -8,8 +8,11 @@ This page contains release notes of notable changes in Pine Script v4.
 
 May 2021
 --------------------------
-New functions were added: 
+New functions were added:
 
+* ``color.rgb(red, green, blue, transp)`` - creates a new color with transparency using the RGB color model.
+* ``color.from_gradient(value, bottom_value, top_value, bottom_color, top_color)`` - returns color calculated from the linear gradient between bottom_color to top_color.
+* ``color.r(color)``, ``color.g(color)``, ``color.b(color)``, ``color.t(color)`` - retrieves the value of one of the color components.
 * ``array.from`` - takes a variable number of arguments with one of the types: ``int``, ``float``, ``bool``, ``string``, ``label``, ``line``, ``color``, and returns an array of the corresponding type. 
 
 
