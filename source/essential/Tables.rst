@@ -235,3 +235,5 @@ Displaying a heatmap
 Tips
 ----
 
+- When creating tables in strategy scripts, keep in mind that unless the strategy uses ``calc_on_every_tick = true``, table code enclose in `if <https://www.tradingview.com/pine-script-reference/v4/#op_if>`__ `barstate.islast <https://www.tradingview.com/pine-script-reference/v4/#var_barstate{dot}islast>`__ blocks will not execute, so the table will not show.
+- 
