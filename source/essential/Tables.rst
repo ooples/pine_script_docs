@@ -16,6 +16,10 @@ independently of the chart bars being viewed or the zoom factor used.
 
 Tables contain cells arranged in columns and rows, much like a spreadsheet. They are created and populated in two distincts steps:
 
+Values plotted by Pine scripts can be displayed in four distinct places:
+
+#. Next to the script's name (controlled by the *Indicator Values* checkbox in the *Chart settings/Status Line* tab).
+
 #. A table's structure and key attributes are defined using `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__, 
 which returns a table id that acts like a pointer to the table, just like label, line, or array ids do.
 The `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__ call will create the table object but does not display it.
