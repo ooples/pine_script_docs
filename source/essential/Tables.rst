@@ -16,11 +16,11 @@ independently of the chart bars being viewed or the zoom factor used.
 
 Tables contain cells arranged in columns and rows, much like a spreadsheet. They are created and populated in two distincts steps:
 
-1. A table's structure and key attributes are defined using `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__, 
+  1. A table's structure and key attributes are defined using `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__, 
 which returns a table id that acts like a pointer to the table, just like label, line, or array ids do.
 The `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__ call will create the table object but does not display it.
 
-1. Once created, and for it to display, the table must be populated using one 
+  1. Once created, and for it to display, the table must be populated using one 
 `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__ call for each cell. 
 Table cells can contain text, or not. This second step is when the width and height of cells are defined.
 
