@@ -14,18 +14,19 @@ Contrary to all other plots or objects drawn in Pine,
 tables are not anchored to specific bars; they *float* in a script's space, whether in overlay or pane mode, in studies or strategies,
 independently of the chart bars being viewed or the zoom factor used. 
 
-Tables contain cells arranged in columns and rows, much like a spreadsheet. 
-A table's structure and key attributes are defined using `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__, 
-which returns a table id that acts like a pointer to the table, just like label, line, or array ids do.
-The `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__ call will create the table but does not display it.
-Once created, the table must be populated using one 
-`table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__ call for each cell. 
-Table cells can contain text, or not.
+Tables contain cells arranged in columns and rows, much like a spreadsheet. They are created and populated in two distincts steps:
 
-Some attributes of a previously created table can be changed using ``table.set_*()`` setter functions.
+1. A table's structure and key attributes are defined using `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__, 
+which returns a table id that acts like a pointer to the table, just like label, line, or array ids do.
+The `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__ call will create the table object but does not display it.
+1. Once created, and for it to display, the table must be populated using one 
+`table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__ call for each cell. 
+Table cells can contain text, or not. This second step is when the width and height of cells are defined.
+
+Most attributes of a previously created table can be changed using ``table.set_*()`` setter functions.
 Attributes of previously populated cells can be modified using ``table.cell_set_*()`` functions.
 
-A table is positioned in an indicator's space by anchoring it to one of nine references: the four corners or a midpoint between two of them. 
+A table is positioned in an indicator's space by anchoring it to one of nine references: the four corners, or a midpoint between any two of them. 
 Tables are positioned by expanding the table from its anchor, so a table anchored to the ``position.middle_right`` reference will be drawn by expanding up, 
 down and left from that anchor.
 
@@ -42,7 +43,7 @@ For this reason, it is strongly recommended to always restrict execution of all 
 - Use the `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ keyword to declare tables.
 - Enclose all other calls inside an `if <https://www.tradingview.com/pine-script-reference/v4/#op_if>`__ `barstate.islast <https://www.tradingview.com/pine-script-reference/v4/#var_barstate{dot}islast>`__ block.
 
-Multiple tables can be used in one script, each one identified by its own id.
+Multiple tables can be used in one script, as long as they are each anchored to a different position. Each table object is identified by its own id.
 Limits on the quantity of cells in all tables are determined by the total number of cells used in one script.
 
 
@@ -59,7 +60,7 @@ When creating a table using `table.new() <https://www.tradingview.com/pine-scrip
 `table.set_border_width() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}set_border_width>`__.
 
 Tables can be deleted using `table.delete() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}delete>`__, 
-and their content can be removed using `table.clear() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}clear>`__.
+and their content can be selectively removed using `table.clear() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}clear>`__.
 
 When populating cells using `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__, you must supply an argument for four mandatory parameters: the table id the cell belongs to, its column and row index using indices that start at zero, and the text string the cell contains, which can be null. Seven other parameters are optional: the width and height of the cell, the text's attributes (color, horizontal and vertical alignment, size), and the cell's background color.
 All cell attributes can be modified using setter functions: 
@@ -71,6 +72,8 @@ All cell attributes can be modified using setter functions:
 `table.cell_set_text_valign() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell_set_text_valign>`__, 
 `table.cell_set_text_size() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell_set_text_size>`__ and 
 `table.cell_set_bgcolor() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell_set_bgcolor>`__.
+
+Keep in mind that each successive call to `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__ redefines **all** the cell's properties, deleting any properties set by previous `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__ calls on the same cell.
 
 
 Placing a single value in a fixed position
