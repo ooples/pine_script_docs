@@ -19,6 +19,7 @@ Tables contain cells arranged in columns and rows, much like a spreadsheet. They
 #. A table's structure and key attributes are defined using `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__, 
 which returns a table id that acts like a pointer to the table, just like label, line, or array ids do.
 The `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__ call will create the table object but does not display it.
+
 #. Once created, and for it to display, the table must be populated using one 
 `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__ call for each cell. 
 Table cells can contain text, or not. This second step is when the width and height of cells are defined.
