@@ -22,7 +22,7 @@ Tables contain cells arranged in columns and rows, much like a spreadsheet. They
 Most attributes of a previously created table can be changed using ``table.set_*()`` setter functions.
 Attributes of previously populated cells can be modified using ``table.cell_set_*()`` functions.
 
-A table is positioned in an indicator's space by anchoring it to one of nine references: the four corners, or a midpoint between any two of them. 
+A table is positioned in an indicator's space by anchoring it to one of nine references: the four corners or midpoints, including the center. 
 Tables are positioned by expanding the table from its anchor, so a table anchored to the ``position.middle_right`` reference will be drawn by expanding up, 
 down and left from that anchor.
 
