@@ -191,9 +191,11 @@ Here, we create a display panel showing a user-selected quantity of MAs. We disp
 
     // ————— Function returning `_color` with `_transp` transparency.
     f_colorNew(_color, _transp) =>
-        var _r = color.r(_color)
-        var _g = color.g(_color)
-        var _b = color.b(_color)
+        // color _color : base color to derive a new transparency from. Its current transparency is ignored.
+        // float _transp: 0-100 transparency of `_color` to return.
+        _r = color.r(_color)
+        _g = color.g(_color)
+        _b = color.b(_color)
         color _return = color.rgb(_r, _g, _b, _transp)
 
     var table panel = table.new(i_tableYpos + "_" + i_tableXpos, 2, i_masQty + 1, bgcolor = color.silver)
