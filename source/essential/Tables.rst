@@ -162,75 +162,58 @@ Creating a display panel
 
 Tables are ideal to create sophisticated display panels. Not only do they make it possible for display panels to always be visible in a constant position, they provide more flexible formatting because each cell's properties are controlled separately: background, text color, size and alignment, etc.
 
-Here, we create a basic display panel showing a user-selected quantity of MAs. We display their period in the first column, then their value with a green/red/gray background that varies with price's position with regards to each MA.
+Here, we create a basic display panel showing a user-selected quantity of MAs values. We display their period in the first column, then their value with a green/red/gray background that varies with price's position with regards to each MA. When price is above/below the MA, the cell's background colored with the bull/bear color. When the MA falls between the current bar's `open <https://www.tradingview.com/pine-script-reference/v4/#var_open>`__ and `close <https://www.tradingview.com/pine-script-reference/v4/#var_close>`__, the cell's background is of the neutral color.
 
 .. image:: images/Tables-DisplayPanel-1.png
 
 ::
 
     //@version=4
-    study("Display panel", "", true)
+    study("Price vs MA", "", true)
 
-    int     i_masQty    = input(10, "Quantity of MAs", minval = 1, maxval = 40)
-    int     i_masPeriod = input(10, "Beginning at Period", minval = 1, maxval = 40)
-    int     i_masStep   = input(20,  "Increasing by", minval = 1, maxval = 25)
+    var string GP1 = "Moving averages"
+    int     i_masQty    = input(20, "Quantity", minval = 1, maxval = 40, group = GP1, tooltip = "1-40")
+    int     i_masStart  = input(20, "Periods begin at", minval = 2, maxval = 200, group = GP1, tooltip = "2-200")
+    int     i_masStep   = input(20, "Periods increase by", minval = 1, maxval = 100, group = GP1, tooltip = "1-100")
 
-    var string GP1 = "Display panel"
-    string  i_tableYpos = input("top", "Table position", inline = "21", options = ["top", "middle", "bottom"], group = GP1)
-    string  i_tableXpos = input("right", "", inline = "21", options = ["left", "center", "right"], group = GP1)
-    color   i_c_bull    = input(color.green, "Bull", inline = "1", group = GP1)
-    color   i_c_bear    = input(color.red, "Bear", inline = "1", group = GP1)
-    color   i_c_neutral = input(color.gray, "Neutral", inline = "1", group = GP1)
+    var string GP2 = "Display"
+    string  i_tableYpos = input("top", "Panel position", inline = "11", options = ["top", "middle", "bottom"], group = GP2)
+    string  i_tableXpos = input("right", "", inline = "11", options = ["left", "center", "right"], group = GP2)
+    color   i_c_bull    = input(color.new(color.green, 80), "Bull", inline = "12", group = GP2)
+    color   i_c_bear    = input(color.new(color.red, 80), "Bear", inline = "12", group = GP2)
+    color   i_c_neutral = input(color.new(color.gray, 80), "Neutral", inline = "12", group = GP2)
 
     // ————— Produces a string format usable with `tostring()` to restrict precision to ticks.
     f_tickFormat() =>
-        _s = tostring(syminfo.mintick)
+        string _s = tostring(syminfo.mintick)
         _s := str.replace_all(_s, "25", "00")
         _s := str.replace_all(_s, "5",  "0")
         _s := str.replace_all(_s, "1",  "0")
 
-    // ————— Function returning `_color` with `_transp` transparency.
-    f_colorNew(_color, _transp) =>
-        // color _color : base color to derive a new transparency from. Its current transparency is ignored.
-        // float _transp: 0-100 transparency of `_color` to return.
-        _r = color.r(_color)
-        _g = color.g(_color)
-        _b = color.b(_color)
-        color _return = color.rgb(_r, _g, _b, _transp)
-
     var table panel = table.new(i_tableYpos + "_" + i_tableXpos, 2, i_masQty + 1, bgcolor = color.silver)
-    var color _c_bullBg    = f_colorNew(i_c_bull, 70)
-    var color _c_bearBg    = f_colorNew(i_c_bear, 70)
-    var color _c_neutralBg = f_colorNew(i_c_neutral, 70)
-
-    int _line = 1
-    int _period = i_masPeriod
+    int period = i_masStart
     for _i = 1 to i_masQty
-        _ma = sma(close, _period)
-        _maPrevious = sma(close[1], _period)
-        _maUp = _ma > _maPrevious
-        _maDn = _ma < _maPrevious
+        // ————— Call MAs on each bar.
+        float _ma = sma(close, period)
+        // ————— Only execute table code on last bar.
         if barstate.islast
             // Table header.
             table.cell(panel, 0, 0, "MA")
             table.cell(panel, 1, 0, "Value")
             // Period in left column.
-            table.cell(panel, 0, _line, tostring(_period))
+            table.cell(panel, 0, _i, tostring(period))
             // If MA is between the open and close, use neutral color. If close is lower/higher than MA, use bull/bear color.
-            _c_bg = close > _ma ? open < _ma ? _c_neutralBg : _c_bullBg : open > _ma ? _c_neutralBg : _c_bearBg
-            _c_text = _maUp ? i_c_bull : _maDn ? i_c_bear : i_c_neutral
+            _c_bg = close > _ma ? open < _ma ? i_c_neutral : i_c_bull : open > _ma ? i_c_neutral : i_c_bear
             // MA value in right column.
-            table.cell(panel, 1, _line, tostring(_ma, f_tickFormat()), text_color = _c_text, bgcolor = _c_bg)
-            // table.cell(panel, 1, _line, tostring(_ma, f_tickFormat()), bgcolor = _c_bg)
-        _line += 1
-        _period += i_masStep
+            table.cell(panel, 1, _i, tostring(_ma, f_tickFormat()), bgcolor = _c_bg)
+        period += i_masStep
 
 
 Note that:
 
 - Users can select the table's position from the inputs, as well as the bull/bear/neutral colors to be used for the background of the right column's cells.
-- The lines creating the table are actually quite few, in the last part of the script. Most of the other lines are to manage inputs and formats.
-- TODO: FIX THIS Even though we populate the table cells on the last bar only, we need to execute the calls to `sma() <https://www.tradingview.com/pine-script-reference/v4/#fun_sma>`__ on every bar so they produce the proper results. While we can calculate the value of `sma() <https://www.tradingview.com/pine-script-reference/v4/#fun_sma>`__ calls using different ``length`` values in a `for <https://www.tradingview.com/pine-script-reference/v4/#op_for>`__ loop, we could not refer to historical values of each call from within the loop. We could not, for example, detect if each instance of an `sma() <https://www.tradingview.com/pine-script-reference/v4/#fun_sma>`__ call was rising or falling, because that would require comparison with the 
+- Even though we populate the table cells on the last bar only, we need to execute the calls to `sma() <https://www.tradingview.com/pine-script-reference/v4/#fun_sma>`__ on every bar so they produce the correct results.
+- We separate our inputs in two sections using ``group``, and join the relevant ones on the same line using ``inline``. We supply tooltips to document the limits of certain fields.
 
 
 
