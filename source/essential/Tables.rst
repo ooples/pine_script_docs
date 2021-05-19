@@ -248,6 +248,8 @@ Our next project is a heatmap, which will indicate the bull/bear relationship of
 
     // ————— Function returning `_color` with `_transp` transparency.
     f_colorNew(_color, _transp) =>
+        // color _color : base color to derive a new transparency from. Its current transparency is ignored.
+        // float _transp: 0-100 transparency of `_color` to return.
         _r = color.r(_color)
         _g = color.g(_color)
         _b = color.b(_color)
@@ -255,6 +257,9 @@ Our next project is a heatmap, which will indicate the bull/bear relationship of
 
     // ————— Function draws a heatmap showing the position of the current `_src` relative to its past `_lookBack` values.
     f_drawHeatmap(_src, _lookBack) =>
+        // float _src     : evaluated price series.
+        // int   _lookBack: number of past bars evaluated.
+
         // Force historical buffer to a sufficient size.
         max_bars_back(_src, MAX_LOOKBACK)
         // Only run table code on last bar.
