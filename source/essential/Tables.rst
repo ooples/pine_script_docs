@@ -162,8 +162,11 @@ Creating a display panel
 
 Tables are ideal to create sophisticated display panels. Not only do they make it possible for display panels to always be visible in a constant position, they provide more flexible formatting because each cell's properties are controlled separately: background, text color, size and alignment, etc.
 
-Here, we create a display panel showing a user-selected quantity of MAs. We display their period in the first column, then their value with a green/red/gray background depending on price's position with regards to each MA::
+Here, we create a display panel showing a user-selected quantity of MAs. We display their period in the first column, then their value with a green/red/gray background depending on price's position with regards to each MA.
 
+.. image:: images/Tables-DisplayPanel-1.png
+
+::
     //@version=4
     study("Display panel", "", true)
 
@@ -222,7 +225,6 @@ Note that:
 - The lines creating the table are actually quite few, in the last part of the script. Most of the other lines are to manage inputs and formats.
 - TODO: FIX THIS Even though we populate the table cells on the last bar only, we need to execute the calls to `sma() <https://www.tradingview.com/pine-script-reference/v4/#fun_sma>`__ on every bar so they produce the proper results. While we can calculate the value of `sma() <https://www.tradingview.com/pine-script-reference/v4/#fun_sma>`__ calls using different ``length`` values in a `for <https://www.tradingview.com/pine-script-reference/v4/#op_for>`__ loop, we could not refer to historical values of each call from within the loop. We could not, for example, detect if each instance of an `sma() <https://www.tradingview.com/pine-script-reference/v4/#fun_sma>`__ call was rising or falling, because that would require comparison with the 
 
-.. image:: images/Tables-DisplayPanel-1.png
 
 
 Displaying a heatmap
