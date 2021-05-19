@@ -259,7 +259,8 @@ Our next project is a heatmap, which will indicate the bull/bear relationship of
     f_drawHeatmap(_src, _lookBack) =>
         // float _src     : evaluated price series.
         // int   _lookBack: number of past bars evaluated.
-
+        // Dependency: MAX_LOOKBACK
+        
         // Force historical buffer to a sufficient size.
         max_bars_back(_src, MAX_LOOKBACK)
         // Only run table code on last bar.
