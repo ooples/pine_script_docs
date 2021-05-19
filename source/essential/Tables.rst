@@ -162,7 +162,7 @@ Creating a display panel
 
 Tables are ideal to create sophisticated display panels. Not only do they make it possible for display panels to always be visible in a constant position, they provide more flexible formatting because each cell's properties are controlled separately: background, text color, size and alignment, etc.
 
-Here, we create a display panel showing a user-selected quantity of MAs. We display their period in the first column, then their value with a green/red/gray background depending on price's position with regards to each MA.
+Here, we create a basic display panel showing a user-selected quantity of MAs. We display their period in the first column, then their value with a green/red/gray background that varies with price's position with regards to each MA.
 
 .. image:: images/Tables-DisplayPanel-1.png
 
