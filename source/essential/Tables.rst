@@ -228,6 +228,41 @@ Note that:
 Displaying a heatmap
 ^^^^^^^^^^^^^^^^^^^^
 
+Our next project is a heatmap. , so a table containing no text
+
+::
+
+    //@version=4
+    study("Price vs Past", "", true)
+
+    var int MAX_LOOKBACK = 300
+
+    int     i_lookBack  = input(150, minval = 1, maxval = MAX_LOOKBACK, step = 10)
+    color   i_c_Bull    = input(#00FF00ff, "Bull", inline = "11")
+    color   i_c_Bear    = input(#FF0080ff, "Bear", inline = "11")
+
+    // ————— Function returning `_color` with `_transp` transparency.
+    f_colorNew(_color, _transp) =>
+        _r = color.r(_color)
+        _g = color.g(_color)
+        _b = color.b(_color)
+        color _return = color.rgb(_r, _g, _b, _transp)
+
+    // ————— Function draws a heatmap showing the position of the current `_src` relative to its past `_lookBack` values.
+    f_drawHeatmap(_src, _lookBack) =>
+        // Force historical buffer to a sufficient size.
+        max_bars_back(_src, MAX_LOOKBACK)
+        // Only run table code on last bar.
+        if barstate.islast
+            var t_heatmap = table.new(position.bottom_center, _lookBack, 1)
+            for _i = 1 to i_lookBack
+                float _transp = 100. * _i / _lookBack
+                if _src > _src[_i]
+                    table.cell(t_heatmap, _lookBack - _i, 0, bgcolor = f_colorNew(i_c_Bull, _transp))
+                else
+                    table.cell(t_heatmap, _lookBack - _i, 0, bgcolor = f_colorNew(i_c_Bear, _transp))
+
+    f_drawHeatmap(high, i_lookBack)
 
 
 
