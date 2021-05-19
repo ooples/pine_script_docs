@@ -454,13 +454,13 @@ June 2019
 * ``max_bars_back`` function to control series variables internal history buffer sizes
 * Pine Script documentation versioning
 
-April 2018
+October 2018
 --------------------------
 * To increase the number of indicators available to the whole community, Invite-Only scripts can now be published by Premium users only.
 
 April 2018
 --------------------------
-* Improved the Strategy Tester by reworking the Maximum Drawdawn calculation formula.
+* Improved the Strategy Tester by reworking the Maximum Drawdown calculation formula.
 
 August 2017
 --------------------------
@@ -478,13 +478,13 @@ April 2017
 --------------------------
 * Expanded the keyword argument functionality: it is now possible to use keyword arguments in all built-in functions.
 * A new ``barstate.isconfirmed`` variable has been added to the list of variables that return bar status. It lets you create indicators that are calculated based on the closed bars only.
-* The ``options`` argument for the ``input`` function creates an input with a set of options defined by the script's author.
+* The ``options`` argument for the ``input()`` function creates an input with a set of options defined by the script's author.
 
 March 2017
 --------------------------
 * Pine Script v3 is here! Some important changes:
   
-  * Changes to the default behavior of the ``security`` function: it can no longer access the future data by default. This can be changes with the ``lookahead`` parameter.
+  * Changes to the default behavior of the ``security()`` function: it can no longer access the future data by default. This can be changes with the ``lookahead`` parameter.
   * An implicit conversion of boolean values to numeric values was replaced with an implicit conversion of numeric values (integer and float) to boolean values.
   * Self-referenced and forward-referenced variables were removed. Any PineScript code that used those language constructions can be equivalently rewritten using mutable variables.
 
@@ -493,16 +493,16 @@ February 2017
 --------------------------
 * Several improvements to the strategy tester and the strategy report:
 
-  * New Buy & Hold equity graph – a new graph that lets you compare performance of your strategy versus a "buy and hold, i.e if you just bought a security and held onto it without trading.
+  * New Buy & Hold equity graph – a new graph that lets you compare performance of your strategy versus a "buy and hold", i.e if you just bought a security and held onto it without trading.
   * Added percentage values to the absolute currency values.
   * Added Buy & Hold Return to display the final value of Buy & Hold Equity based on last price.
-  * Added Sharpe Ratio – it shows relative effectiveness of the investment portfolio (security), a measure that indicates the average return minus the risk-free return divided by the standard deviation of return on an investment.
-  * Slippage lets you simulate a situation when orders are filled at a worse price than expected. It can be set through the Properties dialog or through the slippage argument in the ``strategy`` function.
+  * Added Sharpe Ratio – it shows the relative effectiveness of the investment portfolio (security), a measure that indicates the average return minus the risk-free return divided by the standard deviation of return on an investment.
+  * Slippage lets you simulate a situation when orders are filled at a worse price than expected. It can be set through the Properties dialog or through the slippage argument in the ``strategy()`` function.
   * Commission allows yot to add commission for placed orders in percent of order value, fixed price or per contract. The amount of commission paid is shown in the Commission Paid field. The commission size and its type can be set through the Properties dialog or through the commission_type and commission_value arguments in the ``strategy()`` function.
 
 December 2016
 --------------------------
-* Added invite-only scripts. The invite-only indicators are visible in the Public Library, but nobody can use it on a chart without explicit permission from the author, and only the author can see the source code.
+* Added invite-only scripts. The invite-only indicators are visible in the Public Library, but nobody can use them without explicit permission from the author, and only the author can see the source code.
 
 October 2016
 --------------------------
@@ -514,52 +514,52 @@ September 2016
 
 July 2016
 --------------------------
-* Improved the behavior of the ``fill`` function: one call can now support several different colors.
+* Improved the behavior of the ``fill()`` function: one call can now support several different colors.
 
 March 2016
 --------------------------
-* Color type variables now have an additional parameter to set default transparency. The transparency can be set with the ``color.new`` function, or by adding an alpha-channel value to a hex color code.
+* Color type variables now have an additional parameter to set default transparency. The transparency can be set with the ``color.new()`` function, or by adding an alpha-channel value to a hex color code.
 
 February 2016
 --------------------------
-* Added support for ``for``-loops and keywords ``break`` and ``continue``.
+* Added ``for`` loops and keywords ``break`` and ``continue``.
 * Pine now supports mutable variables! Use the ``:=`` operator to assign a new value to a variable that has already been defined.
 * Multiple improvements and bug fixes for strategies.
 
 January 2016
 --------------------------
-* A new ``alertcondition`` function allows for creating custom alert conditions in Pine-based indicators.
+* A new ``alertcondition()`` function allows for creating custom alert conditions in Pine-based indicators.
 
 October 2015
 --------------------------
-* Pine has graduated to v2! The new version of Pine Script added support for the if-statements, making it easier to write more readable and concise code.
+* Pine has graduated to v2! The new version of Pine Script added support for ``if`` statements, making it easier to write more readable and concise code.
 
 September 2015
 --------------------------
-* Added the backtesting functionality to Pine Scipt. It is now possible to create trading strategies, i.e. studies that can send, modify and cancel orders to buy or sell. Strategies allow you to perform Backtesting (emulation of strategy trading on historical data) and Forwardtesting (emulation of strategy trading on real-time data) according to your precoded algorithms. Detailed information about the strategy's calculations and the order fills can be seen in the newly added Strategy Tester tab.
+* Added backtesting functionality to Pine. It is now possible to create trading strategies, i.e. scripts that can send, modify and cancel orders to buy or sell. Strategies allow you to perform backtesting (emulation of strategy trading on historical data) and forward testing (emulation of strategy trading on real-time data) according to your algorithms. Detailed information about the strategy's calculations and the order fills can be seen in the newly added Strategy Tester tab.
 
 July 2015
 --------------------------
-* A new ``editable`` parameter allows hiding the plot from the Style menu in the indicator settings so that it is not possible to edit its style. The parameter has been added to all the following functions: all plot-type functions, ``barcolor``, ``bgcolor``, ``hline``, and ``fill``.
+* A new ``editable`` parameter allows hiding the plot from the Style menu in the indicator settings so that it is not possible to edit its style. The parameter has been added to all the following functions: all plot-type functions, ``barcolor()``, ``bgcolor()``, ``hline()``, and ``fill()``.
 
 June 2015
 --------------------------
-* Added two new functions to display custom barsets using PineScipt: ``plotbar`` and ``plotcandle``.
+* Added two new functions to display custom barsets using PineScipt: ``plotbar()`` and ``plotcandle()``.
 
 April 2015
 --------------------------
-* Added two new shapes to the ``plotshape`` function: shape.labelup and shape.labeldown.
+* Added two new shapes to the ``plotshape()`` function: shape.labelup and shape.labeldown.
 * PineScipt Editor has been improved and moved to a new panel at the bottom of the page.
-* Added a new ``step`` argument for the ``input`` function, allowing to specify the step size for the indicator's inputs.
+* Added a new ``step`` argument for the ``input()`` function, allowing to specify the step size for the indicator's inputs.
 
 March 2015
 --------------------------
-* Added support for inputs with the ``source`` type to the ``input`` function, allowing to select the data source for the indicator's calculations from its settings.
+* Added support for inputs with the ``source`` type to the ``input()`` function, allowing to select the data source for the indicator's calculations from its settings.
 
 February 2015
 --------------------------
-* Added a new ``text`` argument to ``plotshape`` and ``plotchar`` functions.
-* Added four new shapes to the ``plotshape`` function: shape.arrowup, shape.arrowdown, shape.square, shape.diamond.
+* Added a new ``text`` argument to ``plotshape()`` and ``plotchar()`` functions.
+* Added four new shapes to the ``plotshape()`` function: shape.arrowup, shape.arrowdown, shape.square, shape.diamond.
 
 August 2014
 --------------------------
@@ -568,7 +568,7 @@ August 2014
 July 2014
 --------------------------
 
-* Added three new plot-type functions, ``plotshape``, ``plotchar``, and ``plotarrow`` for situations when you need to highlight specific bars on a chart without drawing a line.
+* Added three new plotting functions, ``plotshape()``, ``plotchar()``, and ``plotarrow()`` for situations when you need to highlight specific bars on a chart without drawing a line.
 * Integrated QUANDL data into Pine Script. The data can be accessed by passing the QUANDL ticker to the ``security`` function.
 
 June 2014
@@ -579,7 +579,7 @@ June 2014
 April 2014
 --------------------------
 
-* Added Line Breaks and Multi-Line support.
+* Added line wrapping.
 
 February 2014
 --------------------------
@@ -590,12 +590,12 @@ February 2014
 * Implemented the type-casting mechanism, automatically casting constant and simple float and int values to series when it is required.
 * Added several new functions and improved the existing ones: 
 
-  * ``barssince`` and ``valuewhen`` allow you to check conditions on historical data easier.
-  * The new ``barcolor`` function lets you specify a color for a bar based on filling of a certain condition.
-  * Similar to the ``barcolor`` function, the ``bgcolor`` function changes the color of the background.
-  * Reworked the `security` function, further expanding its functionality.
-  * Improved the ``fill`` function, enabling it to be used more than once in one script.
-  * Added the ``round`` function to round and convert float values to integers.
+  * ``barssince()`` and ``valuewhen()`` allow you to check conditions on historical data easier.
+  * The new ``barcolor()`` function lets you specify a color for a bar based on filling of a certain condition.
+  * Similar to the ``barcolor()`` function, the ``bgcolor()`` function changes the color of the background.
+  * Reworked the ``security()`` function, further expanding its functionality.
+  * Improved the ``fill()`` function, enabling it to be used more than once in one script.
+  * Added the ``round()`` function to round and convert float values to integers.
 
 December 2013
 --------------------------
