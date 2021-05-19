@@ -280,6 +280,7 @@ Note that:
 - We offer users the possibility of configuring the bull/bear colors in the inputs and we use ``inline`` to place the color selections on the same line.
 - Inside our function, we enclose our table-creation code in an `if <https://www.tradingview.com/pine-script-reference/v4/#op_if>`__ `barstate.islast <https://www.tradingview.com/pine-script-reference/v4/#var_barstate{dot}islast>`__ construct so that it only runs on the last bar of the chart.
 - Even the initialization of the table is done inside the `if <https://www.tradingview.com/pine-script-reference/v4/#op_if>`__ statement. Because of that and the fact that it uses the `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ keyword, initialization only occurs the first time the script executes on a last bar. Note that this behavior is different from the usual `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ declarations in the script's global scope, where initialization occurs on the first bar of the dataset, at `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__ zero.
+- We do not specify an argument to the ``text`` parameter in our `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__ calls, so an empty string is used.
 - We calculate our transparency in such a way that the intensity of the colors decrease as we go further in history.
 - We use dynamic color generation to create different transparencies of our base colors as needed.
 - Contrary to other objects displayed in Pine scripts, this heatmap's cells are not linked to chart bars. The configured lookback period determines how many table cells the heatmap contains, and the heatmap will not change as the chart is panned horizontally, or scaled.
@@ -290,4 +291,4 @@ Tips
 ----
 
 - When creating tables in strategy scripts, keep in mind that unless the strategy uses ``calc_on_every_tick = true``, table code enclosed in `if <https://www.tradingview.com/pine-script-reference/v4/#op_if>`__ `barstate.islast <https://www.tradingview.com/pine-script-reference/v4/#var_barstate{dot}islast>`__ blocks will not execute, so the table will not show.
-- Keep in mind that successive calls to `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__ overwrite the cell's properties, if ones were previously defined.
+- Keep in mind that successive calls to `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__ overwrite the cell's properties specified by previous `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__ calls. Use the setter functions to modify a cell's properties.
