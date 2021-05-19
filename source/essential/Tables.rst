@@ -231,7 +231,9 @@ Note that:
 Displaying a heatmap
 ^^^^^^^^^^^^^^^^^^^^
 
-Our next project is a heatmap. , so a table containing no text
+Our next project is a heatmap, which will indicate the bull/bear relationship of the current price relative to its past values. To do so, we will use a table positioned at the bottom of the chart. We will display colors only, so our table will contain no text; we will simply color the background of its cells to produce our heatmap. The heatmap uses a user-selectable lookback period. It loops across that period to determine if price is above/below each bar in that past, and displays a progressively lighter intensity of the bull/bear color as we go further in the past:
+
+
 
 ::
 
