@@ -167,6 +167,7 @@ Here, we create a display panel showing a user-selected quantity of MAs. We disp
 .. image:: images/Tables-DisplayPanel-1.png
 
 ::
+
     //@version=4
     study("Display panel", "", true)
 
