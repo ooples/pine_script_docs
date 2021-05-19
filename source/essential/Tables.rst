@@ -259,16 +259,24 @@ Our next project is a heatmap, which will indicate the bull/bear relationship of
         max_bars_back(_src, MAX_LOOKBACK)
         // Only run table code on last bar.
         if barstate.islast
-            var t_heatmap = table.new(position.bottom_center, _lookBack, 1)
+            var _heatmap = table.new(position.bottom_center, _lookBack, 1)
             for _i = 1 to i_lookBack
                 float _transp = 100. * _i / _lookBack
                 if _src > _src[_i]
-                    table.cell(t_heatmap, _lookBack - _i, 0, bgcolor = f_colorNew(i_c_Bull, _transp))
+                    table.cell(_heatmap, _lookBack - _i, 0, bgcolor = f_colorNew(i_c_Bull, _transp))
                 else
-                    table.cell(t_heatmap, _lookBack - _i, 0, bgcolor = f_colorNew(i_c_Bear, _transp))
+                    table.cell(_heatmap, _lookBack - _i, 0, bgcolor = f_colorNew(i_c_Bear, _transp))
 
     f_drawHeatmap(high, i_lookBack)
 
+Note that:
+
+- We define a maximum lookback period as a constant. This is an important value and we use it for two purposes: to specify the number of columns we will create in our one-row table, and to specify the lookback period required for the ``_src`` argument in our function, so that we force Pine to create a historical buffer size that will allow us to refer to the required quantity of past values of ``_src`` in our `for <https://www.tradingview.com/pine-script-reference/v4/#op_for>`__ loop.
+- We offer users the possibility of configuring the bull/bear colors in the inputs and we use ``inline`` to place the color selections on the same line.
+- Inside our function, we enclose our table-creation code in an `if <https://www.tradingview.com/pine-script-reference/v4/#op_if>`__ `barstate.islast <https://www.tradingview.com/pine-script-reference/v4/#var_barstate{dot}islast>`__ construct so that it only runs on the last bar of the chart.
+- Even the initialization of the table is done inside the `if <https://www.tradingview.com/pine-script-reference/v4/#op_if>`__ statement. Because of that and the fact that it uses the `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ keyword, initialization only occurs the first time the script executes on a last bar. Note that this behavior is different from the usual one of `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ declaration in the script's global scope, where initialization then occurs on the first bar of the dataset, at `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__ zero.
+- We calculate our transparency in such a way that the intensity of the colors decrease as we go further in history.
+- We use dynamic color generation to create different transparencies of our base colors as needed.
 
 
 Tips
