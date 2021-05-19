@@ -212,8 +212,10 @@ Here, we create a basic display panel showing a user-selected quantity of MAs va
 Note that:
 
 - Users can select the table's position from the inputs, as well as the bull/bear/neutral colors to be used for the background of the right column's cells.
-- Even though we populate the table cells on the last bar only, we need to execute the calls to `sma() <https://www.tradingview.com/pine-script-reference/v4/#fun_sma>`__ on every bar so they produce the correct results.
-- We separate our inputs in two sections using ``group``, and join the relevant ones on the same line using ``inline``. We supply tooltips to document the limits of certain fields.
+- The table's quantity of rows is determined using the number of MAs the user chooses to display. We add one row for the column headers.
+- Even though we populate the table cells on the last bar only, we need to execute the calls to `sma() <https://www.tradingview.com/pine-script-reference/v4/#fun_sma>`__ on every bar so they produce the correct results. The compiler warning that appears when you compile the code can be safely ignored.
+- We separate our inputs in two sections using ``group``, and join the relevant ones on the same line using ``inline``. We supply tooltips to document the limits of certain fields using ``tooltip``.
+
 
 
 
