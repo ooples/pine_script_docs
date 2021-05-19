@@ -182,18 +182,6 @@ Here, we create a display panel showing a user-selected quantity of MAs. We disp
     color   i_c_bear    = input(color.red, "Bear", inline = "1", group = GP1)
     color   i_c_neutral = input(color.gray, "Neutral", inline = "1", group = GP1)
 
-    // ————— Function returns the table position from user selection.
-    f_tablePos(_tableXpos, _tableYpos) =>
-        _tableYpos   == "top"    and _tableXpos == "left"   ? position.top_left       :
-          _tableYpos == "top"    and _tableXpos == "center" ? position.top_center     :
-          _tableYpos == "top"    and _tableXpos == "right"  ? position.top_right      :
-          _tableYpos == "middle" and _tableXpos == "left"   ? position.middle_left    :
-          _tableYpos == "middle" and _tableXpos == "center" ? position.middle_center  :
-          _tableYpos == "middle" and _tableXpos == "right"  ? position.middle_right   :
-          _tableYpos == "bottom" and _tableXpos == "left"   ? position.bottom_left    :
-          _tableYpos == "bottom" and _tableXpos == "center" ? position.bottom_center  :
-          _tableYpos == "bottom" and _tableXpos == "right"  ? position.bottom_right   : na
-
     // ————— Produces a string format usable with `tostring()` to restrict precision to ticks.
     f_tickFormat() =>
         _s = tostring(syminfo.mintick)
@@ -201,12 +189,25 @@ Here, we create a display panel showing a user-selected quantity of MAs. We disp
         _s := str.replace_all(_s, "5",  "0")
         _s := str.replace_all(_s, "1",  "0")
 
-    var table panel = table.new(f_tablePos(i_tableXpos, i_tableYpos), 2, i_masQty + 1, bgcolor = color.silver)
+    // ————— Function returning `_color` with `_transp` transparency.
+    f_colorNew(_color, _transp) =>
+        var _r = color.r(_color)
+        var _g = color.g(_color)
+        var _b = color.b(_color)
+        color _return = color.rgb(_r, _g, _b, _transp)
+
+    var table panel = table.new(i_tableYpos + "_" + i_tableXpos, 2, i_masQty + 1, bgcolor = color.silver)
+    var color _c_bullBg    = f_colorNew(i_c_bull, 70)
+    var color _c_bearBg    = f_colorNew(i_c_bear, 70)
+    var color _c_neutralBg = f_colorNew(i_c_neutral, 70)
 
     int _line = 1
     int _period = i_masPeriod
     for _i = 1 to i_masQty
         _ma = sma(close, _period)
+        _maPrevious = sma(close[1], _period)
+        _maUp = _ma > _maPrevious
+        _maDn = _ma < _maPrevious
         if barstate.islast
             // Table header.
             table.cell(panel, 0, 0, "MA")
@@ -214,11 +215,14 @@ Here, we create a display panel showing a user-selected quantity of MAs. We disp
             // Period in left column.
             table.cell(panel, 0, _line, tostring(_period))
             // If MA is between the open and close, use neutral color. If close is lower/higher than MA, use bull/bear color.
-            _c_bg = close > _ma ? open < _ma ? i_c_neutral : i_c_bull : open > _ma ? i_c_neutral : i_c_bear
+            _c_bg = close > _ma ? open < _ma ? _c_neutralBg : _c_bullBg : open > _ma ? _c_neutralBg : _c_bearBg
+            _c_text = _maUp ? i_c_bull : _maDn ? i_c_bear : i_c_neutral
             // MA value in right column.
-            table.cell(panel, 1, _line, tostring(_ma, f_tickFormat()), bgcolor = _c_bg)
+            table.cell(panel, 1, _line, tostring(_ma, f_tickFormat()), text_color = _c_text, bgcolor = _c_bg)
+            // table.cell(panel, 1, _line, tostring(_ma, f_tickFormat()), bgcolor = _c_bg)
         _line += 1
         _period += i_masStep
+
 
 Note that:
 
