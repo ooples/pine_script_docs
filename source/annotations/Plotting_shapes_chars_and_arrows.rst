@@ -124,6 +124,7 @@ color can be defined using the ``color`` parameter and
 expressions which will calculate the shape's color
 depending on conditions at runtime. For example::
 
+    //@version=4
     study('plotshape example 3', overlay=true)
     data = close >= open
     plotshape(true, style=shape.flag, color=data ? color.green : color.red)
