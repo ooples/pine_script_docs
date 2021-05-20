@@ -11,7 +11,7 @@ Introduction
 
 Script visuals can play a critical role in the usability of the indicators we write in Pine. Well-designed plots and drawings make indicators easier to use and understand. Good visual designs establish a visual hierarchy that allows the more important information to stand out and the less important one to not get in the way.
 
-In customary Pine fashion, using colors can be as simple or as involved as your script requirements require, or as your programming skills allow you to master. Colors can be applied to:
+Using colors can be as simple or as involved as your script requirements require, or as your programming skills allow permit. In Pine, colors can be applied to:
 
 - Any element you can plot or draw in an indicator's visual space, be it lines, text or candles.
 - The background of a script's visual space, whether the script is running in its own pane, or in overlay mode on the chart.
