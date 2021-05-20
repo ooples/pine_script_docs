@@ -190,18 +190,20 @@ Here, we create a basic display panel showing a user-selected quantity of MAs va
         _s := str.replace_all(_s, "5",  "0")
         _s := str.replace_all(_s, "1",  "0")
 
-    var table panel = table.new(i_tableYpos + "_" + i_tableXpos, 2, i_masQty + 1, bgcolor = color.silver)
+    var table panel = table.new(i_tableYpos + "_" + i_tableXpos, 2, i_masQty + 1)
+    if barstate.islast
+        // Table header.
+        table.cell(panel, 0, 0, "MA", bgcolor = i_c_neutral)
+        table.cell(panel, 1, 0, "Value", bgcolor = i_c_neutral)
+
     int period = i_masStart
     for _i = 1 to i_masQty
         // ————— Call MAs on each bar.
         float _ma = sma(close, period)
         // ————— Only execute table code on last bar.
         if barstate.islast
-            // Table header.
-            table.cell(panel, 0, 0, "MA")
-            table.cell(panel, 1, 0, "Value")
             // Period in left column.
-            table.cell(panel, 0, _i, tostring(period))
+            table.cell(panel, 0, _i, tostring(period), bgcolor = i_c_neutral)
             // If MA is between the open and close, use neutral color. If close is lower/higher than MA, use bull/bear color.
             _c_bg = close > _ma ? open < _ma ? i_c_neutral : i_c_bull : open > _ma ? i_c_neutral : i_c_bear
             // MA value in right column.
