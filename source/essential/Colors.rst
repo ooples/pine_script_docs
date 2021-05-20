@@ -25,7 +25,7 @@ Pine has built-in colors such as `color.green <https://www.tradingview.com/pine-
 Transparency
 ------------
 
-Each color in Pine is defined by its red, green and blue components, following the [RGB color space](https://en.wikipedia.org/wiki/RGB_color_space) model.
+Each color in Pine is defined by its red, green and blue components, following the `RGB color space <https://www.tradingview.com/pine-script-reference/v4/#var_color{dot}green>`__ model.
 
 
 Literal colors
