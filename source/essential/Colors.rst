@@ -23,11 +23,41 @@ Pine has built-in colors such as `color.green <https://www.tradingview.com/pine-
 
 
 Transparency
-------------
+^^^^^^^^^^^^
 
-Each color in Pine is defined by its red, green and blue components, following the `RGB color space <https://en.wikipedia.org/wiki/RGB_color_space>`__ model.
+Each color in Pine is defined by four components:
+- Its red, green and blue components, following the `RGB color model <https://en.wikipedia.org/wiki/RGB_color_space>`__.
+- Its transparency (often referred to as the Alpha channel outside Pine), as defined in the `RGBA color model <https://en.wikipedia.org/wiki/RGB_color_space>`__.
+
+The transparency of a color defines how opaque it is: zero is fully opaque, 100 makes the color—whichever it is—invisible.
+
+Controlling transparency can be crucial in more involved color visuals, to control which colors dominate the others.
 
 
-Literal colors
---------------
+Z-order
+^^^^^^^
+
+
+Planning color selection by script users
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+Using literal colors
+--------------------
+
+
+
+Using dynamic colors
+--------------------
+
+
+Building gradients
+------------------
+
+
+Color selection in script inputs
+--------------------------------
+
+
+
 
