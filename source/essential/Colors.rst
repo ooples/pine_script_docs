@@ -30,9 +30,7 @@ Each color in Pine is defined by four values:
 - Its red, green and blue components (0-255), following the `RGB color model <https://en.wikipedia.org/wiki/RGB_color_space>`__.
 - Its transparency (0-100), often referred to as the Alpha channel outside Pine, as defined in the `RGBA color model <https://en.wikipedia.org/wiki/RGB_color_space>`__.
 
-The transparency of a color defines how opaque it is: zero is fully opaque, 100 makes the color—whichever it is—invisible.
-
-Controlling transparency can be crucial in more involved color visuals, to control which colors dominate the others.
+The transparency of a color defines how opaque it is: zero is fully opaque, 100 makes the color—whichever it is—invisible. Controlling transparency can be crucial in more involved color visuals, to control which colors dominate the others, for example.
 
 
 Z-order
