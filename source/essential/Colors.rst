@@ -26,6 +26,7 @@ Transparency
 ^^^^^^^^^^^^
 
 Each color in Pine is defined by four components:
+
 - Its red, green and blue components, following the `RGB color model <https://en.wikipedia.org/wiki/RGB_color_space>`__.
 - Its transparency (often referred to as the Alpha channel outside Pine), as defined in the `RGBA color model <https://en.wikipedia.org/wiki/RGB_color_space>`__.
 
