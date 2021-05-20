@@ -19,7 +19,7 @@ In customary Pine fashion, using colors can be as simple or as involved as your 
 
 A script can only color the elements it places in its own visual space. The only exception to this rule is that a pane indicator can color chart bars or candles.
 
-Pine has built-in colors such as `color.green <https://www.tradingview.com/pine-script-reference/v4/#var_color{dot}green>`__, as well as functions like `color.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_color{dot}new>`__ which allow you to generate any color in the RGBA color space.
+Pine has built-in colors such as `color.green <https://www.tradingview.com/pine-script-reference/v4/#var_color{dot}green>`__, as well as functions like `color.rgb() <https://www.tradingview.com/pine-script-reference/v4/#fun_color{dot}rgb>`__ which allow you to generate any color in the RGBA color space.
 
 
 Literal colors
