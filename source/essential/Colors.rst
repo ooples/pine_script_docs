@@ -25,10 +25,10 @@ Pine has built-in colors such as `color.green <https://www.tradingview.com/pine-
 Transparency
 ^^^^^^^^^^^^
 
-Each color in Pine is defined by four components:
+Each color in Pine is defined by four values:
 
-- Its red, green and blue components, following the `RGB color model <https://en.wikipedia.org/wiki/RGB_color_space>`__.
-- Its transparency (often referred to as the Alpha channel outside Pine), as defined in the `RGBA color model <https://en.wikipedia.org/wiki/RGB_color_space>`__.
+- Its red, green and blue components (0-255), following the `RGB color model <https://en.wikipedia.org/wiki/RGB_color_space>`__.
+- Its transparency (0-100), often referred to as the Alpha channel outside Pine, as defined in the `RGBA color model <https://en.wikipedia.org/wiki/RGB_color_space>`__.
 
 The transparency of a color defines how opaque it is: zero is fully opaque, 100 makes the color—whichever it is—invisible.
 
