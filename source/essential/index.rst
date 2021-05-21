@@ -15,3 +15,4 @@ Essential features
    Non-standard_chart_types_data
    Sessions_and_time_functions
    Strategies
+   Tables
