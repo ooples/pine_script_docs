@@ -179,9 +179,9 @@ Here, we create a basic display panel showing a user-selected quantity of MAs va
     var string GP2 = "Display"
     string  i_tableYpos = input("top", "Panel position", inline = "11", options = ["top", "middle", "bottom"], group = GP2)
     string  i_tableXpos = input("right", "", inline = "11", options = ["left", "center", "right"], group = GP2)
-    color   i_c_bull    = input(color.new(color.green, 80), "Bull", inline = "12", group = GP2)
-    color   i_c_bear    = input(color.new(color.red, 80), "Bear", inline = "12", group = GP2)
-    color   i_c_neutral = input(color.new(color.gray, 80), "Neutral", inline = "12", group = GP2)
+    color   i_c_bull    = input(color.new(color.green, 30), "Bull", inline = "12", group = GP2)
+    color   i_c_bear    = input(color.new(color.red, 30), "Bear", inline = "12", group = GP2)
+    color   i_c_neutral = input(color.new(color.gray, 30), "Neutral", inline = "12", group = GP2)
 
     // ————— Produces a string format usable with `tostring()` to restrict precision to ticks.
     f_tickFormat() =>
@@ -207,7 +207,7 @@ Here, we create a basic display panel showing a user-selected quantity of MAs va
             // If MA is between the open and close, use neutral color. If close is lower/higher than MA, use bull/bear color.
             _c_bg = close > _ma ? open < _ma ? i_c_neutral : i_c_bull : open > _ma ? i_c_neutral : i_c_bear
             // MA value in right column.
-            table.cell(panel, 1, _i, tostring(_ma, f_tickFormat()), bgcolor = _c_bg)
+            table.cell(panel, 1, _i, tostring(_ma, f_tickFormat()), text_color = color.black, bgcolor = _c_bg)
         period += i_masStep
 
 
