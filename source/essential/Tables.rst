@@ -162,7 +162,7 @@ Creating a display panel
 
 Tables are ideal to create sophisticated display panels. Not only do they make it possible for display panels to always be visible in a constant position, they provide more flexible formatting because each cell's properties are controlled separately: background, text color, size and alignment, etc.
 
-Here, we create a basic display panel showing a user-selected quantity of MAs values. We display their period in the first column, then their value with a green/red/gray background that varies with price's position with regards to each MA. When price is above/below the MA, the cell's background colored with the bull/bear color. When the MA falls between the current bar's `open <https://www.tradingview.com/pine-script-reference/v4/#var_open>`__ and `close <https://www.tradingview.com/pine-script-reference/v4/#var_close>`__, the cell's background is of the neutral color.
+Here, we create a basic display panel showing a user-selected quantity of MAs values. We display their period in the first column, then their value with a green/red/gray background that varies with price's position with regards to each MA. When price is above/below the MA, the cell's background is colored with the bull/bear color. When the MA falls between the current bar's `open <https://www.tradingview.com/pine-script-reference/v4/#var_open>`__ and `close <https://www.tradingview.com/pine-script-reference/v4/#var_close>`__, the cell's background is of the neutral color.
 
 .. image:: images/Tables-DisplayPanel-1.png
 
