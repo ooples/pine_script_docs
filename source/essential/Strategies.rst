@@ -550,5 +550,13 @@ Leverage
 --------
 
 When you open any position, the margin required to maintain the position will be calculated. If there are not enough funds, then a margin call occurs - the forced closure of part or all of the positions by a market order so that there is again enough funds to maintain the positions.
-It is calculated by the formula: margin = MVS * margin_percent, where margin is cash collateral for opening a position, in %, and MVS is the current market value of the security. MVS is calculated according to the following formula: MVS = last_price * point_value * contracts. margin_percent is a parameter that can be set in the strategy settings.
+
+It is calculated by the formula: 
+
+margin = MVS * margin_percent, where margin is cash collateral for opening a position, in %, and MVS is the current market value of the security. 
+
+MVS is calculated according to the following formula: MVS = last_price * point_value * contracts. 
+
+margin_percent is a parameter that can be set in the strategy settings.
+
 If margin == strategy.equity, then we can no longer open new positions. If margin > strategy.equity, then the margin call occurs, forcibly closing part or all of the positions until the margin < strategy.equity condition is met.
