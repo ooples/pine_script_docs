@@ -8,6 +8,8 @@ This page contains release notes of notable changes in Pine Script v4.
 
 May 2021
 --------------------------
+Improved backtesting functionality by adding the Leverage mechanism
+
 New functions were added:
 
 * ``color.rgb(red, green, blue, transp)`` - creates a new color with transparency using the RGB color model.
