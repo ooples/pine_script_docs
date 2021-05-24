@@ -8,7 +8,7 @@ This page contains release notes of notable changes in Pine Script v4.
 
 May 2021
 --------------------------
-Improved backtesting functionality by adding the Leverage mechanism
+Improved backtesting functionality by adding the Leverage mechanism.
 
 New functions were added:
 
