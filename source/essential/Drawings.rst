@@ -706,6 +706,8 @@ Additional securities
 
 Pine code sometimes uses additional symbols and/or timeframes with the :doc:`security <Context_switching_the_security_function>` function. Drawing functions can only be used in the main symbol's context.
 
+.. _max-bars-back-of-time:
+
 max_bars_back of time
 ^^^^^^^^^^^^^^^^^^^^^
 
