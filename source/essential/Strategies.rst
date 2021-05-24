@@ -545,3 +545,7 @@ chart, then the cross rate on Thursday's session close will always be
 used to calculate the profits.
 
 In real-time, yesterday's session close rate is used.
+
+Leverage
+--------
+
