@@ -4,11 +4,13 @@ Release notes
 .. contents:: :local:
     :depth: 2
 
-This page contains release notes of notable changes in Pine Script v4.
+This page contains release notes of notable changes in Pine Script.
 
 May 2021
 --------------------------
 Improved backtesting functionality by adding the Leverage mechanism.
+
+Added support for table drawings and functions for working with them. Tables are unique objects that are not anchored to specific bars; they float in a script’s space, independently of the chart bars being viewed or the zoom factor used. For more information, see our `User Manual page on tables <https://www.tradingview.com/pine-script-docs/en/v4/essential/Tables.html>`__.
 
 New functions were added:
 
