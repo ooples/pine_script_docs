@@ -135,7 +135,7 @@ Coloring the chart's background
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This example uses a one-cell table to color the chart's background on the bull/bear state of RSI::
-:linenos:
+
     //@version=4
     study("Chart background", "", true)
     i_c_bull = input(color.new(color.green, 95), "Bull", inline = "1")
