@@ -95,7 +95,7 @@ Note that:
 - We use the `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ keyword when creating the table with 
   `table.new() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}new>`__.
 - We populate the cell inside an `if <https://www.tradingview.com/pine-script-reference/v4/#op_if>`__ `barstate.islast <https://www.tradingview.com/pine-script-reference/v4/#var_barstate{dot}islast>`__ block using `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__.
-- When populating the cell, we do not specify use the ``width`` or ``height``. The width and height of our cell will thus adjust automatically to the text it contains.
+- When populating the cell, we do not specify the ``width`` or ``height``. The width and height of our cell will thus adjust automatically to the text it contains.
 - We call ``atr(14)`` prior to entry in our `if <https://www.tradingview.com/pine-script-reference/v4/#op_if>`__ block so that it evaluates on each bar. 
   Had we used ``tostring(atr(14))`` inside the `if <https://www.tradingview.com/pine-script-reference/v4/#op_if>`__ block, 
   the function would not have evaluated correctly because it would be called on the dataset's last bar without having calculated the necessary values from the previous bars.
@@ -162,7 +162,7 @@ Creating a display panel
 
 Tables are ideal to create sophisticated display panels. Not only do they make it possible for display panels to always be visible in a constant position, they provide more flexible formatting because each cell's properties are controlled separately: background, text color, size and alignment, etc.
 
-Here, we create a basic display panel showing a user-selected quantity of MAs values. We display their period in the first column, then their value with a green/red/gray background that varies with price's position with regards to each MA. When price is above/below the MA, the cell's background colored with the bull/bear color. When the MA falls between the current bar's `open <https://www.tradingview.com/pine-script-reference/v4/#var_open>`__ and `close <https://www.tradingview.com/pine-script-reference/v4/#var_close>`__, the cell's background is of the neutral color.
+Here, we create a basic display panel showing a user-selected quantity of MAs values. We display their period in the first column, then their value with a green/red/gray background that varies with price's position with regards to each MA. When price is above/below the MA, the cell's background is colored with the bull/bear color. When the MA falls between the current bar's `open <https://www.tradingview.com/pine-script-reference/v4/#var_open>`__ and `close <https://www.tradingview.com/pine-script-reference/v4/#var_close>`__, the cell's background is of the neutral color.
 
 .. image:: images/Tables-DisplayPanel-1.png
 
@@ -179,9 +179,9 @@ Here, we create a basic display panel showing a user-selected quantity of MAs va
     var string GP2 = "Display"
     string  i_tableYpos = input("top", "Panel position", inline = "11", options = ["top", "middle", "bottom"], group = GP2)
     string  i_tableXpos = input("right", "", inline = "11", options = ["left", "center", "right"], group = GP2)
-    color   i_c_bull    = input(color.new(color.green, 80), "Bull", inline = "12", group = GP2)
-    color   i_c_bear    = input(color.new(color.red, 80), "Bear", inline = "12", group = GP2)
-    color   i_c_neutral = input(color.new(color.gray, 80), "Neutral", inline = "12", group = GP2)
+    color   i_c_bull    = input(color.new(color.green, 30), "Bull", inline = "12", group = GP2)
+    color   i_c_bear    = input(color.new(color.red, 30), "Bear", inline = "12", group = GP2)
+    color   i_c_neutral = input(color.new(color.gray, 30), "Neutral", inline = "12", group = GP2)
 
     // ————— Produces a string format usable with `tostring()` to restrict precision to ticks.
     f_tickFormat() =>
@@ -207,7 +207,7 @@ Here, we create a basic display panel showing a user-selected quantity of MAs va
             // If MA is between the open and close, use neutral color. If close is lower/higher than MA, use bull/bear color.
             _c_bg = close > _ma ? open < _ma ? i_c_neutral : i_c_bull : open > _ma ? i_c_neutral : i_c_bear
             // MA value in right column.
-            table.cell(panel, 1, _i, tostring(_ma, f_tickFormat()), bgcolor = _c_bg)
+            table.cell(panel, 1, _i, tostring(_ma, f_tickFormat()), text_color = color.black, bgcolor = _c_bg)
         period += i_masStep
 
 
@@ -275,7 +275,7 @@ Note that:
 - Inside our function, we enclose our table-creation code in an `if <https://www.tradingview.com/pine-script-reference/v4/#op_if>`__ `barstate.islast <https://www.tradingview.com/pine-script-reference/v4/#var_barstate{dot}islast>`__ construct so that it only runs on the last bar of the chart.
 - The initialization of the table is done inside the `if <https://www.tradingview.com/pine-script-reference/v4/#op_if>`__ statement. Because of that, and the fact that it uses the `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ keyword, initialization only occurs the first time the script executes on a last bar. Note that this behavior is different from the usual `var <https://www.tradingview.com/pine-script-reference/v4/#op_var>`__ declarations in the script's global scope, where initialization occurs on the first bar of the dataset, at `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__ zero.
 - We do not specify an argument to the ``text`` parameter in our `table.cell() <https://www.tradingview.com/pine-script-reference/v4/#fun_table{dot}cell>`__ calls, so an empty string is used.
-- We calculate our transparency in such a way that the intensity of the colors decrease as we go further in history.
+- We calculate our transparency in such a way that the intensity of the colors decreases as we go further in history.
 - We use dynamic color generation to create different transparencies of our base colors as needed.
 - Contrary to other objects displayed in Pine scripts, this heatmap's cells are not linked to chart bars. The configured lookback period determines how many table cells the heatmap contains, and the heatmap will not change as the chart is panned horizontally, or scaled.
 - The maximum number of cells that can be displayed in the scritp's visual space will depend on your viewing device's resolution and the portion of the display used by your chart. Higher resolution screens and wider windows will allow more table cells to be displayed.
