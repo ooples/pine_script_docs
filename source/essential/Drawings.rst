@@ -5,8 +5,8 @@ Drawings
     :depth: 2
 
 Starting with Pine v4, indicators and strategies can
-create *drawing objects* on the chart. Two types of
-drawings are currently supported: *label* and *line*.
+create *drawing objects* on the chart. Three types of
+drawings are currently supported: *label*, *line*, and *boxes*.
 You will find one instance of each on the following chart:
 
 .. image:: images/label_and_line_drawings.png
@@ -16,7 +16,7 @@ You will find one instance of each on the following chart:
   drawing objects created with Pine code, they are essentially different entities.
   Drawing objects created using Pine code cannot be modified with mouse actions.
 
-The new line and label drawings in Pine v4 allow you to create indicators with more sophisticated
+The line, label, and box drawings in Pine v4 allow you to create indicators with more sophisticated
 visual components, e.g., pivot points, support/resistance levels,
 zig zag lines, labels containing dynamic text, etc.
 
@@ -26,8 +26,7 @@ drawing objects can be created on historical bars as well as in the future, wher
 Creating drawings
 -----------------
 
-Pine drawing objects are created with the `label.new <https://www.tradingview.com/pine-script-reference/v4/#fun_label{dot}new>`__
-and `line.new <https://www.tradingview.com/pine-script-reference/v4/#fun_line{dot}new>`__ functions.
+Pine drawing objects are created with the `label.new <https://www.tradingview.com/pine-script-reference/v4/#fun_label{dot}new>`_ , `line.new <https://www.tradingview.com/pine-script-reference/v4/#fun_line{dot}new>`__ and `box.new <https://www.tradingview.com/pine-script-reference/v4/#fun_box{dot}new>`__ functions.
 While each function has many parameters, only the coordinates are mandatory.
 This is an example of code used to create a label on every bar::
 
@@ -63,6 +62,13 @@ This is an example of code that creates line objects on a chart::
 
 .. image:: images/minimal_line.png
 
+This is an example of code that creates box objects on a chart::
+
+    //@version=4
+    study("My Script", overlay=true)
+    box.new(left=bar_index[1], top=low[1], right=bar_index, bottom=high)
+
+.. image:: images/minimal_box.png
 
 Calculation of drawings on bar updates
 --------------------------------------
@@ -104,10 +110,10 @@ The ``xloc.bar_time`` mode makes it possible to place a drawing object in the fu
 
 .. image:: images/label_in_the_future.png
 
-This code places a label object in the future. X-location logic works identically for both label and line drawings.
+This code places a label object in the future. X-location logic works identically for label, line, and box drawings.
 
-In contrast, y-location logic is different for label and line drawings.
-Pine's *line* drawings always use `yloc.price <https://www.tradingview.com/pine-script-reference/v4/#var_yloc{dot}price>`__,
+In contrast, y-location logic is different for label and line or box drawings.
+Pine's *line* and *box* drawings always use `yloc.price <https://www.tradingview.com/pine-script-reference/v4/#var_yloc{dot}price>`__,
 so their y-coordinate is always treated as an absolute price value.
 
 Label drawings have additional y-location values: `yloc.abovebar <https://www.tradingview.com/pine-script-reference/v4/#var_yloc{dot}abovebar>`__ and
@@ -118,9 +124,9 @@ When they are used, the value of the ``y`` parameter is ignored and the drawing 
 Modifying drawings
 ------------------
 
-A drawing object can be modified after its creation. The ``label.new`` and ``line.new`` functions return
-a reference to the created drawing object (of type *series label* and *series line* respectively).
-This reference can then be used as the first argument to the ``label.set_*`` and ``line.set_*`` functions used to modify drawings.
+A drawing object can be modified after its creation. The ``label.new``, ``line.new``, and ``box.new`` functions return
+a reference to the created drawing object (of type *series label*, *series line* and *series box* respectively).
+This reference can then be used as the first argument to the ``label.set_*``, ``line.set_*``, or ``box.set_*`` functions used to modify drawings.
 For example::
 
     //@version=4
@@ -180,6 +186,24 @@ The available *setter* functions for line drawings are:
     * `line.set_y2 <https://www.tradingview.com/pine-script-reference/v4/#fun_line{dot}set_y2>`__ --- changes y2-coordinate of line
     * `line.set_xy2 <https://www.tradingview.com/pine-script-reference/v4/#fun_line{dot}set_xy2>`__ --- changes both x2 and y2 coordinates of line at once
 
+The available *setter* functions for box drawings are:
+
+    * `box.set_border_color <https://www.tradingview.com/pine-script-reference/v4/#fun_box{dot}set_border_color>`__ --- changes border color of the box
+    * `box.set_bgcolor <https://www.tradingview.com/pine-script-reference/v4/#fun_box{dot}set_bgcolor>`__ --- changes background color of the box
+    * `box.set_extend <https://www.tradingview.com/pine-script-reference/v4/#fun_line{dot}set_extend>`__ --- changes attribute that makes:
+
+      - ``extend.none`` - the horizontal borders start at the left border and end at the right border
+      - ``extend.left``/``extend.right`` - the horizontal borders are extended indefinitely to the left/right of the box
+      - ``extend.both`` - the horizontal borders are extended on both sides
+
+    * `box.set_border_style <https://www.tradingview.com/pine-script-reference/v4/#fun_box{dot}set_border_style>`__ --- changes :ref:`border style of the box <drawings_line_styles>`
+    * `box.set_border_width <https://www.tradingview.com/pine-script-reference/v4/#fun_box{dot}set_border_width>`__ --- changes border width of the box
+    * `box.set_bottom <https://www.tradingview.com/pine-script-reference/v4/#fun_box{dot}set_bottom>`__ --- changes bottom coordinate of the box
+    * `box.set_right <https://www.tradingview.com/pine-script-reference/v4/#fun_box{dot}set_right>`__ --- changes right coordinate of the box
+    * `box.set_rightbottom <https://www.tradingview.com/pine-script-reference/v4/#fun_box{dot}set_rightbottom>`__ --- changes both right and bottom coordinates of the box at once
+    * `box.set_top <https://www.tradingview.com/pine-script-reference/v4/#fun_box{dot}set_top>`__ --- changes top coordinate of the box
+    * `box.set_left <https://www.tradingview.com/pine-script-reference/v4/#fun_box{dot}set_left>`__ --- changes left coordinate of the box
+    * `box.set_lefttop <https://www.tradingview.com/pine-script-reference/v4/#fun_box{dot}set_lefttop>`__ --- changes both left and top coordinates of the box at once
 
 .. _drawings_label_styles:
 
@@ -250,29 +274,28 @@ function:
 
 .. _drawings_line_styles:
 
-Line styles
+Line and box styles
 -----------
 
 Various styles can be applied to lines with either the
-`line.new <https://www.tradingview.com/pine-script-reference/v4/#fun_line{dot}new>`__ or
-`line.set_style <https://www.tradingview.com/pine-script-reference/v4/#fun_line{dot}set_style>`__
+`line.new <https://www.tradingview.com/pine-script-reference/v4/#fun_line{dot}new>`_, `box.new <https://www.tradingview.com/pine-script-reference/v4/#fun_box{dot}new>`_, `line.set_style <https://www.tradingview.com/pine-script-reference/v4/#fun_line{dot}set_style>`__ or `box.set_border_style <https://www.tradingview.com/pine-script-reference/v4/#fun_box{dot}set_border_style>`__
 function:
 
-+--------------------------------+-------------------------------------------------+
-| Line style name                | Line                                            |
-+================================+=================================================+
-| ``line.style_solid``           | |line_style_solid|                              |
-+--------------------------------+-------------------------------------------------+
-| ``line.style_dotted``          | |line_style_dotted|                             |
-+--------------------------------+-------------------------------------------------+
-| ``line.style_dashed``          | |line_style_dashed|                             |
-+--------------------------------+-------------------------------------------------+
-| ``line.style_arrow_left``      | |line_style_arrow_left|                         |
-+--------------------------------+-------------------------------------------------+
-| ``line.style_arrow_right``     | |line_style_arrow_right|                        |
-+--------------------------------+-------------------------------------------------+
-| ``line.style_arrow_both``      | |line_style_arrow_both|                         |
-+--------------------------------+-------------------------------------------------+
++--------------------------------+-------------------------------------------------+-------------------------------------------------+
+| Line style name                | Line                                            | Box                                             |
++================================+=================================================+=================================================+
+| ``line.style_solid``           | |line_style_solid|                              | |box_style_solid|                               |
++--------------------------------+-------------------------------------------------+-------------------------------------------------+
+| ``line.style_dotted``          | |line_style_dotted|                             | |box_style_dotted|                              |
++--------------------------------+-------------------------------------------------+-------------------------------------------------+
+| ``line.style_dashed``          | |line_style_dashed|                             | |box_style_dashed|                              |
++--------------------------------+-------------------------------------------------+-------------------------------------------------+
+| ``line.style_arrow_left``      | |line_style_arrow_left|                         | Not supported                                   |
++--------------------------------+-------------------------------------------------+-------------------------------------------------+
+| ``line.style_arrow_right``     | |line_style_arrow_right|                        | Not supported                                   |
++--------------------------------+-------------------------------------------------+-------------------------------------------------+
+| ``line.style_arrow_both``      | |line_style_arrow_both|                         | Not supported                                   |
++--------------------------------+-------------------------------------------------+-------------------------------------------------+
 
 
 .. |line_style_solid| image:: images/line.style_solid.png
@@ -282,13 +305,16 @@ function:
 .. |line_style_arrow_right| image:: images/line.style_arrow_right.png
 .. |line_style_arrow_both| image:: images/line.style_arrow_both.png
 
+.. |box_style_solid| image:: images/box.style_solid.png
+.. |box_style_dotted| image:: images/box.style_dotted.png
+.. |box_style_dashed| image:: images/box.style_dashed.png
+
 
 Deleting drawings
 -----------------
 
-The `label.delete <https://www.tradingview.com/pine-script-reference/v4/#fun_label{dot}delete>`__
-and `line.delete <https://www.tradingview.com/pine-script-reference/v4/#fun_line{dot}delete>`__
-functions delete *label* and *line* drawing objects from the chart.
+The `label.delete <https://www.tradingview.com/pine-script-reference/v4/#fun_label{dot}delete>`_, `line.delete <https://www.tradingview.com/pine-script-reference/v4/#fun_line{dot}delete>`__ and `box.delete <https://www.tradingview.com/pine-script-reference/v4/#fun_box{dot}delete>`__
+functions delete *label*, *line*, or *box* drawing objects from the chart.
 
 Here is Pine code that keeps just one label drawing object on the current bar,
 *deleting the old ones*::
@@ -693,7 +719,7 @@ Scrolling the chart left, one will see there are no drawings after approximately
 
 .. image:: images/drawings_total_number_limit.png
 
-You can change the drawing limit to a value in range from 1 to 500 using the max_lines_count and max_labels_count parameters for the study and strategy functions::
+You can change the drawing limit to a value in range from 1 to 500 using the max_lines_count, max_labels_count, or max_boxes_count parameters for the study and strategy functions::
 
     //@version=4
     study("My Script", overlay=true, max_labels_count=100)
