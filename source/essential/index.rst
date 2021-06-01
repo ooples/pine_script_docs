@@ -8,6 +8,7 @@ Essential features
    Alerts
    Arrays
    Bar_states_Built-in_variables_barstate
+   Colors
    Context_switching_the_security_function
    Drawings
    Extended_and_regular_sessions
