@@ -117,7 +117,7 @@ In the following script, all plots use the same `color.olive <https://www.tradin
 
 The colors in the previous script do not vary as the script executes bar to bar. Sometimes, however, colors need to be created as the script executes on each bar because they depend on conditions that are unknown at compile time, or when the script begins execution on bar zero. For those cases, Pine programmers have two options:
 
-#. Use conditional statements to select colors from a few pre-dertermined base colors.
+#. Use conditional statements to select colors from a few pre-determined base colors.
 #. Build new colors dynamically, by calculating them as the script executes bar to bar, to implement color gradations, for example.
 
 
@@ -239,7 +239,7 @@ In our next example we use `color.rgb(red, green, blue, transp) <https://www.tra
 
 Note that:
 
-- We generate values in the zero to 255 range for the red, green and blue channels, and in the zero to 100 range for transparency.
+- We generate values in the zero to 255 range for the red, green and blue channels, and in the zero to 100 range for transparency. Also note that because `random() <https://www.tradingview.com/pine-script-reference/v4/#fun_random>`__ returns float values, the float 0.0-100.0 range provides access to the full 0-255 transparency values of the underlying alpha channel.
 - We use the `random(min, max, seed) <https://www.tradingview.com/pine-script-reference/v4/#fun_random>`__ function to generate pseudo-random values. We do not use an argument for the third parameter of the function: ``seed``. Using it is handy when you want to ensure the repeatability of the function's results. Called with the same seed, it will produce the same sequence of values.
 
 
@@ -452,6 +452,8 @@ Customize gradients
 
 When building gradients, adapt them to the visuals they apply to. If you are using a gradient to color candles, for example, it is usually best to limit the number of steps in the gradient to ten or less, as it is more difficult for the eye to perceive intensity variations of discrete objects. As we did in our examples, cap minimum and maximum transparency levels so your visual elements remain visible and do not overwhelm when it's not necessary.
 
+
+.. _stylecolors:
 
 Color selection through script settings
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
