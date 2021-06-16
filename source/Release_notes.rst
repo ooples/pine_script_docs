@@ -6,6 +6,19 @@ Release notes
 
 This page contains release notes of notable changes in Pine Script.
 
+June 2021
+--------------------------
+New function was added:
+
+* ``round_to_mintick(x)`` - returns the value rounded to the symbol's mintick, i.e. the nearest value that can be divided by ``syminfo.mintick``, without the remainder, with ties rounding up.
+
+Expanded ``tostring()`` functionality. The function now accepts three new formatting arguments:
+
+* ``format.mintick`` to format to tick precision.
+* ``format.volume`` to abbreviate large values.
+* ``format.percent`` to format percentages.
+
+
 May 2021
 --------------------------
 Improved backtesting functionality by adding the Leverage mechanism.
@@ -18,6 +31,10 @@ New functions were added:
 * ``color.from_gradient(value, bottom_value, top_value, bottom_color, top_color)`` - returns color calculated from the linear gradient between bottom_color to top_color.
 * ``color.r(color)``, ``color.g(color)``, ``color.b(color)``, ``color.t(color)`` - retrieves the value of one of the color components.
 * ``array.from`` - takes a variable number of arguments with one of the types: ``int``, ``float``, ``bool``, ``string``, ``label``, ``line``, ``color``, ``box``, ``table`` and returns an array of the corresponding type. 
+
+A new ``box`` drawing has been added to Pine, making it possible to draw rectangles on charts using the Pine syntax. For more details see the `Pine Script reference <https://www.tradingview.com/pine-script-reference/v4/#fun_box{dot}new>`_ and the `User Manual page on drawings <https://www.tradingview.com/pine-script-docs/en/v4/essential/Drawings.html>`_ .
+
+The ``color.new`` function can now accept series and input arguments, in which case, the colors will be calculated at runtime. For more information about this, see our `User Manual page on colors <https://www.tradingview.com/pine-script-docs/en/v4/essential/Colors.html>`__.
 
 
 
