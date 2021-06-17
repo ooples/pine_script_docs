@@ -233,5 +233,5 @@ of variable ``s`` only, rather than for all the script's variables::
 When using drawings that refer to previous bars through ``bar_index[n]`` and ``xloc = xloc.bar_index``,
 the time series received from this bar will be used to position the drawings on the time axis.
 Therefore, if it is impossible to determine the correct size of the buffer, this error may occur.
-To avoid this, you need to use ``max_bars_bask(time, n)``.
+To avoid this, you need to use ``max_bars_back(time, n)``.
 This behavior is described in more detail in the section about :ref:`drawings <max-bars-back-of-time>`.
