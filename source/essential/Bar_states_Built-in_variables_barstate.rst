@@ -20,6 +20,8 @@ for which scripts actions are performed:
 
 -  ``barstate.isconfirmed`` --- ``true`` if the current data update is the last (closing) update of the current bar,
    ``false`` otherwise. The next data update will be an opening update of a new bar [#isconfirmed]_.
+   
+-  ``barstate.islastconfirmedhistory`` --- ``true`` if script is executing on the dataset's last bar when market is closed, or script is executing on the bar immediately preceding the real-time bar, if market is open. Returns ``false`` otherwise.   
 
 All historical bars are considered *new* bars. That is because of the fact that the script receives them in a sequential order
 from the oldest to the newer ones. For bars that update in realtime, a bar
