@@ -8,6 +8,10 @@ This page contains release notes of notable changes in Pine Script.
 
 June 2021
 --------------------------
+New variable was added:
+
+* ``barstate.islastconfirmedhistory`` - returns ``true`` if script is executing on the dataset's last bar when market is closed, or script is executing on the bar immediately preceding the real-time bar, if market is open. Returns ``false`` otherwise.
+
 New function was added:
 
 * ``round_to_mintick(x)`` - returns the value rounded to the symbol's mintick, i.e. the nearest value that can be divided by ``syminfo.mintick``, without the remainder, with ties rounding up.
