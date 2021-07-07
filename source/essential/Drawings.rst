@@ -100,7 +100,7 @@ the x-coordinate is treated as a UNIX time in milliseconds. The start time of th
 The bar time of previous bars is ``time[1]``, ``time[2]`` and so on. Time can also be set to an absolute time point with the
 `timestamp <https://www.tradingview.com/pine-script-reference/v4/#fun_timestamp>`__ function.
 
-The ``xloc.bar_time`` mode makes it possible to place a drawing object in the future, to the right of the current bar. For example::
+The ``xloc.bar_time`` and ``xloc.bar_index`` modes makes it possible to place a drawing object in the future, to the right of the current bar. For example::
 
     //@version=4
     study("My Script", overlay=true)
@@ -111,6 +111,14 @@ The ``xloc.bar_time`` mode makes it possible to place a drawing object in the fu
 .. image:: images/label_in_the_future.png
 
 This code places a label object in the future. X-location logic works identically for label, line, and box drawings.
+
+Example for ``xloc.bar_index``::
+
+    //@version=4
+    study("My Script", overlay=true)
+    label.new(bar_index+100, high)
+
+.. image:: images/label_in_the_future_2.png
 
 In contrast, y-location logic is different for label and line or box drawings.
 Pine's *line* and *box* drawings always use `yloc.price <https://www.tradingview.com/pine-script-reference/v4/#var_yloc{dot}price>`__,
@@ -726,6 +734,11 @@ You can change the drawing limit to a value in range from 1 to 500 using the max
     label.new(bar_index, high)
 
 .. image:: images/drawings_with_max_labels_count.png
+
+Bars count in future with xloc.bar_index
+^^^^^^^^^^^^^^^^^^^^^
+
+Objects positioned using xloc.bar_index cannot be drawn further than 500 bars into the future.
 
 Additional securities
 ^^^^^^^^^^^^^^^^^^^^^
