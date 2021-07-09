@@ -6,7 +6,7 @@ Release notes
 
 This page contains release notes of notable changes in Pine Script.
 
-Jule 2021
+July 2021
 --------------------------
 It is now possible to place a drawing object in the future with ``xloc = xloc.bar_index``.
 
