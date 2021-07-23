@@ -8,6 +8,10 @@ This page contains release notes of notable changes in Pine Script.
 
 July 2021
 --------------------------
+New argument for ``time`` and ``time_close`` functions was added:
+
+* ``timezone`` - timezone of the ``session`` argument, can only be used when a session is specified. Can be written out in GMT notation (e.g. "GMT-5") or as an `IANA time zone database name <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>`__ (e.g. "America/New_York").
+
 It is now possible to place a drawing object in the future with ``xloc = xloc.bar_index``.
 
 
