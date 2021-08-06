@@ -16,6 +16,9 @@ New argument for ``time`` and ``time_close`` functions was added:
 
 It is now possible to place a drawing object in the future with ``xloc = xloc.bar_index``.
 
+New argument for ``study`` and ``strategy`` functions was added:
+* ``explicit_plot_zorder`` - specifies the order in which the indicator's plots, fills, and hlines are rendered. If true, the plots will be drawn based on the order in which they appear in the indicator's code, each newer plot being drawn above the previous ones.
+
 
 June 2021
 --------------------------
