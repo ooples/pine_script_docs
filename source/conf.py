@@ -177,10 +177,11 @@ if os.path.isdir('locales'):
     languages += os.listdir('locales')
 
 html_context = {
-    'current_version': 'v4',
+    'current_version': 'v5',
     'languages': languages,
     'versions': [
         'v3',
-        'v4'
+        'v4',
+        'v5'
     ]
 }
