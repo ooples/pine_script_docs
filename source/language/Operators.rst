@@ -115,7 +115,7 @@ operand the result will be ``false``, and vice versa.
 --------------------------------------------
 
 The ``?:`` `conditional ternary
-operator <https://www.tradingview.com/pine-script-reference/v4/#op_{question}{colon}>`__
+operator <https://www.tradingview.com/pine-script-reference/v5/#op_{question}{colon}>`__
 calculates the first expression (condition) and returns the value of either
 the second operand (if the condition is ``true``) or of the third
 operand (if the condition is ``false``). Syntax is::
@@ -126,30 +126,17 @@ If ``condition`` is ``true`` then the ternary operator will return ``result1``,
 otherwise it will return ``result2``.
 
 A combination of conditional operators can build
-constructs similar to *switch* statements in other languages. For
+constructs similar to *switch* statements. For
 example::
 
-    isintraday ? red : isdaily ? green : ismonthly ? blue : na
+    timeframe.isintraday ? color.red : timeframe.isdaily ? color.green : timeframe.ismonthly ? color.blue : na
 
 The example is calculated from left to right.
-First, the ``isintraday`` condition is calculated; if it is ``true`` then
-``red`` will be the result. If it is ``false`` then ``isdaily`` is calculated,
-if this is ``true``, then ``green`` will be the result. If it is
-``false``, then ``ismonthly`` is calculated. If it is ``true``, then ``blue``
+First, the ``timeframe.isintraday`` condition is calculated; if it is ``true`` then
+``color.red`` will be the result. If it is ``false`` then ``timeframe.isdaily`` is calculated,
+if this is ``true``, then ``color.green`` will be the result. If it is
+``false``, then ``timeframe.ismonthly`` is calculated. If it is ``true``, then ``color.blue``
 will be the result, otherwise ``na`` will be the result.
-
-For those who find using the ``?:`` operator syntax inconvenient,
-there is an alternative: the built-in ``iff`` function.
-The function has the following signature::
-
-    iff(condition, result1, result2)
-
-The function acts identically to the ``?:`` operator, i.e., if the
-condition is ``true`` then it returns ``result1``, otherwise ``result2``.
-This is the equivalent of the previous example using ``iff``::
-
-    iff(isintraday, red, iff(isdaily, green,
-                         iff(ismonthly, blue, na)))
 
 .. _history_referencing_operator:
 
@@ -201,8 +188,8 @@ early bars of the dataset, but can also occur in later bars under certain condit
 If your Pine code does not explicitly provide for handling these special cases,
 they can introduce invalid results in your script's calculations
 which can ripple through all the way to the realtime bar.
-The `na <https://www.tradingview.com/pine-script-reference/v4/#fun_na>`__ and
-`nz <https://www.tradingview.com/pine-script-reference/v4/#fun_nz>`__ functions
+The `na <https://www.tradingview.com/pine-script-reference/v5/#fun_na>`__ and
+`nz <https://www.tradingview.com/pine-script-reference/v5/#fun_nz>`__ functions
 are designed to allow for handling such cases.
 
 **Note 1**. Almost all built-in functions in Pine's standard library
@@ -211,7 +198,7 @@ possible to apply the ``[]`` operator directly to function calls, as is done her
 
 ::
 
-    sma(close, 10)[1]
+    ta.sma(close, 10)[1]
 
 **Note 2**. Despite the fact that the ``[]`` operator returns a result
 of *series* type, it is prohibited to apply this operator to the same
@@ -228,7 +215,7 @@ accomplished using the ``offset`` parameter in the ``plot`` annotation, which
 supports both positive and negative values. Note though that it is a
 visual shift., i.e., it will be applied after all calculations.
 Further details on ``plot`` and its parameters can be found
-`here <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__.
+`here <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__.
 
 Operator precedence
 -------------------
