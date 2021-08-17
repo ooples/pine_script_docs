@@ -4,8 +4,8 @@ Comments
 Pine Script supports single-line comments. Any text from the symbol
 ``//`` until the end of the line is considered as comment. An example::
 
-    //@version=4
-    study("Test")
+    //@version=5
+    indicator("Test")
     // This line is a comment
     a = close // This is also a comment
     plot(a)
