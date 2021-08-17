@@ -8,42 +8,39 @@ While functions are generally used to calculate values and for the result they r
 annotations are mostly used for their side effects and only occasionally for the result some of them return.
 
 Functions may be built-in, such as
-`sma <https://www.tradingview.com/pine-script-reference/v4/#fun_sma>`__,
-`ema <https://www.tradingview.com/pine-script-reference/v4/#fun_ema>`__,
-`rsi <https://www.tradingview.com/pine-script-reference/v4/#fun_rsi>`__,
+`ta.sma <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__,
+`ta.ema <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__,
+`ta.rsi <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}rsi>`__,
 or :doc:`user-defined <Declaring_functions>`. All annotations are built-in.
 
 The side effects annotations are used for include:
 
 -  assigning a name or other global properties to a script using
-   `study <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__
-   or `strategy <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy>`__
+   `indicator <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__
+   or `strategy <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
 -  determining the inputs of a script using
-   `input <https://www.tradingview.com/pine-script-reference/v4/#fun_input>`__
+   `input <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__ and functions in the  ``input.`` namespace
 -  determining the outputs of a script using
-   `plot <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__
+   `plot <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
 
 In addition to having side effects, a few annotations such as ``plot`` and ``hline``
 also return a result which may be used or not. This result, however, can only be used in other annotations
 and can't take part in the script's calculations
-(see `fill <https://www.tradingview.com/pine-script-reference/v4/#fun_fill>`__ annotation).
+(see `fill <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ annotation).
 
 A detailed overview of Pine annotations can be found :doc:`here </annotations/index>`.
 
 Syntactically, user-defined functions, built-in functions and annotation
 functions are similar, i.e., we call them by name with a list of
-arguments in parentheses. Differences between them are mostly semantic, except
-for the fact that annotations and
-built-in functions accept keyword arguments while user-defined functions
-do not.
+arguments in parentheses. Differences between them are mostly semantic.
 
 Example of an annotation call with positional arguments::
 
-    study('Example', 'Ex', true)
+    indicator('Example', 'Ex', true)
 
 The same call with keyword arguments::
 
-    study(title='Example', shorttitle='Ex', overlay=true)
+    indicator(title='Example', shorttitle='Ex', overlay=true)
 
 It's possible to mix positional and keyword arguments. Positional
 arguments must go first and keyword arguments should follow them. So the
@@ -51,7 +48,7 @@ following call is not valid:
 
 ::
 
-    study(precision=3, 'Example') // Compilation error!
+    indicator(precision=3, 'Example') // Compilation error!
     
     
 Execution of Pine functions and historical context inside function blocks
@@ -61,8 +58,8 @@ The history of series variables used inside Pine functions is created through ea
 
 Let's look at this example script where the ``f`` and ``f2`` functions are called every second bar::
 
-   //@version=4
-   study("My Script", overlay=true)
+   //@version=5
+   indicator("My Script", overlay=true)
 
    // Returns the value of "a" the last time the function was called 2 bars ago.
    f(a) => a[1]
@@ -88,23 +85,23 @@ On the other hand, this behavior leads to unexpected results with certain built-
 
 The solution in these cases is to take those function calls outside their context so they can be executed on every bar.
 
-In this script, ``barssince`` is not called on every bar because it is inside a ternary operator's conditional branch::
+In this script, ``ta.barssince`` is not called on every bar because it is inside a ternary operator's conditional branch::
 
-   //@version=4
-   study("Barssince",overlay=false)
-   res = close>close[1] ? barssince(close<close[1]) : -1
+   //@version=5
+   indicator("Barssince",overlay=false)
+   res = close > close[1] ? ta.barssince(close < close[1]) : -1
    plot(res, style=plot.style_histogram, color=res >= 0 ? color.red : color.blue)
 
-This leads to incorrect results because ``barssince`` is not executed on every bar:
+This leads to incorrect results because ``ta.barssince`` is not executed on every bar:
 
 .. image:: images/Function_historical_context_2.png
 
 The solution is to take the barssince call outside the conditional branch to force its execution on every bar::
 
-   //@version=4		
-   study("Barssince",overlay=false)
-   b = barssince(close<close[1])
-   res = close>close[1] ? b : -1
+   //@version=5
+   indicator("Barssince",overlay=false)
+   b = ta.barssince(close < close[1])
+   res = close > close[1] ? b : -1
    plot(res, style=plot.style_histogram, color=res >= 0 ? color.red : color.blue)
 
 Using this technique we get the expected output:
@@ -116,18 +113,19 @@ Exceptions
 
 Not all built-in functions need to be executed every bar. These are the functions which do not require it, and so do not need special treatment::
 
-   abs, acos, asin, atan, ceil, cos, dayofmonth, dayofweek, exp, floor, heikinashi, hour, kagi, 
-   linebreak, log, log10, max, min, minute, month, na, nz, pow, renko, round, second, sign, sin, 
-   sqrt, tan, tickerid, time, timestamp, tostring, weekofyear, year	
+   dayofmonth, dayofweek, hour, linebreak, math.abs, math.acos, math.asin, math.atan, math.ceil,
+   math.cos, math.exp, math.floor, math.log, math.log10, math.max, math.min, math.pow, math.round,
+   math.sign, math.sin, math.sqrt, math.tan, minute, month, na, nz, second, str.tostring,
+   ticker.heikinashi, ticker.kagi, ticker.new, ticker.renko, time, timestamp, weekofyear, year
 
-.. note:: Functions called from within a ``for`` loop use the same context in each of the loop's iterations. In the example below, each ``lowest`` call on the same bar uses the value that was passed to it (i.e., ``bar_index``), so function calls used in loops do not require special treatment.
+.. note:: Functions called from within a ``for`` loop use the same context in each of the loop's iterations. In the example below, each ``ta.lowest`` call on the same bar uses the value that was passed to it (i.e., ``bar_index``), so function calls used in loops do not require special treatment.
 
 ::
 
-   //@version=4
-   study("My Script")
+   //@version=5
+   indicator("My Script")
    va = 0.0
    for i = 1 to 2 by 1
        if (i + bar_index) % 2 == 0
-           va := lowest(bar_index, 10)  // same context on each call
+           va := ta.lowest(bar_index, 10)  // same context on each call
    plot(va)
