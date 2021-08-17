@@ -4,10 +4,10 @@ Execution model
 .. contents:: :local:
     :depth: 2
 
-When a Pine script is loaded on a chart it executes once on each historical bar using the available OHLCV (open, high, low, close, volume) values for each bar. Once the script's execution reaches the rightmost bar in the dataset, if trading is currently active on the chart's symbol, then Pine *studies* will execute once every time an *update* occurs, i.e., price or volume changes. Pine *strategies* will by default only execute when the rightmost bar closes, but they can also be configured to execute on every update, like studies do.
+When a Pine script is loaded on a chart it executes once on each historical bar using the available OHLCV (open, high, low, close, volume) values for each bar. Once the script's execution reaches the rightmost bar in the dataset, if trading is currently active on the chart's symbol, then Pine *indicators* will execute once every time an *update* occurs, i.e., price or volume changes. Pine *strategies* will by default only execute when the rightmost bar closes, but they can also be configured to execute on every update, like studies do.
 
-All symbol/resolution pairs have a dataset comprising a limited number of bars. When you scroll a chart to the left to see the dataset's earlier bars, the corresponding bars are loaded on the chart. The loading process stops when there are no more bars for that particular symbol/resolution pair or approximately 10000 bars have been loaded [#all_available_bars]_. You can scroll the chart to the left until the very first bar of the dataset, which has an index value of 0
-(see `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__).
+All symbol/timeframe pairs have a dataset comprising a limited number of bars. When you scroll a chart to the left to see the dataset's earlier bars, the corresponding bars are loaded on the chart. The loading process stops when there are no more bars for that particular symbol/timeframe pair or approximately 10000 bars have been loaded [#all_available_bars]_. You can scroll the chart to the left until the very first bar of the dataset, which has an index value of 0
+(see `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__).
 
 All bars in a dataset are *historical bars*, except the rightmost one if a trading session is active. When trading is active in the rightmost bar, it is called the *realtime bar*. The realtime bar updates when a price or volume change is detected. When the realtime bar closes it becomes a historical bar and a new realtime bar opens.
 
@@ -16,12 +16,12 @@ Calculation based on historical bars
 
 Let's take a simple script and follow its execution on historical bars::
 
-    //@version=4
-    study("My Script", overlay=true)
+    //@version=5
+    indicator("My Script", overlay=true)
     src = close
-    a = sma(src, 5)
-    b = sma(src, 50)
-    c = cross(a, b)
+    a = ta.sma(src, 5)
+    b = ta.sma(src, 50)
+    c = ta.cross(a, b)
     plot(a, color=color.blue)
     plot(b, color=color.black)
     plotshape(c, color=color.red)
@@ -43,7 +43,7 @@ After execution and plotting on the first bar, the script is executed on the dat
 Calculation based on realtime bars
 ----------------------------------
 
-The behavior of a Pine script on the realtime bar is very different than on historical bars. Recall that the realtime bar is the rightmost bar on the chart when trading is active on the chart's symbol. Also, recall that strategies can behave in two different ways in the realtime bar. By default, they only execute when the realtime bar closes, but the ``calc_on_every_tick`` parameter of the ``strategy`` declaration statement can be set to true to modify the strategy's behavior so that it executes each time the realtime bar updates, as studies do. The behavior described here for studies will thus only apply to strategies using ``calc_on_every_tick=true``.
+The behavior of a Pine script on the realtime bar is very different than on historical bars. Recall that the realtime bar is the rightmost bar on the chart when trading is active on the chart's symbol. Also, recall that strategies can behave in two different ways in the realtime bar. By default, they only execute when the realtime bar closes, but the ``calc_on_every_tick`` parameter of the ``strategy`` declaration statement can be set to true to modify the strategy's behavior so that it executes each time the realtime bar updates, as indicators do. The behavior described here for indicators will thus only apply to strategies using ``calc_on_every_tick=true``.
 
 The most important difference between execution of scripts on historical and realtime bars is that while they execute only once on historical bars, scripts execute every time an update occurs during a realtime bar. This entails that built-in variables such as ``high``, ``low`` and ``close`` which never change on a historical bar, **can** change at each of a script's iteration in the realtime bar. Changes in the built-in variables used in the script's calculations will, in turn, induce changes in the results of those calculations. This is required for the script to follow the realtime price action. As a result, the same script may produce different results every time it executes during the realtime bar.
 
@@ -68,7 +68,7 @@ Events triggering the execution of a script
 
 A script is executed on the complete set of bars on the chart when one of the following events occurs:
 
-    * A new symbol or resolution is loaded on a chart.
+    * A new symbol or timeframe is loaded on a chart.
     * A script is saved or added to the chart from the Pine Editor.
     * A value is modified in the script's *Settings/Inputs* dialog box.
     * A value is modified in a strategy's *Settings/Properties* dialog box.
@@ -93,5 +93,5 @@ This page explains the details of strategy calculations: :doc:`/essential/Strate
 
 .. rubric:: Footnotes
 
-.. [#all_available_bars] The upper limit for the total number of historical bars is about 10000 for *Pro/Premium* users. *Free* users are able to see about 5000 bars.
+.. [#all_available_bars] The upper limit for the total number of historical bars is about 10000 for *Pro/Pro+* users and about 20000 for *Premium* users. *Free* users are able to see about 5000 bars.
 
