@@ -4,7 +4,7 @@ Execution model
 .. contents:: :local:
     :depth: 2
 
-When a Pine script is loaded on a chart it executes once on each historical bar using the available OHLCV (open, high, low, close, volume) values for each bar. Once the script's execution reaches the rightmost bar in the dataset, if trading is currently active on the chart's symbol, then Pine *indicators* will execute once every time an *update* occurs, i.e., price or volume changes. Pine *strategies* will by default only execute when the rightmost bar closes, but they can also be configured to execute on every update, like studies do.
+When a Pine script is loaded on a chart it executes once on each historical bar using the available OHLCV (open, high, low, close, volume) values for each bar. Once the script's execution reaches the rightmost bar in the dataset, if trading is currently active on the chart's symbol, then Pine *indicators* will execute once every time an *update* occurs, i.e., price or volume changes. Pine *strategies* will by default only execute when the rightmost bar closes, but they can also be configured to execute on every update, like indicators do.
 
 All symbol/timeframe pairs have a dataset comprising a limited number of bars. When you scroll a chart to the left to see the dataset's earlier bars, the corresponding bars are loaded on the chart. The loading process stops when there are no more bars for that particular symbol/timeframe pair or approximately 10000 bars have been loaded [#all_available_bars]_. You can scroll the chart to the left until the very first bar of the dataset, which has an index value of 0
 (see `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__).
@@ -34,7 +34,7 @@ Our example script is first executed on the very first bar of the dataset at ind
 
 initializes the variable ``src`` with the ``close`` value for that first bar, and each of the next lines is executed in turn. Because the script only executes once for each historical bar, the script will always calculate using the same ``close`` value for a specific historical bar.
 
-The execution of each line in the script produces calculations which in turn generate the study's output values, which can then be plotted on the chart. Our example uses the ``plot`` and ``plotshape`` calls at the end of the script to output some values. In the case of a strategy, the outcome of the calculations can be used to plot values or dictate the orders to be placed.
+The execution of each line in the script produces calculations which in turn generate the indicator's output values, which can then be plotted on the chart. Our example uses the ``plot`` and ``plotshape`` calls at the end of the script to output some values. In the case of a strategy, the outcome of the calculations can be used to plot values or dictate the orders to be placed.
 
 After execution and plotting on the first bar, the script is executed on the dataset's second bar, which has an index of 1. The process then repeats until all historical bars in the dataset are processed and the script reaches the rightmost bar on the chart.
 
