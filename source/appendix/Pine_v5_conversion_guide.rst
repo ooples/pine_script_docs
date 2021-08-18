@@ -118,7 +118,7 @@ TODO: write about functions with removed default `transp` values, e.g. fill()
 
 Default session for time() and time_close() has been changed
 ------------------------------------------------------------
-The default value for the ``session`` argument of the ``time()`` and ``time_close()`` functions has changed. In v4, when you pass a specific session time for any of the two functions mentioned above without specifying the days, the session automatically fills the days as ``23456``, i.e. Monday to Friday. In v5, we have changed this to auto-complete the session as ``1234567`` instead:
+The default value for the ``session`` argument of the ``time()`` and ``time_close()`` functions has changed. In v4, when you pass a specific session time for any of the two functions mentioned above without specifying the days, the session automatically fills the days as ``23456``, i.e. Monday to Friday. In v5, we have changed this to auto-complete the session as ``1234567`` instead::
 
   // This line of code will behave differently in v4 and v5 on symbols that are traded on the weekends:
   t0 = time("1D", "1000-1200")
