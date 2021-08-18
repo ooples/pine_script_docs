@@ -29,8 +29,8 @@ is considered new only at the opening tick of this bar.
 
 Here is an example of a script using ``barstate.*`` variables::
 
-    //@version=4
-    study("Bar States", overlay = true)
+    //@version=5
+    indicator("Bar States", overlay = true)
     first = barstate.isfirst
     last = barstate.islast
 
@@ -63,4 +63,4 @@ The elapsed realtime bars show the *confirmed* state.
 .. rubric:: Footnotes
 
 .. [#isconfirmed] Variable ``barstate.isconfirmed`` returns the state of current chart symbol data only.
-   It does not take into account any secondary symbol data requested with the ``security`` function.
+   It does not take into account any secondary symbol data requested with the ``request.security`` function.
