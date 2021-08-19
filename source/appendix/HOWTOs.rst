@@ -12,8 +12,8 @@ and we've added a pine script on it:
 
 ::
 
-    //@version=4
-    study("Visible OHLC", overlay=true)
+    //@version=5
+    indicator("Visible OHLC", overlay=true)
     c = close
     plot(c)
 
@@ -22,13 +22,13 @@ the same as real OHLC price. Because ``close`` built-in variable is always
 a value that corresponds to a visible bar (or candle) on the chart.
 
 So, how do we get the real OHLC prices in Pine Script code, if current
-chart type is non-standard? We should use ``security`` function in
-combination with ``tickerid`` function. Here is an example::
+chart type is non-standard? We should use ``request.security`` function in
+combination with ``ticker.new`` function. Here is an example::
 
-    //@version=4
-    study("Real OHLC", overlay=true)
-    t = tickerid(syminfo.prefix, syminfo.ticker)
-    realC = security(t, timeframe.period, close)
+    //@version=5
+    indicator("Real OHLC", overlay=true)
+    t = ticker.new(syminfo.prefix, syminfo.ticker)
+    realC = request.security(t, timeframe.period, close)
     plot(realC)
 
 In a similar way we may get other OHLC prices: *open*, *high* and *low*.
@@ -38,12 +38,12 @@ Get non-standard OHLC values on a standard chart
 
 Backtesting on non-standard chart types (e.g. Heikin Ashi or Renko) is not recommended because the bars on these kinds of charts do not represent real price movement that you would encounter while trading. If you want your strategy to enter and exit on real prices but still use Heikin Ashi-based signals, you can use the same method to get Heikin Ashi values on a regular candlestick chart::
 
-    //@version=4
+    //@version=5
     strategy("BarUpDn Strategy", overlay=true, default_qty_type = strategy.percent_of_equity, default_qty_value = 10)
-    maxIdLossPcnt = input(1, "Max Intraday Loss(%)", type=input.float)
-    strategy.risk.max_intraday_loss(maxIdLossPcnt, strategy.percent_of_equity)
+    i_maxIdLossPcnt = input.float(1, "Max Intraday Loss(%)")
+    strategy.risk.max_intraday_loss(i_maxIdLossPcnt, strategy.percent_of_equity)
     needTrade() => close > open and open > close[1] ? 1 : close < open and open < close[1] ? -1 : 0
-    trade = security(heikinashi(syminfo.tickerid), timeframe.period, needTrade())
+    trade = request.security(ticker.heikinashi(syminfo.tickerid), timeframe.period, needTrade())
     if (trade == 1)
         strategy.entry("BarUp", strategy.long)
     if (trade == -1)
@@ -55,8 +55,8 @@ Plot arrows on the chart
 You may use plotshape with style ``shape.arrowup`` and
 ``shape.arrowdown``::
 
-    //@version=4
-    study('Ex 1', overlay=true)
+    //@version=5
+    indicator('Ex 1', overlay=true)
     data = close >= open
     plotshape(data, color=color.lime, style=shape.arrowup, text="Buy")
     plotshape(not data, color=color.red, style=shape.arrowdown, text="Sell")
@@ -65,8 +65,8 @@ You may use plotshape with style ``shape.arrowup`` and
 
 You may use ``plotchar`` function with any unicode character::
 
-    //@version=4
-    study('buy/sell arrows', overlay=true)
+    //@version=5
+    indicator('buy/sell arrows', overlay=true)
     data = close >= open
     plotchar(data, char='↓', color=color.lime, text="Buy")
     plotchar(data, char='↑', location=location.belowbar, color=color.red, text="Sell")
@@ -81,8 +81,8 @@ There is function ``hline`` in pine. But it is now limited to only plot
 constant value. Here is a Pine Script with workaround to plot changing
 hline::
 
-    //@version=4
-    study("Horizontal line", overlay=true)
+    //@version=5
+    indicator("Horizontal line", overlay=true)
     plot(close[10], trackprice=true, offset=-9999)
     // trackprice=true plots horizontal line on close[10]
     // offset=-9999 hides the plot
@@ -93,8 +93,8 @@ Plot a vertical line on condition
 
 ::
 
-    //@version=4
-    study("Vertical line", overlay=true, scale=scale.none)
+    //@version=5
+    indicator("Vertical line", overlay=true, scale=scale.none)
     // scale.none means do not resize the chart to fit this plot
     // if the bar being evaluated is the last baron the chart (the most recent bar), then cond is true
     cond = barstate.islast
@@ -109,7 +109,7 @@ Access the previous value
 
 ::
 
-    //@version=4
+    //@version=5
     //...
     s = 0.0
     s := nz(s[1]) // Accessing previous values
@@ -126,8 +126,8 @@ character at that price level above the current bar
 
 ::
 
-    //@version=4
-    study("Range Analysis", overlay=true)
+    //@version=5
+    indicator("Range Analysis", overlay=true)
 
     // find which bar is 5 days away from the current time
     milliseconds_in_5days = 1000 * 60 * 60 * 24 * 5  // millisecs * secs * min * hours * days
@@ -176,7 +176,7 @@ character at that price level above the current bar
     plotchar(val, size=size.normal, location=location.absolute)
 
     // fill the background of the 5 days lookback window range with aqua color
-    bgcolor(leftborder and not rightborder ? color.aqua : na, transp=70)
+    bgcolor(leftborder and not rightborder ? color.new(color.aqua, 70) : na)
 
 Count bars in a dataset
 -----------------------
@@ -186,8 +186,8 @@ calculating flexible lookback periods based on number of bars.
 
 ::
 
-    //@version=4
-    study("Bar Count", overlay=true, scale=scale.none)
+    //@version=5
+    indicator("Bar Count", overlay=true, scale=scale.none)
     plot(bar_index + 1, style=plot.style_histogram)
 
 Enumerate bars in a day
@@ -195,49 +195,49 @@ Enumerate bars in a day
 
 ::
 
-    //@version=4
-    study("My Script", overlay=true, scale=scale.none)
+    //@version=5
+    indicator("My Script", overlay=true, scale=scale.none)
 
-    is_new_day() =>
-        d = dayofweek
-        na(d[1]) or d != d[1]
+    isNewDay() =>
+        _d = dayofweek
+        na(_d[1]) or _d != _d[1]
 
-    plot(barssince(is_new_day()), style=plot.style_cross)
+    plot(ta.barssince(isNewDay()), style=plot.style_cross)
 
 Find the highest and lowest values for the entire dataset
 ---------------------------------------------------------
 
 ::
 
-    //@version=4
-    study("My Script")
+    //@version=5
+    indicator("My Script")
 
-    biggest(series) =>
-        max = 0.0
-        max := nz(max[1], series)
-        if series > max
-            max := series
-        max
+    f_biggest(_source) =>
+        _max = 0.0
+        _max := nz(_max[1], _source)
+        if _source > _max
+            _max := _source
+        _max
 
-    smallest(series) =>
-        min = 0.0
-        min := nz(min[1], series)
-        if series < min
-            min := series
-        min
+    f_smallest(_source) =>
+        _min = 0.0
+        _min := nz(_min[1], _source)
+        if _source < _min
+            _min := _source
+        _min
 
-    plot(biggest(close), color=color.green)
-    plot(smallest(close), color=color.red)
+    plot(f_biggest(close), color=color.green)
+    plot(f_smallest(close), color=color.red)
 
 Query the last non-na value
 ---------------------------
 
 You can use the script below to avoid gaps in a series::
 
-    //@version=4
-    study("My Script")
+    //@version=5
+    indicator("My Script")
     series = close >= open ? close : na
-    vw = valuewhen(not na(series), series, 0)
+    vw = fixnan(series)
     plot(series, style=plot.style_linebr, color=color.red)  // series has na values
     plot(vw)  // all na values are replaced with the last non-empty value
 

@@ -22,8 +22,8 @@ When you publish a script, you control its **visibility** and **access**:
 When you publish a script
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- The publication's title is determined by the argument used for the ``title`` parameter in the script's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__ or `strategy() <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy>`__ declaration statement. That title is also used when TradingViewers search for script names.
-- The name of your script on the chart will be the argument used for the ``shorttitle`` parameter in the script's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__ or `strategy() <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy>`__ declaration statement.
+- The publication's title is determined by the argument used for the ``title`` parameter in the script's `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ or `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__ declaration statement. That title is also used when TradingViewers search for script names.
+- The name of your script on the chart will be the argument used for the ``shorttitle`` parameter in the script's `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ or `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__ declaration statement.
 - Your script must have a description explaining what your script does and how to use it.
 - The chart you are using when you publish will become visible in your publication, including any other scripts or drawings on it. Remove unrelated scripts or drawings from your chart before publishing your script.
 - Your script's code can later be updated. Each update can include *release notes* which will appear, dated, under your original description.
