@@ -11,7 +11,7 @@ Converter
 
 Pine Editor now comes with an utility to automatically convert v4 indicators and strategies to v5. To access it, open a script with ``//@version=4`` in it and select the ``Convert to v5`` option in the ``More`` dropdown menu:
 
-PICTURE
+TODO: IMAGE
 
 Not all scripts can be automatically converted from v4 to v5. If you want to convert the script manually or if your indicator returns a compilation error after conversion, consult the guide below for more information.
 
@@ -19,14 +19,14 @@ Renamed functions and variables
 -------------------------------
 Many built-in functions and variables were renamed in v5 for clarity and consistency. Most changes simply add a namespace is the addition of the namespace: for example, the ``sma()`` function is now called ``ta.sma()`` in v5. As such, the new name can be easily found by entering the old name and checking the suggestion list:
 
-PICTURE
-
+TODO: IMAGE
+ 
 The only two functions that were fully renamed are:
 
- * ``study()`` -> ``indicator()``
- * ``tickerid()`` -> ``ticker.new()``
+* ``study()`` was renamed to ``indicator()``.
+* ``tickerid()`` was renamed to ``ticker.new()``.
 
-The full list of renamed variables, should you need it, can be found here[link to the end of the page so that we don’t post a giant table in the middle of the text].
+The full list of renamed variables, should you need it, can be found in the following section: TODO: add link.
 
 Renamed function arguments
 --------------------------
@@ -42,6 +42,7 @@ The full list of renamed function arguments can be found here[link to the end of
 Removed an ``rsi()`` overload
 -----------------------------
 Previously, the built-in ``rsi()`` function had two different overloads:
+
 * ``rsi(series float, simple int)`` -> regular RSI calculation
 * ``rsi(series float, series float)`` -> an overload used in the MFI indicator, did a calculation equivalent to ``100.0 - (100.0 / (1.0 + arg1 / arg2))``. 
 
@@ -144,7 +145,9 @@ strategy.exit() now must do something
 Gone are the days when the ``strategy.exit()`` function was allowed to loiter. Now it must actually have an effect on the strategy itself, and to do so, it should have at least one of the following parameters: ``profit``, ``limit``, ``loss``, ``stop``, or one of the following pairs: ``trail_offset`` and ``trail_price`` / ``trail_points``. 
 In v4, it used to compile with a warning (although the function itself did not do anything in the code); now it is no longer valid code. If you are converting a script to v5 and get this error, feel free to comment it out or remove it altogether: it didn’t do anything in your code anyway.
 
-Name changes
+.. _changed_names:
+Variables, functions, and function arguments name changes
+---------------------------------------------------------
 
 +------------------------------------------------------+--------------------------------------------------------+
 | Pine v4                                              | Pine v5                                                |
