@@ -5,7 +5,7 @@ Annotations overview
    :maxdepth: 3
    :name: appendixtoc
 
-   study_annotation
+   indicator_annotation
    plot_annotation
    Script_inputs
    Price_levels_hline
