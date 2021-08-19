@@ -33,12 +33,12 @@ We can see repainting in the following cases:
    A strategy with parameter ``calc_on_every_tick = false`` may also be
    prone to repainting, but to a lesser degree.
 
-#. Using ``security`` for requesting data from a resolution *higher* than the resolution of the chart's main symbol::
+#. Using ``request.security`` for requesting data from a resolution *higher* than the resolution of the chart's main symbol::
 
     // Add this study on 1 minute chart
-    //@version=4
-    study("My Script")
-    c = security(syminfo.tickerid, "5", close)
+    //@version=5
+    indicator("My Script")
+    c = request.security(syminfo.tickerid, "5", close)
     plot(close)
     plot(c, color=color.red)
 
@@ -46,9 +46,9 @@ We can see repainting in the following cases:
    historical data, regardless of ``lookahead`` parameter's value (see
    :ref:`understanding_lookahead`).
 
-#. Using ``security`` to request data from a resolution *lower* than the resolution of chart's main symbol
+#. Using ``request.security`` to request data from a resolution *lower* than the resolution of chart's main symbol
    (more information :ref:`here <requesting_data_of_a_lower_timeframe>`).
-   If ``lookahead=false``, repainting will occur. When ``lookahead=true``,
+   If ``lookahead=barmerge.lookahead_off``, repainting will occur. When ``lookahead=barmerge.lookahead_on``,
    repainting is less probable. It may still happen when 1 and 5 minute updates
    outrun each other.
 
@@ -58,9 +58,9 @@ We can see repainting in the following cases:
    such scripts can differ from time to time. These are cases where
    scripts will be relying on a starting point:
 
-   * when they use `valuewhen <https://www.tradingview.com/pine-script-reference/v4/#fun_valuewhen>`__,
-     `barssince <https://www.tradingview.com/pine-script-reference/v4/#fun_barssince>`__ or
-     `ema <https://www.tradingview.com/pine-script-reference/v4/#fun_ema>`__
+   * when they use `ta.valuewhen <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}valuewhen>`__,
+     `ta.barssince <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}barssince>`__ or
+     `ta.ema <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__
      functions (due to peculiarities in their algorithm).
    * any backtesting strategy (regardless of how the ``calc_on_every_tick`` parameter is defined).
 
@@ -72,21 +72,22 @@ We can see repainting in the following cases:
 
    The following limitations of history lengths are taken into account when
    processing the data:
-
-   * 10000 historical bars for all Pro plans.
+	
+   * 20000 historical bars for the Premium plan.
+   * 10000 historical bars for Pro and Pro+ plans.
    * 5000 historical bars for other plans.
 
 #. Changes in historical data, for example, due to a *split*.
 
 #. Presence of the following variables in the script usually leads to repainting:
 
-   * `barstate.isconfirmed <https://www.tradingview.com/pine-script-reference/v4/#var_barstate{dot}isconfirmed>`__,
-     `barstate.isfirst <https://www.tradingview.com/pine-script-reference/v4/#var_barstate{dot}isfirst>`__,
-     `barstate.ishistory <https://www.tradingview.com/pine-script-reference/v4/#var_barstate{dot}ishistory>`__,
-     `barstate.islast <https://www.tradingview.com/pine-script-reference/v4/#var_barstate{dot}islast>`__,
-     `barstate.isnew <https://www.tradingview.com/pine-script-reference/v4/#var_barstate{dot}isnew>`__,
-     `barstate.isrealtime <https://www.tradingview.com/pine-script-reference/v4/#var_barstate{dot}isrealtime>`__;
-   * `timenow <https://www.tradingview.com/pine-script-reference/v4/#var_timenow>`__;
-   * `bar_index <https://www.tradingview.com/pine-script-reference/v4/#var_bar_index>`__.
+   * `barstate.isconfirmed <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__,
+     `barstate.isfirst <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isfirst>`__,
+     `barstate.ishistory <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}ishistory>`__,
+     `barstate.islast <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islast>`__,
+     `barstate.isnew <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isnew>`__,
+     `barstate.isrealtime <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isrealtime>`__;
+   * `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__;
+   * `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__.
 
 
