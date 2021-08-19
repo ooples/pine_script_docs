@@ -145,6 +145,8 @@ Gone are the days when the ``strategy.exit()`` function was allowed to loiter. N
 In v4, it used to compile with a warning (although the function itself did not do anything in the code); now it is no longer valid code. If you are converting a script to v5 and get this error, feel free to comment it out or remove it altogether: it didn’t do anything in your code anyway.
 
 Name changes
-------------
-TODO Port table
 
+.. csv-table:: Table Title
+   :file: Untitled spreadsheet - Sheet1.csv
+   :widths: 30, 70
+   :header-rows: 1
