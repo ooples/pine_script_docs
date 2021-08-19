@@ -33,18 +33,20 @@ Renamed function arguments
 Some 'historical' argument names for built-in functions have been changed because they were not descriptive enough. This has no bearing on most scripts, but if you used these arguments in their 'keyword' form, you’ll have to use a different keyword now. For example::
 
   // Valid in v4, not valid in v5:
-  strv4 = tostring(x = close, y = "#.#")
+  timev4 = time(resolution = "1D")
   // Valid in v5:
-  strv5 = str.tostring(value = close, format = "#.#") 
+  timev5 = time(timeframe = "1D")
+  // Valid in both v4 and v5:
+  timeBoth = time("1D")
 
-The full list of renamed function arguments can be found here[link to the end of the page so that we don’t post a giant table in the middle of the text].
+The full list of renamed function arguments can be found here TODO: add link.
 
 Removed an ``rsi()`` overload
 -----------------------------
 Previously, the built-in ``rsi()`` function had two different overloads:
 
 * ``rsi(series float, simple int)`` -> regular RSI calculation
-* ``rsi(series float, series float)`` -> an overload used in the MFI indicator, did a calculation equivalent to ``100.0 - (100.0 / (1.0 + arg1 / arg2))``. 
+* ``rsi(series float, series float)`` -> an overload used in the MFI indicator, did a calculation equivalent to ``100.0 - (100.0 / (1.0 + arg1 / arg2))``
 
 Because of this, a single built-in function did two tasks with different expected results, and it was hard to distinguish which overload would be used at a glance. We’ve found a number of indicators misusing this and getting an incorrect calculation as a result. As such, the second overload has been removed to get rid of ambiguous behavior of the function. 
 
@@ -112,11 +114,40 @@ In v5, function parameters that have constants dedicated to them can only use co
 
 To convert your script from v4 to v5, make sure to replace all variables with constants where necessary.
 
-The ``Transp`` argument has been removed
+The ``Transp`` argument has been deprecated
 ----------------------------------------
-The ``transp=`` argument that was present in many plot functions in v4 interfered with the rgb functionality and has been removed. The ``color.new()`` function can be used to specify the transparency of any color instead.
-TODO: write about functions with removed default `transp` values, e.g. fill()
+The ``transp=`` argument that was present in many plot functions in v4 interfered with the rgb functionality and has been deprecated. The ``color.new()`` function can be used to specify the transparency of any color instead.
 
+In previous versions, the ``bgcolor()`` and `fill()`` functions had an optional ``transp`` arguments with the default value of 90. This means that the code below used to display Bollinger Bands with semi-transparent fill between two bands and semi-transparent backround color where bands cross the chart, even though ``transp`` is not explicitly specified::
+
+ //@version=4
+ study("Bollinger Bands", overlay=true)
+ [middle, upper, lower] = bb(close, 5, 4)
+ plot(middle, color=color.blue)
+ p1 = plot(upper, color=color.green)
+ p2 = plot(lower, color=color.green)
+ crossUp = crossover(high, upper)
+ crossDn = crossunder(low, lower)
+ // Both `fill()` and `bgcolor()` have a default `transp` of 90
+ fill(p1, p2, color = color.green)
+ bgcolor(crossUp ? color.green : crossDn ? color.red : na)
+
+Both these functions no longer have a default ``transp`` value, so we need to modify the transparency of the colors themselves to make sure our colors are semi-transparent. This can be done with the ``color.new()`` function. The code below will be a v5 equivalent of the code above::
+
+ //@version=5
+ indicator("Bollinger Bands", overlay=true)
+ [middle, upper, lower] = ta.bb(close, 5, 4)
+ plot(middle, color=color.blue)
+ p1 = plot(upper, color=color.green)
+ p2 = plot(lower, color=color.green)
+ crossUp = ta.crossover(high, upper)
+ crossDn = ta.crossunder(low, lower)
+ TRANSP = 90
+ // We use `color.new()` to explicitly pass transparency to both functions
+ fill(p1, p2, color = color.new(color.green, TRANSP))
+ bgcolor(crossUp ? color.new(color.green, TRANSP) : crossDn ? color.new(color.red, TRANSP) : na)
+
+ 
 Default session for time() and time_close() has been changed
 ------------------------------------------------------------
 The default value for the ``session`` argument of the ``time()`` and ``time_close()`` functions has changed. In v4, when you pass a specific session time for any of the two functions mentioned above without specifying the days, the session automatically fills the days as ``23456``, i.e. Monday to Friday. In v5, we have changed this to auto-complete the session as ``1234567`` instead::
@@ -140,12 +171,13 @@ To make sure that your script’s behavior in v5 is consistent with v4, add ``:1
   isLunch = time(timeframe.period, '1300-1400:23456')
   bgcolor(isLunch ? color.new(color.green, 90) : na)
 
+
 strategy.exit() now must do something
 -------------------------------------
 Gone are the days when the ``strategy.exit()`` function was allowed to loiter. Now it must actually have an effect on the strategy itself, and to do so, it should have at least one of the following parameters: ``profit``, ``limit``, ``loss``, ``stop``, or one of the following pairs: ``trail_offset`` and ``trail_price`` / ``trail_points``. 
 In v4, it used to compile with a warning (although the function itself did not do anything in the code); now it is no longer valid code. If you are converting a script to v5 and get this error, feel free to comment it out or remove it altogether: it didn’t do anything in your code anyway.
 
-.. _changed_names:
+
 Variables, functions, and function arguments name changes
 ---------------------------------------------------------
 
