@@ -1,0 +1,242 @@
+Pine v4,Pine v5
+Removed functions and variables,
+Built-in Variables,
+"input.bool
+input.color
+input.float
+input.integer
+input.resolution
+input.session
+Input.source
+input.string
+input.symbol
+input.time","Replaced with functions of the same name, e.g. `input.bool()` instead of `input.bool`
+
+`input.resolution` was replaced by the `input.timeframe()` function"
+Built-in Functions,
+"iff()
+offset()",
+Renamed functions and arguments (without namespace changes),
+Built-in Functions,
+"study(<...>, resolution, resolution_gaps, <...>)
+strategy.entry(long)
+strategy.order(long)
+time(resolution)
+time_close(resolution)
+nz(x, y)","indicator(<...>, timeframe, timeframe_gaps, <...>)
+strategy.entry(direction)
+strategy.order(direction)
+time(timeframe)
+time_close(timeframe)
+nz(source, replacement)"
+Namespace ta.* -- for technical analysis-related functions and variables,
+Built-in Variables,
+"accdist
+iii
+nvi
+obv
+pvi
+pvt
+tr
+vwap
+wad
+wvad","ta.accdist
+ta.iii
+ta.nvi
+ta.obv
+ta.pvi
+ta.pvt
+ta.tr
+ta.vwap
+ta.wad
+ta.wvad"
+Built-in Functions,
+"alma
+atr
+bb
+bbw
+cci
+cmo
+cog
+dmi
+ema
+hma
+barsince
+valuewhen
+highestbars
+lowest
+lowestbars
+kc
+kcw
+macd
+mfi
+mom
+rma
+roc
+rsi(x, y)
+sar
+sma
+cross(x, y)
+crossover(x, y)
+crossunder(x, y)
+pivothigh
+pivotlow
+stoch
+supertrend
+swma(x)
+tr
+tsi
+vwap(x)
+vwma
+wma
+wpr
+change
+falling
+highest
+rising
+range
+correlation(source_a, source_b, length)
+linreg
+percentile_linear_interpolation
+percentile_nearest_rank
+percentrank
+stdev
+variance
+median
+mode
+dev
+cum(x)","ta.alma
+ta.atr
+ta.bb
+ta.bbw
+ta.cci
+ta.cmo
+ta.cog
+ta.dmi
+ta.ema
+ta.hma
+ta.barsince
+ta.valuewhen
+ta.highestbars
+ta.lowest
+ta.lowestbars
+ta.kc
+ta.kcw
+ta.macd
+ta.mfi
+ta.mom
+ta.rma
+ta.roc
+ta.rsi(source, length)
+ta.sar
+ta.sma
+ta.cross(source1, source2)
+ta.crossover(source1, source2)
+ta.crossunder(source1, source2)
+ta.pivothigh
+ta.pivotlow
+ta.stoch
+ta.supertrend
+ta.swma(source)
+ta.tr
+ta.tsi
+ta.vwap(source)
+ta.vwma
+ta.wma
+ta.wpr
+ta.change
+ta.falling
+ta.highest
+ta.rising
+ta.range
+ta.correlation(source1, source2, length)
+ta.linreg
+ta.percentile_linear_interpolation
+ta.percentile_nearest_rank
+ta.percentrank
+ta.stdev
+ta.variance
+ta.median
+ta.mode
+ta.dev
+ta.cum(source)"
+Namespace math.* -- for math-related functions and variables,
+Built-in Functions,
+"abs(x)
+acos(x)
+asin(x)
+atan(x)
+avg
+ceil(x)
+cos(x)
+exp(x)
+floor(x)
+log(x)
+log10(x)
+max(x1, x2, ...)
+min(x1, x2, ...)
+pow
+random
+round(x, precision)
+round_to_mintick(x)
+sign(x)
+sin(x)
+sqrt(x)
+sum
+tan(x)
+todegrees
+toradians","math.abs(number)
+math.acos(number)
+math.asin(number)
+math.atan(number)
+math.avg
+math.ceil(number)
+math.cos(angle)
+math.exp(number)
+math.floor(number)
+math.log(number)
+math.log10(number)
+math.max
+math.min
+math.pow
+math.random
+math.round(number, precision)
+math.round_to_mintick(number)
+math.sign(number)
+math.sin(angle)
+math.sqrt(number)
+math.sum
+math.tan(angle)
+math.todegrees
+math.toradians"
+Namespace request.* -- for functions that request external data,
+Built-in Functions,
+"financial
+quandl
+security(<...>, resolution, <...>)
+splits
+dividends
+earnings","request.financial
+request.quandl
+request.security(<...>, timeframe, <...>)
+request.splits
+request.dividends
+request.earnings"
+Namespace ticker.* -- for functions that help create tickers,
+Built-in Functions,
+"heikinashi
+kagi
+linebreak
+pointfigure
+renko
+tickerid","ticker.heikinashi
+ticker.kagi
+ticker.linebreak
+ticker.pointfigure
+ticker.renko
+ticker.new"
+Namespace str.* -- for functions that work with strings,
+Built-in Functions,
+"tostring(x, y)
+tonumber(x)","str.tostring(value, format)
+str.tonumber(string)"
