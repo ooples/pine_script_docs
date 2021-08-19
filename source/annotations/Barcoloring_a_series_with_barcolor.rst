@@ -2,13 +2,13 @@
 Barcoloring a series with barcolor
 ----------------------------------
 
-The `barcolor <https://www.tradingview.com/pine-script-reference/v4/#fun_barcolor>`__
+The `barcolor <https://www.tradingview.com/pine-script-reference/v5/#fun_barcolor>`__
 annotation function lets you specify the color of bars.
 The coloring can be conditional. The following
 script renders *inside* and *outside* bars in different colors::
 
-    //@version=4
-    study("barcolor example", overlay=true)
+    //@version=5
+    indicator("barcolor example", overlay=true)
     isUp() => close > open
     isDown() => close <= open
     isOutsideUp() => high > high[1] and low < low[1] and isUp()

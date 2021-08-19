@@ -1,8 +1,8 @@
 plot annotation
 ---------------
 
-The `plot <https://www.tradingview.com/pine-script-reference/v4/#fun_plot>`__ annotation function
-has one mandatory parameter: a value of *series* type, which it displays
+The `plot <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ annotation function
+has one mandatory parameter: a value of *series int/float* type, which it displays
 as a line. A basic call looks like this:
 
 ::
@@ -22,7 +22,7 @@ will be represented as a horizontal line.
 
 The ``plot`` annotation has many optional parameters, in
 particular those which set the line's display style: ``style``,
-``color``, ``linewidth``, ``transparency``, and others.
+``color``, ``linewidth``, and others.
 
 The value of the ``color`` parameter can be defined in different ways.
 If it is a color constant, for
@@ -44,10 +44,10 @@ color the rendered line. For example::
 
 The ``offset`` parameter specifies the shift used when the line is plotted
 (negative values shift to the left while positive values shift to
-the right) [#offset_function]_. For example::
+the right). For example::
 
-    //@version=4
-    study("My Script 12", overlay=true)
+    //@version=5
+    indicator("My Script 12", overlay=true)
     plot(close, color=color.red, offset=-5)
     plot(close, color=color.lime, offset=5)
 
@@ -57,14 +57,3 @@ the right) [#offset_function]_. For example::
 As can be seen in the screenshot, the *red* series has been shifted to the
 left (since the argument's value is negative), while the *green*
 series has been shifted to the right (its value is positive).
-
-
-.. rubric:: Footnotes
-
-.. [#offset_function] In Pine there is a built-in
-   `offset <https://www.tradingview.com/pine-script-reference/v4/#fun_offset>`__ function
-   which shifts the values of a series to the right while discarding 'out of range' values.
-   The advantage of the ``offset`` function lies in the fact that its result
-   can be used in other expressions to execute complex calculations. In the
-   case of ``plot`` function's ``offset`` parameter, the shift is only cosmetic;
-   the actual values in the series are not moved.
