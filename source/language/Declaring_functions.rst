@@ -64,12 +64,12 @@ be the result of the function's call. For example::
     geom_average(x, y) =>
         a = x*x
         b = y*y
-        sqrt(a + b)
+        math.sqrt(a + b)
 
 The function ``geom_average`` has two arguments and creates two variables
-in the body: ``a`` and ``b``. The last statement calls the function ``sqrt``
+in the body: ``a`` and ``b``. The last statement calls the function ``math.sqrt``
 (an extraction of the square root). The ``geom_average`` call will return
-the value of the last expression: ``(sqrt(a + b))``.
+the value of the last expression: ``(math.sqrt(a + b))``.
 
 Scopes in the script
 --------------------

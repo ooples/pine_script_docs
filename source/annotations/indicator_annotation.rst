@@ -1,15 +1,16 @@
-study annotation
+indicator() annotation
 ----------------
 
-Every *study* (also known as an *indicator*) [#strategy]_ script must contain one call of the
-`study <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__
+Every *indicator* [#strategy]_ script must contain one call of the
+`indicator <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__
 annotation function, which has the following signature:
 
 .. code-block:: text
 
-    study(title, shorttitle, overlay, format, precision)
+    indicator(title, shorttitle, overlay, format, precision, scale, max_bars_back, timeframe, timeframe_gaps, explicit_plot_zorder, max_lines_count, max_labels_count, max_boxes_count)
 
-The ``study`` annotation determines the indicator's general properties.
+The ``indicator`` annotation determines the indicator's general properties. The most important arguments of the indicator function are described below, a full overview of all `indicator()`` arguments can be found in the Reference Manual article.
+
 Only the ``title`` parameter is mandatory. It defines the name of the
 indicator. This name will be used in the *Indicators* dialog box and is
 independent of the name used to save the script in your Personal Library.
@@ -42,8 +43,7 @@ then the study will not inherit formatting from the chart's settings and
 the value specified will be used instead, as if ``format=format.price`` 
 had been used.
 
-
 .. rubric:: Footnote
 
-.. [#strategy] Pine also has a `strategy <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy>`__
-   annotation function which is used to create a :doc:`backtesting strategy </essential/Strategies>` rather than a study (or indicator).
+.. [#strategy] Pine also has a `strategy <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
+   annotation function which is used to create a :doc:`backtesting strategy </essential/Strategies>` rather than an indicator.

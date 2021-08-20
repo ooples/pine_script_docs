@@ -6,9 +6,9 @@ Type system
 
 .. include:: <isonum.txt>
 
-Pine has 9 fundamental data **types**. They are:
-*int*, *float*, *bool*, *color*, *string*, *line*, *label*, *plot*, *hline*.
-All of these types exist in several **forms**. There are 5 forms of types:
+Pine has 11 fundamental data **types**. They are:
+*int*, *float*, *bool*, *color*, *string*, *plot*, *hline*, *line*, *label*, *box*, *table*.
+Most of these types exist in several **forms**. There are 5 forms of types:
 *literal*, *const*, *input*, *simple* and a *series*. We will often refer to a pair *form type* as a *type*.
 The Pine compiler distinguishes
 between a *literal bool* type, an *input bool* type, a *series bool* type and so on.
@@ -60,11 +60,11 @@ Values of the form *input* are ones that:
 
     * do not change during script execution
     * are unknown at compile time
-    * originate from an `input <https://www.tradingview.com/pine-script-reference/v4/#fun_input>`__ function
+    * originate from one of the `input.*` functions, e.g.  `input.int <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int>`__
 
 For example::
 
-    p = input(10, title="Period")
+    p = input.int(10, title="Period")
 
 The type of ``p`` variable is *input integer*.
 
@@ -77,9 +77,8 @@ Values of the form *simple* are ones that:
     * are unknown at compile time
 
 They are values that come from the main chart's symbol information. For example,
-the `syminfo.mintick <https://www.tradingview.com/pine-script-reference/v4/#var_syminfo{dot}mintick>`__
-built-in variable is a *simple float*. The word *simple* is usually omitted when referring to this form,
-so we use *float* rather than *simple float*.
+the `syminfo.mintick <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}mintick>`__
+built-in variable is a *simple float*.
 
 .. _series:
 
@@ -95,8 +94,7 @@ Values of the form *series* are ones that:
 The *series* form is the most common form in Pine.
 Examples of built-in *series* variables are: ``open``, ``high``, ``low``,
 ``close``, ``volume`` and ``time``. The size of these series is equal to the
-quantity of available bars for the current ticker and timeframe
-(resolution). Series may contain numbers or a special value: ``na``,
+quantity of available bars for the current ticker and timeframe. Series may contain numbers or a special value: ``na``,
 meaning that a value is *not available*. Further information about the ``na`` value
 can be found :ref:`here <history_referencing_operator>`.
 Any expression that contains a series variable will be treated as a
@@ -128,7 +126,7 @@ There are 5 forms of int type in Pine:
     * *literal int*
     * *const int*
     * *input int*
-    * *int*
+    * *simple int*
     * *series int*
 
 float
@@ -155,7 +153,7 @@ There are 5 forms of float type in Pine:
     * *literal float*
     * *const float*
     * *input float*
-    * *float*
+    * *simple float*
     * *series float*
 
 The internal precision of floats in Pine is 1e-10.
@@ -173,7 +171,7 @@ There are 5 forms of bool type in Pine:
     * *literal bool*
     * *const bool*
     * *input bool*
-    * *bool*
+    * *simple bool*
     * *series bool*
 
 
@@ -208,19 +206,8 @@ There are 5 forms of color type in Pine:
     * *literal color*
     * *const color*
     * *input color*
-    * *color*
+    * *simple color*
     * *series color*
-
-One might ask how a value can be of type *input color* if it is impossible to use
-`input <https://www.tradingview.com/pine-script-reference/v4/#fun_input>`__ to input a color in Pine. The answer is:
-through an arithmetic expression with other input types and color literals/constants. For example::
-
-   b = input(true, "Use red color")
-   c = b ? color.red : #000000  // c has color input type
-
-This is an arithmetic expression using Pine's ternary operator ``?:`` where
-three different types of values are used: ``b`` of type *input bool*, ``color.red`` of type *const color* and ``#000000`` of
-type *literal color*. In determining the result's type, the Pine compiler takes into account its automatic type-casting rules (see the end of this section) and the available overloads of the ``?:`` operator. The resulting type is the narrowest type fitting these criteria: *input color*.
 
 The following built-in *color* variables can be used to avoid hexadecimal color literals: ``color.black``, ``color.silver``, ``color.gray``, ``color.white``,
 ``color.maroon``, ``color.red``, ``color.purple``, ``color.fuchsia``, ``color.green``, ``color.lime``,
@@ -229,20 +216,20 @@ The following built-in *color* variables can be used to avoid hexadecimal color 
 
 It is possible to change the transparency of the color using a
 built-in function
-`color.new <https://www.tradingview.com/pine-script-reference/v4/#fun_color{dot}new>`__.
+`color.new <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}new>`__.
 
 Here is an example::
 
-    //@version=4
-    study(title="Shading the chart's background", overlay=true)
-    c = color.navy
-    bgColor = (dayofweek == dayofweek.monday) ? color.new(c, 50) :
-              (dayofweek == dayofweek.tuesday) ? color.new(c, 60) :
-              (dayofweek == dayofweek.wednesday) ? color.new(c, 70) :
-              (dayofweek == dayofweek.thursday) ? color.new(c, 80) :
-              (dayofweek == dayofweek.friday) ? color.new(c, 90) :
-              color.new(color.blue, 80)
-    bgcolor(color=bgColor)
+    //@version=5
+    indicator(title="Shading the chart's background", overlay=true)
+    bgColor = color.navy
+    transp = switch dayofweek
+        dayofweek.monday => 50
+        dayofweek.tuesday => 60
+        dayofweek.wednesday => 70
+        dayofweek.thursday => 80
+        dayofweek.friday => 90
+    bgcolor(color=color.new(bgColor, transp))
 
 
 string
@@ -272,18 +259,14 @@ There are 5 forms of string type in Pine:
     * *literal string*
     * *const string*
     * *input string*
-    * *string*
+    * *simple string*
     * *series string*
 
 
-line and label
+line, label, box, and table
 ^^^^^^^^^^^^^^
 
-New drawing objects were introduced in Pine v4. These objects are created with the
-`line.new <https://www.tradingview.com/pine-script-reference/v4/#fun_line{dot}new>`__
-and `label.new <https://www.tradingview.com/pine-script-reference/v4/#fun_label{dot}new>`__
-functions. Their type is *series line* and *series label*, respectively.
-There is only one form of the *line* and *label* types in Pine: *series*.
+New drawing objects were introduced in Pine v4. These objects are created with the `<drawing_type>.new` functions, e.g. `line.new <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ or `label.new <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__. There is only one form of the drawing types in Pine: *series*, so their type is *series line*, *series label*, *series box*, and *series table* respectively..
 
 plot and hline
 ^^^^^^^^^^^^^^
@@ -293,7 +276,7 @@ values which represent objects created on the chart. The function
 ``plot`` returns an object of the type *plot*, represented as a line
 or diagram on the chart. The function ``hline`` returns an object of the
 type *hline*, represented as a horizontal line. These objects can be
-passed to the `fill <https://www.tradingview.com/pine-script-reference/v4/#fun_fill>`__
+passed to the `fill <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__
 function to color the area in between them.
 
 array
@@ -313,8 +296,8 @@ void
 
 There is a *void* type in Pine Script. Most functions and annotation functions which produce a *side effect*
 return a void result. E.g.,
-`strategy.entry <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy{dot}entry>`__,
-`plotshape <https://www.tradingview.com/pine-script-reference/v4/#fun_plotshape>`__ etc.
+`strategy.entry <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}entry>`__,
+`plotshape <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ etc.
 
 A void result cannot be used in any arithmetic expression or be assigned to a variable.
 
@@ -342,7 +325,7 @@ or::
 
     myVar = float(na)
 
-Thirdly, to test if some value is *not available*, a special function must be used: `na <https://www.tradingview.com/pine-script-reference/v4/#fun_na>`__. For example::
+Thirdly, to test if some value is *not available*, a special function must be used: `na <https://www.tradingview.com/pine-script-reference/v5/#fun_na>`__. For example::
 
     myClose = na(myVar) ? 0 : close
 
@@ -381,8 +364,8 @@ another:
 
 For example::
 
-    //@version=4
-    study("My Script")
+    //@version=5
+    indicator("My Script")
     plotshape(series=close)
 
 The type of the ``series`` parameter of the ``plotshape`` function is *series bool*. But the function is called
@@ -391,33 +374,33 @@ an automatic type-casting rule *series float* |rarr| *series bool* (see the diag
 
 
 Sometimes there is no automatic *X* |rarr| *Y* type-casting rule. For these cases, explicit type-casting functions
-were introduced in Pine v4. They are:
+were introduced in Pine v5. They are:
 
-    * `int <https://www.tradingview.com/pine-script-reference/v4/#fun_int>`__
-    * `float <https://www.tradingview.com/pine-script-reference/v4/#fun_float>`__
-    * `string <https://www.tradingview.com/pine-script-reference/v4/#fun_string>`__
-    * `bool <https://www.tradingview.com/pine-script-reference/v4/#fun_bool>`__
-    * `color <https://www.tradingview.com/pine-script-reference/v4/#fun_color>`__
-    * `line <https://www.tradingview.com/pine-script-reference/v4/#fun_line>`__
-    * `label <https://www.tradingview.com/pine-script-reference/v4/#fun_label>`__
+    * `int <https://www.tradingview.com/pine-script-reference/v5/#fun_int>`__
+    * `float <https://www.tradingview.com/pine-script-reference/v5/#fun_float>`__
+    * `string <https://www.tradingview.com/pine-script-reference/v5/#fun_string>`__
+    * `bool <https://www.tradingview.com/pine-script-reference/v5/#fun_bool>`__
+    * `color <https://www.tradingview.com/pine-script-reference/v5/#fun_color>`__
+    * `line <https://www.tradingview.com/pine-script-reference/v5/#fun_line>`__
+    * `label <https://www.tradingview.com/pine-script-reference/v5/#fun_label>`__
+    * `box <https://www.tradingview.com/pine-script-reference/v5/#fun_box>`__
+    * `table <https://www.tradingview.com/pine-script-reference/v5/#fun_table>`__
 
 Here is an example::
 
-    //@version=4
-    study("My Script")
+    //@version=5
+    indicator("My Script")
     len = 10.0
-    s = sma(close, len) // Compilation error!
+    s = ta.sma(close, len) // Compilation error!
     plot(s)
 
-This code fails to compile with an error: **Add to Chart operation failed, reason:
-line 4: Cannot call `sma` with arguments (series[float], const float); available overloads:
-sma(series[float], integer) => series[float];**
+This code fails to compile with an error: **Add to Chart operation failed, reason: line 4: Cannot call 'ta.sma' with argument 'length'='len'. An argument of 'const float' type was used but a 'series integer' is expected;**
 The compiler says that while the type of the ``len`` variable is *const float*, the ``sma`` function
-expected an ``integer``. There is no automatic type casting from *const float* to *integer*,
+expected a ``series integer``. There is no automatic type casting from *const float* to *series integer*,
 but an explicit type-casting function can be used::
 
-    //@version=4
-    study("My Script")
+    //@version=5
+    indicator("My Script")
     len = 10.0
-    s = sma(close, int(len))
+    s = ta.sma(close, int(len))
     plot(s)

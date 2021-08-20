@@ -5,11 +5,11 @@ Structure of the script
 
 A script in Pine usually consists of:
 
-* ``//@version=4`` A compiler directive in a comment that specifies which version of Pine the script will use.
+* ``//@version=5`` A compiler directive in a comment that specifies which version of Pine the script will use.
   If the ``@version`` directive is missing, version 1 will be used. It is strongly recommended to always
   use the latest version available.
-* A `study <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__ or a
-  `strategy <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy>`__ annotation call.
+* An `indicator <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ or a
+  `strategy <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__ annotation call.
   Their parameters define the script's title and other properties.
 * A series of statements which implement the script's algorithm.
   Each statement is usually placed on a separate line. It is possible to place more
@@ -22,20 +22,20 @@ A script in Pine usually consists of:
     -  :doc:`function declarations <Declaring_functions>`
     -  :doc:`functions and annotations calls <Functions_and_annotations>`
 
-* A *study* must contain at least one function/annotation call which produces some output on the chart
+* An *indicator* must contain at least one function/annotation call which produces some output on the chart
   (e.g., ``plot``, ``plotshape``, ``barcolor``, ``line.new``, etc.).
-  A strategy must contain at least one ``strategy.*`` call, e.g., ``strategy.entry``.
+  A *strategy* must contain at least one ``strategy.*`` call, e.g., ``strategy.entry``.
 
-  The simplest valid Pine v4 study can be generated using *Pine Editor* |rarr| *New* |rarr| *Blank indicator script*::
+  The simplest valid Pine v5 study can be generated using *Pine Editor* |rarr| *Open* |rarr| *New blank indicator*::
 
-    //@version=4
-    study("My Script")
+    //@version=5
+    indicator("My Script")
     plot(close)
 
-  A simple valid Pine v4 strategy can be generated using *Pine Editor* |rarr| *New* |rarr| *Blank strategy script*::
+  A simple valid Pine v5 strategy can be generated using *Pine Editor* |rarr| *Open* |rarr| *New blank strategy*::
 
-    //@version=4
-    strategy("My Strategy", overlay=true)
+    //@version=5
+    strategy("My Strategy", overlay=true, margin_long=100, margin_short=100)
 
     longCondition = crossover(sma(close, 14), sma(close, 28))
     if (longCondition)

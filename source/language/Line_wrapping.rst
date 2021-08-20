@@ -22,10 +22,10 @@ A long ``plot`` call may be wrapped as:
 
 ::
 
-    plot(correlation(src, ovr, length),
-       color=color.purple,
+    plot(ta.correlation(src, ovr, length),
+       color=color.new(color.purple, 40),
        style=plot.style_area,
-       transp=40)
+       trackprice=true)
 
 Statements inside user functions can also be wrapped.
 However, since a local statement must syntactically begin with an
@@ -52,8 +52,8 @@ example:
 Do not use comments with line wrapping.
 The following code does NOT compile::
 
-    //@version=4
-    study("My Script")
+    //@version=5
+    indicator("My Script")
     c = open > close ? color.red :
       high > high[1] ? color.lime : // a comment
       low < low[1] ? color.blue : color.black
