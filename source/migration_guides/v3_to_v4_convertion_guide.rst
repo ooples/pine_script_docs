@@ -1,7 +1,21 @@
-In Pine Script v4 the following built-in constants, variables, and functions were renamed:
+Pine version 4 migration guide
+==============================
+
+This is a guide to converting Pine Script code from ``@version=3`` to ``@version=4``.
+
+Converter
+---------
+
+Pine Editor comes with an utility to automatically convert v3 indicators and strategies to v4. To access it, open a script with ``//@version=3`` in it and select the ``Convert to v4`` option in the ``More`` dropdown menu:
+
+TODO: IMAGE
+
+Not all scripts can be automatically converted from v3 to v4. If you want to convert the script manually or if your indicator returns a compilation error after conversion, consult the guide below for more information.
 
 Renaming of built-in constants, variables, and functions
 --------------------------------------------------------
+
+In Pine Script v4 the following built-in constants, variables, and functions were renamed:
 
 - Color constants (e.g ``red``) are moved to the ``color.*`` namespace (e.g. ``color.red``).
 - The ``color`` function has been renamed to ``color.new``.
@@ -21,10 +35,9 @@ Explicit variable type declaration
 In Pine Script v4 it's no longer possible to create variables with an unknown data type at the time of their declaration. This was done to avoid a number of issues that arise when the variable type changes after its initialization with the na value. From now on, you need to explicitly specify their type using keywords or type functions (for example, ``float``) when declaring variables with the na value::
 
   //@version=4
-  study("NA", overlay=true)
-  float a = na
-  a := if close >= open
-      high
-  else
-      low
-  plot(a)
+  study("Green Candle Close")
+  // We expect `src` to hold float values, so we declare in with the `float` keyword
+  float src = na
+  if close > open
+      src := close
+  plot(src)
