@@ -8,7 +8,7 @@ Converter
 
 Pine Editor comes with an utility to automatically convert v3 indicators and strategies to v4. To access it, open a script with ``//@version=3`` in it and select the ``Convert to v4`` option in the ``More`` dropdown menu:
 
-TODO: IMAGE
+.. image:: images/v3_to_v4_convert_button.png
 
 Not all scripts can be automatically converted from v3 to v4. If you want to convert the script manually or if your indicator returns a compilation error after conversion, consult the guide below for more information.
 

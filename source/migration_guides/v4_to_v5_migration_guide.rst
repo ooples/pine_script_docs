@@ -11,7 +11,8 @@ Converter
 
 Pine Editor now comes with an utility to automatically convert v4 indicators and strategies to v5. To access it, open a script with ``//@version=4`` in it and select the ``Convert to v5`` option in the ``More`` dropdown menu:
 
-TODO: IMAGE
+.. image:: images/v4_to_v5_convert_button.png
+
 
 Not all scripts can be automatically converted from v4 to v5. If you want to convert the script manually or if your indicator returns a compilation error after conversion, consult the guide below for more information.
 
@@ -19,7 +20,7 @@ Renamed functions and variables
 -------------------------------
 Many built-in functions and variables were renamed in v5 for clarity and consistency. Most changes simply add a namespace is the addition of the namespace: for example, the ``sma()`` function is now called ``ta.sma()`` in v5. As such, the new name can be easily found by entering the old name and checking the suggestion list:
 
-TODO: IMAGE
+.. image:: images/v5_autocomplete.png
  
 The only two functions that were fully renamed are:
 
