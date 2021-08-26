@@ -21,6 +21,7 @@ Pine Script |version| User Manual
    Publishing_scripts
    Public_Library
    Release_notes
+   migration_guides/index
    appendix/index
    Where_can_I_get_more_information
 

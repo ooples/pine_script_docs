@@ -1,17 +1,15 @@
-
-
 Pine version 5 migration guide
 ==============================
 
-This document helps to migrate Pine Script code from ``@version=4`` to
-``@version=5``.
+This guide describes how existing Pine v4 features were changed in Pine v5 and what needs to be done to properly convert a ``@version=4`` script to a newer version.
 
 Converter
 ---------
 
 Pine Editor now comes with an utility to automatically convert v4 indicators and strategies to v5. To access it, open a script with ``//@version=4`` in it and select the ``Convert to v5`` option in the ``More`` dropdown menu:
 
-TODO: IMAGE
+.. image:: images/v4_to_v5_convert_button.png
+
 
 Not all scripts can be automatically converted from v4 to v5. If you want to convert the script manually or if your indicator returns a compilation error after conversion, consult the guide below for more information.
 
@@ -19,14 +17,14 @@ Renamed functions and variables
 -------------------------------
 Many built-in functions and variables were renamed in v5 for clarity and consistency. Most changes simply add a namespace is the addition of the namespace: for example, the ``sma()`` function is now called ``ta.sma()`` in v5. As such, the new name can be easily found by entering the old name and checking the suggestion list:
 
-TODO: IMAGE
+.. image:: images/v5_autocomplete.png
  
 The only two functions that were fully renamed are:
 
 * ``study()`` was renamed to ``indicator()``.
 * ``tickerid()`` was renamed to ``ticker.new()``.
 
-The full list of renamed variables, should you need it, can be found in the following section: TODO: add link.
+The full list of renamed variables, should you need it, can be found in the `Variables, functions, and function arguments name changes`_ section.
 
 Renamed function arguments
 --------------------------
@@ -39,23 +37,23 @@ Some 'historical' argument names for built-in functions have been changed becaus
   // Valid in both v4 and v5:
   timeBoth = time("1D")
 
-The full list of renamed function arguments can be found here TODO: add link.
+The full list of renamed function arguments can be found in the `Variables, functions, and function arguments name changes`_ section.
 
-Removed an ``rsi()`` overload
+Removed an rsi() overload
 -----------------------------
 Previously, the built-in ``rsi()`` function had two different overloads:
 
 * ``rsi(series float, simple int)`` -> regular RSI calculation
 * ``rsi(series float, series float)`` -> an overload used in the MFI indicator, did a calculation equivalent to ``100.0 - (100.0 / (1.0 + arg1 / arg2))``
 
-Because of this, a single built-in function did two tasks with different expected results, and it was hard to distinguish which overload would be used at a glance. We’ve found a number of indicators misusing this and getting an incorrect calculation as a result. As such, the second overload has been removed to get rid of ambiguous behavior of the function. 
+Because of this, a single built-in function did two tasks with different expected results, and it was hard to distinguish which overload would be used at a glance. We’ve found a number of indicators misusing this and getting an incorrect calculations as a result. As such, the second overload has been removed to get rid of ambiguous behavior of the function. 
 
-Now, the ``rsi()`` function can only take a simple integer as its second argument.
-If you passed a float value to the second argument, you can replace the ``rsi()`` call with the following formula ``100.0 - (100.0 / (1.0 + arg1 / arg2))``. It is equivalent to the calculation that ``rsi(series float, series float)`` did.
+Now, the ``rsi()`` function can only take a ``simple int`` value as its second argument.
+If you passed a ``float`` value to the second argument, you can replace the ``rsi()`` call with the following formula: ``100.0 - (100.0 / (1.0 + arg1 / arg2))``. It is equivalent to the calculation that ``rsi(series float, series float)`` did.
 
-If you passed a series integer value as the second argument, it only used to work in v4 because series integer was automatically cast to series float and used the second overload. Note that it did not give the result you would actually expect from the ``rsi(source, length)`` function. Also note that the original ``rsi()`` calculation takes previous bars into account, so a series length is not applicable there, which is why there is no overload for ``rsi(series float, series integer)`` and a varying length can no longer be passed to ``rsi()``.
+If you passed a ``series int`` value as the second argument, it only used to work in v4 because ``series int`` was automatically cast to ``series float`` and the second overload of the function was used. It did not give the result you would actually expect from the ``rsi(source, length)`` function. Note that the original ``rsi()`` calculation takes previous bars into account, so a length specified as a ``series`` variable is not applicable there, which is why there is no overload for ``rsi(series float, series integer)``, i.e. an ``int`` variable with value that changes from one bar to another can no longer be passed to ``rsi()`` as length.
 
-If you passed an integer value of a non-series, nothing should change for you.
+If you passed an integer value of a non-series type form, nothing should change for you.
 
 Reserved keywords
 -----------------
@@ -71,6 +69,17 @@ The functions ``iff()`` and ``offset()`` have been removed. The code that uses t
     // <condition> ? <return if true> : <return if false>
     // Valid in v4 and v5
     barColorTernary = close >= open ? color.green : color.red
+	
+Note that the ternary operator is evaluated 'lazily', so only one statement of the two is executed (depending on the condition). This is different from ``iff()``, which always executed both statements (but returned only the relevant one). Some functions rely on being executed on every bar, so you will need to handle these cases separately, for example by moving both branches to separate variables that are calculated on every bar and then returning these variables from the ternary operator instead::
+
+	// iff() in v4
+	v1 = iff(close > open, highest(10), lowest(10)) // highest() and lowest() should be calculated on every bar
+	plot(v1)
+	// the same in v5, with both functions being calculated on every bar
+	h1 = ta.highest(10)
+	l1 = ta.lowest(10)
+	v1 = close > open ? h1 : l1
+	plot(v1)
 
 The ``offset()`` function can in turn be replaced with the ``[]`` operator::
 
@@ -79,9 +88,9 @@ The ``offset()`` function can in turn be replaced with the ``[]`` operator::
   // Valid in v4 and v5
   prevClosev5 = close[1]
 
-Split ``input()`` into several functions
+Split input() into several functions
 ------------------------------------
-The old ``input()`` function had too many different overloads, each one with its list of different arguments that can be possibly passed to it. For clarity, most of these overloads have now been split into separate functions. Each new function shares its name with an ``input.*`` constant from v4. The constants themselves have been removed.
+The old ``input()`` function had too many different overloads, each one with its list of different arguments that can be possibly passed to it. For clarity, most of these overloads have now been split into separate functions. Each new function shares its name with an ``input.*`` constant from v4 (with the exception of ``input.integer``, which is replaced by the ``input.int()`` function). The constants themselves have been removed.
 
 For example, to convert an indicator with an input from v4 to v5, where you would use ``input(type = input.symbol)`` before, you should now use the ``input.symbol()`` function instead::
 
@@ -159,7 +168,7 @@ The default value for the ``session`` argument of the ``time()`` and ``time_clos
   // This line is equivalent to t0 in v5:
   t2 = time("1D", "1000-1200:1234567")
 
-To make sure that your script’s behavior in v5 is consistent with v4, add ``:12345`` to all ``time()`` and ``time_close()`` calls that specify the session without the days. For an example of how to convert ``time()`` from v4 to v5, see the code below::
+To make sure that your script’s behavior in v5 is consistent with v4, add ``:23456`` to all ``time()`` and ``time_close()`` calls that specify the session without the days. For an example of how to convert ``time()`` from v4 to v5, see the code below::
 
   //@version=4
   study("Lunch Break", overlay=true)
@@ -175,7 +184,7 @@ To make sure that your script’s behavior in v5 is consistent with v4, add ``:1
 strategy.exit() now must do something
 -------------------------------------
 Gone are the days when the ``strategy.exit()`` function was allowed to loiter. Now it must actually have an effect on the strategy itself, and to do so, it should have at least one of the following parameters: ``profit``, ``limit``, ``loss``, ``stop``, or one of the following pairs: ``trail_offset`` and ``trail_price`` / ``trail_points``. 
-In v4, it used to compile with a warning (although the function itself did not do anything in the code); now it is no longer valid code. If you are converting a script to v5 and get this error, feel free to comment it out or remove it altogether: it didn’t do anything in your code anyway.
+In v4, it used to compile with a warning (although the function itself did not do anything in the code); now it is no longer valid code and a compilation error will be thrown. If you get this error while converting a strategy to v5, feel free to comment it out or remove it altogether: it didn’t do anything in your code anyway.
 
 
 Variables, functions, and function arguments name changes
@@ -356,7 +365,7 @@ Variables, functions, and function arguments name changes
 +------------------------------------------------------+--------------------------------------------------------+
 | ``cum(x)``                                           | ``ta.cum(source)``                                     |
 +------------------------------------------------------+--------------------------------------------------------+
-|                          **Namespace math.\* -- for math-related functions and variables**                    |
+|                          **Namespace math.\* - for math-related functions and variables**                     |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``abs(x)``                                           | ``math.abs(number)``                                   |
 +------------------------------------------------------+--------------------------------------------------------+
@@ -380,9 +389,9 @@ Variables, functions, and function arguments name changes
 +------------------------------------------------------+--------------------------------------------------------+
 | ``log10(x)``                                         | ``math.log10(number)``                                 |
 +------------------------------------------------------+--------------------------------------------------------+
-| ``max(x1, x2, ...)``                                 | ``math.max``                                           |
+| ``max()``                                            | ``math.max()``                                         |
 +------------------------------------------------------+--------------------------------------------------------+
-| ``min(x1, x2, ...)``                                 | ``math.min``                                           |
+| ``min()``                                            | ``math.min()``                                         |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``pow()``                                            | ``math.pow()``                                         |
 +------------------------------------------------------+--------------------------------------------------------+
@@ -406,7 +415,7 @@ Variables, functions, and function arguments name changes
 +------------------------------------------------------+--------------------------------------------------------+
 | ``toradians()``                                      | ``math.toradians()``                                   |
 +------------------------------------------------------+--------------------------------------------------------+
-|                        **Namespace request.\* -- for functions that request external data**                   |
+|                        **Namespace request.\* - for functions that request external data**                    |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``financial()``                                      | ``request.financial()``                                |
 +------------------------------------------------------+--------------------------------------------------------+
@@ -420,7 +429,7 @@ Variables, functions, and function arguments name changes
 +------------------------------------------------------+--------------------------------------------------------+
 | ``earnings()``                                       | ``request.earnings()``                                 |
 +------------------------------------------------------+--------------------------------------------------------+
-|                          **Namespace ticker.\* -- for functions that help create tickers**                    |
+|                          **Namespace ticker.\* - for functions that help create tickers**                     |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``heikinashi()``                                     | ``ticker.heikinashi()``                                |
 +------------------------------------------------------+--------------------------------------------------------+
@@ -434,7 +443,7 @@ Variables, functions, and function arguments name changes
 +------------------------------------------------------+--------------------------------------------------------+
 | ``tickerid()``                                       | ``ticker.new()``                                       |
 +------------------------------------------------------+--------------------------------------------------------+
-|                            **Namespace str.\* -- for functions that work with strings**                       |
+|                            **Namespace str.\* - for functions that work with strings**                        |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``tostring(x, y)``                                   | ``str.tostring(value, format)``                        |
 +------------------------------------------------------+--------------------------------------------------------+
