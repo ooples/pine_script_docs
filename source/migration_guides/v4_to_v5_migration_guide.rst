@@ -72,8 +72,9 @@ The functions ``iff()`` and ``offset()`` have been removed. The code that uses t
 	
 Note that the ternary operator is evaluated 'lazily', so only one statement of the two is executed (depending on the condition). This is different from ``iff()``, which always executed both statements (but returned only the relevant one). Some functions rely on being executed on every bar, so you will need to handle these cases separately, for example by moving both branches to separate variables that are calculated on every bar and then returning these variables from the ternary operator instead::
 
-	// iff() in v4
-	v1 = iff(close > open, highest(10), lowest(10)) // highest() and lowest() should be calculated on every bar
+	// `iff()` in v4
+	// the way `iff()` works, `highest()` and `lowest()` are calculated on every bar
+	v1 = iff(close > open, highest(10), lowest(10)) 
 	plot(v1)
 	// the same in v5, with both functions being calculated on every bar
 	h1 = ta.highest(10)
@@ -112,9 +113,9 @@ In v4, built-in constants were simply variables with pre-defined values of a spe
 In v5, function parameters that have constants dedicated to them can only use constants instead of raw values. Conversely, constants can no longer be used anywhere but in the parameters they are tied to. For example::
 
   // Not valid in v5: lookahead has a constant tied to it
-  request.security(syminfo.tickerid, “1D”, close, lookahead = true)
+  request.security(syminfo.tickerid, "1D", close, lookahead = true)
   // Valid: using proper constant
-  request.security(syminfo.tickerid, “1D”, close, lookahead = barmerge.lookahead_on)
+  request.security(syminfo.tickerid, "1D", close, lookahead = barmerge.lookahead_on)
 
   // Will compile in v4 because plot.style_columns is equal to 5
   // Won’t compile in v5
@@ -123,11 +124,11 @@ In v5, function parameters that have constants dedicated to them can only use co
 
 To convert your script from v4 to v5, make sure to replace all variables with constants where necessary.
 
-The ``Transp`` argument has been deprecated
+The transp argument has been deprecated
 ----------------------------------------
 The ``transp=`` argument that was present in many plot functions in v4 interfered with the rgb functionality and has been deprecated. The ``color.new()`` function can be used to specify the transparency of any color instead.
 
-In previous versions, the ``bgcolor()`` and `fill()`` functions had an optional ``transp`` arguments with the default value of 90. This means that the code below used to display Bollinger Bands with semi-transparent fill between two bands and semi-transparent backround color where bands cross the chart, even though ``transp`` is not explicitly specified::
+In previous versions, the ``bgcolor()`` and ``fill()`` functions had an optional ``transp`` arguments with the default value of 90. This means that the code below used to display Bollinger Bands with semi-transparent fill between two bands and semi-transparent backround color where bands cross the chart, even though ``transp`` is not explicitly specified::
 
  //@version=4
  study("Bollinger Bands", overlay=true)
