@@ -9,8 +9,8 @@ Libraries
 
 Introduction
 ------------
-
-Pine libraries are publications containing functions that can be reused in Pine indicators, strategies, or in other libraries. They are useful to define frequently used functions so their source code does not have to be included in other Pine scripts using the them.
+.. Too many `use-` in a row: 'reused, useful, used, using' in the first two sentences, 'used, use, used, use, use' in second
+Pine libraries are publications containing functions that can be reused in Pine indicators, strategies, or in other libraries. They are useful to define frequently used functions so their source code does not have to be included in other Pine scripts using them.
 
 A library must be published (privately or publicly) before it can be used in another script. All libraries are published open-source. Public scripts can only use public libraries. Private scripts or personal scripts (saved and used from the Pine Editor) can use public or private libraries. A library can use other libraries, or even previous versions of itself.
 
@@ -44,6 +44,7 @@ A library script has the following structure, where one or more exportable funct
 Note that:
 
 - The ``// @description``, ``// @function``, ``// @param`` and ``// @returns`` compiler directives are optional but we highly recommend you use them. They serve a double purpose: they document the library's code and are used to assemble the default library description authors can use when publishing a library.
+.. Not for long. TODO: remove this when overloads for user functions are added (or maybe remove right now?)
 - <function_name> must be unique within the library script.
 - <parameter_type> is mandatory, contrary to user-defined function parameters in non-library scripts, which are typeless.
 - <script_code> can include any code you would normally use in an indicator, including inputs or plots.
@@ -89,27 +90,29 @@ In library function code:
 - You cannot use variables from the library's global scope unless they are of "const" form. This means you cannot use global variables initialized from script inputs, for example, or globally declared arrays.
 - You cannot use functions in the ``request.*()`` namespace.
 
-Library functions always return a result that is of "series" form, which entails they cannot be used to calculate values used where "const", "input" or "simple" forms are required. Scripts using a library function to calculate an argument to the ``show_last`` parameter in a `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call, for example, will not work because an "input int" argument is expected.
+Library functions always return a result that is either of "simple" or of "series" form, which entails they cannot be used to calculate values used where "literal", "const", or "input" forms are required. Scripts using a library function to calculate an argument to the ``show_last`` parameter in a `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call, for example, will not work because an "input int" argument is expected.
 
 
 Argument form restriction
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Arguments supplied by calling code to library functions are, by default, always cast to the "series" form for use within the function. Since library functions always return results of "series" form also, this does not usually cause problems. In special cases, however, your function's code may need to use a Pine built-in that requires a "simple" argument, as is the case with `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__'s and its ``length`` parameter. For those cases, the `simple <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ keyword can be used to restrict an argument's form to "simple".
+The important difference between the ``simple`` and the ``series`` form is in the data that they represent. A value of the ``simple`` type form has to be the same for the whole bar set, while a ``series`` value can be different on every bar. This is especially important when interfacing with built-in functions: some of them will specifically require ``simple`` (or even ``input`` or ``const`` -- not allowed inside imported functions) values, some will take both. Note that a ``simple`` value will be automatically converted into ``series`` if neccessary, but not vice versa.
 
-Whereas this will not work::
+When an argument is supplied to a library function, its type form is autodetected based on how the argument is used inside of the function. The autodetection starts at the ``series`` type form and checks whether the function can work when a ``series`` value is passed to the argument. If it can, the autodetection assigns it the ``series`` type form. If it doesn't, it does the same check for the ``simple`` type form.
 
-    export emaWrong(float source, int length) =>
-        ema(source, length)
+This is important if your function needs to return a ``simple`` value instead of a ``series`` value. For example, let's create a function that takes two values, ``prefix`` and ``ticker``, and tranforms them into a valid prefix-ticker pair:
 
-This will::
+    export makeTickerid(string prefix, string ticker) =>
+        prefix + ":" + ticker // returns `series string`, can't be passed to `request.security()`
+        
+This function arguments are not restricted by type form: they can take both ``simple`` and ``series`` values. Due to this, the type of the returned value is the widest possible one, a ``series string``. But there is a problem: functions that require ticker values (``request.*`` namespace) as a rule of thumb can only take ``simple string`` values as their ticker. Our ``makeTickerid()`` function returns a ``series string`` ticker, so it will not be usable in most other functions if imported from a library.
 
-    export emaRight(float source, simple int length) =>
-        ema(source, length)
+For these cases, the `simple <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ keyword can be used to restrict an argument's form to "simple". An attempt to pass a ``series`` value to a ``simple`` argument will cause a compulation error; when used correctly, if all of the arguments of our function are of the ``simple`` type (and nothing inside the function itself requires it to be changed to ``series``), the returned value will be ``simple string``:
+
+    export makeTickerid(simple string prefix, simple string ticker) =>
+        prefix + ":" + ticker // returns `simple string`, can be passed to `request.security()`
 
 The `series <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ keyword can also be used to prefix the type of a library function parameter. However, because arguments are by default cast to the "series" form, using the `series <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ modifier is redundant; it exists more for completeness.
-
-
 
 
 Publishing a library
