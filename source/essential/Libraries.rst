@@ -100,14 +100,14 @@ The important difference between the ``simple`` and the ``series`` form is in th
 
 When an argument is supplied to a library function, its type form is autodetected based on how the argument is used inside of the function. The autodetection starts at the ``series`` type form and checks whether the function can work when a ``series`` value is passed to the argument. If it can, the autodetection assigns it the ``series`` type form. If it doesn't, it does the same check for the ``simple`` type form.
 
-This is important if your function needs to return a ``simple`` value instead of a ``series`` value. For example, let's create a function that takes two values, ``prefix`` and ``ticker``, and tranforms them into a valid prefix-ticker pair:
+This is important if your function needs to return a ``simple`` value instead of a ``series`` value. For example, let's create a function that takes two values, ``prefix`` and ``ticker``, and tranforms them into a valid prefix-ticker pair::
 
     export makeTickerid(string prefix, string ticker) =>
         prefix + ":" + ticker // returns `series string`, can't be passed to `request.security()`
         
 This function arguments are not restricted by type form: they can take both ``simple`` and ``series`` values. Due to this, the type of the returned value is the widest possible one, a ``series string``. But there is a problem: functions that require ticker values (``request.*`` namespace) as a rule of thumb can only take ``simple string`` values as their ticker. Our ``makeTickerid()`` function returns a ``series string`` ticker, so it will not be usable in most other functions if imported from a library.
 
-For these cases, the `simple <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ keyword can be used to restrict an argument's form to "simple". An attempt to pass a ``series`` value to a ``simple`` argument will cause a compulation error; when used correctly, if all of the arguments of our function are of the ``simple`` type (and nothing inside the function itself requires it to be changed to ``series``), the returned value will be ``simple string``:
+For these cases, the `simple <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ keyword can be used to restrict an argument's form to "simple". An attempt to pass a ``series`` value to a ``simple`` argument will cause a compulation error; when used correctly, if all of the arguments of our function are of the ``simple`` type (and nothing inside the function itself requires it to be changed to ``series``), the returned value will be ``simple string``::
 
     export makeTickerid(simple string prefix, simple string ticker) =>
         prefix + ":" + ticker // returns `simple string`, can be passed to `request.security()`
