@@ -13,6 +13,7 @@ Essential features
    Drawings
    Extended_and_regular_sessions
    Indicator_repainting
+   Libraries
    Non-standard_chart_types_data
    Sessions_and_time_functions
    Strategies
