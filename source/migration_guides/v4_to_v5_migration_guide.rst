@@ -1,6 +1,9 @@
 Pine version 5 migration guide
 ==============================
 
+.. contents:: :local:
+    :depth: 3
+
 This guide describes how existing Pine v4 features were changed in Pine v5 and what needs to be done to properly convert a ``@version=4`` script to a newer version.
 
 Converter

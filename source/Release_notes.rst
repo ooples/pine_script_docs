@@ -8,9 +8,9 @@ This page contains release notes of notable changes in Pine Script.
 
 September 2021
 --------------
-Pine v5 is here! A number of new features were added:
+Pine v5 is here! A number of new features were added in this release.
 
-Libraries are a new type of publication that allows you to create custom functions to be reused in other scripts. A detailed tutorial on libraries can be found here: :doc:`/essential/Libraries`
+Libraries are a new type of publication that allows you to create custom functions to be reused in other scripts. A detailed tutorial on libraries can be found in the :doc:`/essential/Libraries` section of the User Manual.
 
 Parameters in user-created functions can now come with default values: a function defined as ``f(x = 1) => x`` will return 1 when called as ``f()``, i.e. without specifiyng the value of ``x``.
 
@@ -24,14 +24,14 @@ With ``runtime.error()`` funciton, it is now possible to halt the execution of a
 
 New variables and functions to work with strategies:
 
-* ``strategy.closedtrades.entry_price()`` / ``strategy.opentrades.entry_price()``
-* ``strategy.closedtrades.entry_bar_index()`` / ``strategy.opentrades.entry_bar_index()``
-* ``strategy.closedtrades.entry_time()`` / ``strategy.opentrades.entry_time()``
-* ``strategy.closedtrades.size()`` / ``strategy.opentrades.size()``
-* ``strategy.closedtrades.profit()`` / ``strategy.opentrades.profit()``
-* ``strategy.closedtrades.commission()`` / ``strategy.opentrades.commission()``
-* ``strategy.closedtrades.max_runup()`` / ``strategy.opentrades.max_runup()``
-* ``strategy.closedtrades.max_drawdown()`` / ``strategy.opentrades.max_drawdown()``
+* ``strategy.closedtrades.entry_price()`` and ``strategy.opentrades.entry_price()``
+* ``strategy.closedtrades.entry_bar_index()`` and ``strategy.opentrades.entry_bar_index()``
+* ``strategy.closedtrades.entry_time()`` and ``strategy.opentrades.entry_time()``
+* ``strategy.closedtrades.size()`` and ``strategy.opentrades.size()``
+* ``strategy.closedtrades.profit()`` and ``strategy.opentrades.profit()``
+* ``strategy.closedtrades.commission()`` and ``strategy.opentrades.commission()``
+* ``strategy.closedtrades.max_runup()`` and ``strategy.opentrades.max_runup()``
+* ``strategy.closedtrades.max_drawdown()`` and ``strategy.opentrades.max_drawdown()``
 * ``strategy.closedtrades.exit_price()``
 * ``strategy.closedtrades.exit_bar_index()``
 * ``strategy.closedtrades.exit_time()``
@@ -39,7 +39,7 @@ New variables and functions to work with strategies:
 * ``strategy.convert2symbol()``
 * ``strategy.account_currency``
 
-Most built-in variables, functions, and function arguments were renamed for Pine v5, along with a number of changes in the behavior of built-in functions. Instructions on how to find the Pine Converter and the full list of changes can be found in the :doc:`/migration_guides/v4_to_v5_migration_guide`
+Most built-in variables, functions, and function arguments were renamed for Pine v5, along with a number of changes in the behavior of built-in functions. Instructions on how to find the Pine Converter and the full list of changes can be found in the :doc:`/migration_guides/v4_to_v5_migration_guide`.
 
 
 July 2021
@@ -78,7 +78,7 @@ May 2021
 --------------------------
 Improved backtesting functionality by adding the Leverage mechanism.
 
-Added support for table drawings and functions for working with them. Tables are unique objects that are not anchored to specific bars; they float in a script’s space, independently of the chart bars being viewed or the zoom factor used. For more information, see our `User Manual page on tables <https://www.tradingview.com/pine-script-docs/en/v4/essential/Tables.html>`__.
+Added support for table drawings and functions for working with them. Tables are unique objects that are not anchored to specific bars; they float in a script’s space, independently of the chart bars being viewed or the zoom factor used. For more information, see the :doc:`/essential/Tables` User Manual page.
 
 New functions were added:
 
@@ -87,9 +87,9 @@ New functions were added:
 * ``color.r(color)``, ``color.g(color)``, ``color.b(color)``, ``color.t(color)`` - retrieves the value of one of the color components.
 * ``array.from`` - takes a variable number of arguments with one of the types: ``int``, ``float``, ``bool``, ``string``, ``label``, ``line``, ``color``, ``box``, ``table`` and returns an array of the corresponding type. 
 
-A new ``box`` drawing has been added to Pine, making it possible to draw rectangles on charts using the Pine syntax. For more details see the `Pine Script reference <https://www.tradingview.com/pine-script-reference/v4/#fun_box{dot}new>`_ and the `User Manual page on drawings <https://www.tradingview.com/pine-script-docs/en/v4/essential/Drawings.html>`_ .
+A new ``box`` drawing has been added to Pine, making it possible to draw rectangles on charts using the Pine syntax. For more details see the `Pine Script reference <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ and the :doc:`/essential/Drawings` User Manual page.
 
-The ``color.new`` function can now accept series and input arguments, in which case, the colors will be calculated at runtime. For more information about this, see our `User Manual page on colors <https://www.tradingview.com/pine-script-docs/en/v4/essential/Colors.html>`__.
+The ``color.new`` function can now accept series and input arguments, in which case, the colors will be calculated at runtime. For more information about this, see our :doc:`/essential/Colo` User Manual page.
 
 
 
