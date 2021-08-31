@@ -27,10 +27,10 @@ copyright = str(datetime.now().year) + u', TradingView'
 author = u''
 
 # The short X.Y version
-version = u'4' # Could be referenced from *.rst with |version| macro
+version = u'5' # Could be referenced from *.rst with |version| macro
 
 # The full version, including alpha/beta/rc tags
-release = u'4' # Could be referenced from *.rst with |release| macro
+release = u'5' # Could be referenced from *.rst with |release| macro
 
 
 # -- General configuration ---------------------------------------------------

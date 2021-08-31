@@ -6,6 +6,42 @@ Release notes
 
 This page contains release notes of notable changes in Pine Script.
 
+September 2021
+--------------
+Pine v5 is here! A number of new features were added:
+
+Libraries are a new type of publication that allows you to create custom functions to be reused in other scripts. A detailed tutorial on libraries can be found here: :doc:`/essential/Libraries`
+
+Parameters in user-created functions can now come with default values: a function defined as ``f(x = 1) => x`` will return 1 when called as ``f()``, i.e. without specifiyng the value of ``x``.
+
+Pine now supports switch-statements! The ``switch`` keyword provides a more convenient and readable alternative to long ternary operators and ``if-else`` statements.
+
+New built-in variables ``line.all``, ``label.all``, ``box.all``, and ``table.all`` can be used to get an array that contains the IDs of all the drawings of the specified type drawn by your script.
+
+While-loops are here! The ``while`` keyword allows you to create a loop that will only stop when the condition is false or a ``break`` command is used inside it.
+
+With ``runtime.error()`` funciton, it is now possible to halt the execution of a script and display a runtime error with a custom message on any condition you can define in Pine.
+
+New variables and functions to work with strategies:
+
+* ``strategy.closedtrades.entry_price()`` / ``strategy.opentrades.entry_price()``
+* ``strategy.closedtrades.entry_bar_index()`` / ``strategy.opentrades.entry_bar_index()``
+* ``strategy.closedtrades.entry_time()`` / ``strategy.opentrades.entry_time()``
+* ``strategy.closedtrades.size()`` / ``strategy.opentrades.size()``
+* ``strategy.closedtrades.profit()`` / ``strategy.opentrades.profit()``
+* ``strategy.closedtrades.commission()`` / ``strategy.opentrades.commission()``
+* ``strategy.closedtrades.max_runup()`` / ``strategy.opentrades.max_runup()``
+* ``strategy.closedtrades.max_drawdown()`` / ``strategy.opentrades.max_drawdown()``
+* ``strategy.closedtrades.exit_price()``
+* ``strategy.closedtrades.exit_bar_index()``
+* ``strategy.closedtrades.exit_time()``
+* ``strategy.convert2account()``
+* ``strategy.convert2symbol()``
+* ``strategy.account_currency``
+
+Most built-in variables, functions, and function arguments were renamed for Pine v5, along with a number of changes in the behavior of built-in functions. Instructions on how to find the Pine Converter and the full list of changes can be found in the :doc:`/migration_guides/v4_to_v5_migration_guide`
+
+
 July 2021
 --------------------------
 ``tostring`` now accepts "bool" and "string" types.
