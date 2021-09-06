@@ -199,7 +199,7 @@ A new type of alerts was added - script alerts. More information can be found in
 ----
 
 December 2020
-^^^^^^^^^^^^^^
+^^^^^^^^^^^^^
 
 New array types were added:
 
@@ -214,7 +214,7 @@ New functions were added:
 * ``str.split`` - splits a string at a given substring separator.
 
 November 2020
-^^^^^^^^^^^^^^
+^^^^^^^^^^^^^
 
 * New ``max_labels_count`` and ``max_lines_count`` parameters were added to the study and strategy functions. Now you can manage the number of lines and labels by setting values for these parameters from 1 to 500.
 
@@ -223,7 +223,7 @@ New function was added:
 * ``array.range`` - return the difference between the min and max values in the array.
 
 October 2020
-^^^^^^^^^^^^^^
+^^^^^^^^^^^^
 
 The behavior of ``rising`` and ``falling`` functions have changed. For example, ``rising(close,3)`` is now calculated as following::
 
@@ -278,17 +278,17 @@ The following functions now accept a series length parameter. Learn more about t
     plot(dynSma)
 
 August 2020
-^^^^^^^^^^^^^^
+^^^^^^^^^^^
 
 * Optimized script compilation time. Scripts now compile 1.5 to 2 times faster.
 
 July 2020
-^^^^^^^^^^^^^^
+^^^^^^^^^
 
 * Minor bug fixes and improvements.
 
 June 2020
-^^^^^^^^^^^^^^
+^^^^^^^^^
 
 * New ``resolution`` parameter was added to the ``study`` function. Now you can add MTF functionality to scripts and decide the timeframe you want the indicator to run on. 
 
@@ -328,21 +328,21 @@ Please note that you need to reapply the indicator in order for the `resolution`
 * ``syminfo.basecurrency`` variable was added. Returns the base currency code of the current symbol. For EURUSD symbol returns EUR.
 
 May 2020
-^^^^^^^^^^^^^^
+^^^^^^^^
 
 * ``else if`` statement was added
 
 * The behavior of ``security`` function has changed: the ``expression`` parameter can be series or tuple.
 
 April 2020
-^^^^^^^^^^^^^^
+^^^^^^^^^^
 New function was added:
 
 * ``quandl`` - request quandl data for a symbol
 
 
 March 2020
-^^^^^^^^^^^^^^
+^^^^^^^^^^
 
 New function was added:
 
@@ -367,7 +367,7 @@ Added a detailed description of all the fields in the `Strategy Tester Report <h
 
 
 February 2020
-^^^^^^^^^^^^^^
+^^^^^^^^^^^^^
 
 * New Pine indicator VWAP Anchored was added. Now you can specify the time period: Session, Month, Week, Year.
 
@@ -391,7 +391,7 @@ February 2020
 
 
 January 2020
-^^^^^^^^^^^^^^
+^^^^^^^^^^^^
   
 New built-in variables were added:
 
@@ -422,14 +422,14 @@ New parameter was added for ``strategy.close_all``:
 ----
 
 December 2019
-^^^^^^^^^^^^^^
+^^^^^^^^^^^^^
 * Warning messages were added.
 
   For example, if you don't specify exit parameters for ``strategy.exit`` - ``profit``, ``limit``, ``loss``, ``stop`` or one of the following pairs: ``trail_offset`` and ``trail_price`` / ``trail_points`` - you will see a warning message in the console in the Pine editor.
 * Increased the maximum number of arguments in ``max``, ``min``, ``avg`` functions. Now you can use up to ten arguments in these functions.  
 
 October 2019
-^^^^^^^^^^^^^^
+^^^^^^^^^^^^
 * ``plotchar`` function now supports most of the Unicode symbols::
 
     //@version=4
@@ -470,7 +470,7 @@ Some fixes were made:
 ``str.replace_all (source, target, replacement)`` function was added. It replaces each occurrence of a ``target`` string in the ``source`` string with a ``replacement`` string
 
 July-August 2019
-^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 
 
 New variables added: 
@@ -525,7 +525,7 @@ The behavior of some functions, variables and operators has changed:
 
 
 June 2019
-^^^^^^^^^^^^^^
+^^^^^^^^^
 
 * Support for drawing objects. Added *label* and *line* drawings
 * ``var`` keyword for one time variable initialization
@@ -546,11 +546,11 @@ June 2019
 ----
 
 October 2018
-^^^^^^^^^^^^^^
+^^^^^^^^^^^^
 * To increase the number of indicators available to the whole community, Invite-Only scripts can now be published by Premium users only.
 
 April 2018
-^^^^^^^^^^^^^^
+^^^^^^^^^^
 * Improved the Strategy Tester by reworking the Maximum Drawdown calculation formula.
 
 
@@ -558,15 +558,15 @@ April 2018
 ----
 
 August 2017
-^^^^^^^^^^^^^^
+^^^^^^^^^^^
 * With the new argument ``show_last`` in the plot-type functions, you can restrict the number of bars that the plot is displayed on.
 
 June 2017
-^^^^^^^^^^^^^^
+^^^^^^^^^
 * A major script publishing improvement: it is now possible to update your script without publishing a new one via the Update button in the publishing dialog.
 
 May 2017
-^^^^^^^^^^^^^^
+^^^^^^^^
 * Expanded the type system by adding a new type of constants that can be calculated during compilation.
 
 April 2017
