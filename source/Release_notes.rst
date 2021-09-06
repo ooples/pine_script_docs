@@ -639,28 +639,30 @@ February 2015
 * Added a new ``text`` argument to ``plotshape()`` and ``plotchar()`` functions.
 * Added four new shapes to the ``plotshape()`` function: shape.arrowup, shape.arrowdown, shape.square, shape.diamond.
 
+2014
+----
+
 August 2014
---------------------------
+^^^^^^^^^^^
 * Improved the script sharing capabilities, changed the layout of the Indicators menu and separated published scripts from ideas.
 
 July 2014
---------------------------
-
+^^^^^^^^^
 * Added three new plotting functions, ``plotshape()``, ``plotchar()``, and ``plotarrow()`` for situations when you need to highlight specific bars on a chart without drawing a line.
 * Integrated QUANDL data into Pine Script. The data can be accessed by passing the QUANDL ticker to the ``security`` function.
 
 June 2014
---------------------------
+^^^^^^^^^
 
 * Added Pine Script sharing, enabling coders and traders to share their scripts with the rest of the TradingView community.
 
 April 2014
---------------------------
+^^^^^^^^^^
 
 * Added line wrapping.
 
 February 2014
---------------------------
+^^^^^^^^^^^^^
 
 * Added support for inputs, allowing users to edit the indicator inputs through the properties window, without needing to edit the Pine script.
 * Added self-referencing variables.
@@ -675,7 +677,9 @@ February 2014
   * Improved the ``fill()`` function, enabling it to be used more than once in one script.
   * Added the ``round()`` function to round and convert float values to integers.
 
-December 2013
---------------------------
+
+
+2013
+----
 
 * The first version of Pine is introduced to all TradingView users, initially as an open beta, on December 13th.
