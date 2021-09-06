@@ -6,6 +6,9 @@ Release notes
 
 This page contains release notes of notable changes in Pine Script.
 
+
+.. _v5ReleaseNotes:
+
 September 2021
 --------------
 Pine v5 is here! A number of new features were added in this release.
