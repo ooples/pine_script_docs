@@ -2,136 +2,167 @@ Pine version 5 migration guide
 ==============================
 
 .. contents:: :local:
-    :depth: 3
+    :depth: 1
 
-This guide describes how existing Pine v4 features were changed in Pine v5 and what needs to be done to properly convert a ``@version=4`` script to a newer version.
+Introduction
+------------
 
-Converter
----------
+This guide documents the changes made to Pine from v4 to v5. It will guide you in the adaptation of existing Pine scripts to Pine v5. See our :ref:`here <v5ReleaseNotes> for a list of the **new** features in Pine v5.
 
-Pine Editor now comes with an utility to automatically convert v4 indicators and strategies to v5. To access it, open a script with ``//@version=4`` in it and select the ``Convert to v5`` option in the ``More`` dropdown menu:
+The most frequent adaptations required to convert older scripts to v5 are:
+
+- Changing `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__ for `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ (the function's signature has not changed).
+- Renaming built-in function calls to include their new namespace (e.g., `highest() <https://www.tradingview.com/pine-script-reference/v4/#fun_highest>`__ in v4 becomes `ta.highest() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}highest>`__ in v5).
+- Restructuring inputs to use the more specialized ``input.*()`` functions.
+- Eliminating uses of the deprecated ``transp`` parameter by using `color.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}new>`__ to simultaneously define color and transparency for use with the ``color`` parameter.
+
+
+v4 to v5 converter
+------------------
+
+The Pine Editor includes a utility to automatically convert v4 scripts to v5. To access it, open a script with ``//@version=4`` in it and select the "Convert to v5" option in the "More" menu identified by three dots at the top-right of the Editor's pane:
 
 .. image:: images/v4_to_v5_convert_button.png
 
 
-Not all scripts can be automatically converted from v4 to v5. If you want to convert the script manually or if your indicator returns a compilation error after conversion, consult the guide below for more information.
+Not all scripts can be automatically converted from v4 to v5. If you want to convert the script manually or if your indicator returns a compilation error after conversion, use the following sections to determine how to complete the conversion.
+
 
 Renamed functions and variables
 -------------------------------
-Many built-in functions and variables were renamed in v5 for clarity and consistency. Most changes simply add a namespace is the addition of the namespace: for example, the ``sma()`` function is now called ``ta.sma()`` in v5. As such, the new name can be easily found by entering the old name and checking the suggestion list:
+
+For clarity and consistency, many built-in functions and variables were renamed in v5. The inclusion of v4 function names in a new namespace is the cause of most changes. For example, the `sma() <https://www.tradingview.com/pine-script-reference/v4/#fun_sma>`__ function in v4 is moved to the ``ta.`` namespace in v5: 
+`ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__. Remembering the new namespaces is not necessary; if you type the older name of a function without its namespace in the Editor, a popup showing matching suggestions appears:
 
 .. image:: images/v5_autocomplete.png
  
-The only two functions that were fully renamed are:
+The only two functions whose name changed are:
 
 * ``study()`` was renamed to ``indicator()``.
 * ``tickerid()`` was renamed to ``ticker.new()``.
 
-The full list of renamed variables, should you need it, can be found in the `Variables, functions, and function arguments name changes`_ section.
+The full list of renamed functions and variables can be found in the :ref:`here <_allVariables>` section of this guide.
 
-Renamed function arguments
---------------------------
-Some 'historical' argument names for built-in functions have been changed because they were not descriptive enough. This has no bearing on most scripts, but if you used these arguments in their 'keyword' form, you’ll have to use a different keyword now. For example::
 
-  // Valid in v4, not valid in v5:
+Renamed function parameters
+---------------------------
+
+The parameter names of some built-in functions have been changed because they were not descriptive enough. This has no bearing on most scripts, but if you used these parameter names when calling functions, they will require adaptation. For example::
+
+  // Valid in v4. Not valid in v5.
   timev4 = time(resolution = "1D")
-  // Valid in v5:
+  // Valid in v5.
   timev5 = time(timeframe = "1D")
-  // Valid in both v4 and v5:
+  // Valid in v4 and v5.
   timeBoth = time("1D")
 
-The full list of renamed function arguments can be found in the `Variables, functions, and function arguments name changes`_ section.
+The full list of renamed function parameters can be found in the :ref:`here <_allVariables>` section of this guide.
 
-Removed an rsi() overload
+
+Removed an \`rsi()\` overload
 -----------------------------
-Previously, the built-in ``rsi()`` function had two different overloads:
 
-* ``rsi(series float, simple int)`` -> regular RSI calculation
-* ``rsi(series float, series float)`` -> an overload used in the MFI indicator, did a calculation equivalent to ``100.0 - (100.0 / (1.0 + arg1 / arg2))``
+In v4, the `rsi() <https://www.tradingview.com/pine-script-reference/v4/#fun_rsi>`__ function had two different overloads:
 
-Because of this, a single built-in function did two tasks with different expected results, and it was hard to distinguish which overload would be used at a glance. We’ve found a number of indicators misusing this and getting an incorrect calculations as a result. As such, the second overload has been removed to get rid of ambiguous behavior of the function. 
+* ``rsi(series float, simple int)`` for the normal RSI calculation, and
+* ``rsi(series float, series float)`` for an overload used in the MFI indicator, which did a calculation equivalent to ``100.0 - (100.0 / (1.0 + arg1 / arg2))``.
 
-Now, the ``rsi()`` function can only take a ``simple int`` value as its second argument.
-If you passed a ``float`` value to the second argument, you can replace the ``rsi()`` call with the following formula: ``100.0 - (100.0 / (1.0 + arg1 / arg2))``. It is equivalent to the calculation that ``rsi(series float, series float)`` did.
+This caused a single built-in function to behave in two very different ways, and it was difficult to distinguish which one applied because it depended on the type of the second argument. As a result, a number of indicators misused the function and were displaying incorrect results. To avoid this, the second overload was removed in v5.
 
-If you passed a ``series int`` value as the second argument, it only used to work in v4 because ``series int`` was automatically cast to ``series float`` and the second overload of the function was used. It did not give the result you would actually expect from the ``rsi(source, length)`` function. Note that the original ``rsi()`` calculation takes previous bars into account, so a length specified as a ``series`` variable is not applicable there, which is why there is no overload for ``rsi(series float, series integer)``, i.e. an ``int`` variable with value that changes from one bar to another can no longer be passed to ``rsi()`` as length.
+The `ta.rsi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}rsi>`__ function in v5 only accepts a "simple int" argument for its ``length`` parameter.
+If your v4 code used the now deprecated overload of the function with a ``float`` second argument, you can replace the whole ``rsi()`` call with the following formula, which is equivalent::
 
-If you passed an integer value of a non-series type form, nothing should change for you.
+    100.0 - (100.0 / (1.0 + arg1 / arg2))
+
+Note that when your v4 code used a "series int" value as the second argument to `rsi() <https://www.tradingview.com/pine-script-reference/v4/#fun_rsi>`__, it was automatically cast to "series float" and the second overload of the function was used. While this was syntactically correct, it most probably did **not** yield the result you expected. In v5, `ta.rsi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}rsi>`__ requires a "simple int" for the argument to ``length``, which precludes dynamic (or "series") lengths. The reason for this is that RSI calculations use the `ta.rma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}rma>`__ moving average, which is similar to `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__ in that it relies on a length-dependent recursive process using the values of previous bars. This makes it impossible to achieve correct results with a "series" length that could vary bar to bar.
+
+If your v4 code used a length that was "const int", "input int" or "simple int", no changes are required.
+
 
 Reserved keywords
 -----------------
-A number of words have been reserved and are no longer valid as variable and function names: ``text``, ``ellipse``, ``polygon``, ``return``, ``class``, ``struct``, ``throw``, ``try``, ``catch``, ``is``, ``in``, ``range``, ``while``, ``do``. If your v4 indicator uses any of these words as a variable or a function name, rename them for the script to work in v5.
 
-Removed iff() and offset()
---------------------------
-The functions ``iff()`` and ``offset()`` have been removed. The code that uses the ``iff()`` function can be rewritten using the ternary operator::
+A number of words are reserved and cannot be used for variable or function names. They are: ``text``, ``ellipse``, ``polygon``, ``return``, ``class``, ``struct``, ``throw``, ``try``, ``catch``, ``is``, ``in``, ``range``, ``do``. If your v4 indicator uses any of these, rename your variable or function for the script to work in v5.
 
-    // iff(<condition>, <return if true>, <return if false>)
+
+Removed \`iff()\` and \`offset()\`
+----------------------------------
+
+The `iff() <https://www.tradingview.com/pine-script-reference/v4/#fun_iff>`__ and `offset() <https://www.tradingview.com/pine-script-reference/v4/#fun_offset>`__ functions have been removed. Code using the `iff() <https://www.tradingview.com/pine-script-reference/v4/#fun_iff>`__ function can be rewritten using the ternary operator::
+
+    // iff(<condition>, <return_when_true>, <return_when_false>)
     // Valid in v4, not valid in v5
     barColorIff = iff(close >= open, color.green, color.red)
-    // <condition> ? <return if true> : <return if false>
+    // <condition> ? <return_when_true> : <return_when_false>
     // Valid in v4 and v5
     barColorTernary = close >= open ? color.green : color.red
 	
-Note that the ternary operator is evaluated 'lazily', so only one statement of the two is executed (depending on the condition). This is different from ``iff()``, which always executed both statements (but returned only the relevant one). Some functions rely on being executed on every bar, so you will need to handle these cases separately, for example by moving both branches to separate variables that are calculated on every bar and then returning these variables from the ternary operator instead::
+Note that the ternary operator is evaluated "lazily"; only the required value is calculated (depending on the condition's evaluation to ``true`` or ``false``). This is different from `iff() <https://www.tradingview.com/pine-script-reference/v4/#fun_iff>`__, which always evaluated both values but returned only the relevant one.
 
-	// `iff()` in v4
-	// the way `iff()` works, `highest()` and `lowest()` are calculated on every bar
+Some functions require evaluation on every bar to correctly calculate, so you will need to make special provisions for these by pre-evaluating them before the ternary::
+
+	// `iff()` in v4: `highest()` and `lowest()` are calculated on every bar
 	v1 = iff(close > open, highest(10), lowest(10)) 
 	plot(v1)
-	// the same in v5, with both functions being calculated on every bar
+	// In v5: forced evaluation on every bar prior to the ternary statement.
 	h1 = ta.highest(10)
 	l1 = ta.lowest(10)
 	v1 = close > open ? h1 : l1
 	plot(v1)
 
-The ``offset()`` function can in turn be replaced with the ``[]`` operator::
+The `offset() <https://www.tradingview.com/pine-script-reference/v4/#fun_offset>`__ function was deprecated because the more readable `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ operator is equivalent::
 
-  // Valid in v4, not valid in v5
+  // Valid in v4. Not valid in v5.
   prevClosev4 = offset(close, 1)
-  // Valid in v4 and v5
+  // Valid in v4 and v5.
   prevClosev5 = close[1]
 
-Split input() into several functions
-------------------------------------
-The old ``input()`` function had too many different overloads, each one with its list of different arguments that can be possibly passed to it. For clarity, most of these overloads have now been split into separate functions. Each new function shares its name with an ``input.*`` constant from v4 (with the exception of ``input.integer``, which is replaced by the ``input.int()`` function). The constants themselves have been removed.
 
-For example, to convert an indicator with an input from v4 to v5, where you would use ``input(type = input.symbol)`` before, you should now use the ``input.symbol()`` function instead::
+Split of \`input()\` into several functions
+-------------------------------------------
 
-  // Valid in v4, not valid in v5
+The v4 `input() <https://www.tradingview.com/pine-script-reference/v4/#fun_input>`__ function was becoming crowded with a plethora of overloads and parameters. We split its functionality into different functions to clear that space and provide a more robust structure to accommodate the additions planned for inputs. Each new function uses the name of the ``input.*`` type of the v4 ``input()`` call it replaces. E.g., there is now a specialized `input.float() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}float>`__ function replacing the v4 ``input(1.0, type = input.float)`` call. Note that you can still use ``input(1.0)`` in v5, but because only `input.float() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}float>`__ allows for parameters such as ``minval``, ``maxval``, etc., it is more powerful. Also note that `input.int() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int>`__ is the only specialized input function that does not use its equivalent v4 ``input.integer`` name). The ``input.*`` constants have been removed because they were used as arguments for the ``type`` parameter, which was deprecated.
+
+To convert, for example, a v4 script using an input of type ``input.symbol``, the `input.symbol() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}symbol>`__ function must be used in v5::
+
+  // Valid in v4. Not valid in v5.
   aaplTicker = input("AAPL", type = input.symbol)
   // Valid in v5
   aaplTicker = input.symbol("AAPL")
 
-The basic version of the function (that detects the type automatically based on the default value) still exists, but without most of its parameters::
+The `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__ function persists in v5, but in a simpler form, with less parameters. It has the advantage of automatically detecting input types "bool/color/int/float/string/source" from the argument used for ``defval``::
 
-  // Valid in v4 and v5
-  // Even though "AAPL" is a valid ticker, the input is considered just a string because the type is not specified
-  aaplString = input("AAPL", title = "String")
+  // Valid in v4 and v5.
+  // While "AAPL" is a valid symbol, it is only a string here because `input.symbol()` is not used.
+  tickerString = input("AAPL", title = "Ticker string")
 
-Some functions now require named constants instead of raw values
-----------------------------------------------------------------
-In v4, built-in constants were simply variables with pre-defined values of a specific type. For example, the ``barmerge.lookahead_on`` is simply a constant that passes true and has to specific ties to the ``lookahead`` argument of the ``security()`` function. We found this and many other similar cases to be a common source of confusion for users who passed incorrect constants to functions and got unexpected results.
 
-In v5, function parameters that have constants dedicated to them can only use constants instead of raw values. Conversely, constants can no longer be used anywhere but in the parameters they are tied to. For example::
+Some function parameters now require built-in arguments
+-------------------------------------------------------
 
-  // Not valid in v5: lookahead has a constant tied to it
+In v4, built-in constants such as ``plot.style_area`` used as arguments when calling Pine functions corresponded to pre-defined values of a specific type. For example, the value of ``barmerge.lookahead_on`` was ``true``, so you could use ``true`` instead of the named constant when supplying an argument to the ``lookahead`` parameter in a `security() <https://www.tradingview.com/pine-script-reference/v4/#fun_security>`__ function call. We found this to be a common source of confusion, which caused unsuspecting programmers to produce code yielding unintended results.
+
+In v5, the use of correct built-in named constants as arguments to function parameters requiring them is mandatory::
+
+  // Not valid in v5: `true` is used as an argument for `lookahead`.
   request.security(syminfo.tickerid, "1D", close, lookahead = true)
-  // Valid: using proper constant
+  // Valid in v5: uses a named constant instead of `true`.
   request.security(syminfo.tickerid, "1D", close, lookahead = barmerge.lookahead_on)
 
-  // Will compile in v4 because plot.style_columns is equal to 5
-  // Won’t compile in v5
+  // Would compile in v4 because `plot.style_columns` was equal to 5.
+  // Won’t compile in v5.
   a = 2 * plot.style_columns
   plot(a)
 
-To convert your script from v4 to v5, make sure to replace all variables with constants where necessary.
+To convert your script from v4 to v5, make sure you use the correct named built-in constants as function arguments.
 
-The transp argument has been deprecated
-----------------------------------------
-The ``transp=`` argument that was present in many plot functions in v4 interfered with the rgb functionality and has been deprecated. The ``color.new()`` function can be used to specify the transparency of any color instead.
 
-In previous versions, the ``bgcolor()`` and ``fill()`` functions had an optional ``transp`` arguments with the default value of 90. This means that the code below used to display Bollinger Bands with semi-transparent fill between two bands and semi-transparent backround color where bands cross the chart, even though ``transp`` is not explicitly specified::
+Deprecated the \`transp\` parameter
+-----------------------------------
+
+The ``transp=`` parameter used in the signature of many v4 plotting functions was deprecated because it interfered with RGB functionality. Transparency must now be specified along with the color as an argument to parameters such as ``color``, ``textcolor``, etc. The `color.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}new>`__ or `color.rgb() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}rgb>`__ functions will be needed in those cases to join a color and its transparency.
+
+Note that in v4, the `bgcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_bgcolor>`__ and `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ functions had an optional ``transp`` parameter that used a default value of 90. This meant that the code below could display Bollinger Bands with a semi-transparent fill between two bands and a semi-transparent backround color where bands cross price, even though no argument is used for the ``transp`` parameter in its `bgcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_bgcolor>`__ and `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ calls::
 
  //@version=4
  study("Bollinger Bands", overlay=true)
@@ -145,7 +176,7 @@ In previous versions, the ``bgcolor()`` and ``fill()`` functions had an optional
  fill(p1, p2, color = color.green)
  bgcolor(crossUp ? color.green : crossDn ? color.red : na)
 
-Both these functions no longer have a default ``transp`` value, so we need to modify the transparency of the colors themselves to make sure our colors are semi-transparent. This can be done with the ``color.new()`` function. The code below will be a v5 equivalent of the code above::
+In v5 we need to explictly mention the 90 transparency with the color, yielding::
 
  //@version=5
  indicator("Bollinger Bands", overlay=true)
@@ -155,75 +186,80 @@ Both these functions no longer have a default ``transp`` value, so we need to mo
  p2 = plot(lower, color=color.green)
  crossUp = ta.crossover(high, upper)
  crossDn = ta.crossunder(low, lower)
- TRANSP = 90
+ var TRANSP = 90
  // We use `color.new()` to explicitly pass transparency to both functions
  fill(p1, p2, color = color.new(color.green, TRANSP))
  bgcolor(crossUp ? color.new(color.green, TRANSP) : crossDn ? color.new(color.red, TRANSP) : na)
 
  
-Default session for time() and time_close() has been changed
-------------------------------------------------------------
-The default value for the ``session`` argument of the ``time()`` and ``time_close()`` functions has changed. In v4, when you pass a specific session time for any of the two functions mentioned above without specifying the days, the session automatically fills the days as ``23456``, i.e. Monday to Friday. In v5, we have changed this to auto-complete the session as ``1234567`` instead::
+Changed the default session for \`time()\` and \`time_close()\`
+---------------------------------------------------------------
 
-  // This line of code will behave differently in v4 and v5 on symbols that are traded on the weekends:
+The default set of days for ``session`` arguments used in the `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and `time_close() <https://www.tradingview.com/pine-script-reference/v5/#fun_time_close>`__ functions has changed from "23456" (Monday to Friday) to "1234567" (Sunday to Saturday)::
+
+  // On symbols that are traded during weekends, this will behave differently in v4 and v5.
   t0 = time("1D", "1000-1200")
-  // This line is equivalent to t0 in v4:
+  // v5 equivalent of the behavior of `t0` in v4.
   t1 = time("1D", "1000-1200:23456")
-  // This line is equivalent to t0 in v5:
+  // v5 equivalent of the behavior of `t0` in v5.
   t2 = time("1D", "1000-1200:1234567")
 
-To make sure that your script’s behavior in v5 is consistent with v4, add ``:23456`` to all ``time()`` and ``time_close()`` calls that specify the session without the days. For an example of how to convert ``time()`` from v4 to v5, see the code below::
-
-  //@version=4
-  study("Lunch Break", overlay=true)
-  isLunch = time(timeframe.period, "1300-1400")
-  bgcolor(isLunch ? color.green : na)
-
-  //@version=5
-  indicator('Lunch Break', overlay=true)
-  isLunch = time(timeframe.period, '1300-1400:23456')
-  bgcolor(isLunch ? color.new(color.green, 90) : na)
+This change in behavior will not affect scripts running on conventional markets that are closed during weekends. If it is important for you to ensure your session definitions preserve their v4 behavior in v5 code, add ":23456" to your session strings.
 
 
-strategy.exit() now must do something
--------------------------------------
-Gone are the days when the ``strategy.exit()`` function was allowed to loiter. Now it must actually have an effect on the strategy itself, and to do so, it should have at least one of the following parameters: ``profit``, ``limit``, ``loss``, ``stop``, or one of the following pairs: ``trail_offset`` and ``trail_price`` / ``trail_points``. 
-In v4, it used to compile with a warning (although the function itself did not do anything in the code); now it is no longer valid code and a compilation error will be thrown. If you get this error while converting a strategy to v5, feel free to comment it out or remove it altogether: it didn’t do anything in your code anyway.
+\`strategy.exit()\` now must do something
+-----------------------------------------
+
+Gone are the days when the `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ function was allowed to loiter. Now it must actually have an effect on the strategy by using at least one of the following parameters: ``profit``, ``limit``, ``loss``, ``stop``, or one of the following pairs: ``trail_offset`` combined with either ``trail_price`` or ``trail_points``. When uses of `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ not meeting these criteria trigger an error while converting a strategy to v5, you can safely eliminate these lines, as they didn't do anything in your code anyway.
 
 
-Variables, functions, and function arguments name changes
----------------------------------------------------------
+
+.. _allVariables::
+
+All variable, function, and parameter name changes
+--------------------------------------------------
+
+
+Removed functions and variables
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 +------------------------------------------------------+--------------------------------------------------------+
-| Pine v4                                              | Pine v5                                                |
-+======================================================+========================================================+
-|                                        **Removed functions and variables**                                    |
+| v4                                                   | v5                                                     |
 +------------------------------------------------------+--------------------------------------------------------+
-| ``input.bool``                                       | Replaced by ``input.bool()``                           |
+| ``input.bool`` input                                 | Replaced by ``input.bool()``                           |
 +------------------------------------------------------+--------------------------------------------------------+
-| ``input.color``                                      | Replaced by ``input.color()``                          |
+| ``input.color`` input                                | Replaced by ``input.color()``                          |
 +------------------------------------------------------+--------------------------------------------------------+
-| ``input.float``                                      | Replaced by ``input.float()``                          |
+| ``input.float`` input                                | Replaced by ``input.float()``                          |
 +------------------------------------------------------+--------------------------------------------------------+
-| ``input.integer``                                    | Replaced by ``input.int()``                            |
+| ``input.integer`` input                              | Replaced by ``input.int()``                            |
 +------------------------------------------------------+--------------------------------------------------------+
-| ``input.resolution``                                 | Replaced by ``input.timeframe()``                      |
+| ``input.resolution`` input                           | Replaced by ``input.timeframe()``                      |
 +------------------------------------------------------+--------------------------------------------------------+
-| ``input.session``                                    | Replaced by ``input.session()``                        |
+| ``input.session`` input                              | Replaced by ``input.session()``                        |
 +------------------------------------------------------+--------------------------------------------------------+
-| ``input.source``                                     | Replaced by ``input.source()``                         |
+| ``input.source`` input                               | Replaced by ``input.source()``                         |
 +------------------------------------------------------+--------------------------------------------------------+
-| ``input.string``                                     | Replaced by ``input.string()``                         |
+| ``input.string`` input                               | Replaced by ``input.string()``                         |
 +------------------------------------------------------+--------------------------------------------------------+
-| ``input.symbol``                                     | Replaced by ``input.symbol()``                         |
+| ``input.symbol`` input                               | Replaced by ``input.symbol()``                         |
 +------------------------------------------------------+--------------------------------------------------------+
-| ``input.time``                                       | Replaced by ``input.time()``                           |
+| ``input.time`` input                                 | Replaced by ``input.time()``                           |
 +------------------------------------------------------+--------------------------------------------------------+
-| ``iff()``                                            | Replaced by the ``?:`` operator                        |
+| ``iff()``                                            | Use the ``?:`` operator instead                        |
 +------------------------------------------------------+--------------------------------------------------------+
-| ``offset()``                                         | Replaced by the ``[]`` operator                        |
+| ``offset()``                                         | Use the ``[]`` operator instead                        |
 +------------------------------------------------------+--------------------------------------------------------+
-|                          **Renamed functions and arguments (without namespace changes)**                      |
+
+
+Renamed functions and parameters
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+No namespace change
+"""""""""""""""""""
+
++------------------------------------------------------+--------------------------------------------------------+
+| v4                                                   | v5                                                     |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``study(<...>, resolution, resolution_gaps, <...>)`` | ``indicator(<...>, timeframe, timeframe_gaps, <...>)`` |
 +------------------------------------------------------+--------------------------------------------------------+
@@ -237,27 +273,17 @@ Variables, functions, and function arguments name changes
 +------------------------------------------------------+--------------------------------------------------------+
 | ``nz(x, y)``                                         | ``nz(source, replacement)``                            |
 +------------------------------------------------------+--------------------------------------------------------+
-|                    **Namespace ta.\* - for technical analysis-related functions and variables**               |
+
+
+"ta" namespace for technical analysis functions and variables
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
++------------------------------------------------------+--------------------------------------------------------+
+| v4                                                   | v5                                                     |
++------------------------------------------------------+--------------------------------------------------------+
+| Indicator functions and variables                                                                             |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``accdist``                                          | ``ta.accdist``                                         |
-+------------------------------------------------------+--------------------------------------------------------+
-| ``iii``                                              | ``ta.iii``                                             |
-+------------------------------------------------------+--------------------------------------------------------+
-| ``nvi``                                              | ``ta.nvi``                                             |
-+------------------------------------------------------+--------------------------------------------------------+
-| ``obv``                                              | ``ta.obv``                                             |
-+------------------------------------------------------+--------------------------------------------------------+
-| ``pvi``                                              | ``ta.pvi``                                             |
-+------------------------------------------------------+--------------------------------------------------------+
-| ``pvt``                                              | ``ta.pvt``                                             |
-+------------------------------------------------------+--------------------------------------------------------+
-| ``tr``                                               | ``ta.tr``                                              |
-+------------------------------------------------------+--------------------------------------------------------+
-| ``vwap``                                             | ``ta.vwap``                                            |
-+------------------------------------------------------+--------------------------------------------------------+
-| ``wad``                                              | ``ta.wad``                                             |
-+------------------------------------------------------+--------------------------------------------------------+
-| ``wvad``                                             | ``ta.wvad``                                            |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``alma()``                                           | ``ta.alma()``                                          |
 +------------------------------------------------------+--------------------------------------------------------+
@@ -279,25 +305,27 @@ Variables, functions, and function arguments name changes
 +------------------------------------------------------+--------------------------------------------------------+
 | ``hma()``                                            | ``ta.hma()``                                           |
 +------------------------------------------------------+--------------------------------------------------------+
-| ``barsince()``                                       | ``ta.barsince()``                                      |
-+------------------------------------------------------+--------------------------------------------------------+
-| ``valuewhen()``                                      | ``ta.valuewhen()``                                     |
-+------------------------------------------------------+--------------------------------------------------------+
-| ``highestbars()``                                    | ``ta.highestbars()``                                   |
-+------------------------------------------------------+--------------------------------------------------------+
-| ``lowest()``                                         | ``ta.lowest()``                                        |
-+------------------------------------------------------+--------------------------------------------------------+
-| ``lowestbars()``                                     | ``ta.lowestbars()``                                    |
+| ``iii``                                              | ``ta.iii``                                             |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``kc()``                                             | ``ta.kc()``                                            |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``kcw()``                                            | ``ta.kcw()``                                           |
++------------------------------------------------------+--------------------------------------------------------+
+| ``linreg()``                                         | ``ta.linreg()``                                        |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``macd()``                                           | ``ta.macd()``                                          |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``mfi()``                                            | ``ta.mfi()``                                           |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``mom()``                                            | ``ta.mom()``                                           |
++------------------------------------------------------+--------------------------------------------------------+
+| ``nvi``                                              | ``ta.nvi``                                             |
++------------------------------------------------------+--------------------------------------------------------+
+| ``obv``                                              | ``ta.obv``                                             |
++------------------------------------------------------+--------------------------------------------------------+
+| ``pvi``                                              | ``ta.pvi``                                             |
++------------------------------------------------------+--------------------------------------------------------+
+| ``pvt``                                              | ``ta.pvt``                                             |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``rma()``                                            | ``ta.rma()``                                           |
 +------------------------------------------------------+--------------------------------------------------------+
@@ -309,47 +337,63 @@ Variables, functions, and function arguments name changes
 +------------------------------------------------------+--------------------------------------------------------+
 | ``sma()``                                            | ``ta.sma()``                                           |
 +------------------------------------------------------+--------------------------------------------------------+
-| ``cross(x, y)``                                      | ``ta.cross(source1, source2)``                         |
-+------------------------------------------------------+--------------------------------------------------------+
-| ``crossover(x, y)``                                  | ``ta.crossover(source1, source2)``                     |
-+------------------------------------------------------+--------------------------------------------------------+
-| ``crossunder(x, y)``                                 | ``ta.crossunder(source1, source2)``                    |
-+------------------------------------------------------+--------------------------------------------------------+
-| ``pivothigh()``                                      | ``ta.pivothigh()``                                     |
-+------------------------------------------------------+--------------------------------------------------------+
-| ``pivotlow()``                                       | ``ta.pivotlow()``                                      |
-+------------------------------------------------------+--------------------------------------------------------+
 | ``stoch()``                                          | ``ta.stoch()``                                         |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``supertrend()``                                     | ``ta.supertrend()``                                    |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``swma(x)``                                          | ``ta.swma(source)``                                    |
 +------------------------------------------------------+--------------------------------------------------------+
+| ``tr``                                               | ``ta.tr``                                              |
++------------------------------------------------------+--------------------------------------------------------+
 | ``tr()``                                             | ``ta.tr()``                                            |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``tsi()``                                            | ``ta.tsi()``                                           |
++------------------------------------------------------+--------------------------------------------------------+
+| ``vwap``                                             | ``ta.vwap``                                            |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``vwap(x)``                                          | ``ta.vwap(source)``                                    |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``vwma()``                                           | ``ta.vwma()``                                          |
 +------------------------------------------------------+--------------------------------------------------------+
+| ``wad``                                              | ``ta.wad``                                             |
++------------------------------------------------------+--------------------------------------------------------+
 | ``wma()``                                            | ``ta.wma()``                                           |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``wpr()``                                            | ``ta.wpr()``                                           |
 +------------------------------------------------------+--------------------------------------------------------+
+| ``wvad``                                             | ``ta.wvad``                                            |
++------------------------------------------------------+--------------------------------------------------------+
+| Supporting functions and variables                                                                            |
++------------------------------------------------------+--------------------------------------------------------+
+| ``barsince()``                                       | ``ta.barsince()``                                      |
++------------------------------------------------------+--------------------------------------------------------+
 | ``change()``                                         | ``ta.change()``                                        |
++------------------------------------------------------+--------------------------------------------------------+
+| ``correlation(source_a, source_b, length)``          | ``ta.correlation(source1, source2, length)``           |
++------------------------------------------------------+--------------------------------------------------------+
+| ``cross(x, y)``                                      | ``ta.cross(source1, source2)``                         |
++------------------------------------------------------+--------------------------------------------------------+
+| ``crossover(x, y)``                                  | ``ta.crossover(source1, source2)``                     |
++------------------------------------------------------+--------------------------------------------------------+
+| ``crossunder(x, y)``                                 | ``ta.crossunder(source1, source2)``                    |
++------------------------------------------------------+--------------------------------------------------------+
+| ``cum(x)``                                           | ``ta.cum(source)``                                     |
++------------------------------------------------------+--------------------------------------------------------+
+| ``dev()``                                            | ``ta.dev()``                                           |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``falling()``                                        | ``ta.falling()``                                       |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``highest()``                                        | ``ta.highest()``                                       |
 +------------------------------------------------------+--------------------------------------------------------+
-| ``rising()``                                         | ``ta.rising()``                                        |
+| ``highestbars()``                                    | ``ta.highestbars()``                                   |
 +------------------------------------------------------+--------------------------------------------------------+
-| ``range()``                                          | ``ta.range()``                                         |
+| ``lowest()``                                         | ``ta.lowest()``                                        |
 +------------------------------------------------------+--------------------------------------------------------+
-| ``correlation(source_a, source_b, length)``          | ``ta.correlation(source1, source2, length)``           |
+| ``lowestbars()``                                     | ``ta.lowestbars()``                                    |
 +------------------------------------------------------+--------------------------------------------------------+
-| ``linreg()``                                         | ``ta.linreg()``                                        |
+| ``median()``                                         | ``ta.median()``                                        |
++------------------------------------------------------+--------------------------------------------------------+
+| ``mode()``                                           | ``ta.mode()``                                          |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``percentile_linear_interpolation()``                | ``ta.percentile_linear_interpolation()``               |
 +------------------------------------------------------+--------------------------------------------------------+
@@ -357,19 +401,27 @@ Variables, functions, and function arguments name changes
 +------------------------------------------------------+--------------------------------------------------------+
 | ``percentrank()``                                    | ``ta.percentrank()``                                   |
 +------------------------------------------------------+--------------------------------------------------------+
+| ``pivothigh()``                                      | ``ta.pivothigh()``                                     |
++------------------------------------------------------+--------------------------------------------------------+
+| ``pivotlow()``                                       | ``ta.pivotlow()``                                      |
++------------------------------------------------------+--------------------------------------------------------+
+| ``range()``                                          | ``ta.range()``                                         |
++------------------------------------------------------+--------------------------------------------------------+
+| ``rising()``                                         | ``ta.rising()``                                        |
++------------------------------------------------------+--------------------------------------------------------+
 | ``stdev()``                                          | ``ta.stdev()``                                         |
++------------------------------------------------------+--------------------------------------------------------+
+| ``valuewhen()``                                      | ``ta.valuewhen()``                                     |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``variance()``                                       | ``ta.variance()``                                      |
 +------------------------------------------------------+--------------------------------------------------------+
-| ``median()``                                         | ``ta.median()``                                        |
+
+
+"math" namespace for math-related functions and variables
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 +------------------------------------------------------+--------------------------------------------------------+
-| ``mode()``                                           | ``ta.mode()``                                          |
-+------------------------------------------------------+--------------------------------------------------------+
-| ``dev()``                                            | ``ta.dev()``                                           |
-+------------------------------------------------------+--------------------------------------------------------+
-| ``cum(x)``                                           | ``ta.cum(source)``                                     |
-+------------------------------------------------------+--------------------------------------------------------+
-|                          **Namespace math.\* - for math-related functions and variables**                     |
+| v4                                                   | v5                                                     |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``abs(x)``                                           | ``math.abs(number)``                                   |
 +------------------------------------------------------+--------------------------------------------------------+
@@ -419,7 +471,13 @@ Variables, functions, and function arguments name changes
 +------------------------------------------------------+--------------------------------------------------------+
 | ``toradians()``                                      | ``math.toradians()``                                   |
 +------------------------------------------------------+--------------------------------------------------------+
-|                        **Namespace request.\* - for functions that request external data**                    |
+
+
+"request" namespace for functions that request external data
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
++------------------------------------------------------+--------------------------------------------------------+
+| v4                                                   | v5                                                     |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``financial()``                                      | ``request.financial()``                                |
 +------------------------------------------------------+--------------------------------------------------------+
@@ -433,7 +491,13 @@ Variables, functions, and function arguments name changes
 +------------------------------------------------------+--------------------------------------------------------+
 | ``earnings()``                                       | ``request.earnings()``                                 |
 +------------------------------------------------------+--------------------------------------------------------+
-|                          **Namespace ticker.\* - for functions that help create tickers**                     |
+
+
+"ticker" namespace for functions that help create tickers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
++------------------------------------------------------+--------------------------------------------------------+
+| v4                                                   | v5                                                     |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``heikinashi()``                                     | ``ticker.heikinashi()``                                |
 +------------------------------------------------------+--------------------------------------------------------+
@@ -447,7 +511,13 @@ Variables, functions, and function arguments name changes
 +------------------------------------------------------+--------------------------------------------------------+
 | ``tickerid()``                                       | ``ticker.new()``                                       |
 +------------------------------------------------------+--------------------------------------------------------+
-|                            **Namespace str.\* - for functions that work with strings**                        |
+
+
+"str" namespace for functions that work with strings
+""""""""""""""""""""""""""""""""""""""""""""""""""""
+
++------------------------------------------------------+--------------------------------------------------------+
+| v4                                                   | v5                                                     |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``tostring(x, y)``                                   | ``str.tostring(value, format)``                        |
 +------------------------------------------------------+--------------------------------------------------------+
