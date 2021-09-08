@@ -7,7 +7,7 @@ Release notes
 This page contains release notes of notable changes in Pine Script.
 
 
-.. _v5ReleaseNotes:
+.. _v5ReleaseNotes::
 
 September 2021
 --------------
