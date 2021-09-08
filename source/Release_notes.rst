@@ -2,7 +2,7 @@ Release notes
 =============
 
 .. contents:: :local:
-    :depth: 2
+    :depth: 1
 
 This page contains release notes of notable changes in Pine Script.
 
@@ -46,7 +46,7 @@ Many built-in variables, functions, and function arguments were renamed in Pine 
 
 
 July 2021
---------------------------
+---------
 ``tostring`` now accepts "bool" and "string" types.
 
 New argument for ``time`` and ``time_close`` functions was added:
@@ -61,7 +61,7 @@ New argument for ``study`` and ``strategy`` functions was added:
 
 
 June 2021
---------------------------
+---------
 New variable was added:
 
 * ``barstate.islastconfirmedhistory`` - returns ``true`` if script is executing on the dataset's last bar when market is closed, or script is executing on the bar immediately preceding the real-time bar, if market is open. Returns ``false`` otherwise.
@@ -78,7 +78,7 @@ Expanded ``tostring()`` functionality. The function now accepts three new format
 
 
 May 2021
---------------------------
+--------
 Improved backtesting functionality by adding the Leverage mechanism.
 
 Added support for table drawings and functions for working with them. Tables are unique objects that are not anchored to specific bars; they float in a script’s space, independently of the chart bars being viewed or the zoom factor used. For more information, see the :doc:`/essential/Tables` User Manual page.
@@ -97,7 +97,7 @@ The ``color.new`` function can now accept series and input arguments, in which c
 
 
 April 2021
---------------------------
+----------
 New math constants were added: 
 
 * ``math.pi`` - is a named constant for Archimedes' constant. It is equal to 3.1415926535897932.
@@ -125,7 +125,7 @@ New functions were added:
 
 
 March 2021
---------------------------
+----------
 New assignment operators were added:
 
 * ``+=``  - addition assignment
@@ -164,7 +164,7 @@ New arguments for the study() function were added:
 
 
 February 2021
---------------------------
+-------------
 New variable was added:
 
 * ``time_tradingday`` - the beginning time of the trading day the current bar belongs to.
@@ -172,7 +172,7 @@ New variable was added:
 
 
 January 2021
---------------------------
+------------
 The following functions now accept a series length parameter:
 
 * `bb <https://www.tradingview.com/pine-script-reference/v4/#fun_bb>`__
@@ -198,8 +198,11 @@ A new type of alerts was added - script alerts. More information can be found in
 
 
 
+2020
+----
+
 December 2020
---------------------------
+^^^^^^^^^^^^^
 
 New array types were added:
 
@@ -214,7 +217,7 @@ New functions were added:
 * ``str.split`` - splits a string at a given substring separator.
 
 November 2020
---------------------------
+^^^^^^^^^^^^^
 
 * New ``max_labels_count`` and ``max_lines_count`` parameters were added to the study and strategy functions. Now you can manage the number of lines and labels by setting values for these parameters from 1 to 500.
 
@@ -223,14 +226,14 @@ New function was added:
 * ``array.range`` - return the difference between the min and max values in the array.
 
 October 2020
---------------------------
+^^^^^^^^^^^^
 
 The behavior of ``rising`` and ``falling`` functions have changed. For example, ``rising(close,3)`` is now calculated as following::
 
     close[0] > close[1] and close[1] > close[2] and close[2] > close[3]
     
 September 2020
---------------------------
+^^^^^^^^^^^^^^
 
 Added support for ``input.color`` to the ``input()`` function. Now you can provide script users with color selection through the script’s "Settings/Inputs" tab with the same color widget used throughout the TradingView user interface. Learn more about this feature in our `blog <https://www.tradingview.com/blog/en/create-color-inputs-in-pine-20751/>`__::
 
@@ -278,17 +281,17 @@ The following functions now accept a series length parameter. Learn more about t
     plot(dynSma)
 
 August 2020
---------------------------
+^^^^^^^^^^^
 
 * Optimized script compilation time. Scripts now compile 1.5 to 2 times faster.
 
 July 2020
---------------------------
+^^^^^^^^^
 
 * Minor bug fixes and improvements.
 
 June 2020
---------------------------
+^^^^^^^^^
 
 * New ``resolution`` parameter was added to the ``study`` function. Now you can add MTF functionality to scripts and decide the timeframe you want the indicator to run on. 
 
@@ -328,21 +331,21 @@ Please note that you need to reapply the indicator in order for the `resolution`
 * ``syminfo.basecurrency`` variable was added. Returns the base currency code of the current symbol. For EURUSD symbol returns EUR.
 
 May 2020
---------------------------
+^^^^^^^^
 
 * ``else if`` statement was added
 
 * The behavior of ``security`` function has changed: the ``expression`` parameter can be series or tuple.
 
 April 2020
---------------------------
+^^^^^^^^^^
 New function was added:
 
 * ``quandl`` - request quandl data for a symbol
 
 
 March 2020
---------------------------
+^^^^^^^^^^
 
 New function was added:
 
@@ -367,7 +370,7 @@ Added a detailed description of all the fields in the `Strategy Tester Report <h
 
 
 February 2020
---------------------------
+^^^^^^^^^^^^^
 
 * New Pine indicator VWAP Anchored was added. Now you can specify the time period: Session, Month, Week, Year.
 
@@ -391,7 +394,7 @@ February 2020
 
 
 January 2020
---------------------------
+^^^^^^^^^^^^
   
 New built-in variables were added:
 
@@ -416,15 +419,20 @@ New parameter was added for ``strategy.close_all``:
 
 * ``comment`` - additional notes on the order
 
+
+
+2019
+----
+
 December 2019
---------------------------
+^^^^^^^^^^^^^
 * Warning messages were added.
 
   For example, if you don't specify exit parameters for ``strategy.exit`` - ``profit``, ``limit``, ``loss``, ``stop`` or one of the following pairs: ``trail_offset`` and ``trail_price`` / ``trail_points`` - you will see a warning message in the console in the Pine editor.
 * Increased the maximum number of arguments in ``max``, ``min``, ``avg`` functions. Now you can use up to ten arguments in these functions.  
 
 October 2019
---------------------------
+^^^^^^^^^^^^
 * ``plotchar`` function now supports most of the Unicode symbols::
 
     //@version=4
@@ -447,7 +455,7 @@ October 2019
   * ``syminfo.type`` - returns the type of the current symbol (stock, futures, index, etc.)
 
 September 2019
---------------------------
+^^^^^^^^^^^^^^
 
 
 New parameters to the ``strategy`` function were added:
@@ -465,7 +473,7 @@ Some fixes were made:
 ``str.replace_all (source, target, replacement)`` function was added. It replaces each occurrence of a ``target`` string in the ``source`` string with a ``replacement`` string
 
 July-August 2019
---------------------------
+^^^^^^^^^^^^^^^^
 
 
 New variables added: 
@@ -520,7 +528,7 @@ The behavior of some functions, variables and operators has changed:
 
 
 June 2019
---------------------------
+^^^^^^^^^
 
 * Support for drawing objects. Added *label* and *line* drawings
 * ``var`` keyword for one time variable initialization
@@ -535,34 +543,43 @@ June 2019
 * ``max_bars_back`` function to control series variables internal history buffer sizes
 * Pine Script documentation versioning
 
+
+
+2018
+----
+
 October 2018
---------------------------
+^^^^^^^^^^^^
 * To increase the number of indicators available to the whole community, Invite-Only scripts can now be published by Premium users only.
 
 April 2018
---------------------------
+^^^^^^^^^^
 * Improved the Strategy Tester by reworking the Maximum Drawdown calculation formula.
 
+
+2017
+----
+
 August 2017
---------------------------
+^^^^^^^^^^^
 * With the new argument ``show_last`` in the plot-type functions, you can restrict the number of bars that the plot is displayed on.
 
 June 2017
---------------------------
+^^^^^^^^^
 * A major script publishing improvement: it is now possible to update your script without publishing a new one via the Update button in the publishing dialog.
 
 May 2017
---------------------------
+^^^^^^^^
 * Expanded the type system by adding a new type of constants that can be calculated during compilation.
 
 April 2017
---------------------------
+^^^^^^^^^^
 * Expanded the keyword argument functionality: it is now possible to use keyword arguments in all built-in functions.
 * A new ``barstate.isconfirmed`` variable has been added to the list of variables that return bar status. It lets you create indicators that are calculated based on the closed bars only.
 * The ``options`` argument for the ``input()`` function creates an input with a set of options defined by the script's author.
 
 March 2017
---------------------------
+^^^^^^^^^^
 * Pine Script v3 is here! Some important changes:
   
   * Changes to the default behavior of the ``security()`` function: it can no longer access the future data by default. This can be changes with the ``lookahead`` parameter.
@@ -571,7 +588,7 @@ March 2017
 
 
 February 2017
---------------------------
+^^^^^^^^^^^^^
 * Several improvements to the strategy tester and the strategy report:
 
   * New Buy & Hold equity graph – a new graph that lets you compare performance of your strategy versus a "buy and hold", i.e if you just bought a security and held onto it without trading.
@@ -581,89 +598,103 @@ February 2017
   * Slippage lets you simulate a situation when orders are filled at a worse price than expected. It can be set through the Properties dialog or through the slippage argument in the ``strategy()`` function.
   * Commission allows yot to add commission for placed orders in percent of order value, fixed price or per contract. The amount of commission paid is shown in the Commission Paid field. The commission size and its type can be set through the Properties dialog or through the commission_type and commission_value arguments in the ``strategy()`` function.
 
+
+
+2016
+----
+
 December 2016
---------------------------
+^^^^^^^^^^^^^
 * Added invite-only scripts. The invite-only indicators are visible in the Public Library, but nobody can use them without explicit permission from the author, and only the author can see the source code.
 
 October 2016
---------------------------
+^^^^^^^^^^^^
 * Introduded indicator revisions. Each time an indicator is saved, it gets a new revision, and it is possible to easily switch to any past revision from the Pine Editor.
 
 September 2016
---------------------------
+^^^^^^^^^^^^^^
 * It is now possible to publish indicators with protected source code. These indicators are available in the public Script Library, and any user can use them, but only the author can see the source code.
 
 July 2016
---------------------------
+^^^^^^^^^
 * Improved the behavior of the ``fill()`` function: one call can now support several different colors.
 
 March 2016
---------------------------
+^^^^^^^^^^
 * Color type variables now have an additional parameter to set default transparency. The transparency can be set with the ``color.new()`` function, or by adding an alpha-channel value to a hex color code.
 
 February 2016
---------------------------
+^^^^^^^^^^^^^
 * Added ``for`` loops and keywords ``break`` and ``continue``.
 * Pine now supports mutable variables! Use the ``:=`` operator to assign a new value to a variable that has already been defined.
 * Multiple improvements and bug fixes for strategies.
 
 January 2016
---------------------------
+^^^^^^^^^^^^
 * A new ``alertcondition()`` function allows for creating custom alert conditions in Pine-based indicators.
 
+
+
+2015
+----
+
 October 2015
---------------------------
+^^^^^^^^^^^^
 * Pine has graduated to v2! The new version of Pine Script added support for ``if`` statements, making it easier to write more readable and concise code.
 
 September 2015
---------------------------
+^^^^^^^^^^^^^^
 * Added backtesting functionality to Pine. It is now possible to create trading strategies, i.e. scripts that can send, modify and cancel orders to buy or sell. Strategies allow you to perform backtesting (emulation of strategy trading on historical data) and forward testing (emulation of strategy trading on real-time data) according to your algorithms. Detailed information about the strategy's calculations and the order fills can be seen in the newly added Strategy Tester tab.
 
 July 2015
---------------------------
+^^^^^^^^^
 * A new ``editable`` parameter allows hiding the plot from the Style menu in the indicator settings so that it is not possible to edit its style. The parameter has been added to all the following functions: all plot-type functions, ``barcolor()``, ``bgcolor()``, ``hline()``, and ``fill()``.
 
 June 2015
---------------------------
+^^^^^^^^^
 * Added two new functions to display custom barsets using PineScipt: ``plotbar()`` and ``plotcandle()``.
 
 April 2015
---------------------------
+^^^^^^^^^^
 * Added two new shapes to the ``plotshape()`` function: shape.labelup and shape.labeldown.
 * PineScipt Editor has been improved and moved to a new panel at the bottom of the page.
 * Added a new ``step`` argument for the ``input()`` function, allowing to specify the step size for the indicator's inputs.
 
 March 2015
---------------------------
+^^^^^^^^^^
 * Added support for inputs with the ``source`` type to the ``input()`` function, allowing to select the data source for the indicator's calculations from its settings.
 
 February 2015
---------------------------
+^^^^^^^^^^^^^
 * Added a new ``text`` argument to ``plotshape()`` and ``plotchar()`` functions.
 * Added four new shapes to the ``plotshape()`` function: shape.arrowup, shape.arrowdown, shape.square, shape.diamond.
 
+
+
+2014
+----
+
 August 2014
---------------------------
+^^^^^^^^^^^
 * Improved the script sharing capabilities, changed the layout of the Indicators menu and separated published scripts from ideas.
 
 July 2014
---------------------------
-
+^^^^^^^^^
 * Added three new plotting functions, ``plotshape()``, ``plotchar()``, and ``plotarrow()`` for situations when you need to highlight specific bars on a chart without drawing a line.
 * Integrated QUANDL data into Pine Script. The data can be accessed by passing the QUANDL ticker to the ``security`` function.
 
 June 2014
---------------------------
+^^^^^^^^^
 
 * Added Pine Script sharing, enabling coders and traders to share their scripts with the rest of the TradingView community.
 
 April 2014
---------------------------
+^^^^^^^^^^
 
 * Added line wrapping.
 
 February 2014
---------------------------
+^^^^^^^^^^^^^
 
 * Added support for inputs, allowing users to edit the indicator inputs through the properties window, without needing to edit the Pine script.
 * Added self-referencing variables.
@@ -678,7 +709,9 @@ February 2014
   * Improved the ``fill()`` function, enabling it to be used more than once in one script.
   * Added the ``round()`` function to round and convert float values to integers.
 
-December 2013
---------------------------
+
+
+2013
+----
 
 * The first version of Pine is introduced to all TradingView users, initially as an open beta, on December 13th.
