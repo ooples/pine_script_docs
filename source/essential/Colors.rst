@@ -1,3 +1,5 @@
+.. _Colors:
+
 Colors
 ======
 
