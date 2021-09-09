@@ -1,4 +1,4 @@
-.. _Colors:
+.. _PageColors:
 
 Colors
 ======
