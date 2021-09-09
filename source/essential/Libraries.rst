@@ -9,10 +9,9 @@ Libraries
 
 Introduction
 ------------
-.. Too many `use-` in a row: 'reused, useful, used, using' in the first two sentences, 'used, use, used, use, use' in second
-Pine libraries are publications containing functions that can be reused in Pine indicators, strategies, or in other libraries. They are useful to define frequently used functions so their source code does not have to be included in other Pine scripts using them.
+Pine libraries are publications containing functions that can be reused in Pine indicators, strategies, or in other libraries. They are useful to define frequently-used functions so their source code does not have to be included in every script where they are needed.
 
-A library must be published (privately or publicly) before it can be used in another script. All libraries are published open-source. Public scripts can only use public libraries. Private scripts or personal scripts (saved and used from the Pine Editor) can use public or private libraries. A library can use other libraries, or even previous versions of itself.
+A library must be published (privately or publicly) before it can be used in another script. All libraries are published open-source. Public scripts can only use public libraries. Private scripts or personal scripts saved in the Pine Editor can use public or private libraries. A library can use other libraries, or even previous versions of itself.
 
 Library programmers should be familiar with Pine's typing nomenclature, scopes and user-defined functions. If you need to brush up on Pine forms and types, see the User Manual's page on the :doc:`/language/Type_system`. For user-defined functions and scopes, see :doc:`/language/Declaring_functions`.
 
@@ -43,11 +42,10 @@ A library script has the following structure, where one or more exportable funct
 
 Note that:
 
-- The ``// @description``, ``// @function``, ``// @param`` and ``// @returns`` compiler directives are optional but we highly recommend you use them. They serve a double purpose: they document the library's code and are used to assemble the default library description authors can use when publishing a library.
-.. Not for long. TODO: remove this when overloads for user functions are added (or maybe remove right now?)
-- <function_name> must be unique within the library script.
-- <parameter_type> is mandatory, contrary to user-defined function parameters in non-library scripts, which are typeless.
-- <script_code> can include any code you would normally use in an indicator, including inputs or plots.
+- The ``// @description``, ``// @function``, ``// @param`` and ``// @returns`` compiler directives are optional but we highly recommend you use them. They serve a double purpose: document the library's code and populate the default library description which authors can use when publishing the library.
+- The `export <https://www.tradingview.com/pine-script-reference/v5/#op_export>`__ keyword is mandatory.
+- <parameter_type> is mandatory, contrary to user-defined function parameter definitions in indicators or strategies, which are typeless.
+- <script_code> can be any code you would normally use in an indicator, including inputs or plots.
 
 This is an example library::
 
@@ -77,48 +75,53 @@ This is an example library::
 Library functions
 ^^^^^^^^^^^^^^^^^
 
-Function definitions in libraries are slightly different than those of user-defined functions in indicators and strategies, and there are constraints as to what can be included in the body of library functions.
+Function definitions in libraries are slightly different than those of user-defined functions in indicators and strategies. There are constraints as to what can be included in the body of library functions.
 
 In library function signatures (their first line):
 
 - The `export <https://demo-alerts.xstaging.tv/pine-script-reference/v5/#op_export>`__ keyword is mandatory.
 - The type of argument expected for each parameter must be explicitly mentioned.
-- A `simple <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ or `series <https://www.tradingview.com/pine-script-reference/v5/#op_series>`__ form modifier can be used to restrict the allowable forms of arguments (the next section explains their use).
+- A `simple <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ or `series <https://www.tradingview.com/pine-script-reference/v5/#op_series>`__ form modifier can restrict the allowable forms of arguments (the next section explains their use).
 
 In library function code:
 
 - You cannot use variables from the library's global scope unless they are of "const" form. This means you cannot use global variables initialized from script inputs, for example, or globally declared arrays.
 - You cannot use functions in the ``request.*()`` namespace.
 
-Library functions always return a result that is either of "simple" or of "series" form, which entails they cannot be used to calculate values used where "literal", "const", or "input" forms are required. Scripts using a library function to calculate an argument to the ``show_last`` parameter in a `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call, for example, will not work because an "input int" argument is expected.
+Library functions always return a result that is either of "simple" or "series" form. You cannot use them to calculate values where "const" or "input" forms are required, as is the case with some Pine built-in function arguments. For example, a library function cannot be used to calculate an argument for the ``show_last`` parameter in a `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call, because an "input int" argument is required for ``show_last``.
 
 
-Argument form restriction
-^^^^^^^^^^^^^^^^^^^^^^^^^
+Argument form control
+^^^^^^^^^^^^^^^^^^^^^
 
-The important difference between the ``simple`` and the ``series`` form is in the data that they represent. A value of the ``simple`` type form has to be the same for the whole bar set, while a ``series`` value can be different on every bar. This is especially important when interfacing with built-in functions: some of them will specifically require ``simple`` (or even ``input`` or ``const`` -- not allowed inside imported functions) values, some will take both. Note that a ``simple`` value will be automatically converted into ``series`` if neccessary, but not vice versa.
+The form of arguments supplied in calls to library functions is autodetected based on how the argument is used inside the function. If the argument can be used in "series" form, it is. If it cannot, an attempt is made with the "simple" type form. This explains why this code::
 
-When an argument is supplied to a library function, its type form is autodetected based on how the argument is used inside of the function. The autodetection starts at the ``series`` type form and checks whether the function can work when a ``series`` value is passed to the argument. If it can, the autodetection assigns it the ``series`` type form. If it doesn't, it does the same check for the ``simple`` type form.
+    export myEma(int x) =>
+        ta.ema(close, x)
 
-This is important if your function needs to return a ``simple`` value instead of a ``series`` value. For example, let's create a function that takes two values, ``prefix`` and ``ticker``, and tranforms them into a valid prefix-ticker pair::
+will work when called using ``t.myEma(20)``, even though `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__'s ``length`` parameter requires a "simple int" argument. When the Pine compiler detects that a "series" length cannot be used with `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__, it tries the "simple" form, which in this case is allowed.
+
+While library functions cannot return results of "const" or "input" forms, they can be written to produce a result of "simple" form. This makes them useful in more contexts than functions returning a result of "series" form, because some Pine built-in functions do not allow "series" arguments. For example, `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ requires a "simple string" for its ``symbol`` parameter. If we wrote a library function to assemble the argument to ``symbol`` in the following way, the function's result would not work because it is of "series" form::
 
     export makeTickerid(string prefix, string ticker) =>
-        prefix + ":" + ticker // returns `series string`, can't be passed to `request.security()`
-        
-This function arguments are not restricted by type form: they can take both ``simple`` and ``series`` values. Due to this, the type of the returned value is the widest possible one, a ``series string``. But there is a problem: functions that require ticker values (``request.*`` namespace) as a rule of thumb can only take ``simple string`` values as their ticker. Our ``makeTickerid()`` function returns a ``series string`` ticker, so it will not be usable in most other functions if imported from a library.
+        prefix + ":" + ticker
 
-For these cases, the `simple <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ keyword can be used to restrict an argument's form to "simple". An attempt to pass a ``series`` value to a ``simple`` argument will cause a compulation error; when used correctly, if all of the arguments of our function are of the ``simple`` type (and nothing inside the function itself requires it to be changed to ``series``), the returned value will be ``simple string``::
+However, by restricting the form of its parameters to "simple", we could force the function to yield a "simple" result. We can achieve this by prefixing the parameters' type with the `simple <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ keyword::
 
     export makeTickerid(simple string prefix, simple string ticker) =>
-        prefix + ":" + ticker // returns `simple string`, can be passed to `request.security()`
+        prefix + ":" + ticker
 
-The `series <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ keyword can also be used to prefix the type of a library function parameter. However, because arguments are by default cast to the "series" form, using the `series <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ modifier is redundant; it exists more for completeness.
+Note that for the function to return a "simple" result, no "series" values can be used in its calculation; otherwise the result will be of "series" form.
+
+One can also use the `series <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ keyword to prefix the type of a library function parameter. However, because arguments are by default cast to the "series" form, using the `series <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ modifier is redundant; it exists more for completeness.
+
+
 
 
 Publishing a library
 --------------------
 
-Before you or other Pine coders can reuse any library, it must be published. If you want to share your library with all TradingViewers, publish it publicly. To use it privately, use a private publication. As with indicators or strategies, the chart that is active when you publish a library will appear in both its widget (the small placeholder denoting libraries in the TradingView scripts stream) and script page (the page users see when they click on the widget).
+Before you or other Pine coders can reuse any library, it must be published. If you want to share your library with all TradingViewers, publish it publicly. To use it privately, use a private publication. As with indicators or strategies, the active chart when you publish a library will appear in both its widget (the small placeholder denoting libraries in the TradingView scripts stream) and script page (the page users see when they click on the widget).
 
 After adding our example library to the chart and setting up a clean chart showing our library plots the way we want them, we use the Pine Editor's "Publish Script" button. The "Publish Library" window comes up:
 
@@ -126,14 +129,27 @@ After adding our example library to the chart and setting up a clean chart showi
 
 Note that:
 
-- We leave the library's title as is (the ``title`` argument in our `library() <https://www.tradingview.com/pine-script-reference/v5/#fun_library>`__ declaration statement is used as the default). While you can change the publication's title, it is preferable to use the default value because imported libraries are referenced using the ``title`` argument in `import <https://www.tradingview.com/pine-script-reference/v5/#op_import>`__ statements. It makes life easier for library users when your publication's title matches the actual name of the library.
+- We leave the library's title as is (the ``title`` argument in our `library() <https://www.tradingview.com/pine-script-reference/v5/#fun_library>`__ declaration statement is used as the default). While you can change the publication's title, it is preferable to keep its default value because the ``title`` argument is used to reference imported libraries in the `import <https://www.tradingview.com/pine-script-reference/v5/#op_import>`__ statement. It makes life easier for library users when your publication's title matches the actual name of the library.
 - A default description is built from the compiler directives we used in our library. We will publish the library wihout retouching it.
 - We chose to publish our library publicly, so it will be visible to all TradingViewers.
-- We do not have the possibility of selecting a visibility other than "Open", which means our library will be published open-source.
+- We do not have the possibility of selecting a visibility type other than "Open" because libraries are always open-source.
 - The list of categories for libraries is different than for indicators and strategies. We have selected the "Statistics and Metrics" category.
 - We have added some custom tags: "all-time", "high" and "low".
 
-The intended users of public libraries being other Pine coders, the better you explain and document your library's functions, the more chances others will use them. Providing examples demonstrating how to use your library's functions in your publication's code will also help.
+The intended users of public libraries being other Pine coders; the better you explain and document your library's functions, the more chances others will use them. Providing examples demonstrating how to use your library's functions in your publication's code will also help.
+
+
+House Rules
+^^^^^^^^^^^
+
+Public libraries are considered public domain code in our `House Rules on Script Publishing <https://www.tradingview.com/house-rules/?solution=43000590599>`__, which entails that, contrary to open-source indicators and strategies, permission is **not** required from their author if you reuse their functions in your open-source scripts. If you intend to reuse a public library's functions in a public, closed-source publication (protected or invite-only), explicit permission for reuse in that form **is** required from its author.
+
+With the provision that public Pine libraries are considered to be "public domain", our House Rules on the reuse of open-source Pine scripts apply to them:
+
+- You must obtain permission from the original author, unless the original code meets our "public domain" criteria.
+- You must credit the author in your publication's description. It is also good form to credit in open-source comments.
+- You must make significant improvements to the original code base, and it must account for a small proportion of your script.
+- Your script must also be published open-source, unless explicit permission to that effect was granted by the original author, or unless the reused code is considered public domain AND it constitutes an insignificant part of your codebase.
 
 
 
@@ -141,18 +157,18 @@ The intended users of public libraries being other Pine coders, the better you e
 Using a library
 ---------------
 
-Using a library from another script is done through the `import <https://www.tradingview.com/pine-script-reference/v5/#op_import>`__ statement::
+Using a library from another script (which can be an indicator, a strategy or another library), is done through the `import <https://www.tradingview.com/pine-script-reference/v5/#op_import>`__ statement::
 
-    import <username>/<libraryName>/<libraryVersion> as <alias>
+    import <username>/<libraryName>/<libraryVersion> [as <alias>]
 
 where:
 
 - The <username>/<libraryName>/<libraryVersion> path will uniquely identify the library.
-- The <alias> is the namespace you choose to refer to the library's functions. If you use the ``allTime`` alias as we do in the example below, then you will use ``allTime.<function_mame>()`` in your code to refer to the library's functions.
+- The ``as <alias>`` part is optional. When used, it defines the namespace that will refer to the library's functions. For example, if you import a library using the ``allTime`` alias as we do in the example below, you will refer to that library's functions as ``allTime.<function_mame>()``. When no alias is defined, the library's name becomes its namespace.
 
-To use the library we published in the previous section, we could use the following  `import <https://www.tradingview.com/pine-script-reference/v5/#op_import>`__ statement from any type of script::
+To use the library we published in the previous section, our next script will require an `import <https://www.tradingview.com/pine-script-reference/v5/#op_import>`__ statement::
 
-    import PineCoders/AllTimeHighLow/1 as ath
+    import PineCoders/AllTimeHighLow/1 as allTime
 
 As we type the user name of the library's author, a popup appears providing selections that match the available libraries:
 
@@ -170,21 +186,17 @@ This is an indicator that reuses our library::
 
 Note that:
 
-- We have chosen to use "allTime" as the alias for the library's functions. When you want to use one of an imported library's functions in your script and you start typing the library's alias in the Editor, a popup will appear to help you select the particular function you want to use from the library.
-- We use the library's ``hi()`` and ``lo()`` functions without and argument, so the default `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ built-in variables will be used for their series, respectively.
-- We use a second call to ``allTime.hi()``, but this time using `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ as it argument, to plot the highest `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ in the chart's history.
+- We have chosen to use the "allTime" alias for the library's instance in our script. When typing that alias in the Editor, a popup will appear to help you select the particular function you want to use from the library.
+- We use the library's ``hi()`` and ``lo()`` functions without an argument, so the default `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ built-in variables will be used for their series, respectively.
+- We use a second call to ``allTime.hi()``, but this time using `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ as its argument, to plot the highest `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ in the chart's history.
 
 
-House Rules
-^^^^^^^^^^^
 
-Public libraries are considered public domain code in our `House Rules on Script Publishing <https://www.tradingview.com/house-rules/?solution=43000590599>`__, which entails that, contrary to open-source indicators and strategies, permission is **not** required from their author if you reuse their functions in your open-source scripts. If you intend to reuse a public library's functions in a public, closed-source publication (protected or invite-only), explicit permission for reuse in that form **is** required from its author.
 
-With the provision that public Pine libraries are considered to be "public domain", our House Rules on the reuse of open-source Pine scripts apply to them:
+Examples
+--------
 
-- You must obtain permission from the original author, unless the original code meets our "public domain" criteria.
-- You must credit the author in your publication's description. It is also good form to credit in open-source comments.
-- You must make significant improvements to the original code base and it must account for a small proportion of your script.
-- Your script must also be published open-source, unless explicit permission to that effect was granted by the original author, or unless the reused code is considered public domain AND it constitutes an insignificant part of your codebase.
+These publications are examples of libraries published on TradingView:
 
+- 
 

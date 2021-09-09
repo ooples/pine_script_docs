@@ -7,7 +7,7 @@ Pine version 5 migration guide
 Introduction
 ------------
 
-This guide documents the changes made to Pine from v4 to v5. It will guide you in the adaptation of existing Pine scripts to Pine v5. See our :ref:`here <v5ReleaseNotes> for a list of the **new** features in Pine v5.
+This guide documents the changes made to Pine from v4 to v5. It will guide you in the adaptation of existing Pine scripts to Pine v5. See our :ref:`here <v5ReleaseNotes>` for a list of the **new** features in Pine v5.
 
 The most frequent adaptations required to convert older scripts to v5 are:
 
