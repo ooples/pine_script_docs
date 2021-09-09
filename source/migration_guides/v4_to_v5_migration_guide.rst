@@ -15,7 +15,7 @@ The most frequent adaptations required to convert older scripts to v5 are:
 - Renaming built-in function calls to include their new namespace (e.g., `highest() <https://www.tradingview.com/pine-script-reference/v4/#fun_highest>`__ in v4 becomes `ta.highest() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}highest>`__ in v5).
 - Restructuring inputs to use the more specialized ``input.*()`` functions.
 - Eliminating uses of the deprecated ``transp`` parameter by using `color.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}new>`__ to simultaneously define color and transparency for use with the ``color`` parameter.
-- If you uses the ``resolution`` and ``resolution_gaps`` parameters in v4's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__, they will require changing to ``timeframe`` and ``timeframe_gaps`` in v5's `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__.
+- If you used the ``resolution`` and ``resolution_gaps`` parameters in v4's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__, they will require changing to ``timeframe`` and ``timeframe_gaps`` in v5's `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__.
 
 
 v4 to v5 converter
