@@ -83,7 +83,7 @@ If your v4 code used a length that was "const int", "input int" or "simple int",
 Reserved keywords
 -----------------
 
-A number of words are reserved and cannot be used for variable or function names. They are: ``text``, ``ellipse``, ``polygon``, ``return``, ``class``, ``struct``, ``throw``, ``try``, ``catch``, ``is``, ``in``, ``range``, ``do``. If your v4 indicator uses any of these, rename your variable or function for the script to work in v5.
+A number of words are reserved and cannot be used for variable or function names. They are: ``catch``, ``class``, ``do``, ``ellipse``, ``in``, ``is``, ``polygon``, ``range``, ``return``, ``struct``, ``text``, ``throw``, ``try``. If your v4 indicator uses any of these, rename your variable or function for the script to work in v5.
 
 
 Removed \`iff()\` and \`offset()\`
