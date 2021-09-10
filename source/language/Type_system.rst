@@ -364,7 +364,7 @@ and `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_labe
 `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`__ and
 `table.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}new>`__ functions. 
 
-These functions all return an ID that uniquely identifiers each drawing object. The ID's type is "series line", "series label", "series box" and "series table", respectively, and they do not exist in other forms than "series". Drawing IDs act like pointer in that they are used to reference a specific instance of a drawing in all the related functions of its namespace. The line ID returned by a `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ call is then used to refer to that line using `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`__, for example.
+These functions all return an ID that uniquely identifies each drawing object. The ID's type is "series line", "series label", "series box" and "series table", respectively, and an ID can exist in no other form than "series". Drawing IDs act like pointer in that they are used to reference a specific instance of a drawing in all the related functions of its namespace. The line ID returned by a `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ call is then used to refer to that line using `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`__, for example.
 
 
 array
