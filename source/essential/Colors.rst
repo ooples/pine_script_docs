@@ -35,6 +35,8 @@ Each color in Pine is defined by four values:
 The transparency of a color defines how opaque it is: zero is fully opaque, 100 makes the color—whichever it is—invisible. Modulating transparency can be crucial in more involved color visuals or when using backgrounds, to control which colors dominate the others, and how they mix together when superimposed.
 
 
+.. _PageColors_ZIndex:
+
 Z-index
 ^^^^^^^
 
