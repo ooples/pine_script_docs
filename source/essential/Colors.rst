@@ -55,6 +55,7 @@ This lists the groups of visual elements in Pine, ordered by increasing z-index,
 - Lines
 - Tables
 
+Note that by using ``explicit_plot_zorder = true`` in `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ or `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__ call, you can control the relative z-index of ``plot*()``, `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ and `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ visuals using their sequential order in the script.
 
 
 
