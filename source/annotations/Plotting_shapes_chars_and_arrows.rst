@@ -98,10 +98,8 @@ use another position, use the
     //@version=5
     indicator('plotshape example 2', overlay = true)
     condition = close >= open
-    plotshape(condition, style = shape.triangleup,
-                     location = location.abovebar, color = color.green)
-    plotshape(not condition, style = shape.triangledown,
-                     location = location.belowbar, color = color.red)
+    plotshape(condition, style = shape.triangleup, location = location.abovebar, color = color.green)
+    plotshape(not condition, style = shape.triangledown, location = location.belowbar, color = color.red)
 
 .. image:: images/Plotshape_example_2.png
 
