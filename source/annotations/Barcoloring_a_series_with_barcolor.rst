@@ -1,6 +1,6 @@
 
-Barcoloring a series with barcolor
-----------------------------------
+Barcoloring a series with \`barcolor()\`
+----------------------------------------
 
 The `barcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_barcolor>`__ function lets you specify the color of bars.
 The coloring can be conditional. The following script renders *inside* and *outside* bars in different colors::
