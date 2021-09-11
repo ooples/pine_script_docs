@@ -5,8 +5,8 @@ Custom OHLC bars and candles
     :depth: 2
 
 You may create your own custom *bars* and *candles* in Pine scripts by using the
-`plotbar <https://www.tradingview.com/pine-script-reference/v5/#fun_plotbar>`__
-and `plotcandle <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__
+`plotbar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotbar>`__
+and `plotcandle() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__
 annotation functions::
 
     //@version=5
