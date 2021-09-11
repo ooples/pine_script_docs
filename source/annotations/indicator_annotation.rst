@@ -1,5 +1,5 @@
-indicator() annotation
-----------------
+\`indicator()\`
+---------------
 
 Every *indicator* [#strategy]_ script must contain one call to the
 `indicator <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__
