@@ -47,8 +47,9 @@ but no array is created by this declaration yet. For the moment, the array varia
 
     float[] prices = na
 
-When declaring an array and the ``<expression>`` is not ``na``, one of the ``array.new_<type>(size, initial_value)`` functions must be used. 
-The arguments of both the ``size`` and ``initial_value`` parameters can be *series*, to allow dynamic sizing and initialization of array elements.
+When declaring an array and the ``<expression>`` is not ``na``, one of the ``array.new_<type>(size, initial_value)`` functions or 
+`array.from() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}from>`__ must be used. 
+The arguments of both the ``size`` and ``initial_value`` parameters can be "series", to allow dynamic sizing and initialization of array elements.
 The following example creates an array containing zero "float" elements, 
 and this time, the array id returned by the `array.new_float() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}new_float>`__
 function call is assigned to ``prices``::
@@ -204,7 +205,7 @@ We use it here to calculate progressively lower or higher levels::
 History referencing
 -------------------
 
-Past instances of array id's or elements cannot be referenced directly using Pine's 
+Past instances of array IDs or elements cannot be referenced directly using Pine's 
 `[ ] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ 
 history-referencing operator. 
 One **cannot** write: ``array.get(a[1], 0)`` to fetch the value of the array's first element on the previous bar.
@@ -411,19 +412,18 @@ Calculations on arrays
 ----------------------
 
 While series variables can be viewed as a horizontal set of values stretching back in time, Pine's one-dimensional arrays can be viewed as vertical structures 
-residing on each bar. As an array's set of elements is not a series, Pine's usual mathematical functions are not allowed on them. Special-purpose functions must be used 
-to operate on all of an array's values. The available functions are: 
+residing on each bar. As an array's set of elements is not a :ref:`time series <PageTypeSystem_TimeSeries>`, Pine's usual mathematical functions are not allowed on them. Special-purpose functions must be used to operate on all of an array's values. The available functions are: 
 `array.avg() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}avg>`__, 
+`array.covariance() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}covariance>`__,
 `array.min() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}min>`__, 
 `array.max() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}max>`__, 
 `array.median() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}median>`__, 
 `array.mode() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}mode>`__, 
+`array.range() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}range>`__,
 `array.standardize() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}standardize>`__, 
 `array.stdev() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}stdev>`__, 
 `array.sum() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}sum>`__, 
-`array.variance() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}variance>`__, 
-`array.covariance() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}covariance>`__,
-`array.range() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}range>`__.
+`array.variance() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}variance>`__.
 
 Note that contrary to the usual mathematical functions in Pine, those used on arrays do not return ``na`` when some of the values they 
 calculate on have ``na`` values. There are a few exceptions to this rule:
