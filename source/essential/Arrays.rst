@@ -1,3 +1,5 @@
+.. _PageArrays:
+
 Arrays
 ======
 
@@ -15,8 +17,8 @@ requiring intricate data-handling. If you are a beginning Pine programmer, we re
 more accessible Pine features before you tackle arrays.
 
 Pine arrays are one-dimensional. All elements of an array are of the same type, which can be 
-"int", "float", "bool", "color", "string", "line", "label", "box" or "table", always of *series* form. 
-Arrays are referenced using an array *id*, similar to label and line id's. 
+"int", "float", "bool", "color", "string", "line", "label", "box" or "table", always of "series" form. 
+Arrays are referenced using an array ID similar to line or label IDs. 
 Pine does not use an indexing operator to reference individual array elements;
 instead, functions like `array.get() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}get>`__ 
 and `array.set() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}set>`__ are used to read and write values of array elements. 
@@ -26,7 +28,7 @@ Elements within an array are referred to using an *index*, which starts at 0 and
 Arrays in Pine can be sized dynamically, so the number of elements in the array can be modified within one iteration of the script on a bar,
 and vary across bars. Multiple arrays can be used in the same script. The size of arrays is limited to 100,000.
 
-.. note:: We will use "beginning" of an array to designate index 0, and "end" of an array to designate the array's element with the highest index value. We will also extend the meaning of *array* to include array *id's*, for the sake of brevity.
+.. note:: We will use "beginning" of an array to designate index 0, and "end" of an array to designate the array's element with the highest index value. We will also extend the meaning of *array* to include array IDs, for the sake of brevity.
 
 
 
@@ -40,14 +42,14 @@ The following syntax can be used to declare arrays::
 
 The ``[]`` modifier is appended to the type name when declaring arrays. However, since type-specific functions are always used to create arrays,
 the ``<type>[]`` part of the declaration is redundant, except if you initialize an array variable to ``na``, as in the following example where
-we declare an array variable named ``prices``. The variable will be used to designate an array containing *float* values,  
+we declare an array variable named ``prices``. The variable will be used to designate an array containing "float" values,  
 but no array is created by this declaration yet. For the moment, the array variable contains no valid array id, its value being ``na``::
 
     float[] prices = na
 
 When declaring an array and the ``<expression>`` is not ``na``, one of the ``array.new_<type>(size, initial_value)`` functions must be used. 
 The arguments of both the ``size`` and ``initial_value`` parameters can be *series*, to allow dynamic sizing and initialization of array elements.
-The following example creates an array containing zero *float* elements, 
+The following example creates an array containing zero "float" elements, 
 and this time, the array id returned by the `array.new_float() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}new_float>`__
 function call is assigned to ``prices``::
 
@@ -69,6 +71,8 @@ The following declaration creates and array id named ``prices``.
 The array is created with two elements, each initialized with the value of the ``close`` built-in variable on that bar::
 
     prices = array.new_float(2, close)
+
+You can also use `array.from() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}from>`__ to create an array and intialize it with different values at the same time.
 
 Using the 'var' keyword
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -195,6 +199,7 @@ We use it here to calculate progressively lower or higher levels::
 |Arrays-Scope-Bands.png|
 
 
+.. _PageArrays_HistoryReferencing:
 
 History referencing
 -------------------
