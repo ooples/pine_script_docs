@@ -49,7 +49,7 @@ Integer input
 ^^^^^^^^^^^^^
 ::
 
-    offsetInput = input.int(7, "Offset", minval=-10, maxval=10)
+    offsetInput = input.int(7, "Offset", minval = -10, maxval = 10)
     plot(close[offsetInput])
 
 .. figure:: images/Inputs_of_indicator_2.png
