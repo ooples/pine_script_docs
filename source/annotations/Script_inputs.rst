@@ -31,8 +31,8 @@ Boolean input
 ^^^^^^^^^^^^^
 ::
 
-    b = input.bool(title="On/Off", defval=true)
-    plot(b ? open : na)
+    showOpenInput = input.bool(true, "On/Off")
+    plot(showOpenInput ? open : na)
 
 .. figure:: images/Inputs_of_indicator_1.png
 
@@ -40,8 +40,8 @@ Color input
 ^^^^^^^^^^^
 ::
 
-    c = input.color(title="Color", defval=color.red)
-    plot(close, color=c)
+    plotColorInput = input.color(color.red, "Color")
+    plot(close, color = plotColorInput)
 
 .. figure:: images/Inputs_of_indicator_8.png
 
@@ -49,8 +49,8 @@ Integer input
 ^^^^^^^^^^^^^
 ::
 
-    i = input.int(title="Offset", defval=7, minval=-10, maxval=10)
-    plot(close[i])
+    offsetInput = input.int(7, "Offset", minval=-10, maxval=10)
+    plot(close[offsetInput])
 
 .. figure:: images/Inputs_of_indicator_2.png
 
@@ -59,8 +59,8 @@ Float input
 ^^^^^^^^^^^
 ::
 
-    f = input.float(title="Angle", defval=-0.5, minval=-3.14, maxval=3.14, step=0.2)
-    plot(sin(f) > 0 ? close : open)
+    angleInput = input.float(-0.5, "Angle", minval = -3.14, maxval = 3.14, step = 0.2)
+    plot(sin(angleInput) > 0 ? close : open)
 
 .. figure:: images/Inputs_of_indicator_3.png
 
@@ -69,10 +69,10 @@ Symbol and resolution inputs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
-    sym = input.symbol(title="Symbol", defval="SPY")
-    res = input.timeframe(title="Timeframe", defval="60")
-    plot(close, color=color.red)
-    plot(request.security(sym, res, close), color=color.green)
+    symbolInput = input.symbol("SPY", "Symbol")
+    tfInput = input.timeframe("60", "Timeframe")
+    plot(close, color = color.red)
+    plot(request.security(symbolInput, tfInput, close), color = color.green)
 
 .. figure:: images/Inputs_of_indicator_4.png
 
@@ -86,8 +86,8 @@ Session input
 ^^^^^^^^^^^^^
 ::
 
-    s = input.session(title="Session", defval="24x7")
-    plot(time(timeframe.period, s))
+    sessionInput = input.session("24x7", "Session")
+    plot(time(timeframe.period, sessionInput))
 
 .. figure:: images/Inputs_of_indicator_5.png
 
@@ -96,8 +96,8 @@ Source input
 ^^^^^^^^^^^^^
 ::
 
-    src = input.source(title="Source", defval=close)
-    ma = ta.sma(src, 9)
+    srcInput = input.source(close, "Source")
+    ma = ta.sma(srcInput, 9)
     plot(ma)
 
 .. figure:: images/Inputs_of_indicator_6.png
@@ -107,8 +107,8 @@ Time input
 ^^^^^^^^^^^^^
 ::
 
-    date = input.time(title="Date", defval=timestamp("20 Feb 2020 00:00 +0300"))
-    plot(date)
+    dateInput = input.time(timestamp("20 Feb 2020 00:00 +0300"), "Date")
+    plot(dateInput)
 
 .. figure:: images/Inputs_of_indicator_9.png
 
@@ -119,8 +119,8 @@ The ``options`` parameter is useful to provide users with a list
 of constant values they can choose from using a dropdown menu.
 ::
 
-    choice = input.string(title="Choice", defval="A", options=["A", "B"])
-    plot(choice == "A" ? close : choice == "B" ? open : na)
+    choiceInput = input.string("A", "Choice", options = ["A", "B"])
+    plot(choiceInput == "A" ? close : choiceInput == "B" ? open : na)
 	
 .. figure:: images/Inputs_of_indicator_7.png
 
