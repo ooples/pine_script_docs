@@ -1,5 +1,5 @@
-Filling the background with fill
---------------------------------
+Filling the background with \`fill()\`
+--------------------------------------
 
 The `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__
 function lets you color the background between two plotted
