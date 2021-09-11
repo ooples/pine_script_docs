@@ -14,7 +14,8 @@ otherwise need a set of variables named ``price00``, ``price01`` and ``price02``
 requiring intricate data-handling. If you are a beginning Pine programmer, we recommend you become familiar with other, 
 more accessible Pine features before you tackle arrays.
 
-Pine arrays are one-dimensional. All elements of an array are of the same type, which can be any of the fundamental data types (like *int*, *string*, *color*, *table*, etc.), always of *series* form. 
+Pine arrays are one-dimensional. All elements of an array are of the same type, which can be 
+"int", "float", "bool", "color", "string", "line", "label", "box" or "table", always of *series* form. 
 Arrays are referenced using an array *id*, similar to label and line id's. 
 Pine does not use an indexing operator to reference individual array elements;
 instead, functions like `array.get() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}get>`__ 
