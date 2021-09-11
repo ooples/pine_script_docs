@@ -12,7 +12,7 @@ Here is a script that colors the background of trading sessions (try it on
 30min EURUSD, for example)::
 
     //@version=5
-    indicator("bgcolor() example", overlay=true)
+    indicator("bgcolor() example", overlay = true)
     timeInRange(res, sess) => time(res, sess) != 0
     PREMARKET_COLOR = #0050FF
     REGULAR_COLOR = #0000FF
