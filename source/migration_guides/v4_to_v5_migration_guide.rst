@@ -193,8 +193,8 @@ In v5 we need to explictly mention the 90 transparency with the color, yielding:
  bgcolor(crossUp ? color.new(color.green, TRANSP) : crossDn ? color.new(color.red, TRANSP) : na)
 
  
-Changed the default session for \`time()\` and \`time_close()\`
----------------------------------------------------------------
+Changed the default session days for \`time()\` and \`time_close()\`
+--------------------------------------------------------------------
 
 The default set of days for ``session`` arguments used in the `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and `time_close() <https://www.tradingview.com/pine-script-reference/v5/#fun_time_close>`__ functions has changed from "23456" (Monday to Friday) to "1234567" (Sunday to Saturday)::
 
