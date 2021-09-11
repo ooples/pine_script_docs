@@ -4,7 +4,7 @@ Background coloring with \`bgcolor()\`
 
 The `bgcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_bgcolor>`__
 function changes the color of the script's background. If the script is running in ``overlay = true`` mode, then it will color the chart's background.
-The color used in `bgcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_bgcolor>`__` can be calculated in
+The color used in `bgcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_bgcolor>`__ can be calculated in
 an expression, and the `color.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}new>`__ 
 function can be used to specify the color's transparency.
 
