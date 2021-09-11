@@ -1,5 +1,5 @@
-Price levels, hline
--------------------
+Price levels with \`hline()\`
+-----------------------------
 
 The `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__
 annotation function renders a horizontal line at a given level. For example::
