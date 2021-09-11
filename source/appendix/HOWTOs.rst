@@ -163,8 +163,8 @@ calculating flexible lookback periods based on number of bars.
 ::
 
     //@version=5
-    indicator("Bar Count", overlay=true, scale=scale.none)
-    plot(bar_index + 1, style=plot.style_histogram)
+    indicator("Bar Count", overlay = true, scale = scale.none)
+    plot(bar_index + 1, style = plot.style_histogram)
 
 Enumerate bars in a day
 -----------------------
@@ -172,13 +172,13 @@ Enumerate bars in a day
 ::
 
     //@version=5
-    indicator("My Script", overlay=true, scale=scale.none)
+    indicator("My Script", overlay = true, scale = scale.none)
 
     isNewDay() =>
-        _d = dayofweek
-        na(_d[1]) or _d != _d[1]
+        d = dayofweek
+        na(d[1]) or d != d[1]
 
-    plot(ta.barssince(isNewDay()), style=plot.style_cross)
+    plot(ta.barssince(isNewDay()), style = plot.style_cross)
 
 Find the highest and lowest values for the entire dataset
 ---------------------------------------------------------
@@ -186,24 +186,18 @@ Find the highest and lowest values for the entire dataset
 ::
 
     //@version=5
-    indicator("My Script")
+    indicator("", "", true)
 
-    f_biggest(_source) =>
-        _max = 0.0
-        _max := nz(_max[1], _source)
-        if _source > _max
-            _max := _source
-        _max
+    allTimetHi(source) =>
+        var atHi = source
+        atHi := math.max(atHi, source)
 
-    f_smallest(_source) =>
-        _min = 0.0
-        _min := nz(_min[1], _source)
-        if _source < _min
-            _min := _source
-        _min
+    allTimetLo(source) =>
+        var atLo = source
+        atLo := math.min(atLo, source)
 
-    plot(f_biggest(close), color=color.green)
-    plot(f_smallest(close), color=color.red)
+    plot(allTimetHi(close), "ATH", color.green)
+    plot(allTimetLo(close), "ATL", color.red)
 
 Query the last non-na value
 ---------------------------
@@ -211,10 +205,10 @@ Query the last non-na value
 You can use the script below to avoid gaps in a series::
 
     //@version=5
-    indicator("My Script")
+    indicator("")
     series = close >= open ? close : na
     vw = fixnan(series)
-    plot(series, style=plot.style_linebr, color=color.red)  // series has na values
+    plot(series, style = plot.style_linebr, color = color.red)  // series has na values
     plot(vw)  // all na values are replaced with the last non-empty value
 
 .. |Mark the highest bar within a 5 day lookback window range| image:: images/Wiki_howto_range_analysis.png
