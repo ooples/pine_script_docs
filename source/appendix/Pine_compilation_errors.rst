@@ -31,9 +31,9 @@ after compilation:
     sym(p) =>  // no security call on this line
         request.security(syminfo.tickerid, p, close)
     plot(sym('D'))  // (2) one indirect call to security
-    plot(sym('W'))  // (3) another one indirect call to security
+    plot(sym('W'))  // (3) another indirect call to security
 
-    request.security(syminfo.tickerid, timeframe.period, open)  // result of this line is never used, and will be optimized-out
+    request.security(syminfo.tickerid, timeframe.period, open)  // result of this line is never used, and will be optimized out
 
 
 
@@ -98,7 +98,7 @@ loading.
 ::
 
     //@version=5
-    indicator("Loop is too long", max_bars_back=101)
+    indicator("Loop is too long", max_bars_back = 101)
     s = 0
     for i = 1 to 1e3  // to make it longer
         for j = 0 to 100
@@ -112,7 +112,7 @@ this case, algorithm may be optimized like this:
 ::
 
     //@version=5
-    indicator("Loop is too long", max_bars_back=101)
+    indicator("Loop is too long", max_bars_back = 101)
     bar_back_at(t) =>
         i = 0
         step = 51
@@ -183,7 +183,7 @@ In order to help Pine with detection, you should add the ``max_bars_back``
 parameter to the script's ``indicator`` or ``strategy`` function::
 
     //@version=5
-    indicator("Requires max_bars_back", max_bars_back=20)
+    indicator("Requires max_bars_back", max_bars_back = 20)
     test = 0.0
     if bar_index > 1000
         test := ta.roc(close, 20)
