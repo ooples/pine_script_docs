@@ -57,7 +57,7 @@ The Pine **types** are:
 
 Each type refers to the nature of the value contained in a variable: ``1`` is of type "int", ``1.0`` is of type "float", ``"AAPL"`` is of type "string", etc.
 
-The Pine compiler can automatically convert some types into others when a value is not of the required type. The auto-casting rules are: **int** |rarr| **float** |rarr| **bool**. See the :ref:`here <PageTypeSystem_TypeCasting>` section of this page for more information on type casting.
+The Pine compiler can automatically convert some types into others when a value is not of the required type. The auto-casting rules are: **int** |rarr| **float** |rarr| **bool**. See the :ref:`<PageTypeSystem_TypeCasting>` section of this page for more information on type casting.
 
 Except in library function signatures, Pine forms are implicit in code; they are never declared because they are always determined by the compiler. Types, however, can be specified when declaring variables, e.g.::
 
@@ -76,7 +76,7 @@ Except in library function signatures, Pine forms are implicit in code; they are
 Time series
 ^^^^^^^^^^^
 
-Much of the power of Pine stems from the fact that it is designed to process *time series* efficiently. Time series are not a form or a type; they are the fundamental structure Pine uses to store the successive values of a variable over time, where each value is tethered to a point in time. Since charts are composed of bars, each representing a particular point in time, time series are the ideal data structure to work with values that may change with time. The concept of time series is intimately linked to Pine's :ref:`here <PageExecutionModel>`. Understanding both is key to making the most of the power of Pine.
+Much of the power of Pine stems from the fact that it is designed to process *time series* efficiently. Time series are not a form or a type; they are the fundamental structure Pine uses to store the successive values of a variable over time, where each value is tethered to a point in time. Since charts are composed of bars, each representing a particular point in time, time series are the ideal data structure to work with values that may change with time. The concept of time series is intimately linked to Pine's :ref:`execution model <PageExecutionModel>`. Understanding both is key to making the most of the power of Pine.
 
 Take the built-in `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ variable, which contains the "open" price of each bar in the dataset. If your script is running on a 5min chart, then each value in the `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ time series is the "open" price of the consecutive 5min chart bars. When your script refers to `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__, it is referring to the "open" price of the bar the script is executing on. To refer to past values in a time series, we use the `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ history-referencing operator. When a script is executing on a given bar, ``open[1]`` refers to the value of the `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ time series on the previous bar.
 
