@@ -124,9 +124,9 @@ expressions which will calculate the shape's color
 depending on conditions at runtime. For example::
 
     //@version=5
-    indicator('plotshape example 3', overlay=true)
+    indicator('plotshape example 3', overlay = true)
     condition = close >= open
-    plotshape(true, style=shape.flag, color = condition ? color.green : color.red)
+    plotshape(true, style = shape.flag, color = condition ? color.green : color.red)
 
 .. image:: images/Plotshape_example_3.png
 
@@ -207,7 +207,7 @@ Here is a simple script that illustrates how the ``plotarrow`` function works::
     //@version=5
     indicator("plotarrow example", overlay = true)
     codiff = close - open
-	TRANSP = 40
+    TRANSP = 40
     plotarrow(codiff, colorup = color.new(teal, TRANSP), colordown = color.new(orange, TRANSP))
 
 .. image:: images/Plotarrow_example_1.png
