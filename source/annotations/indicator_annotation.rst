@@ -40,7 +40,7 @@ It must be a non-negative integer and not greater than 16.
 If omitted, then formatting from the parent series on the chart will be used.
 If the format is ``format.inherit`` and the ``precision`` parameter is used with a value, 
 then the study will not inherit formatting from the chart's settings and 
-the value specified will be used instead, as if ``format=format.price`` 
+the value specified will be used instead, as if ``format = format.price`` 
 had been used.
 
 .. rubric:: Footnote
