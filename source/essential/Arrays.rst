@@ -57,9 +57,11 @@ Similar array creation functions exist for the other types of array elements:
 `array.new_int() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}new_int>`__,
 `array.new_bool() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}new_bool>`__, 
 `array.new_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}new_color>`__,
+`array.new_string() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}new_string>`__,
 `array.new_line() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}new_line>`__,
-`array.new_label() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}new_label>`__ and 
-`array.new_string() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}new_string>`__.
+`array.new_label() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}new_label>`__, 
+`array.new_box() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}new_box>`__ and  
+`array.new_table() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}new_table>`__.
 
 When declaring an array, you can initialize all elements in the array using the ``initial_value`` parameter. 
 When no argument is supplied for ``initial_value``, the array elements are initialized to ``na``.
