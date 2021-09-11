@@ -133,7 +133,7 @@ It then fetches the proper array element to use it in a `bgcolor() <https://www.
     plotchar(lastHiBar, "lastHiBar", "", location.top, size = size.tiny)
     plotchar(fillNo, "fillNo", "", location.top, size = size.tiny)
 
-|Arrays-ReadingAndWriting-DistanceFromHigh.png|
+.. image:: images/Arrays-ReadingAndWriting-DistanceFromHigh.png
 
 Another technique that can be used to initialize the elements in an array is to declare the array with size zero, and then populate it using 
 `array.push() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}push>`__ 
@@ -196,7 +196,7 @@ We use it here to calculate progressively lower or higher levels::
     plot(f_nextLevel(i_factor))
     plot(f_nextLevel(i_factor))
 
-|Arrays-Scope-Bands.png|
+.. image:: images/Arrays-Scope-Bands.png
 
 
 .. _PageArrays_HistoryReferencing:
@@ -262,7 +262,7 @@ on the bar's last execution of the script, the earlier call to ``array.get(a, 0)
 because that was the value of the array element at that point in the script. 
 The series value of the function call will thus be each bar's ``close`` value.
 
-|Arrays-HistoryReferencing.png|
+.. image:: images/Arrays-HistoryReferencing.png
 
 
 
@@ -291,7 +291,7 @@ The element existing at the index used in the function call and any others to it
         array.insert(a, 2, 999)    
         label.new(bar_index, 0, "AFTER\na: " + str.tostring(a), style = label.style_label_up, size = size.large)
 
-|Arrays-InsertingAndRemovingArrayElements-Insert.png|
+.. image:: images/Arrays-InsertingAndRemovingArrayElements-Insert.png
 
 `array.push() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}push>`__ 
 will add a new element at the end of an array.
@@ -363,7 +363,7 @@ See how the functions are used here to remember successive lows in rallies::
         // Clear remaining levels after the last 4 have been plotted.
         array.clear(lows)
 
-|Arrays-InsertingAndRemovingArrayElements-LowsFromNewHighs.png|
+.. image:: images/Arrays-InsertingAndRemovingArrayElements-LowsFromNewHighs.png
 
 Using an array as a queue
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -404,7 +404,7 @@ but this does not cause runtime errors. Let's look at our code::
 		// De-queue the oldest label id from the queue and delete the corresponding label.
 		label.delete(array.shift(labelIds))
 
-|Arrays-InsertingAndRemovingArrayElements-ShowLastnHighPivots.png|
+.. image:: images/Arrays-InsertingAndRemovingArrayElements-ShowLastnHighPivots.png
 
 
 Calculations on arrays
@@ -456,7 +456,7 @@ so the first array is modified while the second one remains intact. The function
         array.push(_c, 4)
         label.new(bar_index, 0, "AFTER\na: " + str.tostring(a) + "\nb: " + str.tostring(b) + "\nc: " + str.tostring(_c), style = label.style_label_up, size = size.large)
 
-|Arrays-ManipulatingArrays-Concat.png|
+.. image:: images/Arrays-ManipulatingArrays-Concat.png
 
 Copying
 ^^^^^^^
@@ -477,7 +477,7 @@ Here we copy the array ``a`` to a new array named ``_b``::
 Note that simply using ``_b = a`` in the previous example would not have copied the array, but only its id. 
 From thereon, both variables would point to the same array, so using either one would affect the same array.
 
-|Arrays-ManipulatingArrays-Copy.png|
+.. image:: images/Arrays-ManipulatingArrays-Copy.png
 
 Joining
 ^^^^^^^^^
@@ -521,7 +521,7 @@ Note that in the example, which array is sorted is also determined at runtime::
           "a " + (_barUp ? "is sorted ▲: "   : "is not sorted: ") + str.tostring(a) + "\n\n" +
           "b " + (_barUp ? "is not sorted: " : "is sorted ▼: ")   + str.tostring(b), size = size.large)
 
-|Arrays-ManipulatingArrays-Sort.png|
+.. image:: images/Arrays-ManipulatingArrays-Sort.png
 
 Reversing
 ^^^^^^^^^
@@ -574,7 +574,7 @@ In this example, to slice the subset from index 0 to index 2 of array ``a``, we 
         array.push(_sliceOfA, 4)
         label.new(bar_index, 0, "AFTER\na: " + str.tostring(a) + "\n_sliceOfA: " + str.tostring(_sliceOfA), style = label.style_label_up)
 
-|Arrays-ManipulatingArrays-Slice.png|
+.. image:: images/Arrays-ManipulatingArrays-Slice.png
 
 Searching arrays
 ----------------
@@ -717,17 +717,4 @@ the parent array's indices 3 to 4, is pointing out of the parent array's boundar
     array.remove(a, 0)
     c = array.indexof(b, 2)
     plot(c)
-
-
-
-.. |Arrays-ReadingAndWriting-DistanceFromHigh.png| image:: ../images/Arrays-ReadingAndWriting-DistanceFromHigh.png
-.. |Arrays-HistoryReferencing.png| image:: ../images/Arrays-HistoryReferencing.png
-.. |Arrays-Scope-Bands.png| image:: ../images/Arrays-Scope-Bands.png
-.. |Arrays-InsertingAndRemovingArrayElements-LowsFromNewHighs.png| image:: ../images/Arrays-InsertingAndRemovingArrayElements-LowsFromNewHighs.png
-.. |Arrays-InsertingAndRemovingArrayElements-ShowLastnHighPivots.png| image:: ../images/Arrays-InsertingAndRemovingArrayElements-ShowLastnHighPivots.png
-.. |Arrays-InsertingAndRemovingArrayElements-Insert.png| image:: ../images/Arrays-InsertingAndRemovingArrayElements-Insert.png
-.. |Arrays-ManipulatingArrays-Concat.png| image:: ../images/Arrays-ManipulatingArrays-Concat.png
-.. |Arrays-ManipulatingArrays-Copy.png| image:: ../images/Arrays-ManipulatingArrays-Copy.png
-.. |Arrays-ManipulatingArrays-Sort.png| image:: ../images/Arrays-ManipulatingArrays-Sort.png
-.. |Arrays-ManipulatingArrays-Slice.png| image:: ../images/Arrays-ManipulatingArrays-Slice.png
 
