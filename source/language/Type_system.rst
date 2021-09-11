@@ -88,7 +88,7 @@ Even the result of function calls on successive bars leaves a trace of values in
 
 Do not confuse "time series" with the "series" form. The *time series* concept explains how consecutive values of variables are stored in Pine; the "series" form denotes variables whose values can change bar to bar. Consider, for example, the `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__ built-in variable which is of form "simple" and type "string", so "simple string". The "simple" form entails that the variable's value is known on bar zero (the first bar where the script executes) and will not change during the script's execution on all the chart's bars. The variable's value is the chart's timeframe in string format, so ``"D"`` for a 1D chart, for example. Even though its value cannot change during the script, it would be syntactically correct in Pine (though not very useful) to refer to its value 10 bars ago using ``timeframe.period[10]``. This is possible because the successive values of `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__  for each bar are stored in a time series, even though all the values in that particular time series are similar. Note, however, that when the `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ operator is used to access past values of a variable, it yields a result of "series" form, even though the variable without an offset is of another form, such as "simple" in the case of `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__.
 
-When you grasp how time series can be efficiently handled using Pine's syntax and its :ref:`here <PageExecutionModel>`, you can define complex calculations using just a few lines of Pine code.
+When you grasp how time series can be efficiently handled using Pine's syntax and its :ref:`execution model <PageExecutionModel>`, you can define complex calculations using just a few lines of Pine code.
 
 
 
@@ -315,7 +315,7 @@ Here is an example::
               color.new(color.blue, 80)
     bgcolor(bgColor)
 
-See the page on :ref:`here <PageColors>` for more information on using colors in Pine.
+See the page on :ref:`colors <PageColors>` for more information on using colors in Pine.
 
 
 string
