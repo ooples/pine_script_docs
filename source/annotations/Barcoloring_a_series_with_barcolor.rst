@@ -17,6 +17,6 @@ The coloring can be conditional. The following script renders *inside* and *outs
 .. image:: images/Barcoloring_a_series_barcolor_1.png
 
 
-As you can see, the `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__` value leaves bars as is.
+As you can see, the `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ value leaves bars as is.
 
 `barcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_barcolor>`__ works whether the script is running in ``overlay=true`` mode or not.
