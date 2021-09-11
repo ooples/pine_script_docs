@@ -15,13 +15,12 @@ plotshape
 
 The `plotshape <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__
 function can display a variety of shapes. The script below will draw an "X"
-above all green bars:
+above all green bars::
 
-::
-	//@version=5
-    indicator('plotshape example 1', overlay=true)
-    data = close >= open
-    plotshape(data, style=shape.xcross)
+    //@version=5
+    indicator("plotshape example 1", overlay = true)
+    condition = close >= open
+    plotshape(condition, style = shape.xcross)
 
 .. image:: images/Plotshape_1.png
 
@@ -97,12 +96,12 @@ use another position, use the
 ::
 
     //@version=5
-    indicator('plotshape example 2', overlay=true)
-    data = close >= open
-    plotshape(data, style=shape.triangleup,
-                     location=location.abovebar, color=color.green)
-    plotshape(not data, style=shape.triangledown,
-                     location=location.belowbar, color=color.red)
+    indicator('plotshape example 2', overlay = true)
+    condition = close >= open
+    plotshape(condition, style = shape.triangleup,
+                     location=location.abovebar, color = color.green)
+    plotshape(not condition, style = shape.triangledown,
+                     location = location.belowbar, color = color.red)
 
 .. image:: images/Plotshape_example_2.png
 
@@ -126,8 +125,8 @@ depending on conditions at runtime. For example::
 
     //@version=5
     indicator('plotshape example 3', overlay=true)
-    data = close >= open
-    plotshape(true, style=shape.flag, color=data ? color.green : color.red)
+    condition = close >= open
+    plotshape(true, style=shape.flag, color = condition ? color.green : color.red)
 
 .. image:: images/Plotshape_example_3.png
 
@@ -154,9 +153,9 @@ is that with ``plotchar``, the shape is an ASCII or Unicode symbol (provided it'
 defined with the ``char`` parameter. For example::
 
     //@version=5
-	indicator('plotchar example', overlay=true)
-    data = close >= open
-    plotchar(data, char='a')
+    indicator("plotchar example", overlay = true)
+    condition = close >= open
+    plotchar(condition, char = "a")
 
 .. image:: images/Plotchar_example_1.png
 
@@ -167,9 +166,9 @@ for example: ❤, ☀, €, ⚑, ❄, ◆, ⬆, ⬇. The supported character cod
 The next example uses the "SNOWFLAKE" (❄, U+2744) character::
 
     //@version=5
-	indicator('plotchar example', overlay=true)
-    data = close >= open
-    plotchar(data, char='❄')
+    indicator('plotchar example', overlay = true)
+    condition = close >= open
+    plotchar(condition, char= "❄")
 
 .. image:: images/Plotchar_example_2.png
 
@@ -205,11 +204,11 @@ arrows on the chart using the following logic:
 
 Here is a simple script that illustrates how the ``plotarrow`` function works::
 	
-	//@version=5
-    indicator("plotarrow example", overlay=true)
+    //@version=5
+    indicator("plotarrow example", overlay = true)
     codiff = close - open
 	TRANSP = 40
-    plotarrow(codiff, colorup=color.new(teal, TRANSP), colordown=color.new(orange, TRANSP))
+    plotarrow(codiff, colorup = color.new(teal, TRANSP), colordown = color.new(orange, TRANSP))
 
 .. image:: images/Plotarrow_example_1.png
 
@@ -223,9 +222,9 @@ Oscillator* script in the built-in scripts and display it as an overlay above
 a chart using arrows::
 
     //@version=5
-	indicator("Chaikin Oscillator Arrows", overlay=true)
-    short = input.int(3, minval=1)
-	long = input.int(10, minval=1)
+    indicator("Chaikin Oscillator Arrows", overlay = true)
+    short = input.int(3, minval = 1)
+    long = input.int(10, minval = 1)
     osc = ta.ema(ta.accdist, short) - ta.ema(ta.accdist, long)
     plotarrow(osc)
 
