@@ -14,10 +14,10 @@ Here is a script that colors the background of trading sessions (try it on
     //@version=5
     indicator("bgcolor() example", overlay = true)
     timeInRange(res, sess) => time(res, sess) != 0
-    PREMARKET_COLOR = #0050FF
-    REGULAR_COLOR = #0000FF
+    PREMARKET_COLOR  = #0050FF
+    REGULAR_COLOR    = #0000FF
     POSTMARKET_COLOR = #5000FF
-    NOTRADING_COLOR = color(na)
+    NOTRADING_COLOR  = color(na)
     sessionColor = timeInRange("30", "0400-0930") ? PREMARKET_COLOR :
       timeInRange("30", "0930-1600") ? REGULAR_COLOR :
       timeInRange("30", "1600-2000") ? POSTMARKET_COLOR : NOTRADING_COLOR
