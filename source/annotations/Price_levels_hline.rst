@@ -15,7 +15,7 @@ annotation function renders a horizontal line at a given level. For example::
 .. image:: images/Price_levels_hline_1.png
 
 
-A *number* must be the first argument of ``hline``. Values of *series* type form
+A *number* must be the first argument of ``hline``. Values of *series* form
 are forbidden. It's possible to create a few horizontal lines with the
 help of ``hline`` and fill the background between them with a
 translucent color using `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__.
