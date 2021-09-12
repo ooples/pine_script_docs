@@ -24,7 +24,8 @@ This is the "Bar date/time" script:
 
 The `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__
 variable returns the date/time (timestamp) of each bar's opening time in `UNIX
-format <https://en.wikipedia.org/wiki/Unix_time>`__ [#millis]_ and in the exchange's timezone.
+format <https://en.wikipedia.org/wiki/Unix_time>`__ [#millis]_ and **in the exchange's timezone**, 
+which is independent of the timezone selected by the user on his chart.
 As can be seen from the screenshot, the `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ value on the
 last bar is equal to 1397593800000. This value is the number of
 milliseconds that have passed since 00:00:00 UTC, 1 January, 1970 and
