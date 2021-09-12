@@ -136,14 +136,14 @@ Let's say you want to color a moving average in different colors, depending on s
 
     //@version=5
     indicator("Conditional colors", "", true)
-    int   i_length   = input.int(20, "Length", minval = 2)
-    color i_c_maBull = input.color(color.green, "Bull")
-    color i_c_maBear = input.color(color.maroon, "Bear")
-    float ma = ta.sma(close, i_length)
+    int   lengthInput = input.int(20, "Length", minval = 2)
+    color maBullColorInput = input.color(color.green, "Bull")
+    color maBearColorInput = input.color(color.maroon, "Bear")
+    float ma = ta.sma(close, lengthInput)
     // Define our states.
     bool maRising  = ta.rising(ma, 1)
     // Build our color.
-    color c_ma = maRising ? i_c_maBull : i_c_maBear
+    color c_ma = maRising ? maBullColorInput : maBearColorInput
     plot(ma, "MA", c_ma, 2)
 
 .. image:: images/Colors-ConditionalColors-1.png
@@ -158,18 +158,18 @@ You can also use conditional colors to avoid plotting under certain conditions. 
 
     //@version=5
     indicator("Conditional colors", "", true)
-    int i_legs    = input.int(5, "Pivot Legs", minval = 1)
-    color i_c_pHi = input.color(color.olive, "High pivots")
-    color i_c_pLo = input.color(color.orange, "Low pivots")
+    int legsInput = input.int(5, "Pivot Legs", minval = 1)
+    color pHiColorInput = input.color(color.olive, "High pivots")
+    color pLoColorInput = input.color(color.orange, "Low pivots")
     // Intialize the pivot level variables.
     var float pHi = na
     var float pLo = na
     // When a new pivot is detected, save its value.
-    pHi := nz(ta.pivothigh(i_legs, i_legs), pHi)
-    pLo := nz(ta.pivotlow( i_legs, i_legs), pLo)
+    pHi := nz(ta.pivothigh(legsInput, legsInput), pHi)
+    pLo := nz(ta.pivotlow( legsInput, legsInput), pLo)
     // When a new pivot is detected, do not plot a color.
-    plot(pHi, "High", ta.change(pHi) ? na : i_c_pHi, 2, plot.style_line)
-    plot(pLo, "Low",  ta.change(pLo) ? na : i_c_pLo, 2, plot.style_line)
+    plot(pHi, "High", ta.change(pHi) ? na : pHiColorInput, 2, plot.style_line)
+    plot(pLo, "Low",  ta.change(pLo) ? na : pLoColorInput, 2, plot.style_line)
 
 .. image:: images/Colors-ConditionalColors-2.png
 
@@ -202,20 +202,20 @@ Let's put `color.new(color, transp) <https://www.tradingview.com/pine-script-ref
     //@version=5
     indicator("Volume")
     // We name our color constants to make them more readable.
-    var color C_GOLD   = #CCCC00ff
-    var color C_VIOLET = #AA00FFff
-    color i_c_bull = input.color(C_GOLD,   "Bull")
-    color i_c_bear = input.color(C_VIOLET, "Bear")
-    int i_levels = input.int(10, "Gradient levels", minval = 1)
+    var color GOLD_COLOR   = #CCCC00ff
+    var color VIOLET_COLOR = #AA00FFff
+    color bullColorInput = input.color(GOLD_COLOR,   "Bull")
+    color bearColorInput = input.color(VIOLET_COLOR, "Bear")
+    int levelsInput = input.int(10, "Gradient levels", minval = 1)
     // We initialize only once on bar zero with `var`, otherwise the count would reset to zero on each bar.
     var float riseFallCnt = 0
     // Count the rises/falls, clamping the range to: 1 to `i_levels`.
-    riseFallCnt := math.max(1, math.min(i_levels, riseFallCnt + math.sign(volume - nz(volume[1]))))
+    riseFallCnt := math.max(1, math.min(levelsInput, riseFallCnt + math.sign(volume - nz(volume[1]))))
     // Rescale the count on a scale of 80, reverse it and cap transparency to <80 so that colors remains visible.
-    float transparency = 80 - math.abs(80 * riseFallCnt / i_levels)
+    float transparency = 80 - math.abs(80 * riseFallCnt / levelsInput)
     // Build the correct transparency of either the bull or bear color.
-    color c_volume = color.new(close > open ? i_c_bull : i_c_bear, transparency)
-    plot(volume, "Volume", c_volume, 1, plot.style_columns)
+    color volumeColor = color.new(close > open ? bullColorInput : bearColorInput, transparency)
+    plot(volume, "Volume", volumeColor, 1, plot.style_columns)
 
 .. image:: images/Colors-CalculatingColors-1.png
 
@@ -238,8 +238,8 @@ In our next example we use `color.rgb(red, green, blue, transp) <https://www.tra
     float g = math.random(0, 255)
     float b = math.random(0, 255)
     float t = math.random(0, 100)
-    color c_holiday = color.rgb(r, g, b, t)
-    plotcandle(open, high, low, close, color = c_holiday, wickcolor = c_holiday, bordercolor = c_holiday)
+    color holidayColor = color.rgb(r, g, b, t)
+    plotcandle(open, high, low, close, color = c_holiday, wickcolor = holidayColor, bordercolor = c_holiday)
 
 .. image:: images/Colors-CalculatingColors-2.png
 
@@ -256,19 +256,19 @@ Our last examples of color calculations will use `color.from_gradient(value, bot
 
     //@version=5
     indicator(title="CCI line gradient", precision=2, timeframe="")
-    var color C_GOLD   = #CCCC00
-    var color C_VIOLET = #AA00FF
-    var color C_BEIGE  = #9C6E1B
-    float i_src = input.source(close, title="Source")
-    int i_len = input.int(20, "Length", minval = 5)
-    color i_c_bull = input.color(C_GOLD,   "Bull")
-    color i_c_bear = input.color(C_VIOLET, "Bear")
-    float signal = ta.cci(i_src, i_len)
-    color c_signal = color.from_gradient(signal, -200, 200, C_VIOLET, C_GOLD)
-    plot(signal, "CCI", c_signal)
-    p_bandTop = hline(100,  "Upper Band", color.silver, hline.style_dashed)
-    p_bandBot = hline(-100, "Lower Band", color.silver, hline.style_dashed)
-    fill(p_bandTop, p_bandBot, color.new(C_BEIGE, 90), title = "Background")
+    var color GOLD_COLOR   = #CCCC00
+    var color VIOLET_COLOR = #AA00FF
+    var color BEIGE_COLOR  = #9C6E1B
+    float srcInput = input.source(close, title="Source")
+    int   lenInput = input.int(20, "Length", minval = 5)
+    color bullColorInput = input.color(GOLD_COLOR,   "Bull")
+    color bearColorInput = input.color(BEIGE_COLOR, "Bear")
+    float signal = ta.cci(srcInput, lenInput)
+    color signalColor = color.from_gradient(signal, -200, 200, bearColorInput, bullColorInput)
+    plot(signal, "CCI", signalColor)
+    bandTopPlotID = hline(100,  "Upper Band", color.silver, hline.style_dashed)
+    bandBotPlotID = hline(-100, "Lower Band", color.silver, hline.style_dashed)
+    fill(bandTopPlotID, bandBotPlotID, color.new(BEIGE_COLOR, 90), "Background")
 
 .. image:: images/Colors-CalculatingColors-3.png
 
@@ -282,34 +282,34 @@ The argument used for ``value`` in `color.from_gradient() <https://www.tradingvi
 
     //@version=5
     indicator(title="CCI line gradient", precision=2, timeframe="")
-    var color C_GOLD   = #CCCC00
-    var color C_VIOLET = #AA00FF  
-    var color C_GREEN_BG = color.new(color.green, 70)
-    var color C_RED_BG   = color.new(color.maroon, 70)
-    float i_src      = input.source(close, "Source")
-    int   i_len      = input.int(20, "Length", minval = 5)
-    int   i_steps    = input.int(50, "Gradient levels", minval = 1)
-    color i_c_bull   = input.color(C_GOLD, "Line: Bull", inline = "11")
-    color i_c_bear   = input.color(C_VIOLET, "Bear", inline = "11")
-    color i_c_bullBg = input.color(C_GREEN_BG, "Background: Bull", inline = "12")
-    color i_c_bearBg = input.color(C_RED_BG, "Bear", inline = "12")
-
+    var color GOLD_COLOR   = #CCCC00
+    var color VIOLET_COLOR = #AA00FF  
+    var color GREEN_BG_COLOR = color.new(color.green, 70)
+    var color RED_BG_COLOR   = color.new(color.maroon, 70)
+    float srcInput      = input.source(close, "Source")
+    int   lenInput      = input.int(20, "Length", minval = 5)
+    int   stepsInput    = input.int(50, "Gradient levels", minval = 1)
+    color bullColorInput   = input.color(GOLD_COLOR, "Line: Bull", inline = "11")
+    color bearColorInput   = input.color(VIOLET_COLOR, "Bear", inline = "11")
+    color bullBgColorInput = input.color(GREEN_BG_COLOR, "Background: Bull", inline = "12")
+    color bearBgColorInput = input.color(RED_BG_COLOR, "Bear", inline = "12")
+    
     // Plot colored signal line.
-    float signal = ta.cci(i_src, i_len)
-    color c_signal = color.from_gradient(signal, -200, 200, color.new(C_VIOLET, 0), color.new(C_GOLD, 0))
-    plot(signal, "CCI", c_signal, 2)
-
+    float signal = ta.cci(srcInput, lenInput)
+    color signalColor = color.from_gradient(signal, -200, 200, color.new(bearColorInput, 0), color.new(bullColorInput, 0))
+    plot(signal, "CCI", signalColor, 2)
+    
     // Detect crosses of the centerline.
     bool signalX = ta.cross(signal, 0)
     // Count no of bars since cross. Capping it to the no of steps from inputs.
-    int gradientStep = math.min(i_steps, nz(ta.barssince(signalX)))
+    int gradientStep = math.min(stepsInput, nz(ta.barssince(signalX)))
     // Choose bull/bear end color for the gradient.
-    color c_endColor = signal > 0 ? i_c_bullBg : i_c_bearBg
+    color endColor = signal > 0 ? bullBgColorInput : bearBgColorInput
     // Get color from gradient going from no color to `c_endColor` 
-    color c_band = color.from_gradient(gradientStep, 0, i_steps, na, c_endColor)
-    p_bandTop = hline(100,  "Upper Band", color.silver, hline.style_dashed)
-    p_bandBot = hline(-100, "Lower Band", color.silver, hline.style_dashed)
-    fill(p_bandTop, p_bandBot, c_band, title = "Band")
+    color bandColor = color.from_gradient(gradientStep, 0, stepsInput, na, endColor)
+    bandTopPlotID = hline(100,  "Upper Band", color.silver, hline.style_dashed)
+    bandBotPlotID = hline(-100, "Lower Band", color.silver, hline.style_dashed)
+    fill(bandTopPlotID, bandBotPlotID, bandColor, title = "Band")
 
 .. image:: images/Colors-CalculatingColors-4.png
 
@@ -338,30 +338,30 @@ This is our script::
 
     //@version=5
     indicator("CCI DC", precision = 6)
-    var color C_GOLD   = #CCCC00ff
-    var color C_VIOLET = #AA00FFff
-    int i_p = input.int(20, "Length", minval = 5)
-    color i_c_bull = input.color(C_GOLD,   "Bull")
-    color i_c_bear = input.color(C_VIOLET, "Bear")
-
-    // ————— Function clamps `_val_` between `_min` and `_max`.
-    f_clamp(_val, _min, _max) =>
-        _return = math.max(_min, math.min(_max, _val))
-
+    color GOLD_COLOR   = #CCCC00ff
+    color VIOLET_COLOR = #AA00FFff
+    int lengthInput = input.int(20, "Length", minval = 5)
+    color bullColorInput = input.color(GOLD_COLOR,   "Bull")
+    color bearColorInput = input.color(VIOLET_COLOR, "Bear")
+    
+    // ————— Function clamps `val` between `min` and `max`.
+    clamp(val, min, max) =>
+        math.max(min, math.min(max, val))
+    
     // ————— Volatility expressed as 0-100 value.
-    float v = ta.atr(i_p / 5) / ta.atr(i_p * 5)
-    float vPct = ta.percentrank(v, i_p * 5)
-
+    float v = ta.atr(lengthInput / 5) / ta.atr(lengthInput * 5)
+    float vPct = ta.percentrank(v, lengthInput * 5)
+    
     // ————— Calculate dynamic lookback for DC. It increases/decreases on low/high volatility.
     bool highVolatility = vPct > 50
-    var int lookBackMin = i_p * 2
-    var int lookBackMax = i_p * 10
+    var int lookBackMin = lengthInput * 2
+    var int lookBackMax = lengthInput * 10
     var float lookBack = math.avg(lookBackMin, lookBackMax)
     lookBack += highVolatility ? -2 : 2
-    lookBack := f_clamp(lookBack, lookBackMin, lookBackMax)
-
+    lookBack := clamp(lookBack, lookBackMin, lookBackMax)
+    
     // ————— Dynamic lookback length Donchian channel of signal.
-    float signal = ta.cci(close, i_p)
+    float signal = ta.cci(close, lengthInput)
     // `lookBack` is a float; need to cast it to int to be used a length.
     float hiTop  = ta.highest(signal, int(lookBack))
     float loBot  = ta.lowest( signal, int(lookBack))
@@ -371,34 +371,34 @@ This is our script::
     float loTop  = loBot + margin
     // Center of DC.
     float center = math.avg(hiTop, loBot)
-
+    
     // ————— Create colors.
-    color c_signal = color.from_gradient(signal, -200, 200, C_VIOLET, C_GOLD)
+    color signalColor = color.from_gradient(signal, -200, 200, bearColorInput, bullColorInput)
     // Bands: Calculate transparencies so the longer since the hi/lo has changed, 
     //        the darker the color becomes. Cap highest transparency to 90.
-    float hiTransp = f_clamp(100 - (100 * math.max(1, nz(ta.barssince(ta.change(hiTop)) + 1)) / 255), 60, 90)
-    float loTransp = f_clamp(100 - (100 * math.max(1, nz(ta.barssince(ta.change(loBot)) + 1)) / 255), 60, 90)
-    color c_hi = color.new(i_c_bull, hiTransp)
-    color c_lo = color.new(i_c_bear, loTransp)
+    float hiTransp = clamp(100 - (100 * math.max(1, nz(ta.barssince(ta.change(hiTop)) + 1)) / 255), 60, 90)
+    float loTransp = clamp(100 - (100 * math.max(1, nz(ta.barssince(ta.change(loBot)) + 1)) / 255), 60, 90)
+    color hiColor = color.new(bullColorInput, hiTransp)
+    color loColor = color.new(bearColorInput, loTransp)
     // Background: Rescale the 0-100 range of `vPct` to 0-25 to create 75-100 transparencies.
-    color c_bg = color.new(color.gray, 100 - (vPct / 4))
-
+    color bgColor = color.new(color.gray, 100 - (vPct / 4))
+    
     // ————— Plots
     // Invisible lines for band fills.
-    p_hiTop  = plot(hiTop, color = na)
-    p_hiBot  = plot(hiBot, color = na)
-    p_loTop  = plot(loTop, color = na)
-    p_loBot  = plot(loBot, color = na)
+    hiTopPlotID = plot(hiTop, color = na)
+    hiBotPlotID = plot(hiBot, color = na)
+    loTopPlotID = plot(loTop, color = na)
+    loBotPlotID = plot(loBot, color = na)
     // Plot signal and centerline.
-    p_signal = plot(signal, "CCI", c_signal, 2)
+    p_signal = plot(signal, "CCI", signalColor, 2)
     plot(center, "Centerline", color.silver, 1)
-
+    
     // Fill the bands.
-    fill(p_hiTop, p_hiBot, c_hi)
-    fill(p_loTop, p_loBot, c_lo)
-
+    fill(hiTopPlotID, hiBotPlotID, hiColor)
+    fill(loTopPlotID, loBotPlotID, loColor)
+    
     // ————— Background.
-    bgcolor(c_bg)
+    bgcolor(bgColor)
 
 This is what our indicator looks like using the light theme:
 
@@ -490,15 +490,15 @@ The solution to enable script users to control the colors used is to supply them
 
     //@version=5
     indicator("Calculated colors", "", true)
-    color i_c_ma = input.color(color.purple, "MA")
-    color i_c_close = input.color(color.blue, "Close")
+    color maInput = input.color(color.purple, "MA")
+    color closeInput = input.color(color.blue, "Close")
     float ma = ta.sma(close, 20)
     float maHeight = ta.percentrank(ma, 100)
     float transparency = math.min(80, 100 - maHeight)
     // This plot uses a calculated color.
-    plot(ma, "MA1", color.new(i_c_ma, transparency), 2)
+    plot(ma, "MA1", color.new(maInput, transparency), 2)
     // This plot does not use a calculated color.
-    plot(close, "Close", i_c_close)
+    plot(close, "Close", closeInput)
 
 .. image:: images/Colors-ColorsSelection-3.png
 
