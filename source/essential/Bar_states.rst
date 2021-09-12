@@ -1,10 +1,10 @@
-.. contents:: :local:
-    :depth: 3
-
 .. _PageBarStates:
 
 Bar states
 ==========
+
+.. contents:: :local:
+    :depth: 3
 
 A set of built-in variables in the ``barstate`` namespace allow your script to detect different properties of the bar on which the script is currently exectuting. 
 These states can be used to restrict the execution or the logic of your code to specific bars.
