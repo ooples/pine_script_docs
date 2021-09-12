@@ -113,17 +113,17 @@ the following way::
 
     //@version=5
     indicator("new 30 min bar")
-    isNewBar(_timeframe) =>
-        _t = time(_timeframe)
-        not na(_t) and (na(_t[1]) or _t > _t[1])
+    isNewBar(tf) =>
+        nz(ta.change(time(tf)) > 0, true)
     plot(isNewBar("30") ? 1 : 0)
 
 .. image:: images/Chart_time_2.png
 
 
-The previous example's ``isNewBar()`` user-defined function can be used
-in many situations. Here, we use it to display the market's opening
-high and low on an intraday chart::
+Here, we use `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__
+with a ``session`` argument to display the market's opening
+`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and 
+`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__on an intraday chart::
 
     //@version=5
     indicator("Opening high/low", overlay=true)
