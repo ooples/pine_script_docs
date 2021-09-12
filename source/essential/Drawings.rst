@@ -57,7 +57,7 @@ Here is a modified version of the same script that shows the values of the ``x``
 
 .. image:: images/minimal_label_with_x_y_coordinates.png
 
-In this example labels are shown without background coloring (because of parameter ``style=label.style_none``) but with
+In this example labels are shown without background coloring (because of parameter ``style = label.style_none``) but with
 dynamically created text (``text = "x=" + str.tostring(bar_index) + "\ny=" + str.tostring(high)``) that prints label coordinates.
 
 This is an example of code that creates line objects on a chart::
@@ -98,7 +98,7 @@ Only the last label created before the realtime bar's close will be committed, a
 Coordinates
 -----------
 
-Drawing objects are positioned on the chart according to *x* and *y* coordinates using a combination of 4 parameters: ``x``, ``y``, ``xloc`` and ``yloc``. The value of ``xloc`` determines whether ``x`` will hold a bar index or time value. When ``yloc=yloc.price``, ``y`` holds a price. ``y`` is ignored when ``yloc`` is set to `yloc.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}abovebar>`__ or `yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__.
+Drawing objects are positioned on the chart according to *x* and *y* coordinates using a combination of 4 parameters: ``x``, ``y``, ``xloc`` and ``yloc``. The value of ``xloc`` determines whether ``x`` will hold a bar index or time value. When ``yloc = yloc.price``, ``y`` holds a price. ``y`` is ignored when ``yloc`` is set to `yloc.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}abovebar>`__ or `yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__.
 
 If a drawing object uses `xloc.bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_index>`__, then
 the x-coordinate is treated as an absolute bar index. The bar index of the current bar can be obtained from the built-in variable ``bar_index``. The bar index of previous bars is ``bar_index[1]``, ``bar_index[2]`` and so on. ``xloc.bar_index`` is the default value for x-location parameters of both label and line drawings.
@@ -140,9 +140,12 @@ When they are used, the value of the ``y`` parameter is ignored and the drawing 
 Modifying drawings
 ------------------
 
-A drawing object can be modified after its creation. The ``label.new``, ``line.new``, and ``box.new`` functions return
-a reference to the created drawing object (of type *series label*, *series line* and *series box* respectively).
-This reference can then be used as the first argument to the ``label.set_*``, ``line.set_*``, or ``box.set_*`` functions used to modify drawings.
+A drawing object can be modified after its creation. The 
+`label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_, 
+`line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`_, and 
+`box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ functions return
+a reference to the created drawing object (of type "series label", "series line" and "series box" respectively).
+This reference can then be used as the first argument to the ``label.set_*()``, ``line.set_*()``, or ``box.set_*()`` functions used to modify drawings.
 For example::
 
     //@version=5
@@ -332,7 +335,7 @@ Deleting drawings
 -----------------
 
 The `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`_, `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`__ and `box.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}delete>`__
-functions delete *label*, *line*, or *box* drawing objects from the chart.
+functions delete label, line, or box drawing objects from the chart.
 
 Here is Pine code that keeps just one label drawing object on the current bar,
 *deleting the old ones*::
@@ -387,7 +390,8 @@ There is yet another way to achieve the same objective as in the two previous sc
     label.set_text(l, str.tostring(close))
     label.set_x(l, bar_index)
 
-Once again, the use of new :ref:`var keyword <variable_declaration>` is essential. It is what allows the ``label.new`` call to be
+Once again, the use of new :ref:`var keyword <variable_declaration>` is essential. It is what allows the 
+`label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ call to be
 executed only once, on the very first historical bar.
 
 
