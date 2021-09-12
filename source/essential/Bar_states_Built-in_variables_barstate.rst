@@ -65,7 +65,19 @@ is ``true`` if the current data update is a real-time bar update, ``false`` othe
 ^^^^^^^^^^^^^^^^^^
 
 `barstate.isnew <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isnew>`__ 
-is ``true`` if the current data update is the first (opening) update of a new bar, ``false`` otherwise.
+is ``true`` on all historical bars. On the realtime bar, it is only ``true`` on its first (opening) update.
+
+It is useful to reset `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ variables when a new realtime bar comes in::
+
+    //@version=5
+    indicator("")
+    updateNo() => 
+        varip int updateNo = na
+        if barstate.isnew
+            updateNo := 1
+        else
+            updateNo += 1
+    plot(updateNo())
 
 
 \`barstate.isconfirmed\`
