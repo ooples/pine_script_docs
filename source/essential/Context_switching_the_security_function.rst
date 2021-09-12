@@ -1,5 +1,5 @@
-Context switching and the request.security function
-===========================================
+Context switching and the \`request.security()\` function
+=========================================================
 
 .. contents:: :local:
     :depth: 2
@@ -12,7 +12,7 @@ It will display the `close <https://www.tradingview.com/pine-script-reference/v5
 ::
 
     //@version=5
-    indicator("Example security 1", overlay=true)
+    indicator("Example security 1", overlay = true)
     ibm_15 = request.security("NYSE:IBM", "15", close)
     plot(ibm_15)
 
@@ -53,12 +53,12 @@ The timeframe of the main chart's symbol is stored in the
 `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__
 built-in variable.
 
-With the ``request.security`` function, users can view a *1 minute* chart while
+With the ``request.security`` function, users can view a 1min chart while
 displaying an SMA (or any other expression) from any other timeframe
 (i.e., daily, weekly, monthly)::
 
     //@version=5
-    indicator(title="High Time Frame MA", overlay=true)
+    indicator("High Time Frame MA", overlay = true)
     src = close, len = 9
     out = ta.sma(src, len)
     out1 = request.security(syminfo.tickerid, 'D', out)
@@ -84,12 +84,12 @@ The "Advance Decline Ratio" script illustrates a more
 involved use of ``request.security``::
 
     //@version=5
-    indicator(title = "Advance Decline Ratio", shorttitle="ADR")
-    f_ratio(_t1, _t2, _source) =>
-        _s1 = request.security(_t1, timeframe.period, _source)
-        _s2 = request.security(_t2, timeframe.period, _source)
-        _s1 / _s2
-    plot(f_ratio("USI:ADVN.NY", "USI:DECL.NY", close))
+    indicator("Advance Decline Ratio", "ADR")
+    ratio(t1, t2, source) =>
+        s1 = request.security(t1, timeframe.period, source)
+        s2 = request.security(t2, timeframe.period, source)
+        s1 / s2
+    plot(ratio("USI:ADVN.NY", "USI:DECL.NY", close))
 
 The script requests two additional securities. The results of the
 requests are then used in an arithmetic formula. As a result, we have a
@@ -100,10 +100,10 @@ individual stocks participating in an upward or downward trend.
 
 .. _barmerge_gaps_and_lookahead:
 
-Barmerge gaps and lookahead
----------------------------
+Gaps and lookahead
+------------------
 
-There are two switches that define how data requested with ``request.security``
+There are two switches that define how data requested with `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
 will be mapped to the current timeframe.
 
 The first one, ``gaps``, controls gaps in data. With the default value
@@ -118,17 +118,17 @@ The second switch, ``lookahead``, was added in Pine Script version
 and
 `barmerge.lookahead_on <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}lookahead_on>`__
 to respectively switch between the new, default behavior of
-`security <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__,
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__,
 and the old behavior dating from Pine v1 and v2.
 
 This example shows the difference on a *5 minutes* chart::
 
     //@version=5
-    indicator('My Script', overlay=true)
-    a = request.security(syminfo.tickerid, '60', low, lookahead=barmerge.lookahead_off)
+    indicator('My Script', overlay = true)
+    a = request.security(syminfo.tickerid, '60', low, lookahead = barmerge.lookahead_off)
     plot(a, color=color.red)
-    b = request.security(syminfo.tickerid, '60', low, lookahead=barmerge.lookahead_on)
-    plot(b, color=color.lime)
+    b = request.security(syminfo.tickerid, '60', low, lookahead = barmerge.lookahead_on)
+    plot(b, color = color.lime)
 
 .. image:: images/V3.png
 
@@ -156,7 +156,8 @@ There are many published scripts using the following code::
 
     //@version=2
     //...
-    a = security(tickerid, 'D', close[1]) // It's barmerge.lookahead_on, because version is 2
+    // Uses `barmerge.lookahead_on` because the script uses Pine v2
+    a = security(tickerid, 'D', close[1])
 
 In this case the ``close[1]`` expression fetches the ``close`` of the
 previous day, so the construction **does not use future data**.
@@ -167,7 +168,7 @@ In Pine v3 or later, we can rewrite this in two different ways, using
 
     //@version=5
     //...
-    a = request.security(syminfo.tickerid, 'D', close[1], lookahead=barmerge.lookahead_on)
+    a = request.security(syminfo.tickerid, 'D', close[1], lookahead = barmerge.lookahead_on)
 
 Because the original construction doesn't use future data, it is
 possible to rewrite it using ``barmerge.lookahead_off``. If you use
@@ -178,7 +179,7 @@ how the lookahead parameter works::
     //...
     indexHighTF = barstate.isrealtime ? 1 : 0
     indexCurrTF = barstate.isrealtime ? 0 : 1
-    a0 = request.security(syminfo.tickerid, 'D', close[indexHighTF], lookahead=barmerge.lookahead_off)
+    a0 = request.security(syminfo.tickerid, 'D', close[indexHighTF], lookahead = barmerge.lookahead_off)
     a = a0[indexCurrTF]
 
 When an indicator is based on historical data (i.e.,
@@ -207,16 +208,17 @@ The next example illustrates this::
 
     // Add this script on a "5" minute chart
     //@version=5
-    indicator("Lookahead On/Off", overlay=true, precision=5)
-    l_on = request.security(syminfo.tickerid, "1", close, lookahead=barmerge.lookahead_on)
-    l_off = request.security(syminfo.tickerid, "1", close, lookahead=barmerge.lookahead_off)
-    plot(l_on, color=color.red)
-    plot(l_off, color=color.blue)
+    indicator("Lookahead On/Off", overlay = true, precision = 5)
+    l_on = request.security(syminfo.tickerid, "1", close, lookahead = barmerge.lookahead_on)
+    l_off = request.security(syminfo.tickerid, "1", close, lookahead = barmerge.lookahead_off)
+    plot(l_on, color = color.red)
+    plot(l_off, color = color.blue)
 
 .. image:: images/SecurityLowerTF_LookaheadOnOff.png
 
 This study plots two lines which correspond to different values of the ``lookahead`` parameter.
-The red line shows data returned by ``request.security`` with ``lookahead=barmerge.lookahead_on``. 
+The red line shows data returned by 
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ with ``lookahead = barmerge.lookahead_on``. 
 The blue line with ``lookahead=barmerge.lookahead_off``. Let's look at the *5 minutes* bar starting at 07:50.
 The red line at this bar has a value of 1.13151 which corresponds to the
 value of *the first of the five 1 minute bars* that fall into the time range 07:50--07:54.
