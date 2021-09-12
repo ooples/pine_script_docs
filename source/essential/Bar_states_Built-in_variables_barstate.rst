@@ -44,7 +44,7 @@ It can be useful to initialize variables on the first bar only, e.g.::
 `barstate.islast <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islast>`__ 
 is ``true`` if the current bar is the last one on the chart, whether that bar is a realtime bar or not.
 
-It is often used to restrict the execution of code to the chart's last bar, which is often useful when drawing lines, labels or tables. 
+It can be used to restrict the execution of code to the chart's last bar, which is often useful when drawing lines, labels or tables. 
 Here, we use it to determine when to update a label which we want to appear only on the last bar. 
 We create the label only once and then update its properties using ``label.set_*()`` functions because it is more efficient::
 
