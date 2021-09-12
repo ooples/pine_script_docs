@@ -1,3 +1,6 @@
+.. contents:: :local:
+    :depth: 3
+
 Bar states
 ==========
 
