@@ -120,6 +120,9 @@ is always ``true`` on them::
     myRSI = ta.rsi(close, 20)
     plot(barstate.isconfirmed ? myRSI : na)
 
+`barstate.isconfirmed <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ 
+will not work when used in a `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call.
+
 
 \`barstate.islastconfirmedhistory\`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -152,21 +155,17 @@ Here is an example of a script using ``barstate.*`` variables::
     label.new(bar_index, na, yloc=yloc.abovebar, text=t,
               color=hist ? color.green : color.red)
 
-We begin by adding the "Bar States" study to a yearly chart and take a screenshot before any realtime update is received.
+We begin by adding the indicator to a yearly chart and take a screenshot before any realtime update is received.
 This shows the *first* and the *last* bars, and the fact that all bars are *new* ones:
 
 .. image:: images/barstates_history_only.png
 
-When a realtime update is received, the picture changes slightly. The current bar is no longer a historical bar, it has become a realtime bar. Additionally, it is neither *new* nor *confirmed*, which we indicate with the *intra-bar* text in the label.
+When a realtime update is received, the picture changes slightly. The current bar is no longer a historical bar; it has become a realtime bar. 
+Additionally, it is neither *new* nor *confirmed*, which we indicate with the "intra-bar" text in the label.
 
 .. image:: images/barstates_history_then_realtime.png
 
-This is a screenshot of the same symbol at a *1 minute* timeframe, after a few realtime bars have elapsed.
+This is a screenshot of the same symbol at a 1min timeframe, after a few realtime bars have elapsed.
 The elapsed realtime bars show the *confirmed* state.
 
 .. image:: images/barstates_history_then_more_realtime.png
-
-.. rubric:: Footnotes
-
-.. [#isconfirmed] Variable ``barstate.isconfirmed`` returns the state of current chart symbol data only.
-   It does not take into account any secondary symbol data requested with the ``request.security`` function.
