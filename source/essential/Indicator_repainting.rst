@@ -33,7 +33,7 @@ We can see repainting in the following cases:
    A strategy with parameter ``calc_on_every_tick = false`` may also be
    prone to repainting, but to a lesser degree.
 
-#. Using ``request.security`` for requesting data from a resolution *higher* than the resolution of the chart's main symbol::
+#. Using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ to request data from a timeframe *higher* than the timeframe of the chart's main symbol::
 
     // Add this study on 1 minute chart
     //@version=5
@@ -55,7 +55,7 @@ We can see repainting in the following cases:
 
 #. All scripts which calculations depending on a *starting point*.
    Intraday data gets aligned to the beginning of the week, month or
-   year, depending on the resolution. Due to this, the results produced by
+   year, depending on the timeframe. Due to this, the results produced by
    such scripts can differ from time to time. These are cases where
    scripts will be relying on a starting point:
 
@@ -65,7 +65,7 @@ We can see repainting in the following cases:
      functions (due to peculiarities in their algorithm).
    * any backtesting strategy (regardless of how the ``calc_on_every_tick`` parameter is defined).
 
-   There is a dependency between the resolution and the alignment of a starting point:
+   There is a dependency between the timeframe and the alignment of a starting point:
 
    * 1--14 minutes --- aligns to the beginning of a week.
    * 15--29 minutes --- aligns to the beginning of a month.
