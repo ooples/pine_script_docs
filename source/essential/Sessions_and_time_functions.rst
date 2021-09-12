@@ -56,16 +56,11 @@ Our second script is "Session bars"::
 This shows how the user can distinguish between regular session and extended hours bars
 by using the built-in `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__
 function rather than the `time <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ variable. 
-.. Note that the background behind these bars is colored because of the chart's settings; not because of the script.
-The `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ function returns the time of the
+The `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ call in our script returns the time of the
 bar's open in UNIX time (milliseconds), or `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ if the bar is located outside
-the given trade session (09:30-16:00 in our example). 
+the 09:30-16:00 trading session, which corresponds to the trading session for IBM symbol.
 
-in the form of
-a string containing the beginning and end of the trade
-session in the exchange's timezone. The string "0930-1600" corresponds
-to the trade session of the IBM symbol. These are examples of trade session
-specifications:
+These are examples of trade session specifications:
 
 0000-0000
    A monday to friday 24-hour session beginning at midnight.
