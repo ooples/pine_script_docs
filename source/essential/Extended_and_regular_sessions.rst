@@ -12,7 +12,7 @@ Pine scripts may request additional session data using the
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function.
 
 The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
-function can be called with a symbol name in the ``"EXCHANGE_PREFIX:TICKER"`` format (e.g., ``"BATS:AAPL"``) as its first argument.
+function can be called with a symbol name in the ``"EXCHANGE_PREFIX:TICKER"`` format (e.g., "BATS:AAPL") as its first argument.
 Used this way, the function will return data for the regular session. For example::
 
     //@version=5
