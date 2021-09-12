@@ -6,7 +6,7 @@ Drawings
 
 Starting with Pine v4, indicators and strategies can
 create *drawing objects* on the chart. Three types of
-drawings are currently supported: *label*, *line*, and *boxes*.
+drawings are currently supported: "label", "line" and "box".
 You will find one instance of each on the following chart:
 
 .. image:: images/label_and_line_drawings.png
@@ -20,7 +20,10 @@ The line, label, and box drawings in Pine allow you to create indicators with mo
 visual components, e.g., pivot points, support/resistance levels,
 zig zag lines, labels containing dynamic text, etc.
 
-In contrast to indicator plots (plots are created with functions ``plot``, ``plotshape``, ``plotchar``),
+In contrast to indicator plots (plots are created with functions 
+`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__, 
+`plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ and 
+`plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__), 
 drawing objects can be created on historical bars as well as in the future, where no bars exist yet.
 
 Creating drawings
