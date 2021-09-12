@@ -205,6 +205,7 @@ last parameter, ``index_to``, needs to be one greater than the last index to be 
 The remaining elements will hold the ``na`` value, as no intialization value was provided when the array was declared.
 
 
+.. _PageArrays_Looping:
 
 Looping through array elements
 ------------------------------
@@ -724,6 +725,8 @@ When you size arrays dynamically using a field in your script's *Settings/Inputs
     for i = 0 to sizeInput - 1
         array.set(a, i, i)
     plot(array.size(a))
+
+See the :ref:`<PageArrays_Looping>` of this page for more information.
 
 
 Cannot call array methods when ID of array is 'na'
