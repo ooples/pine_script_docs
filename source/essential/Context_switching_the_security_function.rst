@@ -123,7 +123,7 @@ to respectively switch between the new, default behavior of
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__,
 and the old behavior dating from Pine v1 and v2.
 
-This example shows the difference on a *5 minutes* chart::
+This example shows the difference on a 5min chart::
 
     //@version=5
     indicator('My Script', overlay = true)
@@ -151,31 +151,32 @@ on real-time data, i.e., as ``barmerge.lookahead_off`` does.
 
 .. _understanding_lookahead:
 
+
 Understanding lookahead
 -----------------------
 
-There are many published scripts using the following code::
+In Pine v1 and v2, the ``security()`` function always used lookahead, which unless the series requested was offset in the past, 
+produce *future leak*, or *lookahead bias*, i.e., it was fetching data from the future, which is undesirable::
 
     //@version=2
     //...
-    // Uses `barmerge.lookahead_on` because the script uses Pine v2
+    // `security()` calls use `barmerge.lookahead_on` because the script uses Pine v2
+    // WRONG: Uses future data:
+    a = security(tickerid, 'D', close)
+    // GOOD: Does not use future data:
     a = security(tickerid, 'D', close[1])
 
-In this case the ``close[1]`` expression fetches the ``close`` of the
-previous day, so the construction **does not use future data**.
+In Pine v3 or later, the ``lookahead`` parameter was introduced to provide more control. 
+Its default value is off, so the function doesn't use future data. 
+We can now use the function with ``barmerge.lookahead_on`` or ``barmerge.lookahead_off``.
 
-In Pine v3 or later, we can rewrite this in two different ways, using
-``barmerge.lookahead_on`` or ``barmerge.lookahead_off``. If you use
-``barmerge.lookahead_on``, then it's quite simple::
+In general, ``barmerge.lookahead_on`` should only be used when the series is offset, as when you want to avoid repainting::
 
     //@version=5
     //...
     a = request.security(syminfo.tickerid, 'D', close[1], lookahead = barmerge.lookahead_on)
 
-Because the original construction doesn't use future data, it is
-possible to rewrite it using ``barmerge.lookahead_off``. If you use
-``barmerge.lookahead_off``, the script is more complex but shows
-how the lookahead parameter works::
+If you use ``barmerge.lookahead_off``, a non-repainting value can still be achieved, but it's more complex::
 
     //@version=5
     //...
@@ -186,9 +187,9 @@ how the lookahead parameter works::
 
 When an indicator is based on historical data (i.e.,
 ``barstate.isrealtime`` is ``false``), we take the current *close* of
-the daily timeframe and shift the result of ``request.security`` function call one bar to the
-right in the current timeframe. When an indicator is calculated on
-real-time data, we take the *close* of the previous day without shifting the
+the daily timeframe and shift the result of `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
+function call one bar to the right in the current timeframe. When an indicator is calculated on
+realtime data, we take the *close* of the previous day without shifting the
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ data.
 
 
