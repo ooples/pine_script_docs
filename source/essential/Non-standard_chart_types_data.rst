@@ -33,7 +33,7 @@ This script requests low prices of Heikin-Ashi bars and plots them on
 top of the usual candlesticks::
 
     //@version=5
-    indicator("Example 5", overlay=true)
+    indicator("Example 5", overlay = true)
     ha_t = ticker.heikinashi(syminfo.tickerid)
     ha_low = request.security(ha_t, timeframe.period, low)
     plot(ha_low)
@@ -49,7 +49,7 @@ instead of using the `syminfo.tickerid <https://www.tradingview.com/pine-script-
 variable directly::
 
     //@version=5
-    indicator("Example 6", overlay=true)
+    indicator("Example 6", overlay = true)
     t = ticker.new(syminfo.prefix, syminfo.ticker, session.regular)
     ha_t = ticker.heikinashi(t)
     ha_low = request.security(ha_t, timeframe.period, low, gaps=barmerge.gaps_on)
