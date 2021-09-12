@@ -22,7 +22,7 @@ Arrays are referenced using an array ID similar to line or label IDs.
 Pine does not use an indexing operator to reference individual array elements;
 instead, functions like `array.get() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}get>`__ 
 and `array.set() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}set>`__ are used to read and write values of array elements. 
-Array values can be used in all Pine expressions and functions where a value of *series* form is allowed.
+Array values can be used in all Pine expressions and functions where a value of "series" form is allowed.
 
 Elements within an array are referred to using an *index*, which starts at 0 and extends to the number or elements in the array, minus one.
 Arrays in Pine can be sized dynamically, so the number of elements in the array can be modified within one iteration of the script on a bar,
@@ -42,8 +42,11 @@ The following syntax can be used to declare arrays::
 
 The ``[]`` modifier (not to be confused with the `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ 
 history-referencing operator) is appended to the type name when declaring arrays. However, since type-specific functions are always used to create arrays,
-the ``<type>[]`` part of the declaration is redundant, except if you initialize an array variable to ``na``, as in the following example where
-we declare an array variable named ``prices``. The variable will be used to designate an array containing "float" values,  
+the ``<type>[]`` part of the declaration is redundant, except if you initialize an array variable to ``na``. 
+Explicitly declaring the type of the array is useful, however, to clearly state our intention to readers.  
+
+In the following example we declare an array variable named ``prices`` and initialize it with ``na``. 
+Consequently, its type must be specified. The variable will be used to designate an array containing "float" values,  
 but no array is created by this declaration yet. For the moment, the array variable contains no valid array ID, its value being ``na``::
 
     float[] prices = na
@@ -211,22 +214,22 @@ One major distinction between Pine arrays and variables declared in the global s
 This new capability can be used to implement global variables that can be both read and set from within any function in the script. 
 We use it here to calculate progressively lower or higher levels::
 
-    //@version=5
-    indicator("Bands", "", true)
-    i_factor = 1 + (input.float(-2., "Step %") / 100)
-    // Use the lowest average OHLC in last 50 bars from 10 bars back as the our base level.
-    level = array.new_float(1, ta.lowest(ohlc4, 50)[10])
-    
-    f_nextLevel(_val) =>
-        _newLevel = array.get(level, 0) * _val
-        // Write new level to the global array so it can be used as the base in the next call to this function.
-        array.set(level, 0, _newLevel)
-        _newLevel
-    
-    plot(f_nextLevel(1))
-    plot(f_nextLevel(i_factor))
-    plot(f_nextLevel(i_factor))
-    plot(f_nextLevel(i_factor))
+	//@version=5
+	indicator("Bands", "", true)
+	factorInput = 1 + (input.float(-2., "Step %") / 100)
+	// Use the lowest average OHLC in last 50 bars from 10 bars back as the our base level.
+	level = array.new_float(1, ta.lowest(ohlc4, 50)[10])
+
+	nextLevel(val) =>
+	    newLevel = array.get(level, 0) * val
+	    // Write new level to the global array so it can be used as the base in the next call to this function.
+	    array.set(level, 0, newLevel)
+	    newLevel
+
+	plot(nextLevel(1))
+	plot(nextLevel(factorInput))
+	plot(nextLevel(factorInput))
+	plot(nextLevel(factorInput))
 
 .. image:: images/Arrays-Scope-Bands.png
 
@@ -316,8 +319,8 @@ The element existing at the index used in the function call and any others to it
     //@version=5
     indicator("`array.insert()`")
     a = array.new_float(5, 0)
-    for _i = 0 to 4
-        array.set(a, _i, _i + 1)
+    for i = 0 to 4
+        array.set(a, i, i + 1)
     if barstate.islast
         label.new(bar_index, 0, "BEFORE\na: " + str.tostring(a), size = size.large)
         array.insert(a, 2, 999)    
@@ -368,7 +371,7 @@ See how the functions are used here to remember successive lows in rallies::
     flushLows = false
     
     // Remove last element from the stack when `_cond` is true.
-    f_array_pop(_id, _cond) => _cond and array.size(_id) > 0 ? array.pop(_id) : float(na)
+    array_pop(id, cond) => cond and array.size(id) > 0 ? array.pop(id) : float(na)
     
     if ta.rising(high, 1)
         // Rising highs; push a new low on the stack.
@@ -382,13 +385,13 @@ See how the functions are used here to remember successive lows in rallies::
         flushLows := true
     
     // If needed, plot and flush lows.
-    lowLevel = f_array_pop(lows, flushLows)
+    lowLevel = array_pop(lows, flushLows)
     plot(lowLevel, "Low 1", low > lowLevel ? color.silver : color.purple, 2, plot.style_linebr)
-    lowLevel := f_array_pop(lows, flushLows)
+    lowLevel := array_pop(lows, flushLows)
     plot(lowLevel, "Low 2", low > lowLevel ? color.silver : color.purple, 3, plot.style_linebr)
-    lowLevel := f_array_pop(lows, flushLows)
+    lowLevel := array_pop(lows, flushLows)
     plot(lowLevel, "Low 3", low > lowLevel ? color.silver : color.purple, 4, plot.style_linebr)
-    lowLevel := f_array_pop(lows, flushLows)
+    lowLevel := array_pop(lows, flushLows)
     plot(lowLevel, "Low 4", low > lowLevel ? color.silver : color.purple, 5, plot.style_linebr)
     
     if flushLows
@@ -417,24 +420,24 @@ As we have now de-queued an element from our queue, the array contains ``i_pivot
 Note that on the dataset's first bars we will be deleting ``na`` label IDs until the maximum number of labels has been created, 
 but this does not cause runtime errors. Let's look at our code::
 
-	//@version=5
-	MAX_LABELS = 100
-	indicator("Show Last n High Pivots", "", true, max_labels_count = MAX_LABELS)
-
-	i_pivotCount = input.int(5, "How many pivots to show", minval = 0, maxval = MAX_LABELS)
-	i_pivotLegs  = input.int(3, "Pivot legs", minval = 1, maxval = 5)
-
-	// Create an array containing the user-selected max count of label IDs.
-	var labelIds = array.new_label(i_pivotCount)
-
-	pHi = ta.pivothigh(i_pivotLegs, i_pivotLegs)
-	if not na(pHi)
-		// New pivot found; plot its label `i_pivotLegs` bars back.
-		pLabel = label.new(bar_index[i_pivotLegs], pHi, str.tostring(pHi, format.mintick), textcolor = color.white)
-		// Queue the new label's ID by appending it to the end of the array.
-		array.push(labelIds, pLabel)
-		// De-queue the oldest label ID from the queue and delete the corresponding label.
-		label.delete(array.shift(labelIds))
+    //@version=5
+    MAX_LABELS = 100
+    indicator("Show Last n High Pivots", "", true, max_labels_count = MAX_LABELS)
+    
+    pivotCountInput = input.int(5, "How many pivots to show", minval = 0, maxval = MAX_LABELS)
+    pivotLegsInput  = input.int(3, "Pivot legs", minval = 1, maxval = 5)
+    
+    // Create an array containing the user-selected max count of label IDs.
+    var labelIds = array.new_label(pivotCountInput)
+    
+    pHi = ta.pivothigh(pivotLegsInput, pivotLegsInput)
+    if not na(pHi)
+    	// New pivot found; plot its label `i_pivotLegs` bars back.
+    	pLabel = label.new(bar_index[pivotLegsInput], pHi, str.tostring(pHi, format.mintick), textcolor = color.white)
+    	// Queue the new label's ID by appending it to the end of the array.
+    	array.push(labelIds, pLabel)
+    	// De-queue the oldest label ID from the queue and delete the corresponding label.
+    	label.delete(array.shift(labelIds))
 
 .. image:: images/Arrays-InsertingAndRemovingArrayElements-ShowLastnHighPivots.png
 
@@ -483,9 +486,9 @@ so the first array is modified while the second one remains intact. The function
     array.push(b, 3)
     if barstate.islast
         label.new(bar_index, 0, "BEFORE\na: " + str.tostring(a) + "\nb: " + str.tostring(b), size = size.large)
-        _c = array.concat(a, b)
-        array.push(_c, 4)
-        label.new(bar_index, 0, "AFTER\na: " + str.tostring(a) + "\nb: " + str.tostring(b) + "\nc: " + str.tostring(_c), style = label.style_label_up, size = size.large)
+        c = array.concat(a, b)
+        array.push(c, 4)
+        label.new(bar_index, 0, "AFTER\na: " + str.tostring(a) + "\nb: " + str.tostring(b) + "\nc: " + str.tostring(c), style = label.style_label_up, size = size.large)
 
 .. image:: images/Arrays-ManipulatingArrays-Concat.png
 
@@ -501,9 +504,9 @@ Here we copy the array ``a`` to a new array named ``_b``::
     array.push(a, 0)
     array.push(a, 1)
     if barstate.islast
-        _b = array.copy(a)
-        array.push(_b, 2)
-        label.new(bar_index, 0, "a: " + str.tostring(a) + "\n_b: " + str.tostring(_b), size = size.large)
+        b = array.copy(a)
+        array.push(b, 2)
+        label.new(bar_index, 0, "a: " + str.tostring(a) + "\nb: " + str.tostring(b), size = size.large)
 
 Note that simply using ``_b = a`` in the previous example would not have copied the array, but only its ID. 
 From thereon, both variables would point to the same array, so using either one would affect the same array.
@@ -530,9 +533,10 @@ Use ``array.join`` to concatenate all of the elements in the array into a string
 Sorting
 ^^^^^^^
 
-Arrays can be sorted in either ascending or descending order using `array.sort() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}sort>`__. 
+Arrays containing "int" or "float" elements can be sorted in either ascending or descending order using 
+`array.sort() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}sort>`__. 
 The ``order`` parameter is optional and defaults to `order.ascending <https://www.tradingview.com/pine-script-reference/v5/#var_order{dot}ascending>`__. 
-As all ``array.*()`` function arguments, it is of form *series*, so can be determined at runtime, as is done here. 
+As all ``array.*()`` function arguments, it is of form "series", so can be determined at runtime, as is done here. 
 Note that in the example, which array is sorted is also determined at runtime::
 
     //@version=5
@@ -546,11 +550,11 @@ Note that in the example, which array is sorted is also determined at runtime::
     array.push(b, 3)
     array.push(b, 5)
     if barstate.islast
-        _barUp = close > open
-        array.sort(_barUp ? a : b, _barUp ? order.ascending : order.descending)
+        barUp = close > open
+        array.sort(barUp ? a : b, barUp ? order.ascending : order.descending)
         label.new(bar_index, 0, 
-          "a " + (_barUp ? "is sorted ▲: "   : "is not sorted: ") + str.tostring(a) + "\n\n" +
-          "b " + (_barUp ? "is not sorted: " : "is sorted ▼: ")   + str.tostring(b), size = size.large)
+          "a " + (barUp ? "is sorted ▲: "   : "is not sorted: ") + str.tostring(a) + "\n\n" +
+          "b " + (barUp ? "is not sorted: " : "is sorted ▼: ")   + str.tostring(b), size = size.large)
 
 .. image:: images/Arrays-ManipulatingArrays-Sort.png
 
@@ -597,13 +601,13 @@ In this example, to slice the subset from index 0 to index 2 of array ``a``, we 
     array.push(a, 3)
     if barstate.islast
         // Create a shadow of elements at index 1 and 2 from array `a`.
-        _sliceOfA = array.slice(a, 0, 3)
-        label.new(bar_index, 0, "BEFORE\na: " + str.tostring(a) + "\n_sliceOfA: " + str.tostring(_sliceOfA))
+        sliceOfA = array.slice(a, 0, 3)
+        label.new(bar_index, 0, "BEFORE\na: " + str.tostring(a) + "\nsliceOfA: " + str.tostring(sliceOfA))
         // Remove first element of parent array `a`.
         array.remove(a, 0)
         // Add a new element at the end of the shallow copy, thus also affecting the original array `a`.
-        array.push(_sliceOfA, 4)
-        label.new(bar_index, 0, "AFTER\na: " + str.tostring(a) + "\n_sliceOfA: " + str.tostring(_sliceOfA), style = label.style_label_up)
+        array.push(sliceOfA, 4)
+        label.new(bar_index, 0, "AFTER\na: " + str.tostring(a) + "\nsliceOfA: " + str.tostring(sliceOfA), style = label.style_label_up)
 
 .. image:: images/Arrays-ManipulatingArrays-Slice.png
 
@@ -621,19 +625,19 @@ We can also find the last occurrence of a value with
 
     //@version=5
     indicator("Searching in arrays")
-    _value = input.int(1)
+    valueInput = input.int(1)
     a = array.new_float(0)
     array.push(a, 0)
     array.push(a, 1)
     array.push(a, 2)
     array.push(a, 1)
     if barstate.islast
-        _valueFound      = array.includes(a, _value)
-        _firstIndexFound = array.indexof(a, _value)
-        _lastIndexFound  = array.lastindexof(a, _value)
+        valueFound      = array.includes(a, valueInput)
+        firstIndexFound = array.indexof(a, valueInput)
+        lastIndexFound  = array.lastindexof(a, valueInput)
         label.new(bar_index, 0, "a: " + str.tostring(a) + 
-          "\nFirst " + str.tostring(_value) + (_firstIndexFound != -1 ? " value was found at index: " + str.tostring(_firstIndexFound) : " value was not found.") +
-          "\nLast " + str.tostring(_value)  + (_lastIndexFound  != -1 ? " value was found at index: " + str.tostring(_lastIndexFound) : " value was not found."))
+          "\nFirst " + str.tostring(valueInput) + (firstIndexFound != -1 ? " value was found at index: " + str.tostring(firstIndexFound) : " value was not found.") +
+          "\nLast " + str.tostring(valueInput)  + (lastIndexFound  != -1 ? " value was found at index: " + str.tostring(lastIndexFound) : " value was not found."))
 
 
 
@@ -660,23 +664,33 @@ This code will generate the error because the last index we use in the loop is o
     //@version=5
     indicator("Out of bounds index")
     a = array.new_float(3)
-    for _i = 1 to 3
-        array.set(a, _i, _i)
+    for i = 1 to 3
+        array.set(a, i, i)
     plot(array.pop(a))
 
 The correct ``for`` statement is::
 
-    for _i = 0 to 2
+    for i = 0 to 2
+
+To loop on all array elements in an array of unknown size, use::
+
+	//@version=5
+	indicator("Protected `for` loop")
+	sizeInput = input.int(0, "Array size", minval = 0, maxval = 100000)
+	a = array.new_float(sizeInput)
+	for i = 0 to (array.size(a) == 0 ? na : array.size(a) - 1)
+	    array.set(a, i, i)
+	plot(array.pop(a))
 
 When you size arrays dynamically using a field in your script's *Settings/Inputs* tab, protect the boundaries of that value using 
 `input.int() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int>`__'s ``minval`` and ``maxval`` parameters::
 
     //@version=5
     indicator("Protected array size")
-    i_size = input.int(10, "Array size", minval = 1, maxval = 100000)
-    a = array.new_float(i_size)
-    for _i = 0 to i_size - 1
-        array.set(a, _i, _i)
+    sizeInput = input.int(10, "Array size", minval = 1, maxval = 100000)
+    a = array.new_float(sizeInput)
+    for i = 0 to sizeInput - 1
+        array.set(a, i, i)
     plot(array.size(a))
 
 
