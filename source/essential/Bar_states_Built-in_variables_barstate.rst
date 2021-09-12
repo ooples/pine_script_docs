@@ -83,9 +83,9 @@ Note that `barstate.islast <https://www.tradingview.com/pine-script-reference/v5
 ^^^^^^^^^^^^^^^^^^
 
 `barstate.isnew <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isnew>`__ 
-is ``true`` on all historical bars. On the realtime bar, it is only ``true`` on its first (opening) update.
+is ``true`` on all historical bars and on the realtime bar's first (opening) update.
 
-It is useful to reset `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ variables when a new realtime bar comes in. 
+It can be useful to reset `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ variables when a new realtime bar comes in. 
 The following code will reset ``updateNo`` to 1 on all historical bars and at the beginning of each realtime bar. 
 It calculates the number of realtime updates during each realtime bar::
 
