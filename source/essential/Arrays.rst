@@ -124,44 +124,62 @@ The following example uses `array.set() <https://www.tradingview.com/pine-script
 to initialize an array of colors to instances of one base color using different transparency levels. 
 It then fetches the proper array element to use it in a `bgcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_bgcolor>`__ call::
 
-    //@version=5
-    indicator("Distance from high", "", true)
-    i_lookBack = input.int(100)
-    c_fillColor = color.green
-    var c_fills = array.new_color(5)
-    // Initialize the array elements with progressively lighter shades of the fill color.
-    array.set(c_fills, 0, color.new(c_fillColor, 70))
-    array.set(c_fills, 1, color.new(c_fillColor, 75))
-    array.set(c_fills, 2, color.new(c_fillColor, 80))
-    array.set(c_fills, 3, color.new(c_fillColor, 85))
-    array.set(c_fills, 4, color.new(c_fillColor, 90))
-    
-    // Find the offset to highest high. Change its sign because the function returns a negative value.
-    lastHiBar = - ta.highestbars(high, i_lookBack)
-    // Convert the offset to an array index, capping it to 4 to avoid a runtime error.
-    // The index used by `array.get()` will be the equivalent of `floor(fillNo)`.
-    fillNo = math.min(lastHiBar / (i_lookBack / 5), 4)
-    // Set background to a progressively lighter fill with increasing distance from location of highest high.
-    bgcolor(array.get(c_fills, fillNo))
-    // Plot key values to the Data Window for debugging.
-    plotchar(lastHiBar, "lastHiBar", "", location.top, size = size.tiny)
-    plotchar(fillNo, "fillNo", "", location.top, size = size.tiny)
+	//@version=5
+	indicator("Distance from high", "", true)
+	lookbackInput = input.int(100)
+	FILL_COLOR = color.green
+	// Declare array and set its values on the first bar only.
+	var fillColors = array.new_color(5)
+	if barstate.isfirst
+	    // Initialize the array elements with progressively lighter shades of the fill color.
+	    array.set(fillColors, 0, color.new(FILL_COLOR, 70))
+	    array.set(fillColors, 1, color.new(FILL_COLOR, 75))
+	    array.set(fillColors, 2, color.new(FILL_COLOR, 80))
+	    array.set(fillColors, 3, color.new(FILL_COLOR, 85))
+	    array.set(fillColors, 4, color.new(FILL_COLOR, 90))
+
+	// Find the offset to highest high. Change its sign because the function returns a negative value.
+	lastHiBar = - ta.highestbars(high, lookbackInput)
+	// Convert the offset to an array index, capping it to 4 to avoid a runtime error.
+	// The index used by `array.get()` will be the equivalent of `floor(fillNo)`.
+	fillNo = math.min(lastHiBar / (lookbackInput / 5), 4)
+	// Set background to a progressively lighter fill with increasing distance from location of highest high.
+	bgcolor(array.get(fillColors, fillNo))
+	// Plot key values to the Data Window for debugging.
+	plotchar(lastHiBar, "lastHiBar", "", location.top, size = size.tiny)
+	plotchar(fillNo, "fillNo", "", location.top, size = size.tiny)
 
 .. image:: images/Arrays-ReadingAndWriting-DistanceFromHigh.png
 
 Another technique that can be used to initialize the elements in an array is to declare the array with size zero, and then populate it using 
 `array.push() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}push>`__ 
 to append **new** elements to the end of the array, increasing the size of the array by one at each call. 
-The following code is functionally identical to the initialization section from the preceding script. Note that we do not use ``var`` to declare the array in this case.
-If we did, the set of pushes would add 5 new elements to the array on each bar, since the array would propagate over successive bars::
+The following code is functionally identical to the initialization section from the preceding script::
 
-    c_fills = array.new_color(0)
-    // Initialize the array elements with progressively lighter shades of the fill color.
-    array.push(c_fills, color.new(c_fillColor, 70))
-    array.push(c_fills, color.new(c_fillColor, 75))
-    array.push(c_fills, color.new(c_fillColor, 80))
-    array.push(c_fills, color.new(c_fillColor, 85))
-    array.push(c_fills, color.new(c_fillColor, 90))
+	// Declare array and set its values on the first bar only.
+	var fillColors = array.new_color(0)
+	if barstate.isfirst
+	    // Initialize the array elements with progressively lighter shades of the fill color.
+	    array.push(fillColors, color.new(FILL_COLOR, 70))
+	    array.push(fillColors, color.new(FILL_COLOR, 75))
+	    array.push(fillColors, color.new(FILL_COLOR, 80))
+	    array.push(fillColors, color.new(FILL_COLOR, 85))
+	    array.push(fillColors, color.new(FILL_COLOR, 90))
+
+Finally, we could use `array.from() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}from>`__::
+
+	//@version=5
+	indicator("Using `var`")
+	FILL_COLOR = color.green
+	var color[] fillColors = 
+	  array.from(
+	   color.new(FILL_COLOR, 70),
+	   color.new(FILL_COLOR, 75),
+	   color.new(FILL_COLOR, 80),
+	   color.new(FILL_COLOR, 85),
+	   color.new(FILL_COLOR, 90))
+	// Cycle background through the array's colors.
+	bgcolor(array.get(fillColors, bar_index % array.size(fillColors)))
 
 The `array.fill(id, value, index_from, index_to) <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}fill>`__ function 
 can be used to fill contiguous sets of array elements with a value. Used without the last two optional parameters, the function fills the whole array, so::
