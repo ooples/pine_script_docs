@@ -10,7 +10,12 @@ These states can be used to restrict the execution or the logic of your code to 
 Bar state built-in variables
 ----------------------------
 
-Note that while indicators and libraries run on all price or volume updates in real time, strategies not using ``calc_on_every_tick`` will not; they will only execute when the realtime bar closes. This will affect the detection of bar states in that type of script.
+Note that while indicators and libraries run on all price or volume updates in real time, strategies not using ``calc_on_every_tick`` will not; they will only execute when the realtime bar closes. This will affect the detection of bar states in that type of script. 
+On open markets, for example, this code will not display a background until the realtime closes because that is when the strategy runs::
+
+    //@version=5
+    strategy("S")
+    bgcolor(barstate.islast ? color.silver : na)
 
 
 \`barstate.isfirst\`
