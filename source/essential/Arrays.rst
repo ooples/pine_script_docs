@@ -40,10 +40,11 @@ The following syntax can be used to declare arrays::
     <type>[] <identifier> = <expression>
     var <type>[] <identifier> = <expression>
 
-The ``[]`` modifier is appended to the type name when declaring arrays. However, since type-specific functions are always used to create arrays,
+The ``[]`` modifier (not to be confused with the `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ 
+history-referencing operator) is appended to the type name when declaring arrays. However, since type-specific functions are always used to create arrays,
 the ``<type>[]`` part of the declaration is redundant, except if you initialize an array variable to ``na``, as in the following example where
 we declare an array variable named ``prices``. The variable will be used to designate an array containing "float" values,  
-but no array is created by this declaration yet. For the moment, the array variable contains no valid array id, its value being ``na``::
+but no array is created by this declaration yet. For the moment, the array variable contains no valid array ID, its value being ``na``::
 
     float[] prices = na
 
@@ -51,7 +52,7 @@ When declaring an array and the ``<expression>`` is not ``na``, one of the ``arr
 `array.from() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}from>`__ must be used. 
 The arguments of both the ``size`` and ``initial_value`` parameters can be "series", to allow dynamic sizing and initialization of array elements.
 The following example creates an array containing zero "float" elements, 
-and this time, the array id returned by the `array.new_float() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}new_float>`__
+and this time, the array ID returned by the `array.new_float() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}new_float>`__
 function call is assigned to ``prices``::
 
     prices = array.new_float(0)
@@ -68,12 +69,18 @@ Similar array creation functions exist for the other types of array elements:
 
 When declaring an array, you can initialize all elements in the array using the ``initial_value`` parameter. 
 When no argument is supplied for ``initial_value``, the array elements are initialized to ``na``.
-The following declaration creates and array id named ``prices``.
+The following declaration creates and array ID named ``prices``.
 The array is created with two elements, each initialized with the value of the ``close`` built-in variable on that bar::
 
     prices = array.new_float(2, close)
 
-You can also use `array.from() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}from>`__ to create an array and intialize it with different values at the same time.
+You can also use `array.from() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}from>`__ to create an array and intialize it with different values at the same time. `array.from() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}from>`__ infers the array's size and the type of its elements, which must be consistent, from the arguments supplied to the function when calling it. Similarly to ``array.new_*()` functions, it accepts "series" arguments.
+
+Both these lines will create a "bool[]" array with the same two elements::
+
+    states = array.from(close > open, high != close)
+    bool[] states = array.from(close > open, high != close)
+
 
 Using the 'var' keyword
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -375,15 +382,15 @@ New cars are queued at the end of the line, and the first car to leave will be t
 In the following code example, we let users decide through the script's inputs how many labels they want to have on their chart.
 We use that quantity to determine the size of the array of labels we then create, initializing the array's elements to ``na``.
 
-When a new pivot is detected, we create a label for it, saving the label's id in the ``pLabel`` variable. 
-We then queue the id of that label by 
+When a new pivot is detected, we create a label for it, saving the label's ID in the ``pLabel`` variable. 
+We then queue the ID of that label by 
 using `array.push() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}push>`__ 
-to append the new label's id to the end of the array, making our array size one greater than the maximum number of labels to keep on the chart.
+to append the new label's ID to the end of the array, making our array size one greater than the maximum number of labels to keep on the chart.
 
 Lastly, we de-queue the oldest label by removing the array's first element using 
 `array.shift() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}shift>`__ and deleting the label referenced by that array element's value. 
 As we have now de-queued an element from our queue, the array contains ``i_pivotCount`` elements once again. 
-Note that on the dataset's first bars we will be deleting ``na`` label id's until the maximum number of labels has been created, 
+Note that on the dataset's first bars we will be deleting ``na`` label IDs until the maximum number of labels has been created, 
 but this does not cause runtime errors. Let's look at our code::
 
 	//@version=5
@@ -393,16 +400,16 @@ but this does not cause runtime errors. Let's look at our code::
 	i_pivotCount = input.int(5, "How many pivots to show", minval = 0, maxval = MAX_LABELS)
 	i_pivotLegs  = input.int(3, "Pivot legs", minval = 1, maxval = 5)
 
-	// Create an array containing the user-selected max count of label ids.
+	// Create an array containing the user-selected max count of label IDs.
 	var labelIds = array.new_label(i_pivotCount)
 
 	pHi = ta.pivothigh(i_pivotLegs, i_pivotLegs)
 	if not na(pHi)
 		// New pivot found; plot its label `i_pivotLegs` bars back.
 		pLabel = label.new(bar_index[i_pivotLegs], pHi, str.tostring(pHi, format.mintick), textcolor = color.white)
-		// Queue the new label's id by appending it to the end of the array.
+		// Queue the new label's ID by appending it to the end of the array.
 		array.push(labelIds, pLabel)
-		// De-queue the oldest label id from the queue and delete the corresponding label.
+		// De-queue the oldest label ID from the queue and delete the corresponding label.
 		label.delete(array.shift(labelIds))
 
 .. image:: images/Arrays-InsertingAndRemovingArrayElements-ShowLastnHighPivots.png
@@ -440,7 +447,7 @@ Concatenation
 
 Two arrays can be merged—or concatenated—using `array.concat() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}concat>`__. 
 When arrays are concatenated, the second array is appended to the end of the first, 
-so the first array is modified while the second one remains intact. The function returns the array id of the first array::
+so the first array is modified while the second one remains intact. The function returns the array ID of the first array::
 
     //@version=5
     indicator("`array.concat()`")
@@ -474,7 +481,7 @@ Here we copy the array ``a`` to a new array named ``_b``::
         array.push(_b, 2)
         label.new(bar_index, 0, "a: " + str.tostring(a) + "\n_b: " + str.tostring(_b), size = size.large)
 
-Note that simply using ``_b = a`` in the previous example would not have copied the array, but only its id. 
+Note that simply using ``_b = a`` in the previous example would not have copied the array, but only its ID. 
 From thereon, both variables would point to the same array, so using either one would affect the same array.
 
 .. image:: images/Arrays-ManipulatingArrays-Copy.png
@@ -649,12 +656,12 @@ When you size arrays dynamically using a field in your script's *Settings/Inputs
     plot(array.size(a))
 
 
-Cannot call array methods when id of array is 'na'
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Cannot call array methods when ID of array is 'na'
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-When an array id is initialized to ``na``, operations on it are not allowed, since no array exists. 
-All that exists at that point is an array variable containing the ``na`` value rather that a valid array id pointing to an existing array. 
-Note that an array created with no elements in it, as you do when you use ``a = array.new_int(0)``, has a valid id nonetheless. 
+When an array ID is initialized to ``na``, operations on it are not allowed, since no array exists. 
+All that exists at that point is an array variable containing the ``na`` value rather that a valid array ID pointing to an existing array. 
+Note that an array created with no elements in it, as you do when you use ``a = array.new_int(0)``, has a valid ID nonetheless. 
 This code will throw the error we are discussing::
 
     //@version=5
