@@ -43,7 +43,7 @@ The second script is "Session bars"::
 
 This shows how the user can distinguish between regular session and extended hours bars
 by using the built-in
-`time <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__
+`time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__
 function rather than the `time <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ variable. 
 Note that the background behind these bars
 is colored because of the chart's settings; not because of the script.
