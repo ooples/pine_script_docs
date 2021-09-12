@@ -14,7 +14,7 @@ Bar state built-in variables
 \`barstate.isfirst\`
 ^^^^^^^^^^^^^^^^^^^^
 
-`barstate.isfirst <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ 
+`barstate.isfirst <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isfirst>`__ 
 is only ``true`` on the dataset's first bar, i.e., when `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__ is zero.
 
 It can be useful to initialize variables on the first bar only, e.g.::
@@ -34,43 +34,55 @@ It can be useful to initialize variables on the first bar only, e.g.::
 \`barstate.islast\`
 ^^^^^^^^^^^^^^^^^^^
 
-`barstate.isfirst <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ 
-is ``true`` if the current bar is the last in the whole range of bars available, ``false`` otherwise. This flag helps to detect *the last historical bar*.
+`barstate.islast <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islast>`__ 
+is ``true`` if the current bar is the last one on the chart, whether that bar is a realtime bar or not.
 
 
 \`barstate.ishistory\`
 ^^^^^^^^^^^^^^^^^^^^^^
 
-`barstate.isfirst <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ 
+`barstate.ishistory <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}ishistory>`__ 
 is ``true`` if the current data update is a historical bar update, ``false`` otherwise (thus it is realtime).
 
 
 \`barstate.isrealtime\`
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-`barstate.isfirst <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ 
+`barstate.isrealtime <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isrealtime>`__ 
 is ``true`` if the current data update is a real-time bar update, ``false`` otherwise (thus it is historical). Note that every realtime bar is also the *last* one.
 
 
 \`barstate.isnew\`
 ^^^^^^^^^^^^^^^^^^
 
-`barstate.isfirst <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ 
+`barstate.isnew <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isnew>`__ 
 is ``true`` if the current data update is the first (opening) update of a new bar, ``false`` otherwise.
 
 
 \`barstate.isconfirmed\`
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-`barstate.isfirst <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ 
-is ``true`` if the current data update is the last (closing) update of the current bar, ``false`` otherwise. The next data update will be an opening update of a new bar [#isconfirmed]_.
-   
+`barstate.isconfirmed <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ 
+is ``true`` on all historical bars and on the last (closing) update of a realtime bar.
+
+It can be useful to avoid repainting by requiring the realtime bar to be closed before a condition can become ``true``. 
+Here, we use it to hold plotting of our RSI in the realtime bar until it closes and becomes an elapsed realtime bar. 
+It will plot on historical bars because `barstate.isconfirmed <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ 
+is always ``true`` on them::
+
+    //@version=5
+    indicator("")
+    myRSI = ta.rsi(close, 20)
+    plot(barstate.isconfirmed ? myRSI : na)
+
 
 \`barstate.islastconfirmedhistory\`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-`barstate.isfirst <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ 
-is ``true`` if script is executing on the dataset's last bar when market is closed, or script is executing on the bar immediately preceding the real-time bar, if market is open. Returns ``false`` otherwise.
+`barstate.islastconfirmedhistory <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islastconfirmedhistory>`__ 
+is ``true`` if the script is executing on the dataset's last bar when the market is closed, or on the bar immediately preceding the realtime bar if the market is open.
+
+It can be used to detect the first realtime bar with ``barstate.islastconfirmedhistory[1]``, or to postpone server-intensive calculations until the last historical bar, which would otherwise be undetectable on open markets.
 
 
 Example script
