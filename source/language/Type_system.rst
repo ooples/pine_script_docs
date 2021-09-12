@@ -1,6 +1,5 @@
 .. _PageTypeSystem::
 
-
 Type system
 ===========
 
