@@ -792,7 +792,7 @@ This code's intention, for example, is to ignore all historical bars and create 
     indicator("My Script", overlay = true)
 
     if barstate.isrealtime
-        label.new(bar_index[10], na, text="Label", yloc=yloc.abovebar)
+        label.new(bar_index[10], na, text = "Label", yloc = yloc.abovebar)
 
 It will, however, fail at runtime. The reason for the error is that Pine cannot determine the buffer size
 for historical values of the ``time`` plot, even though the ``time`` built-in variable isn't mentioned in the code.
