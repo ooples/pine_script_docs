@@ -17,6 +17,10 @@ Bar state built-in variables
 `barstate.isfirst <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ 
 is only ``true`` on the dataset's first bar, i.e., when `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__ is zero.
 
+It can be useful to initialize variables on the first bar only, e.g.::
+
+
+
 
 \`barstate.islast\`
 ^^^^^^^^^^^^^^^^^^^
