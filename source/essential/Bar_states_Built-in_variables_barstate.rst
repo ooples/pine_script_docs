@@ -39,7 +39,19 @@ It can be useful to initialize variables on the first bar only, e.g.::
 `barstate.islast <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islast>`__ 
 is ``true`` if the current bar is the last one on the chart, whether that bar is a realtime bar or not.
 
-It is often used to restrict the execution of code to the chart's last bar, which is often useful when drawing lines, labels or tables.
+It is often used to restrict the execution of code to the chart's last bar, which is often useful when drawing lines, labels or tables. 
+Here, we use it to determine when to update a label which we want to appear only on the last bar. 
+We create the label only once and then update its properties using ``label.set_*()`` functions because it is more efficient::
+
+    //@version=5
+    indicator("", "", true)
+    // Create label on the first bar only.
+    var label hiLabel = label.new(na, na, "")
+    // Update the label's position and text on the last bar,
+    // including on all realtime bar updates.
+    if barstate.islast
+        label.set_xy(hiLabel, bar_index, high)
+        label.set_text(hiLabel, str.tostring(high, format.mintick))
 
 
 \`barstate.ishistory\`
@@ -67,7 +79,9 @@ is ``true`` if the current data update is a real-time bar update, ``false`` othe
 `barstate.isnew <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isnew>`__ 
 is ``true`` on all historical bars. On the realtime bar, it is only ``true`` on its first (opening) update.
 
-It is useful to reset `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ variables when a new realtime bar comes in::
+It is useful to reset `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ variables when a new realtime bar comes in. 
+The following code will reset ``updateNo`` to 1 on all historical bars and at the beginning of each realtime bar. 
+It calculates the number of realtime updates during each realtime bar::
 
     //@version=5
     indicator("")
