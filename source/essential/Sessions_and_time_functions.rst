@@ -7,9 +7,7 @@ Session and time information
 \`time\` and \`time()\`
 -----------------------
 
-Pine provides means to work with trade session, time
-and date information. On this IBM chart at *30 minutes*,
-two scripts are running: "Bar date/time" and "Session bars".
+Pine provides means to work with trade session, time and date information. On this 30min chart, two scripts are running: "Bar date/time" and "Session bars".
 
 .. image:: images/Chart_time_1.png
 
@@ -58,7 +56,7 @@ by using the built-in `time() <https://www.tradingview.com/pine-script-reference
 function rather than the `time <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ variable. 
 The `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ call in our script returns the time of the
 bar's open in UNIX time (milliseconds), or `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ if the bar is located outside
-the 09:30-16:00 trading session, which corresponds to the trading session for IBM symbol.
+the 09:30-16:00 trading session.
 
 These are examples of trade session specifications:
 
