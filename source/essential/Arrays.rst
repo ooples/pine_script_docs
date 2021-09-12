@@ -206,6 +206,37 @@ The remaining elements will hold the ``na`` value, as no intialization value was
 
 
 
+Looping through array elements
+------------------------------
+
+When looping through array elements when the array's size is unknown, you can use::
+
+    //@version=5
+    indicator("Protected `for` loop")
+    sizeInput = input.int(0, "Array size", minval = 0, maxval = 100000)
+    a = array.new_float(sizeInput)
+    for i = 0 to (array.size(a) == 0 ? na : array.size(a) - 1)
+        array.set(a, i, i)
+    plot(array.sum(a))
+
+This takes advantage of the fact that `for <https://www.tradingview.com/pine-script-reference/v5/#>`__ loops do not execute if the ``to`` expression is 
+`na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__. Note that the ``to`` value is only evaluated once, upon entry.
+
+A `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ statement can also be used::
+
+    //@version=5
+    indicator("Protected `while` loop")
+    sizeInput = input.int(2, "Array size", minval = 0, maxval = 100000)
+    var a = array.new_float(sizeInput)
+    if barstate.islast
+        i = 0
+        while i < array.size(a)
+    	    array.set(a, i, i)
+        	i += 1
+    plot(array.sum(a))
+
+
+
 Scope
 -----
 
@@ -232,6 +263,7 @@ We use it here to calculate progressively lower or higher levels::
 	plot(nextLevel(factorInput))
 
 .. image:: images/Arrays-Scope-Bands.png
+
 
 
 .. _PageArrays_HistoryReferencing:
