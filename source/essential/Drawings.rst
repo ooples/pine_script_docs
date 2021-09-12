@@ -26,7 +26,9 @@ drawing objects can be created on historical bars as well as in the future, wher
 Creating drawings
 -----------------
 
-Pine drawing objects are created with the `label.new <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ , `line.new <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ and `box.new <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`__ functions.
+Pine drawing objects are created with the `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ , 
+`line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ and 
+`box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`__ functions.
 While each function has many parameters, only the coordinates are mandatory.
 This is an example of code used to create a label on every bar::
 
@@ -36,29 +38,29 @@ This is an example of code used to create a label on every bar::
 
 .. image:: images/minimal_label.png
 
-The label is created with the parameters ``x=bar_index`` (the index of the current bar,
-`bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__) and ``y=high`` (high price of the current bar).
+The label is created with the parameters ``x = bar_index`` (the index of the current bar,
+`bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__) and ``y = high`` (high price of the current bar).
 When a new bar opens, a new label is created on it. Label objects created on previous bars stay on the chart
-until the indicator deletes them with an explicit call of the `label.delete <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`__
+until the indicator deletes them with an explicit call of the `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`__
 function, or until the automatic garbage collection process removes them.
 
 Here is a modified version of the same script that shows the values of the ``x`` and ``y`` coordinates used to create the labels::
 
     //@version=5
     indicator("My Script", overlay = true)
-    label.new(bar_index, high, style=label.style_none,
-              text="x=" + str.tostring(bar_index) + "\ny=" + str.tostring(high))
+    label.new(bar_index, high, style = label.style_none,
+              text = "x=" + str.tostring(bar_index) + "\ny=" + str.tostring(high))
 
 .. image:: images/minimal_label_with_x_y_coordinates.png
 
 In this example labels are shown without background coloring (because of parameter ``style=label.style_none``) but with
-dynamically created text (``text="x=" + str.tostring(bar_index) + "\ny=" + str.tostring(high)``) that prints label coordinates.
+dynamically created text (``text = "x=" + str.tostring(bar_index) + "\ny=" + str.tostring(high)``) that prints label coordinates.
 
 This is an example of code that creates line objects on a chart::
 
     //@version=5
     indicator("My Script", overlay = true)
-    line.new(x1=bar_index[1], y1 = low[1], x2 = bar_index, y2 = high)
+    line.new(x1 = bar_index[1], y1 = low[1], x2 = bar_index, y2 = high)
 
 .. image:: images/minimal_line.png
 
@@ -66,7 +68,7 @@ This is an example of code that creates box objects on a chart::
 
     //@version=5
     indicator("My Script", overlay = true)
-    box.new(left=bar_index[1], top = low[1], right = bar_index, bottom = high)
+    box.new(left = bar_index[1], top = low[1], right = bar_index, bottom = high)
 
 .. image:: images/minimal_box.png
 
@@ -82,8 +84,10 @@ This script demonstrates the effect of rollback when running in the realtime bar
     indicator("My Script", overlay = true)
     label.new(bar_index, high)
 
-While ``label.new`` creates a new label on every iteration of the script when price changes in the realtime bar,
-the most recent label created in the script's previous iteration is also automatically deleted because of rollback before the next iteration. Only the last label created before the realtime bar's close will be committed, and will thus persist.
+While `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ 
+creates a new label on every iteration of the script when price changes in the realtime bar,
+the most recent label created in the script's previous iteration is also automatically deleted because of rollback before the next iteration. 
+Only the last label created before the realtime bar's close will be committed, and will thus persist.
 
 .. _drawings_coordinates:
 
