@@ -4,6 +4,8 @@ Session and time information
 .. contents:: :local:
     :depth: 2
 
+
+
 \`time\` and \`time()\`
 -----------------------
 
@@ -57,6 +59,11 @@ function rather than the `time <https://www.tradingview.com/pine-script-referenc
 The `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ call in our script returns the time of the
 bar's open in UNIX time (milliseconds), or `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ if the bar is located outside
 the 09:30-16:00 trading session.
+
+
+
+Session specifications
+----------------------
 
 These are examples of trade session specifications:
 
