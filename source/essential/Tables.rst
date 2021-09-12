@@ -172,8 +172,8 @@ Here, we create a basic display panel showing a user-selected quantity of MAs va
     var string GP2 = "Display"
     string  tableYposInput = input.string("top", "Panel position", inline = "11", options = ["top", "middle", "bottom"], group = GP2)
     string  tableXposInput = input.string("right", "", inline = "11", options = ["left", "center", "right"], group = GP2)
-    color   bullColorInput    = input.color(color.new(color.green, 30), "Bull", inline = "12", group = GP2)
-    color   bearColorInput    = input.color(color.new(color.red, 30), "Bear", inline = "12", group = GP2)
+    color   bullColorInput = input.color(color.new(color.green, 30), "Bull", inline = "12", group = GP2)
+    color   bearColorInput = input.color(color.new(color.red, 30), "Bear", inline = "12", group = GP2)
     color   neutColorInput = input.color(color.new(color.gray, 30), "Neutral", inline = "12", group = GP2)
     
     var table panel = table.new(tableYposInput + "_" + tableXposInput, 2, masQtyInput + 1)
