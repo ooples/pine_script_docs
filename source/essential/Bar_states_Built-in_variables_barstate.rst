@@ -75,7 +75,8 @@ is also ``true``.
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 `barstate.isrealtime <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isrealtime>`__ 
-is ``true`` if the current data update is a real-time bar update, ``false`` otherwise (thus it is historical). Note that every realtime bar is also the *last* one.
+is ``true`` if the current data update is a real-time bar update, ``false`` otherwise (thus it is historical). 
+Note that `barstate.islast <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islast>`__ is also ``true`` on all realtime bars.
 
 
 \`barstate.isnew\`
