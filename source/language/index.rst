@@ -8,11 +8,11 @@ Language fundamentals
    Structure_of_the_script
    Versions
    Comments
-   Identifiers
    Line_wrapping
-   Type_system
+   Identifiers
    Operators
-   Functions_and_annotations
    Expressions_declarations_and_statements
+   Functions_and_annotations
    Declaring_functions
+   Type_system
    Execution_model
