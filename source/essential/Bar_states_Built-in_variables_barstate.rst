@@ -88,7 +88,8 @@ is ``true`` on all historical bars and on the realtime bar's first (opening) upd
 All historical bars are considered *new* bars because the Pine runtime executes your script on each bar sequentially, from the chart's first bar in time, to the last.
 Each historical bar is thus *discovered* by your script as it executes, bar to bar.
 
-It can be useful to reset `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ variables when a new realtime bar comes in. 
+`barstate.isnew <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isnew>`__ 
+can be useful to reset `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ variables when a new realtime bar comes in. 
 The following code will reset ``updateNo`` to 1 on all historical bars and at the beginning of each realtime bar. 
 It calculates the number of realtime updates during each realtime bar::
 
