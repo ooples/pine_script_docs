@@ -104,6 +104,10 @@ and a new value is pushed at the end of the array on each bar, the array will gr
 The same code without the `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ keyword would re-declare the array on each bar. 
 After execution of the ``array.push()`` call, the array would thus be of size one on all the dataset's bars.
 
+This initializes an array of constant lengths which will not change during the script's execution, so we only declare it on the first bar::
+
+    var int[] lengths = array.from(2, 12, 20, 50, 100, 200)
+
 
 
 Reading and writing array values
