@@ -91,7 +91,8 @@ be executed on the first iteration of the script on the dataset's bar at `bar_in
 Because the array is never re-initialized on subsequent bars, its value will persist across bars, as the script iterates on them.
 
 When an array declaration is done using `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ 
-and a new value is pushed at the end of the array on each bar, the array will grow by one on each bar and be of size ``bar_index`` plus one (bar_index starts at zero) by the time the script executes on the last bar, as this code will do::
+and a new value is pushed at the end of the array on each bar, the array will grow by one on each bar and be of size ``bar_index + 1`` plus one 
+(`bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__ starts at zero) by the time the script executes on the last bar, as this code will do::
 
     //@version=5
     indicator("Using `var`")
