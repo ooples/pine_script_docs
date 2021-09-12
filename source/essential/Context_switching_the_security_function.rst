@@ -4,11 +4,10 @@ Context switching and the request.security function
 .. contents:: :local:
     :depth: 2
 
-The ``request.security`` function enables scripts to request data from
-symbols and/or timeframes other than the ones a script is running on.
-
-Let's assume the following script is running on an IBM chart at *1 minute*. It
-will display the *close* price of the IBM symbol, but at *15 minutes* timeframe.
+The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
+function enables scripts to request data from other symbols and/or timeframes than those of the active chart.
+Let's assume the following script is running on an IBM chart at 1min. 
+It will display the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ price of the IBM symbol, but from the 15min timeframe.
 
 ::
 
@@ -19,7 +18,7 @@ will display the *close* price of the IBM symbol, but at *15 minutes* timeframe.
 
 .. image:: images/Chart_security_1.png
 
-The `request.security <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
 function's first argument is the name of the requested symbol. The second
 argument is the required timeframe and the third one is an expression
 which will be calculated on the requested series *within* the ``request.security`` call.
