@@ -1,10 +1,13 @@
-Bar states. Built-in variables barstate.*
-=========================================
+Bar states
+==========
 
-A set of built-in variables of the ``barstate`` namespace allows users to define the bar states
-for which scripts actions are performed:
+A set of built-in variables in the ``barstate`` namespace allow your script to detect different properties of the bar on which the script is currently exectuting. 
+These states can be used to restrict the execution or the logic of your code to specific bars:
 
--  ``barstate.isfirst`` --- ``true`` if the current bar is the first in the
+\`barstate.isfirst\`
+--------------------
+
+-  `barstate.isfirst <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ is ``true`` if the current bar is the first in the
    whole range of bars available, ``false`` otherwise.
 
 -  ``barstate.islast`` --- ``true`` if the current bar is the last in the
