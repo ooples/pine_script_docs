@@ -4,50 +4,54 @@ Bar states
 A set of built-in variables in the ``barstate`` namespace allow your script to detect different properties of the bar on which the script is currently exectuting. 
 These states can be used to restrict the execution or the logic of your code to specific bars.
 
+Bar state built-in variables
+----------------------------
+
+
 \`barstate.isfirst\`
---------------------
+^^^^^^^^^^^^^^^^^^^^
 
 `barstate.isfirst <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ 
 is only ``true`` on the dataset's first bar, i.e., when `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__ is zero.
 
 
 \`barstate.islast\`
---------------------
+^^^^^^^^^^^^^^^^^^^
 
 `barstate.isfirst <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ 
 is ``true`` if the current bar is the last in the whole range of bars available, ``false`` otherwise. This flag helps to detect *the last historical bar*.
 
 
 \`barstate.ishistory\`
---------------------
+^^^^^^^^^^^^^^^^^^^^^^
 
 `barstate.isfirst <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ 
 is ``true`` if the current data update is a historical bar update, ``false`` otherwise (thus it is realtime).
 
 
 \`barstate.isrealtime\`
---------------------
+^^^^^^^^^^^^^^^^^^^^^^^
 
 `barstate.isfirst <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ 
 is ``true`` if the current data update is a real-time bar update, ``false`` otherwise (thus it is historical). Note that every realtime bar is also the *last* one.
 
 
 \`barstate.isnew\`
---------------------
+^^^^^^^^^^^^^^^^^^
 
 `barstate.isfirst <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ 
 is ``true`` if the current data update is the first (opening) update of a new bar, ``false`` otherwise.
 
 
 \`barstate.isconfirmed\`
---------------------
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 `barstate.isfirst <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ 
 is ``true`` if the current data update is the last (closing) update of the current bar, ``false`` otherwise. The next data update will be an opening update of a new bar [#isconfirmed]_.
    
 
 \`barstate.islastconfirmedhistory\`
---------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 `barstate.isfirst <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ 
 is ``true`` if script is executing on the dataset's last bar when market is closed, or script is executing on the bar immediately preceding the real-time bar, if market is open. Returns ``false`` otherwise.
