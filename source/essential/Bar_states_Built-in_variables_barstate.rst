@@ -10,6 +10,8 @@ These states can be used to restrict the execution or the logic of your code to 
 Bar state built-in variables
 ----------------------------
 
+Note that while indicators and libraries run on all price or volume updates in real time, strategies not using ``calc_on_every_tick`` will not; they will only execute when the realtime bar closes. This will affect the detection of bar states in that type of script.
+
 
 \`barstate.isfirst\`
 ^^^^^^^^^^^^^^^^^^^^
@@ -37,12 +39,19 @@ It can be useful to initialize variables on the first bar only, e.g.::
 `barstate.islast <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islast>`__ 
 is ``true`` if the current bar is the last one on the chart, whether that bar is a realtime bar or not.
 
+It is often used to restrict the execution of code to the chart's last bar, which is often useful when drawing lines, labels or tables.
+
 
 \`barstate.ishistory\`
 ^^^^^^^^^^^^^^^^^^^^^^
 
 `barstate.ishistory <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}ishistory>`__ 
-is ``true`` if the current data update is a historical bar update, ``false`` otherwise (thus it is realtime).
+is ``true`` on all historical bars. It can never be ``true`` on a bar when 
+`barstate.isrealtime <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isrealtime>`__ is also ``true``, 
+and it does not become ``true`` on a realtime bar's closing update, when 
+`barstate.isconfirmed <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ becomes ``true``. 
+On closed markets, it can be ``true`` on the same bar where `barstate.islast <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islast>`__ 
+is also ``true``.
 
 
 \`barstate.isrealtime\`
@@ -66,7 +75,7 @@ is ``true`` if the current data update is the first (opening) update of a new ba
 is ``true`` on all historical bars and on the last (closing) update of a realtime bar.
 
 It can be useful to avoid repainting by requiring the realtime bar to be closed before a condition can become ``true``. 
-Here, we use it to hold plotting of our RSI in the realtime bar until it closes and becomes an elapsed realtime bar. 
+We use it here to hold plotting of our RSI until the realtime bar closes and becomes an elapsed realtime bar. 
 It will plot on historical bars because `barstate.isconfirmed <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ 
 is always ``true`` on them::
 
