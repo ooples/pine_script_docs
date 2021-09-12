@@ -1,6 +1,8 @@
 .. contents:: :local:
     :depth: 3
 
+.. _PageBarStates:
+
 Bar states
 ==========
 
