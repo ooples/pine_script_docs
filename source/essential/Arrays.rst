@@ -82,15 +82,16 @@ Both these lines will create a "bool[]" array with the same two elements::
     bool[] statesArray = array.from(close > open, high != close)
 
 
-Using the 'var' keyword
-^^^^^^^^^^^^^^^^^^^^^^^
+Using the \`var\` keyword
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ keyword can be used when declaring arrays. 
 It works just as it does for other variables; it causes the declaration to only 
-be executed on the first iteration of the script on the dataset's bar at ``bar_index`` zero. Because the array is never re-initialized on subsequent bars, 
-its value will persist across bars, as the script iterates on them.
+be executed on the first iteration of the script on the dataset's bar at `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__ zero. 
+Because the array is never re-initialized on subsequent bars, its value will persist across bars, as the script iterates on them.
 
-When an array declaration is done using ``var`` and a new value is pushed at the end of the array on each bar, the array will grow by one on each bar and be of size ``bar_index`` plus one (bar_index starts at zero) by the time the script executes on the last bar, as this code will do::
+When an array declaration is done using `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ 
+and a new value is pushed at the end of the array on each bar, the array will grow by one on each bar and be of size ``bar_index`` plus one (bar_index starts at zero) by the time the script executes on the last bar, as this code will do::
 
     //@version=5
     indicator("Using `var`")
@@ -99,8 +100,8 @@ When an array declaration is done using ``var`` and a new value is pushed at the
     if barstate.islast
         label.new(bar_index, 0, "Array size: " + str.tostring(array.size(a)) + "\nbar_index: " + str.tostring(bar_index), size = size.large)
 
-The same code without the ``var`` keyword would re-declare the array on each bar. After execution of the ``array.push()`` call, 
-the array would thus be of size one on all the dataset's bars.
+The same code without the `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ keyword would re-declare the array on each bar. 
+After execution of the ``array.push()`` call, the array would thus be of size one on all the dataset's bars.
 
 
 
