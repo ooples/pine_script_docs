@@ -28,7 +28,7 @@ Elements within an array are referred to using an *index*, which starts at 0 and
 Arrays in Pine can be sized dynamically, so the number of elements in the array can be modified within one iteration of the script on a bar,
 and vary across bars. Multiple arrays can be used in the same script. The size of arrays is limited to 100,000.
 
-.. note:: We will use "beginning" of an array to designate index 0, and "end" of an array to designate the array's element with the highest index value. We will also extend the meaning of *array* to include array IDs, for the sake of brevity.
+.. note:: We will use *beginning* of an array to designate index 0, and *end* of an array to designate the array's element with the highest index value. We will also extend the meaning of *array* to include array IDs, for the sake of brevity.
 
 
 
