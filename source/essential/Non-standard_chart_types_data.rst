@@ -1,18 +1,23 @@
-Non-standard chart types data
-=============================
+Non-standard charts data
+========================
 
 .. contents:: :local:
     :depth: 2
 
 These functions allow scripts to fetch information from non-standard
 bars or chart types, regardless of the type of chart the script is running on.
-They are ``ticker.heikinashi``, ``ticker.renko``,
-``ticker.linebreak``, ``ticker.kagi`` and ``ticker.pointfigure``. All of them work in the
-same manner; they create a special ticker identifier to be used as
+They are: 
+`ticker.heikinashi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}heikinashi>`_
+`ticker.renko() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}renko>`_
+`ticker.linebreak() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}linebreak>`_
+`ticker.kagi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}kagi>`_ and 
+`ticker.pointfigure() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}pointfigure>`_.
+All of them work in the same manner; they create a special ticker identifier to be used as
 the first argument in a ``request.security`` function call.
 
-heikinashi function
--------------------
+
+\`ticker.heikinashi()\`
+-----------------------
 
 *Heikin-Ashi* means *average bar* in Japanese. The open, high, low and close
 prices of Heikin-Ashi candlesticks are synthetic; they are not actual prices.
@@ -20,7 +25,7 @@ Each value is calculated using combinations of normal OHLC
 values from the current and previous bar. The calculations used make Heikin-Ashi bars
 less noisy than normal candlesticks.
 
-The `ticker.heikinashi <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}heikinashi>`__
+The `ticker.heikinashi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}heikinashi>`__
 function creates a special ticker identifier for
 requesting Heikin-Ashi data with the ``request.security`` function.
 
@@ -70,12 +75,13 @@ chart's Heikin-Ashi bars::
 
 .. image:: images/Pine_Heikinashi_2.png
 
-You will find more information on the `plotcandle <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__
-and `plotbar <https://www.tradingview.com/pine-script-reference/v5/#fun_plotbar>`__ functions in
+You will find more information on the `plotcandle() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__
+and `plotbar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotbar>`__ functions in
 the :doc:`/annotations/Custom_OHLC_bars_and_candles` section.
 
-renko function
---------------
+
+\`ticker.renko()\`
+------------------
 
 *Renko* bars only plot price movements, without taking time or
 volume into consideration. They are constructed from ticks and look like
@@ -85,7 +91,7 @@ passes the top or bottom by a predetermined amount.
 ::
 
     //@version=5
-    indicator("Example 7", overlay=true)
+    indicator("Example 7", overlay = true)
     renko_t = ticker.renko(syminfo.tickerid, "ATR", 10)
     renko_low = request.security(renko_t, timeframe.period, low)
     plot(renko_low)
@@ -96,10 +102,11 @@ Please note that you cannot plot Renko bricks from Pine script exactly
 as they look. You can only get a series of numbers similar to
 OHLC values for Renko bars and use them in your algorithms.
 
-For detailed information, see `ticker.renko <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}renko>`__.
+For detailed information, see `ticker.renko() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}renko>`__.
 
-linebreak function
-------------------
+
+\`ticker.linebreak()\`
+----------------------
 
 The *Line Break* chart type displays a series of vertical boxes that are based on
 price changes [#ticks]_.
@@ -107,7 +114,7 @@ price changes [#ticks]_.
 ::
 
     //@version=5
-    indicator("Example 8", overlay=true)
+    indicator("Example 8", overlay = true)
     lb_t = ticker.linebreak(syminfo.tickerid, 3)
     lb_close = request.security(lb_t, timeframe.period, close)
     plot(lb_close)
@@ -118,10 +125,11 @@ Please note that you cannot plot Line Break boxes from Pine script
 exactly as they look. You can only get a series of numbers similar to
 OHLC values for Line Break charts and use them in your algorithms.
 
-For detailed information, see `ticker.linebreak <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}linebreak>`__.
+For detailed information, see `ticker.linebreak() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}linebreak>`__.
 
-kagi function
--------------
+
+\`ticker.kagi()\`
+-----------------
 
 *Kagi* charts are made of a continuous line that changes directions.
 The direction changes when the price changes [#ticks]_
@@ -130,7 +138,7 @@ beyond a predetermined amount.
 ::
 
     //@version=5
-    indicator("Example 9", overlay=true)
+    indicator("Example 9", overlay = true)
     kagi_t = ticker.kagi(syminfo.tickerid, 1)
     kagi_close = request.security(kagi_t, timeframe.period, close)
     plot(kagi_close)
@@ -141,10 +149,11 @@ Please note that you cannot plot Kagi lines from Pine script exactly as
 they look. You can only get a series of numbers similar to OHLC
 values for Kagi charts and use them in your algorithms.
 
-For detailed information, see `ticker.kagi <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}kagi>`__.
+For detailed information, see `ticker.kagi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}kagi>`__.
 
-pointfigure function
---------------------
+
+\`ticker.pointfigure()\`
+------------------------
 
 *Point and Figure* (PnF) charts only plot price movements [#ticks]_, without
 taking time into consideration. A column of X's is plotted as the price
@@ -159,7 +168,7 @@ think of them as synthetic OHLC PnF values.
 ::
 
     //@version=5
-    indicator("Example 10", overlay=true)
+    indicator("Example 10", overlay = true)
     pnf_t = ticker.pointfigure(syminfo.tickerid, "hl", "ATR", 14, 3)
     pnf_open = request.security(pnf_t, timeframe.period, open, barmerge.gaps_on)
     pnf_close = request.security(pnf_t, timeframe.period, close, barmerge.gaps_on)
@@ -168,7 +177,7 @@ think of them as synthetic OHLC PnF values.
 
 .. image:: images/Pine_Point_and_Figure.png
 
-For detailed information, see `ticker.pointfigure <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}pointfigure>`__.
+For detailed information, see `ticker.pointfigure() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}pointfigure>`__.
 
 
 .. rubric:: Footnotes
