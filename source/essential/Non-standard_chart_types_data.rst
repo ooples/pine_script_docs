@@ -7,13 +7,13 @@ Non-standard charts data
 These functions allow scripts to fetch information from non-standard
 bars or chart types, regardless of the type of chart the script is running on.
 They are: 
-`ticker.heikinashi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}heikinashi>`_
-`ticker.renko() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}renko>`_
-`ticker.linebreak() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}linebreak>`_
+`ticker.heikinashi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}heikinashi>`_,
+`ticker.renko() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}renko>`_,
+`ticker.linebreak() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}linebreak>`_,
 `ticker.kagi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}kagi>`_ and 
 `ticker.pointfigure() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}pointfigure>`_.
 All of them work in the same manner; they create a special ticker identifier to be used as
-the first argument in a ``request.security`` function call.
+the first argument in a `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function call.
 
 
 \`ticker.heikinashi()\`
@@ -27,7 +27,7 @@ less noisy than normal candlesticks.
 
 The `ticker.heikinashi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}heikinashi>`__
 function creates a special ticker identifier for
-requesting Heikin-Ashi data with the ``request.security`` function.
+requesting Heikin-Ashi data with the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function.
 
 This script requests low prices of Heikin-Ashi bars and plots them on
 top of the usual candlesticks::
@@ -44,7 +44,8 @@ Note that the low prices of Heikin-Ashi bars are different from the
 low prices of the normal candlesticks.
 
 If you wanted to switch off extended hours data in *Example 5*, you would
-need to use the ``ticker.new`` function first, instead of using the ``syminfo.tickerid``
+need to use the `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__ function first, 
+instead of using the `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__
 variable directly::
 
     //@version=5
@@ -54,11 +55,11 @@ variable directly::
     ha_low = request.security(ha_t, timeframe.period, low, gaps=barmerge.gaps_on)
     plot(ha_low, style=plot.style_linebr)
 
-Note that we use an additional fourth parameter with ``request.security``: ``gaps=barmerge.gaps_on``,
+Note that we use an additional fourth parameter with `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__: ``gaps=barmerge.gaps_on``,
 which instructs the function not to use previous values to fill slots where data is absent.
 This means we will get empty areas during extended hours.
 To be able to see this on the chart, we also need to use a special plot
-style (``style=plot.style_linebr``), the *Line With Breaks* style.
+style (``style = plot.style_linebr``), the *Line With Breaks* style.
 
 You may plot Heikin-Ashi bars from a script so they look exactly like a
 chart's Heikin-Ashi bars::
