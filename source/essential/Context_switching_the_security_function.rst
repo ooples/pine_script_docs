@@ -21,7 +21,7 @@ It will display the `close <https://www.tradingview.com/pine-script-reference/v5
 The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
 function's first argument is the name of the requested symbol. The second
 argument is the required timeframe and the third one is an expression
-which will be calculated on the requested series *within* the ``request.security`` call.
+which will be calculated on the requested series *within* the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call.
 
 The name of the symbol can be defined using two variants: with a prefix that
 contains the exchange (or data provider), or without it. For example:
@@ -29,15 +29,17 @@ contains the exchange (or data provider), or without it. For example:
 BATS will be used as the default. The current symbol name is stored in the
 `syminfo.ticker <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}ticker>`__ and
 `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__
-built-in variables. ``syminfo.ticker`` contains the value of the
-symbol name without its exchange prefix, for example ``"MSFT"``.
-``syminfo.tickerid`` contains the value of the symbol name with its exchange prefix, for example,
-``"BATS:MSFT"`` or ``"NASDAQ:MSFT"``. It is recommended to use ``syminfo.tickerid`` to avoid
-ambiguity in the values returned by ``request.security``.
+built-in variables. `syminfo.ticker <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}ticker>`__ 
+contains the value of the symbol name without its exchange prefix, for example ``"MSFT"``.
+`syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__ 
+contains the value of the symbol name with its exchange prefix, for example,
+``"BATS:MSFT"`` or ``"NASDAQ:MSFT"``. It is recommended to use 
+`syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__ to avoid
+ambiguity in the values returned by `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__.
 
 .. TODO write about syminfo.tickerid in extended format and function tickerid
 
-The second argument of the ``request.security`` function, ``timeframe``, is
+The second argument of the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function, ``timeframe``, is
 also a string. All intraday timeframes are defined using a
 number of minutes (from ``"1"`` to ``"1440"``), with the exception of four second-based timeframes: ``"1S"``, ``"5S"``, ``"15S"``, and ``"30S"`` [#seconds]_. It is possible to request any [#minutes]_ number of minutes: ``"5"``, ``"10"``,
 ``"21"``, etc. *Hourly* timeframe is also set by minutes [#hours]_. For example, the
@@ -47,19 +49,19 @@ following lines signify one hour, two hours and four hours respectively:
 ``"3D"``, etc. *Weekly* and *Monthly* timeframes are set in a similar way: ``"W"``,
 ``"1W"``, ``"2W"``, ..., ``"M"``, ``"1M"``, ``"2M"``. ``"M"`` and ``"1M"`` denote the same monthly
 timeframe, and ``"W"`` and ``"1W"`` the same weekly timeframe. The
-third parameter of the request.security function can be any arithmetic
+third parameter of the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function can be any arithmetic
 expression or a function call, which will be calculated in the context of the chosen series.
 The timeframe of the main chart's symbol is stored in the
 `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__
 built-in variable.
 
-With the ``request.security`` function, users can view a 1min chart while
-displaying an SMA (or any other expression) from any other timeframe
-(i.e., daily, weekly, monthly)::
+Using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__, one can view a 1min chart while
+displaying an 1D SMA like this::
 
     //@version=5
     indicator("High Time Frame MA", overlay = true)
-    src = close, len = 9
+    src = close
+    len = 9
     out = ta.sma(src, len)
     out1 = request.security(syminfo.tickerid, 'D', out)
     plot(out1)
@@ -76,12 +78,12 @@ and calculate it at *1 minute*, *15 minutes* and *60 minutes*::
     spread_15 = request.security(syminfo.tickerid, '15', spread)
     spread_60 = request.security(syminfo.tickerid, '60', spread)
 
-The ``request.security`` function
+The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function
 returns a series which is then adapted to the time scale of
 the current chart's symbol. This result can be either shown directly on
 the chart (i.e., with ``plot``), or used in further calculations.
 The "Advance Decline Ratio" script illustrates a more
-involved use of ``request.security``::
+involved use of `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__::
 
     //@version=5
     indicator("Advance Decline Ratio", "ADR")
@@ -187,7 +189,7 @@ When an indicator is based on historical data (i.e.,
 the daily timeframe and shift the result of ``request.security`` function call one bar to the
 right in the current timeframe. When an indicator is calculated on
 real-time data, we take the *close* of the previous day without shifting the
-``request.security`` data.
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ data.
 
 
 
@@ -196,14 +198,16 @@ real-time data, we take the *close* of the previous day without shifting the
 Requesting data of a lower timeframe
 ------------------------------------
 
-``request.security`` function was designed to request data of a timeframe *higher*
+The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
+function was designed to request data of a timeframe *higher*
 than the current chart timeframe. On a *60 minutes* chart,
 this would mean requesting 240, D, W, or any higher timeframe.
 
 It is not recommended to request data of a timeframe *lower* that the current chart timeframe,
 for example *1 minute* data from a *5 minutes* chart. The main problem with such a case is that
 some part of a 1 minute data will be inevitably lost, as it's impossible to display it on a *5 minutes*
-chart and not to break the time axis. In such cases the behavior of ``request.security`` can be rather unexpected.
+chart and not to break the time axis. In such cases the behavior of 
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ can be rather unexpected.
 The next example illustrates this::
 
     // Add this script on a "5" minute chart
