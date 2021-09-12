@@ -123,28 +123,26 @@ the following way::
 Here, we use `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__
 with a ``session`` argument to display the market's opening
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and 
-`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__on an intraday chart::
+`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ on an intraday chart::
 
     //@version=5
-    indicator("Opening high/low", overlay=true)
-
-    i_highTimeFrame = input.timeframe("D")
-    i_sessSpec = input.session("0930-1600")
-
-    f_isNewBar(_timeframe, _session) =>
-        _t  = time(_timeframe, _session)
-		not na(_t) and (na(_t[1]) or _t > _t[1])
+    indicator("Opening high/low", overlay = true)
     
-	newBar = f_isNewBar(i_highTimeFrame, i_sessSpec)
-
-    var float s1 = na
-    var float s2 = na
-    if newBar
-        s1 := low
-        s2 := high
-
-    plot(s1, style=plot.style_circles, linewidth=3, color=color.red)
-    plot(s2, style=plot.style_circles, linewidth=3, color=color.lime)
+    highTFInput = input.timeframe("D")
+    sessSpecInput = input.session("0930-1600")
+    
+    isNewBar(res, sess) =>
+        t = time(res, sess)
+        na(t[1]) and not na(t) or t[1] < t
+    
+    var float hi = na
+    var float lo = na
+    if isNewBar(highTFInput, sessSpecInput)
+        hi := high
+        lo := low
+    
+    plot(lo, "lo", color.red, 3, plot.style_circles)
+    plot(hi, "hi", color.lime, 3, plot.style_circles)
 
 .. image:: images/Chart_time_3.png
 
