@@ -78,8 +78,8 @@ You can also use `array.from() <https://www.tradingview.com/pine-script-referenc
 
 Both these lines will create a "bool[]" array with the same two elements::
 
-    states = array.from(close > open, high != close)
-    bool[] states = array.from(close > open, high != close)
+    statesArray = array.from(close > open, high != close)
+    bool[] statesArray = array.from(close > open, high != close)
 
 
 Using the 'var' keyword
