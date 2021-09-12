@@ -34,12 +34,19 @@ The chart's time gauge in the screenshot shows the time of the last bar
 as 2014-04-15 16:30 because it has a 4-hour difference between the exchange's timezone returned by the 
 `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ variable.
 
-The second script is "Session bars". It introduces the 
-`time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ which has the following signature::
+Our second script will introduces the 
+`time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ function, which has the following signature::
 
     time(timeframe, session, timezone)
 
-Our script is::
+The `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ function accepts
+three arguments:
+
+- ``timeframe``, a string in `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__ format
+- ``session``, an optional string in session specification format: ``"hhmm-hhmm[:days]"``, where the ``[:days]`` part is optional
+- ``timezone``, which is only allowed when ``session`` is used. See the `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ entry in the Reference Manual for more information.
+
+Our second script is "Session bars"::
 
     //@version=5
     indicator("Session bars")
@@ -47,17 +54,14 @@ Our script is::
     plot(na(t) ? 0 : 1)
 
 This shows how the user can distinguish between regular session and extended hours bars
-by using the built-in
-`time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__
+by using the built-in `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__
 function rather than the `time <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ variable. 
-Note that the background behind these bars
-is colored because of the chart's settings; not because of the script.
+.. Note that the background behind these bars is colored because of the chart's settings; not because of the script.
 The `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ function returns the time of the
-bar's start in milliseconds UNIX time, or ``na`` if the bar is located outside
+bar's open in UNIX time (milliseconds), or `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ if the bar is located outside
 the given trade session (09:30-16:00 in our example). 
-The `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ function accepts
-two arguments: the ``timeframe`` used to determine the timestamp of bars
-and ``session``, the session specification in the form of
+
+in the form of
 a string containing the beginning and end of the trade
 session in the exchange's timezone. The string "0930-1600" corresponds
 to the trade session of the IBM symbol. These are examples of trade session
