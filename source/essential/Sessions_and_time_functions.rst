@@ -44,7 +44,7 @@ three arguments:
 - ``session``, an optional string in session specification format: ``"hhmm-hhmm[:days]"``, where the ``[:days]`` part is optional
 - ``timezone``, which is only allowed when ``session`` is used. See the `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ entry in the Reference Manual for more information.
 
-Our second script is "Session bars"::
+::
 
     //@version=5
     indicator("Session bars")
