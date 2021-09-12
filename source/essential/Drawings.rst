@@ -14,7 +14,8 @@ You will find one instance of each on the following chart:
 .. note:: On TradingView charts, a complete set of *Drawing Tools*
   allows users to create and modify drawings using mouse actions. While they may look similar to
   drawing objects created with Pine code, they are essentially different entities.
-  Drawing objects created using Pine code cannot be modified with mouse actions.
+  Drawing objects created using Pine code cannot be modified with mouse actions, 
+  and hand-drawn drawings from the chart user interface are not visible from Pine scripts.
 
 The line, label, and box drawings in Pine allow you to create indicators with more sophisticated
 visual components, e.g., pivot points, support/resistance levels,
