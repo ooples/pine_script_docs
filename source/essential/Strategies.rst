@@ -9,13 +9,13 @@ Strategies
 A *strategy* is a Pine script that can send, modify and cancel *buy/sell orders*.
 Strategies allow you to perform *backtesting* (emulation of a
 strategy trading on historical data) and *forwardtesting* (emulation
-of a strategy trading on real-time data) according to your
+of a strategy trading on realtime data) according to your
 algorithms.
 
 A strategy written in Pine has many of the same capabilities
 as a Pine *indicator*. When you write a strategy, it must start
 with the `strategy <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
-annotation call (instead of ``study``). Strategies may plot data,
+function call. Strategies may plot data,
 but they can also place, modify and cancel orders. They also have
 access to essential strategy performance information through specific
 keywords. The same information is available externally in the *Strategy
@@ -188,8 +188,8 @@ Example 1::
     //@version=5
     strategy("revers demo")
     if bar_index  < 100
-        strategy.entry("buy", strategy.long, 4, when=strategy.position_size <= 0)
-        strategy.entry("sell", strategy.short, 6, when=strategy.position_size > 0)
+        strategy.entry("buy", strategy.long, 4, when = strategy.position_size <= 0)
+        strategy.entry("sell", strategy.short, 6, when = strategy.position_size > 0)
     plot(strategy.equity)
 
 The above strategy constantly reverses market position from +4 to -6,
@@ -200,7 +200,7 @@ Example 2::
     //@version=5
     strategy("exit once demo")
     strategy.entry("buy", strategy.long, 4, when=strategy.position_size <= 0)
-    strategy.exit("bracket", "buy",  2, profit=10, stop=10)
+    strategy.exit("bracket", "buy",  2, profit = 10, stop = 10)
 
 This strategy demonstrates a case where a market position is never
 closed because it uses a partial exit order to close the market position
@@ -212,9 +212,9 @@ Example 3::
     //@version=5
     strategy("Partial exit demo")
     if bar_index < 100
-        strategy.entry("buy", strategy.long, 4, when=strategy.position_size <= 0)
-    strategy.exit("bracket1", "buy",  2, profit=10, stop=10)
-    strategy.exit("bracket2", "buy",  profit=20, stop=20)
+        strategy.entry("buy", strategy.long, 4, when = strategy.position_size <= 0)
+    strategy.exit("bracket1", "buy",  2, profit = 10, stop = 10)
+    strategy.exit("bracket2", "buy",  profit = 20, stop = 20)
 
 This code generates 2 levels of brackets (2 take profit orders and 2
 stop loss orders). Both levels are activated at the same time: first
@@ -251,8 +251,8 @@ Example::
     //@version=5
     strategy("next bar open execution demo")
     if bar_index < 100
-        strategy.order("buy", strategy.long, when=strategy.position_size == 0)
-        strategy.order("sell", strategy.short, when=strategy.position_size != 0)
+        strategy.order("buy", strategy.long, when = strategy.position_size == 0)
+        strategy.order("sell", strategy.short, when = strategy.position_size != 0)
 
 If this code is applied to a chart, all orders are filled at the open of
 every bar.
@@ -317,14 +317,14 @@ first entry order that opened market position. Let's study the following
 example::
 
     //@version=5
-    strategy("exit Demo", pyramiding=2, overlay=true)
+    strategy("exit Demo", pyramiding = 2, overlay = true)
     strategy.entry("Buy1", strategy.long, 5,
                    when = strategy.position_size == 0 and year > 2014)
     strategy.entry("Buy2", strategy.long,
                    10, stop = strategy.position_avg_price +
                    strategy.position_avg_price*0.1,
                    when = strategy.position_size == 5)
-    strategy.exit("bracket", loss=10, profit=10, when=strategy.position_size == 15)
+    strategy.exit("bracket", loss = 10, profit = 10, when = strategy.position_size == 15)
 
 The code given above places 2 orders sequentially: "Buy1" at market
 price and "Buy2" at a 10% higher price (stop order). The exit order is placed
@@ -336,14 +336,14 @@ though we did not specify entry order ID to close in this line:
 Another example::
 
     //@version=5
-    strategy("exit Demo", pyramiding=2, overlay=true)
+    strategy("exit Demo", pyramiding=2, overlay = true)
     strategy.entry("Buy1", strategy.long, 5, when = strategy.position_size == 0)
     strategy.entry("Buy2", strategy.long,
                    10, stop = strategy.position_avg_price +
                    strategy.position_avg_price*0.1,
                    when = strategy.position_size == 5)
     strategy.close("Buy2",when=strategy.position_size == 15)
-    strategy.exit("bracket", "Buy1", loss=10, profit=10, when=strategy.position_size == 15)
+    strategy.exit("bracket", "Buy1", loss = 10, profit = 10, when=strategy.position_size == 15)
     plot(strategy.position_avg_price)
 
 -  It opens a 5-contract long position with the order "Buy1".
@@ -403,8 +403,8 @@ To turn the above strategy into a reverse strategy you need to place orders in t
     //@version=5
     strategy("oca_cancel demo")
     if year > 2014 and year < 2016
-        strategy.entry("LE", strategy.long, oca_type = strategy.oca.cancel, oca_name="Entry")
-        strategy.entry("SE", strategy.short, oca_type = strategy.oca.cancel, oca_name="Entry")
+        strategy.entry("LE", strategy.long, oca_type = strategy.oca.cancel, oca_name = "Entry")
+        strategy.entry("SE", strategy.short, oca_type = strategy.oca.cancel, oca_name = "Entry")
 
 `strategy.oca.reduce <https://www.tradingview.com/pine-script-reference/v5/#var_strategy{dot}oca{dot}reduce>`__
    This group type allows multiple orders
@@ -427,10 +427,10 @@ different groups. Example::
     //@version=5
     strategy("My Script")
     if year > 2014 and year < 2016
-        strategy.entry("Buy", strategy.long, oca_name="My oca", oca_type=strategy.oca.reduce)
-        strategy.exit("FromBy", "Buy", profit=100, loss=200, oca_name="My oca")
-        strategy.entry("Sell", strategy.short, oca_name="My oca", oca_type=strategy.oca.cancel)
-        strategy.order("Order", strategy.short, oca_name="My oca", oca_type=strategy.oca.none)
+        strategy.entry("Buy", strategy.long, oca_name = "My oca", oca_type = strategy.oca.reduce)
+        strategy.exit("FromBy", "Buy", profit = 100, loss = 200, oca_name = "My oca")
+        strategy.entry("Sell", strategy.short, oca_name = "My oca", oca_type = strategy.oca.cancel)
+        strategy.order("Order", strategy.short, oca_name = "My oca", oca_type = strategy.oca.none)
 
 "Buy" and "Sell" will be placed in different groups as their type is
 different. "Order" will be outside of any group as its type is set to
@@ -471,7 +471,7 @@ starting with prefix ``strategy.risk.max_intraday_``.
 Example (MSFT, 1)::
 
     //@version=5
-    strategy("multi risk demo", overlay=true, pyramiding=10, calc_on_order_fills = true)
+    strategy("multi risk demo", overlay = true, pyramiding = 10, calc_on_order_fills = true)
     if year > 2014
         strategy.entry("LE", strategy.long)
     strategy.risk.max_intraday_filled_orders(5)
@@ -492,10 +492,10 @@ trades.
 Example (MSFT, 1D)::
 
     //@version=5
-    strategy("allow_entry_in demo", overlay=true)
+    strategy("allow_entry_in demo", overlay = true)
     if year > 2014
-        strategy.entry("LE", strategy.long, when=strategy.position_size <= 0)
-        strategy.entry("SE", strategy.short, when=strategy.position_size > 0)
+        strategy.entry("LE", strategy.long, when = strategy.position_size <= 0)
+        strategy.entry("SE", strategy.short, when = strategy.position_size > 0)
     strategy.risk.allow_entry_in(strategy.direction.long)
 
 As short entries are prohibited by the risk rules,
@@ -522,13 +522,13 @@ profit target or stop loss.
 ::
 
     //@version=5
-    strategy("Currency test", currency=currency.EUR)
+    strategy("Currency test", currency = currency.EUR)
     if year > 2020
         strategy.entry("LE", strategy.long, 1000)
-        strategy.exit("LX", "LE", profit=1, loss=1)
+        strategy.exit("LX", "LE", profit = 1, loss = 1)
     profit = strategy.netprofit
-    plot(abs((profit - profit[1])*100), "1 point profit", color=color.blue, linewidth=2)
-    plot(1 / close[1], "prev usdeur", color=color.red)
+    plot(abs((profit - profit[1])*100), "1 point profit", color = color.blue, linewidth = 2)
+    plot(1 / close[1], "prev usdeur", color = color.red)
 
 After adding this strategy to the chart we can see that the plot lines
 are matching. This demonstrates that the rate to calculate the profit
