@@ -71,12 +71,13 @@ Here, we are pointing to the "Editors' Picks" section, but there are many other 
 .. image:: images/FirstSteps-FromThePublicLibrary-1.png
 
 You can also search for scripts using the homepage's "Search" field, and filter scripts using different criteria. 
-The Help Center has a page explaining more about `loading scripts <https://www.tradingview.com/script/?solution=43000555216>`__
-and one one the `different types of scripts <https://www.tradingview.com/scripts/?solution=43000558522>`__ in the Public Library.
+The Help Center has a page explaining the `different types of scripts <https://www.tradingview.com/scripts/?solution=43000558522>`__ in the Public Library.
 
 The script feed shows script *widgets*, i.e., placeholders showing a miniature view of each publication's chart and description, and its author.
 By clicking on it you will open the *script's page*, where you can see the script on a chart, read the author's description, like the script, leave comments or 
 read the script's source code if it was published open-source.
+
+Once you find an interesting script in the Public Library, follow the instructions in the Help Center to `load it on your chart <https://www.tradingview.com/script/?solution=43000555216>`__.
 
 
 
