@@ -11,16 +11,23 @@ First steps
 Introduction
 ------------
 
-Welcome to the `Pine Script User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__. 
-In this page, we present a step-by-step approach that you can follow to gradually become more familiar with indicators and strategies (also called *scripts*) 
-written in the Pine Script programming language on `TradingView <https://www.tradingview.com/>`__:
+Welcome to the `Pine Script User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__, 
+which will accompany you in your journey to learn to program your own trading tools in Pine.
+Welcome also to the very active community of Pine coders on TradingView.
 
-1. How to use the tens of thousands of existing scripts.
-2. How to read the Pine code of existing scripts.
-3. How to learn to write Pine scripts.
+In this page, we present a step-by-step approach that you can follow to gradually become more familiar with indicators and strategies (also called *scripts*) 
+written in the Pine programming language on `TradingView <https://www.tradingview.com/>`__:
+
+1. How to **use** the tens of thousands of existing scripts.
+2. How to **read** the Pine code of existing scripts.
+3. How to learn to **write** Pine scripts.
 
 If you are already familiar with the use of Pine scripts on TradingView and are now ready to learn how to write your own,
 then jump to the :ref:`<PageFirstIndicator_WritingScripts>` section of this page.
+
+If you are new to our platform, follow the steps below to begin using Pine scripts, 
+then read their code before beginning your Pine-programming learning journey.
+
 
 
 Using scripts
@@ -138,7 +145,9 @@ using the "Open/New default built-in script..." menu selection.
 Writing scripts
 ---------------
 
-
-Learning to program in Pine will allow you to develop your own trading tools. , and to the community of Pine coders on TradingView. 
 We have built Pine Script to empower both budding and seasoned traders to create their own trading tools. 
+We have designed it so it is relatively easy to learn for first-time programmers, 
+yet powerful enough for knowledgeable programmers to build tools of moderate complexity.
 
+
+The next step we recommend is to write your :ref:`<PageFirstIndicator>`.
