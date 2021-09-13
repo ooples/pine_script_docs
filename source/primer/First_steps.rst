@@ -16,17 +16,17 @@ which will accompany you in your journey to learn to program your own trading to
 Welcome also to the very active community of Pine coders on TradingView.
 
 In this page, we present a step-by-step approach that you can follow to gradually become more familiar with indicators and strategies (also called *scripts*) 
-written in the Pine programming language on `TradingView <https://www.tradingview.com/>`__:
+written in the Pine programming language on `TradingView <https://www.tradingview.com/>`__. 
+We will get you started on your journey to:
 
-1. How to **use** the tens of thousands of existing scripts.
-2. How to **read** the Pine code of existing scripts.
-3. How to learn to **write** Pine scripts.
+1. **Use** some of the tens of thousands of existing scripts on the platform.
+2. **Read** the Pine code of existing scripts.
+3. **Write** Pine scripts.
 
 If you are already familiar with the use of Pine scripts on TradingView and are now ready to learn how to write your own,
 then jump to the :ref:`<PageFirstIndicator_WritingScripts>` section of this page.
 
-If you are new to our platform, follow the steps below to begin using Pine scripts, 
-then read their code before beginning your Pine-programming learning journey.
+If you are new to our platform, then please read on!
 
 
 
