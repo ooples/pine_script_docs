@@ -8,28 +8,48 @@ which stands for "technical analysis".
 Many functions are used for the result(s) they return, e.g.:
 
 - Math-related functions in the ``math`` namespace: 
-  
-- Technical indicators in the ``ta`` namespace.
+  `math.abs() <https://www.tradingview.com/pine-script-reference/v5/#fun_math{dot}abs>`__,
+  `math.log() <https://www.tradingview.com/pine-script-reference/v5/#fun_math{dot}log>`__,
+  `math.max() <https://www.tradingview.com/pine-script-reference/v5/#fun_math{dot}max>`__,
+  `math.random() <https://www.tradingview.com/pine-script-reference/v5/#fun_math{dot}random>`__,
+  `math.round_to_mintick() <https://www.tradingview.com/pine-script-reference/v5/#fun_math{dot}round_to_mintick>`__, etc.
+- Technical indicators in the ``ta`` namespace:
   `ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__,
   `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__,
   `ta.macd() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}macd>`__,
   `ta.rsi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}rsi>`__,
-  `ta.supertrend() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}supertrend>`__.
+  `ta.supertrend() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}supertrend>`__, etc.
+- Support functions often used to calculate technical indicators in the ``ta`` namespace:
+  `ta.barssince() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}barssince>`__,
+  `ta.crossover() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}crossover>`__,
+  `ta.highest() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}highest>`__, etc.
+- Functions to request data from other symbols or timeframes in the ``request`` namespace:
+  `request.dividends() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}dividends>`__,
+  `request.earnings() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}earnings>`__,
+  `request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__,
+  `request.quandl() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}quandl>`__,
+  `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__,
+  `request.splits() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}splits>`__.
+- Functions to manipulate strings in the ``str.`` namespace:
+  `str.format <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}format>`__,
+  `str.length <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}length>`__,
+  `str.tonumber <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}tonumber>`__,
+  `str.tostring <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}tostring>`__, etc.
+- Functions used to define the input values that script users can modify in the script's "Settings/Inputs" tab, in the ``input`` namespace:
+  `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__,
+  `input.color() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}color>`__,
+  `input.int() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int>`__,
+  `input.session() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}session>`__,
+  `input.symbol() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}symbol>`__, etc.
 
 
-Functions may be built-in, such as
-`ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__,
-`ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__,
-`ta.rsi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}rsi>`__,
-or :doc:`user-defined <Declaring_functions>`. All annotations are built-in.
+Other functions do not return a result but are used for their side effect:
 
-The side effects annotations are used for include:
+- Each script must begin with a call to one of these functions, which are used as a declaration statement defining the type of script and its properties:
+  `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
+  `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__ or 
+  `library() <https://www.tradingview.com/pine-script-reference/v5/#fun_library>`__.
 
--  assigning a name or other global properties to a script using
-   `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__
-   or `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
--  determining the inputs of a script using
-   `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__ and functions in the  ``input.`` namespace
 -  determining the outputs of a script using
    `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
 
