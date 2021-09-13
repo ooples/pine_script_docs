@@ -2,25 +2,25 @@ Functions
 =========
 
 Functions may be built-in, such as
-`ta.sma <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__,
-`ta.ema <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__,
-`ta.rsi <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}rsi>`__,
+`ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__,
+`ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__,
+`ta.rsi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}rsi>`__,
 or :doc:`user-defined <Declaring_functions>`. All annotations are built-in.
 
 The side effects annotations are used for include:
 
 -  assigning a name or other global properties to a script using
-   `indicator <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__
-   or `strategy <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
+   `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__
+   or `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
 -  determining the inputs of a script using
-   `input <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__ and functions in the  ``input.`` namespace
+   `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__ and functions in the  ``input.`` namespace
 -  determining the outputs of a script using
-   `plot <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
+   `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
 
 In addition to having side effects, a few annotations such as ``plot`` and ``hline``
 also return a result which may be used or not. This result, however, can only be used in other annotations
 and can't take part in the script's calculations
-(see `fill <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ annotation).
+(see `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ annotation).
 
 A detailed overview of Pine annotations can be found :doc:`here </annotations/index>`.
 
@@ -34,7 +34,7 @@ Example of an annotation call with positional arguments::
 
 The same call with keyword arguments::
 
-    indicator(title='Example', shorttitle='Ex', overlay=true)
+    indicator(title = 'Example', shorttitle = 'Ex', overlay = true)
 
 It's possible to mix positional and keyword arguments. Positional
 arguments must go first and keyword arguments should follow them. So the
@@ -42,7 +42,7 @@ following call is not valid:
 
 ::
 
-    indicator(precision=3, 'Example') // Compilation error!
+    indicator(precision = 3, 'Example') // Compilation error!
     
     
 Execution of Pine functions and historical context inside function blocks
@@ -53,7 +53,7 @@ The history of series variables used inside Pine functions is created through ea
 Let's look at this example script where the ``f`` and ``f2`` functions are called every second bar::
 
    //@version=5
-   indicator("My Script", overlay=true)
+   indicator("My Script", overlay = true)
 
    // Returns the value of "a" the last time the function was called 2 bars ago.
    f(a) => a[1]
@@ -61,10 +61,10 @@ Let's look at this example script where the ``f`` and ``f2`` functions are calle
    f2() => close[1]
 
    oneBarInTwo = bar_index % 2 == 0
-   plot(oneBarInTwo ? f(close) : na, color=color.maroon, linewidth=6, style=plot.style_cross)
-   plot(oneBarInTwo ? f2() : na, color=color.lime, linewidth=6, style=plot.style_circles)
-   plot(close[2], color=color.maroon)
-   plot(close[1], color=color.lime)
+   plot(oneBarInTwo ? f(close) : na, color = color.maroon, linewidth = 6, style = plot.style_cross)
+   plot(oneBarInTwo ? f2() : na, color = color.lime, linewidth = 6, style = plot.style_circles)
+   plot(close[2], color = color.maroon)
+   plot(close[1], color = color.lime)
 
 .. image:: images/Function_historical_context_1.png
 
@@ -82,9 +82,9 @@ The solution in these cases is to take those function calls outside their contex
 In this script, ``ta.barssince`` is not called on every bar because it is inside a ternary operator's conditional branch::
 
    //@version=5
-   indicator("Barssince",overlay=false)
+   indicator("Barssince", overlay = false)
    res = close > close[1] ? ta.barssince(close < close[1]) : -1
-   plot(res, style=plot.style_histogram, color=res >= 0 ? color.red : color.blue)
+   plot(res, style = plot.style_histogram, color=res >= 0 ? color.red : color.blue)
 
 This leads to incorrect results because ``ta.barssince`` is not executed on every bar:
 
@@ -93,10 +93,10 @@ This leads to incorrect results because ``ta.barssince`` is not executed on ever
 The solution is to take the barssince call outside the conditional branch to force its execution on every bar::
 
    //@version=5
-   indicator("Barssince",overlay=false)
+   indicator("Barssince", overlay = false)
    b = ta.barssince(close < close[1])
    res = close > close[1] ? b : -1
-   plot(res, style=plot.style_histogram, color=res >= 0 ? color.red : color.blue)
+   plot(res, style = plot.style_histogram, color = res >= 0 ? color.red : color.blue)
 
 Using this technique we get the expected output:
 
