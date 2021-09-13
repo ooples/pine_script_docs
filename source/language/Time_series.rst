@@ -7,10 +7,12 @@ Much of the power of Pine stems from the fact that it is designed to process *ti
 Time series are not a form or a type; they are the fundamental structure Pine uses to store the successive values of a variable over time, 
 where each value is tethered to a point in time. Since charts are composed of bars, each representing a particular point in time, 
 time series are the ideal data structure to work with values that may change with time. 
-The concept of time series is intimately linked to Pine's :ref:`execution model <PageExecutionModel>` and :ref:`type system <PageTypeSystem>`. 
+
+The notion of time series is intimately linked to Pine's :ref:`execution model <PageExecutionModel>` and :ref:`type system <PageTypeSystem>` concepts. 
 Understanding all three is key to making the most of the power of Pine.
 
-Take the built-in `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ variable, which contains the "open" price of each bar in the dataset. 
+Take the built-in `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ variable, 
+which contains the "open" price of each bar in the dataset, the *dataset* being all the bars on any given chart. 
 If your script is running on a 5min chart, then each value in the `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ 
 time series is the "open" price of the consecutive 5min chart bars. 
 When your script refers to `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__, 
