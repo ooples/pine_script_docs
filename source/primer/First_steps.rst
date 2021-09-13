@@ -22,8 +22,8 @@ If you are already familiar with the use of Pine scripts on TradingView and are 
 then jump to the 
 
 
-Using existing scripts
-----------------------
+Using scripts
+-------------
 
 
 From the chart
