@@ -73,6 +73,11 @@ Here, we are pointing to the "Editors' Picks" section, but there are many other 
 You can also search for scripts using the homepage's "Search" field, and filter scripts using different criteria. 
 The Help Center has a page explaining more about `loading scripts <https://www.tradingview.com/script/?solution=43000555216>`__.
 
+The script feed shows script *widgets*, i.e., placeholders showing a miniature view of the publication's chart and description.
+By clicking on it you will open the *script's page*, where you can see the script on a chart, read the author's description, like the script, leave comments or 
+read the script' source code if it was published open-source.
+
+
 
 Reading scripts
 ---------------
