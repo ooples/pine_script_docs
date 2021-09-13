@@ -49,7 +49,7 @@ Line 10: ``plot(signal, color = color.orange)``
 
 After adding the "MACD" script to the chart you will see the following:
 
-.. image:: images/Macd_pine.png
+.. image:: images/FirstIndicator-VersionA.png
 
 Pine contains a variety of built-in functions for the most popular
 algorithms (
