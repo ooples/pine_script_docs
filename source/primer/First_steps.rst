@@ -7,7 +7,24 @@ First steps
 .. contents:: :local:
     :depth: 3
 
-Welcome to the Pine Script User Manual. If you are interested in using technical indicators or strategies on TradingView, 
+
+Introduction
+------------
+
+Welcome to the Pine Script User Manual. In this page, we present a step-by-step approach to become familiar with indicators and strategies (also called *scripts*) written in the Pine Script programming language on TradingView:
+
+1. How to use the thousands of existing scripts.
+1. How to read the Pine code of the scripts you use.
+1. How to learn to write Pine scripts.
+
+If you are already familiar with the use of Pine scripts on TradingView and are now ready to learn how to write your own,
+then jump to the :ref:`<PageFirstIndicator_WritingScripts>` section of this page.
+
+
+Using scripts
+-------------
+
+If you are interested in using technical indicators or strategies on TradingView, 
 you can first start exploring the thousands of indicators already available on our platform. 
 You can access existing indicators on the platform in two different ways:
 
@@ -18,12 +35,7 @@ You can access existing indicators on the platform in two different ways:
 If you can find the tools you need already written for you, it can be a good way to get started and gradually become proficient as a script user, 
 until you are ready to start your programming journey in Pine.
 
-If you are already familiar with the use of Pine scripts on TradingView and are now ready to learn how to write your own,
-then jump to the 
 
-
-Using scripts
--------------
 
 
 From the chart
