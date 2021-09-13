@@ -3,7 +3,7 @@ Language
 
 .. toctree::
    :maxdepth: 3
-   :name: appendixtoc
+   :name: languagetoc
 
    Structure_of_the_script
    Versions
