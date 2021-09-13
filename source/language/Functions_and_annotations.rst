@@ -117,8 +117,8 @@ We can also use the parameter names when calling the function. Parameter names a
     myVwma = ta.vwma(source = close, length = 20)
 
 You can change the position of arguments when using keyword arguments, but only if you use them for all your arguments. 
-When calling functions with many parameters such as `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__
-you can also forego keyword arguments for the first arguments as long as you don't skip any, but if you skip some, 
+When calling functions with many parameters such as `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
+you can also forego keyword arguments for the first arguments, as long as you don't skip any. If you skip some, 
 you must then use keyword arguments so the Pine compiler can figure out which parameter they correspond to, e.g.::
 
     indicator("Example", "Ex", true, max_bars_back = 100)
