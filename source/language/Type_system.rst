@@ -26,6 +26,10 @@ The *type* denotes the nature of a value.
 
 .. note:: We will often use "type" to refer to the "form type" pair.
 
+The type system is intimately linked to Pine's :ref:`execution model <PageExecutionModel>` and :ref:`time series <PageTimeSeries>` concepts. 
+Understanding all three is key to making the most of the power of Pine.
+
+
 
 Forms
 ^^^^^
