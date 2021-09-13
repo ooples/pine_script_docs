@@ -85,25 +85,35 @@ which documents the function's signature, i.e., the list of *parameters* it acce
 
 All built-in functions have one or more parameters defined in their signature. Not all parameters are required for every function.
 
-Let's look at the `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ function. This is its function signature from the Reference Manual::
+Let's look at the `ta.vwma <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}vwma>`__, 
+which returns the volume-weighted moving average of a source value. Its signature (or definition) is::
 
-    input(defval, title, tooltip, inline, group) 
+    ta.vwma(source, length) → series float
 
-This call uses positional arguments.Example of an annotation call with positional arguments::
+This tells us it expects two arguments when it is called, one for the ``source`` parameter, and one for the ``length`` parameter (both are required in this case).
+This is a call to the function in a line of code that assigns the result to a variable called ``myVwma``::
 
-    indicator("Example", "Ex", true)
+    myVwma = ta.vwma(close, 20)
 
-The same call with keyword arguments::
+Note that:
 
-    indicator(title = "Example", shorttitle = "Ex", overlay = true)
+- We use the built-in variable `close <https://www.tradingview.com/pine-script-reference/v5/#>`__ as the argument for the ``source`` parameter.
+- We use 20 as the argument for the ``length`` parameter.
 
-It's possible to mix positional and keyword arguments. Positional
-arguments must go first and keyword arguments should follow them. So the
-following call is not valid:
+We can also use the parameter names when calling the function. Parameter names are called *keyword arguments* when used in a function call::
 
-::
+    myVwma = ta.vwma(source = close, length = 20)
 
-    indicator(precision = 3, 'Example') // Compilation error!
+You can change the position of arguments when using keyword arguments, but only if you use them for all your arguments. 
+When calling functions with many parameters such as `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__
+you can also forego keyword arguments for the first arguments as long as you don't skip any, but if you skip some, 
+you must then use keyword arguments so the Pine compiler can figure out which parameter they correspond to, e.g.::
+
+    indicator("Example", "Ex", true, max_bars_back = 100)
+
+Mixing things up this way is not allowed::
+
+    indicator(precision = 3, "Example") // Compilation error!
     
     
 Execution of Pine functions and historical context inside function blocks
