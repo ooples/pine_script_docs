@@ -120,13 +120,21 @@ Limitations
 -----------
 
 User-defined functions can use any of the Pine built-ins, except:
+`barcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_barcolor>`__,
+`fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__,
 `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
-`strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__,
 `library() <https://www.tradingview.com/pine-script-reference/v5/#fun_library>`__,
 `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__,
 `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__,
 `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__,
-`fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__,
+`plotbar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotbar>`__,
+`plotcandle() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__,
+`strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__,
+`xxxxxx() <https://www.tradingview.com/pine-script-reference/v5/#fun_>`__,
+`xxxxxx() <https://www.tradingview.com/pine-script-reference/v5/#fun_>`__,
+`xxxxxx() <https://www.tradingview.com/pine-script-reference/v5/#fun_>`__,
+`xxxxxx() <https://www.tradingview.com/pine-script-reference/v5/#fun_>`__,
+`xxxxxx() <https://www.tradingview.com/pine-script-reference/v5/#fun_>`__,
 `xxxxxx() <https://www.tradingview.com/pine-script-reference/v5/#fun_>`__,
 `xxxxxx() <https://www.tradingview.com/pine-script-reference/v5/#fun_>`__,
 `xxxxxx() <https://www.tradingview.com/pine-script-reference/v5/#fun_>`__,
