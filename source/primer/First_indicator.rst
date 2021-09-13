@@ -12,8 +12,8 @@ and variables necessary to calculate results which will often be rendered
 on a chart with a `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ function, or some other function that plots the script's output.
 
 
-Example of a Pine script
-------------------------
+Example of a Pine indicator
+---------------------------
 
 Let's look at the implementation of the
 `MACD <https://www.tradingview.com/support/solutions/43000502344-macd-moving-average-convergence-divergence/>`__ indicator in Pine:
