@@ -147,7 +147,7 @@ Writing scripts
 
 We have built Pine Script to empower both budding and seasoned traders to create their own trading tools. 
 We have designed it so it is relatively easy to learn for first-time programmers 
-— although learning a first programming language, like trading, is rarely easy for anyone —  
+— although learning a first programming language, like trading, is rarely **very** easy for anyone —  
 yet powerful enough for knowledgeable programmers to build tools of moderate complexity.
 
 Pine allows you to write three types of scripts:
