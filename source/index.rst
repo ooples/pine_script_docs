@@ -16,12 +16,8 @@ Pine Script |version| User Manual
    Quickstart_guide
    language/index
    essential/index
-   annotations/index
-   Debugging
    Publishing_scripts
-   Public_Library
    Release_notes
-   Style_guide
    migration_guides/index
    appendix/index
    Where_can_I_get_more_information
