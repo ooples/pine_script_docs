@@ -1,6 +1,9 @@
 Built-in Functions
 ==================
 
+Introduction
+------------
+
 Pine comes with hundreds of built-in functions. Those in the same family share the same namespace, which is a prefix to the function's name. 
 The `ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__ function, for example, is in the ``ta`` namespace, 
 which stands for "technical analysis".
