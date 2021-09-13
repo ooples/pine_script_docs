@@ -269,7 +269,7 @@ where:
    next iteration.
 -  ``break`` --- a keyword. Can be used only in loops. It exits the loop.
 
-This example use a `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ 
+This example uses a `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ 
 statement to look back a user-defined amount of bars to determine how many bars have a 
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ that is higher or lower than the 
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ of the last bar on the chart. 
