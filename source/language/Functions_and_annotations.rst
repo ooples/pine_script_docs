@@ -87,7 +87,7 @@ which documents the function's signature, i.e., the list of *parameters* it acce
 (a function can return more than one result). The Reference Manual entry will also list, for each parameter:
 
 - Its name.
-- The form and type of the value it requires (we use *argument* to name the values passed to a function when calling it).
+- The form-type of the value it requires (we use *argument* to name the values passed to a function when calling it).
 - If the parameter is required or not.
 
 All built-in functions have one or more parameters defined in their signature. Not all parameters are required for every function.
@@ -122,7 +122,11 @@ Mixing things up this way is not allowed::
 
     indicator(precision = 3, "Example") // Compilation error!
     
-    
+When calling Pine built-ins, it is critical to ensure that the arguments you use are of the form and type required, which will vary for each parameter. 
+To learn how to do this, one needs to understand Pine's :ref:`<PageTypeSytem>.
+
+
+
 Execution of Pine functions and historical context inside function blocks
 -------------------------------------------------------------------------
 
