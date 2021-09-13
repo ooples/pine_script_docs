@@ -485,7 +485,7 @@ where we are replacing any `na <https://www.tradingview.com/pine-script-referenc
     ath := math.max(ath, high)
 
 
-.. _PageTypeSystem_TypeCasting::
+.. _PageTypeSystem_TypeCasting:
 
 Type casting
 ------------

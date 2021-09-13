@@ -12,17 +12,14 @@ Pine Script |version| User Manual
    :maxdepth: 3
    :name: mastertoc
 
-   Introduction
-   Quickstart_guide
+   Welcome
+   primer/index
    language/index
-   essential/index
-   annotations/index
-   Debugging
-   Publishing_scripts
-   Public_Library
+   concepts/index
+   writing/index
    Release_notes
-   Style_guide
    migration_guides/index
+   Release_notes
    appendix/index
    Where_can_I_get_more_information
 
