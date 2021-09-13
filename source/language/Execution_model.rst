@@ -113,7 +113,7 @@ Additional resources
 A number of ``barstate.*`` built-in variables provide information about the current type of bar update (historical, realtime, closing, etc.). 
 The page where they are documented also contains a script that allows you to visualize the distinction described above between elapsed realtime bars and historical bars: :ref:`<PageBarStates>`.
 
-This page explains the details of strategy calculations: :doc:`/essential/Strategies`.
+The :ref:`<PageStrategies>` page explains the details of strategy calculations, which are not identical to those of indicators.
 
 .. rubric:: Footnotes
 
