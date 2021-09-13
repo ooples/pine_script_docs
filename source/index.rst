@@ -15,7 +15,7 @@ Pine Script |version| User Manual
    Welcome
    primer/index
    language/index
-   essential/index
+   concepts/index
    writing/index
    Release_notes
    migration_guides/index
