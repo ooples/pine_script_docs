@@ -1,11 +1,5 @@
-Functions and annotations
-=========================
-
-Pine Script distinguishes between *functions* and *annotation functions* (or just *annotations*).
-Syntactically they are similar, but they serve different purposes.
-
-While functions are generally used to calculate values and for the result they return,
-annotations are mostly used for their side effects and only occasionally for the result some of them return.
+Functions
+=========
 
 Functions may be built-in, such as
 `ta.sma <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__,
