@@ -40,8 +40,8 @@ until you are ready to start your programming journey in Pine.
 
 
 
-From the chart
-^^^^^^^^^^^^^^
+Loading scripts from the chart
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To explore and load scripts from you chart, use the "Indicators & Strategies" button:
 
@@ -62,8 +62,8 @@ Here, the section containing the TradingView built-ins is selected:
 When you click on one of the indicators or strategies (the ones with the green and red arrows following their name), it loads on your chart.
 
 
-From the Public Library
-^^^^^^^^^^^^^^^^^^^^^^^
+Browsing public scripts in the Public Library
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 From `TradingView's homepage <https://www.tradingview.com/>`__, you can bring up the Public Library's script stream from the "Community" menu. 
 Here, we are pointing to the "Editors' Picks" section, but there are many other categories you can choose from:
