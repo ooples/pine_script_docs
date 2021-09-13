@@ -1,6 +1,10 @@
+.. _PageScriptStructure:
 
 Script Structure
 ================
+
+.. contents:: :local:
+    :depth: 3
 
 .. include:: <isonum.txt>
 
