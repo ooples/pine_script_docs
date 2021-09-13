@@ -1,5 +1,5 @@
-Language fundamentals
-=====================
+Language
+========
 
 .. toctree::
    :maxdepth: 3
