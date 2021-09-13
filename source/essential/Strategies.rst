@@ -9,13 +9,13 @@ Strategies
 A *strategy* is a Pine script that can send, modify and cancel *buy/sell orders*.
 Strategies allow you to perform *backtesting* (emulation of a
 strategy trading on historical data) and *forwardtesting* (emulation
-of a strategy trading on real-time data) according to your
+of a strategy trading on realtime data) according to your
 algorithms.
 
 A strategy written in Pine has many of the same capabilities
-as a Pine *study*, a.k.a. *indicator*. When you write a strategy, it must start
-with the `strategy <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy>`__
-annotation call (instead of ``study``). Strategies may plot data,
+as a Pine *indicator*. When you write a strategy, it must start
+with the `strategy <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
+function call. Strategies may plot data,
 but they can also place, modify and cancel orders. They also have
 access to essential strategy performance information through specific
 keywords. The same information is available externally in the *Strategy
@@ -27,7 +27,7 @@ A simple strategy example
 
 ::
 
-    //@version=4
+    //@version=5
     strategy("test")
     if bar_index < 100
         strategy.entry("buy", strategy.long, 10, when=strategy.position_size <= 0)
@@ -107,7 +107,7 @@ The following logic is used to emulate order fills:
 Here is a strategy demonstrating how orders are filled by the broker
 emulator::
 
-    //@version=4
+    //@version=5
     strategy("History SAW demo", overlay=true, pyramiding=100, calc_on_order_fills=true)
     strategy.entry("LE", strategy.long)
 
@@ -148,7 +148,7 @@ All keywords related to strategies start with a
 ``strategy.`` prefix. The following commands are used for placing
 orders: ``strategy.entry``, ``strategy.order`` and ``strategy.exit``.
 
-`strategy.entry <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy{dot}entry>`__
+`strategy.entry <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}entry>`__
    This command only places entry orders. It is
    affected by the ``pyramiding`` setting in the strategy's properties and by
    the ``strategy.risk.allow_entry_in`` function. If there is an open
@@ -158,13 +158,13 @@ orders: ``strategy.entry``, ``strategy.order`` and ``strategy.exit``.
    As a result, the size of the opened market position will be equal to the order size specified in
    the ``strategy.entry`` command.
 
-`strategy.order <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy{dot}order>`__
+`strategy.order <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}order>`__
    This command places both entry and exit orders. It is not affected by pyramiding settings or by the
    ``strategy.risk.allow_entry_in`` function. It allows you to create
    complex entry and exit order constructions when the functionality of
    ``strategy.entry`` and ``strategy.exit`` will not do.
 
-`strategy.exit <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy{dot}exit>`__
+`strategy.exit <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__
    This command allows you to exit a market position
    or form multiple exit order strategies using a stop loss,
    profit target or trailing stop. All such orders are part of the same
@@ -172,8 +172,8 @@ orders: ``strategy.entry``, ``strategy.order`` and ``strategy.exit``.
    there is no open market position or there is no active entry order
    (an exit order is bound to the ID of an entry order). It is not possible
    to exit a position with a market order using the command
-   ``strategy.exit``. For this, the `strategy.close <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy{dot}close>`__
-   or `strategy.close_all <https://www.tradingview.com/pine-script-reference/v4/#fun_strategy{dot}close_all>`__
+   ``strategy.exit``. For this, the `strategy.close <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}close>`__
+   or `strategy.close_all <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}close_all>`__
    commands should be used.
    If the number of contracts/shares/lots/units specified for the ``strategy.exit`` is
    less than the size of current open positions, the exit will be
@@ -185,11 +185,11 @@ orders: ``strategy.entry``, ``strategy.order`` and ``strategy.exit``.
 
 Example 1::
 
-    //@version=4
+    //@version=5
     strategy("revers demo")
     if bar_index  < 100
-        strategy.entry("buy", strategy.long, 4, when=strategy.position_size <= 0)
-        strategy.entry("sell", strategy.short, 6, when=strategy.position_size > 0)
+        strategy.entry("buy", strategy.long, 4, when = strategy.position_size <= 0)
+        strategy.entry("sell", strategy.short, 6, when = strategy.position_size > 0)
     plot(strategy.equity)
 
 The above strategy constantly reverses market position from +4 to -6,
@@ -197,10 +197,10 @@ back and forth, which the plot shows.
 
 Example 2::
 
-    //@version=4
+    //@version=5
     strategy("exit once demo")
     strategy.entry("buy", strategy.long, 4, when=strategy.position_size <= 0)
-    strategy.exit("bracket", "buy",  2, profit=10, stop=10)
+    strategy.exit("bracket", "buy",  2, profit = 10, stop = 10)
 
 This strategy demonstrates a case where a market position is never
 closed because it uses a partial exit order to close the market position
@@ -209,12 +209,12 @@ for exiting, the strategy will close the market position completely.
 
 Example 3::
 
-    //@version=4
+    //@version=5
     strategy("Partial exit demo")
     if bar_index < 100
-        strategy.entry("buy", strategy.long, 4, when=strategy.position_size <= 0)
-    strategy.exit("bracket1", "buy",  2, profit=10, stop=10)
-    strategy.exit("bracket2", "buy",  profit=20, stop=20)
+        strategy.entry("buy", strategy.long, 4, when = strategy.position_size <= 0)
+    strategy.exit("bracket1", "buy",  2, profit = 10, stop = 10)
+    strategy.exit("bracket2", "buy",  profit = 20, stop = 20)
 
 This code generates 2 levels of brackets (2 take profit orders and 2
 stop loss orders). Both levels are activated at the same time: first
@@ -237,9 +237,9 @@ with the same IDs (they can modify the same entry order).
 entry order and an exit order with the same ID).
 
 To cancel a specific order using its ID, the
-`strategy.cancel(string ID) <https://www.tradingview.com/pine-script-reference/#fun_strategy{dot}cancel>`__
+`strategy.cancel(string ID) <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}cancel>`__
 command should be used. To cancel all pending
-orders the `strategy.cancel_all() <https://www.tradingview.com/pine-script-reference/#fun_strategy{dot}cancel_all>`__
+orders the `strategy.cancel_all() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}cancel_all>`__
 command should be used. Strategy orders are placed as soon as their conditions are satisfied and command
 is called in code. The broker emulator doesn't execute orders before the next
 tick comes after the code was calculated, while in real trading
@@ -248,11 +248,11 @@ the broker emulator only executes it at the open price of the next.
 
 Example::
 
-    //@version=4
+    //@version=5
     strategy("next bar open execution demo")
     if bar_index < 100
-        strategy.order("buy", strategy.long, when=strategy.position_size == 0)
-        strategy.order("sell", strategy.short, when=strategy.position_size != 0)
+        strategy.order("buy", strategy.long, when = strategy.position_size == 0)
+        strategy.order("sell", strategy.short, when = strategy.position_size != 0)
 
 If this code is applied to a chart, all orders are filled at the open of
 every bar.
@@ -265,7 +265,7 @@ orders (limit, stop and stop-limit orders).
 
 Example (for MSFT, 1D)::
 
-    //@version=4
+    //@version=5
     strategy("Priced Entry demo")
     var c = 0
     if year > 2020
@@ -282,7 +282,7 @@ orders in an OCA group using ``strategy.oca.cancel``. This way
 only one order is filled and the other one is cancelled. Here is the
 modified code::
 
-    //@version=4
+    //@version=5
     strategy("Priced Entry demo")
     var c = 0
     if year > 2020
@@ -316,15 +316,15 @@ ID is not specified for an exit order in code, the exit order closes the
 first entry order that opened market position. Let's study the following
 example::
 
-    //@version=4
-    strategy("exit Demo", pyramiding=2, overlay=true)
+    //@version=5
+    strategy("exit Demo", pyramiding = 2, overlay = true)
     strategy.entry("Buy1", strategy.long, 5,
                    when = strategy.position_size == 0 and year > 2014)
     strategy.entry("Buy2", strategy.long,
                    10, stop = strategy.position_avg_price +
                    strategy.position_avg_price*0.1,
                    when = strategy.position_size == 5)
-    strategy.exit("bracket", loss=10, profit=10, when=strategy.position_size == 15)
+    strategy.exit("bracket", loss = 10, profit = 10, when = strategy.position_size == 15)
 
 The code given above places 2 orders sequentially: "Buy1" at market
 price and "Buy2" at a 10% higher price (stop order). The exit order is placed
@@ -335,15 +335,15 @@ though we did not specify entry order ID to close in this line:
 
 Another example::
 
-    //@version=4
-    strategy("exit Demo", pyramiding=2, overlay=true)
+    //@version=5
+    strategy("exit Demo", pyramiding=2, overlay = true)
     strategy.entry("Buy1", strategy.long, 5, when = strategy.position_size == 0)
     strategy.entry("Buy2", strategy.long,
                    10, stop = strategy.position_avg_price +
                    strategy.position_avg_price*0.1,
                    when = strategy.position_size == 5)
     strategy.close("Buy2",when=strategy.position_size == 15)
-    strategy.exit("bracket", "Buy1", loss=10, profit=10, when=strategy.position_size == 15)
+    strategy.exit("bracket", "Buy1", loss = 10, profit = 10, when=strategy.position_size == 15)
     plot(strategy.position_avg_price)
 
 -  It opens a 5-contract long position with the order "Buy1".
@@ -367,7 +367,7 @@ OCA groups
 
 It is possible to put orders in 2 different One-Cancells-All (OCA) groups in Pine Script.
 
-`strategy.oca.cancel <https://www.tradingview.com/pine-script-reference/v4/#var_strategy{dot}oca{dot}cancel>`__
+`strategy.oca.cancel <https://www.tradingview.com/pine-script-reference/v5/#var_strategy{dot}oca{dot}cancel>`__
    As soon as an order from the group is filled
    (even partially) or cancelled, the other orders from the same group
    get cancelled. One should keep in mind that if order prices are the
@@ -377,7 +377,7 @@ It is possible to put orders in 2 different One-Cancells-All (OCA) groups in Pin
 
 Example::
 
-    //@version=4
+    //@version=5
     strategy("oca_cancel demo")
     if year > 2014 and year < 2016
         strategy.entry("LE", strategy.long)
@@ -400,13 +400,13 @@ order was executed are cancelled.
 
 To turn the above strategy into a reverse strategy you need to place orders in the OCA group::
 
-    //@version=4
+    //@version=5
     strategy("oca_cancel demo")
     if year > 2014 and year < 2016
-        strategy.entry("LE", strategy.long, oca_type = strategy.oca.cancel, oca_name="Entry")
-        strategy.entry("SE", strategy.short, oca_type = strategy.oca.cancel, oca_name="Entry")
+        strategy.entry("LE", strategy.long, oca_type = strategy.oca.cancel, oca_name = "Entry")
+        strategy.entry("SE", strategy.short, oca_type = strategy.oca.cancel, oca_name = "Entry")
 
-`strategy.oca.reduce <https://www.tradingview.com/pine-script-reference/v4/#var_strategy{dot}oca{dot}reduce>`__
+`strategy.oca.reduce <https://www.tradingview.com/pine-script-reference/v5/#var_strategy{dot}oca{dot}reduce>`__
    This group type allows multiple orders
    within the group to be filled. As one of the orders within the group
    starts to be filled, the size of other orders is reduced by the
@@ -416,7 +416,7 @@ To turn the above strategy into a reverse strategy you need to place orders in t
    filled contracts amount, thus protecting the rest of the open
    position.
 
-`strategy.oca.none <https://www.tradingview.com/pine-script-reference/v4/#var_strategy{dot}oca{dot}none>`__
+`strategy.oca.none <https://www.tradingview.com/pine-script-reference/v5/#var_strategy{dot}oca{dot}none>`__
    The order is placed outside of the group
    (default value for the ``strategy.order`` and ``strategy.entry`` functions).
 
@@ -424,13 +424,13 @@ Every group has its own unique id, like orders. If
 two groups have the same id, but different type, they will be considered a
 different groups. Example::
 
-    //@version=4
+    //@version=5
     strategy("My Script")
     if year > 2014 and year < 2016
-        strategy.entry("Buy", strategy.long, oca_name="My oca", oca_type=strategy.oca.reduce)
-        strategy.exit("FromBy", "Buy", profit=100, loss=200, oca_name="My oca")
-        strategy.entry("Sell", strategy.short, oca_name="My oca", oca_type=strategy.oca.cancel)
-        strategy.order("Order", strategy.short, oca_name="My oca", oca_type=strategy.oca.none)
+        strategy.entry("Buy", strategy.long, oca_name = "My oca", oca_type = strategy.oca.reduce)
+        strategy.exit("FromBy", "Buy", profit = 100, loss = 200, oca_name = "My oca")
+        strategy.entry("Sell", strategy.short, oca_name = "My oca", oca_type = strategy.oca.cancel)
+        strategy.order("Order", strategy.short, oca_name = "My oca", oca_type = strategy.oca.none)
 
 "Buy" and "Sell" will be placed in different groups as their type is
 different. "Order" will be outside of any group as its type is set to
@@ -470,8 +470,8 @@ starting with prefix ``strategy.risk.max_intraday_``.
 
 Example (MSFT, 1)::
 
-    //@version=4
-    strategy("multi risk demo", overlay=true, pyramiding=10, calc_on_order_fills = true)
+    //@version=5
+    strategy("multi risk demo", overlay = true, pyramiding = 10, calc_on_order_fills = true)
     if year > 2014
         strategy.entry("LE", strategy.long)
     strategy.risk.max_intraday_filled_orders(5)
@@ -491,11 +491,11 @@ trades.
 
 Example (MSFT, 1D)::
 
-    //@version=4
-    strategy("allow_entry_in demo", overlay=true)
+    //@version=5
+    strategy("allow_entry_in demo", overlay = true)
     if year > 2014
-        strategy.entry("LE", strategy.long, when=strategy.position_size <= 0)
-        strategy.entry("SE", strategy.short, when=strategy.position_size > 0)
+        strategy.entry("LE", strategy.long, when = strategy.position_size <= 0)
+        strategy.entry("SE", strategy.short, when = strategy.position_size > 0)
     strategy.risk.allow_entry_in(strategy.direction.long)
 
 As short entries are prohibited by the risk rules,
@@ -521,14 +521,14 @@ profit target or stop loss.
 
 ::
 
-    //@version=4
-    strategy("Currency test", currency=currency.EUR)
+    //@version=5
+    strategy("Currency test", currency = currency.EUR)
     if year > 2020
-        strategy.entry("LE", true, 1000)
-        strategy.exit("LX", "LE", profit=1, loss=1)
+        strategy.entry("LE", strategy.long, 1000)
+        strategy.exit("LX", "LE", profit = 1, loss = 1)
     profit = strategy.netprofit
-    plot(abs((profit - profit[1])*100), "1 point profit", color=color.blue, linewidth=2)
-    plot(1 / close[1], "prev usdeur", color=color.red)
+    plot(abs((profit - profit[1])*100), "1 point profit", color = color.blue, linewidth = 2)
+    plot(1 / close[1], "prev usdeur", color = color.red)
 
 After adding this strategy to the chart we can see that the plot lines
 are matching. This demonstrates that the rate to calculate the profit

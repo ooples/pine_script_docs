@@ -5,7 +5,7 @@ Where can I get more information?
 
 * Additional descriptions of all built-in operators, variables,
   functions and annotation functions can be found in the
-  `Pine Script Reference <https://www.tradingview.com/pine-script-reference/v4/>`__.
+  `Pine Script Reference <https://www.tradingview.com/pine-script-reference/v5/>`__.
 
 * Use the code from one of TradingView's built-in scripts to start from. Open a new chart and click the
   *Pine Editor* button on the toolbar. Once in the editor

@@ -13,15 +13,14 @@ it is often easier to use the ``plotshape``, ``plotchar`` and ``plotarrow`` anno
 plotshape
 ---------
 
-The `plotshape <https://www.tradingview.com/pine-script-reference/v4/#fun_plotshape>`__
+The `plotshape <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__
 function can display a variety of shapes. The script below will draw an "X"
-above all green bars:
+above all green bars::
 
-::
-
-    study('plotshape example 1', overlay=true)
-    data = close >= open
-    plotshape(data, style=shape.xcross)
+    //@version=5
+    indicator("plotshape example 1", overlay = true)
+    condition = close >= open
+    plotshape(condition, style = shape.xcross)
 
 .. image:: images/Plotshape_1.png
 
@@ -96,13 +95,11 @@ use another position, use the
 
 ::
 
-    //@version=4
-    study('plotshape example 2', overlay=true)
-    data = close >= open
-    plotshape(data, style=shape.triangleup,
-                     location=location.abovebar, color=color.green)
-    plotshape(not data, style=shape.triangledown,
-                     location=location.belowbar, color=color.red)
+    //@version=5
+    indicator('plotshape example 2', overlay = true)
+    condition = close >= open
+    plotshape(condition, style = shape.triangleup, location = location.abovebar, color = color.green)
+    plotshape(not condition, style = shape.triangledown, location = location.belowbar, color = color.red)
 
 .. image:: images/Plotshape_example_2.png
 
@@ -124,10 +121,10 @@ color can be defined using the ``color`` parameter and
 expressions which will calculate the shape's color
 depending on conditions at runtime. For example::
 
-    //@version=4
-    study('plotshape example 3', overlay=true)
-    data = close >= open
-    plotshape(true, style=shape.flag, color=data ? color.green : color.red)
+    //@version=5
+    indicator('plotshape example 3', overlay = true)
+    condition = close >= open
+    plotshape(true, style = shape.flag, color = condition ? color.green : color.red)
 
 .. image:: images/Plotshape_example_3.png
 
@@ -142,7 +139,6 @@ Other features of the ``plotshape`` function:
    ``title`` parameter.
 -  Shift a series of shapes to the left/right using the
    ``offset`` parameter.
--  Set the transparency of shapes with the ``transp`` parameter.
 -  Use the ``text`` parameter to display a short text above/below the shape.
    You may use ``\n`` to separate text lines.
 
@@ -150,13 +146,14 @@ Other features of the ``plotshape`` function:
 plotchar
 --------
 
-The main difference between ``plotshape`` and `plotchar <https://www.tradingview.com/pine-script-reference/v4/#fun_plotchar>`__
+The main difference between ``plotshape`` and `plotchar <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__
 is that with ``plotchar``, the shape is an ASCII or Unicode symbol (provided it's supported by the TradingView standard font)
 defined with the ``char`` parameter. For example::
 
-    study('plotchar example', overlay=true)
-    data = close >= open
-    plotchar(data, char='a')
+    //@version=5
+    indicator("plotchar example", overlay = true)
+    condition = close >= open
+    plotchar(condition, char = "a")
 
 .. image:: images/Plotchar_example_1.png
 
@@ -166,9 +163,10 @@ for example: ❤, ☀, €, ⚑, ❄, ◆, ⬆, ⬇. The supported character cod
 
 The next example uses the "SNOWFLAKE" (❄, U+2744) character::
 
-    study('plotchar example', overlay=true)
-    data = close >= open
-    plotchar(data, char='❄')
+    //@version=5
+    indicator('plotchar example', overlay = true)
+    condition = close >= open
+    plotchar(condition, char= "❄")
 
 .. image:: images/Plotchar_example_2.png
 
@@ -179,14 +177,13 @@ Like ``plotshape``, the ``plotchar`` function allows you to:
 -  Set a shape's location with the ``location`` parameter.
 -  Set the name of a displayed series of data using the ``title`` parameter.
 -  Shift a series of shapes left/right using the ``offset`` parameter.
--  Set the transparency of shapes using the ``transp`` parameter.
 -  Use the ``text`` parameter to display a short text above/below the shape.
    You may use ``\n`` to separate text lines.
 
 plotarrow
 ---------
 
-The `plotarrow <https://www.tradingview.com/pine-script-reference/v4/#fun_plotarrow>`__
+The `plotarrow <https://www.tradingview.com/pine-script-reference/v5/#fun_plotarrow>`__
 annotation function allows for up/down arrows to be displayed on
 the chart. The arrow length is not the same on each bar and is
 calculated from the first parameter's value.
@@ -204,10 +201,12 @@ arrows on the chart using the following logic:
    arrow is not displayed.
 
 Here is a simple script that illustrates how the ``plotarrow`` function works::
-
-    study("plotarrow example", overlay=true)
+	
+    //@version=5
+    indicator("plotarrow example", overlay = true)
     codiff = close - open
-    plotarrow(codiff, colorup=teal, colordown=orange, transp=40)
+    TRANSP = 40
+    plotarrow(codiff, colorup = color.new(teal, TRANSP), colordown = color.new(orange, TRANSP))
 
 .. image:: images/Plotarrow_example_1.png
 
@@ -220,9 +219,11 @@ In another example, we'll start from the *Chaikin
 Oscillator* script in the built-in scripts and display it as an overlay above
 a chart using arrows::
 
-    study("Chaikin Oscillator Arrows", overlay=true)
-    short = input(3,minval=1), long = input(10,minval=1)
-    osc = ema(accdist, short) - ema(accdist, long)
+    //@version=5
+    indicator("Chaikin Oscillator Arrows", overlay = true)
+    short = input.int(3, minval = 1)
+    long = input.int(10, minval = 1)
+    osc = ta.ema(ta.accdist, short) - ta.ema(ta.accdist, long)
     plotarrow(osc)
 
 .. image:: images/Plotarrow_example_2.png
@@ -241,7 +242,6 @@ Additionally, the ``plotarrow`` function allows you to:
 -  Set the color of an *up arrow* using the ``colorup`` parameter.
 -  Set the color of a *down arrow* using the ``colordown`` parameter.
 -  Shift a series of arrows left/right using the ``offset`` parameter.
--  Set the transparency of arrows with the ``transp`` parameter.
 
 It's important to note that the ``colorup`` and ``colordown`` parameters must receive a
 constant value of the *color* type. Using expressions for determining

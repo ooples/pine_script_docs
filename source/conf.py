@@ -27,10 +27,10 @@ copyright = str(datetime.now().year) + u', TradingView'
 author = u''
 
 # The short X.Y version
-version = u'4' # Could be referenced from *.rst with |version| macro
+version = u'5' # Could be referenced from *.rst with |version| macro
 
 # The full version, including alpha/beta/rc tags
-release = u'4' # Could be referenced from *.rst with |release| macro
+release = u'5' # Could be referenced from *.rst with |release| macro
 
 
 # -- General configuration ---------------------------------------------------
@@ -98,7 +98,7 @@ html_sidebars = {
 #
 html_theme_options = {
     # Set the name of the project to appear in the sidebar
-    'project_nav_name': u'Pine Script v4 User Manual',
+    'project_nav_name': u'Pine Script v5 User Manual',
 }
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -177,10 +177,11 @@ if os.path.isdir('locales'):
     languages += os.listdir('locales')
 
 html_context = {
-    'current_version': 'v4',
+    'current_version': 'v5',
     'languages': languages,
     'versions': [
         'v3',
-        'v4'
+        'v4',
+        'v5'
     ]
 }

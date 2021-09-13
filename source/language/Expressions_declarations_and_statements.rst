@@ -11,13 +11,13 @@ An expression is a sequence where operators or function
 calls are applied to operands (variables or values) to define the calculations
 and actions required by the script. Expressions in Pine almost always
 produce a result (exceptions are the functions
-``study``, ``fill``, ``strategy.entry``, etc., which produce side effects and will be covered
+``indicator``, ``fill``, ``strategy.entry``, etc., which produce side effects and will be covered
 later).
 
 Here are some examples of simple expressions::
 
     (high + low + close)/3
-    sma(high - low, 10) + sma(close, 20)
+    ta.sma(high - low, 10) + ta.sma(close, 20)
 
 .. _variable_declaration:
 
@@ -36,7 +36,7 @@ in one of the following ways:
 
 ``<identifier>`` is the name of the declared variable, see :doc:`Identifiers`.
 
-``<type>`` can be one of the predefined keywords: ``float``, ``int``, ``bool``, ``color``, ``string``, ``line`` or ``label``.
+``<type>`` can be one of the predefined keywords: ``float``, ``int``, ``bool``, ``color``, ``string``, ``line``, ``label``, ``box`` or ``table``.
 However, in most cases, an explicit type declaration is redundant because type is automatically inferred from the ``<expression>``
 on the right of the ``=`` at compile time, so the decision to use them is often a matter of preference. For example::
 
@@ -49,8 +49,8 @@ The declaration of the ``baseLine2`` variable is also correct because its type c
 
 The ``var`` keyword is a special modifier that instructs the compiler to *create and initialize the variable only once*. This behavior is very useful in cases where a variable's value must persist through the iterations of a script across successive bars. For example, suppose we'd like to count the number of green bars on the chart::
 
-    //@version=4
-    study("Green Bars Count")
+    //@version=5
+    indicator("Green Bars Count")
     var count = 0
     isGreen = close >= open
     if isGreen
@@ -65,21 +65,21 @@ In Pine v3 the study "Green Bars Count" could be written without using the ``var
 
     //@version=3
     study("Green Bars Count")
-    count = 0                       // These two lines could be replaced in v4
+    count = 0                       // These two lines could be replaced in v4 or v5
     count := nz(count[1], count)    // with 'var count = 0'
     isGreen = close >= open
     if isGreen
         count := count + 1
     plot(count)
 
-The v4 code is more readable and can be more efficient if, for example, the ``count`` variable is
+The v5 code is more readable and can be more efficient if, for example, the ``count`` variable is
 initialized with an expensive function call instead of ``0``.
 
 Examples of simple variable declarations::
 
     src = close
     len = 10
-    ma = sma(src, len) + high
+    ma = ta.sma(src, len) + high
 
 Examples with type modifiers and var keyword::
 
@@ -114,17 +114,19 @@ compilation error will occur.
 
 Variable assignment example::
 
-    //@version=4
-    study("My Script")
+    //@version=5
+    indicator("My Script")
     price = close
     if hl2 > price
         price := hl2
     plot(price)
 
+
+
 .. _if_statement:
 
-if statement
-------------
+\`if\` statement
+----------------
 
 An ``if`` statement defines a block of statements to be executed when
 the ``if``'s conditional expression evaluates to ``true``, and optionally,
@@ -221,17 +223,19 @@ side effect of the expression, for example in :doc:`strategy trading</essential/
 
 ::
 
-    if (crossover(source, lower))
+    if (ta.crossover(source, lower))
         strategy.entry("BBandLE", strategy.long, stop=lower,
                        oca_name="BollingerBands",
                        oca_type=strategy.oca.cancel, comment="BBandLE")
     else
         strategy.cancel(id="BBandLE")
 
+
+
 .. _for_statement:
 
-for statement
--------------
+\`for\` statement
+-----------------
 
 The ``for`` statement allows to execute a number of instructions repeatedly:
 
@@ -265,47 +269,28 @@ where:
    next iteration.
 -  ``break`` --- a keyword. Can be used only in loops. It exits the loop.
 
-``for`` loop example:
+This example uses a `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ 
+statement to look back a user-defined amount of bars to determine how many bars have a 
+`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ that is higher or lower than the 
+`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ of the last bar on the chart. 
+A `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ loop is necessary here, 
+since the script only has access to the reference value on the chart's last bar. 
+Pine's runtime cannot, here, be used to calculate on the fly, as the script is executing bar to bar::
 
-::
-
-    //@version=4
-    study("For loop")
-    my_sma(price, length) =>
-        sum = price
-        for i = 1 to length-1
-            sum := sum + price[i]
-        sum / length
-    plot(my_sma(close,14))
-
-Variable ``sum`` is a :ref:`mutable variable <variable_assignment>` so a
-new value can be given to it by the operator ``:=`` in the loop's body.
-Note that we recommend using the built-in
-`sma <https://www.tradingview.com/pine-script-reference/v4/#fun_sma>`__
-function for simple moving averages, as it calculates faster.
-
-Note that some built-in functions may behave unexpectedly in for loop. Let's look at the following
-example:
-
-::
-
-    //@version=4
-    study("RMA in for loop")
-    sum = 0.0
-    for i = 1 to 2
-        sum := sum + rma(close, i)
-    plot(sum)
-
-While you may expect that ``sum`` will contain ``rma(close, 1) + rma(close, 2)``, this is not so.
-It will contain ``rma(close, 1) + rma(close, 1)`` because once ``rma`` is initialized with
-length 1, this length is stored until the script is removed from chart. To avoid this you may
-use your own, stateless function implementation. This is the list of built-in functions which have
-the same behavior:
-
-- ``rma(source, length)``: ``length`` is stateful.
-- ``ema(source, length)``: ``length`` is stateful.
-- ``valuewhen(condition, source, occurrence)``: ``occurrence`` is stateful.
-- ``rsi(x, y)``: when ``y`` is of type integer and behaves like a length, ``y`` is stateful.
+    //@version=5
+    indicator("`for` loop")
+    lookbackInput = input.int(50, "Lookback in bars", minval = 1, maxval = 4999)
+    higherBars = 0
+    lowerBars = 0
+    if barstate.islast
+        var label lbl = label.new(na, na, "", style = label.style_label_left)
+        for i = 1 to lookbackInput
+            if high[i] > high
+                higherBars += 1
+            else if high[i] < high
+                lowerBars += 1
+        label.set_xy(lbl, bar_index, high)
+        label.set_text(lbl, str.tostring(higherBars, "# higher bars\n") + str.tostring(lowerBars, "# lower bars"))
 
 .. rubric:: Footnotes
 
