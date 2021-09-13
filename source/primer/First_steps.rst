@@ -43,7 +43,13 @@ until you are ready to start your programming journey in Pine.
 From the chart
 ^^^^^^^^^^^^^^
 
+To explore and load scripts from you chart, use the "Indicators & Strategies" button:
+
 .. image:: images/FirstSteps-FromTheChart-1.png
+
+The dialog box presents different categories of scripts in its left pane. Here, the section containing the TradingView built-ins is selected:
+
+.. image:: images/FirstSteps-FromTheChart-2.png
 
 
 
