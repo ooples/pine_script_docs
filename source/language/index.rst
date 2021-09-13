@@ -12,7 +12,7 @@ Language
    Identifiers
    Operators
    Expressions_declarations_and_statements
-   Functions_and_annotations
+   Built-ins
    User-defined_functions
    Type_system
    Execution_model
