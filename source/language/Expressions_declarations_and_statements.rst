@@ -274,8 +274,8 @@ statement to look back a user-defined amount of bars to determine how many bars 
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ that is higher or lower than the 
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ of the last bar on the chart. 
 A `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ loop is necessary here, 
-since the script is only has access to the reference value on the charrt's last bar, 
-so Pine's runtime cannot, in this case, be used to calculate on the fly, as the script is executing bar to bar::
+since the script only has access to the reference value on the chart's last bar. 
+Pine's runtime cannot, here, be used to calculate on the fly, as the script is executing bar to bar::
 
     //@version=5
     indicator("`for` loop")
