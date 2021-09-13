@@ -49,6 +49,11 @@ To explore and load scripts from you chart, use the "Indicators & Strategies" bu
 
 The dialog box presents different categories of scripts in its left pane:
 
+- **My scripts** displays the scipts you have written and saved in the Pine Editor. They are saved in TradingView's cloud.
+- **Built-ins** groups the classic trading indicators that TradingView has written (mostly in Pine) and which are available for free.
+- **Candlestick Patterns** are also built-ins supplied by TradingView. They have their distinct categpry because there are many.
+- **Public Library** is where you can search from the 100,000 published scripts written by TradingView users.
+- **Volume Profile** includes four volume profile indicators supplied by TradingView, but only available to Pro and Premium accounts.
 
 Here, the section containing the TradingView built-ins is selected:
 
