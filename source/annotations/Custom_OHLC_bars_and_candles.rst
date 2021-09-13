@@ -50,8 +50,8 @@ For example you could calculate and plot *smoothed* candles using the following 
     //@version=5
     indicator("Example 4")
     lenInput = input.int(9)
-    smooth(x, len) =>
-        ta.sma(x, len)
+    smooth(source, length) =>
+        ta.sma(source, length)
     o = smooth(open, lenInput)
     h = smooth(high, lenInput)
     l = smooth(low, lenInput)
