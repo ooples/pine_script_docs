@@ -121,10 +121,12 @@ Variable assignment example::
         price := hl2
     plot(price)
 
+
+
 .. _if_statement:
 
-if statement
-------------
+\`if\` statement
+----------------
 
 An ``if`` statement defines a block of statements to be executed when
 the ``if``'s conditional expression evaluates to ``true``, and optionally,
@@ -228,10 +230,12 @@ side effect of the expression, for example in :doc:`strategy trading</essential/
     else
         strategy.cancel(id="BBandLE")
 
+
+
 .. _for_statement:
 
-for statement
--------------
+\`for\` statement
+-----------------
 
 The ``for`` statement allows to execute a number of instructions repeatedly:
 
@@ -266,7 +270,7 @@ where:
 -  ``break`` --- a keyword. Can be used only in loops. It exits the loop.
 
 This example use a `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ 
-statement to lookback a user-defined amount of bars to determine how many bars have a 
+statement to look back a user-defined amount of bars to determine how many bars have a 
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ that is higher or lower than the 
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ of the last bar on the chart. 
 A `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ loop is necessary here, 
