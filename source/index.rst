@@ -13,7 +13,7 @@ Pine Script |version| User Manual
    :name: mastertoc
 
    Welcome
-   Quickstart_guide
+   primer/index
    language/index
    essential/index
    writing/index
