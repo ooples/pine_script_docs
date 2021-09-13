@@ -12,7 +12,7 @@ Introduction
 ------------
 
 Welcome to the `Pine Script User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__. 
-In this page, we present a step-by-step approach to becoming familiar with indicators and strategies (also called *scripts*) 
+In this page, we present a step-by-step approach that you can follow to gradually become more familiar with indicators and strategies (also called *scripts*) 
 written in the Pine Script programming language on TradingView:
 
 1. How to use the tens of thousands of existing scripts.
@@ -42,6 +42,8 @@ until you are ready to start your programming journey in Pine.
 
 From the chart
 ^^^^^^^^^^^^^^
+
+.. image:: images/FirstSteps-FromTheChart-1.png
 
 
 
