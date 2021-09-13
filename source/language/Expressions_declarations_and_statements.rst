@@ -265,24 +265,28 @@ where:
    next iteration.
 -  ``break`` --- a keyword. Can be used only in loops. It exits the loop.
 
-``for`` loop example:
-
-::
+This example use a `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ 
+statement to lookback a user-defined amount of bars to determine how many bars have a 
+`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ that is higher or lower than the 
+`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ of the last bar on the chart. 
+A `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ loop is necessary here, 
+since the script is only has access to the reference value on the charrt's last bar, 
+so Pine's runtime cannot, in this case, be used to calculate on the fly, as the script is executing bar to bar::
 
     //@version=5
-    indicator("For loop")
-    my_sma(price, length) =>
-        sum = price
-        for i = 1 to length-1
-            sum := sum + price[i]
-        sum / length
-    plot(my_sma(close, 14))
-
-Variable ``sum`` is a :ref:`mutable variable <variable_assignment>` so a
-new value can be given to it by the operator ``:=`` in the loop's body.
-Note that we recommend using the built-in
-`sma <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__
-function for simple moving averages, as it calculates faster.
+    indicator("`for` loop")
+    lookbackInput = input.int(50, "Lookback in bars", minval = 1, maxval = 4999)
+    higherBars = 0
+    lowerBars = 0
+    if barstate.islast
+        var label lbl = label.new(na, na, "", style = label.style_label_left)
+        for i = 1 to lookbackInput
+            if high[i] > high
+                higherBars += 1
+            else if high[i] < high
+                lowerBars += 1
+        label.set_xy(lbl, bar_index, high)
+        label.set_text(lbl, str.tostring(higherBars, "# higher bars\n") + str.tostring(lowerBars, "# lower bars"))
 
 .. rubric:: Footnotes
 
