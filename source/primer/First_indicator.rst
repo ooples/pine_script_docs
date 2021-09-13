@@ -21,7 +21,7 @@ Let's look at the implementation of a
     plot(signal, color = color.orange)
 
 
-:Line 1: ``//@version=5``:
+Line 1: ``//@version=5``
     This is a comment containing a compiler directive that tells the compiler the script will use version 5 of Pine.
 Line 2: ``indicator("MACD")``
     Defines the name of the script that will appear on the chart as "MACD".
