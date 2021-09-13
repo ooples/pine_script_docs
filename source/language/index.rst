@@ -6,7 +6,7 @@ Language
    :name: languagetoc
 
    Execution_model
-   Type_system
+   Time_series
    Script_structure
    Identifiers
    Operators
