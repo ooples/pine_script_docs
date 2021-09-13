@@ -12,12 +12,12 @@ Pine scripts may request additional session data using the
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function.
 
 The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
-function can be called with a symbol name in the ``"EXCHANGE_PREFIX:TICKER"`` format (e.g., "BATS:AAPL") as its first argument.
+function can be called with a symbol name in the ``"EXCHANGE_PREFIX:TICKER"`` format (e.g., "NASDAQ:AAPL") as its first argument.
 Used this way, the function will return data for the regular session. For example::
 
     //@version=5
     indicator("Example 1: Regular Session Data")
-    cc = request.security("BATS:AAPL", timeframe.period, close, barmerge.gaps_on)
+    cc = request.security("NASDAQ:AAPL", timeframe.period, close, barmerge.gaps_on)
     plot(cc, style = plot.style_linebr)
 
 .. image:: images/Pine-_Regular_Session_Data.png
@@ -28,7 +28,7 @@ to build `request.security() <https://www.tradingview.com/pine-script-reference/
 
     //@version=5
     indicator("Example 2: Extended Session Data")
-    t = ticker.new("BATS", "AAPL", session.extended)
+    t = ticker.new("NASDAQ", "AAPL", session.extended)
     cc = request.security(t, timeframe.period, close, barmerge.gaps_on)
     plot(cc, style=plot.style_linebr)
 
@@ -40,15 +40,15 @@ that the background coloring on the chart is not produced by our example scripts
 it is due to the chart's settings showing extended hours.
 
 The first argument of the `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__ 
-function is an exchange prefix ("BATS") and the
+function is an exchange prefix ("NASDAQ") and the
 second argument is a ticker ("AAPL"). The third argument specifies the type
 of the session (``session.extended`` or ``session.regular``). So *Example 1*
 could be rewritten as::
 
     //@version=5
     indicator("Example 3: Regular Session Data using `ticker.new()`")
-    t = ticker.new("BATS", "AAPL", session.regular)
-    cc = request.security("BATS:AAPL", timeframe.period, close, barmerge.gaps_on)
+    t = ticker.new("NASDAQ", "AAPL", session.regular)
+    cc = request.security("NASDAQ:AAPL", timeframe.period, close, barmerge.gaps_on)
     plot(cc, style=plot.style_linebr)
 
 If you want to request the same session specification used for the chart's main
@@ -59,6 +59,6 @@ function, as it holds the session type of the chart's main symbol::
 
     //@version=5
     indicator("Example 4: Same as Main Symbol Session Type Data")
-    t = ticker.new("BATS", "AAPL", syminfo.session)
+    t = ticker.new("NASDAQ", "AAPL", syminfo.session)
     cc = request.security(t, timeframe.period, close, barmerge.gaps_on)
     plot(cc, style=plot.style_linebr)
