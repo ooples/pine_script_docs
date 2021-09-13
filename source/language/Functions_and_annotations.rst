@@ -110,7 +110,7 @@ This is a call to the function in a line of code that assigns the result to a va
 Note that:
 
 - We use the built-in variable `close <https://www.tradingview.com/pine-script-reference/v5/#>`__ as the argument for the ``source`` parameter.
-- We use 20 as the argument for the ``length`` parameter.
+- We use ``20`` as the argument for the ``length`` parameter.
 
 We can also use the parameter names when calling the function. Parameter names are called *keyword arguments* when used in a function call::
 
