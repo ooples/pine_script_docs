@@ -49,6 +49,7 @@ To explore and load scripts from you chart, use the "Indicators & Strategies" bu
 
 The dialog box presents different categories of scripts in its left pane:
 
+- **Favorites** lists the scripts you have "favorited" by clicking on the star that appears to the left of its name when you mouse over it.
 - **My scripts** displays the scipts you have written and saved in the Pine Editor. They are saved in TradingView's cloud.
 - **Built-ins** groups the classic trading indicators that TradingView has written (mostly in Pine) and which are available for free.
 - **Candlestick Patterns** are also built-ins supplied by TradingView. They have their distinct category because there are many.
