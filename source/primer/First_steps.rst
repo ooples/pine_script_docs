@@ -146,8 +146,14 @@ Writing scripts
 ---------------
 
 We have built Pine Script to empower both budding and seasoned traders to create their own trading tools. 
-We have designed it so it is relatively easy to learn for first-time programmers, 
+We have designed it so it is relatively easy to learn for first-time programmers 
+— although learning a first programming language, like trading, is rarely easy for anyone —  
 yet powerful enough for knowledgeable programmers to build tools of moderate complexity.
 
+Pine allows you to write three types of scripts:
+
+- **Indicators** like RSI, MACD, etc.
+- **Strategies** which include logic to issue trading orders and can be backtested and forward-tested.
+- **Libraries** which are used by more advanced programmers to include oft-used functions that can be used by other scripts.
 
 The next step we recommend is to write your :ref:`<PageFirstIndicator>`.
