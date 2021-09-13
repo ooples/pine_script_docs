@@ -1,11 +1,10 @@
-Declaring functions
-===================
+User-defined functions
+======================
 
 .. contents:: :local:
     :depth: 2
 
-Pine has an extensive library of built-in functions which
-can be used to create scripts. Users can also create their own functions.
+Pine has an extensive library of built-in functions which can be used to create scripts, but you can also create your own functions. We call them *user-defined functions*.
 
 Single-line functions
 ---------------------
