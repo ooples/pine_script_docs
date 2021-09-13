@@ -8,8 +8,9 @@ calculations.
 
 A script must contain an ``indicator`` or ``strategy`` annotation which defines the script's
 name and other properties. The script's body contains the functions
-and variables necessary to calculate results which will be rendered
-on a chart with a ``plot`` function, or some other function that plots the script's output.
+and variables necessary to calculate results which will often be rendered
+on a chart with a `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ function, or some other function that plots the script's output.
+
 
 Example of a Pine script
 ------------------------
