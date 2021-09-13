@@ -141,10 +141,10 @@ Here, we use a function to create a label that only appears on the chart's last 
     indicator("print()", "", true)
     print(txt) =>
         // Create label on the first bar.
-        var label = label.new(bar_index, na, txt, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left)
+        var lbl = label.new(bar_index, na, txt, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left)
         // On next bars, update the label's x and y position, and the text it displays.
-        label.set_xy(label, bar_index, ta.highest(10)[1])
-        label.set_text(label, txt)
+        label.set_xy(lbl, bar_index, ta.highest(10)[1])
+        label.set_text(lbl, txt)
     
     print("Multiplier = " + str.tostring(timeframe.multiplier) + "\nPeriod = " + timeframe.period + "\nHigh = " + str.tostring(high))
     print("Hello world!\n\n\n\n")
