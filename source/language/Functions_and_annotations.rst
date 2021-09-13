@@ -74,7 +74,7 @@ Some functions do not return a result but are used for their side effect, which 
   `strategy.order() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}order>`__, etc.
 - Functions to generate alert events:
   `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ and
-  `alertcondition() <https://www.tradingview.com/pine-script-reference/v5/#fun_alertcondition>`__
+  `alertcondition() <https://www.tradingview.com/pine-script-reference/v5/#fun_alertcondition>`__.
 
 Other functions return a result which is not always used. Sometimes we call them only for their side effect:
 `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__,
