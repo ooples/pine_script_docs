@@ -76,16 +76,18 @@ Using built-in functions
 ------------------------
 
 All Pine built-ins are defined in the Pine Reference Manual. You can click on any of the function names listed here to go to its entry in the Reference Manual, 
-which documents the function's signature, i.e., the list of *parameters* it accepts. The entry will also list, for each parameter, 
-the form and type of the value allowed to be used for each parameter. We use *argument* to name the values passed to a function when calling it.
+which documents the function's signature, i.e., the list of *parameters* it accepts and the form-type of the value(s) it returns 
+(a function can return more than one result). The Reference Manual entry will also list, for each parameter:
 
-All built-in functions have one or more parameters defined in their signature. 
-For each of those parameters, a corresponding value (or argument) can be passed to the function when calling it.
-The list of arguments is enclosed in parentheses.
+- Its name.
+- The form and type of the value it requires (we use *argument* to name the values passed to a function when calling it).
+- If the parameter is required or not.
+
+All built-in functions have one or more parameters defined in their signature. Not all parameters are required for every function.
 
 Let's look at the `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ function. This is its function signature from the Reference Manual::
 
-    indicator(title, shorttitle, overlay, format, precision, scale, max_bars_back, timeframe, timeframe_gaps, explicit_plot_zorder, max_lines_count, max_labels_count, max_boxes_count) → void
+    input(defval, title, tooltip, inline, group) 
 
 This call uses positional arguments.Example of an annotation call with positional arguments::
 
