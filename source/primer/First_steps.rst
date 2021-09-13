@@ -85,10 +85,18 @@ Once you find an interesting script in the Public Library, follow the instructio
 Changing script settings
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once a script is loaded on the chart, you can double-click on its name to bring up its "Settings/Inputs" tab: 
+Once a script is loaded on the chart, you can double-click on its name (#1) to bring up its "Settings/Inputs" tab (#2): 
 
 .. image:: images/FirstSteps-ChangingScriptSettings-1.png
 
+The "Inputs" tab allows you to change the settings which the script's author has decided to make editable. 
+You can configure some of the script's visuals using the "Style" tab of the same dialog box,
+and which timeframes the script should appear on using the "Visibility" tab.
+
+Other settings are available to all scripts from the buttons that appear to the right of its name when you mouse over it, 
+and from the "More" menu (the three dots):
+
+.. image:: images/FirstSteps-ChangingScriptSettings-2.png
 
 
 Reading scripts
