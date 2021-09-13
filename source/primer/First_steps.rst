@@ -85,7 +85,10 @@ Once you find an interesting script in the Public Library, follow the instructio
 Changing script settings
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once a script is loaded on the chart, you can use the 
+Once a script is loaded on the chart, you can double-click on its name to bring up its "Settings/Inputs" tab: 
+
+.. image:: images/FirstSteps-ChangingScriptSettings-1.png
+
 
 
 Reading scripts
