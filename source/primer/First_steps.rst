@@ -122,6 +122,10 @@ you can see the script's code. If you want to play with it, you will need to use
 and select "Make a copy...". You will then be able to modify and save the code. Because you will have created a different version of the script, 
 you will need to use the Editor's "Add to Chart" button to add that new copy to the chart.
 
+This shows the Pine Editor having just opened because we selected the "View source" button from the indicator on our chart:
+
+.. image:: images/FirstSteps-ReadingScripts-1.png
+
 You can also open TradingView built-in indicators from the Pine Editor (accessible from the "Pine Editor" tab at the bottom of the chart) by 
 using the "Open/New default built-in script...".
 
