@@ -3,7 +3,29 @@
 First indicator
 ===============
 
-Let's look at the implementation of a
+The Pine Editor
+---------------
+
+The Pine Editor is where you will be working on your scripts. While you can use any text editor you want to write your Pine scripts,
+using our Editor has many advantages:
+
+- It highlights your code following Pine syntax
+- It pops up syntax reminders for built-in and library functions when you hover over them
+- It provides quick access to the Pine Reference Manual popup through CTRL - clicking on Pine keywords
+- It makes the write/compile/run cycle fast because saving a new version of a script loaded on the chart also executes it immediately
+- While not as feature-rich as the top editors out there, it provides key functionality such as auto-complete, search and replace, multi-cursor and versioning.
+
+To open the Editor, click on the "Pine Editor" tab at the bottom of your TradingView chart. This will open up the editor's window.
+
+
+From here, you can change the script’s code. For example, change the last line’s ``color.orange`` for ``color.fuchsia``. When you save the script, the change will be reflected in the indicator’s pane. Your first Pine script is running!
+
+
+
+First version
+-------------
+
+We will now create our first working Pine script, an implementation of the
 `MACD <https://www.tradingview.com/support/solutions/43000502344-macd-moving-average-convergence-divergence/>`__ indicator in Pine:
 
 .. code-block:: pine
@@ -20,6 +42,17 @@ Let's look at the implementation of a
     plot(macd, color = color.blue)
     plot(signal, color = color.orange)
 
+- Start by bringing up the "Open" dropdown menu at the top right of the Editor and choose "New blank indicator". 
+- Then copy the example script below, taking care not to include the line numbers in your selection. 
+- Select all the code already in the editor and replace it with the example script. 
+- Click "Save" and choose a name for your script. Your script is now saved in TradingView's cloud, but under your account's name. Nobody but you can use it.
+- Click "Add to Chart" in the Editor's menu bar. The MACD indicator appears in a separate *Pane* under your  chart.
+
+This is what your chart should look like:
+
+.. image:: images/FirstIndicator-VersionA.png
+
+Let's look at the code, line by line:
 
 Line 1: ``//@version=5``
     This is a comment containing a compiler directive that tells the compiler the script will use version 5 of Pine.
@@ -47,18 +80,18 @@ Line 9: ``plot(macd, color = color.blue)``
 Line 10: ``plot(signal, color = color.orange)``
     Calls the ``plot`` function to output the variable ``signal`` using an orange line.
 
-After adding the "MACD" script to the chart you will see the following:
 
-.. image:: images/FirstIndicator-VersionA.png
+Second version
+--------------
 
-Pine contains a variety of built-in functions for the most popular
-algorithms (
-`ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__ for an `SMA <https://www.tradingview.com/support/solutions/43000502589-moving-average/>`__,
-`ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__ for an `EMA <https://www.tradingview.com/support/solutions/43000592270-exponential-moving-average/>`__,
-`ta.wma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}wma>`__ for an `WMA <https://www.tradingview.com/support/solutions/43000594680-weighted-moving-average/>`__, etc.).
-You can also define your custom functions. You will find a
-description of all available built-in functions
-`here <https://www.tradingview.com/pine-script-reference/v5/>`__.
+inputs
+built-in macd
 
+
+
+Third version
+-------------
+
+We are getting the hang of this! Let's see how we could add some bells and whistles to our creation.
 
 
