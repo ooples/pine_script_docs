@@ -86,7 +86,8 @@ Other functions return a result which is not always used. Sometimes we call them
 Using built-in functions
 ------------------------
 
-All Pine built-ins are defined in the Pine Reference Manual. You can click on any of the function names listed here to go to its entry in the Reference Manual, 
+All Pine built-ins are defined in the `Pine Reference Manual <https://www.tradingview.com/pine-script-reference/v4/>`__. 
+You can click on any of the function names listed here to go to its entry in the Reference Manual, 
 which documents the function's signature, i.e., the list of *parameters* it accepts and the form-type of the value(s) it returns 
 (a function can return more than one result). The Reference Manual entry will also list, for each parameter:
 
