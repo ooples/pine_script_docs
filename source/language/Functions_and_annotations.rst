@@ -48,6 +48,10 @@ Many functions are used for the result(s) they return. These are a few examples:
   `input.int() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int>`__,
   `input.session() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}session>`__,
   `input.symbol() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}symbol>`__, etc.
+- Functions used to manipulate colors in the ``color`` namespace:
+  `color.from_gradient() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}from_gradient>`__,
+  `color.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}rgb>`__,
+  `color.rgb() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}new>`__, etc.
 
 Some functions do not return a result but are used for their side effect, which means they do something, even if they don't return a result:
 
