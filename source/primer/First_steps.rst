@@ -154,6 +154,6 @@ Pine allows you to write three types of scripts:
 
 - **Indicators** like RSI, MACD, etc.
 - **Strategies** which include logic to issue trading orders and can be backtested and forward-tested.
-- **Libraries** which are used by more advanced programmers to include oft-used functions that can be used by other scripts.
+- **Libraries** which are used by more advanced programmers to package oft-used functions that can be reused by other scripts.
 
 The next step we recommend is to write your :ref:`<PageFirstIndicator>`.
