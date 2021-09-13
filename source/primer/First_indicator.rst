@@ -11,7 +11,7 @@ using our Editor has many advantages:
 
 - It highlights your code following Pine syntax
 - It pops up syntax reminders for built-in and library functions when you hover over them
-- It provides quick access to the Pine Reference Manual popup through CTRL - clicking on Pine keywords
+- It provides quick access to the Pine Reference Manual popup when you CTRL + click on Pine keywords
 - It makes the write/compile/run cycle fast because saving a new version of a script loaded on the chart also executes it immediately
 - While not as feature-rich as the top editors out there, it provides key functionality such as auto-complete, search and replace, multi-cursor and versioning.
 
