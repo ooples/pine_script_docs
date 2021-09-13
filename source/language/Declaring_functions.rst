@@ -4,7 +4,9 @@ User-defined functions
 .. contents:: :local:
     :depth: 2
 
-Pine has an extensive library of built-in functions which can be used to create scripts, but you can also create your own functions. We call them *user-defined functions*.
+User-defined functions are functions that you write, as opposed to the built-in functions in Pine. User-defined functions are useful to define calculations that you must do repetitevely, or that you want to isolate from your script's main section of calculations. Think of user-defined functions as a way to extend the capabilities of Pine, when no built-in function will do what you need.
+
+
 
 Single-line functions
 ---------------------
@@ -111,3 +113,14 @@ Special syntax is required for calling such functions:
     [res0, res1] = fun(open, close)
     plot(res0)
     plot(res1)
+
+
+
+Limitations
+-----------
+
+User-defined functions can use any of the Pine built-ins, except:
+
+`indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__  
+`strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
+
