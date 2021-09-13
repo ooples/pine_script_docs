@@ -15,10 +15,7 @@ using our Editor has many advantages:
 - It makes the write/compile/run cycle fast because saving a new version of a script loaded on the chart also executes it immediately
 - While not as feature-rich as the top editors out there, it provides key functionality such as auto-complete, search and replace, multi-cursor and versioning.
 
-To open the Editor, click on the "Pine Editor" tab at the bottom of your TradingView chart. This will open up the editor's window.
-
-
-From here, you can change the script’s code. For example, change the last line’s ``color.orange`` for ``color.fuchsia``. When you save the script, the change will be reflected in the indicator’s pane. Your first Pine script is running!
+To open the Editor, click on the "Pine Editor" tab at the bottom of your TradingView chart. This will open up the Editor's pane.
 
 
 
@@ -48,11 +45,11 @@ We will now create our first working Pine script, an implementation of the
 - Click "Save" and choose a name for your script. Your script is now saved in TradingView's cloud, but under your account's name. Nobody but you can use it.
 - Click "Add to Chart" in the Editor's menu bar. The MACD indicator appears in a separate *Pane* under your  chart.
 
-This is what your chart should look like:
+Your first Pine script is running on your chart, which should look like this:
 
 .. image:: images/FirstIndicator-VersionA.png
 
-Let's look at the code, line by line:
+Let's look at our script's code, line by line:
 
 Line 1: ``//@version=5``
     This is a comment containing a compiler directive that tells the compiler the script will use version 5 of Pine.
