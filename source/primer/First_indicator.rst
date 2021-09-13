@@ -29,7 +29,7 @@ We will now create our first working Pine script, an implementation of the
     :linenos:
 
     //@version=5
-    indicator("MACD")
+    indicator("MACD #1")
     fast = 12
     slow = 26
     fastMA = ta.ema(close, fast)
@@ -53,7 +53,7 @@ Let's look at our script's code, line by line:
 
 Line 1: ``//@version=5``
     This is a comment containing a compiler directive that tells the compiler the script will use version 5 of Pine.
-Line 2: ``indicator("MACD")``
+Line 2: ``indicator("MACD #1")``
     Defines the name of the script that will appear on the chart as "MACD".
 Line 3: ``fast = 12``
     Defines a ``fast`` integer variable which will be the length of the fast EMA.
@@ -80,6 +80,25 @@ Line 10: ``plot(signal, color = color.orange)``
 
 Second version
 --------------
+
+The first version of our script calculates MACD "manually", but because Pine is designed for indicator- and strategy-writing,
+built-in Pine functions exist for many common indicators, including one for... MACD: `ta.macd() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}macd>`__.
+
+This is the second version of our script:
+
+.. code-block:: pine
+    :linenos:
+
+    //@version=5
+    indicator("MACD #2")
+    fast = 12
+    slow = 26
+    fastMA = ta.ema(close, fast)
+    slowMA = ta.ema(close, slow)
+    macd = fastMA - slowMA
+    signal = ta.sma(macd, 9)
+    plot(macd, color = color.blue)
+    plot(signal, color = color.orange)
 
 inputs
 built-in macd
