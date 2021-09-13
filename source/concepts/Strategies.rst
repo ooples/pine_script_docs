@@ -1,3 +1,5 @@
+.. _PageStrategies:
+
 Strategies
 ==========
 
@@ -14,7 +16,7 @@ algorithms.
 
 A strategy written in Pine has many of the same capabilities
 as a Pine *indicator*. When you write a strategy, it must start
-with the `strategy <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
+with the `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
 function call. Strategies may plot data,
 but they can also place, modify and cancel orders. They also have
 access to essential strategy performance information through specific
@@ -30,8 +32,8 @@ A simple strategy example
     //@version=5
     strategy("test")
     if bar_index < 100
-        strategy.entry("buy", strategy.long, 10, when=strategy.position_size <= 0)
-        strategy.entry("sell", strategy.short, 10, when=strategy.position_size > 0)
+        strategy.entry("buy", strategy.long, 10, when = strategy.position_size <= 0)
+        strategy.entry("sell", strategy.short, 10, when = strategy.position_size > 0)
     plot(strategy.equity)
 
 As soon as the script is compiled and applied to a chart, you can see
@@ -108,7 +110,7 @@ Here is a strategy demonstrating how orders are filled by the broker
 emulator::
 
     //@version=5
-    strategy("History SAW demo", overlay=true, pyramiding=100, calc_on_order_fills=true)
+    strategy("History SAW demo", overlay = true, pyramiding = 100, calc_on_order_fills = true)
     strategy.entry("LE", strategy.long)
 
 This code is calculated once per bar on the close, but
@@ -148,7 +150,7 @@ All keywords related to strategies start with a
 ``strategy.`` prefix. The following commands are used for placing
 orders: ``strategy.entry``, ``strategy.order`` and ``strategy.exit``.
 
-`strategy.entry <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}entry>`__
+`strategy.entry() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}entry>`__
    This command only places entry orders. It is
    affected by the ``pyramiding`` setting in the strategy's properties and by
    the ``strategy.risk.allow_entry_in`` function. If there is an open
@@ -158,13 +160,13 @@ orders: ``strategy.entry``, ``strategy.order`` and ``strategy.exit``.
    As a result, the size of the opened market position will be equal to the order size specified in
    the ``strategy.entry`` command.
 
-`strategy.order <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}order>`__
+`strategy.order() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}order>`__
    This command places both entry and exit orders. It is not affected by pyramiding settings or by the
    ``strategy.risk.allow_entry_in`` function. It allows you to create
    complex entry and exit order constructions when the functionality of
    ``strategy.entry`` and ``strategy.exit`` will not do.
 
-`strategy.exit <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__
+`strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__
    This command allows you to exit a market position
    or form multiple exit order strategies using a stop loss,
    profit target or trailing stop. All such orders are part of the same
@@ -173,7 +175,7 @@ orders: ``strategy.entry``, ``strategy.order`` and ``strategy.exit``.
    (an exit order is bound to the ID of an entry order). It is not possible
    to exit a position with a market order using the command
    ``strategy.exit``. For this, the `strategy.close <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}close>`__
-   or `strategy.close_all <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}close_all>`__
+   or `strategy.close_all() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}close_all>`__
    commands should be used.
    If the number of contracts/shares/lots/units specified for the ``strategy.exit`` is
    less than the size of current open positions, the exit will be
