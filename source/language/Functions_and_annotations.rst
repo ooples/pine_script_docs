@@ -5,7 +5,7 @@ Pine comes with hundreds of built-in functions. Those in the same family share t
 The `ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__ function, for example, is in the ``ta`` namespace, 
 which stands for "technical analysis".
 
-Many functions are used for the result(s) they return, e.g.:
+Many functions are used for the result(s) they return. These are a few examples:
 
 - Math-related functions in the ``math`` namespace: 
   `math.abs() <https://www.tradingview.com/pine-script-reference/v5/#fun_math{dot}abs>`__,
@@ -30,7 +30,7 @@ Many functions are used for the result(s) they return, e.g.:
   `request.quandl() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}quandl>`__,
   `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__,
   `request.splits() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}splits>`__.
-- Functions to manipulate strings in the ``str.`` namespace:
+- Functions to manipulate strings in the ``str`` namespace:
   `str.format <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}format>`__,
   `str.length <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}length>`__,
   `str.tonumber <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}tonumber>`__,
@@ -42,35 +42,58 @@ Many functions are used for the result(s) they return, e.g.:
   `input.session() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}session>`__,
   `input.symbol() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}symbol>`__, etc.
 
+Some functions do not return a result but are used for their side effect, which means they do something, even if they don't return a result:
 
-Other functions do not return a result but are used for their side effect:
-
-- Each script must begin with a call to one of these functions, which are used as a declaration statement defining the type of script and its properties:
+- Functions used as a declaration statement defining one of three types of Pine scripts, and its properties. Each script must begin with a call to one of these functions:
   `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
   `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__ or 
   `library() <https://www.tradingview.com/pine-script-reference/v5/#fun_library>`__.
+- Plotting or coloring functions:
+  `bgcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_bgcolor>`__,
+  `plotbar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotbar>`__,
+  `plotcandle() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__,
+  `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__,
+  `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__,
+  `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__,
+- Strategy functions placing orders in the ``strategy`` namespace:
+  `strategy.cancel() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}cancel>`__,
+  `strategy.close() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}close>`__,
+  `strategy.entry() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}entry>`__,
+  `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__,
+  `strategy.order() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}order>`__, etc.
+- Functions to generate alert events:
+  `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ and
+  `alertcondition <https://www.tradingview.com/pine-script-reference/v5/#fun_alertcondition>`__
 
--  determining the outputs of a script using
-   `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
+Other functions return a result which is not always used. Sometimes we call them only for their side effect:
+`hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__,
+`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__,
+`array.pop() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}pop>`__,
+`label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__, etc.
 
-In addition to having side effects, a few annotations such as ``plot`` and ``hline``
-also return a result which may be used or not. This result, however, can only be used in other annotations
-and can't take part in the script's calculations
-(see `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ annotation).
 
-A detailed overview of Pine annotations can be found :doc:`here </annotations/index>`.
+Using built-in functions
+------------------------
 
-Syntactically, user-defined functions, built-in functions and annotation
-functions are similar, i.e., we call them by name with a list of
-arguments in parentheses. Differences between them are mostly semantic.
+All Pine built-ins are defined in the Pine Reference Manual. You can click on any of the function names listed here to go to its entry in the Reference Manual, 
+which documents the function's signature, i.e., the list of *parameters* it accepts. The entry will also list, for each parameter, 
+the form and type of the value allowed to be used for each parameter. We use *argument* to name the values passed to a function when calling it.
 
-Example of an annotation call with positional arguments::
+All built-in functions have one or more parameters defined in their signature. 
+For each of those parameters, a corresponding value (or argument) can be passed to the function when calling it.
+The list of arguments is enclosed in parentheses.
 
-    indicator('Example', 'Ex', true)
+Let's look at the `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ function. This is its function signature from the Reference Manual::
+
+    indicator(title, shorttitle, overlay, format, precision, scale, max_bars_back, timeframe, timeframe_gaps, explicit_plot_zorder, max_lines_count, max_labels_count, max_boxes_count) → void
+
+This call uses positional arguments.Example of an annotation call with positional arguments::
+
+    indicator("Example", "Ex", true)
 
 The same call with keyword arguments::
 
-    indicator(title = 'Example', shorttitle = 'Ex', overlay = true)
+    indicator(title = "Example", shorttitle = "Ex", overlay = true)
 
 It's possible to mix positional and keyword arguments. Positional
 arguments must go first and keyword arguments should follow them. So the
