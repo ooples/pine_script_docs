@@ -13,7 +13,7 @@ Introduction
 
 Welcome to the `Pine Script User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__. 
 In this page, we present a step-by-step approach that you can follow to gradually become more familiar with indicators and strategies (also called *scripts*) 
-written in the Pine Script programming language on TradingView:
+written in the Pine Script programming language on `TradingView <https://www.tradingview.com/>`__:
 
 1. How to use the tens of thousands of existing scripts.
 2. How to read the Pine code of existing scripts.
@@ -65,8 +65,13 @@ When you click on one of the indicators or strategies (the ones with the green a
 From the Public Library
 ^^^^^^^^^^^^^^^^^^^^^^^
 
+From `TradingView's homepage <https://www.tradingview.com/>`__, you can bring up the Public Library's script stream from the "Community" menu. 
+Here, we are pointing to the "Editors' Picks" section, but there are many other categories you can choose from:
+
 .. image:: images/FirstSteps-FromThePublicLibrary-1.png
 
+You can also search for scripts using the homepage's "Search" field, and filter scripts using different criteria. 
+The Help Center has a page explaining more about `loading scripts <https://www.tradingview.com/script/?solution=43000555216>`__.
 
 
 Reading scripts
