@@ -122,7 +122,8 @@ you can see the script's code. If you want to play with it, you will need to use
 and select "Make a copy...". You will then be able to modify and save the code. Because you will have created a different version of the script, 
 you will need to use the Editor's "Add to Chart" button to add that new copy to the chart.
 
-This shows the Pine Editor having just opened because we selected the "View source" button from the indicator on our chart:
+This shows the Pine Editor having just opened because we selected the "View source" button from the indicator on our chart. 
+We are about to make a copy of its source because it is read-only for now (indicated by the "lock" icon near its filename in the Editor):
 
 .. image:: images/FirstSteps-ReadingScripts-1.png
 
