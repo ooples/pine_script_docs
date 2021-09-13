@@ -54,7 +54,8 @@ The dialog box presents different categories of scripts in its left pane:
 - **Built-ins** groups the classic trading indicators that TradingView has written (mostly in Pine) and which are available for free.
 - **Candlestick Patterns** are also built-ins supplied by TradingView. They have their distinct category because there are many.
 - **Public Library** is where you can search from the 100,000+ published scripts written by TradingView users.
-- **Volume Profile** includes volume profile indicators supplied by TradingView, but only available to Pro and Premium accounts.
+- **Volume Profile** includes volume profile indicators supplied by TradingView, but only available to Pro and Premium accounts. 
+  These are not written in Pine and their source code is `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ (in Pine, ``na`` means "not available").
 
 Here, the section containing the TradingView built-ins is selected:
 
@@ -102,7 +103,14 @@ and from the "More" menu (the three dots):
 Reading scripts
 ---------------
 
-Reading code written by 
+Reading code written by **good** programmers is the best way to develop your understanding of the language.
+This is as true for Pine as it is for all other programming languages. 
+Finding good open-source Pine code is relatively easy. These are reliable sources of code written by good programmers on TradingView:
+
+- The TradingView built-in indicators.
+- 
+
+
 
 
 .. _PageFirstIndicator_WritingScripts:
