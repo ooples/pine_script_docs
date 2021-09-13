@@ -1,9 +1,9 @@
-Essential features
-==================
+Concepts
+========
 
 .. toctree::
    :maxdepth: 3
-   :name: appendixtoc
+   :name: conceptstoc
 
    Alerts
    Arrays
