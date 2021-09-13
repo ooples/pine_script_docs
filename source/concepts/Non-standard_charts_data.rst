@@ -1,3 +1,5 @@
+.. _PageNonStandardChartsData:
+
 Non-standard charts data
 ========================
 
