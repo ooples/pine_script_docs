@@ -1,8 +1,8 @@
-plot annotation
----------------
+\`plot()\`
+----------
 
-The `plot <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ annotation function
-has one mandatory parameter: a value of *series int/float* type, which it displays
+The `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ function
+has one mandatory parameter: a value of "series int/float" type, which it displays
 as a line. A basic call looks like this:
 
 ::
@@ -28,7 +28,7 @@ The value of the ``color`` parameter can be defined in different ways.
 If it is a color constant, for
 example ``color.red``, then the whole line will be plotted using a *red* color::
 
-    plot(close, color=color.red)
+    plot(close, color = color.red)
 
 .. image:: images/Output_of_charts_plot_1.png
 
@@ -36,8 +36,8 @@ The value of ``color`` can also be an expression of a *series*
 type of color values. This series of colors will be used to
 color the rendered line. For example::
 
-    c = close >= open ? color.lime : color.red
-    plot(close, color = c)
+    plotColor = close >= open ? color.lime : color.red
+    plot(close, color = plotColor)
 
 .. image:: images/Output_of_charts_plot_2.png
 
@@ -47,9 +47,9 @@ The ``offset`` parameter specifies the shift used when the line is plotted
 the right). For example::
 
     //@version=5
-    indicator("My Script 12", overlay=true)
-    plot(close, color=color.red, offset=-5)
-    plot(close, color=color.lime, offset=5)
+    indicator("My Script 12", overlay = true)
+    plot(close, color = color.red, offset = -5)
+    plot(close, color = color.lime, offset = 5)
 
 .. image:: images/Output_of_charts_plot_3.png
 

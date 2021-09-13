@@ -121,10 +121,12 @@ Variable assignment example::
         price := hl2
     plot(price)
 
+
+
 .. _if_statement:
 
-if statement
-------------
+\`if\` statement
+----------------
 
 An ``if`` statement defines a block of statements to be executed when
 the ``if``'s conditional expression evaluates to ``true``, and optionally,
@@ -228,10 +230,12 @@ side effect of the expression, for example in :doc:`strategy trading</essential/
     else
         strategy.cancel(id="BBandLE")
 
+
+
 .. _for_statement:
 
-for statement
--------------
+\`for\` statement
+-----------------
 
 The ``for`` statement allows to execute a number of instructions repeatedly:
 
@@ -265,24 +269,28 @@ where:
    next iteration.
 -  ``break`` --- a keyword. Can be used only in loops. It exits the loop.
 
-``for`` loop example:
-
-::
+This example uses a `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ 
+statement to look back a user-defined amount of bars to determine how many bars have a 
+`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ that is higher or lower than the 
+`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ of the last bar on the chart. 
+A `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ loop is necessary here, 
+since the script only has access to the reference value on the chart's last bar. 
+Pine's runtime cannot, here, be used to calculate on the fly, as the script is executing bar to bar::
 
     //@version=5
-    indicator("For loop")
-    my_sma(price, length) =>
-        sum = price
-        for i = 1 to length-1
-            sum := sum + price[i]
-        sum / length
-    plot(my_sma(close, 14))
-
-Variable ``sum`` is a :ref:`mutable variable <variable_assignment>` so a
-new value can be given to it by the operator ``:=`` in the loop's body.
-Note that we recommend using the built-in
-`sma <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__
-function for simple moving averages, as it calculates faster.
+    indicator("`for` loop")
+    lookbackInput = input.int(50, "Lookback in bars", minval = 1, maxval = 4999)
+    higherBars = 0
+    lowerBars = 0
+    if barstate.islast
+        var label lbl = label.new(na, na, "", style = label.style_label_left)
+        for i = 1 to lookbackInput
+            if high[i] > high
+                higherBars += 1
+            else if high[i] < high
+                lowerBars += 1
+        label.set_xy(lbl, bar_index, high)
+        label.set_text(lbl, str.tostring(higherBars, "# higher bars\n") + str.tostring(lowerBars, "# lower bars"))
 
 .. rubric:: Footnotes
 

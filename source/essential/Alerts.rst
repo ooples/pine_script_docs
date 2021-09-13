@@ -1,3 +1,5 @@
+.. _PageAlerts:
+
 Alerts
 ======
 
@@ -203,17 +205,17 @@ You could code your script like this::
 
     //@version=5
     indicator("Selective `alert()` calls")
-    i_detectLongs  = input.bool(true,  "Detect Longs")
-    i_detectShorts = input.bool(true,  "Detect Shorts")
-    i_repaint      = input.bool(false, "Allow Repainting")
+    detectLongsInput  = input.bool(true,  "Detect Longs")
+    detectShortsInput = input.bool(true,  "Detect Shorts")
+    repaintInput      = input.bool(false, "Allow Repainting")
 
     r = ta.rsi(close, 20)
     // Detect crosses.
     xUp = ta.crossover( r, 50)
     xDn = ta.crossunder(r, 50)
     // Only generate entries when the trade's direction is allowed in inputs.
-    enterLong  = i_detectLongs  and xUp and (i_repaint or barstate.isconfirmed)
-    enterShort = i_detectShorts and xDn and (i_repaint or barstate.isconfirmed)
+    enterLong  = detectLongsInput  and xUp and (repaintInput or barstate.isconfirmed)
+    enterShort = detectShortsInput and xDn and (repaintInput or barstate.isconfirmed)
     // Trigger the alerts only when the compound condition is met.
     if enterLong
         alert("Go long (RSI is " + str.tostring(r, "#.00)"))
@@ -442,16 +444,16 @@ This script demonstrates one way to do it::
 
     //@version=5
     indicator("`alertcondition()` on multiple conditions")
-    i_detectLongs  = input.bool(true, "Detect Longs")
-    i_detectShorts = input.bool(true, "Detect Shorts")
+    detectLongsInput  = input.bool(true, "Detect Longs")
+    detectShortsInput = input.bool(true, "Detect Shorts")
 
     r = ta.rsi(close, 20)
     // Detect crosses.
     xUp = ta.crossover( r, 50)
     xDn = ta.crossunder(r, 50)
     // Only generate entries when the trade's direction is allowed in inputs.
-    enterLong  = i_detectLongs  and xUp
-    enterShort = i_detectShorts and xDn
+    enterLong  = detectLongsInput  and xUp
+    enterShort = detectShortsInput and xDn
 
     plot(r)
     plotchar(enterLong,  "Go Long",  "▲", location.bottom, color.lime, size = size.tiny)

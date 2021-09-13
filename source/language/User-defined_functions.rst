@@ -1,11 +1,12 @@
-Declaring functions
-===================
+User-defined functions
+======================
 
 .. contents:: :local:
     :depth: 2
 
-Pine has an extensive library of built-in functions which
-can be used to create scripts. Users can also create their own functions.
+User-defined functions are functions that you write, as opposed to the built-in functions in Pine. User-defined functions are useful to define calculations that you must do repetitevely, or that you want to isolate from your script's main section of calculations. Think of user-defined functions as a way to extend the capabilities of Pine, when no built-in function will do what you need.
+
+
 
 Single-line functions
 ---------------------
@@ -112,3 +113,21 @@ Special syntax is required for calling such functions:
     [res0, res1] = fun(open, close)
     plot(res0)
     plot(res1)
+
+
+
+Limitations
+-----------
+
+User-defined functions can use any of the Pine built-ins, except:
+`barcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_barcolor>`__,
+`fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__,
+`hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__,
+`indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
+`library() <https://www.tradingview.com/pine-script-reference/v5/#fun_library>`__,
+`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__,
+`plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__,
+`plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__,
+`plotbar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotbar>`__,
+`plotcandle() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__ and
+`strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__.

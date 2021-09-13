@@ -105,10 +105,10 @@ Let's improve the usability and aesthethics of our script::
 
     //@version=5
     indicator("ATR", "", true)
-    i_atrP = input.int(14,  "ATR period", minval = 1, tooltip = "Using a period of 1 yields True Range.")
+    atrPeriodInput = input.int(14,  "ATR period", minval = 1, tooltip = "Using a period of 1 yields True Range.")
 
     var table atrDisplay = table.new(position.top_right, 1, 1, bgcolor = color.gray, frame_width = 2, frame_color = color.black)
-    myAtr = ta.atr(i_atrP)
+    myAtr = ta.atr(atrPeriodInput)
     if barstate.islast
         table.cell(atrDisplay, 0, 0, str.tostring(myAtr, format.mintick), text_color = color.white)
 
@@ -131,17 +131,17 @@ This example uses a one-cell table to color the chart's background on the bull/b
 
     //@version=5
     indicator("Chart background", "", true)
-    i_c_bull = input.color(color.new(color.green, 95), "Bull", inline = "1")
-    i_c_bear = input.color(color.new(color.red, 95), "Bear", inline = "1")
+    bullColorInput = input.color(color.new(color.green, 95), "Bull", inline = "1")
+    bearColorInput = input.color(color.new(color.red, 95), "Bear", inline = "1")
     // ————— Function colors chart bg on RSI bull/bear state.
-    f_colorChartBg(_c_bull, _c_bear) =>
-        var table _chartBg = table.new(position.middle_center, 1, 1)
-        float _r = ta.rsi(close, 20)
-        color _c_bg = _r > 50 ? _c_bull : _r < 50 ? _c_bear : na
+    colorChartBg(bullColor, bearColor) =>
+        var table bgTable = table.new(position.middle_center, 1, 1)
+        float r = ta.rsi(close, 20)
+        color bgColor = r > 50 ? bullColor : r < 50 ? bearColor : na
         if barstate.islast
-            table.cell(_chartBg, 0, 0, width = 100, height = 100, bgcolor = _c_bg)
-
-    f_colorChartBg(i_c_bull, i_c_bear)
+            table.cell(bgTable, 0, 0, width = 100, height = 100, bgcolor = bgColor)
+    
+    colorChartBg(bullColorInput, bearColorInput)
 
 Note that:
 
@@ -163,38 +163,38 @@ Here, we create a basic display panel showing a user-selected quantity of MAs va
 
     //@version=5
     indicator("Price vs MA", "", true)
-
+    
     var string GP1 = "Moving averages"
-    int     i_masQty    = input.int(20, "Quantity", minval = 1, maxval = 40, group = GP1, tooltip = "1-40")
-    int     i_masStart  = input.int(20, "Periods begin at", minval = 2, maxval = 200, group = GP1, tooltip = "2-200")
-    int     i_masStep   = input.int(20, "Periods increase by", minval = 1, maxval = 100, group = GP1, tooltip = "1-100")
-
+    int     masQtyInput    = input.int(20, "Quantity", minval = 1, maxval = 40, group = GP1, tooltip = "1-40")
+    int     masStartInput  = input.int(20, "Periods begin at", minval = 2, maxval = 200, group = GP1, tooltip = "2-200")
+    int     masStepInput   = input.int(20, "Periods increase by", minval = 1, maxval = 100, group = GP1, tooltip = "1-100")
+    
     var string GP2 = "Display"
-    string  i_tableYpos = input.string("top", "Panel position", inline = "11", options = ["top", "middle", "bottom"], group = GP2)
-    string  i_tableXpos = input.string("right", "", inline = "11", options = ["left", "center", "right"], group = GP2)
-    color   i_c_bull    = input.color(color.new(color.green, 30), "Bull", inline = "12", group = GP2)
-    color   i_c_bear    = input.color(color.new(color.red, 30), "Bear", inline = "12", group = GP2)
-    color   i_c_neutral = input.color(color.new(color.gray, 30), "Neutral", inline = "12", group = GP2)
-
-    var table panel = table.new(i_tableYpos + "_" + i_tableXpos, 2, i_masQty + 1)
+    string  tableYposInput = input.string("top", "Panel position", inline = "11", options = ["top", "middle", "bottom"], group = GP2)
+    string  tableXposInput = input.string("right", "", inline = "11", options = ["left", "center", "right"], group = GP2)
+    color   bullColorInput = input.color(color.new(color.green, 30), "Bull", inline = "12", group = GP2)
+    color   bearColorInput = input.color(color.new(color.red, 30), "Bear", inline = "12", group = GP2)
+    color   neutColorInput = input.color(color.new(color.gray, 30), "Neutral", inline = "12", group = GP2)
+    
+    var table panel = table.new(tableYposInput + "_" + tableXposInput, 2, masQtyInput + 1)
     if barstate.islast
         // Table header.
-        table.cell(panel, 0, 0, "MA", bgcolor = i_c_neutral)
-        table.cell(panel, 1, 0, "Value", bgcolor = i_c_neutral)
-
-    int period = i_masStart
-    for _i = 1 to i_masQty
+        table.cell(panel, 0, 0, "MA", bgcolor = neutColorInput)
+        table.cell(panel, 1, 0, "Value", bgcolor = neutColorInput)
+    
+    int period = masStartInput
+    for i = 1 to masQtyInput
         // ————— Call MAs on each bar.
-        float _ma = ta.sma(close, period)
+        float ma = ta.sma(close, period)
         // ————— Only execute table code on last bar.
         if barstate.islast
             // Period in left column.
-            table.cell(panel, 0, _i, str.tostring(period), bgcolor = i_c_neutral)
+            table.cell(panel, 0, i, str.tostring(period), bgcolor = neutColorInput)
             // If MA is between the open and close, use neutral color. If close is lower/higher than MA, use bull/bear color.
-            _c_bg = close > _ma ? open < _ma ? i_c_neutral : i_c_bull : open > _ma ? i_c_neutral : i_c_bear
+            bgColor = close > ma ? open < ma ? neutColorInput : bullColorInput : open > ma ? neutColorInput : bearColorInput
             // MA value in right column.
-            table.cell(panel, 1, _i, str.tostring(_ma, format.mintick), text_color = color.black, bgcolor = _c_bg)
-        period += i_masStep
+            table.cell(panel, 1, i, str.tostring(ma, format.mintick), text_color = color.black, bgcolor = bgColor)
+        period += masStepInput
 
 
 Note that:
@@ -218,32 +218,32 @@ Our next project is a heatmap, which will indicate the bull/bear relationship of
 
     //@version=5
     indicator("Price vs Past", "", true)
-
+    
     var int MAX_LOOKBACK = 300
-
-    int     i_lookBack  = input.int(150, minval = 1, maxval = MAX_LOOKBACK, step = 10)
-    color   i_c_Bull    = input.color(#00FF00ff, "Bull", inline = "11")
-    color   i_c_Bear    = input.color(#FF0080ff, "Bear", inline = "11")
-
+    
+    int     lookBackInput  = input.int(150, minval = 1, maxval = MAX_LOOKBACK, step = 10)
+    color   bullColorInput = input.color(#00FF00ff, "Bull", inline = "11")
+    color   bearColorInput = input.color(#FF0080ff, "Bear", inline = "11")
+    
     // ————— Function draws a heatmap showing the position of the current `_src` relative to its past `_lookBack` values.
-    f_drawHeatmap(_src, _lookBack) =>
-        // float _src     : evaluated price series.
-        // int   _lookBack: number of past bars evaluated.
+    drawHeatmap(src, lookBack) =>
+        // float src     : evaluated price series.
+        // int   lookBack: number of past bars evaluated.
         // Dependency: MAX_LOOKBACK
         
         // Force historical buffer to a sufficient size.
-        max_bars_back(_src, MAX_LOOKBACK)
+        max_bars_back(src, MAX_LOOKBACK)
         // Only run table code on last bar.
         if barstate.islast
-            var _heatmap = table.new(position.bottom_center, _lookBack, 1)
-            for _i = 1 to i_lookBack
-                float _transp = 100. * _i / _lookBack
-                if _src > _src[_i]
-                    table.cell(_heatmap, _lookBack - _i, 0, bgcolor = color.new(i_c_Bull, _transp))
+            var heatmap = table.new(position.bottom_center, lookBack, 1)
+            for i = 1 to lookBackInput
+                float transp = 100. * i / lookBack
+                if src > src[i]
+                    table.cell(heatmap, lookBack - i, 0, bgcolor = color.new(bullColorInput, transp))
                 else
-                    table.cell(_heatmap, _lookBack - _i, 0, bgcolor = color.new(i_c_Bear, _transp))
-
-    f_drawHeatmap(high, i_lookBack)
+                    table.cell(heatmap, lookBack - i, 0, bgcolor = color.new(bearColorInput, transp))
+    
+    drawHeatmap(high, lookBackInput)
 
 Note that:
 

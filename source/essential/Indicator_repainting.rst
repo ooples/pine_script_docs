@@ -18,7 +18,7 @@ calculate differently on historical and real-time bars.
 
 Other types of behavior rightly or wrongly referred to as *repainting* include plotting with a
 negative offset on past bars and using otherwise unavailable future information received through
-misunderstood calls to the ``security`` function, which can introduce
+malformed calls to the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function, which can introduce
 data not available in real-time into script calculations.
 
 Not all indicators are subject to the type of repainting we discuss here.
@@ -33,20 +33,21 @@ We can see repainting in the following cases:
    A strategy with parameter ``calc_on_every_tick = false`` may also be
    prone to repainting, but to a lesser degree.
 
-#. Using ``request.security`` for requesting data from a resolution *higher* than the resolution of the chart's main symbol::
+#. Using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ to request data from a timeframe *higher* than the timeframe of the chart's main symbol::
 
     // Add this study on 1 minute chart
     //@version=5
     indicator("My Script")
     c = request.security(syminfo.tickerid, "5", close)
     plot(close)
-    plot(c, color=color.red)
+    plot(c, color = color.red)
 
    This study will calculate differently on real-time and
    historical data, regardless of ``lookahead`` parameter's value (see
    :ref:`understanding_lookahead`).
 
-#. Using ``request.security`` to request data from a resolution *lower* than the resolution of chart's main symbol
+#. Using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
+   to request data from a timeframe *lower* than the timeframe of chart's main symbol
    (more information :ref:`here <requesting_data_of_a_lower_timeframe>`).
    If ``lookahead=barmerge.lookahead_off``, repainting will occur. When ``lookahead=barmerge.lookahead_on``,
    repainting is less probable. It may still happen when 1 and 5 minute updates
@@ -54,17 +55,17 @@ We can see repainting in the following cases:
 
 #. All scripts which calculations depending on a *starting point*.
    Intraday data gets aligned to the beginning of the week, month or
-   year, depending on the resolution. Due to this, the results produced by
+   year, depending on the timeframe. Due to this, the results produced by
    such scripts can differ from time to time. These are cases where
    scripts will be relying on a starting point:
 
-   * when they use `ta.valuewhen <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}valuewhen>`__,
-     `ta.barssince <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}barssince>`__ or
-     `ta.ema <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__
+   * when they use `ta.valuewhen() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}valuewhen>`__,
+     `ta.barssince() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}barssince>`__ or
+     `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__
      functions (due to peculiarities in their algorithm).
    * any backtesting strategy (regardless of how the ``calc_on_every_tick`` parameter is defined).
 
-   There is a dependency between the resolution and the alignment of a starting point:
+   There is a dependency between the timeframe and the alignment of a starting point:
 
    * 1--14 minutes --- aligns to the beginning of a week.
    * 15--29 minutes --- aligns to the beginning of a month.

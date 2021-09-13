@@ -1,3 +1,5 @@
+.. _PageLibraries:
+
 Libraries
 =========
 
@@ -13,7 +15,7 @@ Pine libraries are publications containing functions that can be reused in Pine 
 
 A library must be published (privately or publicly) before it can be used in another script. All libraries are published open-source. Public scripts can only use public libraries. Private scripts or personal scripts saved in the Pine Editor can use public or private libraries. A library can use other libraries, or even previous versions of itself.
 
-Library programmers should be familiar with Pine's typing nomenclature, scopes and user-defined functions. If you need to brush up on Pine forms and types, see the User Manual's page on the :doc:`/language/Type_system`. For user-defined functions and scopes, see :doc:`/language/Declaring_functions`.
+Library programmers should be familiar with Pine's typing nomenclature, scopes and user-defined functions. If you need to brush up on Pine forms and types, see the User Manual's page on the :ref:`here <PageTypeSystem>`. For user-defined functions and scopes, see :doc:`/language/Declaring_functions`.
 
 
 

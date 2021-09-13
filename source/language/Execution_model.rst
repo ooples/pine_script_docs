@@ -19,14 +19,14 @@ Calculation based on historical bars
 Let's take a simple script and follow its execution on historical bars::
 
     //@version=5
-    indicator("My Script", overlay=true)
+    indicator("My Script", overlay = true)
     src = close
     a = ta.sma(src, 5)
     b = ta.sma(src, 50)
     c = ta.cross(a, b)
-    plot(a, color=color.blue)
-    plot(b, color=color.black)
-    plotshape(c, color=color.red)
+    plot(a, color = color.blue)
+    plot(b, color = color.black)
+    plotshape(c, color = color.red)
 
 On historical bars, a script executes at the equivalent of the bar's close, when the OHLCV values are all known for that bar. Prior to execution of the script on a bar, the built-in variables such as ``open``, ``high``, ``low``, ``close``, ``volume`` and ``time`` are set to values corresponding to those from that bar. A script executes **once per historical bar**.
 

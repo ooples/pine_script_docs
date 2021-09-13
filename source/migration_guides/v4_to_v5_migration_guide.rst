@@ -83,7 +83,7 @@ If your v4 code used a length that was "const int", "input int" or "simple int",
 Reserved keywords
 -----------------
 
-A number of words are reserved and cannot be used for variable or function names. They are: ``text``, ``ellipse``, ``polygon``, ``return``, ``class``, ``struct``, ``throw``, ``try``, ``catch``, ``is``, ``in``, ``range``, ``do``. If your v4 indicator uses any of these, rename your variable or function for the script to work in v5.
+A number of words are reserved and cannot be used for variable or function names. They are: ``catch``, ``class``, ``do``, ``ellipse``, ``in``, ``is``, ``polygon``, ``range``, ``return``, ``struct``, ``text``, ``throw``, ``try``. If your v4 indicator uses any of these, rename your variable or function for the script to work in v5.
 
 
 Removed \`iff()\` and \`offset()\`
@@ -165,45 +165,45 @@ The ``transp=`` parameter used in the signature of many v4 plotting functions wa
 
 Note that in v4, the `bgcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_bgcolor>`__ and `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ functions had an optional ``transp`` parameter that used a default value of 90. This meant that the code below could display Bollinger Bands with a semi-transparent fill between two bands and a semi-transparent backround color where bands cross price, even though no argument is used for the ``transp`` parameter in its `bgcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_bgcolor>`__ and `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ calls::
 
- //@version=4
- study("Bollinger Bands", overlay=true)
- [middle, upper, lower] = bb(close, 5, 4)
- plot(middle, color=color.blue)
- p1 = plot(upper, color=color.green)
- p2 = plot(lower, color=color.green)
- crossUp = crossover(high, upper)
- crossDn = crossunder(low, lower)
- // Both `fill()` and `bgcolor()` have a default `transp` of 90
- fill(p1, p2, color = color.green)
- bgcolor(crossUp ? color.green : crossDn ? color.red : na)
+    //@version=4
+    study("Bollinger Bands", overlay = true)
+    [middle, upper, lower] = bb(close, 5, 4)
+    plot(middle, color=color.blue)
+    p1PlotID = plot(upper, color=color.green)
+    p2PlotID = plot(lower, color=color.green)
+    crossUp = crossover(high, upper)
+    crossDn = crossunder(low, lower)
+    // Both `fill()` and `bgcolor()` have a default `transp` of 90
+    fill(p1PlotID, p2PlotID, color = color.green)
+    bgcolor(crossUp ? color.green : crossDn ? color.red : na)
 
 In v5 we need to explictly mention the 90 transparency with the color, yielding::
 
- //@version=5
- indicator("Bollinger Bands", overlay=true)
- [middle, upper, lower] = ta.bb(close, 5, 4)
- plot(middle, color=color.blue)
- p1 = plot(upper, color=color.green)
- p2 = plot(lower, color=color.green)
- crossUp = ta.crossover(high, upper)
- crossDn = ta.crossunder(low, lower)
- var TRANSP = 90
- // We use `color.new()` to explicitly pass transparency to both functions
- fill(p1, p2, color = color.new(color.green, TRANSP))
- bgcolor(crossUp ? color.new(color.green, TRANSP) : crossDn ? color.new(color.red, TRANSP) : na)
+    //@version=5
+    indicator("Bollinger Bands", overlay = true)
+    [middle, upper, lower] = ta.bb(close, 5, 4)
+    plot(middle, color=color.blue)
+    p1PlotID = plot(upper, color=color.green)
+    p2PlotID = plot(lower, color=color.green)
+    crossUp = ta.crossover(high, upper)
+    crossDn = ta.crossunder(low, lower)
+    var TRANSP = 90
+    // We use `color.new()` to explicitly pass transparency to both functions
+    fill(p1PlotID, p2PlotID, color = color.new(color.green, TRANSP))
+    bgcolor(crossUp ? color.new(color.green, TRANSP) : crossDn ? color.new(color.red, TRANSP) : na)
 
  
-Changed the default session for \`time()\` and \`time_close()\`
----------------------------------------------------------------
+Changed the default session days for \`time()\` and \`time_close()\`
+--------------------------------------------------------------------
 
 The default set of days for ``session`` arguments used in the `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and `time_close() <https://www.tradingview.com/pine-script-reference/v5/#fun_time_close>`__ functions has changed from "23456" (Monday to Friday) to "1234567" (Sunday to Saturday)::
 
-  // On symbols that are traded during weekends, this will behave differently in v4 and v5.
-  t0 = time("1D", "1000-1200")
-  // v5 equivalent of the behavior of `t0` in v4.
-  t1 = time("1D", "1000-1200:23456")
-  // v5 equivalent of the behavior of `t0` in v5.
-  t2 = time("1D", "1000-1200:1234567")
+    // On symbols that are traded during weekends, this will behave differently in v4 and v5.
+    t0 = time("1D", "1000-1200")
+    // v5 equivalent of the behavior of `t0` in v4.
+    t1 = time("1D", "1000-1200:23456")
+    // v5 equivalent of the behavior of `t0` in v5.
+    t2 = time("1D", "1000-1200:1234567")
 
 This change in behavior will not affect scripts running on conventional markets that are closed during weekends. If it is important for you to ensure your session definitions preserve their v4 behavior in v5 code, add ":23456" to your session strings.
 

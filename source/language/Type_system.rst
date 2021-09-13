@@ -1,6 +1,5 @@
 .. _PageTypeSystem::
 
-
 Type system
 ===========
 
@@ -57,7 +56,7 @@ The Pine **types** are:
 
 Each type refers to the nature of the value contained in a variable: ``1`` is of type "int", ``1.0`` is of type "float", ``"AAPL"`` is of type "string", etc.
 
-The Pine compiler can automatically convert some types into others when a value is not of the required type. The auto-casting rules are: **int** |rarr| **float** |rarr| **bool**. See the :ref:`here <_typeCasting>` section of this page for more information on type casting.
+The Pine compiler can automatically convert some types into others when a value is not of the required type. The auto-casting rules are: **int** |rarr| **float** |rarr| **bool**. See the :ref:`<PageTypeSystem_TypeCasting>` section of this page for more information on type casting.
 
 Except in library function signatures, Pine forms are implicit in code; they are never declared because they are always determined by the compiler. Types, however, can be specified when declaring variables, e.g.::
 
@@ -71,12 +70,12 @@ Except in library function signatures, Pine forms are implicit in code; they are
     plotchar(xUp, "Cross Up", "▲", location.top, size = size.tiny)
 
 
-.. _series:
+.. _PageTypeSystem_TimeSeries:
 
 Time series
 ^^^^^^^^^^^
 
-Much of the power of Pine stems from the fact that it is designed to process *time series* efficiently. Time series are not a form or a type; they are the fundamental structure Pine uses to store the successive values of a variable over time, where each value is tethered to a point in time. Since charts are composed of bars, each representing a particular point in time, time series are the ideal data structure to work with values that may change with time. The concept of time series is intimately linked to Pine's :ref:`here <PageExecutionModel>`. Understanding both is key to making the most of the power of Pine.
+Much of the power of Pine stems from the fact that it is designed to process *time series* efficiently. Time series are not a form or a type; they are the fundamental structure Pine uses to store the successive values of a variable over time, where each value is tethered to a point in time. Since charts are composed of bars, each representing a particular point in time, time series are the ideal data structure to work with values that may change with time. The concept of time series is intimately linked to Pine's :ref:`execution model <PageExecutionModel>`. Understanding both is key to making the most of the power of Pine.
 
 Take the built-in `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ variable, which contains the "open" price of each bar in the dataset. If your script is running on a 5min chart, then each value in the `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ time series is the "open" price of the consecutive 5min chart bars. When your script refers to `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__, it is referring to the "open" price of the bar the script is executing on. To refer to past values in a time series, we use the `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ history-referencing operator. When a script is executing on a given bar, ``open[1]`` refers to the value of the `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ time series on the previous bar.
 
@@ -88,7 +87,7 @@ Even the result of function calls on successive bars leaves a trace of values in
 
 Do not confuse "time series" with the "series" form. The *time series* concept explains how consecutive values of variables are stored in Pine; the "series" form denotes variables whose values can change bar to bar. Consider, for example, the `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__ built-in variable which is of form "simple" and type "string", so "simple string". The "simple" form entails that the variable's value is known on bar zero (the first bar where the script executes) and will not change during the script's execution on all the chart's bars. The variable's value is the chart's timeframe in string format, so ``"D"`` for a 1D chart, for example. Even though its value cannot change during the script, it would be syntactically correct in Pine (though not very useful) to refer to its value 10 bars ago using ``timeframe.period[10]``. This is possible because the successive values of `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__  for each bar are stored in a time series, even though all the values in that particular time series are similar. Note, however, that when the `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ operator is used to access past values of a variable, it yields a result of "series" form, even though the variable without an offset is of another form, such as "simple" in the case of `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__.
 
-When you grasp how time series can be efficiently handled using Pine's syntax and its :ref:`here <PageExecutionModel>`, you can define complex calculations using just a few lines of Pine code.
+When you grasp how time series can be efficiently handled using Pine's syntax and its :ref:`execution model <PageExecutionModel>`, you can define complex calculations using just a few lines of Pine code.
 
 
 
@@ -315,7 +314,7 @@ Here is an example::
               color.new(color.blue, 80)
     bgcolor(bgColor)
 
-See the page on :ref:`here <PageColors>` for more information on using colors in Pine.
+See the page on :ref:`colors <PageColors>` for more information on using colors in Pine.
 
 
 string
@@ -364,7 +363,7 @@ and `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_labe
 `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`__ and
 `table.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}new>`__ functions. 
 
-These functions all return an ID that uniquely identifiers each drawing object. The ID's type is "series line", "series label", "series box" and "series table", respectively, and they do not exist in other forms than "series". Drawing IDs act like pointer in that they are used to reference a specific instance of a drawing in all the related functions of its namespace. The line ID returned by a `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ call is then used to refer to that line using `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`__, for example.
+These functions all return an ID that uniquely identifies each drawing object. The ID's type is "series line", "series label", "series box" and "series table", respectively, and an ID can exist in no other form than "series". Drawing IDs act like pointer in that they are used to reference a specific instance of a drawing in all the related functions of its namespace. The line ID returned by a `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ call is then used to refer to that line using `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`__, for example.
 
 
 array
@@ -486,7 +485,7 @@ where we are replacing any `na <https://www.tradingview.com/pine-script-referenc
     ath := math.max(ath, high)
 
 
-.. _typeCasting::
+.. _PageTypeSystem_TypeCasting::
 
 Type casting
 ------------

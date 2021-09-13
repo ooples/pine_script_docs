@@ -7,7 +7,7 @@ Essential features
 
    Alerts
    Arrays
-   Bar_states_Built-in_variables_barstate
+   Bar_states
    Colors
    Context_switching_the_security_function
    Drawings

@@ -1,28 +1,27 @@
-Context switching and the request.security function
-===========================================
+Context switching and the \`request.security()\` function
+=========================================================
 
 .. contents:: :local:
     :depth: 2
 
-The ``request.security`` function enables scripts to request data from
-symbols and/or timeframes other than the ones a script is running on.
-
-Let's assume the following script is running on an IBM chart at *1 minute*. It
-will display the *close* price of the IBM symbol, but at *15 minutes* timeframe.
+The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
+function enables scripts to request data from other symbols and/or timeframes than those of the active chart.
+Let's assume the following script is running on an IBM chart at 1min. 
+It will display the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ price of the IBM symbol, but from the 15min timeframe.
 
 ::
 
     //@version=5
-    indicator("Example security 1", overlay=true)
+    indicator("Example security 1", overlay = true)
     ibm_15 = request.security("NYSE:IBM", "15", close)
     plot(ibm_15)
 
 .. image:: images/Chart_security_1.png
 
-The `request.security <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
 function's first argument is the name of the requested symbol. The second
 argument is the required timeframe and the third one is an expression
-which will be calculated on the requested series *within* the ``request.security`` call.
+which will be calculated on the requested series *within* the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call.
 
 The name of the symbol can be defined using two variants: with a prefix that
 contains the exchange (or data provider), or without it. For example:
@@ -30,15 +29,17 @@ contains the exchange (or data provider), or without it. For example:
 BATS will be used as the default. The current symbol name is stored in the
 `syminfo.ticker <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}ticker>`__ and
 `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__
-built-in variables. ``syminfo.ticker`` contains the value of the
-symbol name without its exchange prefix, for example ``"MSFT"``.
-``syminfo.tickerid`` contains the value of the symbol name with its exchange prefix, for example,
-``"BATS:MSFT"`` or ``"NASDAQ:MSFT"``. It is recommended to use ``syminfo.tickerid`` to avoid
-ambiguity in the values returned by ``request.security``.
+built-in variables. `syminfo.ticker <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}ticker>`__ 
+contains the value of the symbol name without its exchange prefix, for example ``"MSFT"``.
+`syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__ 
+contains the value of the symbol name with its exchange prefix, for example,
+``"BATS:MSFT"`` or ``"NASDAQ:MSFT"``. It is recommended to use 
+`syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__ to avoid
+ambiguity in the values returned by `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__.
 
 .. TODO write about syminfo.tickerid in extended format and function tickerid
 
-The second argument of the ``request.security`` function, ``timeframe``, is
+The second argument of the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function, ``timeframe``, is
 also a string. All intraday timeframes are defined using a
 number of minutes (from ``"1"`` to ``"1440"``), with the exception of four second-based timeframes: ``"1S"``, ``"5S"``, ``"15S"``, and ``"30S"`` [#seconds]_. It is possible to request any [#minutes]_ number of minutes: ``"5"``, ``"10"``,
 ``"21"``, etc. *Hourly* timeframe is also set by minutes [#hours]_. For example, the
@@ -48,19 +49,19 @@ following lines signify one hour, two hours and four hours respectively:
 ``"3D"``, etc. *Weekly* and *Monthly* timeframes are set in a similar way: ``"W"``,
 ``"1W"``, ``"2W"``, ..., ``"M"``, ``"1M"``, ``"2M"``. ``"M"`` and ``"1M"`` denote the same monthly
 timeframe, and ``"W"`` and ``"1W"`` the same weekly timeframe. The
-third parameter of the request.security function can be any arithmetic
+third parameter of the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function can be any arithmetic
 expression or a function call, which will be calculated in the context of the chosen series.
 The timeframe of the main chart's symbol is stored in the
 `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__
 built-in variable.
 
-With the ``request.security`` function, users can view a *1 minute* chart while
-displaying an SMA (or any other expression) from any other timeframe
-(i.e., daily, weekly, monthly)::
+Using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__, one can view a 1min chart while
+displaying an 1D SMA like this::
 
     //@version=5
-    indicator(title="High Time Frame MA", overlay=true)
-    src = close, len = 9
+    indicator("High Time Frame MA", overlay = true)
+    src = close
+    len = 9
     out = ta.sma(src, len)
     out1 = request.security(syminfo.tickerid, 'D', out)
     plot(out1)
@@ -77,20 +78,20 @@ and calculate it at *1 minute*, *15 minutes* and *60 minutes*::
     spread_15 = request.security(syminfo.tickerid, '15', spread)
     spread_60 = request.security(syminfo.tickerid, '60', spread)
 
-The ``request.security`` function
+The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function
 returns a series which is then adapted to the time scale of
 the current chart's symbol. This result can be either shown directly on
 the chart (i.e., with ``plot``), or used in further calculations.
 The "Advance Decline Ratio" script illustrates a more
-involved use of ``request.security``::
+involved use of `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__::
 
     //@version=5
-    indicator(title = "Advance Decline Ratio", shorttitle="ADR")
-    f_ratio(_t1, _t2, _source) =>
-        _s1 = request.security(_t1, timeframe.period, _source)
-        _s2 = request.security(_t2, timeframe.period, _source)
-        _s1 / _s2
-    plot(f_ratio("USI:ADVN.NY", "USI:DECL.NY", close))
+    indicator("Advance Decline Ratio", "ADR")
+    ratio(t1, t2, source) =>
+        s1 = request.security(t1, timeframe.period, source)
+        s2 = request.security(t2, timeframe.period, source)
+        s1 / s2
+    plot(ratio("USI:ADVN.NY", "USI:DECL.NY", close))
 
 The script requests two additional securities. The results of the
 requests are then used in an arithmetic formula. As a result, we have a
@@ -101,10 +102,10 @@ individual stocks participating in an upward or downward trend.
 
 .. _barmerge_gaps_and_lookahead:
 
-Barmerge gaps and lookahead
----------------------------
+Gaps and lookahead
+------------------
 
-There are two switches that define how data requested with ``request.security``
+There are two switches that define how data requested with `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
 will be mapped to the current timeframe.
 
 The first one, ``gaps``, controls gaps in data. With the default value
@@ -119,17 +120,17 @@ The second switch, ``lookahead``, was added in Pine Script version
 and
 `barmerge.lookahead_on <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}lookahead_on>`__
 to respectively switch between the new, default behavior of
-`security <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__,
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__,
 and the old behavior dating from Pine v1 and v2.
 
-This example shows the difference on a *5 minutes* chart::
+This example shows the difference on a 5min chart::
 
     //@version=5
-    indicator('My Script', overlay=true)
-    a = request.security(syminfo.tickerid, '60', low, lookahead=barmerge.lookahead_off)
+    indicator('My Script', overlay = true)
+    a = request.security(syminfo.tickerid, '60', low, lookahead = barmerge.lookahead_off)
     plot(a, color=color.red)
-    b = request.security(syminfo.tickerid, '60', low, lookahead=barmerge.lookahead_on)
-    plot(b, color=color.lime)
+    b = request.security(syminfo.tickerid, '60', low, lookahead = barmerge.lookahead_on)
+    plot(b, color = color.lime)
 
 .. image:: images/V3.png
 
@@ -150,44 +151,46 @@ on real-time data, i.e., as ``barmerge.lookahead_off`` does.
 
 .. _understanding_lookahead:
 
+
 Understanding lookahead
 -----------------------
 
-There are many published scripts using the following code::
+In Pine v1 and v2, the ``security()`` function always used lookahead, which unless the series requested was offset in the past, 
+produce *future leak*, or *lookahead bias*, i.e., it was fetching data from the future, which is undesirable::
 
     //@version=2
     //...
-    a = security(tickerid, 'D', close[1]) // It's barmerge.lookahead_on, because version is 2
+    // `security()` calls use `barmerge.lookahead_on` because the script uses Pine v2
+    // WRONG: Uses future data:
+    a = security(tickerid, 'D', close)
+    // GOOD: Does not use future data:
+    a = security(tickerid, 'D', close[1])
 
-In this case the ``close[1]`` expression fetches the ``close`` of the
-previous day, so the construction **does not use future data**.
+In Pine v3 or later, the ``lookahead`` parameter was introduced to provide more control. 
+Its default value is off, so the function doesn't use future data. 
+We can now use the function with ``barmerge.lookahead_on`` or ``barmerge.lookahead_off``.
 
-In Pine v3 or later, we can rewrite this in two different ways, using
-``barmerge.lookahead_on`` or ``barmerge.lookahead_off``. If you use
-``barmerge.lookahead_on``, then it's quite simple::
+In general, ``barmerge.lookahead_on`` should only be used when the series is offset, as when you want to avoid repainting::
 
     //@version=5
     //...
-    a = request.security(syminfo.tickerid, 'D', close[1], lookahead=barmerge.lookahead_on)
+    a = request.security(syminfo.tickerid, 'D', close[1], lookahead = barmerge.lookahead_on)
 
-Because the original construction doesn't use future data, it is
-possible to rewrite it using ``barmerge.lookahead_off``. If you use
-``barmerge.lookahead_off``, the script is more complex but shows
-how the lookahead parameter works::
+If you use ``barmerge.lookahead_off``, a non-repainting value can still be achieved, but it's more complex::
 
     //@version=5
     //...
     indexHighTF = barstate.isrealtime ? 1 : 0
     indexCurrTF = barstate.isrealtime ? 0 : 1
-    a0 = request.security(syminfo.tickerid, 'D', close[indexHighTF], lookahead=barmerge.lookahead_off)
+    a0 = request.security(syminfo.tickerid, 'D', close[indexHighTF], lookahead = barmerge.lookahead_off)
     a = a0[indexCurrTF]
 
 When an indicator is based on historical data (i.e.,
 ``barstate.isrealtime`` is ``false``), we take the current *close* of
-the daily timeframe and shift the result of ``request.security`` function call one bar to the
-right in the current timeframe. When an indicator is calculated on
-real-time data, we take the *close* of the previous day without shifting the
-``request.security`` data.
+the daily timeframe and shift the result of `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
+function call one bar to the right in the current timeframe. When an indicator is calculated on
+realtime data, we take the *close* of the previous day without shifting the
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ data.
 
 
 
@@ -196,28 +199,31 @@ real-time data, we take the *close* of the previous day without shifting the
 Requesting data of a lower timeframe
 ------------------------------------
 
-``request.security`` function was designed to request data of a timeframe *higher*
+The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
+function was designed to request data of a timeframe *higher*
 than the current chart timeframe. On a *60 minutes* chart,
 this would mean requesting 240, D, W, or any higher timeframe.
 
 It is not recommended to request data of a timeframe *lower* that the current chart timeframe,
 for example *1 minute* data from a *5 minutes* chart. The main problem with such a case is that
 some part of a 1 minute data will be inevitably lost, as it's impossible to display it on a *5 minutes*
-chart and not to break the time axis. In such cases the behavior of ``request.security`` can be rather unexpected.
+chart and not to break the time axis. In such cases the behavior of 
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ can be rather unexpected.
 The next example illustrates this::
 
     // Add this script on a "5" minute chart
     //@version=5
-    indicator("Lookahead On/Off", overlay=true, precision=5)
-    l_on = request.security(syminfo.tickerid, "1", close, lookahead=barmerge.lookahead_on)
-    l_off = request.security(syminfo.tickerid, "1", close, lookahead=barmerge.lookahead_off)
-    plot(l_on, color=color.red)
-    plot(l_off, color=color.blue)
+    indicator("Lookahead On/Off", overlay = true, precision = 5)
+    l_on = request.security(syminfo.tickerid, "1", close, lookahead = barmerge.lookahead_on)
+    l_off = request.security(syminfo.tickerid, "1", close, lookahead = barmerge.lookahead_off)
+    plot(l_on, color = color.red)
+    plot(l_off, color = color.blue)
 
 .. image:: images/SecurityLowerTF_LookaheadOnOff.png
 
 This study plots two lines which correspond to different values of the ``lookahead`` parameter.
-The red line shows data returned by ``request.security`` with ``lookahead=barmerge.lookahead_on``. 
+The red line shows data returned by 
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ with ``lookahead = barmerge.lookahead_on``. 
 The blue line with ``lookahead=barmerge.lookahead_off``. Let's look at the *5 minutes* bar starting at 07:50.
 The red line at this bar has a value of 1.13151 which corresponds to the
 value of *the first of the five 1 minute bars* that fall into the time range 07:50--07:54.

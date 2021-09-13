@@ -26,7 +26,7 @@ chart type is non-standard? We should use ``request.security`` function in
 combination with ``ticker.new`` function. Here is an example::
 
     //@version=5
-    indicator("Real OHLC", overlay=true)
+    indicator("Real OHLC", overlay = true)
     t = ticker.new(syminfo.prefix, syminfo.ticker)
     realC = request.security(t, timeframe.period, close)
     plot(realC)
@@ -39,14 +39,14 @@ Get non-standard OHLC values on a standard chart
 Backtesting on non-standard chart types (e.g. Heikin Ashi or Renko) is not recommended because the bars on these kinds of charts do not represent real price movement that you would encounter while trading. If you want your strategy to enter and exit on real prices but still use Heikin Ashi-based signals, you can use the same method to get Heikin Ashi values on a regular candlestick chart::
 
     //@version=5
-    strategy("BarUpDn Strategy", overlay=true, default_qty_type = strategy.percent_of_equity, default_qty_value = 10)
-    i_maxIdLossPcnt = input.float(1, "Max Intraday Loss(%)")
-    strategy.risk.max_intraday_loss(i_maxIdLossPcnt, strategy.percent_of_equity)
+    strategy("BarUpDn Strategy", overlay = true, default_qty_type = strategy.percent_of_equity, default_qty_value = 10)
+    maxIdLossPcntInput = input.float(1, "Max Intraday Loss(%)")
+    strategy.risk.max_intraday_loss(maxIdLossPcntInput, strategy.percent_of_equity)
     needTrade() => close > open and open > close[1] ? 1 : close < open and open < close[1] ? -1 : 0
     trade = request.security(ticker.heikinashi(syminfo.tickerid), timeframe.period, needTrade())
-    if (trade == 1)
+    if trade == 1
         strategy.entry("BarUp", strategy.long)
-    if (trade == -1)
+    if trade == -1
         strategy.entry("BarDn", strategy.short)
 
 Plot arrows on the chart
@@ -56,20 +56,20 @@ You may use plotshape with style ``shape.arrowup`` and
 ``shape.arrowdown``::
 
     //@version=5
-    indicator('Ex 1', overlay=true)
-    data = close >= open
-    plotshape(data, color=color.lime, style=shape.arrowup, text="Buy")
-    plotshape(not data, color=color.red, style=shape.arrowdown, text="Sell")
+    indicator('Ex 1', overlay = true)
+    condition = close >= open
+    plotshape(condition, color = color.lime, style = shape.arrowup, text = "Buy")
+    plotshape(not condition, color = color.red, style = shape.arrowdown, text = "Sell")
 
 .. image:: images/Buy_sell_chart1.png
 
 You may use ``plotchar`` function with any unicode character::
 
     //@version=5
-    indicator('buy/sell arrows', overlay=true)
-    data = close >= open
-    plotchar(data, char='↓', color=color.lime, text="Buy")
-    plotchar(data, char='↑', location=location.belowbar, color=color.red, text="Sell")
+    indicator('buy/sell arrows', overlay = true)
+    condition = close >= open
+    plotchar(not condition, char='↓', color = color.lime, text = "Buy")
+    plotchar(condition, char='↑', location = location.belowbar, color = color.red, text = "Sell")
 
 .. image:: images/Buy_sell_chart2.png
 
@@ -82,11 +82,11 @@ constant value. Here is a Pine Script with workaround to plot changing
 hline::
 
     //@version=5
-    indicator("Horizontal line", overlay=true)
-    plot(close[10], trackprice=true, offset=-9999)
-    // trackprice=true plots horizontal line on close[10]
-    // offset=-9999 hides the plot
-    plot(close, color=#FFFFFFFF)  // forces to show study
+    indicator("Horizontal line", overlay = true)
+    plot(close[10], trackprice = true, offset = -9999)
+    // `trackprice = true` plots horizontal line on close[10]
+    // `offset = -9999` hides the plot
+    plot(close, color = #FFFFFFFF)  // forces display
 
 Plot a vertical line on condition
 ---------------------------------
@@ -94,7 +94,7 @@ Plot a vertical line on condition
 ::
 
     //@version=5
-    indicator("Vertical line", overlay=true, scale=scale.none)
+    indicator("Vertical line", overlay = true, scale = scale.none)
     // scale.none means do not resize the chart to fit this plot
     // if the bar being evaluated is the last baron the chart (the most recent bar), then cond is true
     cond = barstate.islast
@@ -102,7 +102,7 @@ Plot a vertical line on condition
     // (10 to the power of 20)
     // when cond is false, plot no numeric value (nothing is plotted)
     // use the style of histogram, a vertical bar
-    plot(cond ? 10e20 : na, style=plot.style_histogram)
+    plot(cond ? 10e20 : na, style = plot.style_histogram)
 
 Access the previous value
 -------------------------
@@ -127,56 +127,32 @@ character at that price level above the current bar
 ::
 
     //@version=5
-    indicator("Range Analysis", overlay=true)
+    indicator("High of last 5 days", overlay = true)
 
-    // find which bar is 5 days away from the current time
-    milliseconds_in_5days = 1000 * 60 * 60 * 24 * 5  // millisecs * secs * min * hours * days
-    // plot(milliseconds_in_5days, title="ms in 5d", style=circles) //debug
-    // subtract timestamp of the bar being examined from the current time
-    // if value is less than 5 days ago, set variable "leftborder" as true
-    // this is set true at the bar being examined as the left border of the 5 days lookback window range
-    leftborder = timenow - time < milliseconds_in_5days  // true or na when false
-    // plot(leftborder ? 1 : na, title="bar within leftborder")  //debug
-    // plot(time, title="bartime") //debug
-    // plot(timenow - time, title="timenow minus bartime")  //debug
+    // Milliseconds in 5 days: millisecs * secs * mins * hours * days
+    MS_IN_5DAYS = 1000 * 60 * 60 * 24 * 5
 
-    // treat the last bar (most recent bar) as the right edge of the lookback window range
-    rightborder = barstate.islast
+    // The range check begins 5 days from the current time.
+    leftBorder = timenow - time < MS_IN_5DAYS
+    // The range ends on the last bar of the chart.
+    rightBorder = barstate.islast
 
-    // initialize variable "max" as na
-    max = float(na)
+    // ————— Keep track of highest `high` during the range.
+    // Intialize `maxHi` with `var` on bar zero only.
+    // This way, its value is preserved, bar to bar.
+    var float maxHi = na
+    if leftBorder
+        if not leftBorder[1]
+            // Range's first bar.
+            maxHi := high
+        else if not rightBorder
+            // On other bars in the range, track highest `high`.
+            maxHi := math.max(maxHi, high)
 
-    // if bar being examined is not within the lookback window range (i.e., leftborder = false)
-    // change the variable "max" to be na
-    // else, test if value of "max" stored in the previous bar is na
-    // (bcuz first bar being examined in the lookback window will not have a previous value ),
-    // if it is na, use the high of the current bar,
-    // else, use the value of "max" stored in the previous bar
-    max := not leftborder ? na : na(max[1]) ? high : max[1]
-    // plot(max ? max : na, title="max b4 compare")  // debug
-
-    // compare high of current bar being examined with previous bar's high
-    // if curr bar high is higher than the max bar high in the lookback window range
-    if high > max  // we have a new high
-        max := high  // change variable "max" to use current bar's high value
-        max
-    // else keep the previous value of max as the high bar within this lookback window range
-    // plot(max ? max : na, title="max after compare")  //debug
-
-    // if examining the last bar (newest bar, rightborder is true)
-    // set variable "val" to the previous value of series variable "max"
-    // else set to na so nothing is plotted
-    val = rightborder ? max[1] : na
-
-    // if val is true (a number, not na)
-    // plot character
-    // since no character is specified, a "star" will be plotted
-    // location.absolute uses the value of val as the y axis value
-    // the x axis location will be the last bar (newest bar)
-    plotchar(val, size=size.normal, location=location.absolute)
-
-    // fill the background of the 5 days lookback window range with aqua color
-    bgcolor(leftborder and not rightborder ? color.new(color.aqua, 70) : na)
+    // Plot level of the highest `high` on the last bar.
+    plotchar(rightBorder ? maxHi : na, "Level", "—", location.absolute, size = size.normal)
+    // When in range, color the background.
+    bgcolor(leftBorder and not rightBorder ? color.new(color.aqua, 70) : na)
 
 Count bars in a dataset
 -----------------------
@@ -187,8 +163,8 @@ calculating flexible lookback periods based on number of bars.
 ::
 
     //@version=5
-    indicator("Bar Count", overlay=true, scale=scale.none)
-    plot(bar_index + 1, style=plot.style_histogram)
+    indicator("Bar Count", overlay = true, scale = scale.none)
+    plot(bar_index + 1, style = plot.style_histogram)
 
 Enumerate bars in a day
 -----------------------
@@ -196,13 +172,13 @@ Enumerate bars in a day
 ::
 
     //@version=5
-    indicator("My Script", overlay=true, scale=scale.none)
+    indicator("My Script", overlay = true, scale = scale.none)
 
     isNewDay() =>
-        _d = dayofweek
-        na(_d[1]) or _d != _d[1]
+        d = dayofweek
+        na(d[1]) or d != d[1]
 
-    plot(ta.barssince(isNewDay()), style=plot.style_cross)
+    plot(ta.barssince(isNewDay()), style = plot.style_cross)
 
 Find the highest and lowest values for the entire dataset
 ---------------------------------------------------------
@@ -210,24 +186,18 @@ Find the highest and lowest values for the entire dataset
 ::
 
     //@version=5
-    indicator("My Script")
+    indicator("", "", true)
 
-    f_biggest(_source) =>
-        _max = 0.0
-        _max := nz(_max[1], _source)
-        if _source > _max
-            _max := _source
-        _max
+    allTimetHi(source) =>
+        var atHi = source
+        atHi := math.max(atHi, source)
 
-    f_smallest(_source) =>
-        _min = 0.0
-        _min := nz(_min[1], _source)
-        if _source < _min
-            _min := _source
-        _min
+    allTimetLo(source) =>
+        var atLo = source
+        atLo := math.min(atLo, source)
 
-    plot(f_biggest(close), color=color.green)
-    plot(f_smallest(close), color=color.red)
+    plot(allTimetHi(close), "ATH", color.green)
+    plot(allTimetLo(close), "ATL", color.red)
 
 Query the last non-na value
 ---------------------------
@@ -235,10 +205,10 @@ Query the last non-na value
 You can use the script below to avoid gaps in a series::
 
     //@version=5
-    indicator("My Script")
+    indicator("")
     series = close >= open ? close : na
     vw = fixnan(series)
-    plot(series, style=plot.style_linebr, color=color.red)  // series has na values
+    plot(series, style = plot.style_linebr, color = color.red)  // series has na values
     plot(vw)  // all na values are replaced with the last non-empty value
 
 .. |Mark the highest bar within a 5 day lookback window range| image:: images/Wiki_howto_range_analysis.png
