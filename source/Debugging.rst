@@ -155,7 +155,7 @@ Note the following in our last code example:
 
 - We use the ``print()`` function to enclose the label-drawing code. While the function is called on each bar, 
   the label is only created on the dataset's first bar because of our use of the 
-  `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ keyword when declaring the ``label`` variable inside the function. After creating it, 
+  `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ keyword when declaring the ``lbl`` variable inside the function. After creating it, 
   we only update the label's *x* and *y* coordinates and its text on each successive bar. If we did not update those values, the label would remain on the dataset's first bar
   and would only display the text string's value on that bar. Lastly, note that we use ``ta.highest(10)[1]`` to position the label vertically, 
   By using the highest high of the **previous** 10 bars, we prevent the label from moving during the realtime bar. 
