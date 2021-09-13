@@ -3,7 +3,7 @@
 First indicator
 ===============
 
-Let's look at the implementation of the
+Let's look at the implementation of a
 `MACD <https://www.tradingview.com/support/solutions/43000502344-macd-moving-average-convergence-divergence/>`__ indicator in Pine:
 
 .. code-block:: pine
@@ -21,7 +21,7 @@ Let's look at the implementation of the
     plot(signal, color = color.orange)
 
 
-Line 1: ``//@version=5``
+:Line 1 ``//@version=5``:
     This is a comment containing a compiler directive that tells the compiler the script will use version 5 of Pine.
 Line 2: ``indicator("MACD")``
     Defines the name of the script that will appear on the chart as "MACD".
