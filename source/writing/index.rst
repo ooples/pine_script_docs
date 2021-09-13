@@ -5,6 +5,6 @@ Writing scripts
    :maxdepth: 3
    :name: writingtoc
 
-   Debugging
    Style_guide
+   Debugging
    Publishing
