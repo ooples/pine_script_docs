@@ -47,10 +47,14 @@ To explore and load scripts from you chart, use the "Indicators & Strategies" bu
 
 .. image:: images/FirstSteps-FromTheChart-1.png
 
-The dialog box presents different categories of scripts in its left pane. Here, the section containing the TradingView built-ins is selected:
+The dialog box presents different categories of scripts in its left pane:
+
+
+Here, the section containing the TradingView built-ins is selected:
 
 .. image:: images/FirstSteps-FromTheChart-2.png
 
+When you click on one of the indicators or strategies (the ones with the green and red arrows following their name), it loads on your chart.
 
 
 From the Public Library
