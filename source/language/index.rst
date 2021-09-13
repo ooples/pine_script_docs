@@ -5,14 +5,13 @@ Language
    :maxdepth: 3
    :name: languagetoc
 
-   Structure_of_the_script
-   Versions
-   Comments
-   Line_wrapping
+   Execution_model
+   Type_system
+   Script_structure
    Identifiers
    Operators
    Expressions_declarations_and_statements
+   Type_system
    Built-ins
    User-defined_functions
-   Type_system
-   Execution_model
+   Arrays
