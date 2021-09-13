@@ -107,8 +107,23 @@ Reading code written by **good** programmers is the best way to develop your und
 This is as true for Pine as it is for all other programming languages. 
 Finding good open-source Pine code is relatively easy. These are reliable sources of code written by good programmers on TradingView:
 
-- The TradingView built-in indicators.
-- 
+- The TradingView built-in indicators
+- Scripts selected as `Editors' Picks <https://www.tradingview.com/scripts/editors-picks/>`__
+- Scripts by the `authors the PineCoders account follows <https://www.tradingview.com/u/PineCoders/#following-people>`__
+- Scripts by authors with high reputation and many open-source publications.
+
+Looking at code from scripts you find in the `Puclic Library <https://www.tradingview.com/scripts/>`__ is easy; 
+if you don't see a grey or red lock in the upper-right corner of the script's widget, this indicates the script is open-source.
+By opening its script page, you will be able to see its source.
+
+To see the code of TradingView built-ins, load the indicator on your chart, then hover over its name and select the "Source code" curly braces icon 
+(if you don't see it, it's because the indicator's source is unavailable). When you click on the icon, the Pine Editor will open and from there, 
+you can see the script's code. If you want to play with it, you will need to use the Editor's "More" menu button at the top-right of the Editor's pane,
+and select "Make a copy...". You will then be able to modify and save the code. Because you will have created a different version of the script, 
+you will need to use the Editor's "Add to Chart" button to add that new copy to the chart.
+
+You can also open TradingView built-in indicators from the Pine Editor (accessible from the "Pine Editor" tab at the bottom of the chart) by 
+using the "Open/New default built-in script...".
 
 
 
