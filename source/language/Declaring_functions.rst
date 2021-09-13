@@ -120,7 +120,15 @@ Limitations
 -----------
 
 User-defined functions can use any of the Pine built-ins, except:
+`indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
+`strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__,
+`library() <https://www.tradingview.com/pine-script-reference/v5/#fun_library>`__,
+`xxxxxx() <https://www.tradingview.com/pine-script-reference/v5/#fun_>`__,
+`xxxxxx() <https://www.tradingview.com/pine-script-reference/v5/#fun_>`__,
+`xxxxxx() <https://www.tradingview.com/pine-script-reference/v5/#fun_>`__,
+`xxxxxx() <https://www.tradingview.com/pine-script-reference/v5/#fun_>`__,
+`xxxxxx() <https://www.tradingview.com/pine-script-reference/v5/#fun_>`__,
+`xxxxxx() <https://www.tradingview.com/pine-script-reference/v5/#fun_>`__,
+`xxxxxx() <https://www.tradingview.com/pine-script-reference/v5/#fun_>`__,
 
-- `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__
-- `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
 
