@@ -65,7 +65,7 @@ Some functions do not return a result but are used for their side effect, which 
   `plotcandle() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__,
   `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__,
   `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__,
-  `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__,
+  `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__.
 - Strategy functions placing orders in the ``strategy`` namespace:
   `strategy.cancel() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}cancel>`__,
   `strategy.close() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}close>`__,
