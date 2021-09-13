@@ -1,5 +1,21 @@
-Functions
-=========
+Built-in Functions
+==================
+
+Pine comes with hundreds of built-in functions. Those in the same family share the same namespace, which is a prefix to the function's name. 
+The `ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__ function, for example, is in the ``ta`` namespace, 
+which stands for "technical analysis".
+
+Many functions are used for the result(s) they return, e.g.:
+
+- Math-related functions in the ``math`` namespace: 
+  
+- Technical indicators in the ``ta`` namespace.
+  `ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__,
+  `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__,
+  `ta.macd() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}macd>`__,
+  `ta.rsi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}rsi>`__,
+  `ta.supertrend() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}supertrend>`__.
+
 
 Functions may be built-in, such as
 `ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__,
