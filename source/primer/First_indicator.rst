@@ -35,7 +35,7 @@ We will now create our first working Pine script, an implementation of the
     fastMA = ta.ema(close, fast)
     slowMA = ta.ema(close, slow)
     macd = fastMA - slowMA
-    signal = ta.sma(macd, 9)
+    signal = ta.ema(macd, 9)
     plot(macd, color = color.blue)
     plot(signal, color = color.orange)
 
@@ -68,9 +68,9 @@ Line 6: ``slowMA = ta.ema(close, slow)``
     EMA calculation with a length equal to ``slow`` (26), from ``close``.
 Line 7: ``macd = fastMA - slowMA``
     Defines the variable ``macd`` as the difference between the two EMAs.
-Line 8: ``signal = ta.sma(macd, 9)``
+Line 8: ``signal = ta.ema(macd, 9)``
     Defines the variable ``signal`` as a smoothed value of
-    ``macd`` using the SMA algorithm (Simple Moving Average) with
+    ``macd`` using the EMA algorithm (Exponential Moving Average) with
     a length of 9.
 Line 9: ``plot(macd, color = color.blue)``
     Calls the ``plot`` function to output the variable ``macd`` using a blue line.
