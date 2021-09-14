@@ -62,5 +62,5 @@ it yields a result of "series" form, even though the variable without an offset 
 such as "simple" in the case of `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__.
 
 When you grasp how time series can be efficiently handled using Pine's syntax and its :ref:`execution model <PageExecutionModel>`, 
-you can define complex calculations using just a few lines of Pine code.
+you can define complex calculations using little code.
 
