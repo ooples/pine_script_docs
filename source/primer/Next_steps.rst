@@ -7,8 +7,7 @@ Next steps
     :depth: 3
 
 After your :ref:`<PageFirstSteps>` and your :ref:`<PageFirstIndicator>`, 
-in this page we explore a bit more of the Pine landscape by sharing some pointers to guide you in your journey to learn Pine.
-
+we explore a bit more of the Pine landscape by sharing some pointers to guide you in your journey to learn Pine.
 
 
 
@@ -25,31 +24,38 @@ It is thus advantageous to use indicators whenever you can.
 
 Both indicators and strategies can run in either overlay mode (over the chart's bars) or pane mode (in a separate section below or over the chart). Both can also plot information in their respective space, and both can generate :ref:`alert events <PageAlerts>`.
 
-Strategies differ from indicators in how the execute. The  :ref:`<PageStrategies>` page explains how.
 
 
-How scripts run on charts
+How scripts are executed
 ------------------------
 
-A Pine script is **not** like many normal programs that execute once and then stop. In the Pine runtime environment, a script runs in the equivalent of an invisible loop where it is executed once on each historical bar. When execution reaches the last, real-time bar, the script executes once every time a price or volume change is detected, then one final time when the real-time bar closes and becomes a historical bar.
+A Pine script is **not** like programs in many programming languages that execute once and then stop. In the Pine *runtime* environment, a script runs in the equivalent of an invisible loop where it is executed once on each bar of whatever chart you are on, from left to right. Those bars having already closed, for the most part, they are called *historical bars*. When execution reaches the chart's last bar and the market is open, it is on the *realtime bar*. The script then executes once every time a price or volume change is detected, and one last time for that realtime bar when it closes. That realtime bar then becomes an *elapsed realtime bar*. Note that when the script executes in realtime, it does not recalculate on all the chart's historical bars on every price/volume update. It has already calculated once on those bars, so it does not need to recalculate them on every chart tick. See the :ref:`<PageExecutionModel>` page for more information.
 
-By default, Pine *strategies* only execute once at the close of real-time bars, but they can also be instructed to execute on each price change, as *indicators* do. See :doc:`/language/Execution_model`.
+When a script executes on a historical bar, the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ 
+built-in variable holds the value of that bar's close.
+When a script executes on the realtime bar, `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
+returns the **current** price of the symbol.
+
+Contrary to indicators, Pine strategies normally execute once at the close of realtime bars, but they can also be instructed to execute on each price/volume update. See the page on :ref:`<PageStrategies>` for more information.
 
 
 Time series
 -----------
 
-The main data type used in Pine scripts is called a *series*. It is a continuous list of values that stretches back in time from the current bar and where one value exists for each bar. While this structure may remind many of an array, a Pine series is totally different and thinking in terms of arrays will be detrimental to understanding this key Pine concept. You can read about series :ref:`here <PageTypeSystem_TimeSeries>` and get more information on how to use them :ref:`here <history_referencing_operator>`.
+The main data structure used in Pine scripts is called a *time series*. It is a continuous list of values that expands as the script executes on bars because a time series contains one value for each bar. Past values of the time series can be referenced using the Pine's history-referencing operator: 
+`[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__. ``close[1]`` refers to the value of `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ on the bar preceding the one where the script is executing.
 
+While this indexing mechanism may remind many programmers of arrays, a time series is different and thinking in terms of arrays will be detrimental to understanding this key Pine concept. A good comprehension of both the :ref:`execution model <PageExecutionModel>` and :ref:`time series <PageTypeSystem_TimeSeries>` is essential in understanding how Pine scripts work. If you have never worked with data organized in time series before, you will need practice to put them to work for you. Once you familiarize yourself with these key concepts, you will discover that by combining the use of time series with our built-in functions specifically designed to handle them efficiently, much can be accomplished in very few lines of Pine code.
 
-Understanding scripts
----------------------
-
-If you intend to write Pine scripts of any reasonable complexity, a good comprehension of both the Pine execution model and series is essential in understanding how Pine scripts work. If you have never worked with data organized in series before, you will need practice to put them to work for you. When you familiarize yourself with Pine’s fundamental concepts, you will discover that by combining the use of series with our built-in functions designed to efficiently process series information, much can be accomplished in very few lines of Pine code.
 
 
 Publishing scripts
 ------------------
+
+TradingView is home to a large community of Pine coders and millions of traders from all around the world. Once you beocme proficient enough in Pine, 
+you can choose to share your scripts with other traders. Before doing so, please take the time to learn Pine well-enough to supply traders with a reliable tool.
+All published scripts are anayzed by our team of moderators and must comply with our `Script Publishing Rules <https://www.tradingview.com/house-rules/?solution=43000590599>`__.  
+If want to use the Pine scripts for your own use, simply write them in the Pine Editor and add them to your chart from there; you don't have to publish them to use them. If you want to share your scripts with just a few friends, you can publish them privately and send your friends the url to that private publication. See :ref:`<PagePublishing>` for more information on the subject.
 
 
 
@@ -70,7 +76,6 @@ or by using the Editor's "More/Pine Script reference (pop-up)" menu. The Referen
 
 There are five different versions of Pine. Ensure the documentation you use corresponds to the Pine version you are coding with.
 
-The :ref:`<PageWhereCanIGetMoreInformation>` page lists other useful Pine-related content, including where to ask questions when you are stuck on code.
 
 
 Where to go from here?
@@ -87,7 +92,8 @@ This `Pine User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index
 - The :doc:`</concepts>` section is more task-oriented. It explains how to do things in Pine.
 - The :doc:`</writing>` section explores what's needed to write and publish scripts.
 - The :doc:`</faq>` section answers common questions from Pine coders.
-- The :doc:`</Release_notes>` section is where you can follow the frequent updates to the Pine.
+- The :doc:`</Release_notes>` page is where you can follow the frequent updates to the Pine.
 - The :doc:`</migration_guides>` section explains how to port between different versions of Pine.
-- The :doc:`</migration_guides>` section explains how to port between different versions of Pine.
-- The :doc:`</migration_guides>` section explains how to port between different versions of Pine.
+- The :ref:`<_PageWhereCanIGetMoreInformation>` page lists other useful Pine-related content, including where to ask questions when you are stuck on code.
+
+We wish you a successful journey in learning Pine... and trading!
