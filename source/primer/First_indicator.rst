@@ -47,7 +47,7 @@ We will now create our first working Pine script, an implementation of the
 
 Your first Pine script is running on your chart, which should look like this:
 
-.. image:: images/FirstIndicator-VersionA.png
+.. image:: images/FirstIndicator-Version1.png
 
 Let's look at our script's code, line by line:
 
