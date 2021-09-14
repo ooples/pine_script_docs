@@ -22,7 +22,7 @@ When a script is executing on a given bar, ``open[1]`` refers to the value of th
 time series on the previous bar.
 
 While time series may remind programmers of arrays, they are totally different. 
-Pine does use an array data structure, but it is completely different concept than a time series.
+Pine does use an array data structure, but it is a completely different concept than a time series.
 
 Time series in Pine, combined with its special type of runtime engine and built-in functions, 
 are what makes it easy to compute the running total of `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ 
