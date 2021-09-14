@@ -14,7 +14,7 @@ let us explore a bit more of the Pine landscape by sharing some pointers to guid
 "indicators" vs "strategies"
 ----------------------------
 
-Pine :ref:`<PageStrategies>` are used to backtest on historical data and forward test on open markets. 
+Pine :ref:`strategies <PageStrategies>` are used to backtest on historical data and forward test on open markets. 
 In addition to indicator calculations, they contain ``strategy.*()`` calls to send trade orders to Pine's broker emulator, which can then simulate their execution.
 Strategies display backtest results in the "Strategy Tester" tab at the bottom of the chart, next to the "Pine Editor" tab.
 
