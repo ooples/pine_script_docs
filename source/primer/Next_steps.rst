@@ -98,7 +98,7 @@ By going through it, you will be able to both learn the foundations of Pine and 
 Reading about key concepts and trying them out right away with real code is a productive way to learn any programming language.
 As you should have already done in :ref:`<PageFirstIndicator>`, copy this documentation’s examples in the Editor and play with them. Explore! You won’t break anything.
 
-This `Pine User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__ is organized like this:
+This is how the `Pine User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__ you are reading is organized:
 
 - The :doc:`</language>` section explains the main components of the Pine language and how scripts execute.
 - The :doc:`</concepts>` section is more task-oriented. It explains how to do things in Pine.
