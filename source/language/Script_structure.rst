@@ -8,6 +8,22 @@ Script Structure
 
 .. include:: <isonum.txt>
 
+Structure of the script
+=======================
+
+.. include:: <isonum.txt>
+
+A script in Pine follows this general structure::
+
+  <version>
+  <indicator() / strategy() / library()>
+  <code>
+
+usually consists of:
+
+<version>
+
+
 A script in Pine usually consists of:
 
 * ``//@version=5`` A compiler directive in a comment that specifies which version of Pine the script will use.
