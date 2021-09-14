@@ -40,7 +40,7 @@ It has already calculated once on those bars, so it does not need to recalculate
 When a script executes on a historical bar, the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ 
 built-in variable holds the value of that bar's close.
 When a script executes on the realtime bar, `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
-returns the **current** price of the symbol.
+returns the **current** price of the symbol until the bar closes.
 
 Contrary to indicators, Pine strategies normally execute once at the close of realtime bars, but they can also be instructed to execute on each price/volume update. See the page on :ref:`<PageStrategies>` for more information.
 
