@@ -29,7 +29,13 @@ Both indicators and strategies can run in either overlay mode (over the chart's 
 How scripts are executed
 ------------------------
 
-A Pine script is **not** like programs in many programming languages that execute once and then stop. In the Pine *runtime* environment, a script runs in the equivalent of an invisible loop where it is executed once on each bar of whatever chart you are on, from left to right. Those bars having already closed, for the most part, they are called *historical bars*. When execution reaches the chart's last bar and the market is open, it is on the *realtime bar*. The script then executes once every time a price or volume change is detected, and one last time for that realtime bar when it closes. That realtime bar then becomes an *elapsed realtime bar*. Note that when the script executes in realtime, it does not recalculate on all the chart's historical bars on every price/volume update. It has already calculated once on those bars, so it does not need to recalculate them on every chart tick. See the :ref:`<PageExecutionModel>` page for more information.
+A Pine script is **not** like programs in many programming languages that execute once and then stop. In the Pine *runtime* environment, a script runs in the equivalent of an invisible loop where it is executed once on each bar of whatever chart you are on, from left to right. 
+Chart bars that have already closed when the script executes on them are called *historical bars*. 
+When execution reaches the chart's last bar and the market is open, it is on the *realtime bar*. 
+The script then executes once every time a price or volume change is detected, and one last time for that realtime bar when it closes. 
+That realtime bar then becomes an *elapsed realtime bar*. Note that when the script executes in realtime, 
+it does not recalculate on all the chart's historical bars on every price/volume update. 
+It has already calculated once on those bars, so it does not need to recalculate them on every chart tick. See the :ref:`<PageExecutionModel>` page for more information.
 
 When a script executes on a historical bar, the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ 
 built-in variable holds the value of that bar's close.
