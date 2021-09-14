@@ -79,9 +79,12 @@ Our two main sources of documentation on Pine are:
 
 The `Pine User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__ is in HTML format and in English only.
 
-The `Pine Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__ exists in two formats: the HTML format we just linked to, 
+The `Pine Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__ documents what each variable, function or Pine keyword does.
+It is an essential tool for all Pine programmers, and your life will be miserable if you try to write programs in Pine without consulting it.
+It exists in two formats: the HTML format we just linked to, 
 and the popup version, which can be accessed from the Pine Editor, by either CTRL + clicking on a keyword, 
 or by using the Editor's "More/Pine Script reference (pop-up)" menu. The Reference Manual is translated in other languages.
+
 
 There are five different versions of Pine. Ensure the documentation you use corresponds to the Pine version you are coding with.
 
