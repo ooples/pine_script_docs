@@ -40,10 +40,10 @@ We will now create our first working Pine script, an implementation of the
     plot(signal, color = color.orange)
 
 - Start by bringing up the "Open" dropdown menu at the top right of the Editor and choose "New blank indicator". 
-- Then copy the example script below, taking care not to include the line numbers in your selection. 
+- Then copy the example script above, taking care not to include the line numbers in your selection. 
 - Select all the code already in the editor and replace it with the example script. 
 - Click "Save" and choose a name for your script. Your script is now saved in TradingView's cloud, but under your account's name. Nobody but you can use it.
-- Click "Add to Chart" in the Editor's menu bar. The MACD indicator appears in a separate *Pane* under your  chart.
+- Click "Add to Chart" in the Editor's menu bar. The MACD indicator appears in a separate *Pane* under your chart.
 
 Your first Pine script is running on your chart, which should look like this:
 
@@ -81,7 +81,7 @@ Line 10: ``plot(signal, color = color.orange)``
 Second version
 --------------
 
-The first version of our script calculates MACD "manually", but because Pine is designed for indicator- and strategy-writing,
+The first version of our script calculated MACD "manually", but because Pine is designed for indicator- and strategy-writing,
 built-in Pine functions exist for many common indicators, including one for... MACD: `ta.macd() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}macd>`__.
 
 This is the second version of our script:
@@ -91,17 +91,35 @@ This is the second version of our script:
 
     //@version=5
     indicator("MACD #2")
-    fast = 12
-    slow = 26
-    fastMA = ta.ema(close, fast)
-    slowMA = ta.ema(close, slow)
-    macd = fastMA - slowMA
-    signal = ta.sma(macd, 9)
-    plot(macd, color = color.blue)
-    plot(signal, color = color.orange)
+    fastInput = input(12, "Fast length")
+    slowInput = input(26, "Slow length")
+    [macdLine, signalLine, histLine] = ta.macd(close, fastInput, slowInput, 9)
+    plot(macdLine, color = color.blue)
+    plot(signalLine, color = color.orange)
 
-inputs
-built-in macd
+Note that we have:
+
+- Added inputs so we can change the lengths for the MAs
+- We now use the `ta.macd() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}macd>`__ 
+  Pine built-in to calculate our MACD, which saves us three line and makes our code easier to read.
+
+Let's repeat the same process as before to copy that code in a new indicator:
+
+- Start by bringing up the "Open" dropdown menu at the top right of the Editor and choose "New blank indicator". 
+- Then copy the example script above, again taking care not to include the line numbers in your selection. 
+- Select all the code already in the editor and replace it with the second version of our script. 
+- Click "Save" and choose a name for your script different than the previous one.
+- Click "Add to Chart" in the Editor's menu bar. The "MACD #2" indicator appears in a separate *Pane* under the "MACD #1" indicator.
+
+Your second Pine script is running on your chart. If yo double-click on the indicator's name on your chart, 
+you will bring up the script's "Settings/Inputs" tab, where you can now change the slow and fast lengths:
+
+.. image:: images/FirstIndicator-Version2.png
+
+Let's look at the lines that have changed in the second version of our script:
+
+Line 1: ``//@version=5``
+    This is a comment containing a compiler directive that tells the compiler the script will use version 5 of Pine.
 
 
 
