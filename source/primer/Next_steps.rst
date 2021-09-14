@@ -95,7 +95,7 @@ Where to go from here?
 
 This `Pine User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__ contains numerous examples of code used to illustrate the concepts we discuss.
 By going through it, you will be able to both learn the foundations of Pine and study the example scripts. 
-Read about key concepts and trying them out right away with real code is a peoductive way to learn.
+Reading about key concepts and trying them out right away with real code is a productive way to learn any programming language.
 As you should have already done in :ref:`<PageFirstIndicator>`, copy this documentation’s examples in the Editor and play with them. Explore! You won’t break anything.
 
 This `Pine User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__ is organized like this:
