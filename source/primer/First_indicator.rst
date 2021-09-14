@@ -81,7 +81,7 @@ Line 10: ``plot(signal, color = color.orange)``
 Second version
 --------------
 
-The first version of our script calculated MACD "manually", but because Pine is designed for indicator- and strategy-writing,
+The first version of our script calculated MACD "manually", but because Pine is designed to write indicators and strategies,
 built-in Pine functions exist for many common indicators, including one for... MACD: `ta.macd() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}macd>`__.
 
 This is the second version of our script:
