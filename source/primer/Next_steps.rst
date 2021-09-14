@@ -18,7 +18,7 @@ Our two main sources of documentation on Pine are:
 - This `Pine User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__
 - Our `Pine Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__
 
-There are five different versions of Pine, so be sure that the documentation you are reading is that of the Pine version you are using.
+There are five different versions of Pine, so be sure the documentation you use corresponds to the Pine version you are coding with.
 
 See 
 
