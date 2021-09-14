@@ -12,11 +12,11 @@ In this page, we explore a bit more of the Pine landscape. We give brief explana
 Getting around the Pine documentation
 -------------------------------------
 
-While reading code from published scripts is no doubt useful, spending time in our Pine documentation will be necessary to attain any degree of proficiency in Pine.
+While reading code from published scripts is no doubt useful, spending time in our documentation will be necessary to attain any degree of proficiency in Pine.
 Our two main sources of documentation on Pine are:
 
-- This `Pine User Manual <https://www.tradingview.com/pine-script-reference/v5/#>`__
-- Our `Pine Reference Manual <https://www.tradingview.com/pine-script-reference/v5/#>`__
+- This `Pine User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__
+- Our `Pine Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__
 
 There are five different versions of Pine, so be sure that the documentation you are reading is that of the Pine version you are using.
 
@@ -37,7 +37,7 @@ It is thus advantageous to use indicators whenever you can.
 
 Both indicators and strategies can run in either overlay mode (over the chart's bars) or pane mode (in a separate section below or over the chart). Both can also plot information in their respective space, and both can generate :ref:`alert events <PageAlerts>`.
 
-Strategies differ from indicators in how the execute. The :ref:`<PageExecutionModel>` page explains 
+Strategies differ from indicators in how the execute. The  :ref:`<PageStrategies>` page explains how.
 
 
 How scripts run on charts
