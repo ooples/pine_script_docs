@@ -49,8 +49,8 @@ They can also be configured to execute on each price/volume update if that is wh
 Time series
 -----------
 
-The main data structure used in Pine scripts is called a *time series*. Time series contain one value for each bar the script executes on, so they continuously expand as the script executes on more bars. Past values of the time series can be referenced using the Pine's history-referencing operator: 
-`[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__. ``close[1]`` refers to the value of `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ on the bar preceding the one where the script is executing.
+The main data structure used in Pine scripts is called a *time series*. Time series contain one value for each bar the script executes on, so they continuously expand as the script executes on more bars. Past values of the time series can be referenced using Pine's history-referencing operator: 
+`[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__. ``close[1]``, for example, refers to the value of `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ on the bar preceding the one where the script is executing.
 
 While this indexing mechanism may remind many programmers of arrays, a time series is different and thinking in terms of arrays will be detrimental to understanding this key Pine concept. A good comprehension of both the :ref:`execution model <PageExecutionModel>` and :ref:`time series <PageTypeSystem_TimeSeries>` is essential in understanding how Pine scripts work. If you have never worked with data organized in time series before, you will need practice to put them to work for you. Once you familiarize yourself with these key concepts, you will discover that by combining the use of time series with our built-in functions specifically designed to handle them efficiently, much can be accomplished in very few lines of Pine code.
 
