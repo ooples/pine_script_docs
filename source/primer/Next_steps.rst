@@ -8,11 +8,11 @@ In this page, we explore a bit more of the Pine landscape. We give brief explana
 
 "indicator" vs "strategy"
 -------------------------
-Pine strategies are used to run backtests. In addition to normal script calculations, they also contain ``strategy.*()`` calls to send buy and sell orders to the broker emulator, which can then simulate their execution. See :doc:`/essential/Strategies`.
+Pine strategies are used to run backtests. In addition to indicator calculations, they also contain ``strategy.*()`` calls to send buy and sell orders to the broker emulator, which can then simulate their execution. See :doc:`/essential/Strategies`.
 
-Pine indicator, as the one in the previous example, also contain calculations, but cannot be used in backtesting. Because they do not make use of the broker emulator, they use less resources and will run faster.
+Pine indicators also contain calculations, but cannot be used in backtesting. Because they do not make use of the broker emulator, they use less resources and will run faster.
 
-Both strategies and studies can run in either overlay or pane mode, and plot information in that space. Both can also generate alert events. See :doc:`/essential/Alerts`.
+Both indicators and strategies can run in either overlay mode (over the chart's bars) or pane mode (in a separate section below or over the chart). Both can also plot information in their respective space, and both can generate :ref:`alert events <PageAlerts>.
 
 
 
