@@ -6,7 +6,9 @@ Next steps
 .. contents:: :local:
     :depth: 3
 
-In this page, we explore a bit more of the Pine landscape. We give brief explanations of some fundamental concepts that will be useful to go further than your :ref:`<PageFirstSteps>` and your :ref:`<PageFirstIndicator>`.
+After your :ref:`<PageFirstSteps>` and your :ref:`<PageFirstIndicator>`, 
+in this page we explore a bit more of the Pine landscape by sharing some pointers that should prove useful in your journey to learn Pine.
+
 
 
 Getting around the Pine documentation
@@ -22,7 +24,7 @@ The `Pine User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.
 
 The `Pine Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__ exists in two formats: the HTML format we just linked to, 
 and the popup version, which can be accessed from the Pine Editor, by either CTRL + clicking on a keyword, 
-or by using the Editor's "More/Pine Script reference (pop-up)" menu.
+or by using the Editor's "More/Pine Script reference (pop-up)" menu. The Reference Manual is translated in other languages than English.
 
 There are five different versions of Pine, so be sure the documentation you use corresponds to the Pine version you are coding with.
 
