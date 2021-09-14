@@ -9,16 +9,35 @@ Next steps
 In this page, we explore a bit more of the Pine landscape. We give brief explanations of some fundamental concepts that will be useful to go further than your :ref:`<PageFirstSteps>` and your :ref:`<PageFirstIndicator>`.
 
 
-"indicator" vs "strategy"
--------------------------
-Pine :ref:`<PageStrategies>` are used to backtest and forward test. In addition to indicator calculations, 
-they contain ``strategy.*()`` calls to send trade orders to Pine's broker emulator, which can then simulate their execution.
+Getting around the Pine documentation
+-------------------------------------
+
+While reading code from published scripts is no doubt useful, spending time in our Pine documentation will be necessary to attain any degree of proficiency in Pine.
+Our two main sources of documentation on Pine are:
+
+- This `Pine User Manual <https://www.tradingview.com/pine-script-reference/v5/#>`__
+- Our `Pine Reference Manual <https://www.tradingview.com/pine-script-reference/v5/#>`__
+
+There are five different versions of Pine, so be sure that the documentation you are reading is that of the Pine version you are using.
+
+See 
+
+
+
+"indicators" vs "strategies"
+----------------------------
+
+Pine :ref:`<PageStrategies>` are used to backtest on historical data and forward test on open markets. 
+In addition to indicator calculations, they contain ``strategy.*()`` calls to send trade orders to Pine's broker emulator, which can then simulate their execution.
+Strategies display backtest results in the "Strategy Tester" tab at the bottom of the chart, next to the "Pine Editor" tab.
 
 Pine indicators also contain calculations, but cannot be used in backtesting. 
 Because they do not make use of the broker emulator, they use less resources and will run faster.
 It is thus advantageous to use indicators whenever you can.
 
-Both indicators and strategies can run in either overlay mode (over the chart's bars) or pane mode (in a separate section below or over the chart). Both can also plot information in their respective space, and both can generate :ref:`alert events <PageAlerts>.
+Both indicators and strategies can run in either overlay mode (over the chart's bars) or pane mode (in a separate section below or over the chart). Both can also plot information in their respective space, and both can generate :ref:`alert events <PageAlerts>`.
+
+Strategies differ from indicators in how the execute. The :ref:`<PageExecutionModel>` page explains 
 
 
 How scripts run on charts
@@ -39,6 +58,11 @@ Understanding scripts
 ---------------------
 
 If you intend to write Pine scripts of any reasonable complexity, a good comprehension of both the Pine execution model and series is essential in understanding how Pine scripts work. If you have never worked with data organized in series before, you will need practice to put them to work for you. When you familiarize yourself with Pine’s fundamental concepts, you will discover that by combining the use of series with our built-in functions designed to efficiently process series information, much can be accomplished in very few lines of Pine code.
+
+
+Publishing scripts
+------------------
+
 
 
 Where to go from here?
