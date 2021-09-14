@@ -3,6 +3,7 @@
 Next steps
 ==========
 
+In this page, we explore a bit more of the Pine landscape. We give brief explanations of some fundamental concepts that will be useful to go further than your :ref:`<PageFirstSteps>` and your :ref:`<PageFirstIndicator>`
 
 
 "indicator" vs "strategy"
@@ -30,7 +31,7 @@ The main data type used in Pine scripts is called a *series*. It is a continuous
 
 Understanding scripts
 ---------------------
-If you intend to write Pine scripts of any reasonable complexity, a good comprehension of both the Pine execution model and series is essential in understanding how Pine scripts work. If you have never worked with data organized in series before, you will need practice in putting them to work for you. When you familiarize yourself with Pine’s fundamental concepts, you will discover that by combining the use of series with our built-in functions designed to efficiently process series information, much can be accomplished in very few lines of Pine code.
+If you intend to write Pine scripts of any reasonable complexity, a good comprehension of both the Pine execution model and series is essential in understanding how Pine scripts work. If you have never worked with data organized in series before, you will need practice to put them to work for you. When you familiarize yourself with Pine’s fundamental concepts, you will discover that by combining the use of series with our built-in functions designed to efficiently process series information, much can be accomplished in very few lines of Pine code.
 
 
 Where to go from here?
