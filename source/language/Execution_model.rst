@@ -6,7 +6,7 @@ Execution model
 .. contents:: :local:
     :depth: 2
 
-The execution model of the Pine runtime is intimately linked to Pine's :ref:`time series <PageTimeSeries>` and :ref:`type system <PageTypeSystem>` concepts. 
+The execution model of the Pine runtime is intimately linked to Pine's :ref:`time series <PageTimeSeries>` and :ref:`type system <PageTypeSystem>`. 
 Understanding all three is key to making the most of the power of Pine.
 
 The execution model determines how your script is executed on charts, and thus how the code you write in scripts works. 
