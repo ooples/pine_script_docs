@@ -6,12 +6,13 @@ Next steps
 .. contents:: :local:
     :depth: 3
 
-In this page, we explore a bit more of the Pine landscape. We give brief explanations of some fundamental concepts that will be useful to go further than your :ref:`<PageFirstSteps>` and your :ref:`<PageFirstIndicator>`
+In this page, we explore a bit more of the Pine landscape. We give brief explanations of some fundamental concepts that will be useful to go further than your :ref:`<PageFirstSteps>` and your :ref:`<PageFirstIndicator>`.
 
 
 "indicator" vs "strategy"
 -------------------------
-Pine strategies are used to backtest and forward test. In addition to indicator calculations, they contain ``strategy.*()`` calls to send buy and sell orders to the broker emulator, which can then simulate their execution. See :doc:`/essential/Strategies`.
+Pine :ref:`<PageStrategies>` are used to backtest and forward test. In addition to indicator calculations, 
+they contain ``strategy.*()`` calls to send trade orders to Pine's broker emulator, which can then simulate their execution.
 
 Pine indicators also contain calculations, but cannot be used in backtesting. Because they do not make use of the broker emulator, they use less resources and will run faster.
 
