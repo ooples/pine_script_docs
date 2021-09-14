@@ -119,10 +119,13 @@ you will bring up the script's "Settings/Inputs" tab, where you can now change t
 Let's look at the lines that have changed in the second version of our script:
 
 Line 2: ``indicator("MACD #2")``
-    We have changed ``#1`` to ``#2`` so that the second version of our indicator displays a different name on the chart.
+    We have changed ``#1`` to ``#2`` so the second version of our indicator displays a different name on the chart.
 Line 3: ``fastInput = input(12, "Fast length")``
-    Instead of assigning a value to a variable, we have used the `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__ 
+    Instead of assigning a constant value to a variable, we have used the `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__ 
     function so we can change the value in our script's "Settings/Inputs" tab. ``12`` will be the default value and the field's label will be ``"Fast length"``.
+    If the value is changed in the "Inputs" tab, the ``fastInput`` variable's content will contain the new value and the script will re-execute on the chart with that new value.
+    Note that, as our :ref:`Pine Style Guide <PageStyleGuide>` recommends, we add ``Input`` to the end of the variable's name to remind us, later in the script,
+    that its value comes from a user input.
 Line 4: ``slowInput = input(26, "Slow length")``
     We do the same for the slow length, taking care to use a different variable name, default value and text string for the field's label.
 Line 5: ``[macdLine, signalLine, histLine] = ta.macd(close, fastInput, slowInput, 9)``
