@@ -129,11 +129,16 @@ Line 3: ``fastInput = input(12, "Fast length")``
 Line 4: ``slowInput = input(26, "Slow length")``
     We do the same for the slow length, taking care to use a different variable name, default value and text string for the field's label.
 Line 5: ``[macdLine, signalLine, histLine] = ta.macd(close, fastInput, slowInput, 9)``
-    This is where we call the `ta.macd() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}macd>`__ built-in.
-    We perform all the first version's calculation in one line.
+    This is where we call the `ta.macd() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}macd>`__ built-in to 
+    perform all the first version's calculations in one line only. The function requires four parameters (the values after the function name, enclosed in parentheses).
+    It returns three values into the three variables instead of only one, like the functions we used until now, which is why we need to enclose the list of three 
+    variables receiving the function's result in square brackets, to the left of the ``=`` sign.
+    Note that two of the values we pass to the function are the "input" variables containing the fast and slow lengths: ``fastInput`` and ``slowInput``.
+Line 6 and 7:
+    The variable names we are plotting there have changed, but the lines are doing the same thing as in our first version.
 
 Our second version performs the same calculations as our first, but we can change the two lengths used to calculate it. 
-Our code is also simpler and shorter by three lines.
+Our code is also simpler and shorter by three lines. We have improved our script.
 
 
 
