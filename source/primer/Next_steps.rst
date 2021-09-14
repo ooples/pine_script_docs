@@ -102,7 +102,7 @@ This is how the `Pine User Manual <https://www.tradingview.com/pine-script-docs/
 
 - The :doc:`</language>` section explains the main components of the Pine language and how scripts execute.
 - The :doc:`</concepts>` section is more task-oriented. It explains how to do things in Pine.
-- The :doc:`</writing>` section explores what's needed to write and publish scripts.
+- The :doc:`</writing>` section explores tools and tricks that will help you write and publish scripts.
 - The :doc:`</faq>` section answers common questions from Pine coders.
 - The :doc:`</Release_notes>` page is where you can follow the frequent updates to the Pine.
 - The :doc:`</migration_guides>` section explains how to port between different versions of Pine.
