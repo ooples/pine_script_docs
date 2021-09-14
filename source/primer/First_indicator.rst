@@ -111,17 +111,23 @@ Let's repeat the same process as before to copy that code in a new indicator:
 - Click "Save" and choose a name for your script different than the previous one.
 - Click "Add to Chart" in the Editor's menu bar. The "MACD #2" indicator appears in a separate *Pane* under the "MACD #1" indicator.
 
-Your second Pine script is running on your chart. If yo double-click on the indicator's name on your chart, 
+Your second Pine script is running on your chart. If you double-click on the indicator's name on your chart, 
 you will bring up the script's "Settings/Inputs" tab, where you can now change the slow and fast lengths:
 
 .. image:: images/FirstIndicator-Version2.png
 
 Let's look at the lines that have changed in the second version of our script:
 
-Line 1: ``//@version=5``
-    This is a comment containing a compiler directive that tells the compiler the script will use version 5 of Pine.
-
-
+Line 2: ``indicator("MACD #2")``
+    We have changed ``#1`` to ``#2`` so that the second version of our indicator displays a different name on the chart.
+Line 3: ``fastInput = input(12, "Fast length")``
+    Instead of assigning a value to a variable, we have used the `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__ 
+    function so we can change the value in our script's "Settings/Inputs" tab. ``12`` will be the default value and the field's label will be ``"Fast length"``.
+Line 4: ``slowInput = input(26, "Slow length")``
+    We do the same for the slow length, taking care to use a different variable name, default value and text string for the field's label.
+Line 5: ``[macdLine, signalLine, histLine] = ta.macd(close, fastInput, slowInput, 9)``
+    This is where we call the `ta.macd() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}macd>`__ built-in.
+    We perform all the first version's calculation in one line.
 
 Third version
 -------------
