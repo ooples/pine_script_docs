@@ -11,7 +11,7 @@ In this page, we explore a bit more of the Pine landscape. We give brief explana
 
 "indicator" vs "strategy"
 -------------------------
-Pine strategies are used to run backtests. In addition to indicator calculations, they also contain ``strategy.*()`` calls to send buy and sell orders to the broker emulator, which can then simulate their execution. See :doc:`/essential/Strategies`.
+Pine strategies are used to backtest and forward test. In addition to indicator calculations, they also contain ``strategy.*()`` calls to send buy and sell orders to the broker emulator, which can then simulate their execution. See :doc:`/essential/Strategies`.
 
 Pine indicators also contain calculations, but cannot be used in backtesting. Because they do not make use of the broker emulator, they use less resources and will run faster.
 
