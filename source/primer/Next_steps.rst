@@ -3,6 +3,9 @@
 Next steps
 ==========
 
+.. contents:: :local:
+    :depth: 3
+
 In this page, we explore a bit more of the Pine landscape. We give brief explanations of some fundamental concepts that will be useful to go further than your :ref:`<PageFirstSteps>` and your :ref:`<PageFirstIndicator>`
 
 
