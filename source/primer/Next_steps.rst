@@ -7,7 +7,7 @@ Next steps
     :depth: 3
 
 After your :ref:`<PageFirstSteps>` and your :ref:`<PageFirstIndicator>`, 
-we explore a bit more of the Pine landscape by sharing some pointers to guide you in your journey to learn Pine.
+let us explore a bit more of the Pine landscape by sharing some pointers to guide you in your journey to learn Pine.
 
 
 
