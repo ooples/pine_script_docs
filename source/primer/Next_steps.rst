@@ -29,6 +29,12 @@ or by using the Editor's "More/Pine Script reference (pop-up)" menu. The Referen
 There are five different versions of Pine, so be sure the documentation you use corresponds to the Pine version you are coding with.
 
 
+Stuck on a piece of code?
+-------------------------
+
+You can ask questions on Pine programming on `xxx <https://www.tradingview.com/pine-script-reference/v5/#>`__
+
+
 
 "indicators" vs "strategies"
 ----------------------------
