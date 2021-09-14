@@ -54,20 +54,36 @@ The declaration statement:
 Code
 ----
 
-Pine code consists of a series of statements which implement the script's algorithm.
-Each statement is usually placed on a separate line. It is possible to place more
-than one statement on a line by using the comma (``,``) as a separator.
-Lines containing statements that are not part of local blocks cannot begin with
-white space. Their first character must also be the line's first character.
+Pine code consists of a series of statements which implement the script's algorithm:
+
+- Each statement is usually placed on a separate line, but it possible to place more than one statement on a line by using the comma (``,``) as a separator.
+- Lines that are not part of a *local block* (the code inside user-defined functions or statements that require indentation such as
+  `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__, 
+  `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__, 
+  `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__, etc.) 
+  cannot begin with white space (space or tab). Their first character must also be the line's first character.
+- Lines can contain comments.
+- Lines can be wrapped.
+
+Each type of script has distinct requirements:
+
+- Indicators must contain at least one function call which produces output on the chart
+  (e.g., `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__, 
+  `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__,
+  `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__,
+  `barcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_barcolor>`__,
+  `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__, etc.).
+- Strategies must contain at least one ``strategy.*()`` call, e.g., 
+  `strategy.entry <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}entry>`__.
+- Libraries must contain at least one library function and cannot contain ``strategy.*()`` calls.
+
+
 Statements may be one of three kinds:
 
     -  :ref:`variable declarations <variable_declaration>`
     -  :doc:`function declarations <Declaring_functions>`
     -  :doc:`functions and annotations calls <Functions_and_annotations>`
 
-* An *indicator* must contain at least one function/annotation call which produces some output on the chart
-  (e.g., ``plot``, ``plotshape``, ``barcolor``, ``line.new``, etc.).
-  A *strategy* must contain at least one ``strategy.*`` call, e.g., ``strategy.entry``.
 
   The simplest valid Pine v5 study can be generated using *Pine Editor* |rarr| *Open* |rarr| *New blank indicator*::
 
