@@ -108,4 +108,4 @@ This is how the `Pine User Manual <https://www.tradingview.com/pine-script-docs/
 - The :doc:`</migration_guides>` section explains how to port between different versions of Pine.
 - The :ref:`<_PageWhereCanIGetMoreInformation>` page lists other useful Pine-related content, including where to ask questions when you are stuck on code.
 
-We wish you a successful journey in learning Pine... and trading!
+We wish you a successful journey with Pine... and trading!
