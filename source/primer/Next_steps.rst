@@ -7,7 +7,7 @@ Next steps
     :depth: 3
 
 After your :ref:`<PageFirstSteps>` and your :ref:`<PageFirstIndicator>`, 
-in this page we explore a bit more of the Pine landscape by sharing some pointers that should prove useful in your journey to learn Pine.
+in this page we explore a bit more of the Pine landscape by sharing some pointers to guide you in your journey to learn Pine.
 
 
 
@@ -27,6 +27,11 @@ and the popup version, which can be accessed from the Pine Editor, by either CTR
 or by using the Editor's "More/Pine Script reference (pop-up)" menu. The Reference Manual is translated in other languages.
 
 There are five different versions of Pine. Ensure the documentation you use corresponds to the Pine version you are coding with.
+
+
+Other learning resources
+------------------------
+
 
 
 Stuck on a piece of code?
