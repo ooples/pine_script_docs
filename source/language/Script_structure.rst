@@ -8,36 +8,58 @@ Script Structure
 
 .. include:: <isonum.txt>
 
-Structure of the script
-=======================
-
-.. include:: <isonum.txt>
 
 A script in Pine follows this general structure::
 
   <version>
-  <indicator() / strategy() / library()>
+  <declaration_statement>
   <code>
 
-usually consists of:
-
-<version>
 
 
-A script in Pine usually consists of:
+Version
+-------
 
-* ``//@version=5`` A compiler directive in a comment that specifies which version of Pine the script will use.
-  If the ``@version`` directive is missing, version 1 will be used. It is strongly recommended to always
-  use the latest version available.
-* An `indicator <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ or a
-  `strategy <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__ annotation call.
-  Their parameters define the script's title and other properties.
-* A series of statements which implement the script's algorithm.
-  Each statement is usually placed on a separate line. It is possible to place more
-  than one statement on a line by using the comma (``,``) as a separator.
-  Lines containing statements that are not part of local blocks cannot begin with
-  white space. Their first character must also be the line's first character.
-  Statements may be one of three kinds:
+A compiler directive in the following form tells the compiler which of the versions of Pine the script is written in::
+
+    //@version=5
+    
+- The version number can be 1 to 5.
+- The compiler directive is not mandatory, but if omitted, version 1 is assumed. It is strongly recommended to always
+  use the latest version.
+- While it is synctactically correct to place the directive anywhere in the script, it is much more useful to readers when placed at the top of the script.
+
+Notable changes to the language are documented in the :ref:`<PageReleaseNotes>`.
+
+
+
+Declaration statement
+---------------------
+
+The script must also contain a *declaration statement*, which is a call to one of these functions:
+
+- `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__
+- `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
+- `library() <https://www.tradingview.com/pine-script-reference/v5/#fun_library>`__
+
+The declaration statement:
+
+- Identifies the type of the script, which in turn dictates which content is allowed in it, and how it be used and executed.
+- Sets key properties of the script such as its name, where it will appear when it is added to a chart, the precision and format of the values it displays, 
+  and certain values that govern its runtime behavior, such as the maximum number of drawing objects it will display on the chart. 
+  With strategies, the properties include parameters that control backtesting such as initial capital, commission, slippage, etc.
+
+
+
+Code
+----
+
+Pine code consists of a series of statements which implement the script's algorithm.
+Each statement is usually placed on a separate line. It is possible to place more
+than one statement on a line by using the comma (``,``) as a separator.
+Lines containing statements that are not part of local blocks cannot begin with
+white space. Their first character must also be the line's first character.
+Statements may be one of three kinds:
 
     -  :ref:`variable declarations <variable_declaration>`
     -  :doc:`function declarations <Declaring_functions>`
@@ -67,22 +89,11 @@ A script in Pine usually consists of:
         strategy.entry("My Short Entry Id", strategy.short)
 
 
-Versions
---------
-
-There are currently five versions of the Pine Script Language. A compiler
-directive must be used in the first line of a script to specify the version or Pine
-used by the script: ``//@version=N`` where ``N`` is the version number (1--5). Note that
-different Pine Script Language versions are incompatible with each other.
-
-Notable changes to the language are documented in the :ref:`<PageReleaseNotes>`.
-
-
 
 Comments
 --------
 
-Pine Script supports single-line comments. Any text from the symbol
+Pine supports single-line comments. Any text from the symbol
 ``//`` until the end of the line is considered as comment. An example::
 
     //@version=5
