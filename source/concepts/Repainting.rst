@@ -1,5 +1,7 @@
-Indicator repainting
-====================
+.. _PageRepainting:
+
+Repainting
+==========
 
 Historical data does not include records of intra-bar movements of price;
 only open, high, low and close (OHLC). This leads to a script sometimes

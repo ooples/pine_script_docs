@@ -449,7 +449,7 @@ to append the new label's ID to the end of the array, making our array size one 
 
 Lastly, we de-queue the oldest label by removing the array's first element using 
 `array.shift() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}shift>`__ and deleting the label referenced by that array element's value. 
-As we have now de-queued an element from our queue, the array contains ``i_pivotCount`` elements once again. 
+As we have now de-queued an element from our queue, the array contains ``pivotCountInput`` elements once again. 
 Note that on the dataset's first bars we will be deleting ``na`` label IDs until the maximum number of labels has been created, 
 but this does not cause runtime errors. Let's look at our code::
 

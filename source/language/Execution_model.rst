@@ -6,12 +6,23 @@ Execution model
 .. contents:: :local:
     :depth: 2
 
+The execution model of the Pine runtime is intimately linked to Pine's :ref:`time series <PageTimeSeries>` and :ref:`type system <PageTypeSystem>` concepts. 
+Understanding all three is key to making the most of the power of Pine.
+
+The execution model determines how your script is executed on charts, and thus how the code you write in scripts works. 
+Your Pine code would do nothing were it not for Pine's runtime, which kicks in after your code has compiled and it must run a chart 
+because one of the :ref:`events triggering the execution of a script <PageExecutionModel_Events>` has occurred.
+
 When a Pine script is loaded on a chart it executes once on each historical bar using the available OHLCV (open, high, low, close, volume) values for each bar. Once the script's execution reaches the rightmost bar in the dataset, if trading is currently active on the chart's symbol, then Pine *indicators* will execute once every time an *update* occurs, i.e., price or volume changes. Pine *strategies* will by default only execute when the rightmost bar closes, but they can also be configured to execute on every update, like indicators do.
 
-All symbol/timeframe pairs have a dataset comprising a limited number of bars. When you scroll a chart to the left to see the dataset's earlier bars, the corresponding bars are loaded on the chart. The loading process stops when there are no more bars for that particular symbol/timeframe pair or approximately 10000 bars have been loaded [#all_available_bars]_. You can scroll the chart to the left until the very first bar of the dataset, which has an index value of 0
+All symbol/timeframe pairs have a dataset comprising a limited number of bars. When you scroll a chart to the left to see the dataset's earlier bars, the corresponding bars are loaded on the chart. The loading process stops when there are no more bars for that particular symbol/timeframe pair or the maximum number of bars your account type permits has been loaded [#all_available_bars]_. You can scroll the chart to the left until the very first bar of the dataset, which has an index value of 0
 (see `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__).
 
-All bars in a dataset are *historical bars*, except the rightmost one if a trading session is active. When trading is active in the rightmost bar, it is called the *realtime bar*. The realtime bar updates when a price or volume change is detected. When the realtime bar closes it becomes a historical bar and a new realtime bar opens.
+When the script first runs on a chart, all bars in a dataset are *historical bars*, except the rightmost one if a trading session is active. 
+When trading is active on the rightmost bar, it is called the *realtime bar*. The realtime bar updates when a price or volume change is detected. 
+When the realtime bar closes, it becomes an *elapsed realtime bar* and a new realtime bar opens.
+
+
 
 Calculation based on historical bars
 ------------------------------------
@@ -42,6 +53,8 @@ After execution and plotting on the first bar, the script is executed on the dat
 
 .. image:: images/execution_model_calculation_on_history.png
 
+
+
 Calculation based on realtime bars
 ----------------------------------
 
@@ -65,15 +78,18 @@ To summarize the realtime bar process:
     * Variables are rolled back **before every realtime update**.
     * Variables are committed **once at the closing bar update**.
 
+
+.. _PageExecutionModel_Events:
+
 Events triggering the execution of a script
 -------------------------------------------
 
 A script is executed on the complete set of bars on the chart when one of the following events occurs:
 
     * A new symbol or timeframe is loaded on a chart.
-    * A script is saved or added to the chart from the Pine Editor.
-    * A value is modified in the script's *Settings/Inputs* dialog box.
-    * A value is modified in a strategy's *Settings/Properties* dialog box.
+    * A script is saved or added to the chart, from the Pine Editor or the chart's "Indicators & strategies" dialog box.
+    * A value is modified in the script's "Settings/Inputs" dialog box.
+    * A value is modified in a strategy's "Settings/Properties" dialog box.
     * A browser refresh event is detected.
 
 A script is executed on the realtime bar when trading is active and:
@@ -81,17 +97,23 @@ A script is executed on the realtime bar when trading is active and:
     * One of the above conditions occurs, causing the script to execute on the open of the realtime bar, or
     * The realtime bar updates because a price or volume change was detected.
 
-Note that when a chart is left untouched when the market is active, a succession of realtime bars which have been opened and then closed will trail the current realtime bar. While these bars will have been *confirmed* because their variables have all been committed, the script will not yet have executed on them in their *historical* state, since they did not exist when the script was last run on the chart's dataset.
+Note that when a chart is left untouched when the market is active, a succession of realtime bars which have been opened and then closed will trail the current realtime bar. While these *elapsed realtime bars* will have been *confirmed* because their variables have all been committed, 
+the script will not yet have executed on them in their *historical* state, since they did not exist when the script was last run on the chart's dataset.
 
-When an event triggers the execution of the script on the chart and causes it to run on those bar which have now become historical bars, the script's calculation can sometimes vary from what they were when calculated on the last closing update of the same bars when they were realtime bars. This is due to slight variations between the OHLCV values saved at the close of realtime bars and those fetched from data feeds when the same bars have become historical bars. This behavior is also referred to as *repainting*.
+When an event triggers the execution of the script on the chart and causes it to run on those bars which have now become historical bars, 
+the script's calculation can sometimes vary from what they were when calculated on the last closing update of the same bars when they were realtime bars. 
+This can be caused by slight variations between the OHLCV values saved at the close of realtime bars and those fetched from data feeds 
+when the same bars have become historical bars. This behavior is one of the possible causes of *repainting*.
+
+
 
 Additional resources
 --------------------
 
-A number of ``barstate.*`` built-in variables provide information about the current type of bar update
-(historical, realtime, closing, etc.). The page where they are documented also contains a script that allows you to visualize the distinction described above between elapsed realtime bars and historical bars: :doc:`/essential/Bar_states_Built-in_variables_barstate`.
+A number of ``barstate.*`` built-in variables provide information about the current type of bar update (historical, realtime, closing, etc.). 
+The page where they are documented also contains a script that allows you to visualize the distinction described above between elapsed realtime bars and historical bars: :ref:`<PageBarStates>`.
 
-This page explains the details of strategy calculations: :doc:`/essential/Strategies`.
+The :ref:`<PageStrategies>` page explains the details of strategy calculations, which are not identical to those of indicators.
 
 .. rubric:: Footnotes
 

@@ -38,10 +38,10 @@ Many functions are used for the result(s) they return. These are a few examples:
   `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__,
   `request.splits() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}splits>`__.
 - Functions to manipulate strings in the ``str`` namespace:
-  `str.format <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}format>`__,
-  `str.length <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}length>`__,
-  `str.tonumber <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}tonumber>`__,
-  `str.tostring <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}tostring>`__, etc.
+  `str.format() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}format>`__,
+  `str.length() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}length>`__,
+  `str.tonumber() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}tonumber>`__,
+  `str.tostring() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}tostring>`__, etc.
 - Functions used to define the input values that script users can modify in the script's "Settings/Inputs" tab, in the ``input`` namespace:
   `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__,
   `input.color() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}color>`__,

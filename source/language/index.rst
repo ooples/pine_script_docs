@@ -3,16 +3,15 @@ Language
 
 .. toctree::
    :maxdepth: 3
-   :name: appendixtoc
+   :name: languagetoc
 
-   Structure_of_the_script
-   Versions
-   Comments
-   Line_wrapping
+   Execution_model
+   Time_series
+   Script_structure
    Identifiers
    Operators
    Expressions_declarations_and_statements
-   Functions_and_annotations
-   User-defined_functions
    Type_system
-   Execution_model
+   Built-ins
+   User-defined_functions
+   Arrays

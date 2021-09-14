@@ -1,3 +1,5 @@
+.. _PageReleaseNotes:
+
 Release notes
 =============
 
@@ -88,7 +90,7 @@ New functions were added:
 * ``color.rgb(red, green, blue, transp)`` - creates a new color with transparency using the RGB color model.
 * ``color.from_gradient(value, bottom_value, top_value, bottom_color, top_color)`` - returns color calculated from the linear gradient between bottom_color to top_color.
 * ``color.r(color)``, ``color.g(color)``, ``color.b(color)``, ``color.t(color)`` - retrieves the value of one of the color components.
-* ``array.from`` - takes a variable number of arguments with one of the types: ``int``, ``float``, ``bool``, ``string``, ``label``, ``line``, ``color``, ``box``, ``table`` and returns an array of the corresponding type. 
+* ``array.from()`` - takes a variable number of arguments with one of the types: ``int``, ``float``, ``bool``, ``string``, ``label``, ``line``, ``color``, ``box``, ``table`` and returns an array of the corresponding type. 
 
 A new ``box`` drawing has been added to Pine, making it possible to draw rectangles on charts using the Pine syntax. For more details see the `Pine Script reference <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ and the :doc:`/essential/Drawings` User Manual page.
 
@@ -150,11 +152,11 @@ A new keyword was added:
 
 New functions were added:
 
-* ``tonumber`` - converts a string value into a float.
-* ``time_close`` - returns the UNIX timestamp of the close of the current bar, based on the resolution and session that is passed to the function.
-* ``dividends`` - requests dividends data for the specified symbol.
-* ``earnings`` - requests earnings data for the specified symbol.
-* ``splits`` - requests splits data for the specified symbol.
+* ``tonumber()`` - converts a string value into a float.
+* ``time_close()`` - returns the UNIX timestamp of the close of the current bar, based on the resolution and session that is passed to the function.
+* ``dividends()`` - requests dividends data for the specified symbol.
+* ``earnings()`` - requests earnings data for the specified symbol.
+* ``splits()`` - requests splits data for the specified symbol.
 
 New arguments for the study() function were added:
 
@@ -175,24 +177,24 @@ January 2021
 ------------
 The following functions now accept a series length parameter:
 
-* `bb <https://www.tradingview.com/pine-script-reference/v4/#fun_bb>`__
-* `bbw <https://www.tradingview.com/pine-script-reference/v4/#fun_bbw>`__
-* `cci <https://www.tradingview.com/pine-script-reference/v4/#fun_cci>`__
-* `cmo <https://www.tradingview.com/pine-script-reference/v4/#fun_cmo>`__
-* `cog <https://www.tradingview.com/pine-script-reference/v4/#fun_cog>`__
-* `correlation <https://www.tradingview.com/pine-script-reference/v4/#fun_correlation>`__
-* `dev <https://www.tradingview.com/pine-script-reference/v4/#fun_dev>`__
-* `falling <https://www.tradingview.com/pine-script-reference/v4/#fun_falling>`__
-* `mfi <https://www.tradingview.com/pine-script-reference/v4/#fun_mfi>`__
-* `percentile_linear_interpolation <https://www.tradingview.com/pine-script-reference/v4/#fun_percentile_linear_interpolation>`__
-* `percentile_nearest_rank <https://www.tradingview.com/pine-script-reference/v4/#fun_percentile_nearest_rank>`__
-* `percentrank <https://www.tradingview.com/pine-script-reference/v4/#fun_percentrank>`__
-* `rising <https://www.tradingview.com/pine-script-reference/v4/#fun_rising>`__
-* `roc <https://www.tradingview.com/pine-script-reference/v4/#fun_roc>`__
-* `stdev <https://www.tradingview.com/pine-script-reference/v4/#fun_stdev>`__
-* `stoch <https://www.tradingview.com/pine-script-reference/v4/#fun_stoch>`__
-* `variance <https://www.tradingview.com/pine-script-reference/v4/#fun_variance>`__
-* `wpr <https://www.tradingview.com/pine-script-reference/v4/#fun_wpr>`__
+* `bb() <https://www.tradingview.com/pine-script-reference/v4/#fun_bb>`__
+* `bbw() <https://www.tradingview.com/pine-script-reference/v4/#fun_bbw>`__
+* `cci() <https://www.tradingview.com/pine-script-reference/v4/#fun_cci>`__
+* `cmo() <https://www.tradingview.com/pine-script-reference/v4/#fun_cmo>`__
+* `cog() <https://www.tradingview.com/pine-script-reference/v4/#fun_cog>`__
+* `correlation() <https://www.tradingview.com/pine-script-reference/v4/#fun_correlation>`__
+* `dev() <https://www.tradingview.com/pine-script-reference/v4/#fun_dev>`__
+* `falling() <https://www.tradingview.com/pine-script-reference/v4/#fun_falling>`__
+* `mfi() <https://www.tradingview.com/pine-script-reference/v4/#fun_mfi>`__
+* `percentile_linear_interpolation() <https://www.tradingview.com/pine-script-reference/v4/#fun_percentile_linear_interpolation>`__
+* `percentile_nearest_rank() <https://www.tradingview.com/pine-script-reference/v4/#fun_percentile_nearest_rank>`__
+* `percentrank() <https://www.tradingview.com/pine-script-reference/v4/#fun_percentrank>`__
+* `rising() <https://www.tradingview.com/pine-script-reference/v4/#fun_rising>`__
+* `roc() <https://www.tradingview.com/pine-script-reference/v4/#fun_roc>`__
+* `stdev() <https://www.tradingview.com/pine-script-reference/v4/#fun_stdev>`__
+* `stoch() <https://www.tradingview.com/pine-script-reference/v4/#fun_stoch>`__
+* `variance() <https://www.tradingview.com/pine-script-reference/v4/#fun_variance>`__
+* `wpr() <https://www.tradingview.com/pine-script-reference/v4/#fun_wpr>`__
 
 A new type of alerts was added - script alerts. More information can be found in our `Help Center <https://www.tradingview.com/chart/?solution=43000597494/>`__.
 
@@ -206,15 +208,15 @@ December 2020
 
 New array types were added:
 
-* ``array.new_line``
-* ``array.new_label``
-* ``array.new_string``
+* ``array.new_line()``
+* ``array.new_label()``
+* ``array.new_string()``
 
 New functions were added:
 
-* ``str.length`` - returns number of chars in source string.
-* ``array.join`` - concatenates all of the elements in the array into a string and separates these elements with the specified separator.
-* ``str.split`` - splits a string at a given substring separator.
+* ``str.length()`` - returns number of chars in source string.
+* ``array.join()`` - concatenates all of the elements in the array into a string and separates these elements with the specified separator.
+* ``str.split()`` - splits a string at a given substring separator.
 
 November 2020
 ^^^^^^^^^^^^^
@@ -223,12 +225,12 @@ November 2020
 
 New function was added:
 
-* ``array.range`` - return the difference between the min and max values in the array.
+* ``array.range()`` - return the difference between the min and max values in the array.
 
 October 2020
 ^^^^^^^^^^^^
 
-The behavior of ``rising`` and ``falling`` functions have changed. For example, ``rising(close,3)`` is now calculated as following::
+The behavior of ``rising()`` and ``falling()`` functions have changed. For example, ``rising(close,3)`` is now calculated as following::
 
     close[0] > close[1] and close[1] > close[2] and close[2] > close[3]
     
@@ -257,18 +259,18 @@ Added support for arrays and functions for working with them. You can now use th
 
 The following functions now accept a series length parameter. Learn more about this feature in our `blog <https://www.tradingview.com/blog/en/pine-functions-support-dynamic-length-arguments-20554/>`__:
 
-* `alma <https://www.tradingview.com/pine-script-reference/v4/#fun_alma>`__
-* `change <https://www.tradingview.com/pine-script-reference/v4/#fun_change>`__
-* `highest <https://www.tradingview.com/pine-script-reference/v4/#fun_highest>`__
-* `highestbars <https://www.tradingview.com/pine-script-reference/v4/#fun_highestbars>`__
-* `linreg <https://www.tradingview.com/pine-script-reference/v4/#fun_linreg>`__
-* `lowest <https://www.tradingview.com/pine-script-reference/v4/#fun_lowest>`__
-* `lowestbars <https://www.tradingview.com/pine-script-reference/v4/#fun_lowestbars>`__
-* `mom <https://www.tradingview.com/pine-script-reference/v4/#fun_mom>`__
-* `sma <https://www.tradingview.com/pine-script-reference/v4/#fun_sma>`__
-* `sum <https://www.tradingview.com/pine-script-reference/v4/#fun_sum>`__
-* `vwma <https://www.tradingview.com/pine-script-reference/v4/#fun_vwma>`__
-* `wma <https://www.tradingview.com/pine-script-reference/v4/#fun_wma>`__
+* `alma() <https://www.tradingview.com/pine-script-reference/v4/#fun_alma>`__
+* `change() <https://www.tradingview.com/pine-script-reference/v4/#fun_change>`__
+* `highest() <https://www.tradingview.com/pine-script-reference/v4/#fun_highest>`__
+* `highestbars() <https://www.tradingview.com/pine-script-reference/v4/#fun_highestbars>`__
+* `linreg() <https://www.tradingview.com/pine-script-reference/v4/#fun_linreg>`__
+* `lowest() <https://www.tradingview.com/pine-script-reference/v4/#fun_lowest>`__
+* `lowestbars() <https://www.tradingview.com/pine-script-reference/v4/#fun_lowestbars>`__
+* `mom() <https://www.tradingview.com/pine-script-reference/v4/#fun_mom>`__
+* `sma() <https://www.tradingview.com/pine-script-reference/v4/#fun_sma>`__
+* `sum() <https://www.tradingview.com/pine-script-reference/v4/#fun_sum>`__
+* `vwma() <https://www.tradingview.com/pine-script-reference/v4/#fun_vwma>`__
+* `wma() <https://www.tradingview.com/pine-script-reference/v4/#fun_wma>`__
 
 ::
 
@@ -311,7 +313,7 @@ Please note that you need to reapply the indicator in order for the `resolution`
 
 * Added an ability to create `alerts on strategies <https://www.tradingview.com/chart/?solution=43000481368>`__.
 
-* A new function `line.get_price <https://www.tradingview.com/pine-script-reference/v4/#fun_line{dot}get_price>`__ can be used to determine the price level at which the line is located on a certain bar.
+* A new function `line.get_price() <https://www.tradingview.com/pine-script-reference/v4/#fun_line{dot}get_price>`__ can be used to determine the price level at which the line is located on a certain bar.
 
 * New `label styles <https://www.tradingview.com/pine-script-reference/v4/#fun_label{dot}new>`__ allow you to position the label pointer in any direction.
 
@@ -335,13 +337,13 @@ May 2020
 
 * ``else if`` statement was added
 
-* The behavior of ``security`` function has changed: the ``expression`` parameter can be series or tuple.
+* The behavior of ``security()`` function has changed: the ``expression`` parameter can be series or tuple.
 
 April 2020
 ^^^^^^^^^^
 New function was added:
 
-* ``quandl`` - request quandl data for a symbol
+* ``quandl()`` - request quandl data for a symbol
 
 
 March 2020
@@ -349,21 +351,21 @@ March 2020
 
 New function was added:
 
-* ``financial`` - request financial data for a symbol
+* ``financial()`` - request financial data for a symbol
 
 
 New functions for common indicators were added:
 
-* ``cmo`` - Chande Momentum Oscillator
-* ``mfi`` - Money Flow Index
-* ``bb`` - Bollinger Bands
-* ``bbw`` - Bollinger Bands Width
-* ``kc`` - Keltner Channels
-* ``kcw`` - Keltner Channels Width 
-* ``dmi`` - DMI/ADX
-* ``wpr`` - Williams % R 
-* ``hma`` - Hull Moving Average
-* ``supertrend`` - SuperTrend
+* ``cmo()`` - Chande Momentum Oscillator
+* ``mfi()`` - Money Flow Index
+* ``bb()`` - Bollinger Bands
+* ``bbw()`` - Bollinger Bands Width
+* ``kc()`` - Keltner Channels
+* ``kcw()`` - Keltner Channels Width 
+* ``dmi()`` - DMI/ADX
+* ``wpr()`` - Williams % R 
+* ``hma()`` - Hull Moving Average
+* ``supertrend()`` - SuperTrend
 
 
 Added a detailed description of all the fields in the `Strategy Tester Report <https://www.tradingview.com/chart/?solution=43000561856/>`__
@@ -376,9 +378,9 @@ February 2020
 
 * Fixed a problem with calculating ``percentrank`` function. Now it can return a zero value, which did not happen before due to an incorrect calculation.
 
-* The default ``transparency`` parameter for the ``plot``, ``plotshape``, and ``plotchar`` functions is now 0%.
+* The default ``transparency`` parameter for the ``plot()``, ``plotshape()``, and ``plotchar()`` functions is now 0%.
 
-* For the functions ``plot``, ``plotshape``, ``plotchar``, ``plotbar``, ``plotcandle``, ``plotarrow``, you can set the ``display`` parameter, which controls the display of the plot. The following values can be assigned to it:
+* For the functions ``plot()``, ``plotshape()``, ``plotchar()``, ``plotbar()``, ``plotcandle()``, ``plotarrow()``, you can set the ``display`` parameter, which controls the display of the plot. The following values can be assigned to it:
 
   * ``display.none`` - the plot is not displayed
   * ``display.all`` - the plot is displayed (Default)
@@ -407,7 +409,7 @@ New built-in variables were added:
 * ``nvi`` - Negative Volume Index 
 * ``pvi`` - Positive Volume Index
    
-New parameters were added for ``strategy.close``:
+New parameters were added for ``strategy.close()``:
 
 
 * ``qty`` -  the number of contracts/shares/lots/units to exit a trade with
@@ -433,7 +435,7 @@ December 2019
 
 October 2019
 ^^^^^^^^^^^^
-* ``plotchar`` function now supports most of the Unicode symbols::
+* ``plotchar()`` function now supports most of the Unicode symbols::
 
     //@version=4
     study("My Script", overlay=true)
@@ -442,7 +444,7 @@ October 2019
 
   .. image:: images/Bears_in_plotchar.png
 
-* New ``bordercolor`` argument of the ``plotcandle`` function allows you to change the color of candles' borders::
+* New ``bordercolor`` argument of the ``plotcandle()`` function allows you to change the color of candles' borders::
 
     //@version=4
     study("My Script")
@@ -466,11 +468,11 @@ New parameters to the ``strategy`` function were added:
 
 Some fixes were made:
 
-* ``fill`` function now works correctly with ``na`` as the ``color`` parameter value
+* ``fill()`` function now works correctly with ``na`` as the ``color`` parameter value
 
-* ``sign`` function now calculates correctly for literals and constants
+* ``sign()`` function now calculates correctly for literals and constants
 
-``str.replace_all (source, target, replacement)`` function was added. It replaces each occurrence of a ``target`` string in the ``source`` string with a ``replacement`` string
+``str.replace_all(source, target, replacement)`` function was added. It replaces each occurrence of a ``target`` string in the ``source`` string with a ``replacement`` string
 
 July-August 2019
 ^^^^^^^^^^^^^^^^
@@ -489,9 +491,9 @@ The behavior of some functions, variables and operators has changed:
 
 * The ``time`` variable returns the correct open time of the bar for more special cases than before
 
-* An optional *seconds* parameter of the ``timestamp`` function allows you to set the time to within seconds 
+* An optional *seconds* parameter of the ``timestamp()`` function allows you to set the time to within seconds 
 
-* ``security`` function:
+* ``security()`` function:
   
   * Added the possibility of requesting resolutions in seconds:
 

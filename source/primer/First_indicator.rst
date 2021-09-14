@@ -1,41 +1,62 @@
+.. _PageFirstIndicator:
+
 First indicator
 ===============
 
-A script written in Pine is composed of functions and variables.
-Functions contain instructions that describe the required calculations.
-Variables save the values used or created during those
-calculations.
+.. contents:: :local:
+    :depth: 3
 
-A script must contain an ``indicator`` or ``strategy`` annotation which defines the script's
-name and other properties. The script's body contains the functions
-and variables necessary to calculate results which will often be rendered
-on a chart with a `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ function, or some other function that plots the script's output.
+The Pine Editor
+---------------
+
+The Pine Editor is where you will be working on your scripts. While you can use any text editor you want to write your Pine scripts,
+using our Editor has many advantages:
+
+- It highlights your code following Pine syntax
+- It pops up syntax reminders for built-in and library functions when you hover over them
+- It provides quick access to the Pine Reference Manual popup when you CTRL + click on Pine keywords
+- It makes the write/compile/run cycle fast because saving a new version of a script loaded on the chart also executes it immediately
+- While not as feature-rich as the top editors out there, it provides key functionality such as auto-complete, search and replace, multi-cursor and versioning.
+
+To open the Editor, click on the "Pine Editor" tab at the bottom of your TradingView chart. This will open up the Editor's pane.
 
 
-Example of a Pine indicator
----------------------------
 
-Let's look at the implementation of the
+First version
+-------------
+
+We will now create our first working Pine script, an implementation of the
 `MACD <https://www.tradingview.com/support/solutions/43000502344-macd-moving-average-convergence-divergence/>`__ indicator in Pine:
 
 .. code-block:: pine
     :linenos:
 
     //@version=5
-    indicator("MACD")
+    indicator("MACD #1")
     fast = 12
     slow = 26
     fastMA = ta.ema(close, fast)
     slowMA = ta.ema(close, slow)
     macd = fastMA - slowMA
-    signal = ta.sma(macd, 9)
+    signal = ta.ema(macd, 9)
     plot(macd, color = color.blue)
     plot(signal, color = color.orange)
 
+- Start by bringing up the "Open" dropdown menu at the top right of the Editor and choose "New blank indicator". 
+- Then copy the example script above, taking care not to include the line numbers in your selection. 
+- Select all the code already in the editor and replace it with the example script. 
+- Click "Save" and choose a name for your script. Your script is now saved in TradingView's cloud, but under your account's name. Nobody but you can use it.
+- Click "Add to Chart" in the Editor's menu bar. The MACD indicator appears in a separate *Pane* under your chart.
+
+Your first Pine script is running on your chart, which should look like this:
+
+.. image:: images/FirstIndicator-Version1.png
+
+Let's look at our script's code, line by line:
 
 Line 1: ``//@version=5``
     This is a comment containing a compiler directive that tells the compiler the script will use version 5 of Pine.
-Line 2: ``indicator("MACD")``
+Line 2: ``indicator("MACD #1")``
     Defines the name of the script that will appear on the chart as "MACD".
 Line 3: ``fast = 12``
     Defines a ``fast`` integer variable which will be the length of the fast EMA.
@@ -50,70 +71,82 @@ Line 6: ``slowMA = ta.ema(close, slow)``
     EMA calculation with a length equal to ``slow`` (26), from ``close``.
 Line 7: ``macd = fastMA - slowMA``
     Defines the variable ``macd`` as the difference between the two EMAs.
-Line 8: ``signal = ta.sma(macd, 9)``
+Line 8: ``signal = ta.ema(macd, 9)``
     Defines the variable ``signal`` as a smoothed value of
-    ``macd`` using the SMA algorithm (Simple Moving Average) with
+    ``macd`` using the EMA algorithm (Exponential Moving Average) with
     a length of 9.
 Line 9: ``plot(macd, color = color.blue)``
     Calls the ``plot`` function to output the variable ``macd`` using a blue line.
 Line 10: ``plot(signal, color = color.orange)``
     Calls the ``plot`` function to output the variable ``signal`` using an orange line.
 
-After adding the "MACD" script to the chart you will see the following:
 
-.. image:: images/Macd_pine.png
+Second version
+--------------
 
-Pine contains a variety of built-in functions for the most popular
-algorithms (
-`ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__ for an `SMA <https://www.tradingview.com/support/solutions/43000502589-moving-average/>`__,
-`ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__ for an `EMA <https://www.tradingview.com/support/solutions/43000592270-exponential-moving-average/>`__,
-`ta.wma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}wma>`__ for an `WMA <https://www.tradingview.com/support/solutions/43000594680-weighted-moving-average/>`__, etc.).
-You can also define your custom functions. You will find a
-description of all available built-in functions
-`here <https://www.tradingview.com/pine-script-reference/v5/>`__.
+The first version of our script calculated MACD "manually", but because Pine is designed to write indicators and strategies,
+built-in Pine functions exist for many common indicators, including one for... MACD: `ta.macd() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}macd>`__.
+
+This is the second version of our script:
+
+.. code-block:: pine
+    :linenos:
+
+    //@version=5
+    indicator("MACD #2")
+    fastInput = input(12, "Fast length")
+    slowInput = input(26, "Slow length")
+    [macdLine, signalLine, histLine] = ta.macd(close, fastInput, slowInput, 9)
+    plot(macdLine, color = color.blue)
+    plot(signalLine, color = color.orange)
+
+Note that we have:
+
+- Added inputs so we can change the lengths for the MAs
+- We now use the `ta.macd() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}macd>`__ 
+  Pine built-in to calculate our MACD, which saves us three line and makes our code easier to read.
+
+Let's repeat the same process as before to copy that code in a new indicator:
+
+- Start by bringing up the "Open" dropdown menu at the top right of the Editor and choose "New blank indicator". 
+- Then copy the example script above, again taking care not to include the line numbers in your selection. 
+- Select all the code already in the editor and replace it with the second version of our script. 
+- Click "Save" and choose a name for your script different than the previous one.
+- Click "Add to Chart" in the Editor's menu bar. The "MACD #2" indicator appears in a separate *Pane* under the "MACD #1" indicator.
+
+Your second Pine script is running on your chart. If you double-click on the indicator's name on your chart, 
+you will bring up the script's "Settings/Inputs" tab, where you can now change the slow and fast lengths:
+
+.. image:: images/FirstIndicator-Version2.png
+
+Let's look at the lines that have changed in the second version of our script:
+
+Line 2: ``indicator("MACD #2")``
+    We have changed ``#1`` to ``#2`` so the second version of our indicator displays a different name on the chart.
+Line 3: ``fastInput = input(12, "Fast length")``
+    Instead of assigning a constant value to a variable, we have used the `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__ 
+    function so we can change the value in our script's "Settings/Inputs" tab. ``12`` will be the default value and the field's label will be ``"Fast length"``.
+    If the value is changed in the "Inputs" tab, the ``fastInput`` variable's content will contain the new value and the script will re-execute on the chart with that new value.
+    Note that, as our :ref:`Pine Style Guide <PageStyleGuide>` recommends, we add ``Input`` to the end of the variable's name to remind us, later in the script,
+    that its value comes from a user input.
+Line 4: ``slowInput = input(26, "Slow length")``
+    We do the same for the slow length, taking care to use a different variable name, default value and text string for the field's label.
+Line 5: ``[macdLine, signalLine, histLine] = ta.macd(close, fastInput, slowInput, 9)``
+    This is where we call the `ta.macd() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}macd>`__ built-in to 
+    perform all the first version's calculations in one line only. The function requires four parameters (the values after the function name, enclosed in parentheses).
+    It returns three values into the three variables instead of only one, like the functions we used until now, which is why we need to enclose the list of three 
+    variables receiving the function's result in square brackets, to the left of the ``=`` sign.
+    Note that two of the values we pass to the function are the "input" variables containing the fast and slow lengths: ``fastInput`` and ``slowInput``.
+Line 6 and 7:
+    The variable names we are plotting there have changed, but the lines are doing the same thing as in our first version.
+
+Our second version performs the same calculations as our first, but we can change the two lengths used to calculate it. 
+Our code is also simpler and shorter by three lines. We have improved our script.
 
 
-"indicator" vs "strategy"
--------------------------
-Pine strategies are used to run backtests. In addition to normal script calculations, they also contain ``strategy.*()`` calls to send buy and sell orders to the broker emulator, which can then simulate their execution. See :doc:`/essential/Strategies`.
 
-Pine indicator, as the one in the previous example, also contain calculations, but cannot be used in backtesting. Because they do not make use of the broker emulator, they use less resources and will run faster.
+Next
+----
 
-Both strategies and studies can run in either overlay or pane mode, and plot information in that space. Both can also generate alert events. See :doc:`/essential/Alerts`.
+We now recommend you go to our :ref:`<PageNextSteps>` page.
 
-
-
-Execution model of Pine scripts
--------------------------------
-
-A Pine script is **not** like many normal programs that execute once and then stop. In the Pine runtime environment, a script runs in the equivalent of an invisible loop where it is executed once on each historical bar. When execution reaches the last, real-time bar, the script executes once every time a price or volume change is detected, then one final time when the real-time bar closes and becomes a historical bar.
-
-By default, Pine *strategies* only execute once at the close of real-time bars, but they can also be instructed to execute on each price change, as *indicators* do. See :doc:`/language/Execution_model`.
-
-
-Series
-------
-The main data type used in Pine scripts is called a *series*. It is a continuous list of values that stretches back in time from the current bar and where one value exists for each bar. While this structure may remind many of an array, a Pine series is totally different and thinking in terms of arrays will be detrimental to understanding this key Pine concept. You can read about series :ref:`here <PageTypeSystem_TimeSeries>` and get more information on how to use them :ref:`here <history_referencing_operator>`.
-
-
-Understanding scripts
----------------------
-If you intend to write Pine scripts of any reasonable complexity, a good comprehension of both the Pine execution model and series is essential in understanding how Pine scripts work. If you have never worked with data organized in series before, you will need practice in putting them to work for you. When you familiarize yourself with Pine’s fundamental concepts, you will discover that by combining the use of series with our built-in functions designed to efficiently process series information, much can be accomplished in very few lines of Pine code.
-
-
-Pine Editor
------------
-
-The Pine Editor is where you will be working on your scripts. To open it, click on the *Pine Editor* tab at the bottom of your TradingView chart. This will open up the editor's window. We will create our first working Pine script. Start by bringing up the “Open” dropdown menu at the top right of the editor and choose *New blank indicator*. Then copy the previous example script, select all code already in the editor and replace it with the example script. Click *Save*, choose a name and then click *Add to Chart*. The MACD indicator will appear in a separate *Pane* under the chart.
-
-From here, you can change the script’s code. For example, change the last line’s ``color.orange`` for ``color.fuchsia``. When you save the script, the change will be reflected in the indicator’s pane. Your first Pine script is running!
-
-
-Where to go from here?
-----------------------
-
-This documentation contains numerous examples of code used to illustrate how functions, variables and operators are used in Pine. By going through it, you will be able to both learn the foundations of Pine and study the example scripts.
-
-The fastest way to learn a programming language is to read about key concepts and try them out with real code. As we’ve just done, copy this documentation’s examples in the Editor and play with them. Explore! You won’t break anything.
-
-You will also find examples of Pine scripts in the Editor’s "Open/New default built-in script" menu, and in TradingView's extensive Public Library of `scripts <https://www.tradingview.com/scripts/>`__ which contains more than 100,000 Pine scripts, many of which are open-source. Enjoy, and welcome to Pine!
