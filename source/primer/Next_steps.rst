@@ -22,7 +22,7 @@ Pine indicators also contain calculations, but cannot be used in backtesting.
 Because they do not make use of the broker emulator, they use less resources and will run faster.
 It is thus advantageous to use indicators whenever you can.
 
-Both indicators and strategies can run in either overlay mode (over the chart's bars) or pane mode (in a separate section below or over the chart). Both can also plot information in their respective space, and both can generate :ref:`alert events <PageAlerts>`.
+Both indicators and strategies can run in either overlay mode (over the chart's bars) or pane mode (in a separate section below or above the chart). Both can also plot information in their respective space, and both can generate :ref:`alert events <PageAlerts>`.
 
 
 
