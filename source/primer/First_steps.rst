@@ -86,7 +86,8 @@ The script feed shows script *widgets*, i.e., placeholders showing a miniature v
 By clicking on it you will open the *script's page*, where you can see the script on a chart, read the author's description, like the script, leave comments or 
 read the script's source code if it was published open-source.
 
-Once you find an interesting script in the Public Library, follow the instructions in the Help Center to `load it on your chart <https://www.tradingview.com/script/?solution=43000555216>`__.
+Once you find an interesting script in the Public Library, follow the instructions in the Help Center to `load it on your chart 
+<https://www.tradingview.com/script/?solution=43000555216>`__.
 
 
 
