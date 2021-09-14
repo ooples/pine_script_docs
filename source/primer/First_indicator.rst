@@ -143,3 +143,10 @@ Line 6 and 7:
 Our second version performs the same calculations as our first, but we can change the two lengths used to calculate it. 
 Our code is also simpler and shorter by three lines. We have improved our script.
 
+
+
+Next
+----
+
+We now recommend you go to our :ref:`<PageNextSteps>` page.
+
