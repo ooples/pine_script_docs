@@ -42,7 +42,7 @@ built-in variable holds the value of that bar's close.
 When a script executes on the realtime bar, `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
 returns the **current** price of the symbol until the bar closes.
 
-Contrary to indicators, Pine strategies normally execute only on realtime bars, when they close.
+Contrary to indicators, Pine strategies normally execute only once on realtime bars, when they close.
 They can also be configured to execute on each price/volume update if that is what you need. See the page on :ref:`<PageStrategies>` for more information.
 
 
