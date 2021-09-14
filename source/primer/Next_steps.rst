@@ -14,27 +14,30 @@ In this page, we explore a bit more of the Pine landscape. We give brief explana
 Pine :ref:`<PageStrategies>` are used to backtest and forward test. In addition to indicator calculations, 
 they contain ``strategy.*()`` calls to send trade orders to Pine's broker emulator, which can then simulate their execution.
 
-Pine indicators also contain calculations, but cannot be used in backtesting. Because they do not make use of the broker emulator, they use less resources and will run faster.
+Pine indicators also contain calculations, but cannot be used in backtesting. 
+Because they do not make use of the broker emulator, they use less resources and will run faster.
+It is thus advantageous to use indicators whenever you can.
 
 Both indicators and strategies can run in either overlay mode (over the chart's bars) or pane mode (in a separate section below or over the chart). Both can also plot information in their respective space, and both can generate :ref:`alert events <PageAlerts>.
 
 
-
-Execution model of Pine scripts
--------------------------------
+How scripts run on charts
+------------------------
 
 A Pine script is **not** like many normal programs that execute once and then stop. In the Pine runtime environment, a script runs in the equivalent of an invisible loop where it is executed once on each historical bar. When execution reaches the last, real-time bar, the script executes once every time a price or volume change is detected, then one final time when the real-time bar closes and becomes a historical bar.
 
 By default, Pine *strategies* only execute once at the close of real-time bars, but they can also be instructed to execute on each price change, as *indicators* do. See :doc:`/language/Execution_model`.
 
 
-Series
-------
+Time series
+-----------
+
 The main data type used in Pine scripts is called a *series*. It is a continuous list of values that stretches back in time from the current bar and where one value exists for each bar. While this structure may remind many of an array, a Pine series is totally different and thinking in terms of arrays will be detrimental to understanding this key Pine concept. You can read about series :ref:`here <PageTypeSystem_TimeSeries>` and get more information on how to use them :ref:`here <history_referencing_operator>`.
 
 
 Understanding scripts
 ---------------------
+
 If you intend to write Pine scripts of any reasonable complexity, a good comprehension of both the Pine execution model and series is essential in understanding how Pine scripts work. If you have never worked with data organized in series before, you will need practice to put them to work for you. When you familiarize yourself with Pine’s fundamental concepts, you will discover that by combining the use of series with our built-in functions designed to efficiently process series information, much can be accomplished in very few lines of Pine code.
 
 
