@@ -28,16 +28,7 @@ or by using the Editor's "More/Pine Script reference (pop-up)" menu. The Referen
 
 There are five different versions of Pine. Ensure the documentation you use corresponds to the Pine version you are coding with.
 
-
-Other learning resources
-------------------------
-
-
-
-Stuck on a piece of code?
--------------------------
-
-You can ask questions on Pine programming on `xxx <https://www.tradingview.com/pine-script-reference/v5/#>`__
+The :ref:`<PageWhereCanIGetMoreInformation>` page lists other useful Pine-related content, including where to ask questions when you are stuck on code.
 
 
 
