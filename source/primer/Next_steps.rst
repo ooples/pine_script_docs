@@ -11,26 +11,6 @@ in this page we explore a bit more of the Pine landscape by sharing some pointer
 
 
 
-Getting around the Pine documentation
--------------------------------------
-
-While reading code from published scripts is no doubt useful, spending time in our documentation will be necessary to attain any degree of proficiency in Pine.
-Our two main sources of documentation on Pine are:
-
-- This `Pine User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__
-- Our `Pine Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__
-
-The `Pine User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__ is in HTML format and in English only.
-
-The `Pine Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__ exists in two formats: the HTML format we just linked to, 
-and the popup version, which can be accessed from the Pine Editor, by either CTRL + clicking on a keyword, 
-or by using the Editor's "More/Pine Script reference (pop-up)" menu. The Reference Manual is translated in other languages.
-
-There are five different versions of Pine. Ensure the documentation you use corresponds to the Pine version you are coding with.
-
-The :ref:`<PageWhereCanIGetMoreInformation>` page lists other useful Pine-related content, including where to ask questions when you are stuck on code.
-
-
 
 "indicators" vs "strategies"
 ----------------------------
@@ -73,11 +53,40 @@ Publishing scripts
 
 
 
+Getting around the Pine documentation
+-------------------------------------
+
+While reading code from published scripts is no doubt useful, spending time in our documentation will be necessary to attain any degree of proficiency in Pine.
+Our two main sources of documentation on Pine are:
+
+- This `Pine User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__
+- Our `Pine Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__
+
+The `Pine User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__ is in HTML format and in English only.
+
+The `Pine Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__ exists in two formats: the HTML format we just linked to, 
+and the popup version, which can be accessed from the Pine Editor, by either CTRL + clicking on a keyword, 
+or by using the Editor's "More/Pine Script reference (pop-up)" menu. The Reference Manual is translated in other languages.
+
+There are five different versions of Pine. Ensure the documentation you use corresponds to the Pine version you are coding with.
+
+The :ref:`<PageWhereCanIGetMoreInformation>` page lists other useful Pine-related content, including where to ask questions when you are stuck on code.
+
+
 Where to go from here?
 ----------------------
 
-This documentation contains numerous examples of code used to illustrate how functions, variables and operators are used in Pine. By going through it, you will be able to both learn the foundations of Pine and study the example scripts.
+This `Pine User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__ contains numerous examples of code used to illustrate the concepts we discuss.
+By going through it, you will be able to both learn the foundations of Pine and study the example scripts. 
+Read about key concepts and trying them out right away with real code is a peoductive way to learn.
+As you should have already done in :ref:`<PageFirstIndicator>`, copy this documentation’s examples in the Editor and play with them. Explore! You won’t break anything.
 
-The fastest way to learn a programming language is to read about key concepts and try them out with real code. As we’ve just done, copy this documentation’s examples in the Editor and play with them. Explore! You won’t break anything.
+This `Pine User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__ is organized like this:
 
-You will also find examples of Pine scripts in the Editor’s "Open/New default built-in script" menu, and in TradingView's extensive Public Library of `scripts <https://www.tradingview.com/scripts/>`__ which contains more than 100,000 Pine scripts, many of which are open-source. Enjoy, and welcome to Pine!
+- The :doc:`</language>` section explains the main components of the Pine language and how scripts execute.
+- The :doc:`</concepts>` section is more task-oriented. It explains how to do things in Pine.
+- The :doc:`</writing>` section explores what's needed to write and publish scripts.
+- The :doc:`</migration_guides>` section explains how to port between different versions of Pine.
+- The :doc:`</release_notes>` section is where you can follow the frequent updates to the Pine.
+- The :doc:`</migration_guides>` section explains how to port between different versions of Pine.
+- The :doc:`</migration_guides>` section explains how to port between different versions of Pine.
