@@ -30,7 +30,7 @@ values without using a `for <https://www.tradingview.com/pine-script-reference/v
 This is possible because although ``ta.cum(close)`` appears rather static in a script, it is in fact executed on each bar, 
 so its value becomes increasingly larger as the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
 value of each new bar is added to it. When the script reaches the rightmost bar of the chart, 
-``ta.cum(close)` returns the sum of all the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ from all bars on the chart.
+``ta.cum(close)`` returns the sum of the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ value from all bars on the chart.
 
 Similarly, the mean of the difference between the last 14 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ 
 and `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ values can be expressed as ``ta.sma(high - low, 14)``, 
