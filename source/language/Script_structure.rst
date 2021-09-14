@@ -49,22 +49,6 @@ The declaration statement:
   and certain values that govern its runtime behavior, such as the maximum number of drawing objects it will display on the chart. 
   With strategies, the properties include parameters that control backtesting such as initial capital, commission, slippage, etc.
 
-
-
-Code
-----
-
-Pine code consists of a series of statements which implement the script's algorithm:
-
-- Each statement is usually placed on a separate line, but it possible to place more than one statement on a line by using the comma (``,``) as a separator.
-- Lines that are not part of a *local block* (the code inside user-defined functions or statements that require indentation such as
-  `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__, 
-  `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__, 
-  `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__, etc.) 
-  cannot begin with white space (space or tab). Their first character must also be the line's first character.
-- Lines can contain comments.
-- Lines can be wrapped.
-
 Each type of script has distinct requirements:
 
 - Indicators must contain at least one function call which produces output on the chart
@@ -78,11 +62,29 @@ Each type of script has distinct requirements:
 - Libraries must contain at least one library function and cannot contain ``strategy.*()`` calls.
 
 
+
+Code
+----
+
+Pine code consists of a collection of *statements* which implement the script's algorithm:
+
+- Some statements can be expressed in one line (many variable declarations); others require multiple lines 
+  (`if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__, 
+  `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__, 
+  `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__, etc.)
+- Lines that are not part of a *local block* cannot begin with white space (space or tab). 
+  Their first character must also be the line's first character.
+  A local block is the code inside user-defined functions or other statements requiring indentation such as
+  `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
+- Multiple one-line statements can be concatenated on a single line by using the comma (``,``) as a separator
+- Lines can contain comments, or be comments
+- Lines can be wrapped
+
 Statements may be one of three kinds:
 
-    -  :ref:`variable declarations <variable_declaration>`
-    -  :doc:`function declarations <Declaring_functions>`
-    -  :doc:`functions and annotations calls <Functions_and_annotations>`
+    -  :ref:`Variable declarations <variable_declaration>`
+    -  :doc:`Function declarations <Declaring_functions>`
+    -  :doc:`Functions and annotations calls <Functions_and_annotations>`
 
 
   The simplest valid Pine v5 study can be generated using *Pine Editor* |rarr| *Open* |rarr| *New blank indicator*::
