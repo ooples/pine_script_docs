@@ -132,9 +132,27 @@ Line 5: ``[macdLine, signalLine, histLine] = ta.macd(close, fastInput, slowInput
     This is where we call the `ta.macd() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}macd>`__ built-in.
     We perform all the first version's calculation in one line.
 
+Our second version performs the same calculations as our first, but we can change the two lengths used to calculate it. 
+Our code is also simpler and shorter by three lines.
+
+
+
 Third version
 -------------
 
-We are getting the hang of this! Let's see how we could add some bells and whistles to our creation.
+We are getting the hang of this! Let's see how we could add some bells and whistles to our creation:
 
+.. code-block:: pine
+    :linenos:
 
+    //@version=5
+    indicator("MACD #2")
+    fastInput = input(12, "Fast length")
+    slowInput = input(26, "Slow length")
+    [macdLine, signalLine, histLine] = ta.macd(close, fastInput, slowInput, 9)
+    plot(macdLine, color = color.blue)
+    plot(signalLine, color = color.orange)
+
+Note that we have:
+
+- 
