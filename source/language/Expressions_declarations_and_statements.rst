@@ -110,8 +110,8 @@ Example, illustrating the effect of ``var`` keyword::
 
 .. _PageExpressionsDeclarationsStatements_VariableReassignment:
 
-Variable re-assignment
-----------------------
+Variable reassignment
+---------------------
 
 A mutable variable is a variable which can be given a new value.
 The operator ``:=`` must be used to give a new value to a variable.
