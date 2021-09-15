@@ -7,6 +7,35 @@ Operators
     :depth: 2
 
 
+Introduction
+------------
+
+Some operators are used to build *expressions* returning a result:
+
+- Arithmetic operators: 
+  `+ <https://www.tradingview.com/pine-script-reference/v5/#op_{plus}>`__, 
+  `- <https://www.tradingview.com/pine-script-reference/v5/#op_{minus}>`__, 
+  `* <https://www.tradingview.com/pine-script-reference/v5/#op_{star}>`__, 
+  `/ <https://www.tradingview.com/pine-script-reference/v5/#op_{slash}>`__, 
+  `% <https://www.tradingview.com/pine-script-reference/v5/#op_{percent}>`__.
+- Comparison operators:
+  `< <https://www.tradingview.com/pine-script-reference/v5/#op_<>`__,
+  `<= <https://www.tradingview.com/pine-script-reference/v5/#op_<=>`__,
+  `!= <https://www.tradingview.com/pine-script-reference/v5/#op_!=>`__,
+  `== <https://www.tradingview.com/pine-script-reference/v5/#op_==>`__,
+  `> <https://www.tradingview.com/pine-script-reference/v5/#op_>>`__,
+  `>= <https://www.tradingview.com/pine-script-reference/v5/#op_>=>`__.
+
+- Logical operators
+- The `?: ternary operator <https://www.tradingview.com/pine-script-reference/v5/#op_{question}{colon}>`__
+- `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ operator
+
+Other operators are used to assign values to variables:
+
+- ``=``
+- ``:=``
+
+
 
 Arithmetic operators
 --------------------
@@ -155,7 +184,8 @@ Note that the two result values are expressions — not local blocks, so they wi
 ------------------------------------
 
 It is possible to refer to the historical values of any variable of the
-*series* type with the ``[]`` operator. *Historical* values are variable values for the previous bars.
+*series* type with the `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ operator. 
+*Historical* values are variable values for the previous bars.
 
 Most data in Pine is stored in series (somewhat like arrays, but with a dynamic index).
 Let’s see how the index is dynamic, and why series are also very different from arrays.
