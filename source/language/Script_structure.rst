@@ -49,7 +49,7 @@ The declaration statement:
 - Identifies the type of the script, which in turn dictates which content is allowed in it, and how it can be used and executed.
 - Sets key properties of the script such as its name, where it will appear when it is added to a chart, the precision and format of the values it displays, 
   and certain values that govern its runtime behavior, such as the maximum number of drawing objects it will display on the chart. 
-  With strategies, the properties include parameters that control backtesting such as initial capital, commission, slippage, etc.
+  With strategies, the properties include parameters that control backtesting, such as initial capital, commission, slippage, etc.
 
 Each type of script has distinct requirements:
 
