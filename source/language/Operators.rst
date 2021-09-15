@@ -25,7 +25,7 @@ Other operators are used to assign values to variables:
 
 As is explained in the :ref:`<PageTypeSystem_Forms>` page, *forms* and *types* play a critical role in determining the type of results that expressions yield.
 This, in turn, has an impact on how and with what functions you will be allowed to use those results. 
-Expressions always return a form of the strongest form used in the expression, e.g., if you multiply an "input int" with a "series int", 
+Expressions always return a form of the strongest one used in the expression, e.g., if you multiply an "input int" with a "series int", 
 the expression will produce a "series int" result, which you will not be able to use as the argument to ``length`` in 
 `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__.
 
