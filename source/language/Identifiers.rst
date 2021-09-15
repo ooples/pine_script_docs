@@ -6,7 +6,7 @@ Identifiers
 Identifiers are names used for user-defined variables and functions:
 
 - They must begin with an uppercase (``A-Z``) or lowercase (``a-z``) letter, or an underscore (``_``).
-- The next characters can be letter, the underscore, or digits (``0-9``).
+- The next characters can be letters, underscores or digits (``0-9``).
 - They are case-sensitive.
 
 Here are some examples of valid identifiers::
