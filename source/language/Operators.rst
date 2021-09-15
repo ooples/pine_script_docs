@@ -15,7 +15,7 @@ Some operators are used to build *expressions* returning a result:
 - Arithmetic operators
 - Comparison operators
 - Logical operators
-- The `?: ternary operator <https://www.tradingview.com/pine-script-reference/v5/#op_{question}{colon}>`__
+- The `?: <https://www.tradingview.com/pine-script-reference/v5/#op_{question}{colon}>`__ ternary operator
 - The `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ history-referencing operator
 
 Other operators are used to assign values to variables:
