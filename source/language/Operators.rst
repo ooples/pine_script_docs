@@ -224,8 +224,8 @@ Arrays, in comparison, can have constant or variable sizes, and their content or
 is not modified by the runtime environment. Pine series are thus very different from arrays and
 only share familiarity with them through their indexing syntax.
 
-When the market for the chart symbol is open and the script is executing on the chart's last bar, the *realtime bar*, 
-`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ return the value of the current price. 
+When the market for the chart's symbol is open and the script is executing on the chart's last bar, the *realtime bar*, 
+`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ returns the value of the current price. 
 It will only contain the actual closing price of the realtime bar the last time the script is executed on that bar, when it closes.
 
 Pine has a variable that contains the number of the bar the script is executing on: 
