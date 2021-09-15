@@ -202,7 +202,7 @@ The value used inside the square brackets of the operator is the offset in the p
 To refer to the value of the `volume <https://www.tradingview.com/pine-script-reference/v5/#var_volume>`__ 
 built-in variable two bars away from the current bar, one would use ``volume[2]``.
 
-Because series grow dynamically, as the script moves on sucessive bars, the offset used with the operator will refer to different bars, with time.
+Because series grow dynamically, as the script moves on sucessive bars, the offset used with the operator will refer to different bars.
 Let’s see how the offset is dynamic, and why series are also very different from arrays.
 In Pine, the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ variable, or ``close[0]`` which is equivalent,
 holds the price at the "close" of the current bar.
