@@ -7,10 +7,11 @@ Conditional statements
     :depth: 2
 
 
-.. _if_statement:
 
-\`if\` statement
-----------------
+.. _PageConditionalStatementsIf:
+
+\`if\`
+------
 
 An ``if`` statement defines a block of statements to be executed when
 the ``if``'s conditional expression evaluates to ``true``, and optionally,
@@ -113,4 +114,9 @@ side effect of the expression, for example in ``strategy.*()`` calls:
                        oca_type=strategy.oca.cancel, comment="BBandLE")
     else
         strategy.cancel(id="BBandLE")
+
+
+
+\`switch\`
+----------
 
