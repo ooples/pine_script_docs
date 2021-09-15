@@ -50,7 +50,7 @@ The ``+`` and ``-`` also serve as unary operators (means they work on one operan
 
 If both operands are numbers but at least one of these is of "float" type, the result will also be a "float". 
 If both operands are of "int" type, the result will also be an "int".
-If at least one operand is `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ 
+If at least one operand is `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__, 
 the result is also `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__.
 
 The ``+`` operator also serves as the concatenation operator for strings. ``"EUR"+"USD"`` yields the ``"EURUSD"`` string.
