@@ -110,6 +110,7 @@ Examples::
     close >= open  // Depends on values of `close` and `open`
 
 
+
 Logical operators
 -----------------
 
@@ -123,14 +124,7 @@ There are three logical operators in Pine Script:
 | ``or``  | Logical Disjunction             |
 +---------+---------------------------------+
 
-All logical operators can operate with *bool* operands, numerical
-operands, or *series* type operands. As is the case with arithmetic and comparison
-operators, if at least one of the operands is of *series*
-type, then the result will also be of *series* type. In all other cases
-the type of the result will be the logical type *bool*.
-
-The operator ``not`` is unary. When applied to a ``true``
-operand the result will be ``false``, and vice versa.
+The operator ``not`` is unary. When applied to a ``true``, operand the result will be ``false``, and vice versa.
 
 ``and`` operator truth table:
 
@@ -160,33 +154,34 @@ operand the result will be ``false``, and vice versa.
 | false   | false   | false    |
 +---------+---------+----------+
 
-.. _ternary_operator:
+
+
+.. _PageOperators_TernaryOperator:
 
 \`?:\` ternary operator
 -----------------------
 
-The `?: ternary operator <https://www.tradingview.com/pine-script-reference/v5/#op_{question}{colon}>`__
-evaluates if the first expression is (condition) and returns the value of either
-the second operand (if the condition is ``true``) or of the third
-operand (if the condition is ``false``). Syntax is::
+The `?: <https://www.tradingview.com/pine-script-reference/v5/#op_{question}{colon}>`__ ternary operator is used to create expressions of the form::
 
     condition ? valueWhenConditionIsTrue : valueWhenConditionIsFalse
 
-If ``condition`` is ``true`` then the ternary operator will return ``result1``,
-otherwise it will return ``result2``.
+The ternary operator returns a result that depends on the value of ``condition``. If it is ``true``,  then ``valueWhenConditionIsTrue`` is returned.
+If ``condition` is ``false`` or `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__,  then ``valueWhenConditionIsFalse`` is returned.
 
-A combination of conditional operators can build
-constructs similar to *switch* statements. For
+A combination of ternary expressions can be used to achieve the same effect as a 
+`switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ structure. For
 example::
 
     timeframe.isintraday ? color.red : timeframe.isdaily ? color.green : timeframe.ismonthly ? color.blue : na
 
-The example is calculated from left to right.
-First, the ``timeframe.isintraday`` condition is calculated; if it is ``true`` then
-``color.red`` will be the result. If it is ``false`` then ``timeframe.isdaily`` is calculated,
-if this is ``true``, then ``color.green`` will be the result. If it is
-``false``, then ``timeframe.ismonthly`` is calculated. If it is ``true``, then ``color.blue``
-will be the result, otherwise ``na`` will be the result.
+The example is calculated from left to right:
+
+- If `timeframe.isintraday <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isintraday>`__ is ``true``,
+  then ``color.red`` is returned. If it is ``false``, then `timeframe.isdaily <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isdaily>`__ is evaluated.
+- If `timeframe.isdaily <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isdaily>`__ is ``true``, 
+  then ``color.green`` is returned. If it is ``false``, 
+  then `timeframe.ismonthly <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}ismonthly>`__ is evaluated. 
+- If it is ``true``, then ``color.blue`` is returned, otherwise `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ is returned.
 
 Note that the two result values are expressions — not local blocks, so they will not affect the limit of 500 local blocks per scope.
 
