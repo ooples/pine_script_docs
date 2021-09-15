@@ -131,7 +131,7 @@ You can use it on multiple lines by highlighting them first.
 Line wrapping
 -------------
 
-Long lines can be split on multiple lines, or "wrapped". Wrapped lines must be indented with any number of spaces, provided it's not a multiple of four (those boundaries are used to indent local blocks::
+Long lines can be split on multiple lines, or "wrapped". Wrapped lines must be indented with any number of spaces, provided it's not a multiple of four (those boundaries are used to indent local blocks)::
 
     a = open + high + low + close
 
