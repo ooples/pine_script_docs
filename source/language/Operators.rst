@@ -301,11 +301,41 @@ then parts of the expression can be grouped together with parentheses.
 
 
 \`=\` assignement operator
------------------------------------
+--------------------------
 
+The ``=`` operator is used to assign a variable when it is initialized — or declared —, i.e., the first time you use it. 
+These are all valid variable declarations::
+
+    i = 1
+    MS_IN_ONE_MINUTE = 1000 * 60
+    showPlotInput = input.bool(true, "Show plots")
+    pHi = pivothigh(5, 5)
+    plotColor = color.green
+
+See the :ref:`<PageExpressionsDeclarationsStatements_VariableDeclaration>` section for more information on how to declare variables.
 
 
 
 \`:=\` reassignement operator
---------------------------------------
+-----------------------------
+
+The ``:=`` is used to *reassign* a value to an existing variable. Variables which have been first declared then reassigned using ``:=`` are called *mutable* variables.
+All the following examples are valid variable reassignments. Don't fret if you can't yet make sense of what the `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ thing in there; you can find out more about it in the :ref:`<PageExpressionsDeclarationsStatements_VariableDeclaration>` section::
+
+    //@version=5
+    indicator("", "", true)
+    // Declare `pHi` and initilize it on the first bar only.
+    var float pHi = na
+    // Reassign a value to `pHi`
+    pHi := nz(ta.pivothigh(5, 5), pHi)
+    plot(pHi)
+
+Note that:
+
+- 
+
+The output of our script looks like this:
+
+
+See the :ref:`<PageExpressionsDeclarationsStatements_VariableReassignment>` section for more information on how to reassign values to variables.
 
