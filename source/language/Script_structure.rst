@@ -153,7 +153,7 @@ Statements inside user-defined function declarations can also be wrapped.
 However, since a local block must syntactically begin with an
 indentation (4 spaces or 1 tab), when splitting it onto the
 following line, the continuation of the statement must start with more
-than one indentation (not equal to a multiple of 4 spaces). For
+than one indentation (not equal to a multiple of four spaces). For
 example::
 
     updown(s) =>
