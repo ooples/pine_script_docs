@@ -23,6 +23,9 @@ Other operators are used to assign values to variables:
 - ``=`` is used to assign a value to a variable, **but only when you declare the variable** (the first time you use it)
 - ``:=`` is used to assign a value to a **previously declared variable**. The following operators can also be used in such a way: ``+=``, ``-=``, ``*=``, ``/=``, ``%=``
 
+In order to fully understand how expressions are calculated in Pine, a good understanding of Pine *forms* and *types* is required. 
+The :ref:`<PageTypeSystem_Forms> page explains them.
+
 
 
 Arithmetic operators
@@ -42,18 +45,15 @@ There are five arithmetic operators in Pine Script:
 | ``%`` | Modulo (remainder after division)  |
 +-------+------------------------------------+
 
-The arithmetic operators above are all binary, whith ``+`` and ``-`` also serving as unary operators.
+The arithmetic operators above are all binary (means they need two *operands* — or values — to work on, like in ``1 + 2``). 
+The ``+`` and ``-`` also serve as unary operators (means they work on one operand, like ``-1`` or ``+1``).
 
-When using arithmetic operators, the type of the result depends on
-the type of the operands. If at least one of the operands is a *series*, then
-the result will also have a *series* type. If both operands are numeric,
-but at least one of these has the type *float*, then the result will
-also have the type *float*. If both operands are of type *integer*, then the
-result will also have the type *integer*.
-If at least one operand is ``na`` then the result is also ``na``.
+If both operands are numbers but at least one of these is of "float" type, the result will also be a "float". 
+If both operands are of "int" type, the result will also be an "int".
+If at least one operand is `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ 
+the result is also `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__.
 
-The ``+`` operator also serves as the concatenation operator for strings.
-``"EUR"+"USD"`` constructs the "EURUSD" string.
+The ``+`` operator also serves as the concatenation operator for strings. ``"EUR"+"USD"`` yields the ``"EURUSD"`` string.
 
 
 
