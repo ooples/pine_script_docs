@@ -203,7 +203,7 @@ To refer to the value of the `volume <https://www.tradingview.com/pine-script-re
 built-in variable two bars away from the current bar, one would use ``volume[2]``.
 
 Because series grow dynamically, as the script moves on sucessive bars, the offset used with the operator will refer to different bars.
-Let’s see how the offset is dynamic, and why series are also very different from arrays.
+Let’s see how the value returned by the same offset is dynamic, and why series are very different from arrays.
 In Pine, the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ variable, or ``close[0]`` which is equivalent,
 holds the price at the "close" of the current bar.
 If your code is now executing on the **third** bar of the dataset (the set of all bars on your chart), ``close`` will contain the price at the close of that bar,
