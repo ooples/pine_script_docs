@@ -183,7 +183,7 @@ The example is calculated from left to right:
 - If `timeframe.ismonthly <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}ismonthly>`__ is ``true``, 
   then ``color.blue`` is returned, otherwise `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ is returned.
 
-Note that the two possible values on each side of the ``:`` are expressions — not local blocks, so they will not affect the limit of 500 local blocks per scope.
+Note that the return values on each side of the ``:`` are expressions — not local blocks, so they will not affect the limit of 500 local blocks per scope.
 
 
 
