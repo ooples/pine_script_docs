@@ -107,8 +107,8 @@ when the same bars have become historical bars. This behavior is one of the poss
 
 
 
-See also
---------
+More information
+----------------
 
 - The Pine built-in ``barstate.*`` variables that provide information on :ref:`the type of bar or the event <PageBarStates>` 
   where the script is executing. The page where they are documented also contains a script that allows you to visualize 
