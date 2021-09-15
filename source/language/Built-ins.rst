@@ -1,7 +1,7 @@
 .. _PageBuiltInFunctions:
 
-Built-in Functions
-==================
+Built-ins
+=========
 
 .. contents:: :local:
     :depth: 3
@@ -86,10 +86,16 @@ Other functions return a result which is not always used. Sometimes we call them
 
 
 
-.. _PageBuiltInFunctions_CallingBuiltInFunctions:
+.. _PageBuiltInFunctions_BuiltInVariables:
 
-Calling built-in functions
---------------------------
+Built-in variables
+------------------
+
+
+.. _PageBuiltInFunctions_BuiltInFunctions:
+
+Built-in functions
+------------------
 
 All Pine built-ins are defined in the `Pine Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__. 
 You can click on any of the function names listed here to go to its entry in the Reference Manual, 
@@ -134,3 +140,6 @@ Mixing things up this way is not allowed::
     
 **When calling Pine built-ins, it is critical to ensure that the arguments you use are of the form and type required, which will vary for each parameter.**
 To learn how to do this, one needs to understand Pine's :ref:`<PageTypeSytem>`.
+
+
+
