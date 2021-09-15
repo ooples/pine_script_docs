@@ -1,8 +1,14 @@
+.. _PageExpressionsDeclarationsStatements:
+
 Expressions, declarations and statements
 ========================================
 
 .. contents:: :local:
     :depth: 2
+
+
+
+.. _PageExpressionsDeclarationsStatements_Expressions:
 
 Expressions
 -----------
@@ -20,6 +26,10 @@ Here are some examples of simple expressions::
     ta.sma(high - low, 10) + ta.sma(close, 20)
 
 .. _variable_declaration:
+
+
+
+.. _PageExpressionsDeclarationsStatements_VariableDeclaration:
 
 Variable declaration
 --------------------
@@ -97,15 +107,16 @@ Example, illustrating the effect of ``var`` keyword::
     var label lb = label.new(bar_index, close, text="Hello, World!")
 
 
-.. _variable_assignment:
 
-Variable assignment
--------------------
+.. _PageExpressionsDeclarationsStatements_VariableReassignment:
+
+Variable reassignment
+---------------------
 
 A mutable variable is a variable which can be given a new value.
 The operator ``:=`` must be used to give a new value to a variable.
 A variable must be declared before you can assign a value to it
-(see declaration of variables :ref:`above<variable_declaration>`).
+(see declaration of variables :ref:`above<PageExpressionsDeclarationsStatements_VariableDeclaration>`).
 
 The type of a variable is identified at declaration time. From then on, a variable can
 be given a value of expression only if both the expression and the
@@ -122,175 +133,6 @@ Variable assignment example::
     plot(price)
 
 
-
-.. _if_statement:
-
-\`if\` statement
-----------------
-
-An ``if`` statement defines a block of statements to be executed when
-the ``if``'s conditional expression evaluates to ``true``, and optionally,
-an alternative block to be executed when the expression is ``false``.
-
-General code form:
-
-.. code-block:: text
-
-    <var_declarationX> = if <condition>
-        <var_decl_then0>
-        <var_decl_then1>
-        ...
-        <var_decl_thenN>
-    else if [optional block]
-        <var_decl_else0>
-        <var_decl_else1>
-        ...
-        <var_decl_elseN>
-    else
-        <var_decl_else0>
-        <var_decl_else1>
-        ...
-        <var_decl_elseN>
-        <return_expression_else>
-
-where:
-
--  ``var_declarationX`` --- this variable is assigned the value of the ``if``
-   statement as a whole.
--  ``condition`` --- if the ``condition`` expression is true, the logic from the *then* block immediately following the ``if`` first line
-   (``var_decl_then0``, ``var_decl_then1``, etc.) is used, if the
-   ``condition`` is false, the logic from the *else* block
-   (``var_decl_else0``, ``var_decl_else1``, etc.) is used.
--  ``return_expression_then``, ``return_expression_else`` --- the last
-   expression from the *then* block or from the *else* block will
-   determine the final value of the whole ``if`` statement.
-
-The type of the returning value of the ``if`` statement is determined by the type of
-``return_expression_then`` and ``return_expression_else``. Their types
-must match. It is not possible to return an integer value from the *then* block
-if the *else* block returns a string value.
-
-Example::
-
-    // This code compiles
-    x = if close > open
-        close
-    else
-        open
-    // This code doesn't compile
-    x = if close > open
-        close
-    else
-        "open"
-
-It is possible to omit the *else* block. In this case, if the ``condition``
-is false, an *empty* value (``na``, ``false``, or ``""``) will be assigned to the
-``var_declarationX`` variable.
-
-Example::
-
-    x = if close > open
-        close
-    // If current close > current open, then x = close.
-    // Otherwise the x = na.
-    
-It is possible to use either multiple *else if* blocks or none at all.
-
-Example::
-
-    x = if open > close
-        5
-    else if high > low
-        close
-    else
-        open
-        
-The *then*, *else if* and *else* blocks are shifted by four spaces [#tabs]_. ``if`` statements can
-be nested by adding four more spaces::
-
-    x = if close > open
-        b = if close > close[1]
-            close
-        else
-            close[1]
-        b
-    else
-        open
-
-It is possible and quite frequent to ignore the resulting value of an ``if`` statement
-(``var_declarationX =`` can be omited). This form is used when you need the
-side effect of the expression, for example in :doc:`strategy trading</essential/Strategies>`:
-
-::
-
-    if (ta.crossover(source, lower))
-        strategy.entry("BBandLE", strategy.long, stop=lower,
-                       oca_name="BollingerBands",
-                       oca_type=strategy.oca.cancel, comment="BBandLE")
-    else
-        strategy.cancel(id="BBandLE")
-
-
-
-.. _for_statement:
-
-\`for\` statement
------------------
-
-The ``for`` statement allows to execute a number of instructions repeatedly:
-
-.. code-block:: text
-
-    <var_declarationX> = for <i> = <from> to <to> by <step>
-        <var_decl0>
-        <var_decl1>
-        ...
-        continue
-        ...
-        break
-        ...
-        <var_declN>
-        <return_expression>
-
-where:
-
--  ``i`` --- a loop counter variable.
--  ``from`` --- start value of the counter.
--  ``to`` --- end value of the counter. When the counter becomes greater
-   than ``to`` (or less than ``to`` in the case where ``from > to``) the
-   loop is stopped.
--  ``step`` --- loop step. Optional. Default is 1. If
-   ``from`` is greater than ``to``, the loop step will automatically change direction; no need to use a negative step.
--  ``var_decl0``, ... ``var_declN``, ``return_expression`` --- body of the loop. It
-   must be indented by 4 spaces [#tabs]_.
--  ``return_expression`` --- returning value. When a loop is finished or
-   broken, the returning value is assigned to ``var_declarationX``.
--  ``continue`` --- a keyword. Can only be used in loops. It jumps to the loop's
-   next iteration.
--  ``break`` --- a keyword. Can be used only in loops. It exits the loop.
-
-This example uses a `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ 
-statement to look back a user-defined amount of bars to determine how many bars have a 
-`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ that is higher or lower than the 
-`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ of the last bar on the chart. 
-A `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ loop is necessary here, 
-since the script only has access to the reference value on the chart's last bar. 
-Pine's runtime cannot, here, be used to calculate on the fly, as the script is executing bar to bar::
-
-    //@version=5
-    indicator("`for` loop")
-    lookbackInput = input.int(50, "Lookback in bars", minval = 1, maxval = 4999)
-    higherBars = 0
-    lowerBars = 0
-    if barstate.islast
-        var label lbl = label.new(na, na, "", style = label.style_label_left)
-        for i = 1 to lookbackInput
-            if high[i] > high
-                higherBars += 1
-            else if high[i] < high
-                lowerBars += 1
-        label.set_xy(lbl, bar_index, high)
-        label.set_text(lbl, str.tostring(higherBars, "# higher bars\n") + str.tostring(lowerBars, "# lower bars"))
 
 .. rubric:: Footnotes
 

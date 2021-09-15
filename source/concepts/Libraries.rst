@@ -74,6 +74,7 @@ This is an example library::
     plot(lo())
 
 
+
 Library functions
 ^^^^^^^^^^^^^^^^^
 
@@ -155,6 +156,7 @@ With the provision that public Pine libraries are considered to be "public domai
 
 
 
+.. _PageLibraries_UsingALibrary:
 
 Using a library
 ---------------

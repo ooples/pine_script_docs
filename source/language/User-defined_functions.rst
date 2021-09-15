@@ -1,3 +1,5 @@
+.. _PageUserDefinedFunctions:
+
 User-defined functions
 ======================
 

@@ -22,11 +22,16 @@ When a script is executing on a given bar, ``open[1]`` refers to the value of th
 time series on the previous bar.
 
 While time series may remind programmers of arrays, they are totally different. 
-Pine does use an array data structure, but it is completely different concept than a time series.
+Pine does use an array data structure, but it is a completely different concept than a time series.
 
 Time series in Pine, combined with its special type of runtime engine and built-in functions, 
-are what makes it easy to compute the running total of `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ 
+are what makes it easy to compute the cumulative total of `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ 
 values without using a `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ loop, with only ``ta.cum(close)``. 
+This is possible because although ``ta.cum(close)`` appears rather static in a script, it is in fact executed on each bar, 
+so its value becomes increasingly larger as the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
+value of each new bar is added to it. When the script reaches the rightmost bar of the chart, 
+``ta.cum(close)`` returns the sum of the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ value from all bars on the chart.
+
 Similarly, the mean of the difference between the last 14 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ 
 and `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ values can be expressed as ``ta.sma(high - low, 14)``, 
 or the distance in bars since the last time the chart made five consecutive higher highs as ``barssince(rising(high, 5))``.
@@ -37,6 +42,10 @@ This can be useful, for example, when testing the `close <https://www.tradingvie
 of the current bar for a breach of the highest `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ 
 in the last 10 bars, but excluding the current bar, which we could write as ``breach = close > highest(close, 10)[1]``. 
 The same statement could also be written as ``breach = close > highest(close[1], 10)``.
+
+The same looping logic on all bars is applied to function calls such as ``plot(open)``  
+which will repeat on each bar, successively plotting on the chart the value of `open <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ 
+for each bar.
 
 Do not confuse "time series" with the "series" form. 
 The *time series* concept explains how consecutive values of variables are stored in Pine; the "series" form denotes variables whose values can change bar to bar. 
@@ -53,5 +62,5 @@ it yields a result of "series" form, even though the variable without an offset 
 such as "simple" in the case of `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__.
 
 When you grasp how time series can be efficiently handled using Pine's syntax and its :ref:`execution model <PageExecutionModel>`, 
-you can define complex calculations using just a few lines of Pine code.
+you can define complex calculations using little code.
 

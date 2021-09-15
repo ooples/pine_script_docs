@@ -1,3 +1,5 @@
+.. _PageWhereCanIGetMoreInformation:
+
 Where can I get more information?
 =================================
 

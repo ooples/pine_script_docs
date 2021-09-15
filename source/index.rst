@@ -19,7 +19,6 @@ Pine Script |version| User Manual
    writing/index
    Release_notes
    migration_guides/index
-   Release_notes
    appendix/index
    Where_can_I_get_more_information
 

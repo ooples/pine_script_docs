@@ -216,8 +216,9 @@ When looping through array elements when the array's size is unknown, you can us
     indicator("Protected `for` loop")
     sizeInput = input.int(0, "Array size", minval = 0, maxval = 100000)
     a = array.new_float(sizeInput)
-    for i = 0 to (array.size(a) == 0 ? na : array.size(a) - 1)
-        array.set(a, i, i)
+    if barstate.isfirst
+        for i = 0 to (array.size(a) == 0 ? na : array.size(a) - 1)
+            array.set(a, i, i)
     plot(array.sum(a))
 
 This takes advantage of the fact that `for <https://www.tradingview.com/pine-script-reference/v5/#>`__ loops do not execute if the ``to`` expression is 
@@ -229,7 +230,7 @@ A `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ sta
     indicator("Protected `while` loop")
     sizeInput = input.int(2, "Array size", minval = 0, maxval = 100000)
     var a = array.new_float(sizeInput)
-    if barstate.islast
+    if barstate.isfirst
         i = 0
         while i < array.size(a)
     	    array.set(a, i, i)
