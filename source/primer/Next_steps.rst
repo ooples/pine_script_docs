@@ -6,7 +6,7 @@ Next steps
 .. contents:: :local:
     :depth: 3
 
-After your :ref:` <PageFirstSteps>` and your :ref:` <PageFirstIndicator>`, 
+After your :ref:`first steps <PageFirstSteps>` and your :ref:`first indicator <PageFirstIndicator>`, 
 let us explore a bit more of the Pine landscape by sharing some pointers to guide you in your journey to learn Pine.
 
 
