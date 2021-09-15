@@ -12,23 +12,16 @@ Introduction
 
 Some operators are used to build *expressions* returning a result:
 
-- Arithmetic operators: 
-  `+ <https://www.tradingview.com/pine-script-reference/v5/#op_{plus}>`__, 
-  `- <https://www.tradingview.com/pine-script-reference/v5/#op_{minus}>`__, 
-  `* <https://www.tradingview.com/pine-script-reference/v5/#op_{star}>`__, 
-  `/ <https://www.tradingview.com/pine-script-reference/v5/#op_{slash}>`__, 
-  `% <https://www.tradingview.com/pine-script-reference/v5/#op_{percent}>`__.
-- Comparison operators:
-  `< <https://www.tradingview.com/pine-script-reference/v5/#op_<>`__,
-
+- Arithmetic operators
+- Comparison operators
 - Logical operators
 - The `?: ternary operator <https://www.tradingview.com/pine-script-reference/v5/#op_{question}{colon}>`__
-- `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ operator
+- The `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ history-referencing operator
 
 Other operators are used to assign values to variables:
 
-- ``=``
-- ``:=``
+- ``=`` is used to assign a value to a variable **upon the variable's declaration only**.
+- ``:=`` is used to assign a value to a **previously declared variable**. The following operators can also be used in such a way: ``+=``, ``-=``, ``*=``, ``/=``, ``%=``
 
 
 
