@@ -22,6 +22,6 @@ The :ref:`Pine Style Guide <PageStyleGuide>` recommends using uppercase SNAKE_CA
     GREEN_COLOR = #4CAF50
     MAX_LOOKBACK = 100
     int fastLength = 7
-    // Returns 1 if `boolean` parameter is `true`, 0 if it is `false` or `na`.
+    // Returns 1 if the argument is `true`, 0 if it is `false` or `na`.
     zeroOne(boolean) => boolean ? 1 : 0
     
