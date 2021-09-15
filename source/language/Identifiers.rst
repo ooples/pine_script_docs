@@ -9,13 +9,14 @@ Identifiers are names used for user-defined variables and functions:
 - The next characters can be letters, underscores or digits (``0-9``).
 - They are case-sensitive.
 
-Here are some examples of valid identifiers::
+Here are some examples::
 
     myVar
     _myVar
     my123Var
     MAX_LEN
     max_len
+    3barsDown  // NOT VALID!
 
 The :ref:`Pine Style Guide <PageStyleGuide>` recommends using uppercase SNAKE_CASE for constants, and camelCase for other identifiers::
 
