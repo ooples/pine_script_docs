@@ -20,7 +20,7 @@ Some operators are used to build *expressions* returning a result:
 
 Other operators are used to assign values to variables:
 
-- ``=`` is used to assign a value to a variable **upon the variable's declaration only**.
+- ``=`` is used to assign a value to a variable, **but only when you declare the variable** (the first time you use it)
 - ``:=`` is used to assign a value to a **previously declared variable**. The following operators can also be used in such a way: ``+=``, ``-=``, ``*=``, ``/=``, ``%=``
 
 
