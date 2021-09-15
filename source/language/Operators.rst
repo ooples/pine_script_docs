@@ -24,7 +24,7 @@ Other operators are used to assign values to variables:
 - ``:=`` is used to assign a value to a **previously declared variable**. The following operators can also be used in such a way: ``+=``, ``-=``, ``*=``, ``/=``, ``%=``
 
 In order to fully understand how expressions are calculated in Pine, a good understanding of Pine *forms* and *types* is required. 
-The :ref:`<PageTypeSystem_Forms> page explains them.
+The :ref:`<PageTypeSystem_Forms>` page explains them.
 
 
 
