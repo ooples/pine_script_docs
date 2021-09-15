@@ -68,7 +68,12 @@ Each type of script has distinct requirements:
 Code
 ----
 
-Pine code consists of a collection of *statements* which implement the script's algorithm:
+Pine code consists of a collection of *statements* which implement the script's algorithm. Statements may be one of three kinds:
+
+    -  :ref:`Variable declarations <PageExpressionsDeclarationsStatements_VariableDeclaration>`
+    -  :doc:`Function declarations <PageUserDefinedFunctions>`
+    -  :doc:`Functions calls <Functions_and_annotations>`
+
 
 - Some statements can be expressed in one line (many variable declarations); others require multiple lines 
   (`if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__, 
@@ -82,11 +87,6 @@ Pine code consists of a collection of *statements* which implement the script's 
 - Lines can contain comments, or be comments.
 - Lines can be wrapped.
 
-Statements may be one of three kinds:
-
-    -  :ref:`Variable declarations <PageExpressionsDeclarationsStatements_VariableDeclaration>`
-    -  :doc:`Function declarations <PageUserDefinedFunctions>`
-    -  :doc:`Functions calls <Functions_and_annotations>`
 
 
   The simplest valid Pine v5 study can be generated using *Pine Editor* |rarr| *Open* |rarr| *New blank indicator*::
