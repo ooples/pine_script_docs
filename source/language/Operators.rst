@@ -189,49 +189,55 @@ Note that the return values on each side of the ``:`` are expressions — not lo
 
 .. _PageOperators_HistoryReferencingOperator:
 
-\`[ ]\` History-referencing operator
+\`[ ]\` history-referencing operator
 ------------------------------------
 
-It is possible to refer to the historical values of any variable of the
-*series* type with the `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ operator. 
-*Historical* values are variable values for the previous bars.
+It is possible to refer to past values of :ref:`time series <PageTimeSeries>` using the 
+`[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ history-referencing operator. 
+Past values are values a variable had on bars preceding the bar where the script is currently executing — the *current bar*.
+See the :ref:`<PageExecutionModel>` page for more information about the way scripts are executed on bars.
 
-Most data in Pine is stored in series (somewhat like arrays, but with a dynamic index).
-Let’s see how the index is dynamic, and why series are also very different from arrays.
-In Pine, the ``close`` variable, or ``close[0]`` which is equivalent,
-holds the price at the close of the current bar.
-If your code is now executing on the **third** bar of the dataset,
-``close`` will contain the price at the close of that bar,
-``close[1]`` will contain the price at the close of the preceding bar (the second),
-and ``close[2]``, the first. ``close[3]`` will return ``na`` because no bar exists
-in that position, and thus its value is *not available*.
+The `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ operator is used after a variable, expression or function call.
+The value used inside the square brackets of the operator is the offset in the past we want to refer to.
+To refer to the value of the `volume <https://www.tradingview.com/pine-script-reference/v5/#var_volume>`__ 
+built-in variable two bars away from the current bar, one would use ``volume[2]``.
+
+Because series grow dynamically, as the script moves on sucessive bars, the offset used with the operator will refer to different bars, with time.
+Let’s see how the offset is dynamic, and why series are also very different from arrays.
+In Pine, the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ variable, or ``close[0]`` which is equivalent,
+holds the price at the "close" of the current bar.
+If your code is now executing on the **third** bar of the dataset (the set of all bars on your chart), ``close`` will contain the price at the close of that bar,
+``close[1]`` will contain the price at the close of the preceding bar (the dataset's second bar),
+and ``close[2]``, the first bar. ``close[3]`` will return `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ 
+because no bar exists in that position, and thus its value is *not available*.
 
 When the same code is executed on the next bar, the **fourth** in the dataset,
 ``close`` will now contain the closing price of that bar, and the same ``close[1]``
-used in your code will now refer to the close of the third bar.
-The close of the first bar in the dataset will now be ``close[3]``
-and this time ``close[4]`` will return ``na``.
+used in your code will now refer to the "close" of the third bar in the dataset.
+The close of the first bar in the dataset will now be ``close[3]``, 
+and this time ``close[4]`` will return `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__.
 
 In the Pine runtime environment, as your code is executed once for each historical bar in the dataset,
 starting from the left of the chart, Pine is adding a new element in the series at index 0
 and pushing the pre-existing elements in the series one index further away.
-Arrays, in comparison, are usually static in size and their content or indexing structure
+Arrays, in comparison, can have constant or variable sizes, and their content or indexing structure
 is not modified by the runtime environment. Pine series are thus very different from arrays and
-share familiarity with them mostly through their indexing syntax.
+only share familiarity with them through their indexing syntax.
 
-At the realtime, ``close`` variable 
-represents the current price and will only contain the actual closing price of the
-realtime bar the last time the script is executed on that bar, and from then on,
-when it is referred to using the history-referencing operator.
+When the market for the chart symbol is open and the script is executing on the chart's last bar, the *realtime bar*, 
+`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ return the value of the current price. 
+It will only contain the actual closing price of the realtime bar the last time the script is executed on that bar, when it closes.
 
-Pine has a variable that keeps track of the bar count: ``bar_index``.
-On the first bar, ``bar_index`` is equal to 0 and it increases by 1 at each new bar,
-so at the last bar, ``bar_index`` is equal to the number of bars in the dataset minus one.
+Pine has a variable that contains the number of the bar the script is executing on: 
+`bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__.
+On the first bar, `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__ 
+is equal to 0 and it increases by 1 on each successive bar the script executes on.
+On the last bar, `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__ is equal to the number of bars in the dataset minus one.
 
 There is another important consideration to keep in mind when using the ``[]`` operator in
-Pine. We have seen cases when a history reference may return the ``na``
-value. ``na`` represents a value which is not a number and
-using it in any math expression will produce a result that is also ``na`` (similar
+Pine. We have seen cases when a history reference may return the `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
+value. `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ represents a value which is not a number and
+using it in any math expression will produce a result that is also `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ (similar
 to `NaN <https://en.wikipedia.org/wiki/NaN>`__).
 Such cases often happen during the script's calculations in the
 early bars of the dataset, but can also occur in later bars under certain conditions.
@@ -242,9 +248,6 @@ The `na <https://www.tradingview.com/pine-script-reference/v5/#fun_na>`__ and
 `nz <https://www.tradingview.com/pine-script-reference/v5/#fun_nz>`__ functions
 are designed to allow for handling such cases.
 
-**Note 1**. Almost all built-in functions in Pine's standard library
-return a *series* result. It is therefore
-possible to apply the ``[]`` operator directly to function calls, as is done here:
 
 ::
 
@@ -255,17 +258,10 @@ of *series* type, it is prohibited to apply this operator to the same
 operand over and over again. Here is an example of incorrect use
 which will generate a compilation error:
 
-::
+
+Note that the `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ can only be used once on the same value. This is not allowed::
 
     close[1][2] // Error: incorrect use of [] operator
-
-In some situations, the user may want to shift the series to the left.
-Negative arguments for the operator ``[]`` are prohibited. This can be
-accomplished using the ``offset`` parameter in the ``plot`` annotation, which
-supports both positive and negative values. Note though that it is a
-visual shift., i.e., it will be applied after all calculations.
-Further details on ``plot`` and its parameters can be found
-`here <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__.
 
 
 
