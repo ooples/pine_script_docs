@@ -60,7 +60,7 @@ Each type of script has distinct requirements:
   `barcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_barcolor>`__,
   `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__, etc.).
 - Strategies must contain at least one ``strategy.*()`` call, e.g., 
-  `strategy.entry <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}entry>`__.
+  `strategy.entry() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}entry>`__.
 - Libraries must contain at least one library function and cannot contain ``strategy.*()`` calls.
 
 
