@@ -341,7 +341,7 @@ Note that:
   On each bar, it evaluates if the `pivothigh() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}pivothigh>`__ 
   call returns `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ because that is what the function does when it hasn't found a new pivot.
   The `nz() <https://www.tradingview.com/pine-script-reference/v5/#fun_nz>`__ 
-  function is the function that does the checking for `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ part.
+  function is the one doing the "checking for `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__" part.
   When its first argument (``ta.pivothigh(5, 5)`` is `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__, 
   it returns the second argument (``pHi``) instead of the first.
   When `pivothigh() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}pivothigh>`__ returns the price point of a newly found pivot, 
