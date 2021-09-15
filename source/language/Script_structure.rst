@@ -84,9 +84,9 @@ Pine code consists of a collection of *statements* which implement the script's 
 
 Statements may be one of three kinds:
 
-    -  :ref:`Variable declarations <variable_declaration>`
-    -  :doc:`Function declarations <Declaring_functions>`
-    -  :doc:`Functions and annotations calls <Functions_and_annotations>`
+    -  :ref:`Variable declarations <PageExpressionsDeclarationsStatements_VariableDeclaration>`
+    -  :doc:`Function declarations <PageUserDefinedFunctions>`
+    -  :doc:`Functions calls <Functions_and_annotations>`
 
 
   The simplest valid Pine v5 study can be generated using *Pine Editor* |rarr| *Open* |rarr| *New blank indicator*::
