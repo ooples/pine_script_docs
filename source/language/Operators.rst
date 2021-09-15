@@ -55,6 +55,8 @@ the result is also `na <https://www.tradingview.com/pine-script-reference/v5/#va
 
 The ``+`` operator also serves as the concatenation operator for strings. ``"EUR"+"USD"`` yields the ``"EURUSD"`` string.
 
+Examples::
+
 
 
 Comparison operators
@@ -76,12 +78,14 @@ There are six comparison operators in Pine Script:
 | ``>=`` | Greater Than or Equal To        |
 +--------+---------------------------------+
 
-Comparison operations are binary. The result is determined by the type
-of the operands. If at least one of these operands has a *series* type, then
-the type of the result will also be *series* (a series of logical
-values). If both operands have a numerical type, then the result will be
-of the logical type *bool*.
+Comparison operations are binary. If both operands have a numerical value, the result will be of type *bool*, i.e., ``true``, ``false`` or 
+`na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__.
 
+Examples::
+
+    1 > 2  // false
+    1 != 1 // false
+    close >= open  // Depends on values of `close` and `open`
 
 
 Logical operators
