@@ -320,7 +320,7 @@ See the :ref:`<PageExpressionsDeclarationsStatements_VariableDeclaration>` secti
 -----------------------------
 
 The ``:=`` is used to *reassign* a value to an existing variable. Variables which have been first declared, then reassigned using ``:=``, are called *mutable* variables.
-All the following examples are valid variable reassignments. Don't fret if you can't yet make sense of what the `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ thing in there; you can find out more about it in the :ref:`<PageExpressionsDeclarationsStatements_VariableDeclaration>` section::
+All the following examples are valid variable reassignments. Don't fret if you can't yet make much sense of what the `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ thing does in there; you can find out more about it in the :ref:`<PageExpressionsDeclarationsStatements_VariableDeclaration>` section::
 
     //@version=5
     indicator("", "", true)
