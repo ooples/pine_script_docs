@@ -86,10 +86,10 @@ Other functions return a result which is not always used. Sometimes we call them
 
 
 
-.. _PageBuiltInFunctions_UsingBuiltInFunctions:
+.. _PageBuiltInFunctions_CallingBuiltInFunctions:
 
-Using built-in functions
-------------------------
+Calling built-in functions
+--------------------------
 
 All Pine built-ins are defined in the `Pine Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__. 
 You can click on any of the function names listed here to go to its entry in the Reference Manual, 
