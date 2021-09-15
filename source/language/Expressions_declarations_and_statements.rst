@@ -1,8 +1,14 @@
+.. _PageExpressionsDeclarationsStatements:
+
 Expressions, declarations and statements
 ========================================
 
 .. contents:: :local:
     :depth: 2
+
+
+
+.. _PageExpressionsDeclarationsStatements_Expressions:
 
 Expressions
 -----------
@@ -20,6 +26,10 @@ Here are some examples of simple expressions::
     ta.sma(high - low, 10) + ta.sma(close, 20)
 
 .. _variable_declaration:
+
+
+
+.. _PageExpressionsDeclarationsStatements_VariableDeclaration:
 
 Variable declaration
 --------------------
@@ -97,15 +107,16 @@ Example, illustrating the effect of ``var`` keyword::
     var label lb = label.new(bar_index, close, text="Hello, World!")
 
 
-.. _variable_assignment:
 
-Variable assignment
--------------------
+.. _PageExpressionsDeclarationsStatements_VariableReassignment:
+
+Variable re-assignment
+----------------------
 
 A mutable variable is a variable which can be given a new value.
 The operator ``:=`` must be used to give a new value to a variable.
 A variable must be declared before you can assign a value to it
-(see declaration of variables :ref:`above<variable_declaration>`).
+(see declaration of variables :ref:`above<PageExpressionsDeclarationsStatements_VariableDeclaration>`).
 
 The type of a variable is identified at declaration time. From then on, a variable can
 be given a value of expression only if both the expression and the
@@ -219,7 +230,7 @@ be nested by adding four more spaces::
 
 It is possible and quite frequent to ignore the resulting value of an ``if`` statement
 (``var_declarationX =`` can be omited). This form is used when you need the
-side effect of the expression, for example in :doc:`strategy trading</essential/Strategies>`:
+side effect of the expression, for example in ``strategy.*()`` calls:
 
 ::
 
