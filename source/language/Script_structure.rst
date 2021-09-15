@@ -145,9 +145,9 @@ may be wrapped as::
 A long `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call may be wrapped as::
 
     plot(ta.correlation(src, ovr, length),
-       color=color.new(color.purple, 40),
-       style=plot.style_area,
-       trackprice=true)
+       color = color.new(color.purple, 40),
+       style = plot.style_area,
+       trackprice = true)
 
 Statements inside user-defined function declarations can also be wrapped.
 However, since a local block must syntactically begin with an
@@ -172,7 +172,7 @@ example::
 Do not use comments in wrapped lines. The following code does NOT compile::
 
     //@version=5
-    indicator("My Script")
+    indicator("")
     c = open > close ? color.red :
       high > high[1] ? color.lime : // A comment causing a compilation error.
       low < low[1] ? color.blue : color.black
