@@ -1,3 +1,5 @@
+.. _PageBuiltInFunctions:
+
 Built-in Functions
 ==================
 
@@ -82,6 +84,9 @@ Other functions return a result which is not always used. Sometimes we call them
 `array.pop() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}pop>`__,
 `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__, etc.
 
+
+
+.. _PageBuiltInFunctions_UsingBuiltInFunctions:
 
 Using built-in functions
 ------------------------
