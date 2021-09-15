@@ -17,6 +17,7 @@ Here are some examples::
     functionName
     MAX_LEN
     max_len
+    maxLen
     3barsDown  // NOT VALID!
 
 The :ref:`Pine Style Guide <PageStyleGuide>` recommends using uppercase SNAKE_CASE for constants, and camelCase for other identifiers::
