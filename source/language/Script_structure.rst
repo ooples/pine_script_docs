@@ -90,13 +90,13 @@ Statements can be arranged in multiple ways:
 - Lines can contain comments, or be comments.
 - Lines can be wrapped.
 
-  The simplest valid Pine v5 study can be generated using *Pine Editor* |rarr| *Open* |rarr| *New blank indicator*::
+The simplest valid Pine v5 study can be generated in the Pine Editor by using the "Open" button and choosing "New blank indicator"::
 
     //@version=5
     indicator("My Script")
     plot(close)
 
-  A simple valid Pine v5 strategy can be generated using *Pine Editor* |rarr| *Open* |rarr| *New blank strategy*::
+A simple valid Pine v5 strategy can be generated the Pine Editor by using the "Open" button and choosing "New blank strategy"::
 
     //@version=5
     strategy("My Strategy", overlay=true, margin_long=100, margin_short=100)
@@ -114,47 +114,34 @@ Statements can be arranged in multiple ways:
 Comments
 --------
 
-Pine supports single-line comments. Any text from the symbol
-``//`` until the end of the line is considered as comment. An example::
+Double slashes (``//``) define comments in Pine. Comments can begin anywhere on the line. Except on wrapped lines, they can also follow Pine code on the same line::
 
     //@version=5
-    indicator("Test")
+    indicator("")
     // This line is a comment
     a = close // This is also a comment
     plot(a)
 
-The *Pine Editor* has a hotkey for commenting/uncommenting:
-``Ctrl + /``. Highlight a code fragment and press ``Ctrl + /``
-to comment/uncomment whole blocks of code at a time.
-
-Comments cannot be placed in the middle of a statement continued
-on multiple lines. Read more on this here: :doc:`Line_wrapping`.
+The Pine Editor has a keyboard shortcut to comment/uncomment lines: ``Ctrl + /``. 
+You can use it on multiple lines by highlighting them first.
 
 
 
 Line wrapping
 -------------
 
-Any statement that is too long in Pine Script can be placed on more than
-one line. Syntactically, a statement **must** begin at the beginning of the
-line. If it wraps to the next line then the continuation of the
-statement **must** begin with one or several (different from multiple of 4)
-spaces. For example::
+Long lines can be split on multiple lines, or *wrapped". Wrapped lines must be indented with any number of spaces, provided it's not a multiple of four (those boundaries are used to indent local blocks::
 
     a = open + high + low + close
 
-may be wrapped as:
-
-::
+may be wrapped as::
 
     a = open +
           high +
               low +
                  close
 
-A long ``plot`` call may be wrapped as:
-
-::
+A long `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call may be wrapped as::
 
     plot(ta.correlation(src, ovr, length),
        color=color.new(color.purple, 40),
@@ -162,13 +149,11 @@ A long ``plot`` call may be wrapped as:
        trackprice=true)
 
 Statements inside user functions can also be wrapped.
-However, since a local statement must syntactically begin with an
+However, since a local block must syntactically begin with an
 indentation (4 spaces or 1 tab), when splitting it onto the
 following line, the continuation of the statement must start with more
-than one indentation (not equal to multiple of 4 spaces). For
-example:
-
-::
+than one indentation (not equal to a multiple of 4 spaces). For
+example::
 
     updown(s) =>
         isEqual = s == s[1]
@@ -183,17 +168,11 @@ example:
                        -1 :
                        nz(ud[1])-1)
 
-Do not use comments with line wrapping.
-The following code does NOT compile::
+Do not use comments in wrapped lines. The following code does NOT compile::
 
     //@version=5
     indicator("My Script")
     c = open > close ? color.red :
-      high > high[1] ? color.lime : // a comment
+      high > high[1] ? color.lime : // A comment causing a compilation error.
       low < low[1] ? color.blue : color.black
     bgcolor(c)
-
-
-The compiler fails with the error:
-``Add to Chart operation failed, reason: line 3: syntax error at input 'end of line without line continuation'``.
-To make this code compile, simply remove the ``// a comment`` comment.
