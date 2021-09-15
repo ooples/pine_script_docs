@@ -86,6 +86,7 @@ Statements can be arranged in multiple ways:
   Their first character must also be the line's first character.
   A local block is the code inside user-defined functions or other statements requiring indentation such as
   `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__.
+  Lines beginning in a line's first position become by definition part of the script's *global scope*.
 - Multiple one-line statements can be concatenated on a single line by using the comma (``,``) as a separator.
 - Lines can contain comments, or be comments.
 - Lines can be wrapped.
