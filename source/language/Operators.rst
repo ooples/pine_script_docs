@@ -40,7 +40,8 @@ This script will produce a compilation error::
     plot(ma)
 
 The compiler will complain: *Cannot call 'ta.ema' with argument 'length'='adjustedLength'. An argument of 'series int' type was used but a 'simple int' is expected;*.
-This is happening because ``lenInput`` is an "input int" but ``factor`` is a "series int" (it can only be determined by looking at the time of each bar). 
+This is happening because ``lenInput`` is an "input int" but ``factor`` is a "series int" (it can only be determined by looking at the value of 
+`year <https://www.tradingview.com/pine-script-reference/v5/#var_year>`__ on each bar). 
 The ``adjustedLength`` variable is thus assigned a "series int" value. 
 Our problem is that the Reference Manual entry for `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__ tells us that its ``length`` parameter requires values of "simple" form, which is a weaker form that "series", so a "series int" value is not allowed.
 
