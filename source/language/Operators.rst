@@ -180,7 +180,8 @@ The example is calculated from left to right:
 - If `timeframe.isdaily <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isdaily>`__ is ``true``, 
   then ``color.green`` is returned. If it is ``false``, 
   then `timeframe.ismonthly <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}ismonthly>`__ is evaluated. 
-- If it is ``true``, then ``color.blue`` is returned, otherwise `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ is returned.
+- If `timeframe.ismonthly <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}ismonthly>`__ is ``true``, 
+  then ``color.blue`` is returned, otherwise `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ is returned.
 
 Note that the two result values are expressions — not local blocks, so they will not affect the limit of 500 local blocks per scope.
 
