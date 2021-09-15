@@ -76,6 +76,7 @@ Pine code consists of a collection of *statements* which implement the script's 
   :ref:`how to call user-defined functions <PageUserDefinedFunctions>`
   and :ref:`how to call library functions <PageLibraries_UsingALibrary>`
 
+Statements can be arranged in multiple ways:
 
 - Some statements can be expressed in one line (many variable declarations); others require multiple lines 
   (`if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__, 
@@ -88,8 +89,6 @@ Pine code consists of a collection of *statements* which implement the script's 
 - Multiple one-line statements can be concatenated on a single line by using the comma (``,``) as a separator.
 - Lines can contain comments, or be comments.
 - Lines can be wrapped.
-
-
 
   The simplest valid Pine v5 study can be generated using *Pine Editor* |rarr| *Open* |rarr| *New blank indicator*::
 
