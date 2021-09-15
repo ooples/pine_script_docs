@@ -336,7 +336,8 @@ Note that:
   keyword tells Pine that we only want that variable initialized with `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ on the dataset's first bar. 
   The ``float`` keyword tells the compiler we are declaring a variable of type "float". This is necessary because, contrary to most cases, 
   the compiler cannot automatically determine the type of the value on the right side of the ``=`` sign.
-- While the variable declaration will only be executed on the first bar, the ``pHi := nz(ta.pivothigh(5, 5), pHi)`` line will be executed on all the chart's bars.
+- While the variable declaration will only be executed on the first bar because it uses `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__, 
+  the ``pHi := nz(ta.pivothigh(5, 5), pHi)`` line will be executed on all the chart's bars.
   On each bar, it evaluates if the `pivothigh() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}pivothigh>`__ 
   call returns `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ because that is what the function does when it hasn't found a new pivot.
   The `nz() <https://www.tradingview.com/pine-script-reference/v5/#fun_nz>`__ 
