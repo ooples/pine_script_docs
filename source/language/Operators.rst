@@ -237,7 +237,7 @@ On the last bar, `bar_index <https://www.tradingview.com/pine-script-reference/v
 There is another important consideration to keep in mind when using the ``[]`` operator in
 Pine. We have seen cases when a history reference may return the `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
 value. `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ represents a value which is not a number and
-using it in any math expression will produce a result that is also `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ (similar
+using it in any expression will produce a result that is also `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ (similar
 to `NaN <https://en.wikipedia.org/wiki/NaN>`__).
 Such cases often happen during the script's calculations in the
 early bars of the dataset, but can also occur in later bars under certain conditions.
@@ -249,17 +249,15 @@ The `na <https://www.tradingview.com/pine-script-reference/v5/#fun_na>`__ and
 are designed to allow for handling such cases.
 
 
-::
+These are all valid uses of the `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ operator::
 
+    high[10]
     ta.sma(close, 10)[1]
+    ta.highest(high, 10)[20]
+    close > nz(close[1], open)
 
-**Note 2**. Despite the fact that the ``[]`` operator returns a result
-of *series* type, it is prohibited to apply this operator to the same
-operand over and over again. Here is an example of incorrect use
-which will generate a compilation error:
-
-
-Note that the `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ can only be used once on the same value. This is not allowed::
+Note that the `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ operator can only be used once on the same value. 
+This is not allowed::
 
     close[1][2] // Error: incorrect use of [] operator
 
