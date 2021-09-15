@@ -23,8 +23,31 @@ Other operators are used to assign values to variables:
 - ``=`` is used to assign a value to a variable, **but only when you declare the variable** (the first time you use it)
 - ``:=`` is used to assign a value to a **previously declared variable**. The following operators can also be used in such a way: ``+=``, ``-=``, ``*=``, ``/=``, ``%=``
 
-In order to fully understand how expressions are calculated in Pine, a good understanding of Pine *forms* and *types* is required. 
-The :ref:`<PageTypeSystem_Forms>` page explains them.
+As is explained in the :ref:`<PageTypeSystem_Forms>` page, *forms* and *types* play a critical role in determining the type of results that expressions yield.
+This, in turn, has an impact on how and with what functions you will be allowed to use those results. 
+Expressions always return a form of the strongest form used in the expression, e.g., if you multiply an "input int" with a "series int", 
+the expression will produce a "series int" result, which you will not be able to use as the argument to ``length`` in 
+`ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__.
+
+This script will produce a compilation error::
+
+    //@version=5
+    indicator("")
+    lenInput = input.int(14, "Length")
+    factor = year > 2020 ? 3 : 1
+    adjustedLength = lenInput * factor
+    ma = ta.ema(close, adjustedLength)
+    plot(ma)
+
+The compiler will complain: *Cannot call 'ta.ema' with argument 'length'='adjustedLength'. An argument of 'series int' type was used but a 'simple int' is expected;*.
+This is happening because ``lenInput`` is an "input int" but ``factor`` is a "series int" (it can only be determined by looking at the time of each bar). 
+The ``adjustedLength`` variable is thus assigned a "series int" value. 
+Our problem is that the Reference Manual entry for `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__ tells us that its ``length`` parameter requires values of "simple" form, which is a weaker form that "series", so a "series int" value is not allowed.
+
+The solution to our conundrum requires:
+
+- Using another moving average function that supports a "series int" length, such as `ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__, or
+- Not using a calculation producing a "series int" value for our length.
 
 
 
@@ -54,8 +77,6 @@ If at least one operand is `na <https://www.tradingview.com/pine-script-referenc
 the result is also `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__.
 
 The ``+`` operator also serves as the concatenation operator for strings. ``"EUR"+"USD"`` yields the ``"EURUSD"`` string.
-
-Examples::
 
 
 
