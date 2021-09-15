@@ -107,17 +107,13 @@ when the same bars have become historical bars. This behavior is one of the poss
 
 
 
-Additional resources
---------------------
+See also
+--------
 
-A number of ``barstate.*`` built-in variables provide information about the current type of bar update (historical, realtime, closing, etc.). 
-The page where they are documented also contains a script that allows you to visualize the distinction described above between elapsed realtime bars and historical bars: :ref:`<PageBarStates>`.
-
-The :ref:`<PageStrategies>` page explains the details of strategy calculations, which are not identical to those of indicators.
-
-.. rubric:: Footnotes
-
-.. [#all_available_bars] The upper limit for the total number of historical bars is about 10000 for *Pro/Pro+* users and about 20000 for *Premium* users. *Free* users are able to see about 5000 bars.
+- The Pine built-in ``barstate.*`` variables that provide information on :ref:`the type of bar or the event <PageBarStates>` 
+  where the script is executing. The page where they are documented also contains a script that allows you to visualize 
+  the difference between elapsed realtime and historical bars, for example.
+- The :ref:`<PageStrategies>` page explains the details of strategy calculations, which are not identical to those of indicators.
 
 
 
@@ -145,6 +141,8 @@ Let's look at this example script where the ``f()`` and ``f2()`` functions are c
 .. image:: images/Function_historical_context_1.png
 
 As can be seen with the resulting plots, ``a[1]`` returns the previous value of a in the function's context, so the last time ``f()`` was called two bars ago — not the close of the previous bar, as ``close[1]`` does in ``f2()``. This results in ``a[1]`` in the function block referring to a different past value than ``close[1]`` even though they use the same index of 1.
+
+
 
 Why this behavior?
 ^^^^^^^^^^^^^^^^^^
@@ -183,6 +181,8 @@ Using this technique we get the expected output:
 
 .. image:: images/Function_historical_context_3.png
 
+
+
 Exceptions
 ^^^^^^^^^^
 
@@ -204,3 +204,9 @@ Not all built-in functions need to be executed every bar. These are the function
        if (i + bar_index) % 2 == 0
            va := ta.lowest(bar_index, 10)  // same context on each call
    plot(va)
+
+
+
+.. rubric:: Footnotes
+
+.. [#all_available_bars] The upper limit for the total number of historical bars is about 10000 for *Pro/Pro+* users and about 20000 for *Premium* users. *Free* users are able to see about 5000 bars.
