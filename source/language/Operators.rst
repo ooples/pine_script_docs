@@ -169,8 +169,7 @@ The ternary operator returns a result that depends on the value of ``condition``
 If ``condition`` is ``false`` or `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__,  then ``valueWhenConditionIsFalse`` is returned.
 
 A combination of ternary expressions can be used to achieve the same effect as a 
-`switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ structure. For
-example::
+`switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ structure, e.g.::
 
     timeframe.isintraday ? color.red : timeframe.isdaily ? color.green : timeframe.ismonthly ? color.blue : na
 
