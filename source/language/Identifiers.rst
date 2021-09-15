@@ -14,6 +14,7 @@ Here are some examples::
     myVar
     _myVar
     my123Var
+    functionName
     MAX_LEN
     max_len
     3barsDown  // NOT VALID!
