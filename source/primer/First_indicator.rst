@@ -148,5 +148,5 @@ Our code is also simpler and shorter by three lines. We have improved our script
 Next
 ----
 
-We now recommend you go to our :ref:`<PageNextSteps>` page.
+We now recommend you go to our :ref:`Next Steps <PageNextSteps>` page.
 
