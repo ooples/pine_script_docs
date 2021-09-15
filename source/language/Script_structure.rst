@@ -78,10 +78,10 @@ Pine code consists of a collection of *statements* which implement the script's 
 
 Statements can be arranged in multiple ways:
 
-- Some statements can be expressed in one line (many variable declarations); others require multiple lines 
-  (`if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__, 
+- Some statements can be expressed in one line (many variable declarations); others require multiple lines when they include 
+  `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__, 
   `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__, 
-  `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__, etc.).
+  `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__, etc. structures.
 - Lines that are not part of a *local block* cannot begin with white space (space or tab). 
   Their first character must also be the line's first character.
   A local block is the code inside user-defined functions or other statements requiring indentation such as
