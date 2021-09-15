@@ -1,8 +1,12 @@
+.. _PageOperators:
+
 Operators
 =========
 
 .. contents:: :local:
     :depth: 2
+
+
 
 Arithmetic operators
 --------------------
@@ -34,6 +38,8 @@ If at least one operand is ``na`` then the result is also ``na``.
 The ``+`` operator also serves as the concatenation operator for strings.
 ``"EUR"+"USD"`` constructs the "EURUSD" string.
 
+
+
 Comparison operators
 --------------------
 
@@ -58,6 +64,8 @@ of the operands. If at least one of these operands has a *series* type, then
 the type of the result will also be *series* (a series of logical
 values). If both operands have a numerical type, then the result will be
 of the logical type *bool*.
+
+
 
 Logical operators
 -----------------
@@ -111,16 +119,15 @@ operand the result will be ``false``, and vice versa.
 
 .. _ternary_operator:
 
-?: conditional operator and the iff function
---------------------------------------------
+\`?:\` ternary operator
+-----------------------
 
-The ``?:`` `conditional ternary
-operator <https://www.tradingview.com/pine-script-reference/v5/#op_{question}{colon}>`__
-calculates the first expression (condition) and returns the value of either
+The `?: ternary operator <https://www.tradingview.com/pine-script-reference/v5/#op_{question}{colon}>`__
+evaluates if the first expression is (condition) and returns the value of either
 the second operand (if the condition is ``true``) or of the third
 operand (if the condition is ``false``). Syntax is::
 
-    condition ? result1 : result2
+    condition ? valueWhenConditionIsTrue : valueWhenConditionIsFalse
 
 If ``condition`` is ``true`` then the ternary operator will return ``result1``,
 otherwise it will return ``result2``.
@@ -138,10 +145,14 @@ if this is ``true``, then ``color.green`` will be the result. If it is
 ``false``, then ``timeframe.ismonthly`` is calculated. If it is ``true``, then ``color.blue``
 will be the result, otherwise ``na`` will be the result.
 
-.. _history_referencing_operator:
+Note that the two result values are expressions — not local blocks, so they will not affect the limit of 500 local blocks per scope.
 
-History reference operator []
------------------------------
+
+
+.. _PageOperators_HistoryReferencingOperator:
+
+\`[ ]\` History-referencing operator
+------------------------------------
 
 It is possible to refer to the historical values of any variable of the
 *series* type with the ``[]`` operator. *Historical* values are variable values for the previous bars.
@@ -217,6 +228,8 @@ visual shift., i.e., it will be applied after all calculations.
 Further details on ``plot`` and its parameters can be found
 `here <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__.
 
+
+
 Operator precedence
 -------------------
 
@@ -251,3 +264,14 @@ then they are calculated left to right.
 
 If the expression must be calculated in a different order than precedence would dictate,
 then parts of the expression can be grouped together with parentheses.
+
+
+
+\`=\` assignement operator
+-----------------------------------
+
+
+
+\`:=\` reassignement operator
+--------------------------------------
+
