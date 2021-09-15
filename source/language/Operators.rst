@@ -336,6 +336,7 @@ Note that:
 
 The output of our script looks like this:
 
+.. image:: images/Operators-ReassignmentOperator-1.png
 
 See the :ref:`<PageExpressionsDeclarationsStatements_VariableReassignment>` section for more information on how to reassign values to variables.
 
