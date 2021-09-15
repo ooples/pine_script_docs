@@ -258,7 +258,7 @@ color
 Color literals have the following format: ``#RRGGBB`` or ``#RRGGBBAA``. The letter pairs represent ``00`` to ``FF`` hexadecimal values (0 to 255 in decimal) where:
 
 - ``RR``, ``GG`` and ``BB`` pairs are the values for the color's red, green and blue components
-- ``AA`` is an optional value for the color's transparency (or *alpha* component) where ``00`` is invisble and ``FF`` opaque. When no ``AA`` pair is supplied, ``FF`` is used.
+- ``AA`` is an optional value for the color's transparency (or *alpha* component) where ``00`` is invisible and ``FF`` opaque. When no ``AA`` pair is supplied, ``FF`` is used.
 - The hexadecimal letters can be upper or lower case
 
 Examples::
