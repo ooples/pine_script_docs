@@ -3,6 +3,9 @@
 Loops
 =====
 
+.. contents:: :local:
+    :depth: 2
+
 
 
 .. _PageLoops_ForStatement:
