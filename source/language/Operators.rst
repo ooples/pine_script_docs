@@ -332,11 +332,28 @@ All the following examples are valid variable reassignments. Don't fret if you c
 
 Note that:
 
-- 
+- We declare ``pHi`` with this code: ``var float pHi = na``. The `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ 
+  keyword tells Pine that we only want that variable initialized with `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ on the dataset's first bar. 
+  The ``float`` keyword tells the compiler we are declaring a variable of type "float". This is necessary because, contrary to most cases, 
+  the compiler cannot automatically determine the type of the value on the right side of the ``=`` sign.
+- While the variable declaration will only be executed on the first bar, the ``pHi := nz(ta.pivothigh(5, 5), pHi)`` line will be executed on all the chart's bars.
+  On each bar, it evaluates if the `pivothigh() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}pivothigh>`__ 
+  call returns `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ because that is what the function does when it hasn't found a new pivot.
+  The `nz() <https://www.tradingview.com/pine-script-reference/v5/#fun_nz>`__ 
+  function is the function that does the checking for `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ part.
+  When `pivothigh() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}pivothigh>`__ returns the price point of a newly found pivot, 
+  that value is assigned to ``pHi``. When it returns `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ 
+  because no new pivot was found, we assign the previous value of ``pHi`` to itself, in effect preserving its previous value.
 
 The output of our script looks like this:
 
 .. image:: images/Operators-ReassignmentOperator-1.png
+
+Note that:
+
+- The line preserves its previous value until a new pivot is found.
+- Pivots are detected five bars after the pivot actually occurs because our ``ta.pivothigh(5, 5)`` call
+  says that we require five lower highs on both sides of a high point for it to be detected as a pivot.
 
 See the :ref:`<PageExpressionsDeclarationsStatements_VariableReassignment>` section for more information on how to reassign values to variables.
 
