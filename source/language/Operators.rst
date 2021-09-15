@@ -36,7 +36,7 @@ This script will produce a compilation error::
     lenInput = input.int(14, "Length")
     factor = year > 2020 ? 3 : 1
     adjustedLength = lenInput * factor
-    ma = ta.ema(close, adjustedLength)
+    ma = ta.ema(close, adjustedLength)  // Compilation error!
     plot(ma)
 
 The compiler will complain: *Cannot call 'ta.ema' with argument 'length'='adjustedLength'. An argument of 'series int' type was used but a 'simple int' is expected;*.
