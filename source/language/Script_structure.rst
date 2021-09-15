@@ -72,7 +72,7 @@ Pine code consists of a collection of *statements* which implement the script's 
 
 - :ref:`Variable declarations <PageExpressionsDeclarationsStatements_VariableDeclaration>`
 - :ref:`Function declarations <PageUserDefinedFunctions_DeclaringFunctions>`
-- Functions calls (see :ref:`how to call built-in functions <PageBuiltInFunctions_CallingBuiltInFunctions>`,
+- Expressions consisting of a function call whose result is not used (see :ref:`how to call built-in functions <PageBuiltInFunctions_CallingBuiltInFunctions>`,
   :ref:`how to call user-defined functions <PageUserDefinedFunctions>`
   and :ref:`how to call library functions <PageLibraries_UsingALibrary>`)
 
