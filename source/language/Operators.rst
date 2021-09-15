@@ -20,11 +20,6 @@ Some operators are used to build *expressions* returning a result:
   `% <https://www.tradingview.com/pine-script-reference/v5/#op_{percent}>`__.
 - Comparison operators:
   `< <https://www.tradingview.com/pine-script-reference/v5/#op_<>`__,
-  `<= <https://www.tradingview.com/pine-script-reference/v5/#op_<=>`__,
-  `!= <https://www.tradingview.com/pine-script-reference/v5/#op_!=>`__,
-  `== <https://www.tradingview.com/pine-script-reference/v5/#op_==>`__,
-  `> <https://www.tradingview.com/pine-script-reference/v5/#op_>>`__,
-  `>= <https://www.tradingview.com/pine-script-reference/v5/#op_>=>`__.
 
 - Logical operators
 - The `?: ternary operator <https://www.tradingview.com/pine-script-reference/v5/#op_{question}{colon}>`__
