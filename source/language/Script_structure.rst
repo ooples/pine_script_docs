@@ -149,7 +149,7 @@ A long `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`
        style=plot.style_area,
        trackprice=true)
 
-Statements inside user functions can also be wrapped.
+Statements inside user-defined function declarations can also be wrapped.
 However, since a local block must syntactically begin with an
 indentation (4 spaces or 1 tab), when splitting it onto the
 following line, the continuation of the statement must start with more
