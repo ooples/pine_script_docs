@@ -100,12 +100,12 @@ As you should have already done in :ref:`<PageFirstIndicator>`, copy this docume
 
 This is how the `Pine User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__ you are reading is organized:
 
-- The :doc:`</language>` section explains the main components of the Pine language and how scripts execute.
-- The :doc:`</concepts>` section is more task-oriented. It explains how to do things in Pine.
-- The :doc:`</writing>` section explores tools and tricks that will help you write and publish scripts.
-- The :doc:`</faq>` section answers common questions from Pine coders.
-- The :doc:`</Release_notes>` page is where you can follow the frequent updates to the Pine.
-- The :doc:`</migration_guides>` section explains how to port between different versions of Pine.
-- The :ref:`<_PageWhereCanIGetMoreInformation>` page lists other useful Pine-related content, including where to ask questions when you are stuck on code.
+- The :doc:`<../language>` section explains the main components of the Pine language and how scripts execute.
+- The :doc:`<../concepts>` section is more task-oriented. It explains how to do things in Pine.
+- The :doc:`<../writing>` section explores tools and tricks that will help you write and publish scripts.
+- The :doc:`<../faq>` section answers common questions from Pine coders.
+- The :doc:`<../Release_notes>` page is where you can follow the frequent updates to the Pine.
+- The :doc:`<../migration_guides>` section explains how to port between different versions of Pine.
+- The :ref:`<../_PageWhereCanIGetMoreInformation>` page lists other useful Pine-related content, including where to ask questions when you are stuck on code.
 
 We wish you a successful journey with Pine... and trading!
