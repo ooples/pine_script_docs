@@ -120,29 +120,22 @@ A simple valid Pine v5 indicator can be generated in the Pine Editor by using th
     indicator("My Script")
     plot(close)
 
-This one includes three local blocks, one in the ``f()`` function declaration, 
-and one in the `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ structure::
+This indicator includes three local blocks, one in the ``f()`` function declaration, 
+and two in the variable declaration using an `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ structure::
 
     //@version=5
 
-    // Declaration statement (global scope)
-    indicator("", "", true)
+    indicator("", "", true)    // Declaration statement (global scope)
 
-    // Function declaration (global scope)
-    barIsUp() =>
-        // Local block (local scope)
-        close > open
+    barIsUp() =>    // Function declaration (global scope)
+        close > open    // Local block (local scope)
 
-    // Variable declaration (global scope)
-    plotColor = if barIsUp()
-        // Local block (local scope)
-        color.green
+    plotColor = if barIsUp()  // Variable declaration (global scope)
+        color.green     // Local block (local scope)
     else
-        // Local block (local scope)
-        color.red
+        color.red       // Local block (local scope)
 
-    // Call to a built-in function  (global scope)
-    bgcolor(color.new(plotColor, 70))
+    bgcolor(color.new(plotColor, 70))   // Call to a built-in function  (global scope)
 
 
 You can bring up a simple Pine v5 strategy by selecting "New blank strategy" instead::
