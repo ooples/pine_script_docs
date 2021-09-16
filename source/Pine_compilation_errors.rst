@@ -1,8 +1,12 @@
-Pine compilation and execution errors
-=====================================
+.. _PageErrorMessages:
+
+Error messages
+==============
 
 .. contents:: :local:
     :depth: 2
+
+
 
 Script requesting too many securities
 -------------------------------------
