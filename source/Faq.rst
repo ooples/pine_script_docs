@@ -1,5 +1,6 @@
-HOWTOs
-======
+FAQ
+===
+
 
 .. contents:: :local:
     :depth: 2
