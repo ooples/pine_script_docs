@@ -246,7 +246,7 @@ Added support for ``input.color`` to the ``input()`` function. Now you can provi
     label.set_x(l, bar_index)
     label.set_color(l, c_labelColor)
     
-.. image:: images/input_color.png
+.. image:: images/ReleaseNotes-input_color.png
 
 Added support for arrays and functions for working with them. You can now use the powerful new array feature to build custom datasets. See our `User Manual page on arrays <https://www.tradingview.com/pine-script-docs/en/v4/essential/Arrays.html>`__ and our `blog <https://www.tradingview.com/blog/en/arrays-are-now-available-in-pine-script-20052/>`__::
 
@@ -297,7 +297,7 @@ June 2020
 
 * New ``resolution`` parameter was added to the ``study`` function. Now you can add MTF functionality to scripts and decide the timeframe you want the indicator to run on. 
 
-.. image:: images/Mtf.png
+.. image:: images/ReleaseNotes-Mtf.png
 
 Please note that you need to reapply the indicator in order for the `resolution` parameter to appear.
 
@@ -309,7 +309,7 @@ Please note that you need to reapply the indicator in order for the `resolution`
     label.set_x(l,bar_index)
     label.set_tooltip(l, "Label Tooltip")
     
-.. image:: images/Tooltip.png
+.. image:: images/ReleaseNotes-Tooltip.png
 
 * Added an ability to create `alerts on strategies <https://www.tradingview.com/chart/?solution=43000481368>`__.
 
@@ -317,12 +317,12 @@ Please note that you need to reapply the indicator in order for the `resolution`
 
 * New `label styles <https://www.tradingview.com/pine-script-reference/v4/#fun_label{dot}new>`__ allow you to position the label pointer in any direction.
 
-.. image:: images/new_label_styles.png
+.. image:: images/ReleaseNotes-new_label_styles.png
 
 
 * Find and Replace was added to Pine Editor. To use this, press CTRL+F (find) or CTRL+H (find and replace).
 
-.. image:: images/FindReplace.jpg
+.. image:: images/ReleaseNotes-FindReplace.jpg
 
 * ``timezone`` argument was added for time functions. Now you can specify timezone for ``second``, ``minute``, ``hour``, ``year``, ``month``, ``dayofmonth``, ``dayofweek`` functions::
 
@@ -392,7 +392,7 @@ February 2020
     var l = label.new(bar_index, high, text="Right\n aligned\n text", textalign=text.align_right)
     label.set_xy(l, bar_index, high)
 
-  .. image:: images/Label_text_align.png
+  .. image:: images/ReleaseNotes-Label_text_align.png
 
 
 January 2020
@@ -442,7 +442,7 @@ October 2019
     plotchar(open > close, char="🐻")
 
 
-  .. image:: images/Bears_in_plotchar.png
+  .. image:: images/ReleaseNotes-Bears_in_plotchar.png
 
 * New ``bordercolor`` argument of the ``plotcandle()`` function allows you to change the color of candles' borders::
 

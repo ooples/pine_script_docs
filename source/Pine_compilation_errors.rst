@@ -51,7 +51,7 @@ Script could not be translated from: null
 Usually this error occurs in version 1 pine scripts, and means that code
 is incorrect. Pine of version 2 (and higher) is better at
 explaining errors of this kind. So you can try to switch to version 2 by
-adding a :ref:`special attribute <versions>` in the first line. You'll get
+adding a :ref:`special attribute <PageScriptStructure_Version>` in the first line. You'll get
 ``line 2: no viable alternative at character '$'``
 
 ::
@@ -238,4 +238,4 @@ When using drawings that refer to previous bars through ``bar_index[n]`` and ``x
 the time series received from this bar will be used to position the drawings on the time axis.
 Therefore, if it is impossible to determine the correct size of the buffer, this error may occur.
 To avoid this, you need to use ``max_bars_back(time, n)``.
-This behavior is described in more detail in the section about :ref:`drawings <max-bars-back-of-time>`.
+This behavior is described in more detail in the section about :ref:`drawings <max-bars-back-of-time>`:ref:`. <PageTests>`

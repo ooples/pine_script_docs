@@ -322,7 +322,7 @@ We can use this feature to write a functionally equivalent script::
 
 
 
-Debugging from inside \`for\' loops
+Debugging from inside \`for\` loops
 -----------------------------------
 
 Values inside `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ loops cannot be plotted using `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ calls in the loop. As in functions, such variables are also local to the loop's scope. Here, we explore three different techniques to inspect variable values originating from `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ loops, starting from this code example, which calculates the balance of bars in the lookback period which have a higher/lower true range value than the current bar::

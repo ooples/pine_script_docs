@@ -1,5 +1,7 @@
-Context switching and the \`request.security()\` function
-=========================================================
+.. _PageOtherTimeframesAndData:
+
+Other timeframes and data
+=========================
 
 .. contents:: :local:
     :depth: 2
@@ -100,7 +102,7 @@ individual stocks participating in an upward or downward trend.
 
 
 
-.. _barmerge_gaps_and_lookahead:
+.. _PageOtherTimeframesAndData_GapsAndLookahead:
 
 Gaps and lookahead
 ------------------
@@ -115,7 +117,7 @@ If `barmerge.gaps_on <https://www.tradingview.com/pine-script-reference/v5/#var_
 is used, then merged data may contain gaps in the form of ``na`` values.
 
 The second switch, ``lookahead``, was added in Pine Script version
-3. The parameter has two possible values:
+1. The parameter has two possible values:
 `barmerge.lookahead_off <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}lookahead_off>`__
 and
 `barmerge.lookahead_on <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}lookahead_on>`__
@@ -149,8 +151,9 @@ The fuchsia dotted line represents the beginning of real-time data. You can see 
 ``barmerge.lookahead_on`` and ``barmerge.lookahead_off`` behave the same way
 on real-time data, i.e., as ``barmerge.lookahead_off`` does.
 
-.. _understanding_lookahead:
 
+
+.. _PageOtherTimeframesAndData_UnderstandingLookahead:
 
 Understanding lookahead
 -----------------------
@@ -194,7 +197,7 @@ realtime data, we take the *close* of the previous day without shifting the
 
 
 
-.. _requesting_data_of_a_lower_timeframe:
+.. _PageOtherTimeframesAndData_RequestingDataOfALowerTimeframe:
 
 Requesting data of a lower timeframe
 ------------------------------------

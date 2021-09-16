@@ -1,7 +1,7 @@
 ..    include:: <isonum.txt>
 
-Extended and regular sessions
-=============================
+Sessions
+========
 
 On TradingView you can access extended hours sessions by
 *right-clicking* on a chart and choosing *Settings* |rarr|

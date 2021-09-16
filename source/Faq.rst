@@ -1,3 +1,5 @@
+.. _PageFaq:
+
 FAQ
 ===
 
@@ -62,7 +64,7 @@ You may use plotshape with style ``shape.arrowup`` and
     plotshape(condition, color = color.lime, style = shape.arrowup, text = "Buy")
     plotshape(not condition, color = color.red, style = shape.arrowdown, text = "Sell")
 
-.. image:: images/Buy_sell_chart1.png
+.. image:: images/Faq-Buy_sell_chart1.png
 
 You may use ``plotchar`` function with any unicode character::
 
@@ -72,7 +74,7 @@ You may use ``plotchar`` function with any unicode character::
     plotchar(not condition, char='↓', color = color.lime, text = "Buy")
     plotchar(condition, char='↑', location = location.belowbar, color = color.red, text = "Sell")
 
-.. image:: images/Buy_sell_chart2.png
+.. image:: images/Faq-Buy_sell_chart2.png
 
 
 Plot a dynamic horizontal line
@@ -123,7 +125,7 @@ Get a 5-days high
 Lookback 5 days from the current bar, find the highest bar, plot a star
 character at that price level above the current bar
 
-|Mark the highest bar within a 5 day lookback window range|
+.. image:: images/Faq-Wiki_howto_range_analysis.png
 
 ::
 
@@ -212,4 +214,3 @@ You can use the script below to avoid gaps in a series::
     plot(series, style = plot.style_linebr, color = color.red)  // series has na values
     plot(vw)  // all na values are replaced with the last non-empty value
 
-.. |Mark the highest bar within a 5 day lookback window range| image:: images/Wiki_howto_range_analysis.png
