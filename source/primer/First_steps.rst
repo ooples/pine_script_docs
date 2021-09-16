@@ -24,7 +24,7 @@ We will get you started on your journey to:
 3. **Write** Pine scripts.
 
 If you are already familiar with the use of Pine scripts on TradingView and are now ready to learn how to write your own,
-then jump to the :ref:`<PageFirstIndicator_WritingScripts>` section of this page.
+then jump to the :ref:` <PageFirstIndicator_WritingScripts>` section of this page.
 
 If you are new to our platform, then please read on!
 
@@ -157,4 +157,4 @@ Pine allows you to write three types of scripts:
 - **Strategies** which include logic to issue trading orders and can be backtested and forward-tested.
 - **Libraries** which are used by more advanced programmers to package oft-used functions that can be reused by other scripts.
 
-The next step we recommend is to write your :ref:`<PageFirstIndicator>`.
+The next step we recommend is to write your :ref:` <PageFirstIndicator>`.

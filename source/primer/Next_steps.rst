@@ -35,7 +35,7 @@ When execution reaches the chart's last bar and the market is open, it is on the
 The script then executes once every time a price or volume change is detected, and one last time for that realtime bar when it closes. 
 That realtime bar then becomes an *elapsed realtime bar*. Note that when the script executes in realtime, 
 it does not recalculate on all the chart's historical bars on every price/volume update. 
-It has already calculated once on those bars, so it does not need to recalculate them on every chart tick. See the :ref:`<PageExecutionModel>` page for more information.
+It has already calculated once on those bars, so it does not need to recalculate them on every chart tick. See the :ref:` <PageExecutionModel>` page for more information.
 
 When a script executes on a historical bar, the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ 
 built-in variable holds the value of that bar's close.
@@ -43,7 +43,7 @@ When a script executes on the realtime bar, `close <https://www.tradingview.com/
 returns the **current** price of the symbol until the bar closes.
 
 Contrary to indicators, Pine strategies normally execute only once on realtime bars, when they close.
-They can also be configured to execute on each price/volume update if that is what you need. See the page on :ref:`<PageStrategies>` for more information.
+They can also be configured to execute on each price/volume update if that is what you need. See the page on :ref:` <PageStrategies>` for more information.
 
 
 Time series
@@ -64,7 +64,7 @@ you can choose to share your scripts with other traders. Before doing so, please
 All publicly published scripts are analyzed by our team of moderators and must comply with our `Script Publishing Rules <https://www.tradingview.com/house-rules/?solution=43000590599>`__, which require them to be original and well-documented.
 
 If want to use Pine scripts for your own use, simply write them in the Pine Editor and add them to your chart from there; you don't have to publish them to use them. If you want to share your scripts with just a few friends, you can publish them privately and send your friends the browser's link to your private publication. 
-See :ref:`<PagePublishing>` for more information on the subject.
+See :ref:` <PagePublishing>` for more information on the subject.
 
 
 
@@ -82,7 +82,7 @@ The `Pine User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.
 The `Pine Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__ documents what each variable, function or Pine keyword does.
 It is an essential tool for all Pine programmers; your life will be miserable if you try to write scripts of any reasonable complexity without consulting it.
 It exists in two formats: the HTML format we just linked to, 
-and the popup version, which can be accessed from the Pine Editor, by either CTRL + clicking on a keyword, 
+and the popup version, which can be accessed from the Pine Editor, by either :kbd:`ctrl` + :kbd:`clicking` on a keyword, 
 or by using the Editor's "More/Pine Script reference (pop-up)" menu. The Reference Manual is translated in other languages.
 
 
@@ -96,7 +96,7 @@ Where to go from here?
 This `Pine User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__ contains numerous examples of code used to illustrate the concepts we discuss.
 By going through it, you will be able to both learn the foundations of Pine and study the example scripts. 
 Reading about key concepts and trying them out right away with real code is a productive way to learn any programming language.
-As you should have already done in :ref:`<PageFirstIndicator>`, copy this documentation’s examples in the Editor and play with them. Explore! You won’t break anything.
+As you should have already done in :ref:` <PageFirstIndicator>`, copy this documentation’s examples in the Editor and play with them. Explore! You won’t break anything.
 
 This is how the `Pine User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__ you are reading is organized:
 

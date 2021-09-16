@@ -41,11 +41,15 @@ The Pine **forms** are:
 - "simple" for values known at bar zero (when the script begins execution on the chart's first historical bar)
 - "series" for values known on each bar (any time during the execution of a script on any bar)
 
-Forms are organized in the following hierarchy: **const < input < simple < series**, where "const" is considered a *weaker* form than "input", for example, and "series" *stronger* than "simple". The form hierarchy translates into the rule that, whenever a given form is required, a weaker form is also allowed.
+Forms are organized in the following hierarchy: **const < input < simple < series**, where "const" is considered a *weaker* form than "input", for example, and "series" *stronger* than "simple". 
+The form hierarchy translates into the rule that, whenever a given form is required, a weaker form is also allowed.
 
-An expression's result is always of the strongest form used in the expression's calculation. Furthermore, once a variable acquires a stronger form, that state is irreversible; it can never be converted back to a weaker form. A variable of "series" form can thus never be converted back to a "simple" form, for use with a function that requires arguments of that form.
+An expression's result is always of the strongest form used in the expression's calculation. Furthermore, once a variable acquires a stronger form, that state is irreversible; 
+it can never be converted back to a weaker form. A variable of "series" form can thus never be converted back to a "simple" form, for use with a function that requires arguments of that form.
 
-Note that of all these forms, only the "series" form allows values to change dynamically, bar to bar, during the script's execution over each bar of the chart's history. Such values include `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ or `hlc3 <https://www.tradingview.com/pine-script-reference/v5/#var_hlc3>`__ or any variable calculated using values of "series" form. Variables of "const", "input" or "simple" forms cannot change values once execution of the script has begun.
+Note that of all these forms, only the "series" form allows values to change dynamically, bar to bar, during the script's execution over each bar of the chart's history. 
+Such values include `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ or `hlc3 <https://www.tradingview.com/pine-script-reference/v5/#var_hlc3>`__ or any variable calculated using values of "series" form. 
+Variables of "const", "input" or "simple" forms cannot change values once execution of the script has begun.
 
 
 Types
@@ -60,7 +64,8 @@ The Pine **types** are:
 
 Each type refers to the nature of the value contained in a variable: ``1`` is of type "int", ``1.0`` is of type "float", ``"AAPL"`` is of type "string", etc.
 
-The Pine compiler can automatically convert some types into others when a value is not of the required type. The auto-casting rules are: **int** |rarr| **float** |rarr| **bool**. See the :ref:`Type casting <PageTypeSystem_TypeCasting>` section of this page for more information on type casting.
+The Pine compiler can automatically convert some types into others when a value is not of the required type. The auto-casting rules are: **int** |rarr| **float** |rarr| **bool**. 
+See the :ref:`Type casting <PageTypeSystem_TypeCasting>` section of this page for more information on type casting.
 
 Except in library function signatures, Pine forms are implicit in code; they are never declared because they are always determined by the compiler. Types, however, can be specified when declaring variables, e.g.::
 
@@ -85,10 +90,14 @@ Forms
 const
 """""
 
-Values of "const" form must be known at compile time, before your script has access to any information related to the symbol/timeframe information it is running on. Compilation occurs when you save a script in the Pine Editor, which doesn't even require it to already be running on your chart. "const" variables cannot change during the execution of a script.
+Values of "const" form must be known at compile time, before your script has access to any information related to the symbol/timeframe information it is running on. 
+Compilation occurs when you save a script in the Pine Editor, which doesn't even require it to already be running on your chart. "const" variables cannot change during the execution of a script.
 
 Variables of "const" form can be intialized using a *literal* value, or calculated from expressions using only literal values or other variables of "const" form. 
-Pine's :ref:`<PageStyleGuide>` recommends using upper case SNAKE_CASE to name variables of "const" form. While it is not a requirement, "const" variables are often declared using the `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ keyword so they are only initialized on the first bar of the dataset. Declaring "const" variables using `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ incurs a minor performance penalty on script execution time, so when your logic does not require it, declaring "const" variables without `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ is preferable.
+Pine's :ref:` <PageStyleGuide>` recommends using upper case SNAKE_CASE to name variables of "const" form. 
+While it is not a requirement, "const" variables are often declared using the `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ keyword so they are only initialized on the first bar of the dataset. 
+Declaring "const" variables using `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ incurs a minor performance penalty on script execution time, 
+so when your logic does not require it, declaring "const" variables without `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ is preferable.
 
 These are examples of literal values:
 
@@ -101,7 +110,8 @@ These are examples of literal values:
 .. note:: In Pine, the built-in variables ``open``, ``high``, ``low``, ``close``, ``volume``, ``time``,
     ``hl2``, ``hlc3``, ``ohlc4``, etc., are not of "const" form. Because they change bar to bar, they are of *series* form.
 
-The "const" form is a requirement for the arguments to the ``title`` and ``shorttitle`` parameters in `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__, for example. All these are valid variables that can be used as arguments for those parameters when calling the function::
+The "const" form is a requirement for the arguments to the ``title`` and ``shorttitle`` parameters in `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__, for example. 
+All these are valid variables that can be used as arguments for those parameters when calling the function::
 
     //@version=5
     NAME1 = "My indicator"
@@ -118,9 +128,11 @@ This will trigger a compilation error::
     indicator(NAME, "", true)
     plot(close)
 
-The reason for the error is that the ``NAME`` variable's calculation depends on the value of `syminfo.type <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}type>`__ which is a "simple string" (`syminfo.type <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}type>`__ returns a string corresponding to the sector the chart's symbol belongs to, eg., ``"crypto"``, ``"forex"``, etc.).
+The reason for the error is that the ``NAME`` variable's calculation depends on the value of `syminfo.type <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}type>`__ 
+which is a "simple string" (`syminfo.type <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}type>`__ returns a string corresponding to the sector the chart's symbol belongs to, eg., ``"crypto"``, ``"forex"``, etc.).
 
-Note that using the ``:=`` operator to assign a new value to a previously declared "const" variable will transform it into a "simple" variable, e.g., here with ``name1``, for which we do not use an uppercase name because it is not of "const" form::
+Note that using the ``:=`` operator to assign a new value to a previously declared "const" variable will transform it into a "simple" variable, e.g., here with ``name1``, 
+for which we do not use an uppercase name because it is not of "const" form::
 
     var name1 = "My Indicator "
     var NAME2 = "No. 2"
