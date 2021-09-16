@@ -51,7 +51,7 @@ Script could not be translated from: null
 Usually this error occurs in version 1 pine scripts, and means that code
 is incorrect. Pine of version 2 (and higher) is better at
 explaining errors of this kind. So you can try to switch to version 2 by
-adding a :ref:`special attribute <versions>` in the first line. You'll get
+adding a :ref:`special attribute <PageScriptStructure_Version>` in the first line. You'll get
 ``line 2: no viable alternative at character '$'``
 
 ::

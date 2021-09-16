@@ -1,5 +1,7 @@
-Session and time information
-============================
+.. _PageTime:
+
+Time
+====
 
 .. contents:: :local:
     :depth: 2
