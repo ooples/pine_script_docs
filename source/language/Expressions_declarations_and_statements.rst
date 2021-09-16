@@ -11,6 +11,24 @@ Expressions, declarations and statements
 
 .. _PageExpressionsDeclarationsStatements_Expressions:
 
+
+<variable_declaration> | <variable_reassignment> | <function_call> | <structure>
+
+Statements
+----------
+
+Pine code is composed of statements, which can be:
+
+- A *variable declaration*
+- A *variable reassignement*
+- A *function call* (to a user-defined or built-in function)
+- A *structure* (
+  `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
+  `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__,
+  `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__,
+  `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__)
+
+
 Expressions
 -----------
 
