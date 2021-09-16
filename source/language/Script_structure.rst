@@ -68,20 +68,24 @@ Each type of script has distinct requirements:
 Code
 ----
 
-Pine code consists of a collection of *statements* which implement the script's algorithm. Statements may be one of three kinds:
+Pine code consists of a collection of *statements* which implement the script's algorithm. A statement can be one of these:
+	<variable_declaration> | <variable_reassignment> | <function_declaration> | <function_call> | <structure>
 
-- :ref:`Variable declarations <PageExpressionsDeclarationsStatements_VariableDeclaration>`
-- :ref:`Function declarations <PageUserDefinedFunctions_DeclaringFunctions>`
-- Expressions consisting of a function call whose result is not used (see :ref:`how to call built-in functions <PageBuiltInFunctions_CallingBuiltInFunctions>`,
-  :ref:`how to call user-defined functions <PageUserDefinedFunctions>`
-  and :ref:`how to call library functions <PageLibraries_UsingALibrary>`)
+- :ref:`variable declaration <PageExpressionsDeclarationsStatements_VariableDeclaration>`
+- :ref:`variable reassignement <PageExpressionsDeclarationsStatements_VariableReassignment>`
+- :ref:`function declaration <PageUserDefinedFunctions_DeclaringFunctions>`
+- :ref:`built-in function call <PageBuiltInFunctions_CallingBuiltInFunctions>`, 
+  :ref:`user-defined function call <PageUserDefinedFunctions>`, 
+  :ref:`a library function call <PageLibraries_UsingALibrary>`
+- `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
+  `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__,
+  `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ or
+  `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ *structure*.
 
 Statements can be arranged in multiple ways:
 
-- Some statements can be expressed in one line (many variable declarations); others require multiple lines when they include 
-  `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__, 
-  `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__, 
-  `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__, etc., structures.
+- Some statements can be expressed in one line (many variable declarations). 
+  Others, like structures, always require multiple lines.
 - Lines that are not part of a *local block* cannot begin with white space (space or tab). 
   Their first character must also be the line's first character.
   A local block is the code inside user-defined functions or other statements requiring indentation such as

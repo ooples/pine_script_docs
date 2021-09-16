@@ -1,8 +1,8 @@
 
 .. _PageExpressionsDeclarationsStatements:
 
-Expressions, declarations and statements
-========================================
+Pine syntax
+===========
 
 .. contents:: :local:
     :depth: 2
@@ -28,23 +28,7 @@ Pine code is composed of statements, which can be:
   `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__,
   `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__)
 
-
-Expressions
------------
-
-An expression is a sequence where operators or function
-calls are applied to operands (variables or values) to define the calculations
-and actions required by the script. Expressions in Pine almost always
-produce a result (exceptions are the functions
-``indicator``, ``fill``, ``strategy.entry``, etc., which produce side effects and will be covered
-later).
-
-Here are some examples of simple expressions::
-
-    (high + low + close)/3
-    ta.sma(high - low, 10) + ta.sma(close, 20)
-
-.. _variable_declaration:
+See 
 
 
 
@@ -152,7 +136,26 @@ Variable assignment example::
     plot(price)
 
 
+Expressions
+-----------
+
+An expression is a sequence where operators or function
+calls are applied to operands (variables or values) to define the calculations
+and actions required by the script. Expressions in Pine almost always
+produce a result (exceptions are the functions
+``indicator``, ``fill``, ``strategy.entry``, etc., which produce side effects and will be covered
+later).
+
+Here are some examples of simple expressions::
+
+    (high + low + close)/3
+    ta.sma(high - low, 10) + ta.sma(close, 20)
+
+.. _variable_declaration:
+
+
 
 .. rubric:: Footnotes
 
 .. [#tabs] TradingView's *Pine Editor* automatically replaces **Tab** with 4 spaces.
+
