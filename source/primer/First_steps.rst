@@ -24,7 +24,7 @@ We will get you started on your journey to:
 3. **Write** Pine scripts.
 
 If you are already familiar with the use of Pine scripts on TradingView and are now ready to learn how to write your own,
-then jump to the :ref:` <PageFirstIndicator_WritingScripts>` section of this page.
+then jump to the :ref:`Writing scripts <PageFirstIndicator_WritingScripts>` section of this page.
 
 If you are new to our platform, then please read on!
 
