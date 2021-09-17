@@ -10,7 +10,9 @@ Language
    Script_structure
    Identifiers
    Operators
-   Expressions_declarations_and_statements
+   Variable_declarations
+   Conditional_structures
+   Loop_structures
    Type_system
    Built-ins
    User-defined_functions

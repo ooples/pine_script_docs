@@ -11,11 +11,16 @@ Libraries
 
 Introduction
 ------------
-Pine libraries are publications containing functions that can be reused in Pine indicators, strategies, or in other libraries. They are useful to define frequently-used functions so their source code does not have to be included in every script where they are needed.
+Pine libraries are publications containing functions that can be reused in Pine indicators, strategies, or in other libraries. 
+They are useful to define frequently-used functions so their source code does not have to be included in every script where they are needed.
 
-A library must be published (privately or publicly) before it can be used in another script. All libraries are published open-source. Public scripts can only use public libraries. Private scripts or personal scripts saved in the Pine Editor can use public or private libraries. A library can use other libraries, or even previous versions of itself.
+A library must be published (privately or publicly) before it can be used in another script. All libraries are published open-source. 
+Public scripts can only use public libraries. Private scripts or personal scripts saved in the Pine Editor can use public or private libraries. 
+A library can use other libraries, or even previous versions of itself.
 
-Library programmers should be familiar with Pine's typing nomenclature, scopes and user-defined functions. If you need to brush up on Pine forms and types, see the User Manual's page on the :ref:`here <PageTypeSystem>`. For user-defined functions and scopes, see :doc:`/language/Declaring_functions`.
+Library programmers should be familiar with Pine's typing nomenclature, scopes and user-defined functions. 
+If you need to brush up on Pine forms and types, see the User Manual's page on the :ref:`here <PageTypeSystem>`. 
+For user-defined functions and scopes, see :doc:`/language/Declaring_functions`.
 
 
 
@@ -30,7 +35,7 @@ A library script has the following structure, where one or more exportable funct
     //@version=5
 
     // @description <library_description>
-    library(title, shorttitle, overlay, format, precision, scale)
+    library(title, shorttitle, overlay, format, precision)
 
     <script_code>
 

@@ -1,4 +1,4 @@
-.. _PageTypeSystem::
+.. _PageTypeSystem:
 
 Type system
 ===========
@@ -31,6 +31,8 @@ Understanding all three is key to making the most of the power of Pine.
 
 
 
+.. _PageTypeSystem_Forms:
+
 Forms
 ^^^^^
 
@@ -51,6 +53,8 @@ Note that of all these forms, only the "series" form allows values to change dyn
 Such values include `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ or `hlc3 <https://www.tradingview.com/pine-script-reference/v5/#var_hlc3>`__ or any variable calculated using values of "series" form. 
 Variables of "const", "input" or "simple" forms cannot change values once execution of the script has begun.
 
+
+.. _PageTypeSystem_Types:
 
 Types
 ^^^^^
