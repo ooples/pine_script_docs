@@ -139,8 +139,8 @@ Note that:
   By using the average of the **previous** bar's `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__
   and `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ values, 
   the label doesn't move until the moment when the next realtime bar opens.
-- We use ``bar_index + 2`` in our `label.set_xy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xy>`__
-  to offset the label to the right by two bars.
+- We use ``bar_index + 2`` in our `label.set_xy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xy>`__ 
+  call to offset the label to the right by two bars.
 
 
 
