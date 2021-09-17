@@ -17,12 +17,11 @@ The conditional structures in Pine are `if <https://www.tradingview.com/pine-scr
   like reassign values to variables or call functions.
 - To return a value or a tuple which can then be assigned to one (or more, in the case of tuples) variable.
 
-Conditional structures can be embedded; you can use an 
+Conditional structures, like the `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__
+and `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ structures, can be embedded; you can use an 
 `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ or
 `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
-inside another one.
-
-The local blocks in conditional structures must be indented by four spaces or a tab.
+inside another structure.
 
 Some Pine built-in functions cannot be called from within the local blocks of conditional structures. They are:
 `alertcondition() <https://www.tradingview.com/pine-script-reference/v5/#fun_alertcondition>`__,
@@ -42,6 +41,8 @@ evaluated by your script — only that it cannot be done by including them in co
 Note that while ``input*.()`` function calls are allowed in local blocks,
 their functionality is the same as if they were in the script's global scope.
  
+The local blocks in conditional structures must be indented by four spaces or a tab.
+
 
 
 .. _PageConditionalStructures_If:
@@ -106,7 +107,33 @@ structures is easier to read::
 
 Restricting the execution of your code to specific bars is done using 
 `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
-structures.
+structures, as we do here to restrict updates to our label to the chart's last bar::
+
+    //@version=5
+    indicator("", "", true)
+    var ourLabel = label.new(bar_index, na, na, color = color(na), style = label.style_label_left, textcolor = color.orange)
+    if barstate.islast
+        label.set_xy(ourLabel, bar_index, hl2[1])
+        label.set_text(ourLabel, str.tostring(bar_index + 1, "     # bars in chart"))
+
+Note that:
+
+- We initialize the ``ourLabel`` variable on the script's first bar only because we use the
+  `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ declaration mode.
+  The value used to initialize the variable is provided from the 
+  `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ function call,
+  which return a label ID to the label it creates. We use that call to set the label's properties because once
+  set, they will persist until we change them.
+- What happens next is that on each bar the script will skip the initialization of ``ourLabel``, 
+  and the `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
+  structure's condition (`barstate.islast <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islast>`__)
+  is evaluated. It returns ``false`` on all bars until the last one, 
+  so the script does nothing on most historical bars after bar zero.
+- On the last bar, `barstate.islast <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islast>`__
+  becomes true and the structure's local block executes, 
+  modifying on each chart update the properties of our label, which displays the number of bars in the dataset.
+
+
 
 \`if\` used to return a value
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
