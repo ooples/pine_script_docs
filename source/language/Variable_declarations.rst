@@ -55,22 +55,39 @@ The formal syntax of a variable declaration is:
 .. code-block:: text
 
     <variable_declaration>
-    	[var | varip] [<type>] <identifier> = <expression> | <function_call> | <structure>
+    	[<declaration_mode>] [<type>] <identifier> = <expression> | <structure>
         |
-        <tupleOfIdentifiers> = <function_call> | <structure>
+        <tuple_declaration> = <function_call> | <structure>
 
-``<identifier>`` is the name of the declared variable, see :doc:`Identifiers`.
+    <declaration_mode>
+        var | varip
 
-``<type>`` can be one of the predefined keywords: ``float``, ``int``, ``bool``, ``color``, ``string``, ``line``, ``label``, ``box`` or ``table``.
-However, in most cases, an explicit type declaration is redundant because type is automatically inferred from the ``<expression>``
-on the right of the ``=`` at compile time, so the decision to use them is often a matter of preference. For example::
+    <type>
+        int   | float   | bool   | color   | string   | label   | line   | box   | table | 
+        int[] | float[] | bool[] | color[] | string[] | label[] | line[] | box[] | table[]
+
+
+
+Initialization with \`na\`
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In most cases, an explicit type declaration is redundant 
+because type is automatically inferred from the value
+on the right of the ``=`` at compile time, 
+so the decision to use them is often a matter of preference. For example::
 
     baseLine0 = na          // compile time error!
     float baseLine1 = na    // OK
     baseLine2 = float(na)   // OK
 
-In the first line of the example, the compiler cannot determine the type of the ``baseLine0`` variable because ``na`` is a generic value of no particular type. The declaration of the ``baseLine1`` variable is correct because its ``float`` type is declared explicitly.
-The declaration of the ``baseLine2`` variable is also correct because its type can be derived from the expression ``float(na)``, which is an explicit cast of ``na`` value to ``float`` type. The declarations of ``baseLine1`` and ``baseLine2`` are equivalent.
+In the first line of the example, the compiler cannot determine the type of the ``baseLine0`` variable 
+because `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ is a generic value of no particular type. 
+The declaration of the ``baseLine1`` variable is correct because its 
+`float <https://www.tradingview.com/pine-script-reference/v5/#op_float>`__ type is declared explicitly.
+The declaration of the ``baseLine2`` variable is also correct because its type can be derived from the expression ``float(na)``, 
+which is an explicit cast of the `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ 
+value to the `float <https://www.tradingview.com/pine-script-reference/v5/#op_float>`__ type. 
+The declarations of ``baseLine1`` and ``baseLine2`` are equivalent.
 
 
 
