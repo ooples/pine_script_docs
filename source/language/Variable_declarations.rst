@@ -244,7 +244,7 @@ on each update in the realtime bar. It is more efficient to use::
 Note that:
 
 - We initialize ``closeLine`` on the first bar only, 
-  using the `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ declaration mode)
+  using the `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ declaration mode
 - We restrict the execution of the rest of our code to the chart's last bar by enclosing our code
   that updates the line in an `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
   `barstate.islast <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islast>`__ structure.
@@ -264,23 +264,15 @@ The `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__
 keyword can be used to declare variables that escape the *rollback process*, 
 which is explained in the page on Pine's :ref:`execution model <PageExecutionModel>`.
 
-Because `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ 
-only affects the behavior of your code in the realtime bar, 
-it follows that backtest results on strategies built using logic based on 
-`varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ 
-variables will not be able to reproduce that behavior on hisotrical bars, which will invalidate test results on them.
-This also entails that plots on historical bars will not be able to reproduce the script's behavior in realtime.
-
-Escaping the rollback process
 Whereas scripts only execute once at the close of historical bars, when a script is running in realtime, 
 it executes every time the chart's feed detects a price or volume update. 
 At every realtime update, Pine's runtime normally resets the values of a script's variables to their last committed value, 
 i.e., the value they held when the previous bar closed. 
 This is generally handy, as each realtime script execution starts from a known state, which simplifies script logic.
 
-Sometimes, however, script logic requires code to be able to save states between different executions in the realtime bar. 
+Sometimes, however, script logic requires code to be able to save variable values **between different executions** in the realtime bar. 
 Declaring variables with `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__  makes that possible. 
-The "ip" in varip stands for *intrabar persist*.
+The "ip" in `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ stands for *intrabar persist*.
 
 Let's look at the following code, which does not use `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__::
 
@@ -295,8 +287,10 @@ Let's look at the following code, which does not use `varip <https://www.trading
     plot(updateNo, style = plot.style_circles)
 
 On historical bars, `barstate.isnew <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isnew>`__ is always true, 
-so the plot shows a value of "1". On realtime bars, 
-`barstate.isnew <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isnew>`__ is only true when the script first executes on the bar's opening. 
+so the plot shows a value of "1" because the ``else`` part of the 
+`if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ structure is never executed. 
+On realtime bars, `barstate.isnew <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isnew>`__ 
+is only true when the script first executes on the bar's "open". 
 The plot will then briefly display "1" until subsequent executions occur. 
 On the next executions during the realtime bar, the second branch of the 
 `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ statement is executed because barstate.isnew is no longer true. 
@@ -318,7 +312,16 @@ to declare the ``updateNo`` variable, the script behaves very differently::
     plot(updateNo, style = plot.style_circles)
 
 The difference now is that ``updateNo`` tracks the number of realtime updates that occur on each realtime bar. 
-This can happen because the varip declaration allows the value of ``updateNo`` to be preserved between realtime updates; 
+This can happen because the `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ 
+declaration allows the value of ``updateNo`` to be preserved between realtime updates; 
 it is no longer rolled back at each realtime execution of the script. 
-The test on barstate.isnew allows us to reset the update count when a new realtime bar comes in.
+The test on `barstate.isnew <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isnew>`__ 
+allows us to reset the update count when a new realtime bar comes in.
+
+Because `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ 
+only affects the behavior of your code in the realtime bar, 
+it follows that backtest results on strategies designed using logic based on 
+`varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ 
+variables will not be able to reproduce that behavior on hisotrical bars, which will invalidate test results on them.
+This also entails that plots on historical bars will not be able to reproduce the script's behavior in realtime.
 
