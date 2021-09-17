@@ -25,8 +25,8 @@ They can be used:
 
 .. _PageConditionalStructures_If:
 
-\`if\`
-------
+\`if\` structure
+----------------
 
 
 
@@ -171,8 +171,8 @@ side effect of the expression, for example in ``strategy.*()`` calls:
 
 .. _PageConditionalStructures_Switch:
 
-\`switch\`
-----------
+\`switch\` structure
+--------------------
 
 
 
