@@ -74,8 +74,19 @@ The declaration of the ``baseLine2`` variable is also correct because its type c
 
 
 
+.. _PageVariableDeclarations_TupleDeclarations:
+
 Tuple declarations
 ^^^^^^^^^^^^^^^^^^
+
+Function calls or structures are allowed to return multiple values. 
+When we call them and want to store the values they return,
+a *tuple declaration* must be used, which is a comma-separated set of one or more values enclosed in brackets.
+This allows us to declare multiple variables simultaneously.
+As an example, the `ta.bb() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}bb>`__
+built-in function for Bollinger bands returns three values::
+
+    [bbMiddle, bbUpper, bbLower] = ta.bb(close, 5, 4)
 
 
 
@@ -84,31 +95,52 @@ Tuple declarations
 Variable reassignment
 ---------------------
 
-
-<variable_reassignment>
-	<identifier> := <expression> | <function_call> | <structure>
-
-A mutable variable is a variable which can be given a new value.
-The operator ``:=`` must be used to give a new value to a variable.
-A variable must be declared before you can assign a value to it
-(see declaration of variables :ref:`above<PageVariableDeclarations_VariableDeclaration>`).
-
-The type of a variable is identified at declaration time. From then on, a variable can
-be given a value of expression only if both the expression and the
-variable belong to the same type, otherwise a
-compilation error will occur.
-
-Variable assignment example::
+A variable reassignment is done using the :ref:`:= <PageOperators_ReassignmentOperator>` reassignment operator.
+It can only be done after a variable has been first declared and given an initial value.
+Reassigning a new value to a variable is often necessary in calculations,
+and it is always necessary when a variable from the global scope must be assigned a new value from within a structure's local block, e.g.::
 
     //@version=5
-    indicator("My Script")
-    price = close
-    if hl2 > price
-        price := hl2
-    plot(price)
+    indicator("", "", true)
+    sensitivityInput = input.int(2, "Sensitivity", minval = 1, tooltip = "Higher values make color changes less sensitive.")
+    ma = ta.sma(close, 20)
+    maUp = ta.rising(ma, sensitivityInput)
+    maDn = ta.falling(ma, sensitivityInput)
+    
+    // On first bar only, initialize color to gray
+    var maColor = color.gray
+    if maUp
+        // MA has risen for two bars in a row; make it lime.
+        maColor := color.lime
+    else if maDn
+        // MA has fallen for two bars in a row; make it fuchsia.
+        maColor := color.fuchsia
+    
+    plot(ma, "MA", maColor, 2)
+
+Note that:
+
+- We initialize ``maColor`` on the first bar only, so it preserves its value across bars.
+- On every bar, the `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
+  statement checks if the MA has been rising or falling for the user-specified number of bars
+  (the default is 2). When that happens, the value of ``maColor`` must be reassigned a new value
+  from within the `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ local blocks.
+  To do this, we use the :ref:`:= <PageOperators_ReassignmentOperator>` reassignment operator.
+- If we did not use the :ref:`:= <PageOperators_ReassignmentOperator>` reassignment operator,
+  the effect would be to initialize a new ``maColor`` local variable which would have the same name
+  as that of the global scope, but actually be a very confusing independent entity that would persist
+  only for the length of the local block, and then disappear without a trace.
+
+A variable can be reassigned as many times as needed during the script's execution on one bar,
+so a script can contain any number of reassignments of one variable.
+
+Reassigning a value to a variable makes it a **mutable variable**.
+It may also change a variable's *form* 
+(see the page on Pine's :ref:`type system <PageTypeSystem>` for more information).
 
 
 
+.. _PageVariableDeclarations_DeclarationModes:
 
 Declaration modes
 -----------------
@@ -116,15 +148,22 @@ Declaration modes
 Understanding the impact that declaration modes have on the behavior of variables requires
 prior knowledge of Pine's :ref:`execution model <PageExecutionModel>`.
 
+The declaration mode, if it is specified, must come first when you declare a variable.
+Three modes can be used:
+
+- "On each bar", when none is specified
+- `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__
+- `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__
+
 
 
 On each bar
 ^^^^^^^^^^^
 
 When no explicit declaration mode is specified, i.e.  
-(by using `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ or 
-`varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__)
-the variable is re-declared and re-initialized on each bar, e.g.,
+no `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ or 
+`varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ keyword is used,
+the variable is declared and initialized on each bar, e.g.,
 the following declarations from our first set of examples in this page's introduction::
 
     BULL_COLOR = color.lime
