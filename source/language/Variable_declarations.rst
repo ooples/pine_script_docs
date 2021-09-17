@@ -165,7 +165,7 @@ Declaration modes
 Understanding the impact that declaration modes have on the behavior of variables requires
 prior knowledge of Pine's :ref:`execution model <PageExecutionModel>`.
 
-The declaration mode, if it is specified, must come first when you declare a variable.
+When you declare a variable, if a declaration mode is specified, it must come first.
 Three modes can be used:
 
 - "On each bar", when none is specified
