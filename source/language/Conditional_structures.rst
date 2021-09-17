@@ -17,6 +17,13 @@ The conditional structures in Pine are `if <https://www.tradingview.com/pine-scr
   like reassign values to variables or call functions.
 - To return a value or a tuple which can then be assigned to one (or more, in the case of tuples) variable.
 
+Conditional structures can be embedded; you can use an 
+`if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ or
+`switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
+inside another one.
+
+The local blocks in conditional structures must be indented by four spaces or a tab.
+
 
 
 .. _PageConditionalStructures_If:
@@ -66,6 +73,19 @@ structure's execution ends, and the value(s) evaluated at the end of the local b
 When no <expression> has evaluated to `true <https://www.tradingview.com/pine-script-reference/v5/#op_true>`__
 and no ``else`` clause exists, `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ is returned.
 
+Using `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
+structures for their side effects can be useful to manage the order flow in strategies, for example.
+While the same functionality can often be achieved using the ``when`` parameter in 
+``strategy.*()`` calls, code using `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
+structures is easier to read::
+
+    if (ta.crossover(source, lower))
+        strategy.entry("BBandLE", strategy.long, stop=lower,
+                       oca_name="BollingerBands",
+                       oca_type=strategy.oca.cancel, comment="BBandLE")
+    else
+        strategy.cancel(id="BBandLE")
+
 
 
 \`if\` used to return a value
@@ -107,54 +127,17 @@ This is an example::
         table.cell(_t, 0, 0, _text, bgcolor = color.yellow)
     f_print(barState)
 
-
-
 It is possible to omit the *else* block. In this case, if the ``condition``
 is false, an *empty* value (``na``, ``false``, or ``""``) will be assigned to the
 ``var_declarationX`` variable.
 
-Example::
+This is an example showing how 
+`na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
+is returned when no local block is executed. If ``close > open`` is ``false`` in here,
+`na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ is returned::
 
     x = if close > open
         close
-    // If current close > current open, then x = close.
-    // Otherwise the x = na.
-    
-It is possible to use either multiple *else if* blocks or none at all.
-
-Example::
-
-    x = if open > close
-        5
-    else if high > low
-        close
-    else
-        open
-        
-The *then*, *else if* and *else* blocks are shifted by four spaces [#tabs]_. ``if`` statements can
-be nested by adding four more spaces::
-
-    x = if close > open
-        b = if close > close[1]
-            close
-        else
-            close[1]
-        b
-    else
-        open
-
-It is possible and quite frequent to ignore the resulting value of an ``if`` statement
-(``var_declarationX =`` can be omited). This form is used when you need the
-side effect of the expression, for example in ``strategy.*()`` calls:
-
-::
-
-    if (ta.crossover(source, lower))
-        strategy.entry("BBandLE", strategy.long, stop=lower,
-                       oca_name="BollingerBands",
-                       oca_type=strategy.oca.cancel, comment="BBandLE")
-    else
-        strategy.cancel(id="BBandLE")
 
 
 
@@ -199,8 +182,8 @@ This code does not compile because the first local block returns a "float" and t
         "open"
 
 While this makes perfect sense when using conditional structures to assign a value to a variable,
-it can sometimes cause problems when conditional structures are used for their side effect.
-To workaround this limitation, you can force the type of the local block's unused return value, eg.::
+it can sometimes cause problems when conditional structures are used for their side effects.
+To work around this limitation, you can force the type of the local block's unused return value, eg.::
 
     //@version=5
     indicator("", "", true)
@@ -218,3 +201,4 @@ Note that we make the return value of each local block ``int(na)``,
 which is the `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
 value cast to an integer using `int() <https://www.tradingview.com/pine-script-reference/v5/#fun_int>`__.
 This way, they both return an "int", which is not assigned to any variable.
+Without these additions to our code, it would not compile.
