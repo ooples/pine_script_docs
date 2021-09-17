@@ -16,8 +16,8 @@ They must be *declared* in your code, which means defining:
 
 - A name, using an :ref:`identifier <PageIdentifiers>`
 - The initial value they will have, by using the ``=`` assignment operator
-- When they will be initialized (by using 
-  `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__, 
+- When they will be initialized (by using the
+  `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ or 
   `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__, or nothing)
 - Optionally, their :ref:`type <PageTypeSystem_Types>`
 
