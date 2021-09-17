@@ -46,11 +46,11 @@ These are all valid variable declarations. The last one requires four lines::
         color.red
  
 .. note:: The above statements all contain the ``=`` assignment operator because they are **variable declarations**.
-When you see similar lines using the :ref:`:= <PageOperators_ReassignmentOperator>` **re**assignment operator, 
-the code is **reassigning** a value to a variable that was **already declared**.
-Those are **variable reassignments**.
-Be sure you understand the distinction as this is a common stumbling block for newcomers to Pine. 
-See the next :ref:`Variable reassignment <PageVariableDeclarations_VariableReassignment>` section for details.
+  When you see similar lines using the :ref:`:= <PageOperators_ReassignmentOperator>` **re**assignment operator, 
+  the code is **reassigning** a value to a variable that was **already declared**.
+  Those are **variable reassignments**.
+  Be sure you understand the distinction as this is a common stumbling block for newcomers to Pine. 
+  See the next :ref:`Variable reassignment <PageVariableDeclarations_VariableReassignment>` section for details.
 
 The formal syntax of a variable declaration is:
 
