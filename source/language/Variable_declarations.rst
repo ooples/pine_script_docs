@@ -16,7 +16,7 @@ They must be *declared* in your code, which means defining:
 
 - A name, using an :ref:`identifier <PageIdentifiers>`
 - The initial value they will have, by using the ``=`` assignment operator. 
-  The initial value can be an expression, a function call or a an 
+  The initial value can be an expression, a function call or an 
   `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
   `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__,
   `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ or
@@ -26,7 +26,7 @@ They must be *declared* in your code, which means defining:
   `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ keyword, or nothing)
 - Optionally, their :ref:`type <PageTypeSystem_Types>`
 
-These are all valid variable declarations::
+These are all valid variable declarations. The last one requires four lines::
 
     BULL_COLOR = color.lime
     i = 1
@@ -45,9 +45,7 @@ These are all valid variable declarations::
     else
         color.red
  
-.. note::
-
-The above statements all contain the ``=`` assignment operator because they are **variable declarations**.
+.. note:: The above statements all contain the ``=`` assignment operator because they are **variable declarations**.
 When you see similar lines using the :ref:`:= <PageOperators_ReassignmentOperator>` **re**assignment operator, 
 the code is **reassigning** a value to a variable that was **already declared**.
 Those are **variable reassignments**.
