@@ -13,8 +13,8 @@ Introduction
 The conditional structures in Pine are `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ and
 `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__. They can be used:
 
-- For their side effects, i.e., when they don't return a value but do things like 
-  reassign values to variables or calling functions
+- For their side effects, i.e., when they don't return a value but do things,
+  like reassign values to variables or call functions.
 - To return a value or a tuple which can then be assigned to one (or more, in the case of tuples) variable.
 
 
@@ -44,6 +44,8 @@ where:
 - <expression> must be of "bool" type or be auto-castable to that type
   which is only possible for "int" or "float" values (see the :ref:`Type system <PageTypeSystem_Types>` page).
 - <local_block> consists of zero or more statements followed by a return value.
+- There can be zero or more ``else if`` clauses.
+- There can be zero or one ``else`` clause.
 
 When the <expression> following the `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
 evaluates to `true <https://www.tradingview.com/pine-script-reference/v5/#op_true>`__,
