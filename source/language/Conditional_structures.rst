@@ -24,6 +24,10 @@ The conditional structures in Pine are `if <https://www.tradingview.com/pine-scr
 \`if\` structure
 ----------------
 
+Whether an `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ 
+structure is used for its side effects or to return a value, the value returned
+by each of its local blocks must be of the same type, otherwise a compiler error will occur.
+
 
 
 \`if\` used for its side effects
@@ -43,7 +47,7 @@ where:
 
 - <expression> must be of "bool" type or be auto-castable to that type,
   which is only possible for "int" or "float" values (see the :ref:`Type system <PageTypeSystem_Types>` page).
-- <local_block> consists of zero or more statements followed by a return value.
+- <local_block> consists of zero or more statements followed by a return value, which can be a tuple of values.
 - There can be zero or more ``else if`` clauses.
 - There can be zero or one ``else`` clause.
 
@@ -98,7 +102,6 @@ This is an example::
         var table _t = table.new(position.middle_right, 1, 1)
         table.cell(_t, 0, 0, _text, bgcolor = color.yellow)
     f_print(barState)
-
 
 The type of the returning value of the ``if`` statement is determined by the type of
 ``return_expression_then`` and ``return_expression_else``. Their types
