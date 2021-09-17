@@ -120,11 +120,11 @@ Note that:
 
 - We initialize the ``ourLabel`` variable on the script's first bar only, as we use the
   `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ declaration mode.
-  The value used to initialize the variable is provided from the 
+  The value used to initialize the variable is provided by the 
   `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ function call,
   which returns a label ID pointing to the label it creates. 
   We use that call to set the label's properties because once set, they will persist until we change them.
-- What happens next is that on each bar the script will skip the initialization of ``ourLabel``, 
+- What happens next is that on each successive bar the Pine runtime will skip the initialization of ``ourLabel``, 
   and the `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
   structure's condition (`barstate.islast <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islast>`__)
   is evaluated. It returns ``false`` on all bars until the last one, 
@@ -132,6 +132,11 @@ Note that:
 - On the last bar, `barstate.islast <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islast>`__
   becomes true and the structure's local block executes, 
   modifying on each chart update the properties of our label, which displays the number of bars in the dataset.
+- We display the value only, so we make the label's background `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
+  and we use ``hl2[1]`` for the label's *y* position because we don't want it to move all the time. 
+  By using the average of the **previous** bar's `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__
+  and `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ values, 
+  the label doesn't move until the moment when the next realtime bar opens.
 
 
 
