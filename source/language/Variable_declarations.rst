@@ -12,8 +12,12 @@ Introduction
 ------------
 
 Variables are :ref:`identifiers <PageIdentifiers>` that hold values. 
-They must be *declared* in your code, which means defining:
+They must be *declared* in your code, which means defining, in order:
 
+- Optionally, their :ref:`type <PageTypeSystem_Types>`
+- Their declaration mode, by using the
+  `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ or 
+  `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ keyword, or nothing
 - A name, using an :ref:`identifier <PageIdentifiers>`
 - The initial value they will have, by using the ``=`` assignment operator. 
   The initial value can be an expression, a function call or an 
@@ -21,10 +25,6 @@ They must be *declared* in your code, which means defining:
   `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__,
   `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ or
   `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ *structure*
-- When they will be initialized (by using the
-  `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ or 
-  `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ keyword, or nothing)
-- Optionally, their :ref:`type <PageTypeSystem_Types>`
 
 These are all valid variable declarations. The last one requires four lines::
 
@@ -32,13 +32,11 @@ These are all valid variable declarations. The last one requires four lines::
     i = 1
     len = input(20, "Length)
     float f = 10.5
-    closeRounded = math.round(close)
     closeRoundedToTick = math.round_to_mintick(close)
-    var barRange = high - low
+    st = ta.supertrend(4, 14)
+    var barRange = float(na)
     var firstBarOpen = open
     varip float lastClose = na
-    ma = ta.sma(close, 14)
-    st = ta.supertrend(4, 14)
     [macdLine, signalLine, histLine] = ta.macd(close, 12, 26, 9)
     plotColor = if close > open
         color.green
@@ -110,10 +108,31 @@ Variable assignment example::
 Declaration modes
 -----------------
 
+Understanding the impact that declaration modes have on the behavior of variables requires
+prior knowledge of Pine's :ref:`execution model <PageExecutionModel>`.
+
+
 
 On each bar
 ^^^^^^^^^^^
 
+When no explicit declaration mode is specified, i.e.  
+(by using `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ or 
+`varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__)
+the variable is re-declared and re-initialized on each bar, e.g.,
+the following declarations from our first set of examples in this page's introduction::
+
+    BULL_COLOR = color.lime
+    i = 1
+    len = input(20, "Length)
+    float f = 10.5
+    closeRoundedToTick = math.round_to_mintick(close)
+    st = ta.supertrend(4, 14)
+    [macdLine, signalLine, histLine] = ta.macd(close, 12, 26, 9)
+    plotColor = if close > open
+        color.green
+    else
+        color.red
 
 
 
@@ -122,7 +141,11 @@ On each bar
 \`var\`
 ^^^^^^^
 
-The ``var`` keyword is a special modifier that instructs the compiler to *create and initialize the variable only once*. This behavior is very useful in cases where a variable's value must persist through the iterations of a script across successive bars. For example, suppose we'd like to count the number of green bars on the chart::
+When the `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ keyword is used,
+the variable is only initilized once, on the first bar. After that, it will preserve its last value 
+on successive bars, until we reassign a new value to it.
+This behavior is very useful in many cases where a variable's value must persist through the iterations of a script across successive bars. 
+For example, suppose we'd like to count the number of green bars on the chart::
 
     //@version=5
     indicator("Green Bars Count")
@@ -132,38 +155,12 @@ The ``var`` keyword is a special modifier that instructs the compiler to *create
         count := count + 1
     plot(count)
 
-.. image:: images/GreenBarsCount.png
+.. image:: images/VariableDeclarations-GreenBarsCount.png
 
-Without the ``var`` modifier, variable ``count`` would be reset to zero (thus losing it's value) every time a new bar update triggered a script recalculation.
+Without the ``var`` modifier, variable ``count`` would be reset to zero (thus losing it's value) 
+every time a new bar update triggered a script recalculation.
 
-In Pine v3 the study "Green Bars Count" could be written without using the ``var`` keyword::
-
-    //@version=3
-    study("Green Bars Count")
-    count = 0                       // These two lines could be replaced in v4 or v5
-    count := nz(count[1], count)    // with 'var count = 0'
-    isGreen = close >= open
-    if isGreen
-        count := count + 1
-    plot(count)
-
-The v5 code is more readable and can be more efficient if, for example, the ``count`` variable is
-initialized with an expensive function call instead of ``0``.
-
-Examples of simple variable declarations::
-
-    src = close
-    len = 10
-    ma = ta.sma(src, len) + high
-
-Examples with type modifiers and var keyword::
-
-    float f = 10            // NOTE: while the expression is of type int, the variable is float
-    i = int(close)          // NOTE: explicit cast of float expression close to type int
-    r = round(close)        // NOTE: round() and int() are different... int() simply throws fractional part away
-    var hl = high - low
-
-Example, illustrating the effect of ``var`` keyword::
+Using Example, illustrating the effect of ``var`` keyword::
 
     // Creates a new label object on every bar:
     label lb = label.new(bar_index, close, text="Hello, World!")
