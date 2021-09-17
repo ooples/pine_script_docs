@@ -26,8 +26,8 @@ The conditional structures in Pine are `if <https://www.tradingview.com/pine-scr
 
 
 
-Used for its side effects
-^^^^^^^^^^^^^^^^^^^^^^^^^
+\`if\` used for its side effects
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 An `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ 
 structure used for its side effects has the following syntax::
@@ -41,7 +41,7 @@ structure used for its side effects has the following syntax::
 
 where:
 
-- <expression> must be of "bool" type or be auto-castable to that type
+- <expression> must be of "bool" type or be auto-castable to that type,
   which is only possible for "int" or "float" values (see the :ref:`Type system <PageTypeSystem_Types>` page).
 - <local_block> consists of zero or more statements followed by a return value.
 - There can be zero or more ``else if`` clauses.
@@ -68,8 +68,8 @@ and no ``else`` clause exists, `xxx <https://www.tradingview.com/pine-script-ref
 
 
 
-Used to return a value
-^^^^^^^^^^^^^^^^^^^^^^
+\`if\` used to return a value
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 An `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ 
 structure used to return one or more values has the following syntax::
@@ -174,11 +174,11 @@ side effect of the expression, for example in ``strategy.*()`` calls:
 
 
 
-Used for its side effects
-^^^^^^^^^^^^^^^^^^^^^^^^^
+\`switch\` used for its side effects
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 
-Used to return a value
-^^^^^^^^^^^^^^^^^^^^^^
+\`switch\` used to return a value
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
