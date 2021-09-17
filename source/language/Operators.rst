@@ -312,9 +312,11 @@ These are all valid variable declarations::
     pHi = pivothigh(5, 5)
     plotColor = color.green
 
-See the :ref:`<PageExpressionsDeclarationsStatements_VariableDeclaration>` section for more information on how to declare variables.
+See the :ref:`Variable declarations <PageVariableDeclarations>` page for more information on how to declare variables.
 
 
+
+.. _PageOperators_ReassignmentOperator:
 
 \`:=\` reassignement operator
 -----------------------------
@@ -358,5 +360,5 @@ Note that:
 - Pivots are detected five bars after the pivot actually occurs because our ``ta.pivothigh(5, 5)`` call
   says that we require five lower highs on both sides of a high point for it to be detected as a pivot.
 
-See the :ref:`<PageExpressionsDeclarationsStatements_VariableReassignment>` section for more information on how to reassign values to variables.
+See the :ref:`<PageVariableDeclarations_VariableReassignment>` section for more information on how to reassign values to variables.
 

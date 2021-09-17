@@ -15,10 +15,15 @@ Variables are :ref:`identifiers <PageIdentifiers>` that hold values.
 They must be *declared* in your code, which means defining:
 
 - A name, using an :ref:`identifier <PageIdentifiers>`
-- The initial value they will have, by using the ``=`` assignment operator
+- The initial value they will have, by using the ``=`` assignment operator. 
+  The initial value can be an expression, a function call or a an 
+  `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
+  `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__,
+  `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ or
+  `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ *structure*
 - When they will be initialized (by using the
   `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ or 
-  `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__, or nothing)
+  `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ keyword, or nothing)
 - Optionally, their :ref:`type <PageTypeSystem_Types>`
 
 These are all valid variable declarations::
@@ -35,8 +40,21 @@ These are all valid variable declarations::
     ma = ta.sma(close, 14)
     st = ta.supertrend(4, 14)
     [macdLine, signalLine, histLine] = ta.macd(close, 12, 26, 9)
+    plotColor = if close > open
+        color.green
+    else
+        color.red
+ 
+.. note::
 
-The formal syntax is:
+The above statements all contain the ``=`` assignment operator because they are **variable declarations**.
+When you see similar lines using the :ref:`:= <PageOperators_ReassignmentOperator>` **re**assignment operator, 
+the code is **reassigning** a value to a variable that was **already declared**.
+Those are **variable reassignments**.
+Be sure you understand the distinction as this is a common stumbling block for newcomers to Pine. 
+See the next :ref:`Variable reassignment <PageVariableDeclarations_VariableReassignment>` section for details.
+
+The formal syntax of a variable declaration is:
 
 .. code-block:: text
 
@@ -60,10 +78,51 @@ The declaration of the ``baseLine2`` variable is also correct because its type c
 
 
 
+.. _PageVariableDeclarations_VariableReassignment:
+
+Variable reassignment
+---------------------
+
+
+<variable_reassignment>
+	<identifier> := <expression> | <function_call> | <structure>
+
+A mutable variable is a variable which can be given a new value.
+The operator ``:=`` must be used to give a new value to a variable.
+A variable must be declared before you can assign a value to it
+(see declaration of variables :ref:`above<PageVariableDeclarations_VariableDeclaration>`).
+
+The type of a variable is identified at declaration time. From then on, a variable can
+be given a value of expression only if both the expression and the
+variable belong to the same type, otherwise a
+compilation error will occur.
+
+Variable assignment example::
+
+    //@version=5
+    indicator("My Script")
+    price = close
+    if hl2 > price
+        price := hl2
+    plot(price)
+
+
+
+
+Declaration modes
+-----------------
+
+
+On each bar
+^^^^^^^^^^^
+
+
+
+
 .. _PageVariableDeclarations_Var:
 
 \`var\`
--------
+^^^^^^^
 
 The ``var`` keyword is a special modifier that instructs the compiler to *create and initialize the variable only once*. This behavior is very useful in cases where a variable's value must persist through the iterations of a script across successive bars. For example, suppose we'd like to count the number of green bars on the chart::
 
@@ -116,34 +175,11 @@ Example, illustrating the effect of ``var`` keyword::
 
 
 
-.. _PageVariableDeclarations_VariableReassignment:
-
-Variable reassignment
----------------------
-
-A mutable variable is a variable which can be given a new value.
-The operator ``:=`` must be used to give a new value to a variable.
-A variable must be declared before you can assign a value to it
-(see declaration of variables :ref:`above<PageVariableDeclarations_VariableDeclaration>`).
-
-The type of a variable is identified at declaration time. From then on, a variable can
-be given a value of expression only if both the expression and the
-variable belong to the same type, otherwise a
-compilation error will occur.
-
-Variable assignment example::
-
-    //@version=5
-    indicator("My Script")
-    price = close
-    if hl2 > price
-        price := hl2
-    plot(price)
-
-
-
 .. _PageVariableDeclarations_Varip:
 
 \`varip\`
--------
+^^^^^^^^^
+
+
+
 
