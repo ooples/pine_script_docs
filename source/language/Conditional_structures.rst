@@ -24,6 +24,22 @@ inside another one.
 
 The local blocks in conditional structures must be indented by four spaces or a tab.
 
+Some Pine built-in functions cannot be called from within conditional structures. They are:
+`alertcondition() <https://www.tradingview.com/pine-script-reference/v5/#fun_alertcondition>`__,
+`barcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_barcolor>`__,
+`fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__,
+`hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__,
+`indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
+`library() <https://www.tradingview.com/pine-script-reference/v5/#fun_library>`__,
+`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__,
+`plotbar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotbar>`__,
+`plotcandle() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__,
+`plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__,
+`plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__,
+`strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__.
+Note that while ``input*.()`` function calls are allowed in local blocks,
+their functionality is the same as if they were in the script's global scope.
+ 
 
 
 .. _PageConditionalStructures_If:
@@ -86,7 +102,9 @@ structures is easier to read::
     else
         strategy.cancel(id="BBandLE")
 
-
+Restricting the execution of your code to specific bars is done using 
+`if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
+structures.
 
 \`if\` used to return a value
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -182,7 +200,7 @@ This code does not compile because the first local block returns a "float" and t
         "open"
 
 While this makes perfect sense when using conditional structures to assign a value to a variable,
-it can sometimes cause problems when conditional structures are used for their side effects.
+it can be inconvenient when conditional structures are used for their side effects.
 To work around this limitation, you can force the type of the local block's unused return value, eg.::
 
     //@version=5
@@ -199,6 +217,6 @@ To work around this limitation, you can force the type of the local block's unus
 
 Note that we make the return value of each local block ``int(na)``, 
 which is the `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
-value cast to an integer using `int() <https://www.tradingview.com/pine-script-reference/v5/#fun_int>`__.
+value, cast to an integer using `int() <https://www.tradingview.com/pine-script-reference/v5/#fun_int>`__.
 This way, they both return an "int", which is not assigned to any variable.
 Without these additions to our code, it would not compile.
