@@ -24,7 +24,7 @@ inside another one.
 
 The local blocks in conditional structures must be indented by four spaces or a tab.
 
-Some Pine built-in functions cannot be called from within conditional structures. They are:
+Some Pine built-in functions cannot be called from within the local blocks of conditional structures. They are:
 `alertcondition() <https://www.tradingview.com/pine-script-reference/v5/#fun_alertcondition>`__,
 `barcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_barcolor>`__,
 `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__,
@@ -37,6 +37,8 @@ Some Pine built-in functions cannot be called from within conditional structures
 `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__,
 `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__,
 `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__.
+This does not entail their functionality cannot be controlled by conditions
+evaluated by your script — only that it cannot be done by including them in conditional structures.
 Note that while ``input*.()`` function calls are allowed in local blocks,
 their functionality is the same as if they were in the script's global scope.
  
