@@ -111,10 +111,10 @@ structures, as we do here to restrict updates to our label to the chart's last b
 
     //@version=5
     indicator("", "", true)
-    var ourLabel = label.new(bar_index, na, na, color = color(na), style = label.style_label_left, textcolor = color.orange)
+    var ourLabel = label.new(bar_index, na, na, color = color(na), textcolor = color.orange)
     if barstate.islast
-        label.set_xy(ourLabel, bar_index, hl2[1])
-        label.set_text(ourLabel, str.tostring(bar_index + 1, "     # bars in chart"))
+        label.set_xy(ourLabel, bar_index + 2, hl2[1])
+        label.set_text(ourLabel, str.tostring(bar_index + 1, "# bars in chart"))
 
 Note that:
 
@@ -132,11 +132,15 @@ Note that:
 - On the last bar, `barstate.islast <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islast>`__
   becomes true and the structure's local block executes, 
   modifying on each chart update the properties of our label, which displays the number of bars in the dataset.
-- We display the value only, so we make the label's background `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
+- We want to display the label's text without a background, 
+  so we make the label's background `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
+  in the `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ function call,
   and we use ``hl2[1]`` for the label's *y* position because we don't want it to move all the time. 
   By using the average of the **previous** bar's `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__
   and `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ values, 
   the label doesn't move until the moment when the next realtime bar opens.
+- We use ``bar_index + 2`` in our `label.set_xy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xy>`__
+  to offset the label to the right by two bars.
 
 
 
