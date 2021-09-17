@@ -293,7 +293,8 @@ On realtime bars, `barstate.isnew <https://www.tradingview.com/pine-script-refer
 is only `true <https://www.tradingview.com/pine-script-reference/v5/#op_true>`__ when the script first executes on the bar's "open". 
 The plot will then briefly display "1" until subsequent executions occur. 
 On the next executions during the realtime bar, the second branch of the 
-`if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ statement is executed because barstate.isnew is no longer true. 
+`if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ statement is executed because 
+`barstate.isnew <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isnew>`__ is no longer true. 
 Since ``updateNo`` is initialized to `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ at each execution, 
 the ``updateNo + 1`` expression yields `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__, 
 so nothing is plotted on further realtime executions of the script.

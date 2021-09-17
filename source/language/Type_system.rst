@@ -54,7 +54,7 @@ Such values include `close <https://www.tradingview.com/pine-script-reference/v5
 Variables of "const", "input" or "simple" forms cannot change values once execution of the script has begun.
 
 
-.. _PageTypeSystem_Forms:
+.. _PageTypeSystem_Types:
 
 Types
 ^^^^^

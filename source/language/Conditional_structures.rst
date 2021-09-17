@@ -1,54 +1,106 @@
-.. _PageConditionalStatements:
+.. _PageConditionalStructures:
 
-Conditional statements
+Conditional structures
 ======================
 
 .. contents:: :local:
     :depth: 2
 
 
+Introduction
+------------
 
-.. _PageConditionalStatementsIf:
+The conditional structures in Pine are:
+
+- `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
+- `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
+
+They can be used:
+
+- For their side effects, i.e., when they don't return a value but do things like 
+  reassign values to variables or calling functions
+- To return a value or a tuple which can then be assigned to one (or more, in the case of tuples) variable.
+
+
+
+.. _PageConditionalStructures_If:
 
 \`if\`
 ------
 
-An ``if`` statement defines a block of statements to be executed when
-the ``if``'s conditional expression evaluates to ``true``, and optionally,
-an alternative block to be executed when the expression is ``false``.
 
-General code form:
 
-.. code-block:: text
+Used for its side effects
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    <var_declarationX> = if <condition>
-        <var_decl_then0>
-        <var_decl_then1>
-        ...
-        <var_decl_thenN>
-    else if [optional block]
-        <var_decl_else0>
-        <var_decl_else1>
-        ...
-        <var_decl_elseN>
-    else
-        <var_decl_else0>
-        <var_decl_else1>
-        ...
-        <var_decl_elseN>
-        <return_expression_else>
+An `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ 
+structure used for its side effects has the following syntax::
+
+    if <expression>
+        <local_block>
+    {else if <expression>
+        <local_block>}
+    [else
+        <local_block>]
 
 where:
 
--  ``var_declarationX`` --- this variable is assigned the value of the ``if``
-   statement as a whole.
--  ``condition`` --- if the ``condition`` expression is true, the logic from the *then* block immediately following the ``if`` first line
-   (``var_decl_then0``, ``var_decl_then1``, etc.) is used, if the
-   ``condition`` is false, the logic from the *else* block
-   (``var_decl_else0``, ``var_decl_else1``, etc.) is used.
--  ``return_expression_then``, ``return_expression_else`` --- the last
-   expression from the *then* block or from the *else* block will
-   determine the final value of the whole ``if`` statement.
+- <expression> must be of "bool" type or be auto-castable to that type
+  which is only possible for "int" or "float" values (see the :ref:`Type system <PageTypeSystem_Types>` page).
+- <local_block> consists of zero or more statements followed by a return value.
+
+When the <expression> following the `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
+evaluates to `true <https://www.tradingview.com/pine-script-reference/v5/#op_true>`__,
+the first local block is executed, the `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
+structure's execution ends, and the value(s) evaluated at the end of the local block are returned.
+
+When the <expression> following the `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
+evaluates to `false <https://www.tradingview.com/pine-script-reference/v5/#op_false>`__,
+the successive ``else if`` clauses are evaluated, if there are any.
+When the <expression> of one evaluates to `true <https://www.tradingview.com/pine-script-reference/v5/#op_true>`__,
+its local block is executed, the `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
+structure's execution ends, and the value(s) evaluated at the end of the local block are returned.
+
+When no <expression> has evaluated to `true <https://www.tradingview.com/pine-script-reference/v5/#op_true>`__
+and an ``else`` clause exists, its local block is executed, the `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
+structure's execution ends, and the value(s) evaluated at the end of the local block are returned.
+
+When no <expression> has evaluated to `true <https://www.tradingview.com/pine-script-reference/v5/#op_true>`__
+and no ``else`` clause exists, `xxx <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ is returned.
+
+
+
+Used to return a value
+^^^^^^^^^^^^^^^^^^^^^^
+
+An `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ 
+structure used to return one or more values has the following syntax::
+
+[<declaration_mode>] [<type>] <identifier> = if <expression>
+        <local_block>
+    {else if <expression>
+        <local_block>}
+    [else
+        <local_block>]
+
+This is an example::
+
+    //@version=5
+    indicator("", "", true)
+    string barState = if barstate.islastconfirmedhistory
+        barState = "islastconfirmedhistory"
+    else if barstate.isnew
+        barState = "isnew"
+    else if barstate.isrealtime
+        barState = "isrealtime"
+    else
+        barState = "other"
+    
+    f_print(_text) => 
+        var table _t = table.new(position.middle_right, 1, 1)
+        table.cell(_t, 0, 0, _text, bgcolor = color.yellow)
+    f_print(barState)
+
 
 The type of the returning value of the ``if`` statement is determined by the type of
 ``return_expression_then`` and ``return_expression_else``. Their types
@@ -117,6 +169,18 @@ side effect of the expression, for example in ``strategy.*()`` calls:
 
 
 
+.. _PageConditionalStructures_Switch:
+
 \`switch\`
 ----------
+
+
+
+Used for its side effects
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+Used to return a value
+^^^^^^^^^^^^^^^^^^^^^^
 
