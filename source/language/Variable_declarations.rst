@@ -74,6 +74,11 @@ The declaration of the ``baseLine2`` variable is also correct because its type c
 
 
 
+Tuple declarations
+^^^^^^^^^^^^^^^^^^
+
+
+
 .. _PageVariableDeclarations_VariableReassignment:
 
 Variable reassignment
