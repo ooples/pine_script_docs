@@ -78,7 +78,7 @@ and no ``else`` clause exists, `xxx <https://www.tradingview.com/pine-script-ref
 An `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ 
 structure used to return one or more values has the following syntax::
 
-[<declaration_mode>] [<type>] <identifier> = if <expression>
+    [<declaration_mode>] [<type>] <identifier> = if <expression>
         <local_block>
     {else if <expression>
         <local_block>}
