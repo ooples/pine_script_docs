@@ -1,51 +1,49 @@
+.. _PageVariableDeclarations:
 
-.. _PageExpressionsDeclarationsStatements:
-
-Pine syntax
-===========
+Variable declarations
+=====================
 
 .. contents:: :local:
     :depth: 2
 
 
 
-.. _PageExpressionsDeclarationsStatements_Expressions:
+Introduction
+------------
 
+Variables are :ref:`identifiers <PageIdentifiers>` that hold values. 
+They must be *declared* in your code, which means defining:
 
-<variable_declaration> | <variable_reassignment> | <function_call> | <structure>
+- A name, using an :ref:`identifier <PageIdentifiers>`
+- The initial value they will have, by using the ``=`` assignment operator
+- When they will be initialized (by using 
+  `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__, 
+  `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__, or nothing)
+- Optionally, their :ref:`type <PageTypeSystem_Types>`
 
-Statements
-----------
+These are all valid variable declarations::
 
-Pine code is composed of statements, which can be:
+    BULL_COLOR = color.lime
+    i = 1
+    len = input(20, "Length)
+    float f = 10.5
+    closeRounded = math.round(close)
+    closeRoundedToTick = math.round_to_mintick(close)
+    var barRange = high - low
+    var firstBarOpen = open
+    varip float lastClose = na
+    ma = ta.sma(close, 14)
+    st = ta.supertrend(4, 14)
+    [macdLine, signalLine, histLine] = ta.macd(close, 12, 26, 9)
 
-- A *variable declaration*
-- A *variable reassignement*
-- A *function call* (to a user-defined or built-in function)
-- A *structure* (
-  `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
-  `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__,
-  `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__,
-  `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__)
-
-See 
-
-
-
-.. _PageExpressionsDeclarationsStatements_VariableDeclaration:
-
-Variable declaration
---------------------
-
-Variables in Pine are declared with the special symbol ``=`` and an optional ``var`` keyword
-in one of the following ways:
+The formal syntax is:
 
 .. code-block:: text
 
-    <identifier> = <expression>
-    <type> <identifier> = <expression>
-    var <identifier> = <expression>
-    var <type> <identifier> = <expression>
+    <variable_declaration>
+    	[var | varip] [<type>] <identifier> = <expression> | <function_call> | <structure>
+        |
+        <tupleOfIdentifiers> = <function_call> | <structure>
 
 ``<identifier>`` is the name of the declared variable, see :doc:`Identifiers`.
 
@@ -59,6 +57,13 @@ on the right of the ``=`` at compile time, so the decision to use them is often 
 
 In the first line of the example, the compiler cannot determine the type of the ``baseLine0`` variable because ``na`` is a generic value of no particular type. The declaration of the ``baseLine1`` variable is correct because its ``float`` type is declared explicitly.
 The declaration of the ``baseLine2`` variable is also correct because its type can be derived from the expression ``float(na)``, which is an explicit cast of ``na`` value to ``float`` type. The declarations of ``baseLine1`` and ``baseLine2`` are equivalent.
+
+
+
+.. _PageVariableDeclarations_Var:
+
+\`var\`
+-------
 
 The ``var`` keyword is a special modifier that instructs the compiler to *create and initialize the variable only once*. This behavior is very useful in cases where a variable's value must persist through the iterations of a script across successive bars. For example, suppose we'd like to count the number of green bars on the chart::
 
@@ -111,7 +116,7 @@ Example, illustrating the effect of ``var`` keyword::
 
 
 
-.. _PageExpressionsDeclarationsStatements_VariableReassignment:
+.. _PageVariableDeclarations_VariableReassignment:
 
 Variable reassignment
 ---------------------
@@ -119,7 +124,7 @@ Variable reassignment
 A mutable variable is a variable which can be given a new value.
 The operator ``:=`` must be used to give a new value to a variable.
 A variable must be declared before you can assign a value to it
-(see declaration of variables :ref:`above<PageExpressionsDeclarationsStatements_VariableDeclaration>`).
+(see declaration of variables :ref:`above<PageVariableDeclarations_VariableDeclaration>`).
 
 The type of a variable is identified at declaration time. From then on, a variable can
 be given a value of expression only if both the expression and the
@@ -136,26 +141,9 @@ Variable assignment example::
     plot(price)
 
 
-Expressions
------------
 
-An expression is a sequence where operators or function
-calls are applied to operands (variables or values) to define the calculations
-and actions required by the script. Expressions in Pine almost always
-produce a result (exceptions are the functions
-``indicator``, ``fill``, ``strategy.entry``, etc., which produce side effects and will be covered
-later).
+.. _PageVariableDeclarations_Varip:
 
-Here are some examples of simple expressions::
-
-    (high + low + close)/3
-    ta.sma(high - low, 10) + ta.sma(close, 20)
-
-.. _variable_declaration:
-
-
-
-.. rubric:: Footnotes
-
-.. [#tabs] TradingView's *Pine Editor* automatically replaces **Tab** with 4 spaces.
+\`varip\`
+-------
 
