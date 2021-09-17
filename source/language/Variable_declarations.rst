@@ -14,10 +14,10 @@ Introduction
 Variables are :ref:`identifiers <PageIdentifiers>` that hold values. 
 They must be *declared* in your code, which means defining, in order:
 
-- Optionally, their :ref:`type <PageTypeSystem_Types>`
 - Their declaration mode, by using the
   `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ or 
   `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ keyword, or nothing
+- Optionally, their :ref:`type <PageTypeSystem_Types>`
 - A name, using an :ref:`identifier <PageIdentifiers>`
 - The initial value they will have, by using the ``=`` assignment operator. 
   The initial value can be an expression, a function call or an 
