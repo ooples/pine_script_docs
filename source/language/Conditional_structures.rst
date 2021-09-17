@@ -68,7 +68,7 @@ and an ``else`` clause exists, its local block is executed, the `if <https://www
 structure's execution ends, and the value(s) evaluated at the end of the local block are returned.
 
 When no <expression> has evaluated to `true <https://www.tradingview.com/pine-script-reference/v5/#op_true>`__
-and no ``else`` clause exists, `xxx <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ is returned.
+and no ``else`` clause exists, `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ is returned.
 
 
 
@@ -84,6 +84,14 @@ structure used to return one or more values has the following syntax::
         <local_block>}
     [else
         <local_block>]
+
+where:
+
+- <declaration_mode> is the variable's :ref:`declaration mode <PageVariableDeclarations_DeclarationModes>`
+- The type is optional, as in almost all Pine variable declarations (see :ref:`types <PageTypeSystem_Types>`)
+- <identifier> is the variable's :ref:`name <PageIdentifiers>`
+- The value assigned to the variable is the return value of the <local_block>, or 
+  `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ if no local block is executed.
 
 This is an example::
 
@@ -103,23 +111,8 @@ This is an example::
         table.cell(_t, 0, 0, _text, bgcolor = color.yellow)
     f_print(barState)
 
-The type of the returning value of the ``if`` statement is determined by the type of
-``return_expression_then`` and ``return_expression_else``. Their types
-must match. It is not possible to return an integer value from the *then* block
-if the *else* block returns a string value.
 
-Example::
 
-    // This code compiles
-    x = if close > open
-        close
-    else
-        open
-    // This code doesn't compile
-    x = if close > open
-        close
-    else
-        "open"
 
 It is possible to omit the *else* block. In this case, if the ``condition``
 is false, an *empty* value (``na``, ``false``, or ``""``) will be assigned to the
@@ -185,3 +178,29 @@ side effect of the expression, for example in ``strategy.*()`` calls:
 \`switch\` used to return a value
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+
+
+Matching types for local blocks in conditional structures
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When the `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ and
+`switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ conditional structures 
+are used, the type of the return value (the last statement) of all local blocks must match.
+ 
+The type of the returning value of the ``if`` statement is determined by the type of
+``return_expression_then`` and ``return_expression_else``. Their types
+must match. It is not possible to return an integer value from the *then* block
+if the *else* block returns a string value.
+
+Example::
+
+    // This code compiles
+    x = if close > open
+        close
+    else
+        open
+    // This code doesn't compile
+    x = if close > open
+        close
+    else
+        "open"

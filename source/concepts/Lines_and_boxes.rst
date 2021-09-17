@@ -1,8 +1,12 @@
-Drawings
-========
+.. _PageLinesAndBoxes:
+
+Lines and boxes
+===============
 
 .. contents:: :local:
     :depth: 2
+
+
 
 Starting with Pine v4, indicators and strategies can
 create *drawing objects* on the chart. Three types of
