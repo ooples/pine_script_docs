@@ -10,12 +10,8 @@ Conditional structures
 Introduction
 ------------
 
-The conditional structures in Pine are:
-
-- `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
-- `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
-
-They can be used:
+The conditional structures in Pine are `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ and
+`switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__. They can be used:
 
 - For their side effects, i.e., when they don't return a value but do things like 
   reassign values to variables or calling functions
