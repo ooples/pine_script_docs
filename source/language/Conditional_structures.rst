@@ -24,10 +24,6 @@ The conditional structures in Pine are `if <https://www.tradingview.com/pine-scr
 \`if\` structure
 ----------------
 
-Whether an `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ 
-structure is used for its side effects or to return a value, the value returned
-by each of its local blocks must be of the same type, otherwise a compiler error will occur.
-
 
 
 \`if\` used for its side effects
@@ -98,19 +94,18 @@ This is an example::
     //@version=5
     indicator("", "", true)
     string barState = if barstate.islastconfirmedhistory
-        barState = "islastconfirmedhistory"
+        "islastconfirmedhistory"
     else if barstate.isnew
-        barState = "isnew"
+        "isnew"
     else if barstate.isrealtime
-        barState = "isrealtime"
+        "isrealtime"
     else
-        barState = "other"
+        "other"
     
     f_print(_text) => 
         var table _t = table.new(position.middle_right, 1, 1)
         table.cell(_t, 0, 0, _text, bgcolor = color.yellow)
     f_print(barState)
-
 
 
 
@@ -180,27 +175,46 @@ side effect of the expression, for example in ``strategy.*()`` calls:
 
 
 
-Matching types for local blocks in conditional structures
----------------------------------------------------------
+Matching local block type requirement
+-------------------------------------
 
-When the `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ and
-`switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ conditional structures 
-are used, the type of the return value (the last statement) of all local blocks must match.
- 
-The type of the returning value of the ``if`` statement is determined by the type of
-``return_expression_then`` and ``return_expression_else``. Their types
-must match. It is not possible to return an integer value from the *then* block
-if the *else* block returns a string value.
+Whether an `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ 
+structure is used for its side effects or to return a value, the value returned
+by each of its local blocks must be of the same type, otherwise a compiler error will occur.
 
-Example::
+This code compiles fine because `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
+and `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ are both of "float" type::
 
-    // This code compiles
     x = if close > open
         close
     else
         open
-    // This code doesn't compile
+
+This code does not compile because the first local block returns a "float" and the second one, a "string" value::
+
+    // Compilation error!
     x = if close > open
         close
     else
         "open"
+
+While this makes perfect sense when using conditional structures to assign a value to a variable,
+it can sometimes cause problems when conditional structures are used for their side effect.
+To workaround this limitation, you can force the type of the local block's unused return value, eg.::
+
+    //@version=5
+    indicator("", "", true)
+    var closeLine = line.new(bar_index - 1, close, bar_index, close, extend = extend.right, width = 3)
+    if barstate.islast
+        if syminfo.type == "crypto"
+            line.set_xy1(closeLine, bar_index - 1, close)
+            line.set_xy2(closeLine, bar_index, close)
+            int(na)
+        else
+            label.new(bar_index, high, "Not a crypto market")
+            int(na)
+
+Note that we make the return value of each local block ``int(na)``, 
+which is the `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
+value cast to an integer using `int() <https://www.tradingview.com/pine-script-reference/v5/#fun_int>`__.
+This way, they both return an "int", which is not assigned to any variable.
