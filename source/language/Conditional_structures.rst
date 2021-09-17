@@ -181,7 +181,7 @@ side effect of the expression, for example in ``strategy.*()`` calls:
 
 
 Matching types for local blocks in conditional structures
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+---------------------------------------------------------
 
 When the `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ and
 `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ conditional structures 
