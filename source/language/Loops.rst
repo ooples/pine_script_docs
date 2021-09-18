@@ -16,8 +16,6 @@ Loops
 The `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ 
 structure allows the repetitive execution of statements. Its syntax is::
 
-.. code-block:: text
-
     <for_structure>
         [[<declaration_mode>] [<type>] <identifier> = ]for <identifier> = <expression> to <expression>[ by <expression>]
             <local_block_loop>
