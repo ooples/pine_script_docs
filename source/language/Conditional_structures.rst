@@ -202,15 +202,110 @@ is returned when no local block is executed. If ``close > open`` is ``false`` in
 \`switch\` structure
 --------------------
 
+The `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
+structure exists in two forms. One switches on the different values of a key expression::
+
+    <switch_structure_expression>
+        [[<declaration_mode>] [<type>] <identifier> = ]switch <expression>
+            {<expression> => <local_block>}
+            => <local_block>
+
+The other form does not use an expression as a key; it switches on the evaluation of different expressions::
+
+    <switch_structure_values>
+        [[<declaration_mode>] [<type>] <identifier> = ]switch
+            {<expression> => <local_block>}
+            => <local_block>
+
+where:
+
+- Parts enclosed in square brackets (``[]``) can appear zero or one time.
+- Parts enclosed in curly braces (``{}``) can appear zero or more times.
+- <expression> can be a literal, a variable, an expression or a function call.
+- <local_block> consists of zero or more statements followed by a return value, which can be a tuple of values.
+
+Only one local block of a `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
+structure is executed. It is thus a *structured switch* that doesn't *fall through* cases. 
+Consequently, ``break`` statements are unnecessary.
+
+Both forms are allowed as the value used to initialize a variable.
+
+As with the `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ structure, 
+if no local block is exectuted, `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ is returned.
 
 
-\`switch\` used for its side effects
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+\`switch\` with an expression
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Let's look at an example of a `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
+using an expression::
+
+    //@version=5
+    indicator("Switch using an expression", "", true)
+    
+    string maType = input.string("EMA", "MA type", options = ["EMA", "SMA", "RMA", "WMA"])
+    int maLength = input.int(10, "MA length", minval = 2)
+    
+    float ma = switch maType
+    	"EMA" => ta.ema(close, maLength)
+    	"SMA" => ta.sma(close, maLength)
+    	"RMA" => ta.rma(close, maLength)
+    	"WMA" => ta.wma(close, maLength)
+    
+    plot(ma)
+
+Note that:
+
+- The expression we are switching on is the variable ``maType``, which is of "input int" type.
+  Since it cannot change during the execution of the script, this guarantees that whichever
+  MA type the user selects will be executing on each bar, which is a requirement for functions like
+  `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__
+  which require a "simple int" argument for their ``length`` parameter.
+- We do not use a catch-all clause with an ending local block introduced by ``=>``
+  in our `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
 
 
 
-\`switch\` used to return a value
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+\`switch\` without an expression
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This is an example of a `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
+structure wich does not use an exppression::
+
+    //@version=5
+    strategy("Switch without an expression", "", true)
+
+    bool longCondition  = ta.crossover( ta.sma(close, 14), ta.sma(close, 28))
+    bool shortCondition = ta.crossunder(ta.sma(close, 14), ta.sma(close, 28))
+
+    switch
+    	longCondition  => strategy.entry("Long ID", strategy.long)
+    	shortCondition => strategy.entry("Short ID", strategy.short)
+
+Note that:
+
+- We are using the `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
+  to select the appropriate strategy order to emit, depending on whether 
+  the ``longCondition`` or ``shortCondition`` "bool" variables are ``true``.
+- The building conditions of ``longCondition`` and ``shortCondition``
+  are exclusive. While they can both be ``false`` simultaneously, they cannot both be ``true`` at the same time.
+  The fact that only **one** local block of the `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
+  structure is ever executed is thus not an issue for us.
+- We evaluate the calls to `ta.crossover() <https://www.tradingview.com/pine-script-reference/v5/#>`__
+  and `ta.crossunder() <https://www.tradingview.com/pine-script-reference/v5/#>`__ **prior** to entry in the
+  `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ structure. 
+  Not doing so like in the following example would prevent the functions to be executed on each bar, 
+  which would result in a compiler warning and erratic behavior.
+
+    //@version=5
+    strategy("Switch without an expression", "", true)
+
+    switch
+        // Compiler warning! Will not calculate correctly!
+    	ta.crossover( ta.sma(close, 14), ta.sma(close, 28)) => strategy.entry("Long ID", strategy.long)
+    	ta.crossunder(ta.sma(close, 14), ta.sma(close, 28)) => strategy.entry("Short ID", strategy.short)
 
 
 
