@@ -143,6 +143,8 @@ for which we do not use an uppercase name because it is not of "const" form::
     name1 := name1 + NAME2
 
 
+.. _PageTypeSystem_Input:
+
 input
 """""
 

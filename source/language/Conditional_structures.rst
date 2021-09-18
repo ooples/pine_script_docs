@@ -219,8 +219,7 @@ The other form does not use an expression as a key; it switches on the evaluatio
 
 where:
 
-- Parts enclosed in square brackets (``[]``) can appear zero or one time.
-- Parts enclosed in curly braces (``{}``) can appear zero or more times.
+- Parts enclosed in square brackets (``[]``) can appear zero or one time, and those enclosed in curly braces (``{}``) can appear zero or more times.
 - <expression> can be a literal, a variable, an expression or a function call.
 - <local_block> consists of zero or more statements followed by a return value, which can be a tuple of values.
 
@@ -257,7 +256,8 @@ using an expression::
 
 Note that:
 
-- The expression we are switching on is the variable ``maType``, which is of "input int" type.
+- The expression we are switching on is the variable ``maType``, which is of "input int" type 
+  (see here for an explanation of what the :ref:`input <PageTypeSystem_Input>` form is).
   Since it cannot change during the execution of the script, this guarantees that whichever
   MA type the user selects will be executing on each bar, which is a requirement for functions like
   `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__
