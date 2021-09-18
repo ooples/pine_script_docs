@@ -43,8 +43,8 @@ built-in function to accomplish the task::
     plot(thePineMA)
 
 Counting the occurrences of a condition in the last bars is also a task 
-which beginning Pine programmers think must be done with a loop.
-To count the number of up bars in the last 10 bars they will use::
+which beginning Pine programmers often think must be done with a loop.
+To count the number of up bars in the last 10 bars, they will use::
 
     //@version=5
     indicator("INEFFICIENT SUM")
@@ -55,7 +55,7 @@ To count the number of up bars in the last 10 bars they will use::
             upBars := upBars + 1
     plot(upBars)
    
-The efficient way to write this in Pine (for the programmer, 
+The efficient way to write this in Pine (for the programmer bacause it saves time, 
 to achieve the fastest-loading charts, and to share our common resources most equitably),
 is to use the `math.sum() <https://www.tradingview.com/pine-script-reference/v5/#fun_math{dot}sum>`__
 built-in function to accomplish the task::
@@ -78,7 +78,7 @@ When loops are necessary
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 Loops exist for good reason because even in Pine, they are necessary in some cases.
-These cases typically include::
+These cases typically include:
 
 - The manipulation of arrays.
 - Looking back in history to analyze bars using a reference value that can only 
