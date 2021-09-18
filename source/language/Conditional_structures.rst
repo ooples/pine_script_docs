@@ -211,17 +211,15 @@ is returned when no local block is executed. If ``close > open`` is ``false`` in
 The `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
 structure exists in two forms. One switches on the different values of a key expression::
 
-    <switch_structure_expression>
-        [[<declaration_mode>] [<type>] <identifier> = ]switch <expression>
-            {<expression> => <local_block>}
-            => <local_block>
+    [[<declaration_mode>] [<type>] <identifier> = ]switch <expression>
+        {<expression> => <local_block>}
+        => <local_block>
 
 The other form does not use an expression as a key; it switches on the evaluation of different expressions::
 
-    <switch_structure_values>
-        [[<declaration_mode>] [<type>] <identifier> = ]switch
-            {<expression> => <local_block>}
-            => <local_block>
+    [[<declaration_mode>] [<type>] <identifier> = ]switch
+        {<expression> => <local_block>}
+        => <local_block>
 
 where:
 
