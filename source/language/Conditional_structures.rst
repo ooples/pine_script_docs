@@ -257,7 +257,7 @@ using an expression::
 Note that:
 
 - The expression we are switching on is the variable ``maType``, which is of "input int" type 
-  (see here for an explanation of what the :ref:`input <PageTypeSystem_Input>` form is).
+  (see here for an explanation of what the ":ref:`input <PageTypeSystem_Input>`" form is).
   Since it cannot change during the execution of the script, this guarantees that whichever
   MA type the user selects will be executing on each bar, which is a requirement for functions like
   `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__
