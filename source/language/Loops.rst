@@ -29,11 +29,11 @@ where:
 - <local_block_loop> consists of zero or more statements followed by a return value, which can be a tuple of values.
   It must be indented by four spaces or a tab. It can contain the ``break`` statement to exit the loop, 
   or the ``continue`` statement to exit the current iteration and continue on with the next.
-- The value assigned to the variable is the return value of the <local_block>, or 
+- The value assigned to the variable is the return value of the <local_block_loop>, or 
   `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ if no local block is executed.
-- The identifier in ``for <identifier>`` is the loop's counter variable.
-- The expression in ``= <expression>`` is the start value of the counter.
-- The expression in ``to <expression>`` is the end value of the counter. **It is only evaluated upon entry in the loop**.
+- The identifier in ``for <identifier>`` is the loop's counter *initial value*.
+- The expression in ``= <expression>`` is the *start value* of the counter.
+- The expression in ``to <expression>`` is the *end value* of the counter. **It is only evaluated upon entry in the loop**.
 
   than ``to`` (or less than ``to`` in the case where ``from > to``) the
   loop is stopped.
