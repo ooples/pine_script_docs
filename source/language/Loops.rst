@@ -84,7 +84,8 @@ These cases typically include:
 - Looking back in history to analyze bars using a reference value that can only 
   be known on the current bar, e.g., to find how many past highs are higher than the 
   `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ of the current bar.
-  Since the current bar's high is only know on the bar the script is running on,
+  Since the current bar's `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__
+  is only known on the bar the script is running on,
   a loop is necessary to go back in time and analyze past bars.
 - Performing calculations on past bars that cannot be accomplished using Pine's built-in functions,
   like the Pearson correlation coefficient.
