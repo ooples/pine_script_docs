@@ -26,8 +26,9 @@ where:
 - <type> is optional, as in almost all Pine variable declarations (see :ref:`types <PageTypeSystem_Types>`)
 - <identifier> is a variable's :ref:`name <PageIdentifiers>`
 - <expression> can be a literal, a variable, an expression or a function call.
-- <local_block> consists of zero or more statements followed by a return value, which can be a tuple of values.
-  It must be indented by four spaces or a tab. It can contain the 
+- <local_block_loop> consists of zero or more statements followed by a return value, which can be a tuple of values.
+  It must be indented by four spaces or a tab. It can contain the ``break`` statement to exit the loop, 
+  or the ``continue`` statement to exit the current iteration and continue on with the next.
 - The value assigned to the variable is the return value of the <local_block>, or 
   `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ if no local block is executed.
 - The identifier in ``for <identifier>`` is the loop's counter variable.
