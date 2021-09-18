@@ -8,6 +8,67 @@ Loops
 
 
 
+Introduction
+------------
+
+Pine's runtime and its built-in functions make loops unnecessary in many situations. 
+Budding Pine programmers not yet familiar with the Pine runtime and built-ins 
+who want to calculate the average of the last 10 
+`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ values will often write code such as::
+
+    //@version=5
+    indicator("INEFFICENT MA", "", true)
+    MA_LENGTH = 10
+    sumOfCloses = 0.0
+    for offset = 0 to MA_LENGTH - 1
+        sumOfCloses := sumOfCloses + close[offset]
+    inefficientMA = sumOfCloses / MA_LENGTH
+    plot(inefficientMA)
+
+A `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__
+loop is unnecessary and inefficient to accomplish tasks like this in Pine.
+This is how it should be done. This code is shorter *and* will run much faster
+because it does not use a loop and uses the 
+`ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__
+built-in function to accomplish the task::
+
+    //@version=5
+    indicator("The Pine MA", "", true)
+    thePineMA = ta.sma(close, 10)
+    plot(thePineMA)
+
+Counting the occurrences of a condition in the last bars is also a task 
+which beginning Pine programmers think must be done with a loop.
+To count the number of up bars in the last 10 bars they will use::
+
+    //@version=5
+    indicator("INEFFICIENT SUM")
+    MA_LENGTH = 10
+    upBars = 0.0
+    for offset = 0 to MA_LENGTH - 1
+        if close[offset] > open[offset]
+            upBars := upBars + 1
+    plot(upBars)
+   
+The efficient way to write this in Pine (for the programmer, 
+to achieve the fastest-loading charts, and to share our common resources most equitably),
+is to use the `math.sum() <https://www.tradingview.com/pine-script-reference/v5/#fun_math{dot}sum>`__
+built-in function to accomplish the task::
+
+    //@version=5
+    indicator("INEFFICIENT SUM")
+    upBars = math.sum(close > open ? 1 : 0, 10)     
+    plot(upBars)
+
+What's happening in there is:
+
+- We use the `?: <https://www.tradingview.com/pine-script-reference/v5/#op_{question}{colon}>`__
+  ternary operator to build an expression that yields 1 on up bars and 0 on other bars.
+- We use the `math.sum() <https://www.tradingview.com/pine-script-reference/v5/#fun_math{dot}sum>`__
+  built-in function to keep a running sum of that value for the last 10 bars.
+
+
+
 .. _PageLoops_For:
 
 \`for\`
