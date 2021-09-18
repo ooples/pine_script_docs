@@ -11,6 +11,11 @@ Loops
 Introduction
 ------------
 
+
+
+When loops are not needed
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Pine's runtime and its built-in functions make loops unnecessary in many situations. 
 Budding Pine programmers not yet familiar with the Pine runtime and built-ins 
 who want to calculate the average of the last 10 
@@ -66,6 +71,24 @@ What's happening in there is:
   ternary operator to build an expression that yields 1 on up bars and 0 on other bars.
 - We use the `math.sum() <https://www.tradingview.com/pine-script-reference/v5/#fun_math{dot}sum>`__
   built-in function to keep a running sum of that value for the last 10 bars.
+
+
+
+When loops are necessary
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Loops exist for good reason because even in Pine, they are necessary in some cases.
+These cases typically include::
+
+- The manipulation of arrays.
+- Looking back in history to analyze bars using a reference value that can only 
+  be known on the current bar, e.g., to find how many past highs are higher than the 
+  `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ of the current bar.
+  Since the current bar's high is only know on the bar the script is running on,
+  a loop is necessary to go back in time and analyze past bars.
+- Performing calculations on past bars that cannot be accomplished using Pine's built-in functions,
+  like the Pearson correlation coefficient.
+
 
 
 
