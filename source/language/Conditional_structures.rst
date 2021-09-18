@@ -290,13 +290,13 @@ Note that:
   to select the appropriate strategy order to emit, depending on whether 
   the ``longCondition`` or ``shortCondition`` "bool" variables are ``true``.
 - The building conditions of ``longCondition`` and ``shortCondition``
-  are exclusive. While they can both be ``false`` simultaneously, they cannot both be ``true`` at the same time.
+  are exclusive. While they can both be ``false`` simultaneously, they cannot be ``true`` at the same time.
   The fact that only **one** local block of the `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
   structure is ever executed is thus not an issue for us.
 - We evaluate the calls to `ta.crossover() <https://www.tradingview.com/pine-script-reference/v5/#>`__
   and `ta.crossunder() <https://www.tradingview.com/pine-script-reference/v5/#>`__ **prior** to entry in the
   `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ structure. 
-  Not doing so like in the following example would prevent the functions to be executed on each bar, 
+  Not doing so, as in the following example, would prevent the functions to be executed on each bar, 
   which would result in a compiler warning and erratic behavior::
 
     //@version=5
@@ -312,9 +312,10 @@ Note that:
 Matching local block type requirement
 -------------------------------------
 
-Whether an `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ 
-structure is used for its side effects or to return a value, the value returned
-by each of its local blocks must be of the same type, otherwise a compiler error will occur.
+When multiple local blocks are used in structures, the type of the return value of all its local blocks must match.
+This is even true if the structure is not used to assign a value to a variable in a declaration,
+such as when using an `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ 
+or `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ structure for its side effects only.
 
 This code compiles fine because `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
 and `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ are both of "float" type::
@@ -333,7 +334,7 @@ This code does not compile because the first local block returns a "float" and t
         "open"
 
 While this makes perfect sense when using conditional structures to assign a value to a variable,
-it can be inconvenient when conditional structures are used for their side effects.
+it can be inconvenient when they are used for their side effects.
 To work around this limitation, you can force the type of the local block's unused return value, eg.::
 
     //@version=5
