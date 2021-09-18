@@ -34,14 +34,10 @@ where:
 - The identifier in ``for <identifier>`` is the loop's counter *initial value*.
 - The expression in ``= <expression>`` is the *start value* of the counter.
 - The expression in ``to <expression>`` is the *end value* of the counter. **It is only evaluated upon entry in the loop**.
-
-  than ``to`` (or less than ``to`` in the case where ``from > to``) the
-  loop is stopped.
--  ``return_expression`` --- returning value. When a loop is finished or
-   broken, the returning value is assigned to ``var_declarationX``.
--  ``continue`` --- a keyword. Can only be used in loops. It jumps to the loop's
-   next iteration.
--  ``break`` --- a keyword. Can be used only in loops. It exits the loop.
+- The expression in ``by <expression>`` is optional.
+  It is the step by which the loop counter is increased or decreased on each iteration of the loop.
+  Its default value is 1 when start value < end value. It is -1 when start value > end value.
+  The step (+1 or -1) used as the default is determined by the start and end values.
 
 This example uses a `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ 
 statement to look back a user-defined amount of bars to determine how many bars have a 
