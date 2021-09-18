@@ -67,9 +67,11 @@ structure used for its side effects has the following syntax::
 
 where:
 
+- Parts enclosed in square brackets (``[]``) can appear zero or one time, and those enclosed in curly braces (``{}``) can appear zero or more times.
 - <expression> must be of "bool" type or be auto-castable to that type,
   which is only possible for "int" or "float" values (see the :ref:`Type system <PageTypeSystem_Types>` page).
 - <local_block> consists of zero or more statements followed by a return value, which can be a tuple of values.
+  It must be indented by four spaces or a tab.
 - There can be zero or more ``else if`` clauses.
 - There can be zero or one ``else`` clause.
 
@@ -159,9 +161,13 @@ structure used to return one or more values has the following syntax::
 
 where:
 
+- Parts enclosed in square brackets (``[]``) can appear zero or one time, and those enclosed in curly braces (``{}``) can appear zero or more times.
 - <declaration_mode> is the variable's :ref:`declaration mode <PageVariableDeclarations_DeclarationModes>`
-- The type is optional, as in almost all Pine variable declarations (see :ref:`types <PageTypeSystem_Types>`)
+- <type> is optional, as in almost all Pine variable declarations (see :ref:`types <PageTypeSystem_Types>`)
 - <identifier> is the variable's :ref:`name <PageIdentifiers>`
+- <expression> can be a literal, a variable, an expression or a function call.
+- <local_block> consists of zero or more statements followed by a return value, which can be a tuple of values.
+  It must be indented by four spaces or a tab.
 - The value assigned to the variable is the return value of the <local_block>, or 
   `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ if no local block is executed.
 
@@ -220,8 +226,14 @@ The other form does not use an expression as a key; it switches on the evaluatio
 where:
 
 - Parts enclosed in square brackets (``[]``) can appear zero or one time, and those enclosed in curly braces (``{}``) can appear zero or more times.
+- <declaration_mode> is the variable's :ref:`declaration mode <PageVariableDeclarations_DeclarationModes>`
+- <type> is optional, as in almost all Pine variable declarations (see :ref:`types <PageTypeSystem_Types>`)
+- <identifier> is the variable's :ref:`name <PageIdentifiers>`
 - <expression> can be a literal, a variable, an expression or a function call.
 - <local_block> consists of zero or more statements followed by a return value, which can be a tuple of values.
+  It must be indented by four spaces or a tab.
+- The value assigned to the variable is the return value of the <local_block>, or 
+  `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ if no local block is executed.
 
 Only one local block of a `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
 structure is executed. It is thus a *structured switch* that doesn't *fall through* cases. 
@@ -293,8 +305,8 @@ Note that:
   are exclusive. While they can both be ``false`` simultaneously, they cannot be ``true`` at the same time.
   The fact that only **one** local block of the `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
   structure is ever executed is thus not an issue for us.
-- We evaluate the calls to `ta.crossover() <https://www.tradingview.com/pine-script-reference/v5/#>`__
-  and `ta.crossunder() <https://www.tradingview.com/pine-script-reference/v5/#>`__ **prior** to entry in the
+- We evaluate the calls to `ta.crossover() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}crossover>`__
+  and `ta.crossunder() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}crossover>`__ **prior** to entry in the
   `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ structure. 
   Not doing so, as in the following example, would prevent the functions to be executed on each bar, 
   which would result in a compiler warning and erratic behavior::

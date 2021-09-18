@@ -8,37 +8,37 @@ Loops
 
 
 
-.. _PageLoops_ForStatement:
+.. _PageLoops_For:
 
 \`for\`
 -------
 
-The ``for`` statement allows to execute a number of instructions repeatedly:
+The `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ 
+structure allows the repetitive execution of statements. Its syntax is::
 
 .. code-block:: text
 
-    <var_declarationX> = for <i> = <from> to <to> by <step>
-        <var_decl0>
-        <var_decl1>
-        ...
-        continue
-        ...
-        break
-        ...
-        <var_declN>
-        <return_expression>
+    <for_structure>
+        [[<declaration_mode>] [<type>] <identifier> = ]for <identifier> = <expression> to <expression>[ by <expression>]
+            <local_block_loop>
 
 where:
 
--  ``i`` --- a loop counter variable.
--  ``from`` --- start value of the counter.
--  ``to`` --- end value of the counter. When the counter becomes greater
-   than ``to`` (or less than ``to`` in the case where ``from > to``) the
-   loop is stopped.
--  ``step`` --- loop step. Optional. Default is 1. If
-   ``from`` is greater than ``to``, the loop step will automatically change direction; no need to use a negative step.
--  ``var_decl0``, ... ``var_declN``, ``return_expression`` --- body of the loop. It
-   must be indented by 4 spaces [#tabs]_.
+- Parts enclosed in square brackets (``[]``) can appear zero or one time, and those enclosed in curly braces (``{}``) can appear zero or more times.
+- <declaration_mode> is the variable's :ref:`declaration mode <PageVariableDeclarations_DeclarationModes>`
+- <type> is optional, as in almost all Pine variable declarations (see :ref:`types <PageTypeSystem_Types>`)
+- <identifier> is a variable's :ref:`name <PageIdentifiers>`
+- <expression> can be a literal, a variable, an expression or a function call.
+- <local_block> consists of zero or more statements followed by a return value, which can be a tuple of values.
+  It must be indented by four spaces or a tab. It can contain the 
+- The value assigned to the variable is the return value of the <local_block>, or 
+  `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ if no local block is executed.
+- The identifier in ``for <identifier>`` is the loop's counter variable.
+- The expression in ``= <expression>`` is the start value of the counter.
+- The expression in ``to <expression>`` is the end value of the counter. **It is only evaluated upon entry in the loop**.
+
+  than ``to`` (or less than ``to`` in the case where ``from > to``) the
+  loop is stopped.
 -  ``return_expression`` --- returning value. When a loop is finished or
    broken, the returning value is assigned to ``var_declarationX``.
 -  ``continue`` --- a keyword. Can only be used in loops. It jumps to the loop's
@@ -71,5 +71,13 @@ Pine's runtime cannot, here, be used to calculate on the fly, as the script is e
 
 
 
+.. _PageLoops_For:
+
 \`while\`
 ---------
+
+::
+
+    <while_structure>
+        while <expression>
+            <local_block_loop>
