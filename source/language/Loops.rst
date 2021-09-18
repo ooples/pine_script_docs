@@ -36,7 +36,7 @@ where:
 - The expression in ``to <expression>`` is the *end value* of the counter. **It is only evaluated upon entry in the loop**.
 - The expression in ``by <expression>`` is optional.
   It is the step by which the loop counter is increased or decreased on each iteration of the loop.
-  Its default value is 1 when start value < end value. It is -1 when start value > end value.
+  Its default value is 1 when ``start value < end value``. It is -1 when ``start value > end value``.
   The step (+1 or -1) used as the default is determined by the start and end values.
 
 This example uses a `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ 
