@@ -263,7 +263,7 @@ Note that:
   `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__
   which require a "simple int" argument for their ``length`` parameter.
 - We do not use a catch-all clause with an ending local block introduced by ``=>``
-  in our `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
+  in our `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ structure.
 
 
 
@@ -297,7 +297,7 @@ Note that:
   and `ta.crossunder() <https://www.tradingview.com/pine-script-reference/v5/#>`__ **prior** to entry in the
   `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ structure. 
   Not doing so like in the following example would prevent the functions to be executed on each bar, 
-  which would result in a compiler warning and erratic behavior.
+  which would result in a compiler warning and erratic behavior::
 
     //@version=5
     strategy("Switch without an expression", "", true)
