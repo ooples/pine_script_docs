@@ -67,7 +67,7 @@ Built-in variables exist for different purposes. These are a few examples:
   `hlc3 <https://www.tradingview.com/pine-script-reference/v5/#var_hlc3>`__,
   `ohlc4 <https://www.tradingview.com/pine-script-reference/v5/#var_ohlc4>`__, and
   `volume <https://www.tradingview.com/pine-script-reference/v5/#var_volume>`__.
-- Symbol-related information in the ``syminfo`` namespace:
+- Symbol-related information in the ``syminfo`` namespace (see the :ref:`Chart information <PageChartInformation>` page):
   `syminfo.basecurrency <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}basecurrency>`__,
   `syminfo.currency <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}currency>`__,
   `syminfo.description <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}description>`__,
@@ -80,7 +80,8 @@ Built-in variables exist for different purposes. These are a few examples:
   `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__,
   `syminfo.timezone <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}timezone>`__, and
   `syminfo.type <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}type>`__.
-- Timeframe (a.k.a. "interval" or "resolution", e.g., 15sec, 30min, 60min, 1D, 3M) variables:
+- Timeframe (a.k.a. "interval" or "resolution", e.g., 15sec, 30min, 60min, 1D, 3M) 
+  variables in the ``timeframe`` namespace (see the :ref:`Chart information <PageChartInformation>` page):
   `timeframe.isseconds <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isseconds>`__,
   `timeframe.isminutes <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isminutes>`__,
   `timeframe.isintraday <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isintraday>`__,
@@ -90,7 +91,7 @@ Built-in variables exist for different purposes. These are a few examples:
   `timeframe.isdwm <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isdwm>`__,
   `timeframe.multiplier <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}multiplier>`__, and
   `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__.
-- bar states in the ``barstate`` namespace:
+- Bar states in the ``barstate`` namespace (see the :ref:`Bar states <PageBarStates>` page):
   `barstate.isconfirmed <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__,
   `barstate.isfirst <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isfirst>`__,
   `barstate.ishistory <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}ishistory>`__,
