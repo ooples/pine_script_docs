@@ -99,6 +99,16 @@ Built-in variables exist for different purposes. These are a few examples:
   `barstate.islastconfirmedhistory <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islastconfirmedhistory>`__,
   `barstate.isnew <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isnew>`__, and
   `barstate.isrealtime <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isrealtime>`__.
+- Strategy-related information in the ``strategy`` namespace:
+  `strategy.equity <https://www.tradingview.com/pine-script-reference/v5/#var_strategy{dot}equity>`__,
+  `strategy.initial_capital <https://www.tradingview.com/pine-script-reference/v5/#var_strategy{dot}initial_capital>`__,
+  `strategy.grossloss <https://www.tradingview.com/pine-script-reference/v5/#var_strategy{dot}grossloss>`__,
+  `strategy.grossprofit <https://www.tradingview.com/pine-script-reference/v5/#var_strategy{dot}grossprofit>`__,
+  `strategy.wintrades <https://www.tradingview.com/pine-script-reference/v5/#var_strategy{dot}wintrades>`__,
+  `strategy.losstrades <https://www.tradingview.com/pine-script-reference/v5/#var_strategy{dot}losstrades>`__,
+  `strategy.position_size <https://www.tradingview.com/pine-script-reference/v5/#var_strategy{dot}position_size>`__,
+  `strategy.position_avg_price <https://www.tradingview.com/pine-script-reference/v5/#var_strategy{dot}position_avg_price>`__,
+  `strategy.wintrades <https://www.tradingview.com/pine-script-reference/v5/#var_strategy{dot}wintrades>`__, etc.
 
 
 
@@ -167,6 +177,14 @@ Some functions do not return a result but are used for their side effects, which
   `strategy.entry() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}entry>`__,
   `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__,
   `strategy.order() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}order>`__, etc.
+- Strategy functions returning information on past trades, in the ``strategy`` namespace:
+  `strategy.closedtrades.entry_bar_index() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}entry_bar_index>`__,
+  `strategy.closedtrades.entry_price() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}entry_price>`__,
+  `strategy.closedtrades.entry_time() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}entry_time>`__,
+  `strategy.closedtrades.exit_bar_index() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}exit_bar_index>`__,
+  `strategy.closedtrades.max_drawdown() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}max_drawdown>`__,
+  `strategy.closedtrades.max_runup() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}max_runup>`__,
+  `strategy.closedtrades.profit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}profit>`__, etc.
 - Functions to generate alert events:
   `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ and
   `alertcondition() <https://www.tradingview.com/pine-script-reference/v5/#fun_alertcondition>`__.
