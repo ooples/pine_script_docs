@@ -317,10 +317,3 @@ Note that:
     	counter := counter - 1
     	fact
 
-
-
-.. _PageLoops_HistoryInsideLoops:
-
-History inside loops
---------------------
-
