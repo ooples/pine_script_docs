@@ -63,8 +63,8 @@ Note that:
 
 - The script only works on chart timeframes of 30min or less. 
   It prints an error message when the chart's timeframe is higher than 30min.
-- In the `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ structure's
-  else branch used when the chart's timeframe is incorrect, 
+- When the `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ structure's
+  ``else`` branch used because the chart's timeframe is incorrect, 
   the local block returns the ``NO_COLOR`` color so that no background is displayed in that case.
 - We first initialize constants using our base colors, which include the ``40`` transparency
   in hex notation at the end. "40" in the hexadecimal notation on the reversed 00-FF scale for transparency
