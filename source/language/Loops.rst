@@ -294,10 +294,10 @@ Let's calculate the factorial function using a
 Note that:
 
 - We use `input.int() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int>`__
-  for our input because we need to specify a ``minval`` argument to protect our code.
+  for our input because we need to specify a ``minval`` value to protect our code.
   While `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__
-  supports the input of "int" type values, it does not support the ``minval`` argument.
-- We have packaged our script's functionality in a ``factorial()`` function which accepts 
+  also supports the input of "int" type values, it does not support the ``minval`` parameter.
+- We have packaged our script's functionality in a ``factorial()`` function which accepts as an argument
   the value whose factorial it must calculate. We have used ``int val = na`` to declare our function's parameter,
   which says that if the function is called without an argument, as in ``factorial()``,
   then the ``val`` parameter will initialize to `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__,
@@ -307,7 +307,14 @@ Note that:
   initialize the ``result`` variable to `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__.
   In turn, because the initialization of ``result`` is the return value of the our function's local block,
   the function will return `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__.
-- Note the last line of the `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__' local block: ``fact``.
+- Our initialization of ``return`` is not required; we do it for readability. We could just as well have used::
+
+    while counter > 0
+    	fact := fact * counter
+    	counter := counter - 1
+    	fact
+
+- Note the last line of the `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__'s local block: ``fact``.
   It is the local block's return value, so the value the `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__
   structure will return from its last iteration.
 
