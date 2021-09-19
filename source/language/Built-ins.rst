@@ -55,7 +55,7 @@ Many functions are used for the result(s) they return. These are a few examples:
   `color.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}rgb>`__,
   `color.rgb() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}new>`__, etc.
 
-Some functions do not return a result but are used for their side effect, which means they do something, even if they don't return a result:
+Some functions do not return a result but are used for their side effects, which means they do something, even if they don't return a result:
 
 - Functions used as a declaration statement defining one of three types of Pine scripts, and its properties. Each script must begin with a call to one of these functions:
   `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
