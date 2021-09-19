@@ -232,26 +232,38 @@ where:
 - <type> is optional, as in almost all Pine variable declarations (see :ref:`types <PageTypeSystem_Types>`)
 - <identifier> is a variable's :ref:`name <PageIdentifiers>`
 - <expression> can be a literal, a variable, an expression or a function call. 
-  It is evaluated at each iteration of the loop.
+  It is evaluated at each iteration of the loop. When it evaluates to ``true``,
+  the loop executes. When it evaluates to ``false`` the loop stops.
 - <local_block_loop> consists of zero or more statements followed by a return value, which can be a tuple of values.
   It must be indented by four spaces or a tab. It can contain the ``break`` statement to exit the loop, 
   or the ``continue`` statement to exit the current iteration and continue on with the next.
 - The value assigned to the <identifier> variable is the return value of the <local_block_loop>,
   i.e., the last value calculated on the loop's last iteration,
   or `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ if the loop is not executed.
-- The identifier in ``for <identifier>`` is the loop's counter *initial value*.
-- The expression in ``= <expression>`` is the *start value* of the counter.
-- The expression in ``to <expression>`` is the *end value* of the counter. **It is only evaluated upon entry in the loop**.
-- The expression in ``by <expression>`` is optional.
-  It is the step by which the loop counter is increased or decreased on each iteration of the loop.
-  Its default value is 1 when ``start value < end value``. It is -1 when ``start value > end value``.
-  The step (+1 or -1) used as the default is determined by the start and end values.
 
-::
+This is the first code example of the :ref:`for <PageLoops_For>` section written using a 
+`while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ structure instead of a 
+`for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ one::
 
-    <while_structure>
-        while <expression>
-            <local_block_loop>
+    //@version=5
+    indicator("`for` loop")
+    lookbackInput = input.int(50, "Lookback in bars", minval = 1, maxval = 4999)
+    higherBars = 0
+    lowerBars = 0
+    if barstate.islast
+        var label lbl = label.new(na, na, "", style = label.style_label_left)
+        // Initialize the loop counter to its start value.
+        i = 1
+        // Loop until the `i` counter's value is <= the `lookbackInput` value.
+        while i <= lookbackInput
+            if high[i] > high
+                higherBars += 1
+            else if high[i] < high
+                lowerBars += 1
+            // Counter must be managed "manually".
+            i += 1
+        label.set_xy(lbl, bar_index, high)
+        label.set_text(lbl, str.tostring(higherBars, "# higher bars\n") + str.tostring(lowerBars, "# lower bars"))
 
 
 
