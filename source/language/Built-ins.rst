@@ -58,6 +58,15 @@ Built-in variables
 
 Built-in variables exist for different purposes. These are a few examples:
 
+- Price- and volume-related variables:
+  `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__,
+  `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__,
+  `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__,
+  `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__,
+  `hl2 <https://www.tradingview.com/pine-script-reference/v5/#var_hl2>`__,
+  `hlc3 <https://www.tradingview.com/pine-script-reference/v5/#var_hlc3>`__,
+  `ohlc4 <https://www.tradingview.com/pine-script-reference/v5/#var_ohlc4>`__, and
+  `volume <https://www.tradingview.com/pine-script-reference/v5/#var_volume>`__.
 - Symbol-related information in the ``syminfo`` namespace:
   `syminfo.basecurrency <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}basecurrency>`__,
   `syminfo.currency <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}currency>`__,
@@ -81,7 +90,14 @@ Built-in variables exist for different purposes. These are a few examples:
   `timeframe.isdwm <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isdwm>`__,
   `timeframe.multiplier <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}multiplier>`__, and
   `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__.
-- 
+- bar states in the ``barstate`` namespace:
+  `barstate.isconfirmed <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__,
+  `barstate.isfirst <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isfirst>`__,
+  `barstate.ishistory <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}ishistory>`__,
+  `barstate.islast <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islast>`__,
+  `barstate.islastconfirmedhistory <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islastconfirmedhistory>`__,
+  `barstate.isnew <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isnew>`__, and
+  `barstate.isrealtime <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isrealtime>`__.
 
 
 
