@@ -510,16 +510,15 @@ Note that:
 
 It may sometimes be necessary to cast one type into another because auto-casting rules will not suffice. 
 For these cases, explicit type-casting functions exist. They are:
-
-- `int() <https://www.tradingview.com/pine-script-reference/v5/#fun_int>`__
-- `float() <https://www.tradingview.com/pine-script-reference/v5/#fun_float>`__
-- `bool() <https://www.tradingview.com/pine-script-reference/v5/#fun_bool>`__
-- `color() <https://www.tradingview.com/pine-script-reference/v5/#fun_color>`__
-- `string() <https://www.tradingview.com/pine-script-reference/v5/#fun_string>`__
-- `line() <https://www.tradingview.com/pine-script-reference/v5/#fun_line>`__
-- `label() <https://www.tradingview.com/pine-script-reference/v5/#fun_label>`__
-- `box() <https://www.tradingview.com/pine-script-reference/v5/#fun_box>`__
-- `table() <https://www.tradingview.com/pine-script-reference/v5/#fun_table>`__
+`int() <https://www.tradingview.com/pine-script-reference/v5/#fun_int>`__,
+`float() <https://www.tradingview.com/pine-script-reference/v5/#fun_float>`__,
+`bool() <https://www.tradingview.com/pine-script-reference/v5/#fun_bool>`__,
+`color() <https://www.tradingview.com/pine-script-reference/v5/#fun_color>`__,
+`string() <https://www.tradingview.com/pine-script-reference/v5/#fun_string>`__,
+`line() <https://www.tradingview.com/pine-script-reference/v5/#fun_line>`__,
+`label() <https://www.tradingview.com/pine-script-reference/v5/#fun_label>`__,
+`box() <https://www.tradingview.com/pine-script-reference/v5/#fun_box>`__, and
+`table() <https://www.tradingview.com/pine-script-reference/v5/#fun_table>`__.
 
 This is code that will not compile because we fail to convert the type of the argument used for ``length`` when calling 
 `ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__::
