@@ -68,7 +68,7 @@ Some functions do not return a result but are used for their side effects, which
   `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__,
   `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__,
   `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__.
-- Strategy functions placing orders in the ``strategy`` namespace:
+- Strategy functions placing orders, in the ``strategy`` namespace:
   `strategy.cancel() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}cancel>`__,
   `strategy.close() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}close>`__,
   `strategy.entry() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}entry>`__,
@@ -78,7 +78,7 @@ Some functions do not return a result but are used for their side effects, which
   `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ and
   `alertcondition() <https://www.tradingview.com/pine-script-reference/v5/#fun_alertcondition>`__.
 
-Other functions return a result which is not always used. Sometimes we call them only for their side effect:
+Other functions return a result, but we don't always use it, e.g.:
 `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__,
 `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__,
 `array.pop() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}pop>`__,
