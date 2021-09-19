@@ -265,6 +265,32 @@ This is the first code example of the :ref:`for <PageLoops_For>` section written
         label.set_xy(lbl, bar_index, high)
         label.set_text(lbl, str.tostring(higherBars, "# higher bars\n") + str.tostring(lowerBars, "# lower bars"))
 
+Note that:
+
+- The ``i`` counter must be incremented by one explicitly inside the 
+  `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__'s local block.
+- We use the `+= <https://www.tradingview.com/pine-script-reference/v5/#op_{plus}=>`__
+  operator to add one to the counter. ``lowerBars += 1`` is equivalent to ``lowerBars := lowerBars + 1``
+
+Let's calculate the factorial function using a 
+`while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ structure::
+
+    //@version=5
+    indicator("")
+    int n = input.int(10, "Factorial", minval=0)
+    
+    factorial(val) =>
+        int counter = val
+        int fact = 1
+        factorial = while counter > 0
+        	fact := fact * counter
+        	counter := counter - 1
+        	fact
+    
+    // Only evaluate the function on the first bar.	
+    var answer = factorial(n)
+    plot(answer)
+
 
 
 .. _PageLoops_HistoryInsideLoops:
