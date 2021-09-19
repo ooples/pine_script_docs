@@ -99,7 +99,8 @@ These cases typically include:
 -------
 
 The `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ 
-structure allows the repetitive execution of statements. Its syntax is::
+structure allows the repetitive execution of statements using a counter. 
+Its syntax is::
 
     [[<declaration_mode>] [<type>] <identifier> = ]for <identifier> = <expression> to <expression>[ by <expression>]
         <local_block_loop>
@@ -114,8 +115,9 @@ where:
 - <local_block_loop> consists of zero or more statements followed by a return value, which can be a tuple of values.
   It must be indented by four spaces or a tab. It can contain the ``break`` statement to exit the loop, 
   or the ``continue`` statement to exit the current iteration and continue on with the next.
-- The value assigned to the variable is the return value of the <local_block_loop>, or 
-  `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ if no local block is executed.
+- The value assigned to the variable is the return value of the <local_block_loop>, 
+  i.e., the last value calculated on the loop's last iteration,
+  or `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ if the loop is not executed.
 - The identifier in ``for <identifier>`` is the loop's counter *initial value*.
 - The expression in ``= <expression>`` is the *start value* of the counter.
 - The expression in ``to <expression>`` is the *end value* of the counter. **It is only evaluated upon entry in the loop**.
@@ -147,7 +149,10 @@ Pine's runtime cannot, here, be used to calculate on the fly, as the script is e
         label.set_xy(lbl, bar_index, high)
         label.set_text(lbl, str.tostring(higherBars, "# higher bars\n") + str.tostring(lowerBars, "# lower bars"))
 
-This example uses a loop to go through arrays of pivot lines and delete them when price crosses them::
+This example uses a loop in its ``checkLinesForBreaches()`` function
+to go through an array of pivot lines and delete them when price crosses them.
+A loop is necessary here because all the lines in each of the ``hiPivotLines`` and ``loPivotLines``
+arrays must be checked on each bar, and there is no Pine built-in that can do this for us::
 
     //@version=5
     MAX_LINES_COUNT = 100
@@ -208,13 +213,50 @@ This example uses a loop to go through arrays of pivot lines and delete them whe
 
 
 
-.. _PageLoops_For:
+.. _PageLoops_While:
 
 \`while\`
 ---------
+
+The `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ 
+structure allows the repetitive execution of statements until a condition is true. 
+Its syntax is::
+
+    [[<declaration_mode>] [<type>] <identifier> = ]while <expression>
+        <local_block_loop>
+
+where:
+
+- Parts enclosed in square brackets (``[]``) can appear zero or one time.
+- <declaration_mode> is the variable's :ref:`declaration mode <PageVariableDeclarations_DeclarationModes>`
+- <type> is optional, as in almost all Pine variable declarations (see :ref:`types <PageTypeSystem_Types>`)
+- <identifier> is a variable's :ref:`name <PageIdentifiers>`
+- <expression> can be a literal, a variable, an expression or a function call. 
+  It is evaluated at each iteration of the loop.
+- <local_block_loop> consists of zero or more statements followed by a return value, which can be a tuple of values.
+  It must be indented by four spaces or a tab. It can contain the ``break`` statement to exit the loop, 
+  or the ``continue`` statement to exit the current iteration and continue on with the next.
+- The value assigned to the <identifier> variable is the return value of the <local_block_loop>,
+  i.e., the last value calculated on the loop's last iteration,
+  or `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ if the loop is not executed.
+- The identifier in ``for <identifier>`` is the loop's counter *initial value*.
+- The expression in ``= <expression>`` is the *start value* of the counter.
+- The expression in ``to <expression>`` is the *end value* of the counter. **It is only evaluated upon entry in the loop**.
+- The expression in ``by <expression>`` is optional.
+  It is the step by which the loop counter is increased or decreased on each iteration of the loop.
+  Its default value is 1 when ``start value < end value``. It is -1 when ``start value > end value``.
+  The step (+1 or -1) used as the default is determined by the start and end values.
 
 ::
 
     <while_structure>
         while <expression>
             <local_block_loop>
+
+
+
+.. _PageLoops_HistoryInsideLoops:
+
+History inside loops
+--------------------
+
