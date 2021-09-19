@@ -10,9 +10,88 @@ Built-ins
 Introduction
 ------------
 
-Pine comes with hundreds of built-in functions. Those in the same family share the same namespace, which is a prefix to the function's name. 
+Pine has hundreds of *built-in* variables and functions. 
+Built-in variables and functions are part of the Pine language.
+The better you know them, the more you will be able to do with your Pine scripts.
+
+In this page we present an overview of some of Pine's built-in variables and functions.
+They will be covered in more detail in the pages of this manual covering specific themes.
+
+All Pine built-in variables and functions are defined in the 
+`Pine Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__. 
+It is called a "Reference Manual" because it is the definitive reference on the Pine language.
+It is an essential tool that will accompany you anytime you code in Pine,
+whether you are a beginner or an expert. If you are learning your first programming language,
+make the `Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__
+your friend. Ignoring it will make your programming experience with Pine difficult and frustrating — as
+it would with any other programming language.
+
+Variables and functions in the same family share the same namespace, which is a prefix to the function's name. 
 The `ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__ function, for example, is in the ``ta`` namespace, 
-which stands for "technical analysis".
+which stands for "technical analysis". A namespace can contain both variables and functions.
+
+Some variables have function versions as well:
+
+- `ta.tr <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}tr>`__ variable returns
+  the True Range of the current bar. The `ta.tr(true) <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}tr>`__
+  function call also returns the True Range, but when the previous `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
+  value which is normally needed to calculate it is `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__,
+  it calculates using ``high - low`` instead.
+- The `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ variable gives the time at the 
+  `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ of the current bar.
+  The `time(timeframe) <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ function returns 
+  the time of the bar's `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ 
+  from the ``timeframe`` specified, even if the current chart is at another timeframe.
+  The `time(timeframe, session) <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ function returns 
+  the time of the bar's `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ 
+  from the ``timeframe`` specified, but only if it is within the ``session`` time.
+  The `time(timeframe, session) <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ function returns 
+  the time of the bar's `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ 
+  from the ``timeframe`` specified, but only if it is within the ``session`` time in the specified ``timezone``.
+
+
+
+.. _PageBuiltInFunctions_BuiltInVariables:
+
+Built-in variables
+------------------
+
+Built-in variables exist for different purposes. These are a few examples:
+
+- Symbol-related information in the ``syminfo`` namespace:
+  `syminfo.basecurrency <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}basecurrency>`__,
+  `syminfo.currency <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}currency>`__,
+  `syminfo.description <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}description>`__,
+  `syminfo.mintick <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}mintick>`__,
+  `syminfo.pointvalue <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}pointvalue>`__,
+  `syminfo.prefix <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}prefix>`__,
+  `syminfo.root <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}root>`__,
+  `syminfo.session <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}session>`__,
+  `syminfo.ticker <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}ticker>`__,
+  `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__,
+  `syminfo.timezone <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}timezone>`__, and
+  `syminfo.type <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}type>`__.
+
+- Timeframe (a.k.a. "interval" or "resolution", e.g., 15sec, 30min, 60min, 1D, 3M) variables:
+  `timeframe.isseconds <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isseconds>`__,
+  `timeframe.isminutes <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isminutes>`__,
+  `timeframe.isintraday <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isintraday>`__,
+  `timeframe.isdaily <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isdaily>`__,
+  `timeframe.isweekly <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isweekly>`__,
+  `timeframe.ismonthly <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}ismonthly>`__,
+  `timeframe.isdwm <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isdwm>`__,
+  `timeframe.multiplier <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}multiplier>`__, and
+  `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__.
+  
+- 
+
+
+
+
+.. _PageBuiltInFunctions_BuiltInFunctions:
+
+Built-in functions
+------------------
 
 Many functions are used for the result(s) they return. These are a few examples:
 
@@ -84,20 +163,7 @@ Other functions return a result, but we don't always use it, e.g.:
 `array.pop() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}pop>`__,
 `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__, etc.
 
-
-
-.. _PageBuiltInFunctions_BuiltInVariables:
-
-Built-in variables
-------------------
-
-
-.. _PageBuiltInFunctions_BuiltInFunctions:
-
-Built-in functions
-------------------
-
-All Pine built-ins are defined in the `Pine Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__. 
+All Pine built-in functions are defined in the `Pine Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__. 
 You can click on any of the function names listed here to go to its entry in the Reference Manual, 
 which documents the function's signature, i.e., the list of *parameters* it accepts and the form-type of the value(s) it returns 
 (a function can return more than one result). The Reference Manual entry will also list, for each parameter:
