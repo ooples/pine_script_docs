@@ -26,7 +26,7 @@ make the `Reference Manual <https://www.tradingview.com/pine-script-reference/v5
 your friend. Ignoring it will make your programming experience with Pine difficult and frustrating — as
 it would with any other programming language.
 
-Variables and functions in the same family share the same namespace, which is a prefix to the function's name. 
+Variables and functions in the same family share the same *namespace*, which is a prefix to the function's name. 
 The `ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__ function, for example, is in the ``ta`` namespace, 
 which stands for "technical analysis". A namespace can contain both variables and functions.
 
@@ -179,12 +179,25 @@ which returns the volume-weighted moving average of a source value. This is its 
 
 .. image:: images/BuiltIns-BuiltInFunctions.png
 
-Its signature (or definition) is::
+The entry gives us the information we need to use it:
+
+- What the function does.
+- Its signature (or definition)::
 
     ta.vwma(source, length) → series float
 
-This tells us it expects two arguments when it is called, one for the ``source`` parameter, and one for the ``length`` parameter (both are required in this case).
-This is a call to the function in a line of code that assigns the result to a variable called ``myVwma``::
+- The parameters it includes: ``source`` and ``length``
+- The form and type of the result it returns: "series float".
+- An example showing it in use: ``plot(ta.vwma(close, 15))``.
+- An example showing what it does, but in long form, so you can better understand its calculations. 
+  Note that this is meant to explain — not as usable code, because it is more complicated and takes longer to execute.
+- The "RETURNS" section explains exacty what value the function returns.
+- The "ARGUMENTS" section lists each parameter and gives the critical information 
+  concerning what form-type is required for arguments used when calling the function.
+- The "SEE ALSO" section refers you to related Reference Manual entries.
+
+This is a call to the function in a line of code that declares a ``myVwma`` variable 
+and assigns the result of ``ta.vwma(close, 20)`` to it::
 
     myVwma = ta.vwma(close, 20)
 
@@ -192,6 +205,8 @@ Note that:
 
 - We use the built-in variable `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ as the argument for the ``source`` parameter.
 - We use ``20`` as the argument for the ``length`` parameter.
+- If placed in the global scope (i.e., starting in a line's first position), 
+  it will be executed by the Pine runtime on each bar of the chart.
 
 We can also use the parameter names when calling the function. Parameter names are called *keyword arguments* when used in a function call::
 
