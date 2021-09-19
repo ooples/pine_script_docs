@@ -64,7 +64,7 @@ Note that:
 - The script only works on chart timeframes of 30min or less. 
   It prints an error message when the chart's timeframe is higher than 30min.
 - When the `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ structure's
-  ``else`` branch used because the chart's timeframe is incorrect, 
+  ``else`` branch is used because the chart's timeframe is incorrect, 
   the local block returns the ``NO_COLOR`` color so that no background is displayed in that case.
 - We first initialize constants using our base colors, which include the ``40`` transparency
   in hex notation at the end. "40" in the hexadecimal notation on the reversed 00-FF scale for transparency
@@ -112,7 +112,9 @@ Note that:
   built-in: one for the bull gradient when ``myCCIPosition`` is in the 50-100% range,
   which means that more past values are below its current value, and another for the bear gradient
   when ``myCCIPosition`` is in the 0-49.99% range, which means that more past values are above it.
-- We provide inputs so the user can change the bull/bear colors.
+- We provide inputs so the user can change the bull/bear colors, 
+  and we place both color input widgets on the same line using ``inline = "1"`` in both
+  `input.color() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}color>`__ calls.
 - We plot the CCI signal using two plot calls to achieve the best contrast over the
   busy background: the first plot is a 3-pixel wide white background, 
   the second `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
