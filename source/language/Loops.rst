@@ -307,7 +307,7 @@ Note that:
   initialize the ``result`` variable to `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__.
   In turn, because the initialization of ``result`` is the return value of the our function's local block,
   the function will return `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__.
-- Our initialization of ``return`` is not required; we do it for readability. We could just as well have used::
+- Our initialization of ``result`` is not required; we do it for readability. We could just as well have used::
 
     while counter > 0
     	fact := fact * counter
