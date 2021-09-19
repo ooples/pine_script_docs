@@ -9,6 +9,7 @@ Concepts
    Backgrounds
    Bar_plots_and_coloring
    Bar_states
+   Chart_information
    Colors
    Fills
    Formatting_values

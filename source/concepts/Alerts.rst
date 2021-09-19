@@ -95,7 +95,7 @@ Script alerts
 When a script user creates a *script alert* using the "Create Alert" dialog box, 
 the events able to trigger the alert will vary depending on whether the alert is created from an indicator or a strategy.
 
-A *script alert* created from a **indicator** will trigger when:
+A *script alert* created from an **indicator** will trigger when:
 
 - The indicator contains `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ calls.
 - The code's logic allows a specific `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ call to execute.
@@ -118,19 +118,29 @@ The `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`_
   alert(message, freq)
 
 ``message``
-  A "series string" representing the message text sent when the alert triggers. Because this argument allows the "series" form, it can be generated at runtime and differ bar to bar, making it dynamic.
+  A "series string" representing the message text sent when the alert triggers. 
+  Because this argument allows the "series" form, it can be generated at runtime and differ bar to bar, making it dynamic.
 
 ``freq``
   An "input string" specifying the triggering frequency of the alert. Valid arguments are:
 
   - ``alert.freq_once_per_bar``: Only the first call per realtime bar triggers the alert (default value).
-  - ``alert.freq_once_per_bar_close``: An alert is only triggered when the realtime bar closes and an `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ call is executed during that script iteration.
+  - ``alert.freq_once_per_bar_close``: An alert is only triggered when the realtime bar closes and an 
+  - `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ call is executed during that script iteration.
   - ``alert.freq_all``: All calls during the realtime bar trigger the alert.
 
-The `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ function can be used in both indicators and strategies. For an `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ call to trigger a *script alert* configured on *alert() function calls*, the script's logic must allow the `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ call to execute, **and** the frequency determined by the ``freq`` parameter must allow the alert to trigger.
+The `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ function can be used in both indicators and strategies. 
+For an `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ 
+call to trigger a *script alert* configured on *alert() function calls*, 
+the script's logic must allow the `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ call to execute, 
+**and** the frequency determined by the ``freq`` parameter must allow the alert to trigger.
 
-Note that by default, strategies are recalculated at the bar's close, so if the `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ function with the frequency ``alert.freq_all`` or ``alert.freq_once_per_bar`` is used in a strategy, then it will be called no more often than once at the bar's close.
-In order to enable the `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ function to be called during the bar construction process, you need to enable the ``calc_on_every_tick`` option.
+Note that by default, strategies are recalculated at the bar's close, so if the 
+`alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ 
+function with the frequency ``alert.freq_all`` or ``alert.freq_once_per_bar`` is used in a strategy, 
+then it will be called no more often than once at the bar's close.
+In order to enable the `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ 
+function to be called during the bar construction process, you need to enable the ``calc_on_every_tick`` option.
 
 Using all 'alert()' calls
 """""""""""""""""""""""""
@@ -394,6 +404,7 @@ The `alertcondition() <https://www.tradingview.com/pine-script-reference/v5/#fun
 ``freq`` parameter. The frequency of *alertcondition() alerts* is determined by users in the "Create Alert" dialog box.
 
 
+
 Using one condition
 ^^^^^^^^^^^^^^^^^^^
 
@@ -433,6 +444,7 @@ Note that:
 - Using one of these methods, we can include any numeric value that is plotted by our indicator, but as strings cannot be plotted, no string variable can be used.
 
 
+
 Using compound conditions
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -464,6 +476,7 @@ This script demonstrates one way to do it::
 
 Note how the `alertcondition() <https://www.tradingview.com/pine-script-reference/v5/#fun_alertcondition>`_ call is allowed to trigger on one of two conditions. 
 Each condition can only trigger the alert if the user enables it in the script's inputs before creating the alert.
+
 
 
 Placeholders
@@ -534,4 +547,4 @@ The most common instances of repainting traders want to avoid with alerts are on
 The simplest way to avoid this type of repainting is to configure the triggering frequency of alerts so they only trigger on the close of the realtime bar. 
 There is no panacea; avoiding this type of repainting **always** entails waiting for confirmed information, which means the trader must sacrifice immediacy to achieve reliability.
 
-Note that other types of repainting such as those documented in our :doc:`/essential/Indicator_repainting` section may not be preventable by simply triggering alerts on the close of realtime bars.
+Note that other types of repainting such as those documented in our :ref:`Repainting <PageRepainting>` section may not be preventable by simply triggering alerts on the close of realtime bars.

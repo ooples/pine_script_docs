@@ -177,7 +177,7 @@ Some functions do not return a result but are used for their side effects, which
   `strategy.entry() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}entry>`__,
   `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__,
   `strategy.order() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}order>`__, etc.
-- Strategy functions returning information on past trades, in the ``strategy`` namespace:
+- Strategy functions returning information on indivdual past trades, in the ``strategy`` namespace:
   `strategy.closedtrades.entry_bar_index() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}entry_bar_index>`__,
   `strategy.closedtrades.entry_price() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}entry_price>`__,
   `strategy.closedtrades.entry_time() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}entry_time>`__,
