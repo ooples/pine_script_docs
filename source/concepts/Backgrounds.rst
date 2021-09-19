@@ -16,6 +16,7 @@ The function's signature is::
 
 Its ``color`` parameter allows a "series color" to be used for its argument,
 so it can be dynamically calculated in an expression.
+
 If the correct transparency is not part of the color to be used, 
 it can be be generated using the `color.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}new>`__ function.
 
@@ -58,7 +59,65 @@ Here is a script that colors the background of trading sessions (try it on
     
     bgcolor(sessionColor)
 
+Note that:
+
+- The script only works on chart timeframes of 30min or less. 
+  It prints an error message when the chart's timeframe is higher than 30min.
+- In the `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ structure's
+  else branch used when the chart's timeframe is incorrect, 
+  the local block returns the ``NO_COLOR`` color so that no background is displayed in that case.
+- We first initialize constants using our base colors, which include the ``40`` transparency
+  in hex notation at the end. "40" in the hexadecimal notation on the reversed 00-FF scale for transparency
+  corresponds to 75 in Pine's 0-100 decimal scale for transparency.
+- We provide color inputs allowing script users to change the default colors we propose.
+  
 .. image:: images/Backgrounds-Sessions.png
 
+Here, we generate a gradient for the background of a CCI line::
+
+    //@version=5
+    indicator("CCI Background")
+    
+    bullColor = input.color(color.lime, "🠅", inline = "1")
+    bearColor = input.color(color.fuchsia, "🠇", inline = "1")
+    
+    // Calculate CCI.
+    myCCI = ta.cci(hlc3, 20)
+    // Get relative position of CCI in last 100 bars, on a 0-100% scale.
+    myCCIPosition = ta.percentrank(myCCI, 100)
+    // Generate a bull gradient when position is 50-100%, bear gradient when position is 0-50%.
+    backgroundColor = if myCCIPosition >= 50
+        color.from_gradient(myCCIPosition, 50, 100, color.new(bullColor, 75), bullColor)
+    else
+        color.from_gradient(myCCIPosition, 0, 50, bearColor, color.new(bearColor, 75))
+    
+    // Wider white line background.
+    plot(myCCI, "CCI", color.white, 3)
+    // Think black line.
+    plot(myCCI, "CCI", color.black, 1)
+    // Zero level.
+    hline(0)
+    // Gradient background.
+    bgcolor(backgroundColor)
+
+Note that:
+
+- We use the `ta.cci() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}cci>`__
+  built-in function to calculate the indicator value.
+- We use the `ta.percentrank() <https://www.tradingview.com/pine-script-reference/v5/#ta.percentrank>`__
+  built-in function to calculate ``myCCIPosition``, i.e., the percentage of past ``myCCI``
+  values in the last 100 bars that are below the current value of ``myCCI``.
+- To calculate the gradient, we use two different calls of the
+  `color.from_gradient() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}from_gradient>`__
+  built-in: one for the bull gradient when ``myCCIPosition`` is in the 50-100% range,
+  which means that more past values are below its current value, and another for the bear gradient
+  when ``myCCIPosition`` is in the 0-49.99% range, which means that more past values are above it.
+- We provide inputs so the user can change the bull/bear colors.
+- We plot the CCI signal using two plot calls to achieve the best contrast over the
+  busy background: the first plot is a 3-pixel wide white background, 
+  the second `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
+  call plots the thin, 1-pixel wide black line.
+
+.. image:: images/Backgrounds-CCI.png
 
 See the :ref:`Colors <PageColors>` page for more examples of backgrounds.
