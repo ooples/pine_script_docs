@@ -270,19 +270,19 @@ Note that:
 - The ``i`` counter must be incremented by one explicitly inside the 
   `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__'s local block.
 - We use the `+= <https://www.tradingview.com/pine-script-reference/v5/#op_{plus}=>`__
-  operator to add one to the counter. ``lowerBars += 1`` is equivalent to ``lowerBars := lowerBars + 1``
+  operator to add one to the counter. ``lowerBars += 1`` is equivalent to ``lowerBars := lowerBars + 1``.
 
 Let's calculate the factorial function using a 
 `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ structure::
 
     //@version=5
     indicator("")
-    int n = input.int(10, "Factorial", minval=0)
+    int n = input.int(10, "Factorial of", minval=0)
     
-    factorial(val) =>
+    factorial(int val = na) =>
         int counter = val
         int fact = 1
-        factorial = while counter > 0
+        result = while counter > 0
         	fact := fact * counter
         	counter := counter - 1
         	fact
@@ -291,6 +291,25 @@ Let's calculate the factorial function using a
     var answer = factorial(n)
     plot(answer)
 
+Note that:
+
+- We use `input.int() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int>`__
+  for our input because we need to specify a ``minval`` argument to protect our code.
+  While `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__
+  supports the input of "int" type values, it does not support the ``minval`` argument.
+- We have packaged our script's functionality in a ``factorial()`` function which accepts 
+  the value whose factorial it must calculate. We have used ``int val = na`` to declare our function's parameter,
+  which says that if the function is called without an argument, as in ``factorial()``,
+  then the ``val`` parameter will initialize to `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__,
+  which will prevent the execution of the `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ loop
+  because its ``counter > 0`` expression will return `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__.
+  The `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ structure will thus
+  initialize the ``result`` variable to `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__.
+  In turn, because the initialization of ``result`` is the return value of the our function's local block,
+  the function will return `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__.
+- Note the last line of the `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__' local block: ``fact``.
+  It is the local block's return value, so the value the `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__
+  structure will return from its last iteration.
 
 
 .. _PageLoops_HistoryInsideLoops:
