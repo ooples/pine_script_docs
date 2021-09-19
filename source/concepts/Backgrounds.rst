@@ -58,6 +58,8 @@ Here is a script that colors the background of trading sessions (try it on
         NO_COLOR
     
     bgcolor(sessionColor)
+  
+.. image:: images/Backgrounds-Sessions.png
 
 Note that:
 
@@ -67,13 +69,11 @@ Note that:
   ``else`` branch is used because the chart's timeframe is incorrect, 
   the local block returns the ``NO_COLOR`` color so that no background is displayed in that case.
 - We first initialize constants using our base colors, which include the ``40`` transparency
-  in hex notation at the end. "40" in the hexadecimal notation on the reversed 00-FF scale for transparency
+  in hex notation at the end. 40 in the hexadecimal notation on the reversed 00-FF scale for transparency
   corresponds to 75 in Pine's 0-100 decimal scale for transparency.
 - We provide color inputs allowing script users to change the default colors we propose.
-  
-.. image:: images/Backgrounds-Sessions.png
 
-Here, we generate a gradient for the background of a CCI line::
+In our next example, we generate a gradient for the background of a CCI line::
 
     //@version=5
     indicator("CCI Background")
@@ -100,6 +100,8 @@ Here, we generate a gradient for the background of a CCI line::
     // Gradient background.
     bgcolor(backgroundColor)
 
+.. image:: images/Backgrounds-CCI.png
+
 Note that:
 
 - We use the `ta.cci() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}cci>`__
@@ -115,11 +117,9 @@ Note that:
 - We provide inputs so the user can change the bull/bear colors, 
   and we place both color input widgets on the same line using ``inline = "1"`` in both
   `input.color() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}color>`__ calls.
-- We plot the CCI signal using two plot calls to achieve the best contrast over the
-  busy background: the first plot is a 3-pixel wide white background, 
+- We plot the CCI signal using two `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
+  calls to achieve the best contrast over the busy background: the first plot is a 3-pixel wide white background,
   the second `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
   call plots the thin, 1-pixel wide black line.
-
-.. image:: images/Backgrounds-CCI.png
 
 See the :ref:`Colors <PageColors>` page for more examples of backgrounds.
