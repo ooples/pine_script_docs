@@ -307,6 +307,9 @@ Note that:
   initialize the ``result`` variable to `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__.
   In turn, because the initialization of ``result`` is the return value of the our function's local block,
   the function will return `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__.
+- Note the last line of the `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__'s local block: ``fact``.
+  It is the local block's return value, so the value it had on the `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__
+  structure's last iteration.
 - Our initialization of ``result`` is not required; we do it for readability. We could just as well have used::
 
     while counter > 0
@@ -314,9 +317,6 @@ Note that:
     	counter := counter - 1
     	fact
 
-- Note the last line of the `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__'s local block: ``fact``.
-  It is the local block's return value, so the value the `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__
-  structure will return from its last iteration.
 
 
 .. _PageLoops_HistoryInsideLoops:
