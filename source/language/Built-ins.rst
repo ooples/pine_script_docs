@@ -190,7 +190,8 @@ The entry gives us the information we need to use it:
 - The form and type of the result it returns: "series float".
 - An example showing it in use: ``plot(ta.vwma(close, 15))``.
 - An example showing what it does, but in long form, so you can better understand its calculations. 
-  Note that this is meant to explain — not as usable code, because it is more complicated and takes longer to execute.
+  Note that this is meant to explain — not as usable code, because it is more complicated and takes longer to execute. 
+  There are only disadvantages to using the long form.
 - The "RETURNS" section explains exacty what value the function returns.
 - The "ARGUMENTS" section lists each parameter and gives the critical information 
   concerning what form-type is required for arguments used when calling the function.
