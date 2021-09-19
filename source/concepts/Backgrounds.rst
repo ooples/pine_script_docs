@@ -9,9 +9,15 @@ Backgrounds
 
 The `bgcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_bgcolor>`__
 function changes the color of the script's background. If the script is running in ``overlay = true`` mode, then it will color the chart's background.
-The color used in `bgcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_bgcolor>`__ can be calculated in
-an expression, and the `color.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}new>`__ 
-function can be used to specify the color's transparency.
+
+The function's signature is::
+
+    bgcolor(color, offset, editable, show_last, title) → void
+
+Its ``color`` parameter allows a "series color" to be used for its argument,
+so it can be dynamically calculated in an expression.
+If the correct transparency is not part of the color to be used, 
+it can be be generated using the `color.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}new>`__ function.
 
 Here is a script that colors the background of trading sessions (try it on
 30min EURUSD, for example)::
