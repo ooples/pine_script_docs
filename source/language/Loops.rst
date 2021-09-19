@@ -147,6 +147,64 @@ Pine's runtime cannot, here, be used to calculate on the fly, as the script is e
         label.set_xy(lbl, bar_index, high)
         label.set_text(lbl, str.tostring(higherBars, "# higher bars\n") + str.tostring(lowerBars, "# lower bars"))
 
+This example uses a loop to go through arrays of pivot lines and delete them when price crosses them::
+
+    //@version=5
+    MAX_LINES_COUNT = 100
+    indicator("Pivot line breaches", "", true, max_lines_count = MAX_LINES_COUNT)
+    
+    color hiPivotColorInput  = input(color.new(color.lime, 0), "High pivots")
+    color loPivotColorInput  = input(color.new(color.fuchsia, 0), "Low pivots")
+    int   pivotLegsInput     = input.int(5, "Pivot legs")
+    int   qtyOfPivotsInput   = input.int(50, "Quantity of last pivots to remember", minval = 0, maxval = MAX_LINES_COUNT / 2)
+    int   maxLineLengthInput = input.int(400, "Maximum line length in bars", minval = 2)
+    
+    // ————— Queues a new element in an array and de-queues its first element.
+    qDq(array, qtyOfElements, arrayElement) =>
+        array.push(array, arrayElement)
+        if array.size(array) > qtyOfElements
+            // Only deqeue if array has reached capacity.
+            array.shift(array)
+    
+    // —————— Loop through an array of lines, extending those that price has not crossed and deleting those crossed.
+    checkLinesForBreaches(arrayOfLines) =>
+        int qtyOfLines = array.size(arrayOfLines)
+        // Don't loop in case there are no lines to check because "to" value will be `na` then`.
+        for lineNo = 0 to (qtyOfLines > 0 ? qtyOfLines - 1 : na)
+            // Need to check that array size still warrants a loop because we may have deleted array elements in the loop.
+            if lineNo < array.size(arrayOfLines)
+                line  currentLine    = array.get(arrayOfLines, lineNo)
+                float lineLevel      = line.get_price(currentLine, bar_index)
+                bool  lineWasCrossed = math.sign(close[1] - lineLevel) != math.sign(close - lineLevel)
+                bool  lineIsTooLong  = bar_index - line.get_x1(currentLine) > maxLineLengthInput
+                if lineWasCrossed or lineIsTooLong
+                    // Line stays on the chart but will no longer be extend on further bars.
+                    array.remove(arrayOfLines, lineNo)
+                    // Force type of both local blocks to same type.
+                    int(na)
+                else
+                    line.set_x2(currentLine, bar_index)
+                    int(na)
+    
+    // Arrays of lines containing non-crossed pivot lines.
+    var line[] hiPivotLines = array.new_line(qtyOfPivotsInput)
+    var line[] loPivotLines = array.new_line(qtyOfPivotsInput)
+    
+    // Detect new pivots.
+    float hiPivot = ta.pivothigh(pivotLegsInput, pivotLegsInput)
+    float loPivot = ta.pivotlow(pivotLegsInput, pivotLegsInput)
+    
+    // Create new lines on new pivots.
+    if not na(hiPivot)
+        line newLine = line.new(bar_index[pivotLegsInput], hiPivot, bar_index, hiPivot, color = hiPivotColorInput)
+        line.delete(qDq(hiPivotLines, qtyOfPivotsInput, newLine))
+    else if not na(loPivot)
+        line newLine = line.new(bar_index[pivotLegsInput], loPivot, bar_index, loPivot, color = loPivotColorInput)
+        line.delete(qDq(loPivotLines, qtyOfPivotsInput, newLine))
+    
+    // Extend lines if they haven't been crossed by price.
+    checkLinesForBreaches(hiPivotLines)
+    checkLinesForBreaches(loPivotLines)
 
 
 
