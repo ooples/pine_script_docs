@@ -45,6 +45,7 @@ Keep in mind that:
   you will need to delete the alert and create a new one in the new context.
 
 
+
 Background
 ^^^^^^^^^^
 
@@ -108,8 +109,9 @@ it must contain `alert() <https://www.tradingview.com/pine-script-reference/v5/#
 *alert() function calls* in their *script alert*.
 
 
-'alert()' function events
-^^^^^^^^^^^^^^^^^^^^^^^^^
+
+\`alert()\` function events
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ function has the following signature:
 
@@ -142,8 +144,10 @@ then it will be called no more often than once at the bar's close.
 In order to enable the `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ 
 function to be called during the bar construction process, you need to enable the ``calc_on_every_tick`` option.
 
-Using all 'alert()' calls
-"""""""""""""""""""""""""
+
+
+Using all \`alert()\` calls
+"""""""""""""""""""""""""""
 
 Let's look at an example where we detect crosses of the RSI centerline::
 
@@ -200,8 +204,9 @@ we could have used the following code to generate our alert events::
         alert(firstPart + str.tostring(r, "#.00)"))
 
 
-Using selective 'alert()' calls
-"""""""""""""""""""""""""""""""
+
+Using selective \`alert()\` calls
+"""""""""""""""""""""""""""""""""
 
 When users create a *script alert* on *alert() function calls*, the alert will trigger on any call the script makes to the 
 `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ function, provided its frequency constraints are met. 
@@ -250,10 +255,17 @@ Note how:
   - Select only "Detect Shorts" in the Inputs and create another *script alert* on the script.
 
 
+
 In strategies
 """""""""""""
 
-`alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ function calls can be used in strategies the same way as in indicators. 
+`alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ 
+function calls can be used in strategies also, with the provision that strategies, by default, 
+only execute on the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ of realtime bars.
+Unless ``calc_on_every_tick = true`` is used in the `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
+declaration statement, all `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ calls
+will use the ``alert.freq_once_per_bar_close`` frequency, regardless of the argument used for ``freq``.
+
 While *script alerts* on strategies will use *order fill events* to trigger alerts when the broker emulator fills orders, 
 `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ can be used advantageously to generate other alert events in strategies.
 
@@ -288,7 +300,8 @@ This strategy creates *alert() function calls* when RSI moves against the trade 
     plot(r)
 
 If a user created a *script alert* from this strategy and included both *order fill events* and *alert() function calls* in his alert, 
-the alert would trigger whenever an order is executed, or when one of the `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ calls 
+the alert would trigger whenever an order is executed, 
+or when one of the `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ calls 
 was executed by the script on the realtime bar's closing iteration, i.e., when 
 `barstate.isrealtime <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isrealtime>`__ and 
 `barstate.isconfirmed <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ are both true. 
