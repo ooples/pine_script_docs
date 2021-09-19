@@ -109,7 +109,11 @@ which documents the function's signature, i.e., the list of *parameters* it acce
 All built-in functions have one or more parameters defined in their signature. Not all parameters are required for every function.
 
 Let's look at the `ta.vwma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}vwma>`__ function, 
-which returns the volume-weighted moving average of a source value. Its signature (or definition) is::
+which returns the volume-weighted moving average of a source value. This is its entry in the Reference Manual:
+
+.. image:: BuiltIns-BuiltInFunctions.png
+
+Its signature (or definition) is::
 
     ta.vwma(source, length) → series float
 
