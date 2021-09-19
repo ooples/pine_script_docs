@@ -309,6 +309,7 @@ The *alert() function events* in the script would only trigger the alert when th
 is the argument used for the ``freq`` parameter in the `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ calls.
 
 
+
 Order fill events
 ^^^^^^^^^^^^^^^^^
 
@@ -378,8 +379,8 @@ they cannot be used in the argument of ``alert_message``.
 
 
 
-'alertcondition()' events
--------------------------
+\`alertcondition()\` events
+---------------------------
 
 The `alertcondition() <https://www.tradingview.com/pine-script-reference/v5/#fun_alertcondition>`__ function
 allows programmers to create individual *alertcondition events* in Pine indicators. 
