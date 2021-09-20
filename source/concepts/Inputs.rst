@@ -97,6 +97,9 @@ The parameters common to all input functions are: ``defval``, ``title``, ``toolt
 Other parameters can be used by the other input functions. They are: ``minval``, ``maxval``, ``step`` and ``confirm``.
 Let's go over each one.
 
+.. image:: images/   
+   :width: 100%
+
 
 
 \`defval\`
@@ -172,15 +175,22 @@ Its signature is:
 
     input(defval, title, tooltip, inline, group) → input int/float/bool/color/string | series float
 
-The function automatically detect the type of input by the ``defval`` argument used when calling it:
+The function automatically detect the type of input by the ``defval`` argument used when calling it.
+This script shows all the supported types and the form-type returned by the function when
+used with each ``defval`` argument::
 
-- ``a = input(1)`` will return an "input int"
-- ``a = input(1.0)`` will return an "input float"
-- ``a = input(true)`` will return an "input bool"
-- ``a = input(color.orange)`` will return an "input color"
-- ``a = input("1")`` will return an "input string"
-- ``a = input(close)`` will return a "series float"
+    //@version=5
+    indicator("`input()`", "", true)
+    a = input(1, "input int")
+    b = input(1.0, "input float")
+    c = input(true, "input bool")
+    d = input(color.orange, "input color")
+    e = input("1", "input string")
+    f = input(close, "series float")
+    plot(na)
 
+.. image:: images/Inputs-SimpleInputs-1.png
+   :height: 50%
 
 
 
