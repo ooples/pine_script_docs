@@ -12,10 +12,10 @@ Introduction
 ------------
 
 Variables are :ref:`identifiers <PageIdentifiers>` that hold values. 
-They must be *declared* in your code, which means defining, in order.
+They must be *declared* in your code before you use them.
 The syntax of variable declarations is::
 
-	[<declaration_mode>] [<type>] <identifier> = <expression> | <structure>
+    [<declaration_mode>] [<type>] <identifier> = <expression> | <structure>
     |
     <tuple_declaration> = <function_call> | <structure>
 
