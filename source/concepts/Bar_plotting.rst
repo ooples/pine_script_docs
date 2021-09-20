@@ -97,7 +97,7 @@ Note that:
 
 - The script will only display candles when two conditions are met:
 
-    - The chart's is an intraday chart (see the check on ``timeframe.isintraday`` in the
+    - The chart is using an intraday timeframe (see the check on ``timeframe.isintraday`` in the
       `plotcandle() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__ call.
     - The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
       returns non `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values
