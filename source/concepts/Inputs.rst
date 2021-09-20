@@ -109,12 +109,12 @@ Its signature is:
 
 The function automatically detect the type of input by the ``defval`` argument used when calling it:
 
- - ``a = input(1)`` will return an "input int"
- - ``a = input(1.0)`` will return an "input float"
- - ``a = input(true)`` will return an "input bool"
- - ``a = input(color.orange)`` will return an "input color"
- - ``a = input("1")`` will return an "input string"
- - ``a = input(close)`` will return a "series float"
+- ``a = input(1)`` will return an "input int"
+- ``a = input(1.0)`` will return an "input float"
+- ``a = input(true)`` will return an "input bool"
+- ``a = input(color.orange)`` will return an "input color"
+- ``a = input("1")`` will return an "input string"
+- ``a = input(close)`` will return a "series float"
 
 
 
