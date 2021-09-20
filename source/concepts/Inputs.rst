@@ -108,7 +108,7 @@ Let's go over each one.
 This is the first parameter of all input functions. 
 It is the default value that will appear in the input widget.
 
-``defval\``
+``defval``
   This is the first parameter of all input functions. 
   It is the default value that will appear in the input widget.
 
