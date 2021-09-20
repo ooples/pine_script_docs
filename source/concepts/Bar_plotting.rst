@@ -96,11 +96,13 @@ higher timeframe. You can, for example, plot daily bars on an intraday chart::
 Note that:
 
 - The script will only display candles when two conditions are met:
-     - The chart's is an intraday chart (see the check on ``timeframe.isintraday`` in the
-       `plotcandle() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__ call.
-     - The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
-       returns non `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values
-       (see ``gaps = barmerge.gaps_on`` in the function call).
+
+    - The chart's is an intraday chart (see the check on ``timeframe.isintraday`` in the
+      `plotcandle() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__ call.
+    - The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+      returns non `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values
+      (see ``gaps = barmerge.gaps_on`` in the function call).
+
 - We use `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ to declare our
   ``UP_COLOR`` and ``DN_COLOR`` color constants on the bar zero only. We use constants because those colors are used
   in more than one place in our code. This way, if we need to change them, we need only do so in one place.
