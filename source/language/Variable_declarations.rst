@@ -28,7 +28,7 @@ where:
 - <type> is optional, as in almost all Pine variable declarations (see :ref:`types <PageTypeSystem_Types>`)
 - <identifier> is the variable's :ref:`name <PageIdentifiers>`.
 - <expression> can be a literal, a variable, an expression or a function call.
-- - <structure> can be an `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
+- <structure> can be an `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
   `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__,
   `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ or
   `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ *structure*.
