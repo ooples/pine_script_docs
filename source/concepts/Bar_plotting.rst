@@ -102,6 +102,9 @@ Note that:
       function returns non `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values
       (see ``gaps = barmerge.gaps_on`` in the function call).
 
+- We use a tuple (``[open, high, low, close]``) with 
+  `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+  to fetch four values in one call.
 - We use `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ to declare our
   ``UP_COLOR`` and ``DN_COLOR`` color constants on bar zero only. We use constants because those colors are used
   in more than one place in our code. This way, if we need to change them, we need only do so in one place.
