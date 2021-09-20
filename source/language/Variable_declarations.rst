@@ -22,7 +22,7 @@ The syntax of variable declarations is::
 where:
 
 - ``|`` means "or", and parts enclosed in square brackets (``[]``) can appear zero or one time.
-- <declaration_mode> is the variable's :ref:`declaration mode <PageVariableDeclarations_DeclarationModes>`
+- <declaration_mode> is the variable's :ref:`declaration mode <PageVariableDeclarations_DeclarationModes>`.
   It can be `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ or 
   `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__, or nothing.
 - <type> is optional, as in almost all Pine variable declarations (see :ref:`types <PageTypeSystem_Types>`).
