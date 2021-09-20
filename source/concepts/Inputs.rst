@@ -10,8 +10,27 @@ Inputs
 Introduction
 ------------
 
-Script inputs are the means by which Pine scripts can receive user inputs.
-They can only be accessed when a script is running on the chart.
+Script inputs are the means by which Pine scripts can receive user inputs,
+which allows Pine programmers to write more flexible scripts because their behavior can made to vary with a user's preferences.
+
+The following script plots a 20-period `simple moving average (SMA) <https://www.tradingview.com/u/?solution=43000502589>`__
+using ``ta.sma(close, 20)``. While it is simple to write, it is not very flexible because that specific MA is all it will ever plot::
+
+    //@version=5
+    indicator("MA", "", true)
+    plot(ta.sma(close, 20))
+
+If instead we write our script this way, it becomes much more flexible because its users will be able to select
+the source and the length they want to use for the MA's calculation::
+
+    //@version=5
+    indicator("MA", "", true)
+    sourceInput = input(close, "Source")
+    lengthInput = input(20, "Length")
+    plot(ta.sma(sourceInput, lengthInput))
+
+
+Inputs can only be accessed when a script is running on the chart.
 Script users access them through the script's "Settings" dialog box, 
 which can be reached different ways, by:
 
@@ -28,13 +47,55 @@ When a script contains calls to ``input.*()`` functions, an "Inputs" tab appears
 
 .. image:: images/Inputs-Introduction-1.png
 
+In the flow of a script's execution, inputs are processed when the script is already on a chart 
+and user changes values in the "Inputs" tab. 
+These changes trigger a re-execution of the script on all the chart bars,
+so when a user changes an input value, your script recalculates using that new value.
 
 
-Script inputs
+
+Input functions
+---------------
+
+The following input functions are available:
+
+- `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__
+- `input.int() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int>`__
+- `input.float() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}float>`__
+- `input.bool() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}bool>`__
+- `input.color() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}color>`__
+- `input.string() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}string>`__
+- `input.price() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}price>`__
+- `input.source() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}source>`__
+- `input.session() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}session>`__
+- `input.symbol() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}symbol>`__
+- `input.time() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}time>`__
+- `input.timeframe() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}timeframe>`__
+
+`input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__ is a simple, 
+generic function that supports the fundamental Pine types: "int", "float", "bool", "color" and "string" types.
+It also support "source" inputs, which are price-related values such as
+`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__,
+`hl2 <https://www.tradingview.com/pine-script-reference/v5/#hl2>`__, and
+`hlc3 <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__,
+or which can be used to receive the output value of another script.
+
+A specific input *widget* is created in the "Inputs" tab for each type of input.
+
+Input function definitions typically contain many parameters,
+which allow you to control the default value of inputs, its limits, 
+and the way it is organized in the "Inputs" tab.
+
+All values returned by ``input.*()`` functions except "source" ones are of the "input" form
+(see the section on :ref:`forms <PageTypeSystem_Forms>` form more information).
+
+
+
+Simple inputs
 -------------
 
 The `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__
-annotation function and other ``input.*()`` functions (``input.int()``, ``input.string()``, etc) make it possible for script users to modify selected
+function and other ``input.*()`` functions (``input.int()``, ``input.string()``, etc) make it possible for script users to modify selected
 values which the script can then use in its calculation or logic,
 without the need to modify the script's code.
 
@@ -156,4 +217,8 @@ of constant values they can choose from using a dropdown menu.
 	
 .. figure:: images/Inputs_of_indicator_7.png
 
+
+
+Organization of inputs
+----------------------
 
