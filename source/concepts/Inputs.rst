@@ -102,6 +102,10 @@ Let's go over each one.
 \`defval\`
 ^^^^^^^^^^
 
+This is the first parameter of all input functions. 
+It is default value that will appear in the input widget.
+Select values that will work well for most uses of the script.
+
 
 
 \`title\`
@@ -279,4 +283,23 @@ of constant values they can choose from using a dropdown menu.
 
 Organization of inputs
 ----------------------
+
+The design of your script's inputs has an important impact on the usability of your scripts.
+Well-designed inputs are more intuitively usable and make for a better user experience:
+
+- Choose clear and concise labels (your input's ``title`` argument).
+- Choose your default values carefully.
+- Provide ``minval`` and ``maxval`` values that will prevent your code from producing unexpected results, 
+  e.g., limit the minimal value of lengths to 1 or 2, depending on the type of MA you are using.
+- Provide a ``step`` value that is congruent with the value you are capturing. 
+  Steps of 5 can be more useful on a 0-200 range, for example, or steps of 0.05 on a 0.0-1.0 scale.
+- Group related inputs on the same line using ``inline``; bull and bear colors for example,
+  or the width and color of a line.
+- When you have many inputs, group them into meaningful sections using ``group``.
+  Place the most important sections at the top.
+- Do the same for individual inputs **within** sections.
+
+It can be advantageous to vertically align different arguments of multliple ``input.*()``
+calls in your code. When you need to make global changes, this will allow you to use the Editor's
+multi-cursor feature to operate on all the lines at once.
 
