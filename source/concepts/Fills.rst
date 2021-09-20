@@ -63,9 +63,10 @@ call, as in this example::
 .. image:: images/Fills-Fill-2.png
 
 
-You can set the fill color by using constants like ``color.red`` or
-``#FF001A``, as well as complex expressions like ``close >=
-open ? color.green : color.red``. Example::
+Because a "series color" can be used as an argument for the ``color`` parameter in
+`fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__,
+you can use constants like ``color.red`` or ``#FF001A``, as well as expressions 
+calculating the color on each bar, as in this example::
 
     //@version=5
     indicator("Example 3", "", true)
