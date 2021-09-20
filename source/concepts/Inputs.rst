@@ -32,7 +32,7 @@ the source and the length they want to use for the MA's calculation::
 
 Inputs can only be accessed when a script is running on the chart.
 Script users access them through the script's "Settings" dialog box, 
-which can be reached different ways, by:
+which can be reached by either:
 
 - Double-clicking on the name of an on-chart indicator
 - Right-clicking on the script's name and choosing the "Settings" item from the dropdown menu
@@ -73,7 +73,7 @@ The following input functions are available:
 - `input.timeframe() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}timeframe>`__
 
 `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__ is a simple, 
-generic function that supports the fundamental Pine types: "int", "float", "bool", "color" and "string" types.
+generic function that supports the fundamental Pine types: "int", "float", "bool", "color" and "string".
 It also support "source" inputs, which are price-related values such as
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__,
 `hl2 <https://www.tradingview.com/pine-script-reference/v5/#hl2>`__, and
