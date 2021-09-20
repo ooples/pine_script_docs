@@ -56,7 +56,9 @@ The local blocks in conditional structures must be indented by four spaces or a 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 An `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ 
-structure used for its side effects has the following syntax::
+structure used for its side effects has the following syntax:
+
+.. code-block::
 
     if <expression>
         <local_block>
@@ -150,7 +152,9 @@ Note that:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 An `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ 
-structure used to return one or more values has the following syntax::
+structure used to return one or more values has the following syntax:
+
+.. code-block::
 
     [<declaration_mode>] [<type>] <identifier> = if <expression>
         <local_block>
@@ -209,13 +213,17 @@ is returned when no local block is executed. If ``close > open`` is ``false`` in
 --------------------
 
 The `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
-structure exists in two forms. One switches on the different values of a key expression::
+structure exists in two forms. One switches on the different values of a key expression:
+
+.. code-block::
 
     [[<declaration_mode>] [<type>] <identifier> = ]switch <expression>
         {<expression> => <local_block>}
         => <local_block>
 
-The other form does not use an expression as a key; it switches on the evaluation of different expressions::
+The other form does not use an expression as a key; it switches on the evaluation of different expressions:
+
+.. code-block::
 
     [[<declaration_mode>] [<type>] <identifier> = ]switch
         {<expression> => <local_block>}
