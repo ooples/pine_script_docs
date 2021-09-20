@@ -12,19 +12,28 @@ Introduction
 ------------
 
 Variables are :ref:`identifiers <PageIdentifiers>` that hold values. 
-They must be *declared* in your code, which means defining, in order:
+They must be *declared* in your code, which means defining, in order.
+The syntax of variable declarations is::
 
-- Their declaration mode, by using the
-  `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ or 
-  `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ keyword, or nothing
-- Optionally, their :ref:`type <PageTypeSystem_Types>`
-- A name, using an :ref:`identifier <PageIdentifiers>`
-- The initial value they will have, by using the ``=`` assignment operator. 
-  The initial value can be an expression, a function call or an 
-  `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
+	[<declaration_mode>] [<type>] <identifier> = <expression> | <structure>
+    |
+    <tuple_declaration> = <function_call> | <structure>
+
+where:
+
+- `|` means "or", and parts enclosed in square brackets (``[]``) can appear zero or one time.
+- <declaration_mode> is the variable's :ref:`declaration mode <PageVariableDeclarations_DeclarationModes>`.
+  It can be `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ or 
+  `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__, or nothing
+- <type> is optional, as in almost all Pine variable declarations (see :ref:`types <PageTypeSystem_Types>`)
+- <identifier> is the variable's :ref:`name <PageIdentifiers>`.
+- <expression> can be a literal, a variable, an expression or a function call.
+- - <structure> can be an `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
   `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__,
   `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ or
-  `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ *structure*
+  `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ *structure*.
+- <tuple_declaration> is a comma-separated list of variable names enclosed in square brackets (``[]``), e.g.,
+  ``[ma, upperBand, lowerBand]``.
 
 These are all valid variable declarations. The last one requires four lines::
 

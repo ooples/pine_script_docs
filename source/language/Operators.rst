@@ -303,7 +303,9 @@ then parts of the expression can be grouped together with parentheses.
 \`=\` assignement operator
 --------------------------
 
-The ``=`` operator is used to assign a variable when it is initialized — or declared —, i.e., the first time you use it. 
+The ``=`` operator is used to assign a variable when it is initialized — or declared —, i.e., the first time you use it.
+It says *this is a new variable that I will be using, and I want it to start on each bar with this value*.
+
 These are all valid variable declarations::
 
     i = 1
@@ -321,8 +323,13 @@ See the :ref:`Variable declarations <PageVariableDeclarations>` page for more in
 \`:=\` reassignement operator
 -----------------------------
 
-The ``:=`` is used to *reassign* a value to an existing variable. Variables which have been first declared, then reassigned using ``:=``, are called *mutable* variables.
-All the following examples are valid variable reassignments. Don't fret if you can't yet make much sense of what the `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ thing does in there; you can find out more about it in the :ref:`<PageExpressionsDeclarationsStatements_VariableDeclaration>` section::
+The ``:=`` is used to *reassign* a value to an existing variable. 
+It says *use this variable that was declared earlier in my script, and give it a new value*.
+
+Variables which have been first declared, then reassigned using ``:=``, are called *mutable* variables.
+All the following examples are valid variable reassignments. 
+Don't fret if you can't yet make much sense of what the `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ thing does in there; 
+you can find out more about it in the :ref:`<PageExpressionsDeclarationsStatements_VariableDeclaration>` section::
 
     //@version=5
     indicator("", "", true)
