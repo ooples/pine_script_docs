@@ -96,55 +96,45 @@ Input function parameters
 The parameters common to all input functions are: ``defval``, ``title``, ``tooltip``, ``inline`` and ``group``.
 Other parameters can be used by the other input functions. They are: ``minval``, ``maxval``, ``step`` and ``confirm``.
 
-Let's go over each one.
+All these parameters expect arguments of "const" form 
+(except if it's an input used for a "source", which returns a "series float" result).
+This means they must be known at compile time and cannot change during the script's execution. 
+Because the result of ``input.*()`` function is always of "input" or "series" form, 
+it follows that the result of one ``input.*()`` function call cannot be used as an argument
+in a subsequent ``input.*()`` call.
 
+Let's go over each parameter:
 
-\`defval\`
-^^^^^^^^^^
+- ``defval`` is the first parameter of all input functions.
+  It is the default value that will appear in the input widget.
+  It requires an argument of the type of input value the function is used for.
+- ``title`` requires a "const string" argument. It is the field's label.
+- ``tooltip`` requires a "const string" argument. When the parameter is used,
+  a question mark icon will appear to the right of the field.
+  When users hover over it, the tooltip's text will appear.
+  Note that if multiple input fields are grouped on one line using ``inline``,
+  the tooltip will always appear to the right of the rightmost field,
+  and display the text of the last ``tooltip`` argument used in the line.
+- ``inline`` requires a "const string" argument. 
+  Using the same argument for the parameter in multiple ``input.*()`` calls will group them on the same line.
+  There is a limit to the width the "Inputs" tab will expand, so a limited quantity of input fields
+  can be fitted on one line. Using one ``input.*()`` call with a unique argument for ``inline``
+  has the effect of bringing the input field immediately after the label, 
+  foregoing the default left-alignment of all input fields used when no ``inline`` argument is used.
+- ``group`` requires a "const string" argument. 
+- ``minval`` requires a "const int/float" argument, depending on the type of the ``defval`` value.
+  It is the minimum valid value for the input field.
+- ``maxval`` requires a "const int/float" argument, depending on the type of the ``defval`` value.
+  It is the maximum valid value for the input field.
+- ``step`` is the increment by which the field's value will move when the widget's up/down arrows are used.
+- ``confirm``requires a "const bool" (``true`` or ``false``) argument.
+  This parameter affect the behavior of the script when it is added to a chart.
+  ``input.*()`` calls using ``confirm = true`` will cause the "Settings/Inputs" tab to popup
+  when the script is added to the chart. ``confirm`` is useful to ensure that users configure a particular field.
 
-This is the first parameter of all input functions. 
-It is the default value that will appear in the input widget.
-
-
-
-\`title\`
-^^^^^^^^^
-
-The argument used for ``title`` is the field's label.
-
-
-\`tooltip\`
-^^^^^^^^^^
-
-
-
-\`inline\`
-^^^^^^^^^^
-
-
-
-\`group\`
-^^^^^^^^^
-
-
-
-\`minval\`
-^^^^^^^^^^
-
-
-
-\`maxval\`
-^^^^^^^^^^
-
-
-
-\`step\`
-^^^^^^^^
-
-
-
-\`confirm\`
-^^^^^^^^^^^
+The ``minval``, ``maxval`` and ``step`` parameters are only present in the signature of the
+`input.int() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int>`__ and
+`input.float() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}float>`__ functions.
 
 
 
