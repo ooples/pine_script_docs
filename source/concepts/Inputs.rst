@@ -144,6 +144,10 @@ Let's go over each one.
 
 
 
+Input types
+-----------
+
+
 
 Simple inputs
 ^^^^^^^^^^^^^
