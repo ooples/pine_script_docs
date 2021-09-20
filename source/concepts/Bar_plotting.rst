@@ -55,7 +55,10 @@ as well as expressions that calculate colors at runtime,
 as is done with the ``paletteColor`` variable here, will all work.
 
 You can build bars or candles using values other than the actual OHLC values.
-For example you could calculate and plot *smoothed* candles using the following code::
+For example you could calculate and plot smoothed candles using the following code,
+which also colors wicks depending on the position of 
+`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
+relative to the smoothed close (``c``) of our indicator::
 
     //@version=5
     indicator("Smoothed candles", overlay = true)
@@ -123,9 +126,9 @@ The signature of `plotbar() <https://www.tradingview.com/pine-script-reference/v
     plotbar(open, high, low, close, title, color, editable, show_last, display) → void
 
 Note that `plotbar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotbar>`__
-has no paremeter for ``bordercolor`` or ``wickcolor``, as there are none on conventional bars.
+has no paremeter for ``bordercolor`` or ``wickcolor``, as there are no borders or wicks on conventional bars.
 
-This plots conventional bars usgin the same coloring logic as in the second example of the previous section::
+This plots conventional bars using the same coloring logic as in the second example of the previous section::
 
     //@version=5
     indicator("Dual-color bars")
