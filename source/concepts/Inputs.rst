@@ -95,7 +95,7 @@ Simple inputs
 
 `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__ is a simple, 
 generic function that supports the fundamental Pine types: "int", "float", "bool", "color" and "string".
-It also support "source" inputs, which are price-related values such as
+It also supports "source" inputs, which are price-related values such as
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__,
 `hl2 <https://www.tradingview.com/pine-script-reference/v5/#hl2>`__, and
 `hlc3 <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__,
@@ -107,7 +107,7 @@ Its signature is:
 
     input(defval, title, tooltip, inline, group) → input int/float/bool/color/string | series float
 
- The function automatically detect the type of input by the ``defval`` argument used when calling it:
+The function automatically detect the type of input by the ``defval`` argument used when calling it:
 
  - ``a = input(1)`` will return an "input int"
  - ``a = input(1.0)`` will return an "input float"
