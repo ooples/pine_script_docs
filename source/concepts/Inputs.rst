@@ -11,7 +11,7 @@ Introduction
 ------------
 
 Script inputs are the means by which Pine scripts can receive user inputs,
-which allows Pine programmers to write more flexible scripts because their behavior can made to vary with a user's preferences.
+which allows Pine programmers to write more flexible scripts because their behavior can adapt to user preferences.
 
 The following script plots a 20-period `simple moving average (SMA) <https://www.tradingview.com/u/?solution=43000502589>`__
 using ``ta.sma(close, 20)``. While it is simple to write, it is not very flexible because that specific MA is all it will ever plot::
