@@ -91,7 +91,7 @@ As we procede, we will explore the different ways you can use input functions an
 
 
 Simple inputs
--------------
+^^^^^^^^^^^^^
 
 `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__ is a simple, 
 generic function that supports the fundamental Pine types: "int", "float", "bool", "color" and "string".
