@@ -72,6 +72,27 @@ The following input functions are available:
 - `input.time() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}time>`__
 - `input.timeframe() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}timeframe>`__
 
+A specific input *widget* is created in the "Inputs" tab to accept each type of input.
+Unless otherwise specified in the ``input.*()`` call, each input appears on a new line of the "Inputs" tab,
+in the order the ``input.*()`` calls appear in the script.
+
+Our :ref:`Style guide <PageStyleGuide>` recommends placing ``input.*()`` calls at the beginning of the script.
+
+Input function definitions typically contain many parameters,
+which allow you to control the default value of inputs, their limits, 
+and the organization in the "Inputs" tab.
+
+All values returned by ``input.*()`` functions except "source" ones are of the "input" form
+(see the section on :ref:`forms <PageTypeSystem_Forms>` form more information).
+
+The next sections explain what each input function does.
+As we procede, we will explore the different ways you can use input functions and organize their display.
+
+
+
+Simple inputs
+-------------
+
 `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__ is a simple, 
 generic function that supports the fundamental Pine types: "int", "float", "bool", "color" and "string".
 It also support "source" inputs, which are price-related values such as
@@ -80,44 +101,8 @@ It also support "source" inputs, which are price-related values such as
 `hlc3 <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__,
 or which can be used to receive the output value of another script.
 
-A specific input *widget* is created in the "Inputs" tab for each type of input.
+ can be used to automatically assign a type based on the default value. Only basic types (``int``, ``float``, ``bool``, ``string``, and ``color``) can be assigned that way.
 
-Input function definitions typically contain many parameters,
-which allow you to control the default value of inputs, its limits, 
-and the way it is organized in the "Inputs" tab.
-
-All values returned by ``input.*()`` functions except "source" ones are of the "input" form
-(see the section on :ref:`forms <PageTypeSystem_Forms>` form more information).
-
-
-
-Simple inputs
--------------
-
-The `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__
-function and other ``input.*()`` functions (``input.int()``, ``input.string()``, etc) make it possible for script users to modify selected
-values which the script can then use in its calculation or logic,
-without the need to modify the script's code.
-
-Specific widgets are supplied in the *Settings/Inputs* dialog box
-for each type of input. A description of the value as well as minimum/maximum
-values and a step increment can also be defined for many input types. The type of the variable can be explicitly defined using the relevant ``input.*()`` function, or a general purpose ``input()`` function can be used to automatically assign a type based on the default value. Only basic types (``int``, ``float``, ``bool``, ``string``, and ``color``) can be assigned that way.
-
-Pine supports the following types of input:
-
--  input.bool(),
--  input.color(),
--  input.int(),
--  input.float(),
--  input.string(),
--  input.symbol(),
--  input.timeframe(),
--  input.session(),
--  input.source(),
--  input.time().
-
-The following examples show how to create each type of input and what
-its widget looks like.
 
 
 Boolean input
