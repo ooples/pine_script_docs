@@ -7,9 +7,9 @@ Concepts
 
    Alerts
    Backgrounds
-   Bar_states
    Bar_coloring
    Bar_plotting
+   Bar_states
    Chart_information
    Colors
    Fills
