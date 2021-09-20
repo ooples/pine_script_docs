@@ -300,3 +300,5 @@ It can be advantageous to vertically align different arguments of multliple ``in
 calls in your code. When you need to make global changes, this will allow you to use the Editor's
 multi-cursor feature to operate on all the lines at once.
 
+.. TODO: 
+.. use == true operators after input() call.
