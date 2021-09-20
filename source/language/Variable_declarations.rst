@@ -22,18 +22,18 @@ The syntax of variable declarations is::
 where:
 
 - ``|`` means "or", and parts enclosed in square brackets (``[]``) can appear zero or one time.
-- <declaration_mode> is the variable's :ref:`declaration mode <PageVariableDeclarations_DeclarationModes>`.
+- <declaration_mode> is the variable's :ref:`declaration mode <PageVariableDeclarations_DeclarationModes>`
   It can be `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ or 
   `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__, or nothing
 - <type> is optional, as in almost all Pine variable declarations (see :ref:`types <PageTypeSystem_Types>`)
-- <identifier> is the variable's :ref:`name <PageIdentifiers>`.
+- <identifier> is the variable's :ref:`name <PageIdentifiers>`
 - <expression> can be a literal, a variable, an expression or a function call.
 - <structure> can be an `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
   `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__,
   `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ or
-  `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ *structure*.
+  `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ *structure*
 - <tuple_declaration> is a comma-separated list of variable names enclosed in square brackets (``[]``), e.g.,
-  ``[ma, upperBand, lowerBand]``.
+  ``[ma, upperBand, lowerBand]``
 
 These are all valid variable declarations. The last one requires four lines::
 
