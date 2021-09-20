@@ -3,14 +3,6 @@
 Fills
 =====
 
-.. contents:: :local:
-    :depth: 2
-
-
-
-Filling the background with \`fill()\`
---------------------------------------
-
 The `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__
 function lets you color the background between either 
 two plots (plotted using `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__)
