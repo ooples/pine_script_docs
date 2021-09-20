@@ -346,7 +346,11 @@ You can concatenate strings using the ``+`` operator.
 plot and hline
 """"""""""""""
 
-Pine's `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ function fills the space between two lines with a color. Both lines must have been plotted with either `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ or `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ function calls. Each plotted line is referred to in the `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ function using line IDs which are of "plot" or "hline" type, e.g.::
+Pine's `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ function fills the space between two lines with a color. 
+Both lines must have been plotted with either `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ or 
+`hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ function calls. 
+Each plotted line is referred to in the `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ 
+function using IDs which are of "plot" or "hline" type, e.g.::
 
     //@version=5
     indicator("", "", true)
@@ -354,7 +358,9 @@ Pine's `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`
     plotID2 = plot(math.max(close, open))
     fill(plotID1, plotID2, color.yellow)
 
-Note that there is no ``plot`` or ``hline`` keyword to explicitly declare the type of `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ or `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ IDs.
+Note that there is no ``plot`` or ``hline`` keyword to explicitly declare the type of 
+`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ or 
+`hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ IDs.
 
 
 line, label, box and table
