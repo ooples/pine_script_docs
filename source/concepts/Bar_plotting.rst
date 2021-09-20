@@ -31,7 +31,7 @@ To color them green or red, we can use the following code::
     paletteColor = close >= open ? color.lime : color.red
     plotbar(open, high, low, close, color = paletteColor)
 
-.. image:: images/Custom_ohlc_bars_and_candles_2.png
+.. image:: images/BarPlotting-Plotbar-2.png
 
 *Example 2* illustrates using the ``color`` argument, which can be given
 constant values such as ``red``, ``lime``, ``"#FF9090"``, as well as expressions that
