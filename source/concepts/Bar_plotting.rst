@@ -93,6 +93,8 @@ higher timeframe. You can, for example, plot daily bars on an intraday chart::
 
 Note that:
 
+- We show the script's plot after having used "Visual order/Bring to Front" from the script's "More" menu.
+  This causes our scripts candles to appear on top of the chart's candles.
 - The script will only display candles when two conditions are met:
 
     - The chart is using an intraday timeframe (see the check on ``timeframe.isintraday`` in the
