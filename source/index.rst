@@ -18,7 +18,7 @@ Pine Script |version| User Manual
    concepts/index
    writing/index
    Faq
-   Pine_compilation_errors
+   Error_messages
    Release_notes
    migration_guides/index
    appendix/index

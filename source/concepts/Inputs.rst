@@ -103,13 +103,15 @@ Let's go over each one.
 ^^^^^^^^^^
 
 This is the first parameter of all input functions. 
-It is default value that will appear in the input widget.
-Select values that will work well for most uses of the script.
+It is the default value that will appear in the input widget.
 
 
 
 \`title\`
 ^^^^^^^^^
+
+The argument used for ``title`` is the field's label.
+The first letter of each word is capitalized.
 
 
 
