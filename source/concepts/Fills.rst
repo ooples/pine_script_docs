@@ -45,9 +45,7 @@ for reuse as `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_
 
 
 Because `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__
-requires two IDs from the same function 
-(`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ or
-`hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__),
+requires two IDs from the same function,
 we sometimes need to use a `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
 call where we would have otherwise used an `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__
 call, as in this example::
