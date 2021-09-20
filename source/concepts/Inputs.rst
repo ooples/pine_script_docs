@@ -13,7 +13,7 @@ Introduction
 Script inputs are the means by which Pine scripts can receive user inputs.
 They can only be accessed when a script is running on the chart.
 Script users access them through the script's "Settings" dialog box, 
-which can be reached by:
+which can be reached different ways, by:
 
 - Double-clicking on the name of an on-chart indicator
 - Right-clicking on the script's name and choosing the "Settings" item from the dropdown menu
@@ -24,9 +24,9 @@ The "Settings" dialog box always contains the "Style" and "Visibility" tabs,
 which allow users to specify their preferences about the script's visuals
 and the chart timeframes where it should be visible.
 
-When a script contains calls to ``input.*()`` functions, an "Inputs" tab appears in the "Settings" dialog box:
+When a script contains calls to ``input.*()`` functions, an "Inputs" tab appears in the "Settings" dialog box.
 
-
+.. image:: images/Inputs-Introduction-1.png
 
 
 
