@@ -12,7 +12,7 @@ Language
    Operators
    Variable_declarations
    Conditional_structures
-   Loop_structures
+   Loops
    Type_system
    Built-ins
    User-defined_functions

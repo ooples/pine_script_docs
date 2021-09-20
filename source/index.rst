@@ -23,6 +23,7 @@ Pine Script |version| User Manual
    migration_guides/index
    appendix/index
    Where_can_I_get_more_information
+   Tests
 
 
 .. TODO: Need pages about Pine Editor (Open, New, Save, Add To Chart)

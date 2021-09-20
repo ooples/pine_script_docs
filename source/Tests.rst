@@ -1,5 +1,7 @@
-..test page to try new stuff
 .. _PageTests:
+
+Tests
+=====
 
 
 :php:`$result = $a + 23;`

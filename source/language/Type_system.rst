@@ -143,6 +143,8 @@ for which we do not use an uppercase name because it is not of "const" form::
     name1 := name1 + NAME2
 
 
+.. _PageTypeSystem_Input:
+
 input
 """""
 
@@ -344,7 +346,11 @@ You can concatenate strings using the ``+`` operator.
 plot and hline
 """"""""""""""
 
-Pine's `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ function fills the space between two lines with a color. Both lines must have been plotted with either `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ or `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ function calls. Each plotted line is referred to in the `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ function using line IDs which are of "plot" or "hline" type, e.g.::
+Pine's `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ function fills the space between two lines with a color. 
+Both lines must have been plotted with either `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ or 
+`hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ function calls. 
+Each plotted line is referred to in the `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ 
+function using IDs which are of "plot" or "hline" type, e.g.::
 
     //@version=5
     indicator("", "", true)
@@ -352,7 +358,9 @@ Pine's `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`
     plotID2 = plot(math.max(close, open))
     fill(plotID1, plotID2, color.yellow)
 
-Note that there is no ``plot`` or ``hline`` keyword to explicitly declare the type of `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ or `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ IDs.
+Note that there is no ``plot`` or ``hline`` keyword to explicitly declare the type of 
+`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ or 
+`hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ IDs.
 
 
 line, label, box and table
@@ -508,16 +516,15 @@ Note that:
 
 It may sometimes be necessary to cast one type into another because auto-casting rules will not suffice. 
 For these cases, explicit type-casting functions exist. They are:
-
-- `int() <https://www.tradingview.com/pine-script-reference/v5/#fun_int>`__
-- `float() <https://www.tradingview.com/pine-script-reference/v5/#fun_float>`__
-- `bool() <https://www.tradingview.com/pine-script-reference/v5/#fun_bool>`__
-- `color() <https://www.tradingview.com/pine-script-reference/v5/#fun_color>`__
-- `string() <https://www.tradingview.com/pine-script-reference/v5/#fun_string>`__
-- `line() <https://www.tradingview.com/pine-script-reference/v5/#fun_line>`__
-- `label() <https://www.tradingview.com/pine-script-reference/v5/#fun_label>`__
-- `box() <https://www.tradingview.com/pine-script-reference/v5/#fun_box>`__
-- `table() <https://www.tradingview.com/pine-script-reference/v5/#fun_table>`__
+`int() <https://www.tradingview.com/pine-script-reference/v5/#fun_int>`__,
+`float() <https://www.tradingview.com/pine-script-reference/v5/#fun_float>`__,
+`bool() <https://www.tradingview.com/pine-script-reference/v5/#fun_bool>`__,
+`color() <https://www.tradingview.com/pine-script-reference/v5/#fun_color>`__,
+`string() <https://www.tradingview.com/pine-script-reference/v5/#fun_string>`__,
+`line() <https://www.tradingview.com/pine-script-reference/v5/#fun_line>`__,
+`label() <https://www.tradingview.com/pine-script-reference/v5/#fun_label>`__,
+`box() <https://www.tradingview.com/pine-script-reference/v5/#fun_box>`__, and
+`table() <https://www.tradingview.com/pine-script-reference/v5/#fun_table>`__.
 
 This is code that will not compile because we fail to convert the type of the argument used for ``length`` when calling 
 `ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__::
