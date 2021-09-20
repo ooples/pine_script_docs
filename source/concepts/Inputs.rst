@@ -90,6 +90,61 @@ As we procede, we will explore the different ways you can use input functions an
 
 
 
+Input function parameters
+-------------------------
+
+The parameters common to all input functions are: ``defval``, ``title``, ``tooltip``, ``inline`` and ``group``.
+Other parameters can be used by the other input functions. They are: ``minval``, ``maxval``, ``step`` and ``confirm``.
+Let's go over each one.
+
+
+
+\`defval\`
+^^^^^^^^^^
+
+
+
+\`title\`
+^^^^^^^^^
+
+
+
+\`tooltip\`
+^^^^^^^^^^
+
+
+
+\`inline\`
+^^^^^^^^^^
+
+
+
+\`group\`
+^^^^^^^^^
+
+
+
+\`minval\`
+^^^^^^^^^^
+
+
+
+\`maxval\`
+^^^^^^^^^^
+
+
+
+\`step\`
+^^^^^^^^
+
+
+
+\`confirm\`
+^^^^^^^^^^^
+
+
+
+
 Simple inputs
 ^^^^^^^^^^^^^
 
