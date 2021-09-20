@@ -95,11 +95,8 @@ Input function parameters
 
 The parameters common to all input functions are: ``defval``, ``title``, ``tooltip``, ``inline`` and ``group``.
 Other parameters can be used by the other input functions. They are: ``minval``, ``maxval``, ``step`` and ``confirm``.
+
 Let's go over each one.
-
-.. image:: images/   
-   :width: 100%
-
 
 
 \`defval\`
@@ -108,17 +105,12 @@ Let's go over each one.
 This is the first parameter of all input functions. 
 It is the default value that will appear in the input widget.
 
-``defval``
-  This is the first parameter of all input functions. 
-  It is the default value that will appear in the input widget.
 
 
 \`title\`
 ^^^^^^^^^
 
 The argument used for ``title`` is the field's label.
-The first letter of each word is capitalized.
-
 
 
 \`tooltip\`

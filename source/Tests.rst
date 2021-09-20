@@ -80,3 +80,5 @@ Alice -> Bob: Another authentication Request
 Alice <-- Bob: another authentication Response
 
 :ref:`Go back to top <PageTests>`
+
+Refer to the :ref:`Concepts <IndexConcepts>` section of this manual.

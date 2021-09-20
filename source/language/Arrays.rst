@@ -730,8 +730,8 @@ When you size arrays dynamically using a field in your script's *Settings/Inputs
 See the :ref:`<PageArrays_Looping>` of this page for more information.
 
 
-Cannot call array methods when ID of array is \'na\'
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Cannot call array methods when ID of array is 'na'
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 When an array ID is initialized to ``na``, operations on it are not allowed, since no array exists. 
 All that exists at that point is an array variable containing the ``na`` value rather that a valid array ID pointing to an existing array. 
