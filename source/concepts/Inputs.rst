@@ -101,7 +101,21 @@ It also support "source" inputs, which are price-related values such as
 `hlc3 <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__,
 or which can be used to receive the output value of another script.
 
- can be used to automatically assign a type based on the default value. Only basic types (``int``, ``float``, ``bool``, ``string``, and ``color``) can be assigned that way.
+Its signature is:
+
+.. code-block::
+
+    input(defval, title, tooltip, inline, group) → input int/float/bool/color/string | series float
+
+ The function automatically detect the type of input by the ``defval`` argument used when calling it:
+
+ - ``a = input(1)`` will return an "input int"
+ - ``a = input(1.0)`` will return an "input float"
+ - ``a = input(true)`` will return an "input bool"
+ - ``a = input(color.orange)`` will return an "input color"
+ - ``a = input("1")`` will return an "input string"
+ - ``a = input(close)`` will return a "series float"
+
 
 
 
