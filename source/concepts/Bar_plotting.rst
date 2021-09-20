@@ -76,12 +76,10 @@ higher timeframe. You can, for example, plot daily bars on an intraday chart::
 
     // NOTE: Use this script on an intraday chart.
     //@version=5
-    indicator("HTF bars")
+    indicator("Daily bars")
     
-    string higherTFInput = input.timeframe("D")
-    
-    // Use gaps to only return data when the HTF completes, `na` otherwise.
-    [o, h, l, c] = request.security(syminfo.tickerid, higherTFInput, [open, high, low, close], gaps = barmerge.gaps_on)
+    // Use gaps to only return data when the 1D timeframe completes, `na` otherwise.
+    [o, h, l, c] = request.security(syminfo.tickerid, "D", [open, high, low, close], gaps = barmerge.gaps_on)
     
     var color UP_COLOR = color.silver
     var color DN_COLOR = color.blue
@@ -98,16 +96,19 @@ Note that:
 - The script will only display candles when two conditions are met:
 
     - The chart is using an intraday timeframe (see the check on ``timeframe.isintraday`` in the
-      `plotcandle() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__ call.
+      `plotcandle() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__ call).
+      We do this because it's not useful to show a daily value on timeframes higher or equal to 1D.
     - The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
-      returns non `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values
+      function returns non `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values
       (see ``gaps = barmerge.gaps_on`` in the function call).
 
 - We use `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ to declare our
-  ``UP_COLOR`` and ``DN_COLOR`` color constants on the bar zero only. We use constants because those colors are used
+  ``UP_COLOR`` and ``DN_COLOR`` color constants on bar zero only. We use constants because those colors are used
   in more than one place in our code. This way, if we need to change them, we need only do so in one place.
-- We create a lighter transparency for the body of our candles in the ``bodyColor`` variable initialization, so they don't obstruct the chart's candles.
-- We creat the ``isNewBar()`` function to detect when the higher
+- We create a lighter transparency for the body of our candles in the ``bodyColor`` variable initialization, 
+  so they don't obstruct the chart's candles.
+
+
 
 Plotting bars with \`plotbar()\`
 --------------------------------
