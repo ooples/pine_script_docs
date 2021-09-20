@@ -127,7 +127,7 @@ Let's go over each parameter:
 - ``maxval`` requires a "const int/float" argument, depending on the type of the ``defval`` value.
   It is the maximum valid value for the input field.
 - ``step`` is the increment by which the field's value will move when the widget's up/down arrows are used.
-- ``confirm``requires a "const bool" (``true`` or ``false``) argument.
+- ``confirm`` requires a "const bool" (``true`` or ``false``) argument.
   This parameter affect the behavior of the script when it is added to a chart.
   ``input.*()`` calls using ``confirm = true`` will cause the "Settings/Inputs" tab to popup
   when the script is added to the chart. ``confirm`` is useful to ensure that users configure a particular field.
