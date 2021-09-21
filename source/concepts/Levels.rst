@@ -99,5 +99,17 @@ Let's put some background colors in our TSI indicator::
 
 Note that:
 
-- 
-
+- We have now used the return value of our 
+  `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__
+  which is of the :ref:`hline <PageTypeSystem_PlotAndHline>` special type.
+  We use the ``plus50Hline``, ``plus25Hline``, ``zeroHline``, ``minus25Hline`` and ``minus50Hline``
+  variables to store those "hline" IDs because we will need them in our
+  `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ calls later.
+- To generate lighter color shades for the background colors,
+  we declare a ``fillColor()`` function that accepts a color and returns its 90 transparency.
+  We use calls to that function for the ``color`` arguments in our
+  `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ calls.
+- We make our `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ calls
+  for each of the four different fills we want, between four different pairs of levels.
+- We use ``color.teal`` in our second fill because it produces a green that fits 
+  the color scheme better than the ``color.green`` used for the 25 level.
