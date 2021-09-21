@@ -149,10 +149,11 @@ Note that:
 - We use a session input to allow users to specify the time they want to detect.
   We are only looking for the session's beginning time on bars,
   so we use a five-minute gaps between the beginning and end time of our ``"0930-0935"`` default value.
-- We create a sessionBegins() function to detect the beginning of a session.
+- We create a ``sessionBegins()`` function to detect the beginning of a session.
   Its ``time("", sess)`` call uses an empty string for the function's ``timeframe`` parameter,
   which means it uses the chart's timeframe, whatever that is.
   The function returns true when:
+  
      - The chart uses an intraday timeframe (seconds or minutes)
      - The script isn't on the chart's first bar, which we ensure with ``(not barstate.isfirst)``.
        This check prevents the code from always detecting a
