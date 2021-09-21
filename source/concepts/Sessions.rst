@@ -15,7 +15,7 @@ Introduction
 
 Sessions information is usable in two different ways in Pine:
 
-1. **Session strings** containing from-to start times and day information can be used in functions
+1. **Session strings** containing from-to start times and day information that can be used in functions
    such as `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and
    `time_close() <https://www.tradingview.com/pine-script-reference/v5/#fun_time_close>`__
    to detect when bars are in a particular time period, with the option of limiting valid sessions to specific days.
