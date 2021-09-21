@@ -301,6 +301,8 @@ Note that:
   calls to plot conditionally. When the user unchecks the checkbox of the ``showBBInput`` input,
   the variable's value becomes ``false``. When that happens, our `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
   calls plot the `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ value, which displays nothing.
+- Because we use the ``inline`` parameter for the ``bbFactorInput`` variable, its input field in the "Inputs" tab does not align vertically
+  with that of ``maLengthInput``, which doesn't use ``inline``.
 
 .. image:: images/Inputs-InputTypes-04.png
 
