@@ -33,7 +33,7 @@ has a few constraints when compared to
   ``hline.style_solid``, ``hline.style_dotted`` and ``hline.style_dashed``.
 
 Let's see `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__
-in action in the True Strength Index indicator::
+in action in the "True Strength Index" indicator::
 
     //@version=5
     indicator("TSI")
@@ -47,6 +47,10 @@ in action in the True Strength Index indicator::
     
     plot(myTSI)
 
+.. image:: images/Levels-HlineLevels-01.png
+
+.. image:: images/Levels-HlineLevels-02.png
+
 Note that:
 
 - We display 5 levels, each of a different color.
@@ -55,30 +59,6 @@ Note that:
 - The usual range for the indicator's values is +100 to -100.
   Since the `ta.tsi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}tsi>`__
   built-in returns values in the +1 to -1 range, we make the adjustment in our code.
-
-
-
-Price levels with \`hline()\`
------------------------------
-
-The `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__
-annotation function renders a horizontal line at a given level. For example::
-
-    //@version=5
-    indicator("Chaikin Oscillator", "Chaikin Osc")
-    shortInput = input.int(3, minval = 1)
-    longInput = input.int(10, minval = 1)
-    osc = ta.ema(ta.accdist, shortInput) - ta.ema(ta.accdist, longInput)
-    plot(osc, color = color.red)
-    hline(0, "Zero", color.gray, hline.style_dashed)
-
-.. image:: images/Price_levels_hline_1.png
-
-
-A *number* must be the first argument of ``hline``. Values of *series* form
-are forbidden. It's possible to create a few horizontal lines with the
-help of ``hline`` and fill the background between them with a
-translucent color using `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__.
 
 
 
