@@ -152,7 +152,7 @@ Note that:
 - We create a ``sessionBegins()`` function to detect the beginning of a session.
   Its ``time("", sess)`` call uses an empty string for the function's ``timeframe`` parameter,
   which means it uses the chart's timeframe, whatever that is.
-  The function returns true when:
+  The function returns ``true'' when:
 
       - The chart uses an intraday timeframe (seconds or minutes)
       - The script isn't on the chart's first bar, which we ensure with ``(not barstate.isfirst)``.
