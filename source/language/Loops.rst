@@ -100,7 +100,9 @@ These cases typically include:
 
 The `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ 
 structure allows the repetitive execution of statements using a counter. 
-Its syntax is::
+Its syntax is:
+
+.. code-block::
 
     [[<declaration_mode>] [<type>] <identifier> = ]for <identifier> = <expression> to <expression>[ by <expression>]
         <local_block_loop>
@@ -220,7 +222,9 @@ arrays must be checked on each bar, and there is no Pine built-in that can do th
 
 The `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ 
 structure allows the repetitive execution of statements until a condition is true. 
-Its syntax is::
+Its syntax is:
+
+.. code-block::
 
     [[<declaration_mode>] [<type>] <identifier> = ]while <expression>
         <local_block_loop>
@@ -283,9 +287,9 @@ Let's calculate the factorial function using a
         int counter = val
         int fact = 1
         result = while counter > 0
-        	fact := fact * counter
-        	counter := counter - 1
-        	fact
+            fact := fact * counter
+            counter := counter - 1
+            fact
     
     // Only evaluate the function on the first bar.	
     var answer = factorial(n)
@@ -313,7 +317,7 @@ Note that:
 - Our initialization of ``result`` is not required; we do it for readability. We could just as well have used::
 
     while counter > 0
-    	fact := fact * counter
-    	counter := counter - 1
-    	fact
+        fact := fact * counter
+        counter := counter - 1
+        fact
 

@@ -31,7 +31,7 @@ Except on wrapped lines, they can also follow Pine code on the same line::
     a = close // This is also a comment
     plot(a)
 
-The Pine Editor has a keyboard shortcut to comment/uncomment lines: ``Ctrl + /``. 
+The Pine Editor has a keyboard shortcut to comment/uncomment lines: :kbd:`ctrl` + :kbd:`/`. 
 You can use it on multiple lines by highlighting them first.
 
 
