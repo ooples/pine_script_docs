@@ -174,12 +174,8 @@ There are two types of sessions:
 - **regular** (which does not include pre- and post-market data), and
 - **extended** (which includes pre- and post-market data).
 
-Pine scripts using the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
-function to access data can return extended session data, or not.
-
-The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
-function can be called with a symbol name in the ``"EXCHANGE_PREFIX:TICKER"`` format (e.g., "NASDAQ:AAPL") as its first argument.
-Used this way, the function will return data for the regular session. For example::
+Scripts using the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
+function to access data can return extended session data, or not. This is an example where only regular session data is fetched::
 
     //@version=5
     indicator("Example 1: Regular Session Data")
@@ -190,41 +186,49 @@ Used this way, the function will return data for the regular session. For exampl
 
 If you want the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call to return extended session data, 
 you must first use the `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__ function
-to build `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call's first argument::
+to build the first argument of the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call::
 
     //@version=5
     indicator("Example 2: Extended Session Data")
     t = ticker.new("NASDAQ", "AAPL", session.extended)
     extendedSessionData = request.security(t, timeframe.period, close, barmerge.gaps_on)
-    plot(extendedSessionData, style=plot.style_linebr)
+    plot(extendedSessionData, style = plot.style_linebr)
 
 .. image:: images/Sessions-RegularAndExtendedSessions-02.png
 
-
-Notice that the previous chart's gaps in the script's plot are now filled. Also keep in mind
+Note that the previous chart's gaps in the script's plot are now filled. Also keep in mind
 that the background coloring on the chart is not produced by our example scripts;
 it is due to the chart's settings showing extended hours.
 
-The first argument of the `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__ 
-function is an exchange prefix ("NASDAQ") and the
-second argument is a ticker ("AAPL"). The third argument specifies the type
-of the session (``session.extended`` or ``session.regular``). So *Example 1*
-could be rewritten as::
+The `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__
+function has the following signature:
+
+.. code-block:: text
+
+    ticker.new(prefix, ticker, session, adjustment) → simple string
+
+where:
+
+- ``prefix`` is the exchange prefix, e.g., ``"NASDAQ"``
+- ``ticker`` is a symbol name, e.g., ``"AAPL"``
+- ``session`` can be ``session.extended`` or ``session.regular``.
+  Note that this is **not** a session string.
+
+Our first example could be rewritten as::
 
     //@version=5
-    indicator("Example 3: Regular Session Data using `ticker.new()`")
+    indicator("Example 1: Regular Session Data")
     t = ticker.new("NASDAQ", "AAPL", session.regular)
-    cc = request.security("NASDAQ:AAPL", timeframe.period, close, barmerge.gaps_on)
-    plot(cc, style=plot.style_linebr)
+    regularSessionData = request.security(t, timeframe.period, close, barmerge.gaps_on)
+    plot(regularSessionData, style = plot.style_linebr)
 
-If you want to request the same session specification used for the chart's main
-symbol, omit the third argument; it is optional. Or, if you want your code to
-explicitly declare your intention, use the ``syminfo.session``
-built-in variable as the third argument to the `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__ 
-function, as it holds the session type of the chart's main symbol::
+If you want to use the same session specifications used for the chart's main
+symbol, omit the third argument in `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__; it is optional. 
+Or, if you want your code to explicitly declare your intention, use the ``syminfo.session``
+built-in variable. It holds the session type of the chart's main symbol::
 
     //@version=5
-    indicator("Example 4: Same as Main Symbol Session Type Data")
+    indicator("Example 1: Regular Session Data")
     t = ticker.new("NASDAQ", "AAPL", syminfo.session)
-    cc = request.security(t, timeframe.period, close, barmerge.gaps_on)
-    plot(cc, style=plot.style_linebr)
+    regularSessionData = request.security(t, timeframe.period, close, barmerge.gaps_on)
+    plot(regularSessionData, style = plot.style_linebr)
