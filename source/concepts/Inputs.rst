@@ -114,7 +114,7 @@ All these parameters expect arguments of "const" form
 This means they must be known at compile time and cannot change during the script's execution. 
 Because the result of ``input.*()`` function is always of "input" or "series" form, 
 it follows that the result of one ``input.*()`` function call cannot be used as an argument
-in a subsequent ``input.*()`` call.
+in a subsequent ``input.*()`` call because the "input" form is stronger than the "const" form.
 
 Let's go over each parameter:
 
