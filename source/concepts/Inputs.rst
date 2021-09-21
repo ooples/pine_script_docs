@@ -320,7 +320,8 @@ Instead of using the "Settings/Style" tab to change colors, you will then allow 
 the colors using calls to `input.color() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}color>`__.
 
 Suppose we wanted to plot our BBs in a ligther shade when the 
-`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__/ and `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__
+`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and 
+`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__
 values are higher/lower than the BBs. You could use code like this to create your colors::
 
     bbHiColor = color.new(color.gray, high > bbHi ? 60 : 0)
