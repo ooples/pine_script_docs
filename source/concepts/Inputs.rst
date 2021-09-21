@@ -167,8 +167,8 @@ The next sections explain what each input function does.
 As we procede, we will explore the different ways you can use input functions and organize their display.
 
 
-Simple inputs
-^^^^^^^^^^^^^
+Simple input
+^^^^^^^^^^^^
 
 `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__ is a simple, 
 generic function that supports the fundamental Pine types: "int", "float", "bool", "color" and "string".
@@ -365,8 +365,8 @@ Note that:
 
 
 
-Timeframe inputs
-^^^^^^^^^^^^^^^^
+Timeframe input
+^^^^^^^^^^^^^^^
 
 Timeframe inputs can be useful when you want to be able to change the
 timeframe used to calculate values in your scripts.
@@ -395,8 +395,8 @@ Note that:
 
 
 
-Symbol inputs
-^^^^^^^^^^^^^
+Symbol input
+^^^^^^^^^^^^
 
 The `input.symbol() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}symbol>`__
 function creates a widget that allows users to search and select symbols like they would from the chart's user interface.
@@ -473,7 +473,7 @@ Note that:
 
 
 Source input
-^^^^^^^^^^^^^
+^^^^^^^^^^^^
 
 Source inputs are useful to provide a selection of two types of sources:
 
@@ -544,11 +544,6 @@ The parameters are ``timeframe`` and ``timeframe_gaps``. An example::
 Tips
 ----
 
-
-
-Organization of inputs
-^^^^^^^^^^^^^^^^^^^^^^
-
 The design of your script's inputs has an important impact on the usability of your scripts.
 Well-designed inputs are more intuitively usable and make for a better user experience:
 
@@ -563,11 +558,6 @@ Well-designed inputs are more intuitively usable and make for a better user expe
 - When you have many inputs, group them into meaningful sections using ``group``.
   Place the most important sections at the top.
 - Do the same for individual inputs **within** sections.
-
-
-
-In your code
-^^^^^^^^^^^^
 
 It can be advantageous to vertically align different arguments of multliple ``input.*()``
 calls in your code. When you need to make global changes, this will allow you to use the Editor's
