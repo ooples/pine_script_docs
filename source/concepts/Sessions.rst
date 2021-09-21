@@ -213,6 +213,7 @@ where:
 - ``ticker`` is a symbol name, e.g., ``"AAPL"``
 - ``session`` can be ``session.extended`` or ``session.regular``.
   Note that this is **not** a session string.
+- ``adjustment`` adjusts prices using different criteria: ``adjustment.none``, ``adjustment.splits``, ``adjustment.dividends``.
 
 Our first example could be rewritten as::
 
