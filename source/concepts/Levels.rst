@@ -12,7 +12,7 @@ Levels
 
 Levels are lines plotted using the 
 `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ function.
-It is designed to plot straigth, horizontal levels using a color that does not change on different bars.
+It is designed to plot **horizontal** levels using a **single color**, i.e., it does not change on different bars.
 
 The function has the following signature:
 
@@ -24,7 +24,7 @@ The function has the following signature:
 has a few constraints when compared to 
 `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__:
 
-- Its ``price`` parameter requires an "input int/float" argument,
+- Since the function's objective is to plot horizontal lines, its ``price`` parameter requires an "input int/float" argument,
   which means that "series float" values such as `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
   or dynamically-calculated values cannot be used.
 - Its ``color`` parameter requires an "input int" argument,
