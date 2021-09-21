@@ -288,6 +288,8 @@ to toggle the display of the BBs::
     plot(showBBInput ? bbHi : na, "BB Hi", color.gray)
     plot(showBBInput ? bbLo : na, "BB Lo", color.gray)
 
+.. image:: images/Inputs-InputTypes-04.png
+
 Note that:
 
 - We have added an input using `input.bool() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}bool>`__
@@ -304,8 +306,6 @@ Note that:
   We use ``true`` as the default value of the input, so the BBs plot by default.
 - Because we use the ``inline`` parameter for the ``bbFactorInput`` variable, its input field in the "Inputs" tab does not align vertically
   with that of ``maLengthInput``, which doesn't use ``inline``.
-
-.. image:: images/Inputs-InputTypes-04.png
 
 
 
@@ -349,6 +349,19 @@ which will appear in our "Inputs" tab::
     plot(showBBInput ? bbLo : na, "BB Lo", bbLoColor, 2)
 
 .. image:: images/Inputs-InputTypes-05.png
+
+Note that:
+
+- We have added two calls to `input.color() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}color>`__
+  to gather the values of the ``maColorInput`` and ``bbColorInput`` variables. We use ``maColorInput`` directly in the
+  ``plot(ma, "MA", maColorInput)`` call, and we use ``bbColorInput`` to build the ``bbHiColor`` and ``bbLoColor`` variables,
+  which modulate the transparency using the position of price relative to the BBs.
+  We use a conditional value for the ``transp`` value we call 
+  `color.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}new>`__ with,
+  to generate different transparencies of the same base color.
+- We do not use a ``title`` argument for our new color inputs 
+  because they are on the same line as other inputs allowing users to understand to which plots they apply.
+- We have reorganized our ``inline`` arguments so they reflect the fact we have inputs grouped on two distinct lines.
 
 
 
