@@ -82,7 +82,7 @@ Input function definitions typically contain many parameters,
 which allow you to control the default value of inputs, their limits, 
 and their organization in the "Inputs" tab.
 
-An ``input*.()`` call being just another function call in Pine, its result can be combind with
+An ``input*.()`` call being just another function call in Pine, its result can be combined with
 :ref:`arithmetic <PageOperators_ArithmeticOperators>`, :ref:`comparison <ComparisonOperators>`,
 :ref:`logical <PageOperators_LogicalOperators>` or :ref:`ternary <PageOperators_TernaryOperator>`
 operators to form an expression to be assigned to the variable. Here, we compare the result of our call to
@@ -180,7 +180,7 @@ or which can be used to receive the output value of another script.
 
 Its signature is:
 
-.. code-block::
+.. code-block:: text
 
     input(defval, title, tooltip, inline, group) → input int/float/bool/color/string | series float
 
@@ -209,7 +209,7 @@ Integer input
 Two signatures exist for the `input.int() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int>`__ 
 function; one when ``options`` is not used, the other when it is:
 
-.. code-block::
+.. code-block:: text
 
     input.int(defval, title, minval, maxval, step, tooltip, inline, group, confirm) → input int
     input.int(defval, title, options, tooltip, inline, group, confirm) → input int
@@ -243,7 +243,7 @@ Float input
 Two signatures exist for the `input.float() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}float>`__ function; 
 one when ``options`` is not used, the other when it is:
 
-.. code-block::
+.. code-block:: text
 
     input.int(defval, title, minval, maxval, step, tooltip, inline, group, confirm) → input int
     input.int(defval, title, options, tooltip, inline, group, confirm) → input int
