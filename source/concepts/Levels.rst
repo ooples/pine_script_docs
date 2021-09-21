@@ -100,7 +100,7 @@ Let's put some background colors in our TSI indicator::
 Note that:
 
 - We have now used the return value of our 
-  `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__
+  `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ function calls,
   which is of the :ref:`hline <PageTypeSystem_PlotAndHline>` special type.
   We use the ``plus50Hline``, ``plus25Hline``, ``zeroHline``, ``minus25Hline`` and ``minus50Hline``
   variables to store those "hline" IDs because we will need them in our
