@@ -465,45 +465,52 @@ Note that:
   is not in the session, `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ returns
   `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__, so ``inSession`` will be ``true``
   whenever `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ 
-  returns a non- `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ value.
-
-
-
-
+  returns a value that is not `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__.
 
 .. image:: images/Inputs-InputTypes-07.png
 
+
+
+
 Source input
 ^^^^^^^^^^^^^
-::
 
-    srcInput = input.source(close, "Source")
-    ma = ta.sma(srcInput, 9)
-    plot(ma)
+Source inputs are useful to provide a selection of two types of sources:
 
-.. figure:: images/Inputs_of_indicator_6.png
+- Price values, namely:
+  `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__,
+  `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__,
+  `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__,
+  `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__,
+  `hl2 <https://www.tradingview.com/pine-script-reference/v5/#var_hl2>`__,
+  `hlc3 <https://www.tradingview.com/pine-script-reference/v5/#var_hlc3>`__, and
+  `ohlc4 <https://www.tradingview.com/pine-script-reference/v5/#var_ohlc4>`__.
+- The values plotted by other scripts on the chart. This can be useful to "link"
+  two scripts together by sending the output of one as an input to another script.
+
+This script simply plots the user's selection of source.
+We propose the `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ as the default value::
+
+    //@version=5
+    indicator("Source input", "", true)
+    srcInput = input.source(high, "Source")
+    plot(srcInput, "Src", color.new(color.purple, 70), 6)
+
+This shows a chart where, in addition to our script, we have loaded an "Arnaud Legoux Moving Average" indicator.
+See here how we use our script's source input widget to select the output of the ALMA script as an input into our script:
+
+.. image:: images/Inputs-InputTypes-08.png
+
 
 
 Time input
-^^^^^^^^^^^^^
+^^^^^^^^^^
 ::
 
     dateInput = input.time(timestamp("20 Feb 2020 00:00 +0300"), "Date")
     plot(dateInput)
 
 .. figure:: images/Inputs_of_indicator_9.png
-
-
-options parameter
-^^^^^^^^^^^^^^^^^
-The ``options`` parameter is useful to provide users with a list
-of constant values they can choose from using a dropdown menu.
-::
-
-    choiceInput = input.string("A", "Choice", options = ["A", "B"])
-    plot(choiceInput == "A" ? close : choiceInput == "B" ? open : na)
-	
-.. figure:: images/Inputs_of_indicator_7.png
 
 
 
