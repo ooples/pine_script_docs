@@ -167,13 +167,15 @@ Note that:
 Regular and extended sessions
 -----------------------------
 
-On TradingView you can access extended hours sessions by
-*right-clicking* on a chart and choosing *Settings* |rarr|
-*Symbol* |rarr| *Extended Hours (Intraday only)*.
-There are two types of sessions: *regular* (excluding pre- and post-market
-data) and *extended* (including pre- and post-market data).
-Pine scripts may request additional session data using the
-`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function.
+When your TradingView provides access to extended sessions,
+you can choose to see their bars with the "Settings/Symbol/Session" field.
+There are two types of sessions:
+
+- **regular** (which excludes pre- and post-market data), and
+- **extended** (which includes pre- and post-market data).
+
+Pine scripts using the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
+function to access data can return extended session data, or not.
 
 The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
 function can be called with a symbol name in the ``"EXCHANGE_PREFIX:TICKER"`` format (e.g., "NASDAQ:AAPL") as its first argument.
@@ -184,7 +186,7 @@ Used this way, the function will return data for the regular session. For exampl
     cc = request.security("NASDAQ:AAPL", timeframe.period, close, barmerge.gaps_on)
     plot(cc, style = plot.style_linebr)
 
-.. image:: images/Pine-_Regular_Session_Data.png
+.. image:: images/Sessions-RegularAndExtendedSessions-01.png
 
 If you want the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call to return extended session data, you
 must first use the `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__ function
