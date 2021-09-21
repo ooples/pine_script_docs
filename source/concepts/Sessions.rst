@@ -117,10 +117,6 @@ This is accomplished in Pine by using one of the following two signatures of the
     time(timeframe, session, timezone) → series int
     time(timeframe, session) → series int
 
-
-.. image:: images/Chart_time_2.png
-
-
 Here, we use `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__
 with a ``session`` argument to display the market's opening
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and 
