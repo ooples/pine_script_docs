@@ -70,5 +70,34 @@ can be colored using `fill() <https://www.tradingview.com/pine-script-reference/
 Keep in mind that **both** plots must have been plotted with
 `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__.
 
+Let's put some background colors in our TSI indicator::
 
+    //@version=5
+    indicator("TSI")
+    myTSI = 100 * ta.tsi(close, 25, 13)
+    
+    plus50Hline  = hline( 50, "+50",  color.lime)
+    plus25Hline  = hline( 25, "+25",  color.green)
+    zeroHline    = hline(  0, "Zero", color.gray, linestyle = hline.style_dotted)
+    minus25Hline = hline(-25, "-25",  color.maroon)
+    minus50Hline = hline(-50, "-50",  color.red)
+    
+    // ————— Function returns a color in a light shade for use as a background.
+    fillColor(color col) =>
+        color.new(col, 90)
+    
+    fill(plus50Hline,  plus25Hline,  fillColor(color.lime))
+    fill(plus25Hline,  zeroHline,    fillColor(color.teal))
+    fill(zeroHline,    minus25Hline, fillColor(color.maroon))
+    fill(minus25Hline, minus50Hline, fillColor(color.red))
+    
+    plot(myTSI)
+
+.. image:: images/Levels-FillBetweenLevels-01.png
+
+.. image:: images/Levels-FillBetweenLevels-02.png
+
+Note that:
+
+- 
 

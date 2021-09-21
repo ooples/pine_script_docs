@@ -522,10 +522,8 @@ Here, we test the bar's time against an input value, and we plot an arrow when i
     barIsLater = time > timeAndDateInput
     plotchar(barIsLater, "barIsLater", "🠆", location.top, size = size.tiny)
 
-Note that:
-
-- The ``defval`` value we use is a call to the `timestamp() <https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp>`__
-  function. 
+Note that the ``defval`` value we use is a call to the 
+`timestamp() <https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp>`__ function. 
 
 
 Other features affecting Inputs
