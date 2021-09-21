@@ -29,13 +29,13 @@ Sessions information is usable in two different ways in Pine:
    This notion of *regular* and *extended* sessions is the same one used in the chart's interface,
    in the "Chart Settings/Symbol/Session" field, for example. 
 
+In the following sections, we cover both methods of using session information in Pine.
+
 Note that:
 
 - Not all user accounts on TradingView have access to extended session information.
 - There is no special "session" type in Pine. Session strings are of "string" type,
   but they must conform to the session string syntax.
-
-In the following sections, we cover both methods of using session information in Pine.
 
 
 
@@ -47,7 +47,7 @@ Session strings
 Session string specifications
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Session strings to be used with `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and
+Session strings used with `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and
 `time_close() <https://www.tradingview.com/pine-script-reference/v5/#fun_time_close>`__ must have a specific format.
 Their syntax is:
 
