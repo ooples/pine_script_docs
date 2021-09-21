@@ -140,9 +140,9 @@ Let's go over each parameter:
   All ``input.*()`` calls to be grouped together must use the same string for their ``group`` argument.
 - ``options`` requires a comma-separated list of elements enclosed in square brackets (e.g., ``["ON", "OFF"]``.
   It is used to create a dropdown menu offering the list's elements in the form of menu selections.
-  Only one menu item can be selected. When an ``option`` list is used,
+  Only one menu item can be selected. When an ``options`` list is used,
   the ``defval`` value must be one of the list's elements.
-  When ``option`` is used in input functions allowing ``minval``, ``maxval`` or ``step``, 
+  When ``options`` is used in input functions allowing ``minval``, ``maxval`` or ``step``, 
   those parameters cannot be used simultaneously.
 - ``minval`` requires a "const int/float" argument, depending on the type of the ``defval`` value.
   It is the minimum valid value for the input field.
@@ -206,20 +206,30 @@ used with ``defval`` arguments of different types::
 Integer input
 ^^^^^^^^^^^^^
 
-Two signatures exist for the function; one when ``option`` is not used, the other when it is:
+Two signatures exist for the function; one when ``options`` is not used, the other when it is:
 
 .. code-block::
 
     input.int(defval, title, minval, maxval, step, tooltip, inline, group, confirm) → input int
     input.int(defval, title, options, tooltip, inline, group, confirm) → input int
 
+This call uses ``options`` parameter to propose a pre-defined list of lengths for the MA::
 
-::
+    //@version=5
+    indicator("MA", "", true)
+    maLengthInput = input.int(10, options = [3, 5, 7, 10, 14, 20, 50, 100, 200])
+    ma = ta.sma(close, maLengthInput)
+    plot(ma)
 
-    offsetInput = input.int(7, "Offset", minval = -10, maxval = 10)
-    plot(close[offsetInput])
+This one uses the ``minval`` parameter to limit the length::
 
-.. figure:: images/Inputs_of_indicator_2.png
+    //@version=5
+    indicator("MA", "", true)
+    maLengthInput = input.int(10, minval = 2)
+    ma = ta.sma(close, maLengthInput)
+    plot(ma)
+
+.. image:: images/Inputs-IntegerInput-1.png
 
 
 
