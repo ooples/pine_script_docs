@@ -1,11 +1,14 @@
-.. _PageText:
+.. _PageTextAndShapes:
 
-Text
-====
+Text and shapes
+===============
 
 .. contents:: :local:
     :depth: 2
 
+
+Introduction
+------------
 
 Starting with Pine v4, indicators and strategies can
 create *drawing objects* on the chart. Three types of
