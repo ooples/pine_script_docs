@@ -183,22 +183,22 @@ Used this way, the function will return data for the regular session. For exampl
 
     //@version=5
     indicator("Example 1: Regular Session Data")
-    cc = request.security("NASDAQ:AAPL", timeframe.period, close, barmerge.gaps_on)
-    plot(cc, style = plot.style_linebr)
+    regularSessionData = request.security("NASDAQ:AAPL", timeframe.period, close, barmerge.gaps_on)
+    plot(regularSessionData, style = plot.style_linebr)
 
 .. image:: images/Sessions-RegularAndExtendedSessions-01.png
 
-If you want the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call to return extended session data, you
-must first use the `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__ function
+If you want the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call to return extended session data, 
+you must first use the `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__ function
 to build `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call's first argument::
 
     //@version=5
     indicator("Example 2: Extended Session Data")
     t = ticker.new("NASDAQ", "AAPL", session.extended)
-    cc = request.security(t, timeframe.period, close, barmerge.gaps_on)
-    plot(cc, style=plot.style_linebr)
+    extendedSessionData = request.security(t, timeframe.period, close, barmerge.gaps_on)
+    plot(extendedSessionData, style=plot.style_linebr)
 
-.. image:: images/Pine_Extended_Session_Data.png
+.. image:: images/Sessions-RegularAndExtendedSessions-02.png
 
 
 Notice that the previous chart's gaps in the script's plot are now filled. Also keep in mind
