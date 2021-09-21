@@ -167,7 +167,7 @@ Note that:
 Regular and extended sessions
 -----------------------------
 
-When your TradingView provides access to extended sessions,
+When your TradingView account provides access to extended sessions,
 you can choose to see their bars with the "Settings/Symbol/Session" field.
 There are two types of sessions:
 
