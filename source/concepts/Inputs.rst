@@ -142,6 +142,8 @@ Let's go over each parameter:
   It is used to create a dropdown menu offering the list's elements in the form of menu selections.
   Only one menu item can be selected. When an ``option`` list is used,
   the ``defval`` value must be one of the list's elements.
+  When ``option`` is used in input function allowing ``minval``, ``maxval`` or ``step``, 
+  those parameters cannot be used simultaneously.
 - ``minval`` requires a "const int/float" argument, depending on the type of the ``defval`` value.
   It is the minimum valid value for the input field.
 - ``maxval`` requires a "const int/float" argument, depending on the type of the ``defval`` value.
@@ -155,7 +157,6 @@ Let's go over each parameter:
 The ``minval``, ``maxval`` and ``step`` parameters are only present in the signature of the
 `input.int() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int>`__ and
 `input.float() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}float>`__ functions.
-When those functions use any of these parameters, their ``options`` parameter cannot be used simultaneously).
 
 
 
