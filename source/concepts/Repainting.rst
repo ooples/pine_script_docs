@@ -3,7 +3,7 @@
 Repainting
 ==========
 
-We define repainting as: **script behavior causing historical and realtime bars calculations or plots to behave differently**.
+We define repainting as: **script behavior causing historical vs realtime bar calculations or plots to behave differently**.
 
 
 
