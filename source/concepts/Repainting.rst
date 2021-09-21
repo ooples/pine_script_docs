@@ -100,7 +100,7 @@ Other types of repainting
 
 Other types of behavior referred to as *repainting* include:
 
-- Plotting with a negative offset on past bars
+- Plotting with a negative offset on past bars.
 - Values recalculating differently on historical bars vs elapsed realtime bars.
   This can be caused by the fact that exchanges/brokers will sometimes make what are usually small adjustments
   to bar prices when generating the historical data prices for newly elapsed realtime bars.
@@ -109,3 +109,4 @@ Other types of behavior referred to as *repainting* include:
   due to the fact that the current higher timeframe has not completed. 
   See the Pinecoders `security() revisited <https://www.tradingview.com/script/00jFIl5w-security-revisited-PineCoders/>`__
   publication for more information.
+- Strategies using particular settings which makes its behavior in real time different than its behavior on historical bars.
