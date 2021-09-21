@@ -507,25 +507,49 @@ because they plot the same value:
 
 Time input
 ^^^^^^^^^^
-::
 
-    dateInput = input.time(timestamp("20 Feb 2020 00:00 +0300"), "Date")
-    plot(dateInput)
+Time inputs use the `input.time() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}time>`__
+function. The function returns a Unix time in milliseconds (see the :ref:`Time <PageTime>` page for more information).
+This type of data also contains date information, so the
+`input.time() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}time>`__ function returns a time **and** a date.
+That is the reason why its widget allows for the selection of both.
 
-.. figure:: images/Inputs_of_indicator_9.png
+Here, we test the bar's time against an input value, and we plot an arrow when it is greater::
 
+    //@version=5
+    indicator("Time input", "T", true)
+    timeAndDateInput = input.time(timestamp("1 Aug 2021 00:00 +0300"), "Date and time")
+    barIsLater = time > timeAndDateInput
+    plotchar(barIsLater, "barIsLater", "🠆", location.top, size = size.tiny)
+
+Note that:
+
+- The ``defval`` value we use is a call to the `timestamp() <https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp>`__
+  function. 
 
 
 Other features affecting Inputs
 -------------------------------
 
-``resolution``
-``resolution_gaps``
+Some parameters of the `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__
+function, when used, will populate the script's "Inputs" tab with a field. 
+The parameters are ``timeframe`` and ``timeframe_gaps``. An example::
+
+    //@version=5
+    indicator("MA", "", true, timeframe = "D", timeframe_gaps = false)
+    plot(ta.vwma(close, 10))
+
+.. image:: images/Inputs-OtherFeaturesAffectingInputs-03.png
+
+
+
+Tips
+----
 
 
 
 Organization of inputs
-----------------------
+^^^^^^^^^^^^^^^^^^^^^^
 
 The design of your script's inputs has an important impact on the usability of your scripts.
 Well-designed inputs are more intuitively usable and make for a better user experience:
@@ -544,17 +568,47 @@ Well-designed inputs are more intuitively usable and make for a better user expe
 
 
 
-
-Tips
-----
+In your code
+------------
 
 It can be advantageous to vertically align different arguments of multliple ``input.*()``
 calls in your code. When you need to make global changes, this will allow you to use the Editor's
 multi-cursor feature to operate on all the lines at once.
 
-Unicode spaces can be used to pad inputs.
-TODO: example.
+Because It is sometimes necessary to use Unicode spaces to In order to achieve optimal alignment in inputs.
+This is an example::
 
+    //@version=5
+    indicator("Aligned inputs", "", true)
+    
+    var GRP1 = "Not aligned"
+    ma1SourceInput   = input(close, "MA source",     inline = "11", group = GRP1)
+    ma1LengthInput   = input(close, "Length",        inline = "11", group = GRP1)
+    long1SourceInput = input(close, "Signal source", inline = "12", group = GRP1)
+    long1LengthInput = input(close, "Length",        inline = "12", group = GRP1)
+    
+    var GRP2 = "Aligned"
+    // The three spaces after "MA source" are Unicode EN spaces (U+2002).
+    ma2SourceInput   = input(close, "MA source   ",  inline = "21", group = GRP2)
+    ma2LengthInput   = input(close, "Length",        inline = "21", group = GRP2)
+    long2SourceInput = input(close, "Signal source", inline = "22", group = GRP2)
+    long2LengthInput = input(close, "Length",        inline = "22", group = GRP2)
+    
+    plot(ta.vwma(close, 10))
 
-.. TODO: 
-.. use == true operators after input() call.
+.. image:: images/Inputs-Tips-1.png
+
+Note that:
+
+- We use the ``group`` parameter to distinguish between the two sections of inputs.
+  We use a constant to hold the name of the groups. This way, if we decide to change the name of the group,
+  we only need to change it in one place.
+- The first sections inputs widgets do not align vertically. We are using ``inline``,
+  which places the input widgets immediately to the right of the label.
+  Because the labels for the ``ma1SourceInput`` and ``long1SourceInput`` inputs are of different lengths
+  the labels are in different *y* positions.
+- To make up for the misalignment, we pad the ``title`` argument in the ``ma2SourceInput`` line
+  with three Unicode EN spaces (U+2002). 
+  Unicode spaces are necessary because ordinary spaces would be stripped from the label.
+  You can achieve precise alignment by combining different quantities and types of Unicode spaces.
+  See here for a list of `Unicode spaces <https://jkorpela.fi/chars/spaces.html>`__ of different widths.
