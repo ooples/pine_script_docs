@@ -272,6 +272,35 @@ The input widgets for floats are similar to the ones used for integer inputs.
 Boolean input
 ^^^^^^^^^^^^^
 
+Let's continue to develop our script further, this time by adding a boolean input to allow users
+to toggle the display of the BBs::
+
+    //@version=5
+    indicator("MA", "", true)
+    maLengthInput = input.int(10,    "MA length", minval = 1)
+    bbFactorInput = input.float(1.5, "BB factor", inline = "01", minval = 0, step = 0.5)
+    showBBInput   = input.bool(true, "Show BB",   inline = "01")
+    ma      = ta.sma(close, maLengthInput)
+    bbWidth = ta.stdev(ma, maLengthInput) * bbFactorInput
+    bbHi    = ma + bbWidth
+    bbLo    = ma - bbWidth
+    plot(ma, "MA", color.aqua)
+    plot(showBBInput ? bbHi : na, "BB Hi", color.gray)
+    plot(showBBInput ? bbLo : na, "BB Lo", color.gray)
+
+Note that:
+
+- We have added an input using `input.bool() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}bool>`__
+  to set the value of ``showBBInput``.
+- We use the ``inline`` parameter in that input and in the one for ``bbFactorInput`` to bring them on the same line.
+  We use ``"01"`` for its argument in both cases. That is how the Pine compiler recognizes that they belong on the same line.
+  The particular string used as an argument is unimportant and does not appear anywhere in the "Inputs" tab;
+  it is only used to identify which inputs go on the same line.
+- We have vertically aligned the ``title`` arguments of our ``input.*()`` calls to make them easier to read.
+- We use the ``showBBInput`` variable in our two `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
+  calls to plot conditionally. When the user unchecks the checkbox of the ``showBBInput`` input,
+  the variable's value becomes ``false``. When that happens, our `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
+  calls plot the `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ value, which displays nothing.
 
 .. image:: images/Inputs-InputTypes-04.png
 
