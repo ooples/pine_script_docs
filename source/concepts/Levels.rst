@@ -12,7 +12,7 @@ Levels
 
 Levels are lines plotted using the 
 `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ function.
-
+It is designed to plot straigth, horizontal levels using a color that does not change on different bars.
 
 The function has the following signature:
 
@@ -20,13 +20,17 @@ The function has the following signature:
 
     hline(price, title, color, linestyle, linewidth, editable) → hline
 
-The function has a few constraints when compared to 
+`hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__
+has a few constraints when compared to 
 `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__:
 
 - Its ``price`` parameter requires an "input int/float" argument,
   which means that "series float" values such as `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
-  or variables calculated dynamically cannot be used.
-
+  or dynamically-calculated values cannot be used.
+- Its ``color`` parameter requires an "input int" argument,
+  which precludes the use of dynamic colors, i.e., colors calculated on each bar — or "series color" values.
+- Three different line styles are supported through the ``linestyle`` parameter:
+  ``hline.style_solid``, ``hline.style_dotted`` and ``hline.style_dashed``.
 
 Let's see `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__
 in action in the True Strength Index indicator::
