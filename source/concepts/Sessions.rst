@@ -144,6 +144,8 @@ with a ``session`` argument to display the market's opening
     plot(lo, "lo", color.fuchsia, 2, plot.style_circles)
     plot(hi, "hi", color.lime,    2, plot.style_circles)
     
+.. image:: images/Sessions-UsingSessionStrings-01.png
+
 Note that:
 
 - We use a session input to allow users to specify the time they want to detect.
@@ -152,9 +154,9 @@ Note that:
 - We create a ``sessionBegins()`` function to detect the beginning of a session.
   Its ``time("", sess)`` call uses an empty string for the function's ``timeframe`` parameter,
   which means it uses the chart's timeframe, whatever that is.
-  The function returns ``true'' when:
+  The function returns ``true`` when:
 
-      - The chart uses an intraday timeframe (seconds or minutes)
+      - The chart uses an intraday timeframe (seconds or minutes).
       - The script isn't on the chart's first bar, which we ensure with ``(not barstate.isfirst)``.
         This check prevents the code from always detecting a
         session beginning on the first bar because ``na(t[1]) and not na(t)`` is always ``true`` there.
@@ -163,8 +165,6 @@ Note that:
         because it wasn't in the session's time period, and it has returned a value that is not
         `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ on the current bar,
         which means the bar is **in** the session's time period.
-
-.. image:: images/Chart_time_3.png
 
 
 
