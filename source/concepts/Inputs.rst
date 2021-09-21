@@ -186,7 +186,7 @@ Its signature is:
 
 The function automatically detects the type of input by analyzing the type of the ``defval`` argument used in the function call.
 This script shows all the supported types and the form-type returned by the function when
-used with each ``defval`` argument::
+used with ``defval`` arguments of different types::
 
     //@version=5
     indicator("`input()`", "", true)
