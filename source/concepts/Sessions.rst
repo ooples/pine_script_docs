@@ -58,12 +58,13 @@ Their syntax is:
 where:
 
 - <time_period> uses times in "hhmm" format, with "hh" in 24-hour format, so ``1700`` for 5PM.
-  The time periods are in the "hhmm-hhmm" format, and multiple time periods can be separated by a comma.
+  The time periods are in the "hhmm-hhmm" format, and multiple time periods can be separated by a comma,
+  to specify combinations of discrete periods.
 - <days> is a set of digits from 1 to 7 that specifies on which days the session is valid.
   1 is Sunday, 7 is Saturday. 
   
-.. note:: **The default days is**: ``1234567``, which is different in Pine v5 than in earlier version,
-   which use the ``23456`` default days. For v5 code to reproduce the behavior from previous versions,
+.. note:: **The default days are**: ``1234567``, which is different in Pine v5 than in earlier versions where 
+   ``23456`` (weekdays) is used. For v5 code to reproduce the behavior from previous versions,
    it should explicitly mention the days required, as in ``"0930-1700:23456"``.
 
 
