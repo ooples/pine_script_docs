@@ -121,7 +121,11 @@ Let's go over each parameter:
   can be fitted on one line. Using one ``input.*()`` call with a unique argument for ``inline``
   has the effect of bringing the input field immediately after the label, 
   foregoing the default left-alignment of all input fields used when no ``inline`` argument is used.
-- ``group`` requires a "const string" argument. 
+- ``group`` requires a "const string" argument.
+- ``options`` requires a comma-separated list of elements enclosed in square brackets (e.g., ``["ON", "OFF"]``.
+  It used to create a dropdown menu offering the list's elements in the form of menu selections.
+  Only one menu item can be selected. When an ``option`` list is used,
+  the ``defval`` value must be one of the list's elements.
 - ``minval`` requires a "const int/float" argument, depending on the type of the ``defval`` value.
   It is the minimum valid value for the input field.
 - ``maxval`` requires a "const int/float" argument, depending on the type of the ``defval`` value.
