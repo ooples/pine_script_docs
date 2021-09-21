@@ -130,10 +130,10 @@ Let's go over each parameter:
   and display the text of the last ``tooltip`` argument used in the line.
   Newlines (``\n``) are supported in the argument string.
 - ``inline`` requires a "const string" argument. 
-  Using the same argument for the parameter in multiple ``input.*()`` calls will group them on the same line.
+  Using the same argument for the parameter in multiple ``input.*()`` calls will group their input widgets on the same line.
   There is a limit to the width the "Inputs" tab will expand, so a limited quantity of input fields
   can be fitted on one line. Using one ``input.*()`` call with a unique argument for ``inline``
-  has the effect of bringing the input field immediately after the label, 
+  has the effect of bringing the input field left, immediately after the label, 
   foregoing the default left-alignment of all input fields used when no ``inline`` argument is used.
 - ``group`` requires a "const string" argument.
 - ``options`` requires a comma-separated list of elements enclosed in square brackets (e.g., ``["ON", "OFF"]``.
