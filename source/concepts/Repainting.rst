@@ -45,7 +45,7 @@ Note that:
 - The script uses `bgcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_bgcolor>`__
   to color the background green when `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
   crosses over the EMA, and red on crosses under the EMA.
-- The screen snapshot shows the script in realtime on 30sec chart.
+- The screen snapshot shows the script in realtime on a 30sec chart.
   A cross over the EMA has been detected, thus the background of the realtime bar is green.
 - The problem here is that nothing guarantees this condition will hold true until the
   end of the realtime bar. The arrow points to the timer showing that 21 seconds remain in the realtime bar,
@@ -57,7 +57,8 @@ during the realtime bar. This will require using values from a bar that has elap
 (typically the preceding bar), or the `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__
 price, which does not vary in realtime.
 
-We can chieve this in many ways. This uses the crosses detected on the previous bar::
+We can chieve this in many ways. This uses the crosses detected on the previous bar.
+It is the simplest way to avoid repainting::
 
     //@version=5
     indicator("Repainting", "", true)
