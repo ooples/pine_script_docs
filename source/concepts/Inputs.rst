@@ -104,8 +104,10 @@ All values returned by ``input.*()`` functions except "source" ones are of the "
 Input function parameters
 -------------------------
 
-The parameters common to all input functions are: ``defval``, ``title``, ``tooltip``, ``inline`` and ``group``.
-Other parameters can be used by the other input functions. They are: ``minval``, ``maxval``, ``step`` and ``confirm``.
+The parameters common to all input functions are:
+``defval``, ``title``, ``tooltip``, ``inline`` and ``group``.
+Other parameters can be used by the other input functions. 
+They are: ``options``, ``minval``, ``maxval``, ``step`` and ``confirm``.
 
 All these parameters expect arguments of "const" form 
 (except if it's an input used for a "source", which returns a "series float" result).
