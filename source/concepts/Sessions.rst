@@ -65,19 +65,19 @@ where:
   
 .. note:: **The default days are**: ``1234567``, which is different in Pine v5 than in earlier versions where 
    ``23456`` (weekdays) is used. For v5 code to reproduce the behavior from previous versions,
-   it should explicitly mention the days required, as in ``"0930-1700:23456"``.
+   it should explicitly mention weekdays, as in ``"0930-1700:23456"``.
 
 
 These are examples of session strings:
 
-"0000-0000"
-   A 7-days 24-hour session beginning at midnight.
-
 "24x7"
-   Equivalent to the previous example.
+   A 7-day, 24-hour session beginning at midnight.
 
 "0000-0000:1234567"
-   Equivalent to the previous two examples.
+   Equivalent to the previous example.
+
+"0000-0000"
+   Equivalent to the previous two examples, because the default days are ``1234567``.
 
 "0000-0000:23456"
    Same as previous example, but only Monday to Friday.
@@ -108,7 +108,7 @@ Using session strings
 
 Session properties defined with session strings are independent from the exchange-defined sessions determining when an instrument can be traded.
 Programmers have full liberty in creating whatever session definitions suit their purpose,
-which is usually to ensure that chart bars the script is running on belong or not to specific time periods.
+which is usually to detect when bars belong or not to specific time periods.
 
 This is accomplished in Pine by using one of the following two signatures of the
 `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ function:
