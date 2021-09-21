@@ -203,6 +203,37 @@ used with ``defval`` arguments of different types::
 
 
 
+Integer input
+^^^^^^^^^^^^^
+
+Two signatures exist for the function; one when ``option`` is not used, the other when it is:
+
+.. code-block::
+
+    input.int(defval, title, minval, maxval, step, tooltip, inline, group, confirm) → input int
+    input.int(defval, title, options, tooltip, inline, group, confirm) → input int
+
+
+::
+
+    offsetInput = input.int(7, "Offset", minval = -10, maxval = 10)
+    plot(close[offsetInput])
+
+.. figure:: images/Inputs_of_indicator_2.png
+
+
+
+Float input
+^^^^^^^^^^^
+::
+
+    angleInput = input.float(-0.5, "Angle", minval = -3.14, maxval = 3.14, step = 0.2)
+    plot(sin(angleInput) > 0 ? close : open)
+
+.. figure:: images/Inputs_of_indicator_3.png
+
+
+
 Boolean input
 ^^^^^^^^^^^^^
 ::
