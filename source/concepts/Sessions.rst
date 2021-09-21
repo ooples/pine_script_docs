@@ -1,12 +1,12 @@
 .. _PageSessions:
 
-.. contents:: :local:
-    :depth: 2
-
 ..    include:: <isonum.txt>
 
 Sessions
 ========
+
+.. contents:: :local:
+    :depth: 2
 
 
 
