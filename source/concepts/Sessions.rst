@@ -153,16 +153,16 @@ Note that:
   Its ``time("", sess)`` call uses an empty string for the function's ``timeframe`` parameter,
   which means it uses the chart's timeframe, whatever that is.
   The function returns true when:
-  
-     - The chart uses an intraday timeframe (seconds or minutes)
-     - The script isn't on the chart's first bar, which we ensure with ``(not barstate.isfirst)``.
-       This check prevents the code from always detecting a
-       session beginning on the first bar because ``na(t[1]) and not na(t)`` is always ``true`` there.
-     - The `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ call
-       has returned `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ on the previous bar
-       because it wasn't in the session's time period, and it has returned a value that is not
-       `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ on the current bar,
-       which means the bar is **in** the session's time period.
+
+      - The chart uses an intraday timeframe (seconds or minutes)
+      - The script isn't on the chart's first bar, which we ensure with ``(not barstate.isfirst)``.
+        This check prevents the code from always detecting a
+        session beginning on the first bar because ``na(t[1]) and not na(t)`` is always ``true`` there.
+      - The `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ call
+        has returned `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ on the previous bar
+        because it wasn't in the session's time period, and it has returned a value that is not
+        `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ on the current bar,
+        which means the bar is **in** the session's time period.
 
 .. image:: images/Chart_time_3.png
 
