@@ -171,7 +171,7 @@ When your TradingView account provides access to extended sessions,
 you can choose to see their bars with the "Settings/Symbol/Session" field.
 There are two types of sessions:
 
-- **regular** (which excludes pre- and post-market data), and
+- **regular** (which does not include pre- and post-market data), and
 - **extended** (which includes pre- and post-market data).
 
 Pine scripts using the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
