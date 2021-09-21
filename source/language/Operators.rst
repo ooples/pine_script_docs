@@ -52,6 +52,8 @@ The solution to our conundrum requires:
 
 
 
+.. _PageOperators_ArithmeticOperators:
+
 Arithmetic operators
 --------------------
 
@@ -80,6 +82,8 @@ the result is also `na <https://www.tradingview.com/pine-script-reference/v5/#va
 The ``+`` operator also serves as the concatenation operator for strings. ``"EUR"+"USD"`` yields the ``"EURUSD"`` string.
 
 
+
+.. _PageOperators_ComparisonOperators:
 
 Comparison operators
 --------------------
@@ -110,6 +114,8 @@ Examples::
     close >= open  // Depends on values of `close` and `open`
 
 
+
+.. _PageOperators_LogicalOperators:
 
 Logical operators
 -----------------
@@ -299,6 +305,8 @@ If the expression must be calculated in a different order than precedence would 
 then parts of the expression can be grouped together with parentheses.
 
 
+
+.. _PageOperators_AssignmentOperator:
 
 \`=\` assignement operator
 --------------------------

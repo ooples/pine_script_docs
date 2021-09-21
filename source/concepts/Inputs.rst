@@ -569,7 +569,7 @@ Well-designed inputs are more intuitively usable and make for a better user expe
 
 
 In your code
-------------
+^^^^^^^^^^^^
 
 It can be advantageous to vertically align different arguments of multliple ``input.*()``
 calls in your code. When you need to make global changes, this will allow you to use the Editor's
