@@ -48,8 +48,8 @@ When a script contains calls to ``input.*()`` functions, an "Inputs" tab appears
 .. image:: images/Inputs-Introduction-1.png
 
 In the flow of a script's execution, inputs are processed when the script is already on a chart 
-and user changes values in the "Inputs" tab. 
-These changes trigger a re-execution of the script on all the chart bars,
+and a user changes values in the "Inputs" tab. 
+The changes trigger a re-execution of the script on all the chart bars,
 so when a user changes an input value, your script recalculates using that new value.
 
 
