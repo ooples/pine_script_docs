@@ -426,6 +426,8 @@ Note that:
 
 
 
+.. _PageInputs_SessionInput:
+
 Session input
 ^^^^^^^^^^^^^
 
