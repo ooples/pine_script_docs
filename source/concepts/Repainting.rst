@@ -17,17 +17,12 @@ realtime bar's final
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ values are fixed, after the realtime bar closes.
 
 If we add a script on a chart,
-wait until it calculates on a number of real-time bars and then reload the page,
+wait until it calculates on a number of realtime bars and then reload the page,
 we will sometimes see a script's plots change slightly. This behavior is one of a few
 different types of behaviors commonly referred to as *indicator repainting*. It is the
 type of repainting we are concerned with here and which we will refer to when using *repainting*.
 It is due to the fact that when certain features are used in scripts, they will
-calculate differently on historical and real-time bars.
-
-Other types of behavior rightly or wrongly referred to as *repainting* include plotting with a
-negative offset on past bars and using otherwise unavailable future information received through
-malformed calls to the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function, which can introduce
-data not available in real-time into script calculations.
+calculate differently on historical and realtime bars.
 
 Not all indicators are subject to the type of repainting we discuss here.
 In most cases it depends on whether or not certain functions or language
@@ -100,3 +95,17 @@ We can see repainting in the following cases:
    * `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__.
 
 
+Other types of repainting
+-------------------------
+
+Other types of behavior referred to as *repainting* include:
+
+- Plotting with a negative offset on past bars
+- Values recalculating differently on historical bars vs elapsed realtime bars.
+  This can be caused by the fact that exchanges/brokers will sometimes make what are usually small adjustments
+  to bar prices when generating the historical data prices for newly elapsed realtime bars.
+- Using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+  without the proper adjustments to ensure that it does not return higher timeframe data that fluctuates on realtime bars
+  due to the fact that the current higher timeframe has not completed. 
+  See the Pinecoders `security() revisited <https://www.tradingview.com/script/00jFIl5w-security-revisited-PineCoders/>`__
+  publication for more information.
