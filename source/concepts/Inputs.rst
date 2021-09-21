@@ -198,7 +198,7 @@ used with ``defval`` arguments of different types::
     f = input(close, "series float")
     plot(na)
 
-.. image:: images/Inputs-SimpleInputs-1.png
+.. image:: images/Inputs-InputTypes-01.png
    :height: 50%
 
 
@@ -233,7 +233,7 @@ This one uses the ``minval`` parameter to limit the length::
 The version with the ``options`` list uses a dropdown menu for its widget.
 When the ``options`` parameter is not used, a simple input widget is used to enter the value.
 
-.. image:: images/Inputs-IntegerInput-1.png
+.. image:: images/Inputs-InputTypes-02.png
 
 
 
@@ -265,20 +265,17 @@ to calculate Bollinger Bands::
 
 The input widgets for floats are similar to the ones used for integer inputs.
 
-.. image:: images/Inputs-FloatInput-1.png
+.. image:: images/Inputs-InputTypes-03.png
 
 
 
 Boolean input
 ^^^^^^^^^^^^^
 
-Boolean 
-::
 
-    showOpenInput = input.bool(true, "On/Off")
-    plot(showOpenInput ? open : na)
+.. image:: images/Inputs-InputTypes-04.png
 
-.. figure:: images/Inputs_of_indicator_1.png
+
 
 Color input
 ^^^^^^^^^^^
