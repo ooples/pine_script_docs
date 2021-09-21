@@ -313,9 +313,9 @@ Color input
 ^^^^^^^^^^^
 
 As is explained in the :ref:`Color selection through script settings <PageColors_ColorSelectionThroughScriptSettings>`
-section of the "Colors" page, the color selections that usually appear in the "Settings/Style" tab are not always available,
-so it not always possible to rely that tab's inputs for users to modify the colors your script uses.
-For those cases, it is essential to provide color inputs if you want your script's color to be modifiable through the script's "Settings".
+section of the "Colors" page, the color selections that usually appear in the "Settings/Style" tab are not always available.
+When that is the case, script users will have no means to change the colors your script uses.
+For those cases, it is essential to provide color inputs if you want your script's colors to be modifiable through the script's "Settings".
 Instead of using the "Settings/Style" tab to change colors, you will then allow your script users to change
 the colors using calls to `input.color() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}color>`__.
 
