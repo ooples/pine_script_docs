@@ -206,7 +206,8 @@ used with ``defval`` arguments of different types::
 Integer input
 ^^^^^^^^^^^^^
 
-Two signatures exist for the function; one when ``options`` is not used, the other when it is:
+Two signatures exist for the `input.int() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int>`__ 
+function; one when ``options`` is not used, the other when it is:
 
 .. code-block::
 
@@ -229,23 +230,49 @@ This one uses the ``minval`` parameter to limit the length::
     ma = ta.sma(close, maLengthInput)
     plot(ma)
 
+The version with the ``options`` list uses a dropdown menu for its widget.
+When the ``options`` parameter is not used, a simple input widget is used to enter the value.
+
 .. image:: images/Inputs-IntegerInput-1.png
 
 
 
 Float input
 ^^^^^^^^^^^
-::
 
-    angleInput = input.float(-0.5, "Angle", minval = -3.14, maxval = 3.14, step = 0.2)
-    plot(sin(angleInput) > 0 ? close : open)
+Two signatures exist for the `input.float() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}float>`__ function; 
+one when ``options`` is not used, the other when it is:
 
-.. figure:: images/Inputs_of_indicator_3.png
+.. code-block::
+
+    input.int(defval, title, minval, maxval, step, tooltip, inline, group, confirm) → input int
+    input.int(defval, title, options, tooltip, inline, group, confirm) → input int
+
+Here, we use a "float" input for the factor used to multiple the standard deviation,
+to calculate Bollinger Bands::
+
+    //@version=5
+    indicator("MA", "", true)
+    maLengthInput = input.int(10, minval = 1)
+    bbFactorInput = input.float(1.5, minval = 0, step = 0.5)
+    ma      = ta.sma(close, maLengthInput)
+    bbWidth = ta.stdev(ma, maLengthInput) * bbFactorInput
+    bbHi    = ma + bbWidth
+    bbLo    = ma - bbWidth
+    plot(ma)
+    plot(bbHi, "BB Hi", color.gray)
+    plot(bbLo, "BB Lo", color.gray)
+
+The input widgets for floats are similar to the ones used for integer inputs.
+
+.. image:: images/Inputs-FloatInput-1.png
 
 
 
 Boolean input
 ^^^^^^^^^^^^^
+
+Boolean 
 ::
 
     showOpenInput = input.bool(true, "On/Off")
