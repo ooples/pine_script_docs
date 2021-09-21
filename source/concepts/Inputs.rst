@@ -128,6 +128,7 @@ Let's go over each parameter:
   Note that if multiple input fields are grouped on one line using ``inline``,
   the tooltip will always appear to the right of the rightmost field,
   and display the text of the last ``tooltip`` argument used in the line.
+  Newlines (``\n``) are supported in the argument string.
 - ``inline`` requires a "const string" argument. 
   Using the same argument for the parameter in multiple ``input.*()`` calls will group them on the same line.
   There is a limit to the width the "Inputs" tab will expand, so a limited quantity of input fields
