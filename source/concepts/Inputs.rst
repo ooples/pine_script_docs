@@ -139,7 +139,7 @@ Let's go over each parameter:
   The string used as the ``group`` argument becomes the section's heading.
   All ``input.*()`` calls to be grouped together must use the same string for their ``group`` argument.
 - ``options`` requires a comma-separated list of elements enclosed in square brackets (e.g., ``["ON", "OFF"]``.
-  It used to create a dropdown menu offering the list's elements in the form of menu selections.
+  It is used to create a dropdown menu offering the list's elements in the form of menu selections.
   Only one menu item can be selected. When an ``option`` list is used,
   the ``defval`` value must be one of the list's elements.
 - ``minval`` requires a "const int/float" argument, depending on the type of the ``defval`` value.
@@ -155,6 +155,7 @@ Let's go over each parameter:
 The ``minval``, ``maxval`` and ``step`` parameters are only present in the signature of the
 `input.int() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int>`__ and
 `input.float() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}float>`__ functions.
+When those functions use any of these parameters, their ``options`` parameter cannot be used simultaneously).
 
 
 
