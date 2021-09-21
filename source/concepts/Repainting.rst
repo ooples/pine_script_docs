@@ -3,12 +3,12 @@
 Repainting
 ==========
 
+We define repainting as: **script behavior causing historical and realtime bars calculations or plots to behave differently**.
 
 
-Realtime vs historical calculations
+
+Historical vs realtime calculations
 -----------------------------------
-
-We define repainting as: **script behavior where it will not calculate or plot the same way on historical bars and in realtime**.
 
 Historical data does not include records of intra-bar movements of price; only
 `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__,
