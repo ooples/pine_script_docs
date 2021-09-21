@@ -497,7 +497,9 @@ We propose the `high <https://www.tradingview.com/pine-script-reference/v5/#var_
     plot(srcInput, "Src", color.new(color.purple, 70), 6)
 
 This shows a chart where, in addition to our script, we have loaded an "Arnaud Legoux Moving Average" indicator.
-See here how we use our script's source input widget to select the output of the ALMA script as an input into our script:
+See here how we use our script's source input widget to select the output of the ALMA script as an input into our script.
+Because our script plots that source in a light-purple thick line, you see the plots from the two scripts overlap
+because they plot the same value:
 
 .. image:: images/Inputs-InputTypes-08.png
 
