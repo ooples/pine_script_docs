@@ -65,12 +65,12 @@ The following input functions are available:
 - `input.bool() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}bool>`__
 - `input.color() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}color>`__
 - `input.string() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}string>`__
+- `input.timeframe() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}timeframe>`__
+- `input.symbol() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}symbol>`__
 - `input.price() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}price>`__
 - `input.source() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}source>`__
 - `input.session() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}session>`__
-- `input.symbol() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}symbol>`__
 - `input.time() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}time>`__
-- `input.timeframe() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}timeframe>`__
 
 A specific input *widget* is created in the "Inputs" tab to accept each type of input.
 Unless otherwise specified in the ``input.*()`` call, each input appears on a new line of the "Inputs" tab,
@@ -288,8 +288,6 @@ to toggle the display of the BBs::
     plot(showBBInput ? bbHi : na, "BB Hi", color.gray)
     plot(showBBInput ? bbLo : na, "BB Lo", color.gray)
 
-.. image:: images/Inputs-InputTypes-04.png
-
 Note that:
 
 - We have added an input using `input.bool() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}bool>`__
@@ -306,6 +304,8 @@ Note that:
   We use ``true`` as the default value of the input, so the BBs plot by default.
 - Because we use the ``inline`` parameter for the ``bbFactorInput`` variable, its input field in the "Inputs" tab does not align vertically
   with that of ``maLengthInput``, which doesn't use ``inline``.
+
+.. image:: images/Inputs-InputTypes-04.png
 
 
 
@@ -348,8 +348,6 @@ which will appear in our "Inputs" tab::
     plot(showBBInput ? bbHi : na, "BB Hi", bbHiColor, 2)
     plot(showBBInput ? bbLo : na, "BB Lo", bbLoColor, 2)
 
-.. image:: images/Inputs-InputTypes-05.png
-
 Note that:
 
 - We have added two calls to `input.color() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}color>`__
@@ -363,34 +361,117 @@ Note that:
   because they are on the same line as other inputs allowing users to understand to which plots they apply.
 - We have reorganized our ``inline`` arguments so they reflect the fact we have inputs grouped on two distinct lines.
 
-
-
-Symbol and resolution inputs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-::
-
-    symbolInput = input.symbol("SPY", "Symbol")
-    tfInput = input.timeframe("60", "Timeframe")
-    plot(close, color = color.red)
-    plot(request.security(symbolInput, tfInput, close), color = color.green)
-
-.. figure:: images/Inputs_of_indicator_4.png
+.. image:: images/Inputs-InputTypes-05.png
 
 
 
-The symbol input widget has a built-in *symbol search* which activates
-automatically when the ticker's first characters are typed.
+Timeframe inputs
+^^^^^^^^^^^^^^^^
+
+Timeframe inputs can be useful when you want to be able to change the
+timeframe used to calculate values in your scripts.
+
+Let's do away with our BBs from the previous sections and add a timeframe input to a simple MA script::
+
+    //@version=5
+    indicator("MA", "", true)
+    tfInput = input.timeframe("D", "Timeframe")
+    ma = ta.sma(close, 20)
+    securityNoRepaint(sym, tf, src) =>
+        request.security(sym, tf, src[barstate.isrealtime ? 1 : 0])[barstate.isrealtime ? 0 : 1]
+    maHTF = securityNoRepaint(syminfo.tickerid, tfInput, ma)
+    plot(maHTF, "MA", color.aqua)
+
+Note that:
+
+- We use the `input.timeframe() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}timeframe>`__
+  function to receive the timeframe input.
+- The function creates a dropdown widget where some standard timeframes are proposed.
+  The list of timeframes also includes any you have favorated in the chart user interface.
+- We use the ``tfInput`` in our `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call.
+  We also use ``gaps = barmerge.gaps_on`` in the call, so the function only returns data when the higher timeframe has completed.
+
+.. image:: images/Inputs-InputTypes-06.png
+
+
+
+Symbol inputs
+^^^^^^^^^^^^^
+
+The `input.symbol() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}symbol>`__
+function creates a widget that allows users to search and select symbols like they would from the chart's user interface.
+
+Let's add a symbol input to our script::
+
+    //@version=5
+    indicator("MA", "", true)
+    tfInput = input.timeframe("D", "Timeframe")
+    symbolInput = input.symbol("", "Symbol")
+    ma = ta.sma(close, 20)
+    securityNoRepaint(sym, tf, src) =>
+        request.security(sym, tf, src[barstate.isrealtime ? 1 : 0])[barstate.isrealtime ? 0 : 1]
+    maHTF = securityNoRepaint(symbolInput, tfInput, ma)
+    plot(maHTF, "MA", color.aqua)
+
+Note that:
+
+- The ``defval`` argument we use is an empty string. This causes 
+  `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__,
+  where we use the ``symbolInput`` variable containing that input, to use the chart's symbol by default.
+  If the user selects another symbol and wants to return to the default value using the chart's symbol,
+  he will need to use the "Reset Settings" selection from the "Inputs" tab's "Defaults" menu.
+- We use the ``securityNoRepaint()`` user-defined function to use
+  `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+  in such a way that it does not repaint; it only returns values when the higher timeframe has completed.
+
 
 
 Session input
 ^^^^^^^^^^^^^
-::
 
-    sessionInput = input.session("24x7", "Session")
-    plot(time(timeframe.period, sessionInput))
+Session inputs are useful to gather start-stop values for periods of time.
+The `input.session() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}session>`__
+built-in function creates an input widget allowing users to specify the beginning and end time of a session.
+Selections can be made using a dropdown menu, or by entering time values in "hh:mm" format.
 
-.. figure:: images/Inputs_of_indicator_5.png
+The value returned by `input.session() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}session>`__
+is a valid string in session format. See the manual's page on :ref:`sessions <PageSessions>` for more information.
 
+Session information can also contain information on the days where the session is valid. 
+We use an `input.string() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}string>`__
+function call here to input that day information::
+
+    //@version=5
+    indicator("Session input", "", true)
+    string sessionInput = input.session("0600-1700", "Session")
+    string daysInput = input.string("1234567", tooltip = "1 = Sunday, 7 = Saturday")
+    sessionString = sessionInput + ":" + daysInput
+    inSession = not na(time(timeframe.period, sessionString))
+    bgcolor(inSession ? color.silver : na)
+
+Note that:
+
+- This script proposes a default session of "0600-1700".
+- The `input.string() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}string>`__
+  call uses a tooltip to provide users with help on the format to use to enter day information.
+- A complete session string is built by concatenating the two strings the script receives as inputs.
+- We explicitly declare the type of our two inputs with the 
+  `string <https://www.tradingview.com/pine-script-reference/v5/#op_string>`__ keyword to make it clear those
+  variables will contain a string.
+- We detect if the chart bar is in the user-defined session by calling
+  `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__
+  with the session string. If the current bar's `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__
+  value (the time at the bar's `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__)
+  is not in the session, `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ returns
+  `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__, so ``inSession`` will be ``true``
+  whenever `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ 
+  returns a non- `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ value.
+
+
+
+
+
+.. image:: images/Inputs-InputTypes-07.png
 
 Source input
 ^^^^^^^^^^^^^

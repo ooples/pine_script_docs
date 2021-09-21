@@ -1,3 +1,5 @@
+.. _PageSessions:
+
 ..    include:: <isonum.txt>
 
 Sessions
