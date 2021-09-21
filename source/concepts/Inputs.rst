@@ -85,7 +85,7 @@ and their organization in the "Inputs" tab.
 An ``input*.()`` call being just another function call in Pine, its result can be combind with
 :ref:`arithmetic <PageOperators_ArithmeticOperators>`, :ref:`comparison <ComparisonOperators>`,
 :ref:`logical <PageOperators_LogicalOperators>` or :ref:`ternary <PageOperators_TernaryOperator>`
-operators to form an expression to be assigned to the variable. Here, compare the result of our call to
+operators to form an expression to be assigned to the variable. Here, we compare the result of our call to
 `input.string() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}string>`__ to the string ``"On"``.
 The expression's result is then stored in the ``plotDisplayInput`` variable. Since that variable
 holds a ``true`` or ``false`` value, it is a of "input bool" type::
@@ -97,7 +97,7 @@ holds a ``true`` or ``false`` value, it is a of "input bool" type::
 
 
 All values returned by ``input.*()`` functions except "source" ones are of the "input" form
-(see the section on :ref:`forms <PageTypeSystem_Forms>` form more information).
+(see the section on :ref:`forms <PageTypeSystem_Forms>` for more information).
 
 
 
