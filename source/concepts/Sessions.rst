@@ -108,8 +108,7 @@ Using session strings
 
 Session properties defined with session strings are independent from the exchange-defined sessions determining when an instrument can be traded.
 Programmers have full liberty in creating whatever session definitions suit their purpose,
-which is usually to detect when bars belong or not to specific time periods.
-
+which is usually to detect when bars belong to specific time periods.
 This is accomplished in Pine by using one of the following two signatures of the
 `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ function:
 
