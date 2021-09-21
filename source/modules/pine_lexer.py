@@ -15,7 +15,7 @@ class PinePygmentsLexer(RegexLexer):
             (r'//.*?$', Comment), 
             (r'(for|if|else|var)\b', Keyword),
             (r'(open|high|low|close|volume|time|hl2|hlc3|ohlc4)\b', Name.Constant), # Built-in series 'open', 'high', ...
-            (r'(study|strategy|plot|plotshape|plotchar|plotarrow|fill|hline|input)\b', Name.Entity), # Annotation function
+            (r'(indicator|strategy|plot|plotshape|plotchar|plotarrow|fill|hline|input)\b', Name.Entity), # Annotation function
             (r'[\w\.]+', Name.Other),
             (r'\+|\-|\*|\/|\%|\=|\[|\]|and|or|not|\?|\:|\<|\>|\!', Operator),
             (r'\(|\)|\,', Punctuation),
