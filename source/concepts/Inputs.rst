@@ -82,6 +82,11 @@ Input function definitions typically contain many parameters,
 which allow you to control the default value of inputs, their limits, 
 and their organization in the "Inputs" tab.
 
+An ``input*.()`` call being just another function call in Pine, its result can be combine with
+:ref:`arithmetic <PageOperators_ArithmeticOperators>`, :ref:`comparison <ComparisonOperators>`
+or :ref:`logical <PageOperators_LogicalOperators>` operators to form an expression
+to be assigned to the variable.
+
 All values returned by ``input.*()`` functions except "source" ones are of the "input" form
 (see the section on :ref:`forms <PageTypeSystem_Forms>` form more information).
 
@@ -278,6 +283,14 @@ of constant values they can choose from using a dropdown menu.
     plot(choiceInput == "A" ? close : choiceInput == "B" ? open : na)
 	
 .. figure:: images/Inputs_of_indicator_7.png
+
+
+
+Other features affecting Inputs
+-------------------------------
+
+``resolution``
+``resolution_gaps``
 
 
 
