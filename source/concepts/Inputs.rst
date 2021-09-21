@@ -301,6 +301,7 @@ Note that:
   calls to plot conditionally. When the user unchecks the checkbox of the ``showBBInput`` input,
   the variable's value becomes ``false``. When that happens, our `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
   calls plot the `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ value, which displays nothing.
+  We use ``true`` as the default value of the input, so the BBs plot by default.
 - Because we use the ``inline`` parameter for the ``bbFactorInput`` variable, its input field in the "Inputs" tab does not align vertically
   with that of ``maLengthInput``, which doesn't use ``inline``.
 
@@ -310,31 +311,44 @@ Note that:
 
 Color input
 ^^^^^^^^^^^
-::
 
-    plotColorInput = input.color(color.red, "Color")
-    plot(close, color = plotColorInput)
+As is explained in the :ref:`Color selection through script settings <PageColors_ColorSelectionThroughScriptSettings>`
+section of the "Colors" page, the color selections that usually appear in the "Settings/Style" tab are not always available,
+so it not always possible to rely that tab's inputs for users to modify the colors your script uses.
+For those cases, it is essential to provide color inputs if you want your script's color to be modifiable through the script's "Settings".
+Instead of using the "Settings/Style" tab to change colors, you will then allow your script users to change
+the colors using calls to `input.color() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}color>`__.
 
-.. figure:: images/Inputs_of_indicator_8.png
+Suppose we wanted to plot our BBs in a ligther shade when the 
+`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__/ and `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__
+values are higher/lower than the BBs. You could use code like this to create your colors::
 
-Integer input
-^^^^^^^^^^^^^
-::
+    bbHiColor = color.new(color.gray, high > bbHi ? 60 : 0)
+    bbLoColor = color.new(color.gray, low  < bbLo ? 60 : 0)
 
-    offsetInput = input.int(7, "Offset", minval = -10, maxval = 10)
-    plot(close[offsetInput])
+When using dynamic (or "series") color components like the transparency here, 
+the color widgets in the "Settings/Style" will no longer appear. Let's create our own,
+which will appear in our "Inputs" tab::
 
-.. figure:: images/Inputs_of_indicator_2.png
+    //@version=5
+    indicator("MA", "", true)
+    maLengthInput = input.int(10,           "MA length", inline = "01", minval = 1)
+    maColorInput  = input.color(color.aqua, "",          inline = "01")
+    bbFactorInput = input.float(1.5,        "BB factor", inline = "02", minval = 0, step = 0.5)
+    bbColorInput  = input.color(color.gray, "",          inline = "02")
+    showBBInput   = input.bool(true,        "Show BB",   inline = "02")
+    ma      = ta.sma(close, maLengthInput)
+    bbWidth = ta.stdev(ma, maLengthInput) * bbFactorInput
+    bbHi    = ma + bbWidth
+    bbLo    = ma - bbWidth
+    bbHiColor = color.new(bbColorInput, high > bbHi ? 60 : 0)
+    bbLoColor = color.new(bbColorInput, low  < bbLo ? 60 : 0)
+    plot(ma, "MA", maColorInput)
+    plot(showBBInput ? bbHi : na, "BB Hi", bbHiColor, 2)
+    plot(showBBInput ? bbLo : na, "BB Lo", bbLoColor, 2)
 
+.. image:: images/Inputs-InputTypes-05.png
 
-Float input
-^^^^^^^^^^^
-::
-
-    angleInput = input.float(-0.5, "Angle", minval = -3.14, maxval = 3.14, step = 0.2)
-    plot(sin(angleInput) > 0 ? close : open)
-
-.. figure:: images/Inputs_of_indicator_3.png
 
 
 Symbol and resolution inputs
