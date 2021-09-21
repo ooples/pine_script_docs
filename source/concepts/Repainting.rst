@@ -3,12 +3,18 @@
 Repainting
 ==========
 
-Historical data does not include records of intra-bar movements of price;
-only open, high, low and close (OHLC). This leads to a script sometimes
-working differently on historical data and in real-time, where only the open price
-is known and where price will typically move many times before the
-real-time bar's final high, low and close values are
-set after the real-time bar closes.
+Historical data does not include records of intra-bar movements of price; only
+`open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__,
+`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__,
+`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ and
+`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ values (OHLC). 
+This leads to a script sometimes working differently on historical data and in real time, 
+where only the open price will not change during the bar.
+Other values will typically move many times before the
+realtime bar's final
+`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__,
+`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ and
+`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ values are fixed, after the realtime bar closes.
 
 If we add a script on a chart,
 wait until it calculates on a number of real-time bars and then reload the page,
