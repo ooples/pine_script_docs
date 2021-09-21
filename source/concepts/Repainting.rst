@@ -3,6 +3,11 @@
 Repainting
 ==========
 
+
+
+Realtime vs historical calculations
+-----------------------------------
+
 We define repainting as: **script behavior where it will not calculate or plot the same way on historical bars and in realtime**.
 
 Historical data does not include records of intra-bar movements of price; only
@@ -57,8 +62,19 @@ during the realtime bar. This will require using values from a bar that has elap
 (typically the preceding bar), or the `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__
 price, which does not vary in realtime.
 
-We can chieve this in many ways. This uses the crosses detected on the previous bar.
-It is the simplest way to avoid repainting::
+We can chieve this in many ways. This method adds a ``and barstate.isconfirmed`` 
+condition to our cross detections, which requires the script to be executing on the bar's last iteration, 
+when it closes and prices are confirmed. It is a simple way to avoid repainting::
+
+    //@version=5
+    indicator("Repainting", "", true)
+    ma = ta.ema(close, 5)
+    xUp = ta.crossover(close, ma) and barstate.isconfirmed
+    xDn = ta.crossunder(close, ma) and barstate.isconfirmed
+    plot(ma, "MA", color.black, 2)
+    bgcolor(xUp ? color.new(color.lime, 80) : xDn ? color.new(color.fuchsia, 80) : na)
+
+This uses the crosses detected on the previous bar::
 
     //@version=5
     indicator("Repainting", "", true)
@@ -79,20 +95,25 @@ values for its calculations::
     plot(ma, "MA", color.black, 2)
     bgcolor(xUp ? color.new(color.lime, 80) : xDn ? color.new(color.fuchsia, 80) : na)
 
-This uses the `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__
+This detects crosses between the realtime bar's `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__
+and the value of the EMA from the previous bars. Notice that the EMA is calculated using 
+`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__, 
+so it repaints. We must ensure we use a confirmed value to detect crosses, thus ``ma[1]``
+in the cross detection logic::
 
-Here, we use the values of the the `[] <https://www.tradingview.com/pine-script-reference/v5/#op_{question}{colon}>`__
-history-referencing operator to use 
+    //@version=5
+    indicator("Repainting", "", true)
+    ma = ta.ema(close, 5)
+    xUp = ta.crossover(open, ma[1])
+    xDn = ta.crossunder(open, ma[1])
+    plot(ma, "MA", color.black, 2)
+    bgcolor(xUp ? color.new(color.lime, 80) : xDn ? color.new(color.fuchsia, 80) : na)
 
-one form of repainting, 
-Whereas these scrpits will produce only one result on historical bars because they calculate at their bar's close,
-in realtime, such scripts are constantly recalculating values once they are running in realtime.
-They can thus produce 
+**Notice that all these methods have one thing in common: while they prevent repainting, 
+they will also trigger signals later than repainting scripts. 
+This is an inevitable compromise if ones wants to avoid repainting;
+you can't have your cake and eat it too**.
 
-Other values will typically move many times before the realtime bar's final
-`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__,
-`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ and
-`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ values are fixed, after the realtime bar closes.
 
 If we add a script on a chart,
 wait until it calculates on a number of realtime bars and then reload the page,
