@@ -142,7 +142,7 @@ Let's go over each parameter:
   It is used to create a dropdown menu offering the list's elements in the form of menu selections.
   Only one menu item can be selected. When an ``option`` list is used,
   the ``defval`` value must be one of the list's elements.
-  When ``option`` is used in input function allowing ``minval``, ``maxval`` or ``step``, 
+  When ``option`` is used in input functions allowing ``minval``, ``maxval`` or ``step``, 
   those parameters cannot be used simultaneously.
 - ``minval`` requires a "const int/float" argument, depending on the type of the ``defval`` value.
   It is the minimum valid value for the input field.
@@ -184,7 +184,7 @@ Its signature is:
 
     input(defval, title, tooltip, inline, group) → input int/float/bool/color/string | series float
 
-The function automatically detect the type of input by the ``defval`` argument used when calling it.
+The function automatically detects the type of input by analyzing the type of the ``defval`` argument used in the function call.
 This script shows all the supported types and the form-type returned by the function when
 used with each ``defval`` argument::
 
