@@ -80,13 +80,10 @@ Our :ref:`Style guide <PageStyleGuide>` recommends placing ``input.*()`` calls a
 
 Input function definitions typically contain many parameters,
 which allow you to control the default value of inputs, their limits, 
-and the organization in the "Inputs" tab.
+and their organization in the "Inputs" tab.
 
 All values returned by ``input.*()`` functions except "source" ones are of the "input" form
 (see the section on :ref:`forms <PageTypeSystem_Forms>` form more information).
-
-The next sections explain what each input function does.
-As we procede, we will explore the different ways you can use input functions and organize their display.
 
 
 
@@ -145,6 +142,8 @@ The ``minval``, ``maxval`` and ``step`` parameters are only present in the signa
 Input types
 -----------
 
+The next sections explain what each input function does.
+As we procede, we will explore the different ways you can use input functions and organize their display.
 
 
 Simple inputs
