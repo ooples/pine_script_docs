@@ -98,7 +98,7 @@ This uses the crosses detected on the previous bar::
     bgcolor(xUp ? color.new(color.lime, 80) : xDn ? color.new(color.fuchsia, 80) : na)
 
 This uses only confirmed `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
-values for its calculations::
+and EMA values for its calculations::
 
     //@version=5
     indicator("Repainting", "", true)
@@ -124,8 +124,8 @@ in the cross detection logic::
 
 **Notice that all these methods have one thing in common: while they prevent repainting, 
 they will also trigger signals later than repainting scripts. 
-This is an inevitable compromise if ones wants to avoid repainting;
-you can't have your cake and eat it too**.
+This is an inevitable compromise if ones wants to avoid repainting.
+You just can't have your cake and eat it too.**
 
 
 If we add a script on a chart,
