@@ -16,7 +16,6 @@ what's important is that you understand how your tools behave, and if that behav
 More important than repainting, perhaps, is that your indicator's plots and trade entries or exits be realistic.
 Plots that go back in time to plot pivot lines starting at the pivot, for example,
 may be great to impress the galery, but they mislead others — and perhaps yourself.
- by not leading you or others to believe it does things 
 
 In this page we will explore different causes of repainting.
 
