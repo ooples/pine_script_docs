@@ -70,34 +70,34 @@ where:
 
 These are examples of session strings:
 
-\"24x7\"
+``"24x7"``
    A 7-day, 24-hour session beginning at midnight.
 
-\"0000-0000:1234567\"
+``"0000-0000:1234567"``
    Equivalent to the previous example.
 
-"0000-0000"
+``"0000-0000"``
    Equivalent to the previous two examples, because the default days are ``1234567``.
 
-"0000-0000:23456"
+``"0000-0000:23456"``
    Same as previous example, but only Monday to Friday.
 
-"2000-1630:1234567"
+``"2000-1630:1234567"``
    An overnight session that begins at 20:00 and ends at 16:30 the next day.
    It is valid on all days of the week.
 
-"0930-1700:146"
+``"0930-1700:146"``
    A session that begins at 9:30 and ends at 17:00 on Sundays (1), Wednesdays (4) and Fridays (6).
 
-"1700-1700:23456"
+``"1700-1700:23456"``
    An *overnight session*. The Monday session starts Sunday at 17:00 and ends Monday at 17:00.
    It is valid Monday through Friday.
 
-"1000-1001:26"
+``"1000-1001:26"``
    A weird session that lasts only one minute on
    Mondays (2) and Fridays (6).
 
-"0900-1600,1700-2000"
+``"0900-1600,1700-2000"``
    A session that begins at 9:00, breaks from 16:00 to 17:00, and continues until 20:00.
    Applies to every day of the week.
 
