@@ -15,13 +15,7 @@ class PinePygmentsLexer(RegexLexer):
             (r'//.*?$', Comment), 
             (r'(for|if|else|var|varip|while|switch|export|import|series|simple|float|int|bool|string|color|line|label|box|table)\b', Keyword),
             (r'(open|high|low|close|volume|time|hl2|hlc3|ohlc4)\b', Name.Constant), # Built-in series 'open', 'high', ...
-            (r'(bar_index|dayofmonth|hour|minute|month|na|second|time_close|time_tradingday|timenow|year|'
-             r'(alertcondition|barcolor|bgcolor|bool|fill|fixnan|float|hline|hour|indicator|int|library|'
-             r'nz|plot|plotarrow|plotbar|plotcandle|plotchar|plotshape|string|timestamp|weekofyear|'
-             r'(strategy|input|plot|hline|alert|color|dayofweek|dividends|earnings|label|line|splits|box|table)(\..+)?|'
-             r'(adjustment|barmerge|barstate|currency|dayofweek|display|extend|format|location|'
-             r'math|position|scale|session|shape|size|syminfo|ta|text|timeframe|xloc|yloc|array|'
-             r'request|str|ticker)\..+)\b', Name.Entity), # Built-in functions and variables
+            (r'(bar_index|dayofmonth|hour|minute|month|na|second|time_close|time_tradingday|timenow|year|(alertcondition|barcolor|bgcolor|bool|fill|fixnan|float|hline|hour|indicator|int|library|nz|plot|plotarrow|plotbar|plotcandle|plotchar|plotshape|string|timestamp|weekofyear|(strategy|input|plot|hline|alert|color|dayofweek|dividends|earnings|label|line|splits|box|table)(\..+)?|(adjustment|barmerge|barstate|currency|dayofweek|display|extend|format|location|math|position|scale|session|shape|size|syminfo|ta|text|timeframe|xloc|yloc|array|request|str|ticker)\..+)\b', Name.Entity), # Built-in functions and variables
             (r'[\w\.]+', Name.Other),
             (r'\+|\-|\*|\/|\%|\=|\[|\]|and|or|not|\?|\:|\<|\>|\!', Operator),
             (r'\(|\)|\,', Punctuation),
