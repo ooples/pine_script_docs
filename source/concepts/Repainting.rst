@@ -17,7 +17,12 @@ More important than repainting, perhaps, is that your indicator's plots and trad
 Plots that go back in time to plot pivot lines starting at the pivot, for example,
 may be great to impress the galery, but they mislead others — and perhaps yourself.
 
-In this page we will explore different causes of repainting.
+In this page we will explore different causes of both repainting and misleading indicators.
+
+Many of the problems we discuss here are caused by improper programming techniques.
+Only a few are due to the way some built-in functions calculate, 
+and the way bars and bar sets are built on charts.
+
 
 
 Historical vs realtime calculations
@@ -124,7 +129,7 @@ in the cross detection logic::
 
 **Notice that all these methods have one thing in common: while they prevent repainting, 
 they will also trigger signals later than repainting scripts. 
-This is an inevitable compromise if ones wants to avoid repainting.
+This is an inevitable compromise if one wants to avoid repainting.
 You just can't have your cake and eat it too.**
 
 
