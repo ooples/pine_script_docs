@@ -27,6 +27,6 @@ Concepts
    Sessions
    Strategies
    Tables
-   Text
+   Text_and_shapes
    Time
    

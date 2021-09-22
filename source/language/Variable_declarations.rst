@@ -15,7 +15,7 @@ Variables are :ref:`identifiers <PageIdentifiers>` that hold values.
 They must be *declared* in your code before you use them.
 The syntax of variable declarations is:
 
-.. code-block::
+.. code-block:: text
 
     [<declaration_mode>] [<type>] <identifier> = <expression> | <structure>
     |

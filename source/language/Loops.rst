@@ -102,7 +102,7 @@ The `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__
 structure allows the repetitive execution of statements using a counter. 
 Its syntax is:
 
-.. code-block::
+.. code-block:: text
 
     [[<declaration_mode>] [<type>] <identifier> = ]for <identifier> = <expression> to <expression>[ by <expression>]
         <local_block_loop>
@@ -224,7 +224,7 @@ The `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__
 structure allows the repetitive execution of statements until a condition is true. 
 Its syntax is:
 
-.. code-block::
+.. code-block:: text
 
     [[<declaration_mode>] [<type>] <identifier> = ]while <expression>
         <local_block_loop>
