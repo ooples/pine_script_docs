@@ -5,6 +5,20 @@ Repainting
 
 We define repainting as: **script behavior causing historical vs realtime bar calculations or plots to behave differently**.
 
+Repainting can be caused by many factors, and >95% of indicators in existence repaint, following our definition. 
+Think of it; even widely used indicators like MACD and RSI repaint because they show one fixed value on historical bars,
+yet when running in realtime they will produce results that vary constantly until the realtime bar closes. 
+They thus behave differently on historical and realtime bars, which does not prevent many traders from using them.
+
+Repainting, per se, is thus not necessarily good or bad. Whether you decide to use repainting or non-repainting indicators,
+what's important is that you understand how your tools behave, and if that behavior is compatible with your objectives.
+
+More important than repainting, perhaps, is that your indicator's plots and trade entries or exits be realistic.
+Plots that go back in time to plot pivot lines starting at the pivot, for example,
+may be great to impress the galery, but they mislead others — and perhaps yourself.
+ by not leading you or others to believe it does things 
+
+In this page we will explore different causes of repainting.
 
 
 Historical vs realtime calculations
@@ -195,6 +209,15 @@ Repainting is possible in the following cases:
 
 #. When scripts use `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ variables
    to make calculations that can only be done in realtime (:ref:`more on varip here <PageVariableDeclarations_Varip>`).
+
+
+Misleading behavior
+-------------------
+
+If a script takes 5 bars to detect a pivot, then in the realtime bar, 
+pivots can only be detected 5 bars after they occur.
+Historical bars 
+
 
 
 Other types of repainting
