@@ -13,7 +13,7 @@ class PinePygmentsLexer(RegexLexer):
             (r'(\.\d+|[0-9]+\.[0-9]*)([eE][-+]?[0-9]+)?', Number.Float),
             (r'\s+', Text.Whitespace),
             (r'//.*?$', Comment), 
-            (r'(for|if|else|var|varip|while|switch|export|import|series|simple|float|int|bool|string|color|line|label|box|table)\b', Keyword),
+            (r'(for|if|else|var|varip|while|switch|export|import|series|simple|float|int|bool|string|color|line|label|box|table)\s', Keyword),
             (r'(open|high|low|close|volume|time|hl2|hlc3|ohlc4)\b', Name.Constant), # Built-in series 'open', 'high', ...
             (r'(bar_index|dayofmonth|hour|minute|month|na|second|time_close|time_tradingday|timenow|year|alertcondition|barcolor|'
              r'bgcolor|bool|fill|fixnan|float|hline|hour|indicator|int|library|nz|plot|plotarrow|plotbar|plotcandle|plotchar|'
