@@ -1,3 +1,5 @@
+.. _IndexMigrationGuides:
+
 Migration Guides
 ========
 

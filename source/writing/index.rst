@@ -1,3 +1,5 @@
+.. _IndexWriting::
+
 Writing scripts
 ===============
 

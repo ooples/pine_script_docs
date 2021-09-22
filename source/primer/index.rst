@@ -1,3 +1,5 @@
+.. _IndexPinePrimer:
+
 Pine primer
 ===========
 

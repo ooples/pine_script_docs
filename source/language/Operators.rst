@@ -23,7 +23,7 @@ Other operators are used to assign values to variables:
 - ``=`` is used to assign a value to a variable, **but only when you declare the variable** (the first time you use it)
 - ``:=`` is used to assign a value to a **previously declared variable**. The following operators can also be used in such a way: ``+=``, ``-=``, ``*=``, ``/=``, ``%=``
 
-As is explained in the :ref:`<PageTypeSystem_Forms>` page, *forms* and *types* play a critical role in determining the type of results that expressions yield.
+As is explained in the :ref:`Type system <PageTypeSystem>` page, *forms* and *types* play a critical role in determining the type of results that expressions yield.
 This, in turn, has an impact on how and with what functions you will be allowed to use those results. 
 Expressions always return a form of the strongest one used in the expression, e.g., if you multiply an "input int" with a "series int", 
 the expression will produce a "series int" result, which you will not be able to use as the argument to ``length`` in 
@@ -201,7 +201,7 @@ Note that the return values on each side of the ``:`` are expressions — not lo
 It is possible to refer to past values of :ref:`time series <PageTimeSeries>` using the 
 `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ history-referencing operator. 
 Past values are values a variable had on bars preceding the bar where the script is currently executing — the *current bar*.
-See the :ref:`<PageExecutionModel>` page for more information about the way scripts are executed on bars.
+See the :ref:`Execution model <PageExecutionModel>` page for more information about the way scripts are executed on bars.
 
 The `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ operator is used after a variable, expression or function call.
 The value used inside the square brackets of the operator is the offset in the past we want to refer to.
@@ -337,7 +337,7 @@ It says *use this variable that was declared earlier in my script, and give it a
 Variables which have been first declared, then reassigned using ``:=``, are called *mutable* variables.
 All the following examples are valid variable reassignments. 
 Don't fret if you can't yet make much sense of what the `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ thing does in there; 
-you can find out more about it in the :ref:`<PageExpressionsDeclarationsStatements_VariableDeclaration>` section::
+you can find out more about it :ref:`here <PageExpressionsDeclarationsStatements_VariableDeclaration>`::
 
     //@version=5
     indicator("", "", true)
@@ -375,5 +375,5 @@ Note that:
 - Pivots are detected five bars after the pivot actually occurs because our ``ta.pivothigh(5, 5)`` call
   says that we require five lower highs on both sides of a high point for it to be detected as a pivot.
 
-See the :ref:`<PageVariableDeclarations_VariableReassignment>` section for more information on how to reassign values to variables.
+See the :ref:`Variable reassignment <PageVariableDeclarations_VariableReassignment>` section for more information on how to reassign values to variables.
 

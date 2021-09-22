@@ -70,10 +70,10 @@ where:
 
 These are examples of session strings:
 
-"24x7"
+\"24x7\"
    A 7-day, 24-hour session beginning at midnight.
 
-"0000-0000:1234567"
+\"0000-0000:1234567\"
    Equivalent to the previous example.
 
 "0000-0000"

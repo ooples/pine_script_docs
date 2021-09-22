@@ -150,7 +150,7 @@ More information
 - The Pine built-in ``barstate.*`` variables that provide information on :ref:`the type of bar or the event <PageBarStates>` 
   where the script is executing. The page where they are documented also contains a script that allows you to visualize 
   the difference between elapsed realtime and historical bars, for example.
-- The :ref:`<PageStrategies>` page explains the details of strategy calculations, which are not identical to those of indicators.
+- The :ref:`Strategies <PageStrategies>` page explains the details of strategy calculations, which are not identical to those of indicators.
 
 
 

@@ -28,7 +28,7 @@ Only a few are due to the way some built-in functions calculate, and the way bar
 Historical vs realtime calculations
 -----------------------------------
 
-Historical data does not include records of intra-bar movements of price; only
+Historical data does not include records of intrabar movements of price; only
 `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__,
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__,
 `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ and

@@ -80,7 +80,7 @@ which require them to be original and well-documented.
 If want to use Pine scripts for your own use, simply write them in the Pine Editor and add them to your chart from there; 
 you don't have to publish them to use them. If you want to share your scripts with just a few friends, 
 you can publish them privately and send your friends the browser's link to your private publication. 
-See :ref:` <PagePublishing>` for more information on the subject.
+See the page on :ref:`Publishing <PagePublishing>` for more information.
 
 
 
@@ -116,12 +116,12 @@ As you should have already done in :ref:` <PageFirstIndicator>`, copy this docum
 
 This is how the `Pine User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__ you are reading is organized:
 
-- The :doc:`<../language>` section explains the main components of the Pine language and how scripts execute.
-- The :doc:`<../concepts>` section is more task-oriented. It explains how to do things in Pine.
-- The :doc:`<../writing>` section explores tools and tricks that will help you write and publish scripts.
-- The :doc:`<../faq>` section answers common questions from Pine coders.
-- The :doc:`<../Release_notes>` page is where you can follow the frequent updates to the Pine.
-- The :doc:`<../migration_guides>` section explains how to port between different versions of Pine.
-- The :ref:`<../_PageWhereCanIGetMoreInformation>` page lists other useful Pine-related content, including where to ask questions when you are stuck on code.
+- The :ref:`Language <IndexLanguage>` section explains the main components of the Pine language and how scripts execute.
+- The :ref:`Concepts <IndexConcepts>` section is more task-oriented. It explains how to do things in Pine.
+- The :ref:`Writing <IndexWriting>` section explores tools and tricks that will help you write and publish scripts.
+- The :ref:`FAQ <PageFaq>` section answers common questions from Pine coders.
+- The :ref:`Release Notes <PageReleaseNotes>` page is where you can follow the frequent updates to the Pine.
+- The :ref:`Migration guides <IndexMigrationGuides>` section explains how to port between different versions of Pine.
+- The :ref:`Where can I get more information <PageWhereCanIGetMoreInformation>` page lists other useful Pine-related content, including where to ask questions when you are stuck on code.
 
 We wish you a successful journey with Pine... and trading!
