@@ -5,23 +5,23 @@ Repainting
 
 We define repainting as: **script behavior causing historical vs realtime bar calculations or plots to behave differently**.
 
-Repainting can be caused by many factors, and >95% of indicators in existence repaint, following our definition. 
-Think of it; even widely used indicators like MACD and RSI repaint because they show one fixed value on historical bars,
+Repainting behavior is widespread and can be caused by many factors. 
+Following our definition, our estimate is that more than 95% of indicators in existence repaint. 
+Widely used indicators like MACD and RSI repaint, for example, because they show one fixed value on historical bars,
 yet when running in realtime they will produce results that vary constantly until the realtime bar closes. 
 They thus behave differently on historical and realtime bars, which does not prevent many traders from using them.
 
-Repainting, per se, is thus not necessarily good or bad. Whether you decide to use repainting or non-repainting indicators,
-what's important is that you understand how your tools behave, and if that behavior is compatible with your objectives.
+Repainting, per se, is not necessarily good or bad. Whether you decide to use repainting or non-repainting indicators,
+what's important is that you understand how the tools you use behave, and if their behavior is compatible with your objectives.
 
-More important than repainting, perhaps, is that your indicator's plots and trade entries or exits be realistic.
-Plots that go back in time to plot pivot lines starting at the pivot, for example,
+More important than repainting, perhaps, is that your indicator's plots, and trade entries and exits, be realistic.
+Indicators that go back in time to plot pivot lines starting at the pivot, for example,
 may be great to impress the galery, but they mislead others — and perhaps yourself.
 
-In this page we will explore different causes of both repainting and misleading indicators.
+In this page, we will explore different causes of both repainting and misleading indicators.
 
 Many of the problems we discuss here are caused by improper programming techniques.
-Only a few are due to the way some built-in functions calculate, 
-and the way bars and bar sets are built on charts.
+Only a few are due to the way some built-in functions calculate, and the way bars and bar sets are built on charts.
 
 
 
