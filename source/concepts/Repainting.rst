@@ -341,7 +341,7 @@ as they are not representative of the strategy's behavior in realtime.
 Plotting in the past
 --------------------
 
-Script detecting pivots after, let's say, 5 bars have elapsed, will often go back in the past to plot pivot levels or values on the actual pivot 5 bars in the past.
+Scripts detecting pivots after 5 bars have elapsed will often go back in the past to plot pivot levels or values on the actual pivot, 5 bars in the past.
 This will often cause unsuspecting traders looking at plots on historical bars to infer that when the pivot happens in realtime,
 the same plots will apppear on the pivot.
 
