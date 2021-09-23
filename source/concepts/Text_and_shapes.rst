@@ -60,7 +60,7 @@ These are a few things to keep in mind concerning Pine strings:
   script to get an idea of what can be done with Unicode characters.
 - The color or size of text can sometimes be controlled using function parameters,
   but no inline attributes (like bold, italics, monospace, etc.) can be attributed.
-- Text from Pine scripts always displays on the chart in the Trebuchet MS font, which is used in many TradingView text,
+- Text from Pine scripts always displays on the chart in the Trebuchet MS font, which is used in many TradingView texts,
   including this one.
 
 This script displays text using the four methods available in Pine::
