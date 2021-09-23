@@ -343,7 +343,7 @@ Plotting in the past
 
 Scripts detecting pivots after 5 bars have elapsed will often go back in the past to plot pivot levels or values on the actual pivot, 5 bars in the past.
 This will often cause unsuspecting traders looking at plots on historical bars to infer that when the pivot happens in realtime,
-the same plots will apppear on the pivot.
+the same plots will apppear on the pivot when it occurs, as opposed to when it is detected.
 
 Let's look at a script showing the price of high pivots by placing the price in the past, 5 bars after the pivot was detected::
 
