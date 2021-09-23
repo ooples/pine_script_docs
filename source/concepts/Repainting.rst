@@ -192,7 +192,6 @@ Let's look at a script showing the difference between repainting and non-repaint
     //@version=5
     indicator("Repainting vs non-repainting `request.security()`", "", true)
     var BLACK_MEDIUM = color.new(color.black, 50)
-    var BLACK_LIGHT = color.new(color.black, 80)
     var ORANGE_LIGHT = color.new(color.orange, 80)
     
     tfInput = input.timeframe("1")
@@ -202,7 +201,7 @@ Let's look at a script showing the difference between repainting and non-repaint
     
     indexHighTF = barstate.isrealtime ? 1 : 0
     indexCurrTF = barstate.isrealtime ? 0 : 1
-    nonRepaintingClose = request.security(syminfo.tickerid, "1", close[indexHighTF])[indexCurrTF]
+    nonRepaintingClose = request.security(syminfo.tickerid, tfInput, close[indexHighTF])[indexCurrTF]
     plot(nonRepaintingClose, "Non-repainting close", color.fuchsia, 3)
     
     newTF = ta.change(time(tfInput))
@@ -211,25 +210,54 @@ Let's look at a script showing the difference between repainting and non-repaint
     if newTF
         label.new(bar_index, na, "↻", yloc = yloc.abovebar, textcolor = color.black, style = label.style_none, size = size.large)
 
-This is what its output looks like on a 5sec chart that has been running with the script for a few minutes:
+This is what its output looks like on a 5sec chart that has been running the script for a few minutes:
 
 .. image:: images/Repainting-RepaintingRequestSecurityCalls-01.png
 
 Note that:
 
-- The orange background identifies the realtime, and elapsed realtime bars.
+- The orange background identifies the realtime bar, and elapsed realtime bars.
 - A black curved arrow indicates when a new higher timeframe comes in.
+- The thick gray line shows the repainting `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call
+  used to initialize ``repaintingClose``.
+- The fuchsia line shows the non-repainting `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call
+  used to initialize ``nonRepaintingClose``.
+- The behavior of the repainting line is completely different on historical bars and in realtime. On historical bars,
+  it shows the new value of a completed timeframe on the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
+  of the bar where it completes. It then stays stable until another timeframe completes. The problem is that in realtime,
+  it follows the current `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ price,
+  so it moves all the time and changes on each bar.
+- The behavior of the non-repainting, fuchsia line, in contrast, behaves exactly the same way on historical bars and in realtime.
+  It updates on the bar following the completion of the higher timeframe, and doesn't move until the bar after another higher timeframe completes.
+  Thus, it is more reliable.
 
+This script shows a ``nonRepaintingSecurity()`` function that can be used to do the same as our non-repainting code in the previous example::
 
+    //@version=5
+    indicator("Non-repainting `nonRepaintingSecurity()`", "", true)
+    
+    tfInput = input.timeframe("1")
+    
+    nonRepaintingSecurity(sym, tf, src) =>
+        request.security(sym, tf, close[barstate.isrealtime ? 1 : 0])[barstate.isrealtime ? 0 : 1]
+    
+    nonRepaintingClose = nonRepaintingSecurity(syminfo.tickerid, "1", close)
+    plot(nonRepaintingClose, "Non-repainting close", color.fuchsia, 3)
 
+Another way that can be used to produce non-repainting higher timeframe data is this,
+which use an offset of ``[1]`` on the series, and lookahead::
 
-Unreproducible realtime behavior
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    request.security(sym, tf, close[1], lookahead = barmerge.lookahead_on)
+
+While it will produce the same non-repainting behavior as ``nonRepaintingSecurity()`` in realtime,
+it has the disadvantage of showing the higher timeframe values one bar earlier on historical bars.
+This may look great, but the problem is that it does not reflect its behavior in realtime.
+While the method used in ``nonRepaintingSecurity()`` is more complex, we find it more reliable.
 
 
 
 \`varip\`
-"""""""""
+^^^^^^^^^
 
 Some calculations possible on realtime bars cannot be reproduced on historical bars. 
 Scripts using the `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ 
@@ -242,7 +270,7 @@ but their logic cannot be backtested, nor can their plots on historical bars ref
 
 
 Bar state built-ins
-"""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^
 
 Scripts using :ref:`bar states <PageBarStates>` may or may not repaint.
 As we have seen in the previous section, using `barstate.isconfirmed <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__
@@ -257,26 +285,22 @@ Using the other bar state variables will usually cause some type of behavioral d
 
 
 Using \`request.security()\` at lower timeframes
-""""""""""""""""""""""""""""""""""""""""""""""""
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Some scripts use `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
+to request data from a timeframe **lower** than the chart's timeframe.
+This works on historical bars but will not work in realtime.
 
 
+Strategies
+^^^^^^^^^^
+
+Strategies using ``calc_on_every_tick = true`` cannot 
 
 
-
-
-
-
-
-#. Strategies using ``calc_on_every_tick = true``.
-   A strategy with parameter ``calc_on_every_tick = false`` may also be
+A strategy with parameter ``calc_on_every_tick = false`` may also be
    prone to repainting, but to a lesser degree.
 
-#. Using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
-   to request data from a timeframe **lower** than the timeframe of chart's main symbol
-   (more on the subject in the :ref:`Requesting data of a lower timeframe <PageOtherTimeframesAndData_RequestingDataOfALowerTimeframe>` section).
-   When using lower timeframes in realtime, using ``lookahead = barmerge.lookahead_off`` will produce repainting.
-   It is less probalbe with ``lookahead = barmerge.lookahead_on``,
-   but may still occur when 1 and 5 minute updates outrun each other.
 
 #. All scripts with calculations depending on a *starting point*.
    At the beginning of the dataset, intraday data gets aligned to the beginning of the week, month or
@@ -290,18 +314,6 @@ Using \`request.security()\` at lower timeframes
      functions (due to peculiarities in their algorithm).
    * Any backtesting strategy, regardless of the argument used for ``calc_on_every_tick``.
 
-   There is a dependency between the timeframe and the alignment of a starting point:
-
-   * 1 - 14 minutes: aligns to the beginning of a week.
-   * 15 - 29 minutes: aligns to the beginning of a month.
-   * from 30 minutes and higher: aligns to the beginning of a year.
-
-   The following limitations of history lengths are taken into account when
-   processing the data:
-	
-   * 20000 historical bars for the Premium plan.
-   * 10000 historical bars for Pro and Pro+ plans.
-   * 5000 historical bars for other plans.
 
 #. Changes in historical data, for example, due to a *split*.
 
@@ -337,6 +349,35 @@ Dataset variations
 Fluid datasets
 ^^^^^^^^^^^^^^
 
+Scripts begin executing on the chart's first historical bar, and then execute on each bar sequentially, 
+as is explained in this manual's page on Pine's :ref:`execution model <PageExecutionModel>`.
+If the first bar changes, then the script will often not calculate the same way it did when the dataset began at a different point in time.
+
+The following factors have an impact on the quantity of bars you can see on your charts:
+
+- The type of account you hold
+- The historical data available from the data supplier
+- The alignment requirements of the dataset, which determine its *starting point*
+
+These are the account-specific bar limits:
+	
+- 20000 historical bars for the Premium plan.
+- 10000 historical bars for Pro and Pro+ plans.
+- 5000 historical bars for other plans.
+
+Starting points are determined using the following rules, which depend on the chart's timeframe:
+
+- **1 - 14 minutes**: aligns to the beginning of a week.
+- **15 - 29 minutes**: aligns to the beginning of a month.
+- **30 minutes and higher**: aligns to the beginning of a year.
+
+As time goes by, the combinations of these factors cause your chart's history to start at different points in time.
+This often has an impact on your scripts calculations, because calculations changes in early bars can ripple through all the other bars in the dataset. 
+Using functions like `ta.valuewhen() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}valuewhen>`__,
+`ta.barssince() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}barssince>`__ or
+`ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__, for example,
+will yield results that vary with early history.
+
 
 
 Data feed revisions
@@ -347,28 +388,4 @@ When realtime bars elapse, exchanges/brokers sometimes make what are usually sma
 When the chart is refreshed or the script is re-executed on those elapsed realtime bars,
 they will then be built and calculated using the historical data, which will contain those usually small price revisions, if any have been made.
 
-
-
-Other types of repainting
--------------------------
-
-Other types of behavior referred to as *repainting* include:
-
-
-
-
-
-
-
-
-
-
-
-Believing that repainting is inherently bad, is bad, and ignorant traders who believe this are often disappointed to learn that in order to avoid repainting,
-they must work with late information.
-
-
-More important than repainting, perhaps, is that your indicator's plots, and trade entries and exits, be realistic.
-Indicators that go back in time to plot pivot lines starting at the pivot, for example,
-may be great to impress the gallery, but they mislead others — and perhaps yourself.
-
+Historical data may also be revised for other reasons, e.g., for stock splits.
