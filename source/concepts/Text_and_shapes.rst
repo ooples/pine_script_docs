@@ -172,7 +172,9 @@ to achieve a similar effect::
 
 This method has the inconvenience that, since there is no relative positioning mechanism with
 `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
-one must shift the circles down using something like `ta.atr <https://www.tradingview.com/pine-script-reference/v5/#var_ta{dot}tr>`__
+one must shift the circles down using something like 
+`ta.atr <https://www.tradingview.com/pine-script-reference/v5/#var_ta{dot}tr>`__
+(the bar's "True Range"):
 
 .. image:: images/TextAndShapes-Plotchar-03.png
 
