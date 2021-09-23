@@ -9,13 +9,14 @@ Release notes
 This page contains release notes of notable changes in Pine Script.
 
 
-.. _v5ReleaseNotes:
+
+.. _PageReleaseNotes_September2021:
 
 September 2021
 --------------
 Pine v5 is here! A number of new features were added in this release.
 
-Libraries are a new type of publication that allows you to create custom functions for reuse in other scripts. See the :doc:`/essential/Libraries` section of the User Manual.
+Libraries are a new type of publication that allows you to create custom functions for reuse in other scripts. See the :ref:`Libraries <PageLibraries>` page of the User Manual.
 
 Parameter definitions in user-created functions can now include a default value: a function defined as ``f(x = 1) => x`` will return 1 when called as ``f()``, i.e., without providing an argument for its ``x`` parameter.
 
@@ -44,7 +45,9 @@ New variables and functions provide better script visibility on strategy informa
 * ``strategy.convert2symbol()``
 * ``strategy.account_currency``
 
-Many built-in variables, functions, and function arguments were renamed in Pine v5. The behavior of some built-in functions was also improved. These changes implement a more rational nomenclature and provide a more orderly growth path for the many additions planned for Pine. Instructions on how to use the v5 converter and the full list of changes in v5 can be found in the :doc:`/migration_guides/v4_to_v5_migration_guide`.
+Many built-in variables, functions, and function arguments were renamed in Pine v5. The behavior of some built-in functions was also improved. 
+These changes implement a more rational nomenclature and provide a more orderly growth path for the many additions planned for Pine. 
+Instructions on how to use the v5 converter and the full list of changes in v5 can be found in the :ref:`Migration guide to Pine v5 <PageToPineVersion5>`.
 
 
 July 2021
@@ -83,7 +86,9 @@ May 2021
 --------
 Improved backtesting functionality by adding the Leverage mechanism.
 
-Added support for table drawings and functions for working with them. Tables are unique objects that are not anchored to specific bars; they float in a script’s space, independently of the chart bars being viewed or the zoom factor used. For more information, see the :doc:`/essential/Tables` User Manual page.
+Added support for table drawings and functions for working with them. 
+Tables are unique objects that are not anchored to specific bars; they float in a script’s space, independently of the chart bars being viewed or the zoom factor used. 
+For more information, see the :ref:`Tables <PageTables>`` User Manual page.
 
 New functions were added:
 
@@ -92,9 +97,10 @@ New functions were added:
 * ``color.r(color)``, ``color.g(color)``, ``color.b(color)``, ``color.t(color)`` - retrieves the value of one of the color components.
 * ``array.from()`` - takes a variable number of arguments with one of the types: ``int``, ``float``, ``bool``, ``string``, ``label``, ``line``, ``color``, ``box``, ``table`` and returns an array of the corresponding type. 
 
-A new ``box`` drawing has been added to Pine, making it possible to draw rectangles on charts using the Pine syntax. For more details see the `Pine Script reference <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ and the :doc:`/essential/Drawings` User Manual page.
+A new ``box`` drawing has been added to Pine, making it possible to draw rectangles on charts using the Pine syntax. 
+For more details see the `Pine Script reference <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ and the :ref:`Lines and boxes <PageLinesAndBoxes>` User Manual page.
 
-The ``color.new`` function can now accept series and input arguments, in which case, the colors will be calculated at runtime. For more information about this, see our :doc:`/essential/Colo` User Manual page.
+The ``color.new`` function can now accept series and input arguments, in which case, the colors will be calculated at runtime. For more information about this, see our :ref:`Colors <PageColors>` User Manual page.
 
 
 
