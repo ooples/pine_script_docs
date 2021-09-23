@@ -48,7 +48,7 @@ These are a few things to keep in mind concerning Pine strings:
   `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
   `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ 
   require a "const string" argument, it cannot contain values such as prices that can only be known on the bar.
-- To include such "series" values in `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__
+- To include "series" values in text displayed using `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__,
   they will first need to be converted to strings using 
   `str.tostring() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}tostring>`__.
 - Characters displayed by all these functions can be Unicode characters, which may include Unicode symbols.
