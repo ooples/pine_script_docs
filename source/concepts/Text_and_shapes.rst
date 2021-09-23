@@ -131,7 +131,7 @@ Note that:
 
 `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__
 also works well to identify specific points on the chart or to validate that conditions
-are ``true`` when we expect it. This example displays an up arrow under bars where
+are ``true`` when we expect them to be. This example displays an up arrow under bars where
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__,
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and
 `volume <https://www.tradingview.com/pine-script-reference/v5/#var_volume>`__
@@ -149,6 +149,7 @@ Note that:
 - We use ``(na(volume) or ta.rising(volume, 2))`` so our script will work on symbols without 
   `volume <https://www.tradingview.com/pine-script-reference/v5/#var_volume>`__ data.
   If we did not make provisions for when there is no `volume <https://www.tradingview.com/pine-script-reference/v5/#var_volume>`__ data,
+  which is what ``na(volume)`` does by being ``true`` when there is no volume, 
   the ``longSignal`` variable's value would never be ``true`` because ``ta.rising(volume, 2)`` yields ``false`` in those cases.
 - Because `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__
   is now actually displaying a character on the chart, we use ``size = size.tiny`` to control its size.
