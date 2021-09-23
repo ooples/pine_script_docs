@@ -76,13 +76,16 @@ This script displays text using the four methods available in Pine::
 
 Note that:
 
-- The method used to display each text is shown with the text, except for the lime up arrows displayed using
+- The method used to display each text string is shown with the text, except for the lime up arrows displayed using
   `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__, as it can only displayone character.
 - Label and table calls can be inserted in conditional structures to control when their are executed,
-  whereas   `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
+  whereas `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
   `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ cannot.
   Their conditional plotting must be controled using their first argument, 
   which is a "series bool" whose ``true`` or ``false`` value controls when the text is displayed.
+- Numeric values displayed in the table and labels is first converted to a string using
+  `str.tostring() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}tostring>`__
+- We use the ``+`` operator to concatenate string components.
 - `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ is designed to display a shape
   with accompanying text. Its ``size`` parameter controls the size of the shape, not of the text.
   We use `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ for its ``color`` argument
