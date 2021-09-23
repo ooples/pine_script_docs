@@ -17,6 +17,12 @@ yet when running in realtime they will produce results that vary constantly unti
 They thus behave differently on historical and realtime bars, which does not make them less useful, nor prevent knowledgeable traders from using them.
 
 **Repainting, per se, is not necessarily good or bad.**
+
+
+
+For script users
+^^^^^^^^^^^^^^^^
+
 You can very well decide to use repainting indicators if you understand how they behave and they suit your trading methodology.
 Don't be one of those traders who slap "repaint" sentences on published scripts as if it discredits them;
 doing so only reveals your incomprehension of the subject.
@@ -37,12 +43,32 @@ and if their behavior is compatible with your objectives, repainting or not.
 As you will learn if you read this page, repainting is a complex matter. 
 It has many faces, and many causes.
 
-.. note:: Most of the problems we discuss here are caused by improper programming techniques. Only a few are due to the way some built-in functions calculate, and the way bars and bar sets are built on charts.
+
+For Pine coders
+---------------
+
+As we discussed in the previous section, not all types of repainting behavior must necessarily be avoided at all costs.
+It is up you, as a programmer, to decide which repainting logic you are OK with in designing your script, and which you want to avoid.
+We hope this page helps you better understand the dynamics at play, so you can make better design decisions concerning your trading tools.
+
+Whatever your design decisions are, if you publish your script, you should explain them to traders so they can understand how you script behaves.
+
+We will explore some of the causes of repainting, and discuss solutions when some exist.
+We survey three broad categories of repainting causes:
+
+- Historical vs realtime calculations
+- Plotting in the past
+- Dataset variations
 
 
 
 Historical vs realtime calculations
 -----------------------------------
+
+
+
+Fluid data values
+^^^^^^^^^^^^^^^^^
 
 Historical data does not include records of intrabar movements of price; only
 `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__,
@@ -54,7 +80,7 @@ Conversely, on realtime bars (bars running when the instrument's market is open)
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__,
 `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ and
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ values are not fixed;
-they can changes values many times before the realtime bar closes and its HLC values are fixed.
+they can changes values many times before the realtime bar closes and its HLC values are fixed. They are *fluid*.
 This leads to a script sometimes working differently on historical data and in real time, 
 where only the `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ price will not change during the bar.
 
@@ -149,20 +175,48 @@ This is an inevitable compromise if one wants to avoid repainting.
 You just can't have your cake and eat it too.**
 
 
-If we add a script on a chart,
-wait until it calculates on a number of realtime bars and then reload the page,
-we will sometimes see a script's plots change slightly. This behavior is one of a few
-different types of behaviors commonly referred to as *indicator repainting*.
 
-Not all indicators are subject to the types of repainting we discuss here.
-In most cases it depends on whether or not certain functions or language
-constructs are used in the code.
+Unreproducible realtime behavior
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Please note that this repainting effect
-is **not** a bug; it is the result of the inherent differences between historic
-bars and realtime bar information on TradingView.
 
-Repainting is possible in the following cases:
+
+\`varip\`
+"""""""""
+
+Some calculations possible on realtime bars cannot be reproduced on historical bars. 
+Scripts using the `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ 
+declaration mode for variables (see our section on :ref:`varip  <PageVariableDeclarations_Varip>` for more information)
+save information across realtime updates, which cannot be reproduced on historical bars,
+because these have only OHLC information, so no intermediary price movements.
+Such scripts may be very useful in realtime, including to generate alerts,
+but their logic cannot be backetested, nor can their plots on historical bars reflect calculations that will be done in realtime.
+
+
+
+Bar state built-ins
+"""""""""""""""""""
+
+Scripts using :ref:`bar states <PageBarStates>` may or may not repaint.
+As we have seen in the previous section, using `barstate.isconfirmed <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__
+is actually one way to **avoid** repainting that **will** reproduce on historical bars, which are always "confirmed".
+Uses of other bar states such as `barstate.isnew <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isnew>`__,
+however, will lead to repainting. The reason is that on historical bars, 
+`barstate.isnew <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isnew>`__ is ``true`` on the bar's
+`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__, yet in realtime, it is ``true`` on the bar's
+`open <https://www.tradingview.com/pine-script-reference/v5/#open>`__. 
+Using the other bar state variables will usually cause some type of behavioral discrepancy between historical and realtime bars.
+
+
+
+\`request.security()\`
+""""""""""""""""""""""
+
+
+
+
+
+
 
 #. Strategies using ``calc_on_every_tick = true``.
    A strategy with parameter ``calc_on_every_tick = false`` may also be
@@ -178,13 +232,13 @@ Repainting is possible in the following cases:
     plot(close)
     plot(c, color = color.red)
 
-   This study will calculate differently on real-time and
+   This indicator will calculate differently on real-time and
    historical data, regardless of ``lookahead`` parameter's value (see
    :ref:`our discussion of lookahead <PageOtherTimeframesAndData_UnderstandingLookahead>`).
 
 #. Using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
    to request data from a timeframe **lower** than the timeframe of chart's main symbol
-   (more on the subject :ref:`here <PageOtherTimeframesAndData_RequestingDataOfALowerTimeframe>`).
+   (more on the subject in the :ref:`Requesting data of a lower timeframe <PageOtherTimeframesAndData_RequestingDataOfALowerTimeframe>` section).
    When using lower timeframes in realtime, using ``lookahead = barmerge.lookahead_off`` will produce repainting.
    It is less probalbe with ``lookahead = barmerge.lookahead_on``,
    but may still occur when 1 and 5 minute updates outrun each other.
@@ -231,12 +285,18 @@ Repainting is possible in the following cases:
    to make calculations that can only be done in realtime (:ref:`more on varip here <PageVariableDeclarations_Varip>`).
 
 
-Misleading behavior
--------------------
+
+Plotting in the past
+--------------------
 
 If a script takes 5 bars to detect a pivot, then in the realtime bar, 
 pivots can only be detected 5 bars after they occur.
 Historical bars 
+
+
+
+Dataset variations
+------------------
 
 
 
