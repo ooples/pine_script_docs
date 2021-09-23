@@ -91,7 +91,8 @@ Note that:
   We use `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ for its ``color`` argument
   so that the shape is not visible.
 - Contrary to other texts, the table text will not move as you scroll or scale the chart.
-
+- Some text strings contain the 🠇 Unicode arrow (U+1F807).
+- Some text strings contain the ``\n`` sequence that represents a new line.
 
 
 \`plotchar()\`
@@ -114,11 +115,20 @@ This function is useful to display pre-defined shapes and/or text on bars. It ha
 
     plotshape(series, title, style, location, color, offset, text, textcolor, editable, size, show_last, display) → void
 
+See the `Reference Manual entry for plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__
+for details on its parameters.
+
+Let's have 
+
 
 
 Labels
 ------
 
+Labels use a completely different mechanism that 
+`plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
+`plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__
+to position text in both *x* (which chart bar) and *y* (the price level) coordinates.
 
 Starting with Pine v4, indicators and strategies can
 create *drawing objects* on the chart. Three types of
