@@ -209,30 +209,30 @@ shape. The available styles are:
 | ``shape.labeldown``      | |Plotshape_labeldown|    | |Labeldown_with_text|    |
 +--------------------------+--------------------------+--------------------------+
 
-.. |Plotshape_xcross| image:: images/Plotshape_xcross.png
-.. |Xcross_with_text| image:: images/Xcross_with_text.png
-.. |Plotshape_cross| image:: images/Plotshape_cross.png
-.. |Cross_with_text| image:: images/Cross_with_text.png
-.. |Plotshape_circle| image:: images/Plotshape_circle.png
-.. |Circle_with_text| image:: images/Circle_with_text.png
-.. |Plotshape_triangleup| image:: images/Plotshape_triangleup.png
-.. |Triangleup_with_text| image:: images/Triangleup_with_text.png
-.. |Plotshape_triangledown| image:: images/Plotshape_triangledown.png
-.. |Triangledown_with_text| image:: images/Triangledown_with_text.png
-.. |Plotshape_flag| image:: images/Plotshape_flag.png
-.. |Flag_with_text| image:: images/Flag_with_text.png
-.. |Plotshape_arrowup| image:: images/Plotshape_arrowup.png
-.. |Arrowup_with_text| image:: images/Arrowup_with_text.png
-.. |Plotshape_arrowdown| image:: images/Plotshape_arrowdown.png
-.. |Arrowdown_with_text| image:: images/Arrowdown_with_text.png
-.. |Plotshape_square| image:: images/Plotshape_square.png
-.. |Square_with_text| image:: images/Square_with_text.png
-.. |Plotshape_diamond| image:: images/Plotshape_diamond.png
-.. |Diamond_with_text| image:: images/Diamond_with_text.png
-.. |Plotshape_labelup| image:: images/Plotshape_labelup.png
-.. |Labelup_with_text| image:: images/Labelup_with_text.png
-.. |Plotshape_labeldown| image:: images/Plotshape_labeldown.png
-.. |Labeldown_with_text| image:: images/Labeldown_with_text.png
+.. |Plotshape_xcross| image:: images/TextAndShapes-Plotshape-Xcross.png
+.. |Xcross_with_text| image:: images/TextAndShapes-Plotshape-Xcross_with_text.png
+.. |Plotshape_cross| image:: images/TextAndShapes-Plotshape-Cross.png
+.. |Cross_with_text| image:: images/TextAndShapes-Plotshape-Cross_with_text.png
+.. |Plotshape_circle| image:: images/TextAndShapes-Plotshape-Circle.png
+.. |Circle_with_text| image:: images/TextAndShapes-Plotshape-Circle_with_text.png
+.. |Plotshape_triangleup| image:: images/TextAndShapes-Plotshape-Triangleup.png
+.. |Triangleup_with_text| image:: images/TextAndShapes-Plotshape-Triangleup_with_text.png
+.. |Plotshape_triangledown| image:: images/TextAndShapes-Plotshape-Triangledown.png
+.. |Triangledown_with_text| image:: images/TextAndShapes-Plotshape-Triangledown_with_text.png
+.. |Plotshape_flag| image:: images/TextAndShapes-Plotshape-Flag.png
+.. |Flag_with_text| image:: images/TextAndShapes-Plotshape-Flag_with_text.png
+.. |Plotshape_arrowup| image:: images/TextAndShapes-Plotshape-Arrowup.png
+.. |Arrowup_with_text| image:: images/TextAndShapes-Plotshape-Arrowup_with_text.png
+.. |Plotshape_arrowdown| image:: images/TextAndShapes-Plotshape-Arrowdown.png
+.. |Arrowdown_with_text| image:: images/TextAndShapes-Plotshape-Arrowdown_with_text.png
+.. |Plotshape_square| image:: images/TextAndShapes-Plotshape-Square.png
+.. |Square_with_text| image:: images/TextAndShapes-Plotshape-Square_with_text.png
+.. |Plotshape_diamond| image:: images/TextAndShapes-Plotshape-Diamond.png
+.. |Diamond_with_text| image:: images/TextAndShapes-Plotshape-Diamond_with_text.png
+.. |Plotshape_labelup| image:: images/TextAndShapes-Plotshape-Labelup.png
+.. |Labelup_with_text| image:: images/TextAndShapes-Plotshape-Labelup_with_text.png
+.. |Plotshape_labeldown| image:: images/TextAndShapes-Plotshape-Labeldown.png
+.. |Labeldown_with_text| image:: images/TextAndShapes-Plotshape-Labeldown_with_text.png
 
 
 
