@@ -57,7 +57,7 @@ As we discussed in the previous section, not all types of repainting behavior mu
 We hope this page helps you better understand the dynamics at play, so that you can make better design decisions concerning your trading tools.
 This page's content should help you avoid making the most common coding mistakes that lead to repainting or misleading plots.
 
-Whatever your design decisions are, if you publish your script, you should explain them to traders so they can understand how you script behaves.
+Whatever your design decisions are, if you publish your script, you should explain them to traders so they can understand how your script behaves.
 
 Let's explore some of the causes of repainting, and discuss solutions when they exist.
 We will survey three broad categories of repainting causes:
@@ -230,7 +230,7 @@ Note that:
   so it moves all the time and changes on each bar.
 - The behavior of the non-repainting, fuchsia line, in contrast, behaves exactly the same way on historical bars and in realtime.
   It updates on the bar following the completion of the higher timeframe, and doesn't move until the bar after another higher timeframe completes.
-  Thus, it is more reliable. Note that while new higher timeframe data comes in at the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
+  It is more reliable and does not mislead script users. Note that while new higher timeframe data comes in at the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
   of historical bars, it will be available on the `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__
   of the same bar in realtime.
 
@@ -360,6 +360,17 @@ Note that:
 - This script repaints because an elapsed realtime bar showing no price may get a price placed on it if it is identified as a pivot, 5 bars after the actual pivot occurs.
 - The display looks great, but it can be misleading.
 
+The best solution to this problem when developing script for others is to plot **without** an offset by default,
+but give the option for script users to turn on plotting in the past through inputs, 
+so they are necessarily aware of what the script is doing, e.g.::
+
+    //@version=5
+    indicator("Plotting in the past", "", true)
+    plotInThePast = input(false, "Plot in the past")
+    pHi = ta.pivothigh(5, 5)
+    if not na(pHi)
+        label.new(bar_index[plotInThePast ? 5 : 0], na, str.tostring(pHi, format.mintick) + "\n🠇", yloc = yloc.abovebar, style = label.style_none, textcolor = color.black, size = size.normal)
+
 
 
 Dataset variations
@@ -374,7 +385,7 @@ Scripts begin executing on the chart's first historical bar, and then execute on
 as is explained in this manual's page on Pine's :ref:`execution model <PageExecutionModel>`.
 If the first bar changes, then the script will often not calculate the same way it did when the dataset began at a different point in time.
 
-The following factors have an impact on the quantity of bars you can see on your charts:
+The following factors have an impact on the quantity of bars you see on your charts, and their *starting point*:
 
 - The type of account you hold
 - The historical data available from the data supplier

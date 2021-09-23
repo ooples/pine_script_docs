@@ -10,6 +10,60 @@ Text and shapes
 Introduction
 ------------
 
+Besides :ref:`tables <PageTables>`, Pine has three functions to display text on charts:
+
+- `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__
+- `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__
+- `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__
+
+Which one you to use depends on your needs:
+
+- `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
+  `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ 
+  can display non-dynamic (not of "series" form) text on any bar or all bars of the chart.
+- `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__
+  can only display one character while `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__
+  can display strings, including line breaks.
+- `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__
+  can display a maximum of 500 labels on the chart, but their text **can** contain dynamic text, or "series strings".
+  Line breaks are also supported in label text.
+- While `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
+  `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ 
+  can display text at a fixed offset in the past or the future which cannot change during the script's execution,
+  each `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ call
+  can use a "series" offset that can be calculated on the fly.
+
+These are a few things to keep in mind concerning Pine strings:
+
+- Since the ``text`` parameter in both 
+  `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
+  `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ 
+  require a "const string" argument, it cannot contain values such as prices that can only be known on the bar.
+- To include such "series" values in `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__
+  they will first need to be converted to strings using 
+  `str.tostring() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}tostring>`__.
+- Characters displayed by all these functions can be Unicode characters, which may include Unicode symbols.
+- The concatenation operator for strings in Pine is ``+``. It is used to join string components into one string, e.g.,
+  ``msg = "Chart symbol: " + syminfo.tickerid``, 
+  where `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__
+  is a Pine built-in variable that returns the chart's exchange and symbol information in string format.
+
+
+
+\`plotchar()\`
+--------------
+
+
+
+\`plotshape()\`
+---------------
+
+
+
+Labels
+------
+
+
 Starting with Pine v4, indicators and strategies can
 create *drawing objects* on the chart. Three types of
 drawings are currently supported: "label", "line" and "box".

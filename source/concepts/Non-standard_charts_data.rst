@@ -6,6 +6,11 @@ Non-standard charts data
 .. contents:: :local:
     :depth: 2
 
+
+
+Introduction
+------------
+
 These functions allow scripts to fetch information from non-standard
 bars or chart types, regardless of the type of chart the script is running on.
 They are:
@@ -21,11 +26,15 @@ the first argument in a `request.security() <https://www.tradingview.com/pine-sc
 \`ticker.heikinashi()\`
 -----------------------
 
-*Heikin-Ashi* means *average bar* in Japanese. The open, high, low and close
-prices of Heikin-Ashi candlesticks are synthetic; they are not actual prices.
+*Heikin-Ashi* means *average bar* in Japanese. The 
+`open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__,
+`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__,
+`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ and
+`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
+prices of Heikin-Ashi candlesticks are synthetic; they are not actual market prices.
 Each value is calculated using combinations of normal OHLC
-values from the current and previous bar. The calculations used make Heikin-Ashi bars
-less noisy than normal candlesticks.
+values from the current and previous bar. 
+The calculations used make Heikin-Ashi bars less noisy than normal candlesticks.
 
 The `ticker.heikinashi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}heikinashi>`__
 function creates a special ticker identifier for

@@ -1,8 +1,8 @@
 .. _PageTests:
 
-========
-DocTitle
-========
+=====
+Tests
+=====
 
 Then use underlining only:
 
