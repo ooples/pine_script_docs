@@ -51,19 +51,49 @@ These are a few things to keep in mind concerning Pine strings:
 - To include "series" values in text displayed using `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__,
   they will first need to be converted to strings using 
   `str.tostring() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}tostring>`__.
-- Characters displayed by all these functions can be Unicode characters, which may include Unicode symbols.
-  See this `Exploring Unicode <https://www.tradingview.com/script/0rFQOCKf-Exploring-Unicode/>`__
-  script to get an idea of what can be done with Unicode characters.
 - The concatenation operator for strings in Pine is ``+``. It is used to join string components into one string, e.g.,
   ``msg = "Chart symbol: " + syminfo.tickerid``, 
   where `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__
   is a Pine built-in variable that returns the chart's exchange and symbol information in string format.
+- Characters displayed by all these functions can be Unicode characters, which may include Unicode symbols.
+  See this `Exploring Unicode <https://www.tradingview.com/script/0rFQOCKf-Exploring-Unicode/>`__
+  script to get an idea of what can be done with Unicode characters.
+
+This script display text using the four possible methods available in Pine::
+
+    //@version=5
+    indicator("Four displays of text", overlay = true)
+    plotchar(ta.rising(close, 5), "`plotchar()`", "🠅", location.belowbar, color.lime, size = size.small)
+    plotshape(ta.falling(close, 5), "`plotchar()`", location = location.abovebar, color = na, text = "•`plotshape()•`\n🠇", textcolor = color.fuchsia, size = size.huge)
+    
+    if bar_index % 25 == 0
+        label.new(bar_index, na, "•LABEL•\nHigh = " + str.tostring(high, format.mintick) + "\n🠇", yloc = yloc.abovebar, style = label.style_none, textcolor = color.black, size = size.normal)
+    
+    printTable(txt) => var table t = table.new(position.middle_right, 1, 1), table.cell(t, 0, 0, txt, bgcolor = color.yellow)
+    printTable("•TABLE•\n" + str.tostring(bar_index + 1) + " bars\nin the dataset")
+
+.. image:: images/TextAndShapes-Introduction-01.png
+
+Note that:
+
+- The method used to display each text is shown with the text, except for the lime up arrows displayed using
+  `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__, as it can only displayone character.
+- Label and table calls can be inserted in conditional structures to control when their are executed,
+  whereas   `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
+  `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ cannot.
+  Their conditional plotting must be controled using their first argument, 
+  which is a "series bool" whose ``true`` or ``false`` value controls when the text is displayed.
+- `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ is designed to display a shape
+  with accompanying text. Its ``size`` parameter controls the size of the shape, not of the text.
+  We use `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ for its ``color`` argument
+  so that the shape is not visible.
 
 
 
 \`plotchar()\`
 --------------
 
+This function is useful to display a single character on bars.
 
 
 \`plotshape()\`
