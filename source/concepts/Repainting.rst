@@ -256,6 +256,20 @@ While the method used in ``nonRepaintingSecurity()`` is more complex, we find it
 
 
 
+Using \`request.security()\` at lower timeframes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Some scripts use `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
+to request data from a timeframe **lower** than the chart's timeframe.
+This works on historical bars but will not work in realtime.
+
+
+
+Future leak with \`request.security()\`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
 \`varip\`
 ^^^^^^^^^
 
@@ -281,23 +295,6 @@ however, will lead to repainting. The reason is that on historical bars,
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__, yet in realtime, it is ``true`` on the bar's
 `open <https://www.tradingview.com/pine-script-reference/v5/#open>`__. 
 Using the other bar state variables will usually cause some type of behavioral discrepancy between historical and realtime bars.
-
-
-
-Using \`request.security()\` at lower timeframes
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Some scripts use `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
-to request data from a timeframe **lower** than the chart's timeframe.
-This works on historical bars but will not work in realtime.
-
-
-
-Future leak with \`request.security()\`
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-
 
 
 
