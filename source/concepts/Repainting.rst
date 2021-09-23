@@ -19,7 +19,7 @@ They thus behave differently on historical and realtime bars, which does not mak
 **Repainting, per se, is not necessarily good or bad.**
 You can very well decide to use repainting indicators if you understand how they behave and they suit your trading methodology.
 Don't be one of those traders who slap "repaint" sentences on published scripts as if it discredits them;
-doing so reveals your incomprehension of the subject.
+doing so only reveals your incomprehension of the subject.
 
 The question "Does it repaint?" means nothing, and consequently cannot be answered. 
 Why? Because it needs to be qualified. Instead, one could ask:
@@ -180,7 +180,7 @@ Repainting is possible in the following cases:
 
    This study will calculate differently on real-time and
    historical data, regardless of ``lookahead`` parameter's value (see
-   :ref:`understanding_lookahead`).
+   :ref:`our discussion of lookahead <PageOtherTimeframesAndData_UnderstandingLookahead>`).
 
 #. Using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
    to request data from a timeframe **lower** than the timeframe of chart's main symbol

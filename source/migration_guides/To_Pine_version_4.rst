@@ -1,5 +1,7 @@
-Pine version 4 migration guide
-==============================
+.. _PageToPineVersion4:
+
+To Pine version 4
+=================
 
 This is a guide to converting Pine Script code from ``@version=3`` to ``@version=4``.
 

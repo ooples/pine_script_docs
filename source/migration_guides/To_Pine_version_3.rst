@@ -1,7 +1,7 @@
-.. _pine_v3_migration_guide:
+.. _PageToPineVersion3:
 
-Pine version 3 migration guide
-==============================
+To Pine version 3
+=================
 
 This document helps to migrate Pine Script code from ``@version=2`` to
 ``@version=3``.
