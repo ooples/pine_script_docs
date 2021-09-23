@@ -27,7 +27,7 @@ For script users
 ^^^^^^^^^^^^^^^^
 
 You can very well decide to use repainting indicators if you understand how they behave and they suit your trading methodology.
-Don't be one of those traders who slap "repaint" sentences on published scripts as if it discredits them.
+Don't be one of those newcomers to trading who slap "repaint" sentences on published scripts as if it discredits them.
 Doing so only reveals your incomprehension of the subject.
 
 The question "Does it repaint?" means nothing, and consequently cannot be answered. 
