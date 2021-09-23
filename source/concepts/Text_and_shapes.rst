@@ -117,7 +117,7 @@ the function can be used to display and inspect values in the Data Window or in 
 
     //@version=5
     indicator("", "", true)
-    plotchar(bar_index, "Bar index", "", location.top, size = size.tiny)
+    plotchar(bar_index, "Bar index", "", location.top)
 
 .. image:: images/TextAndShapes-Plotchar-01.png
 
@@ -126,8 +126,32 @@ Note that:
 - The cursor is on the chart's last bar.
 - The value of `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__
   on **that** bar is displayed in indicator values (1) and in the Data Window (2).
+- We use ``location.top`` because the default ``location.abovebar`` will put the price into play in the script's scale,
+  which will often interfere with other plots.
 
+`plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__
+also works well to identify specific points on the chart or to validate that conditions
+are ``true`` when we expect it. This example displays an up arrow under bars where
+`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__,
+`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and
+`volume <https://www.tradingview.com/pine-script-reference/v5/#var_volume>`__
+have all been rising for two bars::
 
+    //@version=5
+    indicator("", "", true)
+    bool longSignal = ta.rising(close, 2) and ta.rising(high, 2) and (na(volume) or ta.rising(volume, 2))
+    plotchar(longSignal, "Long", "▲", location.belowbar, size = size.tiny)
+
+.. image:: images/TextAndShapes-Plotchar-02.png
+
+Note that:
+
+- We use ``(na(volume) or ta.rising(volume, 2))`` so our script will work on symbols without 
+  `volume <https://www.tradingview.com/pine-script-reference/v5/#var_volume>`__ data.
+  If we did not make provisions for when there is no `volume <https://www.tradingview.com/pine-script-reference/v5/#var_volume>`__ data,
+  the ``longSignal`` variable's value would never be ``true`` because ``ta.rising(volume, 2)`` yields ``false`` in those cases.
+- Because `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__
+  is now actually displaying a character on the chart, we use ``size = size.tiny`` to control its size.
 
 
 
