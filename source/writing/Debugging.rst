@@ -1,3 +1,5 @@
+.. _PageDebugging:
+
 Debugging
 =========
 
@@ -64,6 +66,9 @@ we were not preoccupied with preserving the scale for other plots to continue to
     indicator("Plot `bar_index`")
     plot(bar_index, "Bar Index")
 
+
+
+.. _PageDebugging_WhenTheScriptsScaleMustBePreserved:
 
 When the script's scale must be preserved
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

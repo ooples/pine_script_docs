@@ -108,6 +108,26 @@ This function is useful to display a single character on bars. It has the follow
 
     plotchar(series, title, char, location, color, offset, text, textcolor, editable, size, show_last, display) → void
 
+See the `Reference Manual entry for plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__
+for details on its parameters.
+
+As explained in the :ref:`When the script's scale must be preserved <PageDebugging_WhenTheScriptsScaleMustBePreserved>` of our page on :ref:`Debugging <PageDebugging>`,
+the function can be used to display and inspect values in the Data Window or in the indicator values displayed to the right of the script's name on the chart::
+
+    //@version=5
+    indicator("", "", true)
+    plotchar(bar_index, "Bar index", "", location.top, size = size.tiny)
+
+.. image:: images/TextAndShapes-Plotchar-01.png
+
+Note that:
+
+- The cursor is on the chart's last bar.
+- The value of `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__
+  on **that** bar is displayed in indicator values (1) and in the Data Window (2).
+
+
+
 
 
 \`plotshape()\`
