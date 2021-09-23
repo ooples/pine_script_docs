@@ -271,12 +271,30 @@ This works on historical bars but will not work in realtime.
 Future leak with \`request.security()\`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+When `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+is used with ``lookahead = barmerge.lookahead_on`` to fetch prices without offsetting the series by ``[1]``,
+it will return data from the future on historical bars, which is dangerously misleading.
+
+While historical bars will magically display future prices before they should be known,
+no lookahead is possible in realtime because the future is unknown — not future bars exist, except in the unknown future.
+
+This is an example::
+
+    //@version=5
+    indicator("Future leak", "", true)
+    futureHigh = request.security(syminfo.tickerid, "D", high, lookahead = barmerge.lookahead_on)
+    plot(futureHigh)
+
+.. image:: images/Repainting-FutureLeakWithRequestSecurity-01.png
+
+Note how the higher timeframe line is showing the timeframe's `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__
+value before it occurs. The solution is to use the function like we do in our ``nonRepaintingSecurity()`` shown earlier.
+
 
 
 \`varip\`
 ^^^^^^^^^
 
-Some calculations possible on realtime bars cannot be reproduced on historical bars. 
 Scripts using the `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ 
 declaration mode for variables (see our section on :ref:`varip  <PageVariableDeclarations_Varip>` for more information)
 save information across realtime updates, which cannot be reproduced on historical bars,
