@@ -44,7 +44,10 @@ Why? Because it needs to be qualified. Instead, one could ask:
 What's important is that you understand how the tools you use work, 
 and if their behavior is compatible with your objectives, repainting or not.
 As you will learn if you read this page, repainting is a complex matter. 
-It has many faces and many causes.
+It has many faces and many causes. Even if you don't program in Pine,
+this page will help you understand the array of causes that can lead to repainting,
+and hopefully help you have more meaningful discussions with script authors.
+
 
 
 For Pine coders
