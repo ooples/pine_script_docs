@@ -162,6 +162,20 @@ Note that:
   is now displaying a character on the chart, we use ``size = size.tiny`` to control its size.
 - We have adapted the ``location`` argument to display the character under bars.
 
+If you don't mind plotting only circles, you could also use `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
+to achieve a similar effect::
+
+    //@version=5
+    indicator("", "", true)
+    longSignal = ta.rising(close, 2) and ta.rising(high, 2) and (na(volume) or ta.rising(volume, 2))
+    plot(longSignal ? low - ta.tr : na, "Long", color.blue, 2, plot.style_circles)
+
+This method has the inconvenience that, since there is no relative positioning mechanism with
+`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
+one must shift the circles down using something like `ta.atr <https://www.tradingview.com/pine-script-reference/v5/#var_ta{dot}tr>`__
+
+.. image:: images/TextAndShapes-Plotchar-03.png
+
 
 
 \`plotshape()\`
