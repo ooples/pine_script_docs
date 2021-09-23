@@ -13,10 +13,10 @@ We define repainting as: **script behavior causing historical vs realtime calcul
 Repainting behavior is widespread and can be caused by many factors. 
 Following our definition, our estimate is that more than 95% of indicators in existence repaint. 
 Widely used indicators like MACD and RSI, for example, repaint because they show one fixed value on historical bars,
-yet when running in realtime they will produce results that vary constantly until the realtime bar closes. 
-They thus behave differently on historical and realtime bars, which does not make them less useful, nor prevent knowledgeable traders from using them.
+yet when running in realtime they will produce results that constantly fluctuate until the realtime bar closes. 
+They thus behave differently on historical and realtime bars. This does not make them less useful, nor prevent knowledgeable traders from using them.
 
-**Repainting, per se, is not necessarily good or bad.**
+**Repainting is not inherently good or bad.**
 
 
 
@@ -38,10 +38,10 @@ Why? Because it needs to be qualified. Instead, one could ask:
 - Will your indicator display in realtime the same way it does on historical bars?
 - Are you fetching future information with your `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls?
 
-What's important is that you understand how the tools you use behave, 
+What's important is that you understand how the tools you use work, 
 and if their behavior is compatible with your objectives, repainting or not.
 As you will learn if you read this page, repainting is a complex matter. 
-It has many faces, and many causes.
+It has many faces and many causes.
 
 
 For Pine coders
@@ -190,7 +190,7 @@ declaration mode for variables (see our section on :ref:`varip  <PageVariableDec
 save information across realtime updates, which cannot be reproduced on historical bars,
 because these have only OHLC information, so no intermediary price movements.
 Such scripts may be very useful in realtime, including to generate alerts,
-but their logic cannot be backetested, nor can their plots on historical bars reflect calculations that will be done in realtime.
+but their logic cannot be backtested, nor can their plots on historical bars reflect calculations that will be done in realtime.
 
 
 
@@ -232,7 +232,7 @@ Using the other bar state variables will usually cause some type of behavioral d
     plot(close)
     plot(c, color = color.red)
 
-   This indicator will calculate differently on real-time and
+   This indicator will calculate differently on realtime and
    historical data, regardless of ``lookahead`` parameter's value (see
    :ref:`our discussion of lookahead <PageOtherTimeframesAndData_UnderstandingLookahead>`).
 
@@ -330,5 +330,5 @@ they must work with late information.
 
 More important than repainting, perhaps, is that your indicator's plots, and trade entries and exits, be realistic.
 Indicators that go back in time to plot pivot lines starting at the pivot, for example,
-may be great to impress the galery, but they mislead others — and perhaps yourself.
+may be great to impress the gallery, but they mislead others — and perhaps yourself.
 

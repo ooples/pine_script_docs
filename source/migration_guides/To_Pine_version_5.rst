@@ -59,7 +59,7 @@ The full list of renamed functions and variables can be found in the :ref:`All v
 Renamed function parameters
 ---------------------------
 
-The parameter names of some built-in functions have been changed because they were not descriptive enough. 
+The parameter names of some built-in functions were changed to improve the nomenclature. 
 This has no bearing on most scripts, but if you used these parameter names when calling functions, they will require adaptation. For example, we have standardized all mentions::
 
   // Valid in v4. Not valid in v5.
