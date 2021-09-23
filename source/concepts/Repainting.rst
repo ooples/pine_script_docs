@@ -179,6 +179,50 @@ You just can't have your cake and eat it too.**
 
 
 
+Repainting \`request.security()\` calls
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The data fetched with `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
+will differ on historical and realtime bars if the function is not used in the correct manner.
+This form of `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+calls will produce historical data and plots that cannot be reproduced in realtime.
+Let's look at a script showing the difference between repainting and non-repainting
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls::
+
+    //@version=5
+    indicator("Repainting vs non-repainting `request.security()`", "", true)
+    var BLACK_MEDIUM = color.new(color.black, 50)
+    var BLACK_LIGHT = color.new(color.black, 80)
+    var ORANGE_LIGHT = color.new(color.orange, 80)
+    
+    tfInput = input.timeframe("1")
+    
+    repaintingClose = request.security(syminfo.tickerid, tfInput, close)
+    plot(repaintingClose, "Repainting close", BLACK_MEDIUM, 8)
+    
+    indexHighTF = barstate.isrealtime ? 1 : 0
+    indexCurrTF = barstate.isrealtime ? 0 : 1
+    nonRepaintingClose = request.security(syminfo.tickerid, "1", close[indexHighTF])[indexCurrTF]
+    plot(nonRepaintingClose, "Non-repainting close", color.fuchsia, 3)
+    
+    newTF = ta.change(time(tfInput))
+    bgcolor(barstate.isrealtime ? ORANGE_LIGHT : na)
+    
+    if newTF
+        label.new(bar_index, na, "↻", yloc = yloc.abovebar, textcolor = color.black, style = label.style_none, size = size.large)
+
+This is what its output looks like on a 5sec chart that has been running with the script for a few minutes:
+
+.. image:: images/Repainting-RepaintingRequestSecurityCalls-01.png
+
+Note that:
+
+- The orange background identifies the realtime, and elapsed realtime bars.
+- A black curved arrow indicates when a new higher timeframe comes in.
+
+
+
+
 Unreproducible realtime behavior
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -212,8 +256,10 @@ Using the other bar state variables will usually cause some type of behavioral d
 
 
 
-\`request.security()\`
-""""""""""""""""""""""
+Using \`request.security()\` at lower timeframes
+""""""""""""""""""""""""""""""""""""""""""""""""
+
+
 
 
 
@@ -224,20 +270,6 @@ Using the other bar state variables will usually cause some type of behavioral d
 #. Strategies using ``calc_on_every_tick = true``.
    A strategy with parameter ``calc_on_every_tick = false`` may also be
    prone to repainting, but to a lesser degree.
-
-#. Using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
-   to request data from a timeframe *higher* than the timeframe of the chart's main symbol::
-
-    // Add this study on 1 minute chart
-    //@version=5
-    indicator("My Script")
-    c = request.security(syminfo.tickerid, "5", close)
-    plot(close)
-    plot(c, color = color.red)
-
-   This indicator will calculate differently on realtime and
-   historical data, regardless of ``lookahead`` parameter's value (see
-   :ref:`our discussion of lookahead <PageOtherTimeframesAndData_UnderstandingLookahead>`).
 
 #. Using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
    to request data from a timeframe **lower** than the timeframe of chart's main symbol
@@ -322,12 +354,6 @@ Other types of repainting
 
 Other types of behavior referred to as *repainting* include:
 
-- Plotting with a negative offset on past bars.
-- Using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
-  without the proper adjustments to ensure that it does not return higher timeframe data that fluctuates on realtime bars,
-  due to the fact that the current higher timeframe has not completed. 
-  See the Pinecoders `security() revisited <https://www.tradingview.com/script/00jFIl5w-security-revisited-PineCoders/>`__
-  publication for more information.
 
 
 
