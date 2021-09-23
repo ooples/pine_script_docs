@@ -230,7 +230,7 @@ Note that:
   so it moves all the time and changes on each bar.
 - The behavior of the non-repainting, fuchsia line, in contrast, behaves exactly the same way on historical bars and in realtime.
   It updates on the bar following the completion of the higher timeframe, and doesn't move until the bar after another higher timeframe completes.
-  Thus, it is more reliable. Note that whereas new higher timeframe data comes in at the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
+  Thus, it is more reliable. Note that while new higher timeframe data comes in at the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
   of historical bars, it will be available on the `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__
   of the same bar in realtime.
 
@@ -276,7 +276,7 @@ is used with ``lookahead = barmerge.lookahead_on`` to fetch prices without offse
 it will return data from the future on historical bars, which is dangerously misleading.
 
 While historical bars will magically display future prices before they should be known,
-no lookahead is possible in realtime because the future is unknown — not future bars exist, except in the unknown future.
+no lookahead is possible in realtime because the future there is unknown, as it should, so no future bars exist.
 
 This is an example::
 
