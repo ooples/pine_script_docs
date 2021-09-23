@@ -10,11 +10,12 @@ Text and shapes
 Introduction
 ------------
 
-You may display text using four different ways with Pine:
+You may display text or shapes using five different ways with Pine:
 
 
 - `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__
 - `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__
+- `plotarrow() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotarrow>`__
 - Labels created with `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__
 - Tables created with `table.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}new>`__
 
@@ -27,6 +28,11 @@ Which one you to use depends on your needs:
   `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ is always tethered to a specific bar,
   so it will move with the bar's position on the chart.
   See the page on :ref:`Tables <PageTables>` for more information on them.
+- Three function include are able to display pre-defined shapes:
+  `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__,
+  `plotarrow() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotarrow>`__ and
+  Labels created with `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__.
+- `plotarrow() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotarrow>`__ cannot display text, only up or down arrows.
 - `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
   `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ 
   can display non-dynamic (not of "series" form) text on any bar or all bars of the chart.
@@ -170,7 +176,7 @@ This function is useful to display pre-defined shapes and/or text on bars. It ha
 See the `Reference Manual entry for plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__
 for details on its parameters.
 
-Let's use the function to achieve the same result as with our second example of the previous section::
+Let's use the function to achieve more or less the same result as with our second example of the previous section::
 
     //@version=5
     indicator("", "", true)
@@ -233,6 +239,20 @@ The ``style`` parameter allows for the selection of many shapes:
 .. |Labelup_with_text| image:: images/TextAndShapes-Plotshape-Labelup_with_text.png
 .. |Plotshape_labeldown| image:: images/TextAndShapes-Plotshape-Labeldown.png
 .. |Labeldown_with_text| image:: images/TextAndShapes-Plotshape-Labeldown_with_text.png
+
+
+
+\`plotarrow()\`
+---------------
+
+This function is useful to display pre-defined shapes and/or text on bars. It has the following syntax:
+
+.. code-block:: text
+
+    plotarrow(series, title, colorup, colordown, offset, minheight, maxheight, editable, show_last, display) → void
+
+See the `Reference Manual entry for plotarrow() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotarrow>`__
+for details on its parameters.
 
 
 
