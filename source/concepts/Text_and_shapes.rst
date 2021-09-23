@@ -97,11 +97,22 @@ Note that:
 \`plotchar()\`
 --------------
 
-This function is useful to display a single character on bars.
+This function is useful to display a single character on bars. It has the following syntax:
+
+.. code-block:: text
+
+    plotchar(series, title, char, location, color, offset, text, textcolor, editable, size, show_last, display) → void
+
 
 
 \`plotshape()\`
 ---------------
+
+This function is useful to display pre-defined shapes and/or text on bars. It has the following syntax:
+
+.. code-block:: text
+
+    plotshape(series, title, style, location, color, offset, text, textcolor, editable, size, show_last, display) → void
 
 
 
