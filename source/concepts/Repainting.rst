@@ -54,13 +54,13 @@ For Pine coders
 ^^^^^^^^^^^^^^^
 
 As we discussed in the previous section, not all types of repainting behavior must necessarily be avoided at all costs.
-It is up you, as a programmer, to decide which repainting logic you are OK with in designing your script, and which you want to avoid.
-We hope this page helps you better understand the dynamics at play, so you can make better design decisions concerning your trading tools.
+We hope this page helps you better understand the dynamics at play, so that you can make better design decisions concerning your trading tools.
+This page's content should help you avoid making the most common coding mistakes that lead to repainting or misleading plots.
 
 Whatever your design decisions are, if you publish your script, you should explain them to traders so they can understand how you script behaves.
 
-We will explore some of the causes of repainting, and discuss solutions when some exist.
-We survey three broad categories of repainting causes:
+Let's explore some of the causes of repainting, and discuss solutions when they exist.
+We will survey three broad categories of repainting causes:
 
 - Historical vs realtime calculations
 - Plotting in the past
