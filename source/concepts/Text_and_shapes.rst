@@ -177,6 +177,8 @@ Let's use the function to achieve the same result as with our second example of 
     longSignal = ta.rising(close, 2) and ta.rising(high, 2) and (na(volume) or ta.rising(volume, 2))
     plotshape(longSignal, "Long", shape.arrowup, location.belowbar)
 
+.. image:: images/TextAndShapes-Plotshape-01.png
+
 The ``style`` parameter allows for the selection of many shapes:
 
 +------------------------+--------------------------+--------------------------+
