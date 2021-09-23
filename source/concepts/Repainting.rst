@@ -346,8 +346,8 @@ Dataset variations
 ------------------
 
 
-Fluid datasets
-^^^^^^^^^^^^^^
+Revision of historical data
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Scripts begin executing on the chart's first historical bar, and then execute on each bar sequentially, 
 as is explained in this manual's page on Pine's :ref:`execution model <PageExecutionModel>`.
