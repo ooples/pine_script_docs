@@ -8,7 +8,7 @@ Non-standard charts data
 
 These functions allow scripts to fetch information from non-standard
 bars or chart types, regardless of the type of chart the script is running on.
-They are: 
+They are:
 `ticker.heikinashi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}heikinashi>`_,
 `ticker.renko() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}renko>`_,
 `ticker.linebreak() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}linebreak>`_,
@@ -80,7 +80,7 @@ chart's Heikin-Ashi bars::
 
 You will find more information on the `plotcandle() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__
 and `plotbar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotbar>`__ functions in
-the :doc:`/annotations/Custom_OHLC_bars_and_candles` section.
+the :ref:`Bar plotting <PageBarPlotting>` page.
 
 
 \`ticker.renko()\`

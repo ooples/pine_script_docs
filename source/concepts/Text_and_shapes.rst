@@ -86,7 +86,7 @@ Calculation of drawings on bar updates
 --------------------------------------
 
 Drawing objects are subject to both *commit* and *rollback* actions, which affect the behavior of a script when it executes
-in the realtime bar, :doc:`/language/Execution_model`.
+in the realtime bar. See the page on Pine's :ref:`Execution model <Page_ExecutionModel>`.
 
 This script demonstrates the effect of rollback when running in the realtime bar::
 

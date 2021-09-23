@@ -70,34 +70,34 @@ where:
 
 These are examples of session strings:
 
-"24x7"
+``"24x7"``
    A 7-day, 24-hour session beginning at midnight.
 
-"0000-0000:1234567"
+``"0000-0000:1234567"``
    Equivalent to the previous example.
 
-"0000-0000"
+``"0000-0000"``
    Equivalent to the previous two examples, because the default days are ``1234567``.
 
-"0000-0000:23456"
+``"0000-0000:23456"``
    Same as previous example, but only Monday to Friday.
 
-"2000-1630:1234567"
+``"2000-1630:1234567"``
    An overnight session that begins at 20:00 and ends at 16:30 the next day.
    It is valid on all days of the week.
 
-"0930-1700:146"
+``"0930-1700:146"``
    A session that begins at 9:30 and ends at 17:00 on Sundays (1), Wednesdays (4) and Fridays (6).
 
-"1700-1700:23456"
+``"1700-1700:23456"``
    An *overnight session*. The Monday session starts Sunday at 17:00 and ends Monday at 17:00.
    It is valid Monday through Friday.
 
-"1000-1001:26"
+``"1000-1001:26"``
    A weird session that lasts only one minute on
    Mondays (2) and Fridays (6).
 
-"0900-1600,1700-2000"
+``"0900-1600,1700-2000"``
    A session that begins at 9:00, breaks from 16:00 to 17:00, and continues until 20:00.
    Applies to every day of the week.
 
@@ -151,7 +151,6 @@ Note that:
   Its ``time("", sess)`` call uses an empty string for the function's ``timeframe`` parameter,
   which means it uses the chart's timeframe, whatever that is.
   The function returns ``true`` when:
-
       - The chart uses an intraday timeframe (seconds or minutes).
       - The script isn't on the chart's first bar, which we ensure with ``(not barstate.isfirst)``.
         This check prevents the code from always detecting a
@@ -225,7 +224,7 @@ Our first example could be rewritten as::
 
 If you want to use the same session specifications used for the chart's main
 symbol, omit the third argument in `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__; it is optional. 
-Or, if you want your code to explicitly declare your intention, use the ``syminfo.session``
+If you want your code to explicitly declare your intention, use the ``syminfo.session``
 built-in variable. It holds the session type of the chart's main symbol::
 
     //@version=5

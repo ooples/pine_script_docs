@@ -1,13 +1,17 @@
-Pine version 5 migration guide
-==============================
+.. _PageToPineVersion5:
+
+To Pine version 5
+=================
 
 .. contents:: :local:
     :depth: 1
 
+
+
 Introduction
 ------------
 
-This guide documents the changes made to Pine from v4 to v5. It will guide you in the adaptation of existing Pine scripts to Pine v5. See our :ref:`here <v5ReleaseNotes>` for a list of the **new** features in Pine v5.
+This guide documents the changes made to Pine from v4 to v5. It will guide you in the adaptation of existing Pine scripts to Pine v5. See our :ref:`Release notes <PageReleaseNotes_September2021>` for a list of the **new** features in Pine v5.
 
 The most frequent adaptations required to convert older scripts to v5 are:
 
@@ -15,7 +19,9 @@ The most frequent adaptations required to convert older scripts to v5 are:
 - Renaming built-in function calls to include their new namespace (e.g., `highest() <https://www.tradingview.com/pine-script-reference/v4/#fun_highest>`__ in v4 becomes `ta.highest() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}highest>`__ in v5).
 - Restructuring inputs to use the more specialized ``input.*()`` functions.
 - Eliminating uses of the deprecated ``transp`` parameter by using `color.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}new>`__ to simultaneously define color and transparency for use with the ``color`` parameter.
-- If you used the ``resolution`` and ``resolution_gaps`` parameters in v4's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__, they will require changing to ``timeframe`` and ``timeframe_gaps`` in v5's `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__.
+  If you used the ``resolution`` and ``resolution_gaps`` parameters in v4's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__, 
+- they will require changing to ``timeframe`` and ``timeframe_gaps`` in v5's `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__.
+
 
 
 v4 to v5 converter
@@ -29,11 +35,15 @@ The Pine Editor includes a utility to automatically convert v4 scripts to v5. To
 Not all scripts can be automatically converted from v4 to v5. If you want to convert the script manually or if your indicator returns a compilation error after conversion, use the following sections to determine how to complete the conversion.
 
 
+
 Renamed functions and variables
 -------------------------------
 
-For clarity and consistency, many built-in functions and variables were renamed in v5. The inclusion of v4 function names in a new namespace is the cause of most changes. For example, the `sma() <https://www.tradingview.com/pine-script-reference/v4/#fun_sma>`__ function in v4 is moved to the ``ta.`` namespace in v5: 
-`ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__. Remembering the new namespaces is not necessary; if you type the older name of a function without its namespace in the Editor, a popup showing matching suggestions appears:
+For clarity and consistency, many built-in functions and variables were renamed in v5. 
+The inclusion of v4 function names in a new namespace is the cause of most changes. 
+For example, the `sma() <https://www.tradingview.com/pine-script-reference/v4/#fun_sma>`__ function in v4 is moved to the ``ta.`` namespace in v5: 
+`ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__. 
+Remembering the new namespaces is not necessary; if you type the older name of a function without its namespace in the Editor, a popup showing matching suggestions appears:
 
 .. image:: images/v5_autocomplete.png
  
@@ -42,13 +52,15 @@ The only two functions whose name changed are:
 * ``study()`` was renamed to ``indicator()``.
 * ``tickerid()`` was renamed to ``ticker.new()``.
 
-The full list of renamed functions and variables can be found in the :ref:`here <_allVariables>` section of this guide.
+The full list of renamed functions and variables can be found in the :ref:`All variable, function, and parameter name changes <PageToPineVersion5_AllVariables>` section of this guide.
+
 
 
 Renamed function parameters
 ---------------------------
 
-The parameter names of some built-in functions have been changed because they were not descriptive enough. This has no bearing on most scripts, but if you used these parameter names when calling functions, they will require adaptation. For example, we have stadandardized all mentions::
+The parameter names of some built-in functions were changed to improve the nomenclature. 
+This has no bearing on most scripts, but if you used these parameter names when calling functions, they will require adaptation. For example, we have standardized all mentions::
 
   // Valid in v4. Not valid in v5.
   timev4 = time(resolution = "1D")
@@ -57,7 +69,8 @@ The parameter names of some built-in functions have been changed because they we
   // Valid in v4 and v5.
   timeBoth = time("1D")
 
-The full list of renamed function parameters can be found in the :ref:`here <_allVariables>` section of this guide.
+The full list of renamed function parameters can be found in the :ref:`All variable, function, and parameter name changes <PageToPineVersion5_AllVariables>` section of this guide.
+
 
 
 Removed an \`rsi()\` overload
@@ -78,6 +91,7 @@ If your v4 code used the now deprecated overload of the function with a ``float`
 Note that when your v4 code used a "series int" value as the second argument to `rsi() <https://www.tradingview.com/pine-script-reference/v4/#fun_rsi>`__, it was automatically cast to "series float" and the second overload of the function was used. While this was syntactically correct, it most probably did **not** yield the result you expected. In v5, `ta.rsi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}rsi>`__ requires a "simple int" for the argument to ``length``, which precludes dynamic (or "series") lengths. The reason for this is that RSI calculations use the `ta.rma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}rma>`__ moving average, which is similar to `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__ in that it relies on a length-dependent recursive process using the values of previous bars. This makes it impossible to achieve correct results with a "series" length that could vary bar to bar.
 
 If your v4 code used a length that was "const int", "input int" or "simple int", no changes are required.
+
 
 
 Reserved keywords
@@ -119,6 +133,7 @@ The `offset() <https://www.tradingview.com/pine-script-reference/v4/#fun_offset>
   prevClosev5 = close[1]
 
 
+
 Split of \`input()\` into several functions
 -------------------------------------------
 
@@ -136,6 +151,7 @@ The `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`_
   // Valid in v4 and v5.
   // While "AAPL" is a valid symbol, it is only a string here because `input.symbol()` is not used.
   tickerString = input("AAPL", title = "Ticker string")
+
 
 
 Some function parameters now require built-in arguments
@@ -156,6 +172,7 @@ In v5, the use of correct built-in named constants as arguments to function para
   plot(a)
 
 To convert your script from v4 to v5, make sure you use the correct named built-in constants as function arguments.
+
 
 
 Deprecated the \`transp\` parameter
@@ -193,6 +210,7 @@ In v5 we need to explictly mention the 90 transparency with the color, yielding:
     bgcolor(crossUp ? color.new(color.green, TRANSP) : crossDn ? color.new(color.red, TRANSP) : na)
 
  
+
 Changed the default session days for \`time()\` and \`time_close()\`
 --------------------------------------------------------------------
 
@@ -208,6 +226,7 @@ The default set of days for ``session`` arguments used in the `time() <https://w
 This change in behavior will not affect scripts running on conventional markets that are closed during weekends. If it is important for you to ensure your session definitions preserve their v4 behavior in v5 code, add ":23456" to your session strings.
 
 
+
 \`strategy.exit()\` now must do something
 -----------------------------------------
 
@@ -215,7 +234,7 @@ Gone are the days when the `strategy.exit() <https://www.tradingview.com/pine-sc
 
 
 
-.. _allVariables::
+.. _PageToPineVersion5_AllVariables::
 
 All variable, function, and parameter name changes
 --------------------------------------------------
@@ -253,8 +272,11 @@ Removed functions and variables
 +------------------------------------------------------+--------------------------------------------------------+
 
 
+
 Renamed functions and parameters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
 
 No namespace change
 """""""""""""""""""
@@ -274,6 +296,7 @@ No namespace change
 +------------------------------------------------------+--------------------------------------------------------+
 | ``nz(x, y)``                                         | ``nz(source, replacement)``                            |
 +------------------------------------------------------+--------------------------------------------------------+
+
 
 
 "ta" namespace for technical analysis functions and variables
@@ -418,6 +441,7 @@ No namespace change
 +------------------------------------------------------+--------------------------------------------------------+
 
 
+
 "math" namespace for math-related functions and variables
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -474,6 +498,7 @@ No namespace change
 +------------------------------------------------------+--------------------------------------------------------+
 
 
+
 "request" namespace for functions that request external data
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -494,6 +519,7 @@ No namespace change
 +------------------------------------------------------+--------------------------------------------------------+
 
 
+
 "ticker" namespace for functions that help create tickers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -512,6 +538,7 @@ No namespace change
 +------------------------------------------------------+--------------------------------------------------------+
 | ``tickerid()``                                       | ``ticker.new()``                                       |
 +------------------------------------------------------+--------------------------------------------------------+
+
 
 
 "str" namespace for functions that work with strings

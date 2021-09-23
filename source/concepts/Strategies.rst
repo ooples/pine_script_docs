@@ -55,7 +55,7 @@ the *Indicators & Strategies* dialog box, or write your own.
 
 .. image:: images/Strategy_tester.png
 
-.. note:: When applying strategies to :doc:`non-standard types of charts <Non-standard_chart_types_data>`
+.. note:: When applying strategies to :ref:`non-standard charts <PageNonStandardChartsData>`
    (Heikin Ashi, Renko, etc.), it is very important to realize that results
    will not reflect real market conditions. Orders on these types of charts will be
    executed at the synthetic price levels used on these charts,

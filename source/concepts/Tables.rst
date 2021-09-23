@@ -1,3 +1,5 @@
+.. _PageTables:
+
 Tables
 ======
 

@@ -127,8 +127,7 @@ The `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`_
   An "input string" specifying the triggering frequency of the alert. Valid arguments are:
 
   - ``alert.freq_once_per_bar``: Only the first call per realtime bar triggers the alert (default value).
-  - ``alert.freq_once_per_bar_close``: An alert is only triggered when the realtime bar closes and an 
-  - `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ call is executed during that script iteration.
+  - ``alert.freq_once_per_bar_close``: An alert is only triggered when the realtime bar closes and an `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ call is executed during that script iteration.
   - ``alert.freq_all``: All calls during the realtime bar trigger the alert.
 
 The `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__ function can be used in both indicators and strategies. 

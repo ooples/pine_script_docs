@@ -727,7 +727,7 @@ When you size arrays dynamically using a field in your script's *Settings/Inputs
         array.set(a, i, i)
     plot(array.size(a))
 
-See the :ref:`<PageArrays_Looping>` of this page for more information.
+See the :ref:`Looping <PageArrays_Looping>` section of this page for more information.
 
 
 Cannot call array methods when ID of array is 'na'

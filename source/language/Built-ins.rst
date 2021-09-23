@@ -11,8 +11,8 @@ Introduction
 ------------
 
 Pine has hundreds of *built-in* variables and functions. 
-Built-in variables and functions are part of the Pine language.
-The better you know them, the more you will be able to do with your Pine scripts.
+They provide your scripts with valuable information and make calculations for you, dispensing you from coding them.
+The better you know the Pine built-ins, the more you will be able to do with your Pine scripts.
 
 In this page we present an overview of some of Pine's built-in variables and functions.
 They will be covered in more detail in the pages of this manual covering specific themes.
@@ -30,22 +30,22 @@ Variables and functions in the same family share the same *namespace*, which is 
 The `ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__ function, for example, is in the ``ta`` namespace, 
 which stands for "technical analysis". A namespace can contain both variables and functions.
 
-Some variables have function versions as well:
+Some variables have function versions as well, e.g.:
 
-- `ta.tr <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}tr>`__ variable returns
-  the True Range of the current bar. The `ta.tr(true) <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}tr>`__
-  function call also returns the True Range, but when the previous `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
+- The `ta.tr <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}tr>`__ variable returns
+  the "True Range" of the current bar. The `ta.tr(true) <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}tr>`__
+  function call also returns the "True Range", but when the previous `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
   value which is normally needed to calculate it is `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__,
   it calculates using ``high - low`` instead.
 - The `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ variable gives the time at the 
   `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ of the current bar.
   The `time(timeframe) <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ function returns 
   the time of the bar's `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ 
-  from the ``timeframe`` specified, even if the current chart is at another timeframe.
+  from the ``timeframe`` specified, even if the chart's timeframe is different.
   The `time(timeframe, session) <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ function returns 
   the time of the bar's `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ 
   from the ``timeframe`` specified, but only if it is within the ``session`` time.
-  The `time(timeframe, session) <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ function returns 
+  The `time(timeframe, session, timezone) <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ function returns 
   the time of the bar's `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ 
   from the ``timeframe`` specified, but only if it is within the ``session`` time in the specified ``timezone``.
 
@@ -257,7 +257,7 @@ Mixing things up this way is not allowed::
     indicator(precision = 3, "Example") // Compilation error!
     
 **When calling Pine built-ins, it is critical to ensure that the arguments you use are of the form and type required, which will vary for each parameter.**
-To learn how to do this, one needs to understand Pine's :ref:`<PageTypeSytem>`.
+To learn how to do this, one needs to understand Pine's :ref:`type system <PageTypeSytem>`.
 The Reference Manual entry for each built-in function includes an "ARGUMENTS" section
 which lists the form-type required for the argument supplied to each of the function's parameters.
 

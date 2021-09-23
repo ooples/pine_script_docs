@@ -49,7 +49,7 @@ A compiler directive in the following form tells the compiler which of the versi
 - While it is synctactically correct to place the version directive anywhere in the script, 
   it is much more useful to readers when placed at the top of the script.
 
-Notable changes to the current version of Pine are documented in the :ref:`<PageReleaseNotes>`.
+Notable changes to the current version of Pine are documented in the :ref:`Release notes <PageReleaseNotes>`.
 
 
 

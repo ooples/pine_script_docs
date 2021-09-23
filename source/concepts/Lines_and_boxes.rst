@@ -84,7 +84,7 @@ Calculation of drawings on bar updates
 --------------------------------------
 
 Drawing objects are subject to both *commit* and *rollback* actions, which affect the behavior of a script when it executes
-in the realtime bar, :doc:`/language/Execution_model`.
+in the realtime bar. See the page on Pine's :ref:`Execution model <PageExecutionModel>`.
 
 This script demonstrates the effect of rollback when running in the realtime bar::
 
@@ -782,7 +782,9 @@ Objects positioned using xloc.bar_index cannot be drawn further than 500 bars in
 Additional securities
 ^^^^^^^^^^^^^^^^^^^^^
 
-Pine code sometimes uses additional symbols and/or timeframes with the :doc:`request.security <Context_switching_the_security_function>` function. Drawing functions can only be used in the main symbol's context.
+Pine code sometimes uses additional symbols and/or timeframes with the 
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function. 
+Drawing functions can only be used in the main symbol's context.
 
 .. _max-bars-back-of-time:
 

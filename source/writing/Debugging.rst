@@ -13,7 +13,7 @@ TradingView's close integration between the Pine Editor and charts allows for ef
 Once a Pine programmer understands the most appropriate technique to use in each situation, he will be able to debug scripts quickly and thoroughly. 
 This page demonstrates the most useful techniques to debug Pine code.
 
-If you are not yet familiar with Pine's execution model, it is important that you read the :doc:`/language/Execution_model` page of this User Manual 
+If you are not yet familiar with Pine's execution model, it is important that you read the :ref:`Execution model <Page_ExecutionModel>` page of this User Manual 
 so you understand how your debugging code will behave in the Pine environment.
 
 

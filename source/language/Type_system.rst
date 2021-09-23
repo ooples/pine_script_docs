@@ -91,6 +91,8 @@ Using forms and types
 Forms
 ^^^^^
 
+
+
 const
 """""
 
@@ -98,7 +100,7 @@ Values of "const" form must be known at compile time, before your script has acc
 Compilation occurs when you save a script in the Pine Editor, which doesn't even require it to already be running on your chart. "const" variables cannot change during the execution of a script.
 
 Variables of "const" form can be intialized using a *literal* value, or calculated from expressions using only literal values or other variables of "const" form. 
-Pine's :ref:` <PageStyleGuide>` recommends using upper case SNAKE_CASE to name variables of "const" form. 
+Pine's :ref:`Style guide <PageStyleGuide>` recommends using upper case SNAKE_CASE to name variables of "const" form. 
 While it is not a requirement, "const" variables are often declared using the `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ keyword so they are only initialized on the first bar of the dataset. 
 Declaring "const" variables using `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ incurs a minor performance penalty on script execution time, 
 so when your logic does not require it, declaring "const" variables without `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ is preferable.

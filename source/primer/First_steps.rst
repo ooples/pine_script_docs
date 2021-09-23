@@ -1,4 +1,4 @@
-.. _PageFirstIndicator:
+.. _PageFirstSteps:
 
 
 First steps
@@ -157,4 +157,4 @@ Pine allows you to write three types of scripts:
 - **Strategies** which include logic to issue trading orders and can be backtested and forward-tested.
 - **Libraries** which are used by more advanced programmers to package oft-used functions that can be reused by other scripts.
 
-The next step we recommend is to write your :ref:` <PageFirstIndicator>`.
+The next step we recommend is to write your :ref:`first indicator <PageFirstIndicator>`.
