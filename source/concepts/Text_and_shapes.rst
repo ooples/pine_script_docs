@@ -140,7 +140,7 @@ have all been rising for two bars::
     //@version=5
     indicator("", "", true)
     bool longSignal = ta.rising(close, 2) and ta.rising(high, 2) and (na(volume) or ta.rising(volume, 2))
-    plotchar(longSignal, "Long", "▲", location.belowbar, size = size.tiny)
+    plotchar(longSignal, "Long", "▲", location.belowbar, color = na(volume) ? color.gray : color.blue, size = size.tiny)
 
 .. image:: images/TextAndShapes-Plotchar-02.png
 
@@ -151,8 +151,10 @@ Note that:
   If we did not make provisions for when there is no `volume <https://www.tradingview.com/pine-script-reference/v5/#var_volume>`__ data,
   which is what ``na(volume)`` does by being ``true`` when there is no volume, 
   the ``longSignal`` variable's value would never be ``true`` because ``ta.rising(volume, 2)`` yields ``false`` in those cases.
+- We display the arrow in gray when there is no volume, to remind us that all three base conditions are not being met.
 - Because `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__
-  is now actually displaying a character on the chart, we use ``size = size.tiny`` to control its size.
+  is now displaying a character on the chart, we use ``size = size.tiny`` to control its size.
+- We have adapted the ``location`` argument to display the character under bars.
 
 
 
