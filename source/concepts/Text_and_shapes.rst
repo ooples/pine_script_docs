@@ -111,7 +111,8 @@ This function is useful to display a single character on bars. It has the follow
 See the `Reference Manual entry for plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__
 for details on its parameters.
 
-As explained in the :ref:`When the script's scale must be preserved <PageDebugging_WhenTheScriptsScaleMustBePreserved>` of our page on :ref:`Debugging <PageDebugging>`,
+As explained in the :ref:`When the script's scale must be preserved <PageDebugging_WhenTheScriptsScaleMustBePreserved>` 
+section of our page on :ref:`Debugging <PageDebugging>`,
 the function can be used to display and inspect values in the Data Window or in the indicator values displayed to the right of the script's name on the chart::
 
     //@version=5
