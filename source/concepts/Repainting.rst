@@ -318,53 +318,47 @@ Using the other bar state variables will usually cause some type of behavioral d
 
 
 
+\`timenow\`
+^^^^^^^^^^^
+
+The `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__
+built-in returns the current time. Scripts using this variable cannot show consistent historical and realtime behavior, 
+so they necessarily repaint.
+
+
+
 Strategies
 ^^^^^^^^^^
 
-Strategies using ``calc_on_every_tick = true`` cannot 
-
-
-A strategy with parameter ``calc_on_every_tick = false`` may also be
-   prone to repainting, but to a lesser degree.
-
-
-#. All scripts with calculations depending on a *starting point*.
-   At the beginning of the dataset, intraday data gets aligned to the beginning of the week, month or
-   year, depending on the timeframe. Due to this, the results produced by
-   scripts can differ from time to time because they start on different bars.
-   These are cases where scripts will be relying on a starting point:
-
-   * When they use `ta.valuewhen() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}valuewhen>`__,
-     `ta.barssince() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}barssince>`__ or
-     `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__
-     functions (due to peculiarities in their algorithm).
-   * Any backtesting strategy, regardless of the argument used for ``calc_on_every_tick``.
-
-
-#. Changes in historical data, for example, due to a *split*.
-
-#. Presence of the following variables in the script often leads to repainting:
-
-   * `barstate.isconfirmed <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__,
-     `barstate.isfirst <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isfirst>`__,
-     `barstate.ishistory <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}ishistory>`__,
-     `barstate.islast <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islast>`__,
-     `barstate.isnew <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isnew>`__,
-     `barstate.isrealtime <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isrealtime>`__
-   * `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__
-   * `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__
-
-#. When scripts use `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ variables
-   to make calculations that can only be done in realtime (:ref:`more on varip here <PageVariableDeclarations_Varip>`).
+Strategies using ``calc_on_every_tick = true`` execute on each realtime update,
+while strategies run on the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
+of historical bars. They will most probably not generate the same order executions, and so repaint.
+Note that when this happens, it also invalidates backtesting results, 
+as they are not representative of the strategy's behavior in realtime.
 
 
 
 Plotting in the past
 --------------------
 
-If a script takes 5 bars to detect a pivot, then in the realtime bar, 
-pivots can only be detected 5 bars after they occur.
-Historical bars 
+Script detecting pivots after, let's say, 5 bars have elapsed, will often go back in the past to plot pivot levels or values on the actual pivot 5 bars in the past.
+This will often cause unsuspecting traders looking at plots on historical bars to infer that when the pivot happens in realtime,
+the same plots will apppear on the pivot.
+
+Let's look at a script showing the price of high pivots by placing the price in the past, 5 bars after the pivot was detected::
+
+    //@version=5
+    indicator("Plotting in the past", "", true)
+    pHi = ta.pivothigh(5, 5)
+    if not na(pHi)
+        label.new(bar_index[5], na, str.tostring(pHi, format.mintick) + "\n🠇", yloc = yloc.abovebar, style = label.style_none, textcolor = color.black, size = size.normal)
+
+.. image:: images/Repainting-PlottingInThePast-01.png
+
+Note that:
+
+- This script repaints because an elapsed realtime bar showing no price may get a price placed on it if it is identified as a pivot, 5 bars after the actual pivot occurs.
+- The display looks great, but it can be misleading.
 
 
 
