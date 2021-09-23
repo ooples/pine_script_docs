@@ -52,6 +52,8 @@ These are a few things to keep in mind concerning Pine strings:
   they will first need to be converted to strings using 
   `str.tostring() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}tostring>`__.
 - Characters displayed by all these functions can be Unicode characters, which may include Unicode symbols.
+  See this `Exploring Unicode <https://www.tradingview.com/script/0rFQOCKf-Exploring-Unicode/>`__
+  script to get an idea of what can be done with Unicode characters.
 - The concatenation operator for strings in Pine is ``+``. It is used to join string components into one string, e.g.,
   ``msg = "Chart symbol: " + syminfo.tickerid``, 
   where `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__
