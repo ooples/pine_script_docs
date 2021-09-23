@@ -34,14 +34,10 @@ Why? Because it needs to be qualified. Instead, one could ask:
 
 What's important is that you understand how the tools you use behave, 
 and if their behavior is compatible with your objectives, repainting or not.
-
 As you will learn if you read this page, repainting is a complex matter. 
 It has many faces, and many causes.
 
-In this page, we will explore different causes of both repainting and misleading indicators.
-
-Many of the problems we discuss here are caused by improper programming techniques.
-Only a few are due to the way some built-in functions calculate, and the way bars and bar sets are built on charts.
+.. note:: Most of the problems we discuss here are caused by improper programming techniques. Only a few are due to the way some built-in functions calculate, and the way bars and bar sets are built on charts.
 
 
 
