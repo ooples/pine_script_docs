@@ -29,7 +29,7 @@ Which one you to use depends on your needs:
   Line breaks are also supported in label text.
 - While `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
   `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ 
-  can display text at a fixed offset in the past or the future which cannot change during the script's execution,
+  can display text at a fixed offset in the past or the future, which cannot change during the script's execution,
   each `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ call
   can use a "series" offset that can be calculated on the fly.
 
