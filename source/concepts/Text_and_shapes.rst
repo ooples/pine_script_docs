@@ -82,9 +82,9 @@ Note that:
   whereas `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
   `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ cannot.
   Their conditional plotting must be controlled using their first argument, 
-  which is a "series bool" whose ``true`` or ``false`` value controls when the text is displayed.
+  which is a "series bool" whose ``true`` or ``false`` value determines when the text is displayed.
 - Numeric values displayed in the table and labels is first converted to a string using
-  `str.tostring() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}tostring>`__
+  `str.tostring() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}tostring>`__.
 - We use the ``+`` operator to concatenate string components.
 - `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ is designed to display a shape
   with accompanying text. Its ``size`` parameter controls the size of the shape, not of the text.
