@@ -36,7 +36,7 @@ Why? Because it needs to be qualified. Instead, one could ask:
 - Do the entry/exit markers your indicator displays repaint (or: Do you wait for the realtime bar to close before displaying your entry/exit markers)?
 - Do alerts wait for the end of the realtime bar before triggering?
 - Do the higher timeframe plots repaint (which means they won't plot the same way on realtime bars as they do on historical bars)?
-- Do the plots plot in the past?
+- Does your script plot in the past (as most pivot or zigzag scripts will do)?
 - Does your strategy use ``calc_on_every_tick = true``?
 - Will your indicator display in realtime the same way it does on historical bars?
 - Are you fetching future information with your `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls?
