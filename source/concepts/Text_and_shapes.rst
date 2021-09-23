@@ -59,7 +59,7 @@ These are a few things to keep in mind concerning Pine strings:
   See this `Exploring Unicode <https://www.tradingview.com/script/0rFQOCKf-Exploring-Unicode/>`__
   script to get an idea of what can be done with Unicode characters.
 
-This script display text using the four possible methods available in Pine::
+This script displays text using the four possible methods available in Pine::
 
     //@version=5
     indicator("Four displays of text", overlay = true)
