@@ -48,7 +48,7 @@ It has many faces and many causes.
 
 
 For Pine coders
----------------
+^^^^^^^^^^^^^^^
 
 As we discussed in the previous section, not all types of repainting behavior must necessarily be avoided at all costs.
 It is up you, as a programmer, to decide which repainting logic you are OK with in designing your script, and which you want to avoid.
