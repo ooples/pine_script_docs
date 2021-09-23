@@ -87,8 +87,10 @@ In contrast to indicator plots (plots are created with functions
 `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__), 
 drawing objects can be created on historical bars as well as in the future, where no bars exist yet.
 
+
+
 Creating drawings
------------------
+^^^^^^^^^^^^^^^^^
 
 Pine drawing objects are created with the `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ , 
 `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ and 
@@ -136,8 +138,10 @@ This is an example of code that creates box objects on a chart::
 
 .. image:: images/minimal_box.png
 
+
+
 Calculation of drawings on bar updates
---------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Drawing objects are subject to both *commit* and *rollback* actions, which affect the behavior of a script when it executes
 in the realtime bar. See the page on Pine's :ref:`Execution model <Page_ExecutionModel>`.
@@ -155,8 +159,10 @@ Only the last label created before the realtime bar's close will be committed, a
 
 .. _drawings_coordinates:
 
+
+
 Coordinates
------------
+^^^^^^^^^^^
 
 Drawing objects are positioned on the chart according to *x* and *y* coordinates using a combination of 4 parameters: ``x``, ``y``, ``xloc`` and ``yloc``. The value of ``xloc`` determines whether ``x`` will hold a bar index or time value. When ``yloc = yloc.price``, ``y`` holds a price. ``y`` is ignored when ``yloc`` is set to `yloc.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}abovebar>`__ or `yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__.
 
@@ -197,8 +203,9 @@ Label drawings have additional y-location values: `yloc.abovebar <https://www.tr
 When they are used, the value of the ``y`` parameter is ignored and the drawing object is placed above or below the bar.
 
 
+
 Modifying drawings
-------------------
+^^^^^^^^^^^^^^^^^^
 
 A drawing object can be modified after its creation. The 
 `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_, 
@@ -249,8 +256,10 @@ The available *setter* functions for label drawings are:
 
 .. _drawings_label_styles:
 
+
+
 Label styles
-------------
+^^^^^^^^^^^^
 
 Various styles can be applied to labels with either the `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ or
 `label.set_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_style>`__
@@ -319,7 +328,7 @@ function:
 
 
 Deleting drawings
------------------
+^^^^^^^^^^^^^^^^^
 
 The `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`_, `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`__ and `box.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}delete>`__
 functions delete label, line, or box drawing objects from the chart.
