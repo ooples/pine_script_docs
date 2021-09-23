@@ -188,7 +188,7 @@ Repainting \`request.security()\` calls
 The data fetched with `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
 will differ on historical and realtime bars if the function is not used in the correct manner.
 Repainting `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
-calls will produce historical data and plots that cannot be reproduced in realtime.
+calls will produce historical data and plots that cannot be replicated in realtime.
 Let's look at a script showing the difference between repainting and non-repainting
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls::
 
