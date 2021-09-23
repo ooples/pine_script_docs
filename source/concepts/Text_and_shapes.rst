@@ -19,7 +19,7 @@ You may display text or shapes using five different ways with Pine:
 - Labels created with `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__
 - Tables created with `table.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}new>`__
 
-Which one you to use depends on your needs:
+Which one you use depends on your needs:
 
 - Tables can display text in various relative positions on charts that will not move as users scroll of zoom the chart horizontally.
   Their content is not tethered to bars. In contrast, text displayed with 
