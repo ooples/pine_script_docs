@@ -10,14 +10,23 @@ Text and shapes
 Introduction
 ------------
 
-Besides :ref:`tables <PageTables>`, Pine has three functions to display text on charts:
+You may display text using four different ways with Pine:
+
 
 - `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__
 - `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__
-- `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__
+- Labels created with `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__
+- Tables created with `table.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}new>`__
 
 Which one you to use depends on your needs:
 
+- Tables can display text in various relative positions on charts that will not move as users scroll of zoom the chart horizontally.
+  Their content is not tethered to bars. In contrast, text displayed with 
+  `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__, 
+  `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ or
+  `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ is always tethered to a specific bar,
+  so it will move with the bar's position on the chart.
+  See the page on :ref:`Tables <PageTables>` for more information on them.
 - `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
   `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ 
   can display non-dynamic (not of "series" form) text on any bar or all bars of the chart.
