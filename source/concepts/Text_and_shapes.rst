@@ -25,7 +25,7 @@ Which one you to use depends on your needs:
   can only display one character while `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__
   can display strings, including line breaks.
 - `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__
-  can display a maximum of 500 labels on the chart, but their text **can** contain dynamic text, or "series strings".
+  can display a maximum of 500 labels on the chart. Its text **can** contain dynamic text, or "series strings".
   Line breaks are also supported in label text.
 - While `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
   `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ 
