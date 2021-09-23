@@ -399,7 +399,7 @@ Starting points are determined using the following rules, which depend on the ch
 - **30 minutes and higher**: aligns to the beginning of a year.
 
 As time goes by, these factors cause your chart's history to start at different points in time.
-This often has an impact on your scripts calculations, because calculations changes in early bars can ripple through all the other bars in the dataset. 
+This often has an impact on your scripts calculations, because changes in calculation results in early bars can ripple through all the other bars in the dataset. 
 Using functions like `ta.valuewhen() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}valuewhen>`__,
 `ta.barssince() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}barssince>`__ or
 `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__, for example,
