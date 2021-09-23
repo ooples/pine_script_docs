@@ -302,6 +302,20 @@ Dataset variations
 ------------------
 
 
+Fluid datasets
+^^^^^^^^^^^^^^
+
+
+
+Data feed revisions
+^^^^^^^^^^^^^^^^^^^
+
+Historical and realtime bars are built using two different data feeds supplied by exchanges/brokers: historical data, and realtime data.
+When realtime bars elapse, exchanges/brokers sometimes make what are usually small adjustments to bar prices, which are then written to their historical data.
+When the chart is refreshed or the script is re-executed on those elapsed realtime bars,
+they will then be built and calculated using the historical data, which will contain those usually small price revisions, if any have been made.
+
+
 
 Other types of repainting
 -------------------------
@@ -309,9 +323,6 @@ Other types of repainting
 Other types of behavior referred to as *repainting* include:
 
 - Plotting with a negative offset on past bars.
-- Values recalculating differently on historical bars vs elapsed realtime bars.
-  This can be caused by the fact that exchanges/brokers will sometimes make what are usually small adjustments
-  to bar prices when generating the historical data prices for newly elapsed realtime bars.
 - Using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
   without the proper adjustments to ensure that it does not return higher timeframe data that fluctuates on realtime bars,
   due to the fact that the current higher timeframe has not completed. 
