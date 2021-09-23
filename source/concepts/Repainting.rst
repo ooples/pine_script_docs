@@ -207,11 +207,9 @@ Let's look at a script showing the difference between repainting and non-repaint
     nonRepaintingClose = request.security(syminfo.tickerid, tfInput, close[indexHighTF])[indexCurrTF]
     plot(nonRepaintingClose, "Non-repainting close", color.fuchsia, 3)
     
-    newTF = ta.change(time(tfInput))
+    if ta.change(time(tfInput))
+        label.new(bar_index, na, "↻", yloc = yloc.abovebar, style = label.style_none, textcolor = color.black, size = size.large)
     bgcolor(barstate.isrealtime ? ORANGE_LIGHT : na)
-    
-    if newTF
-        label.new(bar_index, na, "↻", yloc = yloc.abovebar, textcolor = color.black, style = label.style_none, size = size.large)
 
 This is what its output looks like on a 5sec chart that has been running the script for a few minutes:
 
