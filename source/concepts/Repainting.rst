@@ -230,7 +230,9 @@ Note that:
   so it moves all the time and changes on each bar.
 - The behavior of the non-repainting, fuchsia line, in contrast, behaves exactly the same way on historical bars and in realtime.
   It updates on the bar following the completion of the higher timeframe, and doesn't move until the bar after another higher timeframe completes.
-  Thus, it is more reliable.
+  Thus, it is more reliable. Note that whereas new higher timeframe data comes in at the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
+  of historical bars, it will be available on the `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__
+  of the same bar in realtime.
 
 This script shows a ``nonRepaintingSecurity()`` function that can be used to do the same as our non-repainting code in the previous example::
 
@@ -246,13 +248,13 @@ This script shows a ``nonRepaintingSecurity()`` function that can be used to do 
     plot(nonRepaintingClose, "Non-repainting close", color.fuchsia, 3)
 
 Another way that can be used to produce non-repainting higher timeframe data is this,
-which use an offset of ``[1]`` on the series, and lookahead::
+which use an offset of ``[1]`` on the series, and ``lookahead``::
 
     request.security(sym, tf, close[1], lookahead = barmerge.lookahead_on)
 
 While it will produce the same non-repainting behavior as ``nonRepaintingSecurity()`` in realtime,
 it has the disadvantage of showing the higher timeframe values one bar earlier on historical bars.
-This may look great, but the problem is that it does not reflect its behavior in realtime.
+This may look better, but the problem is that it does not reflect its behavior in realtime.
 While the method used in ``nonRepaintingSecurity()`` is more complex, we find it more reliable.
 
 
