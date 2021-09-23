@@ -3,20 +3,40 @@
 Repainting
 ==========
 
-We define repainting as: **script behavior causing historical vs realtime bar calculations or plots to behave differently**.
+
+
+Introduction
+------------
+
+We define repainting as: **script behavior causing historical vs realtime calculations or plots to behave differently**.
 
 Repainting behavior is widespread and can be caused by many factors. 
 Following our definition, our estimate is that more than 95% of indicators in existence repaint. 
-Widely used indicators like MACD and RSI repaint, for example, because they show one fixed value on historical bars,
+Widely used indicators like MACD and RSI, for example, repaint because they show one fixed value on historical bars,
 yet when running in realtime they will produce results that vary constantly until the realtime bar closes. 
-They thus behave differently on historical and realtime bars, which does not prevent many traders from using them.
+They thus behave differently on historical and realtime bars, which does not make them less useful, nor prevent knowledgeable traders from using them.
 
-Repainting, per se, is not necessarily good or bad. Whether you decide to use repainting or non-repainting indicators,
-what's important is that you understand how the tools you use behave, and if their behavior is compatible with your objectives.
+**Repainting, per se, is not necessarily good or bad.**
+You can very well decide to use repainting indicators if you understand how they behave and they suit your trading methodology.
+Don't be one of those traders who slap "repaint" sentences on published scripts as if it discredits them;
+doing so reveals your incomprehension of the subject.
 
-More important than repainting, perhaps, is that your indicator's plots, and trade entries and exits, be realistic.
-Indicators that go back in time to plot pivot lines starting at the pivot, for example,
-may be great to impress the galery, but they mislead others — and perhaps yourself.
+The question "Does it repaint?" means nothing, and consequently cannot be answered. 
+Why? Because it needs to be qualified. Instead, one could ask:
+
+- Do the entry/exit markers your indicator displays repaint (or: Do you wait for the realtime bar to close before displaying your entry/exit markers)?
+- Do alerts wait for the end of the realtime bar before triggering?
+- Do the higher timeframe plots repaint (which means they won't plot the same way on realtime bars as they do on historical bars)?
+- Do the plots plot in the past?
+- Does your strategy use ``calc_on_every_tick = true``?
+- Will your indicator display in realtime the same way it does on historical bars?
+- Are you fetching future information with your `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls?
+
+What's important is that you understand how the tools you use behave, 
+and if their behavior is compatible with your objectives, repainting or not.
+
+As you will learn if you read this page, repainting is a complex matter. 
+It has many faces, and many causes.
 
 In this page, we will explore different causes of both repainting and misleading indicators.
 
@@ -238,3 +258,21 @@ Other types of behavior referred to as *repainting* include:
   due to the fact that the current higher timeframe has not completed. 
   See the Pinecoders `security() revisited <https://www.tradingview.com/script/00jFIl5w-security-revisited-PineCoders/>`__
   publication for more information.
+
+
+
+
+
+
+
+
+
+
+Believing that repainting is inherently bad, is bad, and ignorant traders who believe this are often disappointed to learn that in order to avoid repainting,
+they must work with late information.
+
+
+More important than repainting, perhaps, is that your indicator's plots, and trade entries and exits, be realistic.
+Indicators that go back in time to plot pivot lines starting at the pivot, for example,
+may be great to impress the galery, but they mislead others — and perhaps yourself.
+

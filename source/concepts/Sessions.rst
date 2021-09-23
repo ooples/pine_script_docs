@@ -224,7 +224,7 @@ Our first example could be rewritten as::
 
 If you want to use the same session specifications used for the chart's main
 symbol, omit the third argument in `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__; it is optional. 
-Or, if you want your code to explicitly declare your intention, use the ``syminfo.session``
+If you want your code to explicitly declare your intention, use the ``syminfo.session``
 built-in variable. It holds the session type of the chart's main symbol::
 
     //@version=5
