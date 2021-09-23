@@ -87,6 +87,7 @@ Note that:
   with accompanying text. Its ``size`` parameter controls the size of the shape, not of the text.
   We use `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ for its ``color`` argument
   so that the shape is not visible.
+- Contrary to other texts, the table text will not move as you scroll or scale the chart.
 
 
 
