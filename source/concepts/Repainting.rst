@@ -292,6 +292,15 @@ to request data from a timeframe **lower** than the chart's timeframe.
 This works on historical bars but will not work in realtime.
 
 
+
+Future leak with \`request.security()\`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+
+
 Strategies
 ^^^^^^^^^^
 
@@ -346,8 +355,9 @@ Dataset variations
 ------------------
 
 
-Revision of historical data
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Starting points
+^^^^^^^^^^^^^^^
 
 Scripts begin executing on the chart's first historical bar, and then execute on each bar sequentially, 
 as is explained in this manual's page on Pine's :ref:`execution model <PageExecutionModel>`.
@@ -380,8 +390,8 @@ will yield results that vary with early history.
 
 
 
-Data feed revisions
-^^^^^^^^^^^^^^^^^^^
+Revision of historical data
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Historical and realtime bars are built using two different data feeds supplied by exchanges/brokers: historical data, and realtime data.
 When realtime bars elapse, exchanges/brokers sometimes make what are usually small adjustments to bar prices, which are then written to their historical data.
