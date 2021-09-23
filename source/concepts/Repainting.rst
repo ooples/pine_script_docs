@@ -297,9 +297,8 @@ value before it occurs. The solution is to use the function like we do in our ``
 
 Scripts using the `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ 
 declaration mode for variables (see our section on :ref:`varip  <PageVariableDeclarations_Varip>` for more information)
-save information across realtime updates, which cannot be reproduced on historical bars,
-because these have only OHLC information, so no intermediary price movements.
-Such scripts may be very useful in realtime, including to generate alerts,
+save information across realtime updates, which cannot be reproduced on historical bars where only OHLC information is available.
+Such scripts may be useful in realtime, including to generate alerts,
 but their logic cannot be backtested, nor can their plots on historical bars reflect calculations that will be done in realtime.
 
 
