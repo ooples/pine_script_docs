@@ -106,6 +106,7 @@ Note that:
 - Some text strings contain the ``\n`` sequence that represents a new line.
 
 
+
 \`plotchar()\`
 --------------
 
@@ -238,31 +239,6 @@ The available shapes you can use with the ``style`` parameter are:
 +------------------------+--------------------------+--------------------------+-+------------------------+--------------------------+--------------------------+
 | ``shape.flag``         | |Plotshape_flag|         | |Flag_with_text|         | | ``shape.labeldown``    | |Plotshape_labeldown|    | |Labeldown_with_text|    |
 +------------------------+--------------------------+--------------------------+-+------------------------+--------------------------+--------------------------+
-
-.. |Plotshape_xcross| image:: images/TextAndShapes-PlotshapeStyles-Xcross.png
-.. |Xcross_with_text| image:: images/TextAndShapes-PlotshapeStyles-Xcross_with_text.png
-.. |Plotshape_cross| image:: images/TextAndShapes-PlotshapeStyles-Cross.png
-.. |Cross_with_text| image:: images/TextAndShapes-PlotshapeStyles-Cross_with_text.png
-.. |Plotshape_circle| image:: images/TextAndShapes-PlotshapeStyles-Circle.png
-.. |Circle_with_text| image:: images/TextAndShapes-PlotshapeStyles-Circle_with_text.png
-.. |Plotshape_triangleup| image:: images/TextAndShapes-PlotshapeStyles-Triangleup.png
-.. |Triangleup_with_text| image:: images/TextAndShapes-PlotshapeStyles-Triangleup_with_text.png
-.. |Plotshape_triangledown| image:: images/TextAndShapes-PlotshapeStyles-Triangledown.png
-.. |Triangledown_with_text| image:: images/TextAndShapes-PlotshapeStyles-Triangledown_with_text.png
-.. |Plotshape_flag| image:: images/TextAndShapes-PlotshapeStyles-Flag.png
-.. |Flag_with_text| image:: images/TextAndShapes-PlotshapeStyles-Flag_with_text.png
-.. |Plotshape_arrowup| image:: images/TextAndShapes-PlotshapeStyles-Arrowup.png
-.. |Arrowup_with_text| image:: images/TextAndShapes-PlotshapeStyles-Arrowup_with_text.png
-.. |Plotshape_arrowdown| image:: images/TextAndShapes-PlotshapeStyles-Arrowdown.png
-.. |Arrowdown_with_text| image:: images/TextAndShapes-PlotshapeStyles-Arrowdown_with_text.png
-.. |Plotshape_square| image:: images/TextAndShapes-PlotshapeStyles-Square.png
-.. |Square_with_text| image:: images/TextAndShapes-PlotshapeStyles-Square_with_text.png
-.. |Plotshape_diamond| image:: images/TextAndShapes-PlotshapeStyles-Diamond.png
-.. |Diamond_with_text| image:: images/TextAndShapes-PlotshapeStyles-Diamond_with_text.png
-.. |Plotshape_labelup| image:: images/TextAndShapes-PlotshapeStyles-Labelup.png
-.. |Labelup_with_text| image:: images/TextAndShapes-PlotshapeStyles-Labelup_with_text.png
-.. |Plotshape_labeldown| image:: images/TextAndShapes-PlotshapeStyles-Labeldown.png
-.. |Labeldown_with_text| image:: images/TextAndShapes-PlotshapeStyles-Labeldown_with_text.png
 
 
 
@@ -575,75 +551,32 @@ These are the avaible ``style`` arguments:
 | ``label.style_arrowdown``    | |label_style_arrowdown|    | |label_style_arrowdown_t|    | | ``label.style_none``              |                                 | |label_style_none_t|              |
 +------------------------------+----------------------------+------------------------------+-+-----------------------------------+---------------------------------+-----------------------------------+
 
-.. |label_style_xcross| image:: images/TextAndShapes-LabelStyles-xcross.png
-.. |label_style_cross| image:: images/TextAndShapes-LabelStyles-cross.png
-.. |label_style_flag| image:: images/TextAndShapes-LabelStyles-flag.png
-.. |label_style_circle| image:: images/TextAndShapes-LabelStyles-circle.png
-.. |label_style_square| image:: images/TextAndShapes-LabelStyles-square.png
-.. |label_style_diamond| image:: images/TextAndShapes-LabelStyles-diamond.png
-.. |label_style_triangleup| image:: images/TextAndShapes-LabelStyles-triangleup.png
-.. |label_style_triangledown| image:: images/TextAndShapes-LabelStyles-triangledown.png
-.. |label_style_arrowup| image:: images/TextAndShapes-LabelStyles-arrowup.png
-.. |label_style_arrowdown| image:: images/TextAndShapes-LabelStyles-arrowdown.png
-
-.. |label_style_xcross_t| image:: images/TextAndShapes-LabelStyles-xcross_t.png
-.. |label_style_cross_t| image:: images/TextAndShapes-LabelStyles-cross_t.png
-.. |label_style_flag_t| image:: images/TextAndShapes-LabelStyles-flag_t.png
-.. |label_style_circle_t| image:: images/TextAndShapes-LabelStyles-circle_t.png
-.. |label_style_square_t| image:: images/TextAndShapes-LabelStyles-square_t.png
-.. |label_style_diamond_t| image:: images/TextAndShapes-LabelStyles-diamond_t.png
-.. |label_style_triangleup_t| image:: images/TextAndShapes-LabelStyles-triangleup_t.png
-.. |label_style_triangledown_t| image:: images/TextAndShapes-LabelStyles-triangledown_t.png
-.. |label_style_arrowup_t| image:: images/TextAndShapes-LabelStyles-arrowup_t.png
-.. |label_style_arrowdown_t| image:: images/TextAndShapes-LabelStyles-arrowdown_t.png
-
-.. |label_style_label_up| image:: images/TextAndShapes-LabelStyles-labelup.png
-.. |label_style_label_down| image:: images/TextAndShapes-LabelStyles-labeldown.png
-.. |label_style_label_left| image:: images/TextAndShapes-LabelStyles-labelleft.png
-.. |label_style_label_right| image:: images/TextAndShapes-LabelStyles-labelright.png
-.. |label_style_label_lower_left| image:: images/TextAndShapes-LabelStyles-labellowerleft.png
-.. |label_style_label_lower_right| image:: images/TextAndShapes-LabelStyles-labellowerright.png
-.. |label_style_label_upper_left| image:: images/TextAndShapes-LabelStyles-labelupperleft.png
-.. |label_style_label_upper_right| image:: images/TextAndShapes-LabelStyles-labelupperright.png
-.. |label_style_label_center| image:: images/TextAndShapes-LabelStyles-labelcenter.png
-
-.. |label_style_label_up_t| image:: images/TextAndShapes-LabelStyles-labelup_t.png
-.. |label_style_label_down_t| image:: images/TextAndShapes-LabelStyles-labeldown_t.png
-.. |label_style_label_left_t| image:: images/TextAndShapes-LabelStyles-labelleft_t.png
-.. |label_style_label_right_t| image:: images/TextAndShapes-LabelStyles-labelright_t.png
-.. |label_style_label_lower_left_t| image:: images/TextAndShapes-LabelStyles-labellowerleft_t.png
-.. |label_style_label_lower_right_t| image:: images/TextAndShapes-LabelStyles-labellowerright_t.png
-.. |label_style_label_upper_left_t| image:: images/TextAndShapes-LabelStyles-labelupperleft_t.png
-.. |label_style_label_upper_right_t| image:: images/TextAndShapes-LabelStyles-labelupperright_t.png
-.. |label_style_label_center_t| image:: images/TextAndShapes-LabelStyles-labelcenter_t.png
-
-
-.. |label_style_none_t| image:: images/TextAndShapes-LabelStyles-none_t.png
-
-If a drawing object uses `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__, then
-the x-coordinate is treated as a UNIX time in milliseconds. The start time of the current bar can be obtained from the built-in variable ``time``.
-The bar time of previous bars is ``time[1]``, ``time[2]`` and so on. Time can also be set to an absolute time point with the
+When using `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__, 
+the ``x`` value must be a UNIX time in milliseconds. The start time of the current bar can be obtained from the 
+`time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ built-in variable.
+The bar time of previous bars is ``time[1]``, ``time[2]`` and so on. Time can also be set to an absolute value with the
 `timestamp <https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp>`__ function.
+You may add or subtract periods of time to achieve relative time offset.
 
-Both modes make it possible to place a drawing object in the future, to the right of the current bar. For example::
+Let's position a label one day ago from the date on the last bar::
 
     //@version=5
-    indicator("My Script", overlay = true)
-    dt = time - time[1]
+    indicator("")
+    daysAgoInput = input.int(1, tooltip = "Use negative values to offset in the future")
     if barstate.islast
-        label.new(time + 3*dt, close, xloc = xloc.bar_time)
+        MS_IN_ONE_DAY = 24 * 60 * 60 * 1000
+        oneDayAgo = time - (daysAgoInput * MS_IN_ONE_DAY)
+        label.new(oneDayAgo, high, xloc = xloc.bar_time, style = label.style_label_right)
 
-.. image:: images/label_in_the_future.png
+Note that because of varying time gaps and missing bars when markets are closed,
+the positioning of the label may not always be exact. 
+Time offsets of the sort tend to be more reliable on 24x7 markets.
 
-This code places a label object in the future. X-location logic works identically for label, line, and box drawings.
+You can also offset using a bar index for the ``x`` value, e.g.::
 
-Example for ``xloc.bar_index``::
-
-    //@version=5
-    indicator("My Script", overlay = true)
-    label.new(bar_index+100, high)
-
-.. image:: images/label_in_the_future_2.png
+    label.new(bar_index + 10, high)
+    label.new(bar_index - 10, high[10])
+    label.new(bar_index[10], high[10])
 
 
 
@@ -709,3 +642,74 @@ This is the efficient way to realize the same task::
         // On all iterations of the script on the last bar, update the label's information.
         label.set_xy(lbl, bar_index, high)
         label.set_text(lbl, str.tostring(high, format.mintick))
+
+
+
+.. |Plotshape_xcross| image:: images/TextAndShapes-PlotshapeStyles-Xcross.png
+.. |Xcross_with_text| image:: images/TextAndShapes-PlotshapeStyles-Xcross_with_text.png
+.. |Plotshape_cross| image:: images/TextAndShapes-PlotshapeStyles-Cross.png
+.. |Cross_with_text| image:: images/TextAndShapes-PlotshapeStyles-Cross_with_text.png
+.. |Plotshape_circle| image:: images/TextAndShapes-PlotshapeStyles-Circle.png
+.. |Circle_with_text| image:: images/TextAndShapes-PlotshapeStyles-Circle_with_text.png
+.. |Plotshape_triangleup| image:: images/TextAndShapes-PlotshapeStyles-Triangleup.png
+.. |Triangleup_with_text| image:: images/TextAndShapes-PlotshapeStyles-Triangleup_with_text.png
+.. |Plotshape_triangledown| image:: images/TextAndShapes-PlotshapeStyles-Triangledown.png
+.. |Triangledown_with_text| image:: images/TextAndShapes-PlotshapeStyles-Triangledown_with_text.png
+.. |Plotshape_flag| image:: images/TextAndShapes-PlotshapeStyles-Flag.png
+.. |Flag_with_text| image:: images/TextAndShapes-PlotshapeStyles-Flag_with_text.png
+.. |Plotshape_arrowup| image:: images/TextAndShapes-PlotshapeStyles-Arrowup.png
+.. |Arrowup_with_text| image:: images/TextAndShapes-PlotshapeStyles-Arrowup_with_text.png
+.. |Plotshape_arrowdown| image:: images/TextAndShapes-PlotshapeStyles-Arrowdown.png
+.. |Arrowdown_with_text| image:: images/TextAndShapes-PlotshapeStyles-Arrowdown_with_text.png
+.. |Plotshape_square| image:: images/TextAndShapes-PlotshapeStyles-Square.png
+.. |Square_with_text| image:: images/TextAndShapes-PlotshapeStyles-Square_with_text.png
+.. |Plotshape_diamond| image:: images/TextAndShapes-PlotshapeStyles-Diamond.png
+.. |Diamond_with_text| image:: images/TextAndShapes-PlotshapeStyles-Diamond_with_text.png
+.. |Plotshape_labelup| image:: images/TextAndShapes-PlotshapeStyles-Labelup.png
+.. |Labelup_with_text| image:: images/TextAndShapes-PlotshapeStyles-Labelup_with_text.png
+.. |Plotshape_labeldown| image:: images/TextAndShapes-PlotshapeStyles-Labeldown.png
+.. |Labeldown_with_text| image:: images/TextAndShapes-PlotshapeStyles-Labeldown_with_text.png
+
+
+.. |label_style_xcross| image:: images/TextAndShapes-LabelStyles-xcross.png
+.. |label_style_cross| image:: images/TextAndShapes-LabelStyles-cross.png
+.. |label_style_flag| image:: images/TextAndShapes-LabelStyles-flag.png
+.. |label_style_circle| image:: images/TextAndShapes-LabelStyles-circle.png
+.. |label_style_square| image:: images/TextAndShapes-LabelStyles-square.png
+.. |label_style_diamond| image:: images/TextAndShapes-LabelStyles-diamond.png
+.. |label_style_triangleup| image:: images/TextAndShapes-LabelStyles-triangleup.png
+.. |label_style_triangledown| image:: images/TextAndShapes-LabelStyles-triangledown.png
+.. |label_style_arrowup| image:: images/TextAndShapes-LabelStyles-arrowup.png
+.. |label_style_arrowdown| image:: images/TextAndShapes-LabelStyles-arrowdown.png
+
+.. |label_style_xcross_t| image:: images/TextAndShapes-LabelStyles-xcross_t.png
+.. |label_style_cross_t| image:: images/TextAndShapes-LabelStyles-cross_t.png
+.. |label_style_flag_t| image:: images/TextAndShapes-LabelStyles-flag_t.png
+.. |label_style_circle_t| image:: images/TextAndShapes-LabelStyles-circle_t.png
+.. |label_style_square_t| image:: images/TextAndShapes-LabelStyles-square_t.png
+.. |label_style_diamond_t| image:: images/TextAndShapes-LabelStyles-diamond_t.png
+.. |label_style_triangleup_t| image:: images/TextAndShapes-LabelStyles-triangleup_t.png
+.. |label_style_triangledown_t| image:: images/TextAndShapes-LabelStyles-triangledown_t.png
+.. |label_style_arrowup_t| image:: images/TextAndShapes-LabelStyles-arrowup_t.png
+.. |label_style_arrowdown_t| image:: images/TextAndShapes-LabelStyles-arrowdown_t.png
+
+.. |label_style_label_up| image:: images/TextAndShapes-LabelStyles-labelup.png
+.. |label_style_label_down| image:: images/TextAndShapes-LabelStyles-labeldown.png
+.. |label_style_label_left| image:: images/TextAndShapes-LabelStyles-labelleft.png
+.. |label_style_label_right| image:: images/TextAndShapes-LabelStyles-labelright.png
+.. |label_style_label_lower_left| image:: images/TextAndShapes-LabelStyles-labellowerleft.png
+.. |label_style_label_lower_right| image:: images/TextAndShapes-LabelStyles-labellowerright.png
+.. |label_style_label_upper_left| image:: images/TextAndShapes-LabelStyles-labelupperleft.png
+.. |label_style_label_upper_right| image:: images/TextAndShapes-LabelStyles-labelupperright.png
+.. |label_style_label_center| image:: images/TextAndShapes-LabelStyles-labelcenter.png
+
+.. |label_style_label_up_t| image:: images/TextAndShapes-LabelStyles-labelup_t.png
+.. |label_style_label_down_t| image:: images/TextAndShapes-LabelStyles-labeldown_t.png
+.. |label_style_label_left_t| image:: images/TextAndShapes-LabelStyles-labelleft_t.png
+.. |label_style_label_right_t| image:: images/TextAndShapes-LabelStyles-labelright_t.png
+.. |label_style_label_lower_left_t| image:: images/TextAndShapes-LabelStyles-labellowerleft_t.png
+.. |label_style_label_lower_right_t| image:: images/TextAndShapes-LabelStyles-labellowerright_t.png
+.. |label_style_label_upper_left_t| image:: images/TextAndShapes-LabelStyles-labelupperleft_t.png
+.. |label_style_label_upper_right_t| image:: images/TextAndShapes-LabelStyles-labelupperright_t.png
+.. |label_style_label_center_t| image:: images/TextAndShapes-LabelStyles-labelcenter_t.png
+.. |label_style_none_t| image:: images/TextAndShapes-LabelStyles-none_t.png
