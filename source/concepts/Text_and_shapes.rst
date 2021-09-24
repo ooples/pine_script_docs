@@ -678,7 +678,10 @@ Note that:
   We use that value to set the ``max_labels_count`` parameter's value in our `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ call,
   and also as the ``maxval`` value in our `input.int() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int>`__ call,
   to cap the user value.
-- We create a new label when our RSI breachest its highest value of the last 20 bars.
+- We create a new label when our RSI breaches its highest value of the last 20 bars.
+  Note the offset of ``[1]`` we use in ``if myRSI > ta.highest(myRSI, 20)[1]``. 
+  This is necessary. Without it, the value returned by `ta.highest() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}highest>`__
+  would always include the current value of ``myRSI``, so ``myRSI`` would never be higher than the function's return value.
 - After that, we delete the oldest label in the `label.all <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}all>`__
   array that is automatically maintained by the Pine runtime and contains the ID of all the visible labels drawn by our script.
   We use the `array.shift() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}shift>`__
