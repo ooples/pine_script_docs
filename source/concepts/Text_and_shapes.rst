@@ -239,30 +239,30 @@ The available shapes you can use with the ``style`` parameter are:
 | ``shape.flag``         | |Plotshape_flag|         | |Flag_with_text|         | | ``shape.labeldown``    | |Plotshape_labeldown|    | |Labeldown_with_text|    |
 +------------------------+--------------------------+--------------------------+-+------------------------+--------------------------+--------------------------+
 
-.. |Plotshape_xcross| image:: images/TextAndShapes-Plotshape-Xcross.png
-.. |Xcross_with_text| image:: images/TextAndShapes-Plotshape-Xcross_with_text.png
-.. |Plotshape_cross| image:: images/TextAndShapes-Plotshape-Cross.png
-.. |Cross_with_text| image:: images/TextAndShapes-Plotshape-Cross_with_text.png
-.. |Plotshape_circle| image:: images/TextAndShapes-Plotshape-Circle.png
-.. |Circle_with_text| image:: images/TextAndShapes-Plotshape-Circle_with_text.png
-.. |Plotshape_triangleup| image:: images/TextAndShapes-Plotshape-Triangleup.png
-.. |Triangleup_with_text| image:: images/TextAndShapes-Plotshape-Triangleup_with_text.png
-.. |Plotshape_triangledown| image:: images/TextAndShapes-Plotshape-Triangledown.png
-.. |Triangledown_with_text| image:: images/TextAndShapes-Plotshape-Triangledown_with_text.png
-.. |Plotshape_flag| image:: images/TextAndShapes-Plotshape-Flag.png
-.. |Flag_with_text| image:: images/TextAndShapes-Plotshape-Flag_with_text.png
-.. |Plotshape_arrowup| image:: images/TextAndShapes-Plotshape-Arrowup.png
-.. |Arrowup_with_text| image:: images/TextAndShapes-Plotshape-Arrowup_with_text.png
-.. |Plotshape_arrowdown| image:: images/TextAndShapes-Plotshape-Arrowdown.png
-.. |Arrowdown_with_text| image:: images/TextAndShapes-Plotshape-Arrowdown_with_text.png
-.. |Plotshape_square| image:: images/TextAndShapes-Plotshape-Square.png
-.. |Square_with_text| image:: images/TextAndShapes-Plotshape-Square_with_text.png
-.. |Plotshape_diamond| image:: images/TextAndShapes-Plotshape-Diamond.png
-.. |Diamond_with_text| image:: images/TextAndShapes-Plotshape-Diamond_with_text.png
-.. |Plotshape_labelup| image:: images/TextAndShapes-Plotshape-Labelup.png
-.. |Labelup_with_text| image:: images/TextAndShapes-Plotshape-Labelup_with_text.png
-.. |Plotshape_labeldown| image:: images/TextAndShapes-Plotshape-Labeldown.png
-.. |Labeldown_with_text| image:: images/TextAndShapes-Plotshape-Labeldown_with_text.png
+.. |Plotshape_xcross| image:: images/TextAndShapes-PlotshapeStyles-Xcross.png
+.. |Xcross_with_text| image:: images/TextAndShapes-PlotshapeStyles-Xcross_with_text.png
+.. |Plotshape_cross| image:: images/TextAndShapes-PlotshapeStyles-Cross.png
+.. |Cross_with_text| image:: images/TextAndShapes-PlotshapeStyles-Cross_with_text.png
+.. |Plotshape_circle| image:: images/TextAndShapes-PlotshapeStyles-Circle.png
+.. |Circle_with_text| image:: images/TextAndShapes-PlotshapeStyles-Circle_with_text.png
+.. |Plotshape_triangleup| image:: images/TextAndShapes-PlotshapeStyles-Triangleup.png
+.. |Triangleup_with_text| image:: images/TextAndShapes-PlotshapeStyles-Triangleup_with_text.png
+.. |Plotshape_triangledown| image:: images/TextAndShapes-PlotshapeStyles-Triangledown.png
+.. |Triangledown_with_text| image:: images/TextAndShapes-PlotshapeStyles-Triangledown_with_text.png
+.. |Plotshape_flag| image:: images/TextAndShapes-PlotshapeStyles-Flag.png
+.. |Flag_with_text| image:: images/TextAndShapes-PlotshapeStyles-Flag_with_text.png
+.. |Plotshape_arrowup| image:: images/TextAndShapes-PlotshapeStyles-Arrowup.png
+.. |Arrowup_with_text| image:: images/TextAndShapes-PlotshapeStyles-Arrowup_with_text.png
+.. |Plotshape_arrowdown| image:: images/TextAndShapes-PlotshapeStyles-Arrowdown.png
+.. |Arrowdown_with_text| image:: images/TextAndShapes-PlotshapeStyles-Arrowdown_with_text.png
+.. |Plotshape_square| image:: images/TextAndShapes-PlotshapeStyles-Square.png
+.. |Square_with_text| image:: images/TextAndShapes-PlotshapeStyles-Square_with_text.png
+.. |Plotshape_diamond| image:: images/TextAndShapes-PlotshapeStyles-Diamond.png
+.. |Diamond_with_text| image:: images/TextAndShapes-PlotshapeStyles-Diamond_with_text.png
+.. |Plotshape_labelup| image:: images/TextAndShapes-PlotshapeStyles-Labelup.png
+.. |Labelup_with_text| image:: images/TextAndShapes-PlotshapeStyles-Labelup_with_text.png
+.. |Plotshape_labeldown| image:: images/TextAndShapes-PlotshapeStyles-Labeldown.png
+.. |Labeldown_with_text| image:: images/TextAndShapes-PlotshapeStyles-Labeldown_with_text.png
 
 
 
@@ -514,36 +514,36 @@ function:
 | ``label.style_arrowdown``    | |label_style_arrowdown|    | |label_style_arrowdown_t|    | | ``label.style_none``              |                                 | |label_style_none_t|              |
 +------------------------------+----------------------------+------------------------------+-+-----------------------------------+---------------------------------+-----------------------------------+
 
-.. |label_style_xcross| image:: images/label.style_xcross.png
-.. |label_style_cross| image:: images/label.style_cross.png
-.. |label_style_flag| image:: images/label.style_flag.png
-.. |label_style_circle| image:: images/label.style_circle.png
-.. |label_style_square| image:: images/label.style_square.png
-.. |label_style_diamond| image:: images/label.style_diamond.png
-.. |label_style_triangleup| image:: images/label.style_triangleup.png
-.. |label_style_triangledown| image:: images/label.style_triangledown.png
-.. |label_style_arrowup| image:: images/label.style_arrowup.png
-.. |label_style_arrowdown| image:: images/label.style_arrowdown.png
+.. |label_style_xcross| image:: images/TextAndShapes-LabelStyles-xcross.png
+.. |label_style_cross| image:: images/TextAndShapes-LabelStyles-cross.png
+.. |label_style_flag| image:: images/TextAndShapes-LabelStyles-flag.png
+.. |label_style_circle| image:: images/TextAndShapes-LabelStyles-circle.png
+.. |label_style_square| image:: images/TextAndShapes-LabelStyles-square.png
+.. |label_style_diamond| image:: images/TextAndShapes-LabelStyles-diamond.png
+.. |label_style_triangleup| image:: images/TextAndShapes-LabelStyles-triangleup.png
+.. |label_style_triangledown| image:: images/TextAndShapes-LabelStyles-triangledown.png
+.. |label_style_arrowup| image:: images/TextAndShapes-LabelStyles-arrowup.png
+.. |label_style_arrowdown| image:: images/TextAndShapes-LabelStyles-arrowdown.png
 
-.. |label_style_xcross_t| image:: images/label.style_xcross_t.png
-.. |label_style_cross_t| image:: images/label.style_cross_t.png
-.. |label_style_flag_t| image:: images/label.style_flag_t.png
-.. |label_style_circle_t| image:: images/label.style_circle_t.png
-.. |label_style_square_t| image:: images/label.style_square_t.png
-.. |label_style_diamond_t| image:: images/label.style_diamond_t.png
-.. |label_style_triangleup_t| image:: images/label.style_triangleup_t.png
-.. |label_style_triangledown_t| image:: images/label.style_triangledown_t.png
-.. |label_style_arrowup_t| image:: images/label.style_arrowup_t.png
-.. |label_style_arrowdown_t| image:: images/label.style_arrowdown_t.png
+.. |label_style_xcross_t| image:: images/TextAndShapes-LabelStyles-xcross_t.png
+.. |label_style_cross_t| image:: images/TextAndShapes-LabelStyles-cross_t.png
+.. |label_style_flag_t| image:: images/TextAndShapes-LabelStyles-flag_t.png
+.. |label_style_circle_t| image:: images/TextAndShapes-LabelStyles-circle_t.png
+.. |label_style_square_t| image:: images/TextAndShapes-LabelStyles-square_t.png
+.. |label_style_diamond_t| image:: images/TextAndShapes-LabelStyles-diamond_t.png
+.. |label_style_triangleup_t| image:: images/TextAndShapes-LabelStyles-triangleup_t.png
+.. |label_style_triangledown_t| image:: images/TextAndShapes-LabelStyles-triangledown_t.png
+.. |label_style_arrowup_t| image:: images/TextAndShapes-LabelStyles-arrowup_t.png
+.. |label_style_arrowdown_t| image:: images/TextAndShapes-LabelStyles-arrowdown_t.png
 
-.. |label_style_label_up| image:: images/label.style_labelup.png
-.. |label_style_label_down| image:: images/label.style_labeldown.png
+.. |label_style_label_up| image:: images/TextAndShapes-LabelStyles-labelup.png
+.. |label_style_label_down| image:: images/TextAndShapes-LabelStyles-labeldown.png
+.. |label_style_label_left| image:: images/TextAndShapes-LabelStyles-labelleft.png
 
-.. |label_style_label_up_t| image:: images/label.style_labelup_t.png
-.. |label_style_label_down_t| image:: images/label.style_labeldown_t.png
-.. |label_style_none_t| image:: images/label.style_none_t.png
+.. |label_style_label_up_t| image:: images/TextAndShapes-LabelStyles-labelup_t.png
+.. |label_style_label_down_t| image:: images/TextAndShapes-LabelStyles-labeldown_t.png
 
-
+.. |label_style_none_t| image:: images/TextAndShapes-LabelStyles-none_t.png
 
 Calculation of drawings on bar updates
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
