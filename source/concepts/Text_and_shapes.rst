@@ -486,10 +486,70 @@ The *setter* functions allowing you to change a label's properties are:
 Label styles
 """"""""""""
 
-Various styles can be applied to labels with either the `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ or
-`label.set_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_style>`__
-function:
 
+Realtime behavior
+^^^^^^^^^^^^^^^^^
+
+Labels are subject to both *commit* and *rollback* actions, which affect the behavior of a script when it executes
+in the realtime bar. See the page on Pine's :ref:`Execution model <Page_ExecutionModel>`.
+
+This script demonstrates the effect of rollback when running in the realtime bar::
+
+    //@version=5
+    indicator("", "", true)
+    label.new(bar_index, high)
+
+On realtime bars, `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ 
+creates a new label on every script update, but the because of the rollback process,
+the label created on the previous update on the same bar is deleted.
+Only the last label created before the realtime bar's close will be committed, and thus persist.
+
+
+
+Positioning labels
+^^^^^^^^^^^^^^^^^^
+
+Labels are positioned on the chart according to *x* (bars) and *y* (price) coordinates. 
+Five parameters affect this behavior: ``x``, ``y``, ``xloc``, ``yloc`` and ``style``:
+
+``x``
+   Is either a bar index or a time value. When a bar index is used, the value can be offset in the past or in the future (maximum of 500 bars in the future).
+   Past of future offsets can also be calculated when using time values.
+   The ``x`` value of an existing label can be modified using `label.set_x() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_x>`__ or
+   `label.set_xy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xy>`__.
+
+``xloc``
+   Is either `xloc.bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_index>`__ (the default)
+   or `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__.
+   It determines which type of argument must be used with ``x``. 
+   With `xloc.bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_index>`__, ``x`` must be an absolute bar index.
+   With `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__, ``x`` must be a UNIX time in milliseconds 
+   corresponding to the `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ value of a bar's `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__.
+   The ``xloc`` value of an existing label can be modified using `label.set_xloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xloc>`__.
+
+``y``
+   Is the price level. It is only taken into account with the default ``yloc`` value of ``yloc.price``.
+   If ``yloc`` is `yloc.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}abovebar>`__ or 
+   `yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__
+   then the ``y`` argument is ignored.
+   The ``y`` value of an existing label can be modified using `label.set_y() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_y>`__ or
+   `label.set_xy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xy>`__.
+
+``yloc``
+   Can be `yloc.price <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}price>`__, 
+   `yloc.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}abovebar>`__ or 
+   `yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__.
+   The argument used for ``y`` is only used with `yloc.price <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}price>`__. 
+   The ``yloc`` value of an existing label can be modified using `label.set_yloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_yloc>`__.
+
+``style``
+   The argument used has an impact on the visual appearance of the label and on its position relative to the reference point
+   determined by either the ``y`` value or the top/bottom of the bar when 
+   `yloc.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}abovebar>`__ or 
+   `yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__ are used.
+   The ``style`` of an existing label can be modified using `label.set_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_style>`__.
+
+These are the avaible ``style`` arguments:
 
 +------------------------------+----------------------------+------------------------------+-+-----------------------------------+---------------------------------+-----------------------------------+
 | Argument                     | Label                      | Label with text              | | Argument                          | Label                           | Label with text                   |
@@ -560,53 +620,6 @@ function:
 
 .. |label_style_none_t| image:: images/TextAndShapes-LabelStyles-none_t.png
 
-Realtime behavior
-^^^^^^^^^^^^^^^^^
-
-Labels are subject to both *commit* and *rollback* actions, which affect the behavior of a script when it executes
-in the realtime bar. See the page on Pine's :ref:`Execution model <Page_ExecutionModel>`.
-
-This script demonstrates the effect of rollback when running in the realtime bar::
-
-    //@version=5
-    indicator("", "", true)
-    label.new(bar_index, high)
-
-On realtime bars, `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ 
-creates a new label on every script update, but the because of the rollback process,
-the label created on the previous update on the same bar is deleted.
-Only the last label created before the realtime bar's close will be committed, and thus persist.
-
-
-
-Coordinates
-^^^^^^^^^^^
-
-Labels are positioned on the chart according to *x* (bars) and *y* (price) coordinates. 
-Four parameters affect this behavior: ``x``, ``y``, ``xloc`` and ``yloc``:
-
-``x``
-   Is either a bar index or a time value. When a bar index is used, it can be offset in the past or in the future. The maximum future offset is 500 bars.
-``xloc``
-   Is either `xloc.bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_index>`__ (the default)
-   or `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__.
-   It determines which type of argument must be used with ``x``. 
-   With `xloc.bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_index>`__, ``x`` must be an absolute bar index.
-   With `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__, ``x`` must be a UNIX time in milliseconds 
-   corresponding to the `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ value of a bar's `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__.
-
-``y``
-   Is the price level. It is only taken into account with the default ``yloc`` value of ``yloc.price``.
-   If ``yloc`` is `yloc.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}abovebar>`__ or 
-   `yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__
-   then the ``y`` argument is ignored.
-
-``yloc``
-   Can be `yloc.price <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}price>`__, 
-   `yloc.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}abovebar>`__ or 
-   `yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__.
-   The argument used for ``y`` is only used with `yloc.price <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}price>`__. 
-
 If a drawing object uses `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__, then
 the x-coordinate is treated as a UNIX time in milliseconds. The start time of the current bar can be obtained from the built-in variable ``time``.
 The bar time of previous bars is ``time[1]``, ``time[2]`` and so on. Time can also be set to an absolute time point with the
@@ -632,13 +645,6 @@ Example for ``xloc.bar_index``::
 
 .. image:: images/label_in_the_future_2.png
 
-In contrast, y-location logic is different for label and line or box drawings.
-Pine's *line* and *box* drawings always use `yloc.price <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}price>`__,
-so their y-coordinate is always treated as an absolute price value.
-
-Label drawings have additional y-location values: `yloc.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}abovebar>`__ and
-`yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__.
-When they are used, the value of the ``y`` parameter is ignored and the drawing object is placed above or below the bar.
 
 
 
