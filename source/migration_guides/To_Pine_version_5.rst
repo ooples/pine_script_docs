@@ -32,7 +32,7 @@ The Pine Editor includes a utility to automatically convert v4 scripts to v5. To
 .. image:: images/v4_to_v5_convert_button.png
 
 
-Not all scripts can be automatically converted from v4 to v5. If you want to convert the script manually or if your indicator returns a compilation error after conversion, use the following sections to determine how to complete the conversion.
+Not all scripts can be automatically converted from v4 to v5. If you want to convert the script manually or if your indicator returns a compilation error after conversion, use the following sections to determine how to complete the conversion. A list of some errors you can encounter during the automatic conversion and how to fix them can be found in the :ref:`Common script conversion errors <PageToPineVersion5_CommonConversionErrors>` section of this guide.
 
 
 
@@ -232,6 +232,84 @@ This change in behavior will not affect scripts running on conventional markets 
 
 Gone are the days when the `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ function was allowed to loiter. Now it must actually have an effect on the strategy by using at least one of the following parameters: ``profit``, ``limit``, ``loss``, ``stop``, or one of the following pairs: ``trail_offset`` combined with either ``trail_price`` or ``trail_points``. When uses of `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ not meeting these criteria trigger an error while converting a strategy to v5, you can safely eliminate these lines, as they didn't do anything in your code anyway.
 
+
+.. _PageToPineVersion5_CommonConversionErrors::
+
+Common script conversion errors 
+-------------------------------
+
+
+Invalid argument 'style'/'linestyle' in 'plot'/'hline' call
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+To make this work, you need to change integer ``plot`` and ``hline`` styles to built-in constants::
+
+	// Will cause an error during conversion
+	plotStyle = input(1)
+	hlineStyle = input(1)
+	plot(close, style = plotStyle)
+	hline(100, linestyle = hlineStyle)
+
+	// Will work in v5
+	plotStyleInput = input.string("Line", options=["Line", "Stepline", "Histogram", "Cross", "Area", "Columns", "Circles"])
+	hlineStyleInput = input.string("Solid", options=["Solid", "Dashed", "Dotted"])
+	
+	plotStyle = plotStyleInput == "Line" ? plot.style_line : 
+		     plotStyleInput == "Stepline" ? plot.style_stepline :
+		     plotStyleInput == "Histogram" ? plot.style_histogram :
+		     plotStyleInput == "Cross" ? plot.style_cross :
+		     plotStyleInput == "Area" ? plot.style_area :
+		     plotStyleInput == "Columns" ? plot.style_columns :
+		     plot.style_circles
+		     
+	hlineStyle = hlineStyleInput == "Solid" ? hline.style_solid :
+		     hlineStyleInput == "Dashed" ? hline.style_dashed :
+		     hline.style_dotted
+		     
+	plot(close, style=plotStyle)
+	hline(100, style=hlineStyle)
+
+
+Undeclated identifier 'input.%input_name%'
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+To fix this issue, remove the 'input.' constants from your code::
+
+	// Will cause an error during conversion
+	_integer = input.integer
+	_bool = input.bool
+	i1 = input(1, "Integer", _integer)
+	i2 = input(true, "Boolean", _bool)
+	
+	// Will work in v5
+	i1 = input.int(1, "Integer")
+	i2 = input.bool(true, "Boolean")
+	
+
+
+Invalid argument 'when' in 'strategy.close' call
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The issue is caused by the confusion in difference between ``strategy.entry()`` and ``strategy.close()``. The former's second argument specified whether the entry is long or short and as such, expects a ``strategy.long`` or ``strategy.short`` constant (which used to be boolean ``true`` and ``false`` in v4, respecively). The latter's second argument is ``when=``, i.e. when the close order should appear. Passing ``strategy.long`` there did effectively nothing - equivalent to ``strategy.long(when = true)``. To fix the issue, get rid of the second positional argument in the ``strategy.close()`` call::
+
+	// Will cause an error during conversion
+	if (longCondition)
+	    strategy.close("Short", strategy.long)
+	    strategy.entry("Long", strategy.long)
+
+	// Will work in v5:
+	if (longCondition)
+	    strategy.close("Short")
+	    strategy.entry("Long", strategy.long)
+
+Cannot call 'input.int' with argument 'minval'='%value%'. An argument of 'literal float' type was used but a 'const int' is expected
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In v4, it was possible to pass a 'float' minimal value to an input that is specifically typified as 'int'. This is no longer possible in v5. Use 'int' values instead of 'float' ones in the input to fix the issue::
+
+	// Works in v4, will break on conversion because minval is a 'float' value
+	int_input = input(1, "Integer", input.integer, minval=1.0)
+
+	// Works in v5
+	int_input = input.int(1, "Integer", minval=1)
 
 
 .. _PageToPineVersion5_AllVariables::
