@@ -70,8 +70,8 @@ Note that:
   to create a ticker without extended session information.
 - We use that ticker instead of `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__ in our 
   `ticker.heikinashi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}heikinashi>`__ call.
-- We use set the ``gaps`` parameter's value to ``barmerge.gaps_on`` in our
-  `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call.
+- In our `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call,
+  we set the ``gaps`` parameter's value to ``barmerge.gaps_on``.
   This instructs the function not to use previous values to fill slots where data is absent.
   This makes it possible for it to return `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
   values outside of regular sessions.
