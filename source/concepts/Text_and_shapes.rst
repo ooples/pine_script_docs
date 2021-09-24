@@ -332,8 +332,8 @@ Labels are only available in v4 and higher versions of Pine. They work very diff
 `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__.
 
 Labels are objects, like :ref:`lines and boxes <PageLinesAndBoxes>`, or :ref:`tables <PageTables>`.
-Like them, they are referred to using an ID, which acts like a pointer. Label IDs are of "label" type,
-and as with other Pine objects, labels IDs are "time series" and all the functions used to manage them accept "series" arguments,
+Like them, they are referred to using an ID, which acts like a pointer. Label IDs are of "label" type.
+As with other Pine objects, labels IDs are "time series" and all the functions used to manage them accept "series" arguments,
 which makes them very flexible.
 
 .. note:: On TradingView charts, a complete set of *Drawing Tools*
