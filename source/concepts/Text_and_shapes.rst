@@ -540,6 +540,12 @@ function:
 .. |label_style_label_up| image:: images/TextAndShapes-LabelStyles-labelup.png
 .. |label_style_label_down| image:: images/TextAndShapes-LabelStyles-labeldown.png
 .. |label_style_label_left| image:: images/TextAndShapes-LabelStyles-labelleft.png
+.. |label_style_label_right| image:: images/TextAndShapes-LabelStyles-labelright.png
+.. |label_style_label_lower_left| image:: images/TextAndShapes-LabelStyles-labellowerleft.png
+.. |label_style_label_lower_right| image:: images/TextAndShapes-LabelStyles-labellowerright.png
+.. |label_style_label_upper_left| image:: images/TextAndShapes-LabelStyles-labelupperleft.png
+.. |label_style_label_upper_right| image:: images/TextAndShapes-LabelStyles-labelupperright.png
+.. |label_style_label_center| image:: images/TextAndShapes-LabelStyles-labelcenter.png
 
 .. |label_style_label_up_t| image:: images/TextAndShapes-LabelStyles-labelup_t.png
 .. |label_style_label_down_t| image:: images/TextAndShapes-LabelStyles-labeldown_t.png
