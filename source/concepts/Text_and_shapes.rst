@@ -350,6 +350,7 @@ Labels are advantageous because:
 - They offer more display modes.
 - Contrary to ``plot*()`` functions, label-handling functions can be inserted in conditional or loop structures,
   making it easier to control their behavior.
+- You can add tooltips to labels.
 
 One drawback to using labels is that you can only have a limited quantity of them on the chart.
 The default is ~50 and you can use the ``max_labels_count`` parameter in your 
@@ -358,6 +359,22 @@ The default is ~50 and you can use the ``max_labels_count`` parameter in your
 declaration statement to specify up to 500. Labels, as other objects, 
 are managed using a garbage collection mechanism which deletes the oldest ones on the chart
 such that only the newest displayed labels are visible.
+
+
+
+Label functions
+^^^^^^^^^^^^^^^
+
+Your toolbox of built-ins to manage labels includes:
+
+- `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ to create labels
+- ``label.set_*()`` functions to modify the properties of an existing label
+- ``label.get_*()`` functions to read the properties of an existing label
+- `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`_ to delete labels
+- The `label.all <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}all>`__ 
+  array which always contains the IDs of all the visible labels on the chart. 
+  The array's size will depend on the maximum label count for your script and how many of those you have drawn.
+  ``aray.size(label.all)`` will return the array's size.
 
 
 
