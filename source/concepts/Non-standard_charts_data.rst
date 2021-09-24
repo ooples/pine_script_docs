@@ -30,7 +30,7 @@ the first argument in a `request.security() <https://www.tradingview.com/pine-sc
 The open/high/low/close values of Heikin-Ashi candlesticks are synthetic; they are not actual market prices.
 They are calculated by averaging combinations of real OHLC values from the current and previous bar. 
 The calculations used make Heikin-Ashi bars less noisy than normal candlesticks.
-They can be useful to make vsual assesments but are unsuited to backtesting or automated trading, 
+They can be useful to make visual assessments, but are unsuited to backtesting or automated trading, 
 as orders execute on market prices — not Heikin-Ashi prices.
 
 The `ticker.heikinashi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}heikinashi>`__
@@ -50,12 +50,10 @@ This script requests the close value of Heikin-Ashi bars and plots them on top o
 Note that:
 
 - The close values for Heikin-Ashi bars plotted as the black line are very different from those of real candles using market prices. They act more like a moving average.
-- The black line appears over the chart bars because we have selected "Visual Order/Bring to From" from the script's "More" menu.
+- The black line appears over the chart bars because we have selected "Visual Order/Bring to Front" from the script's "More" menu.
 
-If you wanted to switch off extended hours data in *Example 5*, you would
-need to use the `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__ function first, 
-instead of using the `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__
-variable directly::
+If you wanted to omit values for extended hours in the last example, 
+an intermediary ticker without extended session information would need to be created first::
 
     //@version=5
     indicator("HA Close", "", true)
@@ -68,6 +66,10 @@ variable directly::
 
 Note that:
 
+- We use the `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__ function first, 
+  to create a ticker without extended session information.
+- We use that ticker instead of `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__ in our 
+  `ticker.heikinashi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}heikinashi>`__ call.
 - We use set the ``gaps`` parameter's value to ``barmerge.gaps_on`` in our
   `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call.
   This instructs the function not to use previous values to fill slots where data is absent.
@@ -76,8 +78,7 @@ Note that:
 - To be able to see this on the chart, we also need to use a special ``plot.style_linebr`` style,
   which breaks the plots on `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values.
 
-You may plot Heikin-Ashi bars from a script so they look exactly like a
-chart's Heikin-Ashi bars::
+This script plots Heikin-Ashi candles under the chart::
 
     //@version=5
     indicator("Heikin-Ashi candles")
