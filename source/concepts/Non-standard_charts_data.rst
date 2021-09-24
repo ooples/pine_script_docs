@@ -86,18 +86,19 @@ This script plots Heikin-Ashi candles under the chart::
     CANDLE_RED   = #EF5350
     
     haTicker = ticker.heikinashi(syminfo.tickerid)
-    haO = request.security(haTicker, timeframe.period, open)
-    haH = request.security(haTicker, timeframe.period, high)
-    haL = request.security(haTicker, timeframe.period, low)
-    haC = request.security(haTicker, timeframe.period, close)
+    [haO, haH, haL, haC] = request.security(haTicker, timeframe.period, [open, high, low, close])
     candleColor = haC >= haO ? CANDLE_GREEN : CANDLE_RED
     plotcandle(haO, haH, haL, haC, color = candleColor)
 
 .. image:: images/NonStandardCharts-TickerHeikinAshi-03.png
 
-You will find more information on `plotcandle() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__
-and the related `plotbar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotbar>`__ functions in
-the :ref:`Bar plotting <PageBarPlotting>` page.
+Note that:
+
+- We use a :ref:`tuple <PageVariableDeclarations_TupleDeclarations>` with 
+  `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+  to fetch four values with the same call.
+- We use `plotcandle() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__
+  to plot our candles. See the :ref:`Bar plotting <PageBarPlotting>` page for more information.
 
 
 
