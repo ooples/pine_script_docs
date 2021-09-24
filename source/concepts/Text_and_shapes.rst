@@ -542,6 +542,7 @@ function:
 
 .. |label_style_label_up_t| image:: images/TextAndShapes-LabelStyles-labelup_t.png
 .. |label_style_label_down_t| image:: images/TextAndShapes-LabelStyles-labeldown_t.png
+.. |label_style_label_left_t| image:: images/TextAndShapes-LabelStyles-labelleft_t.png
 
 .. |label_style_none_t| image:: images/TextAndShapes-LabelStyles-none_t.png
 
