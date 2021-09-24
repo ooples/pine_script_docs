@@ -588,12 +588,6 @@ Four parameters affect this behavior: ``x``, ``y``, ``xloc`` and ``yloc``:
 ``x``
    Is either a bar index or a time value. When a bar index is used, it can be offset in the past or in the future. The maximum future offset is 500 bars.
 
-``y``
-   Is the price level. It is only taken into account with the default ``yloc`` value of ``yloc.price``.
-   If ``yloc`` is `yloc.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}abovebar>`__ or 
-   `yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__
-   then the ``y`` argument is ignored.
-
 ``xloc``
    Is either `xloc.bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_index>`__ (the default)
    or `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__.
@@ -601,6 +595,12 @@ Four parameters affect this behavior: ``x``, ``y``, ``xloc`` and ``yloc``:
    With `xloc.bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_index>`__, ``x`` must be an absolute bar index.
    With `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__, ``x`` must be a UNIX time in milliseconds 
    corresponding to the `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ value of a bar's `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__.
+
+``y``
+   Is the price level. It is only taken into account with the default ``yloc`` value of ``yloc.price``.
+   If ``yloc`` is `yloc.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}abovebar>`__ or 
+   `yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__
+   then the ``y`` argument is ignored.
 
 ``yloc``
    Can be `yloc.price <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}price>`__, 
