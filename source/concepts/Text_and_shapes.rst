@@ -181,6 +181,32 @@ one must shift the circles down using something like
 
 
 
+\`plotshape()\`
+---------------
+
+This function is useful to display pre-defined shapes and/or text on bars. It has the following syntax:
+
+.. code-block:: text
+
+    plotshape(series, title, style, location, color, offset, text, textcolor, editable, size, show_last, display) → void
+
+See the `Reference Manual entry for plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__
+for details on its parameters.
+
+Let's use the function to achieve more or less the same result as with our second example of the previous section::
+
+    //@version=5
+    indicator("", "", true)
+    longSignal = ta.rising(close, 2) and ta.rising(high, 2) and (na(volume) or ta.rising(volume, 2))
+    plotshape(longSignal, "Long", shape.arrowup, location.belowbar)
+
+Note that here, rather than using an arrow character, we are using the ``shape.arrowup`` argument
+for the ``style`` parameter.
+
+.. image:: images/TextAndShapes-Plotshape-01.png
+
+
+
 Labels
 ------
 
