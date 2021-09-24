@@ -550,6 +550,13 @@ function:
 .. |label_style_label_up_t| image:: images/TextAndShapes-LabelStyles-labelup_t.png
 .. |label_style_label_down_t| image:: images/TextAndShapes-LabelStyles-labeldown_t.png
 .. |label_style_label_left_t| image:: images/TextAndShapes-LabelStyles-labelleft_t.png
+.. |label_style_label_right_t| image:: images/TextAndShapes-LabelStyles-labelright_t.png
+.. |label_style_label_lower_left_t| image:: images/TextAndShapes-LabelStyles-labellowerleft_t.png
+.. |label_style_label_lower_right_t| image:: images/TextAndShapes-LabelStyles-labellowerright_t.png
+.. |label_style_label_upper_left_t| image:: images/TextAndShapes-LabelStyles-labelupperleft_t.png
+.. |label_style_label_upper_right_t| image:: images/TextAndShapes-LabelStyles-labelupperright_t.png
+.. |label_style_label_center_t| image:: images/TextAndShapes-LabelStyles-labelcenter_t.png
+
 
 .. |label_style_none_t| image:: images/TextAndShapes-LabelStyles-none_t.png
 
