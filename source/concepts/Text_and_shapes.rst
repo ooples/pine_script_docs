@@ -469,17 +469,17 @@ Label setter functions
 
 The *setter* functions allowing you to change a label's properties are:
 
-- `label.set_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_color>`
-- `label.set_size() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_size>`
-- `label.set_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_style>`
-- `label.set_text() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_text>`
-- `label.set_textcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_textcolor>`
-- `label.set_x() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_x>`
-- `label.set_y() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_y>`
-- `label.set_xy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xy>`
-- `label.set_xloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xloc>`
-- `label.set_yloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_yloc>`
-- `label.set_tooltip() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_tooltip>`
+- `label.set_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_color>`__
+- `label.set_size() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_size>`__
+- `label.set_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_style>`__
+- `label.set_text() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_text>`__
+- `label.set_textcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_textcolor>`__
+- `label.set_x() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_x>`__
+- `label.set_y() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_y>`__
+- `label.set_xy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xy>`__
+- `label.set_xloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xloc>`__
+- `label.set_yloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_yloc>`__
+- `label.set_tooltip() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_tooltip>`__
 
 
 
