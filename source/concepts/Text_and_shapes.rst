@@ -288,10 +288,10 @@ it is a "series int/float" and there's more to it than a simple ``true`` or ``fa
 This is the logic governing how the argument supplied to ``series`` 
 affects the behavior of `plotarrow() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotarrow>`__:
 
--  ``series > 0``: An *up arrow* is displayed, the length of which will be proportional to the
+-  ``series > 0``: An up arrow is displayed, the length of which will be proportional to the
    relative value of the series on that bar in relation to other series values.
--  ``series < 0``: A *down arrow* is displayed, proportionally-size using the same rules.
--  ``series is zero or na``: No arrow is displayed.
+-  ``series < 0``: A down arrow is displayed, proportionally-sized using the same rules.
+-  ``series == 0 or na(series)``: No arrow is displayed.
 
 The maximum and minimum possible sizes for the arrows (in pixels) 
 can be controlled using the ``minheight`` and ``maxheight`` parameters.
@@ -327,47 +327,54 @@ so you can see what values are used to determine the position and size of the ar
 Labels
 ------
 
-Labels use a completely different mechanism that 
+Labels are available in v4 and v5 of Pine only. They use a completely different mechanism that 
 `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
 `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__
 to position text in both *x* (which chart bar) and *y* (the price level) coordinates.
 
-Starting with Pine v4, indicators and strategies can
-create *drawing objects* on the chart. Three types of
-drawings are currently supported: "label", "line" and "box".
-You will find one instance of each on the following chart:
-
-.. image:: images/label_and_line_drawings.png
+Labels are objects, like :ref:`lines and boxes <PageLinesAndBoxes>` and are referred to using an ID of "label" type.
+Many functions exist in the ``label`` namespace. They are used to create, modify and delete labels.
 
 .. note:: On TradingView charts, a complete set of *Drawing Tools*
-  allows users to create and modify drawings using mouse actions. While they may look similar to
-  drawing objects created with Pine code, they are essentially different entities.
+  allows users to create and modify drawings using mouse actions. While they may sometimes look similar to
+  drawing objects created with Pine code, they are different entities.
   Drawing objects created using Pine code cannot be modified with mouse actions, 
   and hand-drawn drawings from the chart user interface are not visible from Pine scripts.
 
-The line, label, and box drawings in Pine allow you to create indicators with more sophisticated
-visual components, e.g., pivot points, support/resistance levels,
-zig zag lines, labels containing dynamic text, etc.
+Labels are advantageous because:
 
-In contrast to indicator plots (plots are created with functions 
-`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__, 
-`plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ and 
-`plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__), 
-drawing objects can be created on historical bars as well as in the future, where no bars exist yet.
+- They allow "series" values to be converted to text and placed on charts.
+  This means they are ideal to display values that cannot be known before time,
+  such as price values, support and resistance levels, of any other values that your script calculates.
+- Their positioning options are more flexible that those of the ``plot*()`` functions.
+- They offer more display modes.
+- Contrary to ``plot*()`` functions, label-handling functions can be inserted in conditional or loop structures,
+  making it easier to control their behavior.
+
+One drawback to using labels is that you can only have a limited quantity of them on the chart.
+The default is ~50 and you can use the ``max_labels_count`` parameter in your 
+`indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ or 
+`indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__
+declaration statement to specify up to 500. Labels, as other objects, 
+are managed using a garbage collection mechanism which deletes the oldest ones on the chart
+such that only the newest displayed labels are visible.
 
 
 
-Creating drawings
-^^^^^^^^^^^^^^^^^
+Creating labels
+^^^^^^^^^^^^^^^
 
-Pine drawing objects are created with the `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ , 
-`line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ and 
-`box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`__ functions.
-While each function has many parameters, only the coordinates are mandatory.
-This is an example of code used to create a label on every bar::
+The `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_
+function creates a new label. It has the following signature:
+
+.. code-block:: text
+
+    label.new(x, y, text, xloc, yloc, color, style, textcolor, size, textalign, tooltip) → series label
+
+This is how you can create labels in their simplest form::
 
     //@version=5
-    indicator("My Script", overlay = true)
+    indicator("", "", true)
     label.new(bar_index, high)
 
 .. image:: images/minimal_label.png
@@ -472,8 +479,8 @@ When they are used, the value of the ``y`` parameter is ignored and the drawing 
 
 
 
-Modifying drawings
-^^^^^^^^^^^^^^^^^^
+Modifying labels
+^^^^^^^^^^^^^^^^
 
 A drawing object can be modified after its creation. The 
 `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_, 
@@ -534,7 +541,7 @@ Various styles can be applied to labels with either the `label.new() <https://ww
 function:
 
 +--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| Label style name               | Label                                           | Label with text                                 |
+| Argument                       | Label                                           | Label with text                                 |
 +================================+=================================================+=================================================+
 | ``label.style_none``           |                                                 | |label_style_none_t|                            |
 +--------------------------------+-------------------------------------------------+-------------------------------------------------+
