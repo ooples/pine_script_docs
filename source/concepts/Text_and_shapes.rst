@@ -217,7 +217,7 @@ The special Unicode character needs to be the last one in the string for text go
     plotshape(true, "", shape.arrowdown, location.belowbar, color.red,    text="C")
     plotshape(true, "", shape.arrowdown, location.belowbar, color.maroon, text="​\nD")
 
-.. image:: images/TextAndShapes-Plotshape-02.png
+
 
 The available shapes you can use with the ``style`` parameter are:
 
