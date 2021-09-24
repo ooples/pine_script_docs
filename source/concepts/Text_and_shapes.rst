@@ -374,8 +374,8 @@ Your toolbox of built-ins to manage labels are all in the ``label`` namespace. T
 
 
 
-Creating labels
-^^^^^^^^^^^^^^^
+Creating and modifying labels
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_
 function creates a new label. It has the following signature:
@@ -413,54 +413,139 @@ value in the last 50 bars::
     
     // Find the offset to the highest `high` in last 50 bars. Change it's sign so it is positive.
     highestBarOffset = - ta.highestbars(50)
-    // Get the `high` value at that offset (`highest(50)` would be equivalent).
-    hi = high[highestBarOffset]
-    // Build label and tooltip strings.
-    labelText = "High: " + str.tostring(hi, format.mintick)
-    tooltipText = "Bar no.: " + str.tostring(bar_index) + "\nLow: " + str.tostring(low[highestBarOffset], format.mintick)
     
     // Create label on bar zero only.
     var lbl = label.new(na, na, "", color = color.orange, style = label.style_label_lower_left)
     // When a new high is found, move the label there and update its text and tooltip.
     if ta.change(highestBarOffset)
+        // Get the `high` value at that offset. Note that `highest(50)` would be equivalent,  
+        // but it would require evaluation on every bar, prior to entry into this `if` structure.
+        hi = high[highestBarOffset]
+        // Build label and tooltip strings.
+        labelText = "High: " + str.tostring(hi, format.mintick)
+        tooltipText = "Offest in bars: " + str.tostring(highestBarOffset) + "\nLow: " + str.tostring(low[highestBarOffset], format.mintick)
         label.set_xy(lbl, bar_index[highestBarOffset], hi)
         label.set_text(lbl, labelText)
         label.set_tooltip(lbl, tooltipText)
 
 .. image:: images/TextAndShapes-CreatingLabels-02.png
 
+Note that:
 
+- We create the label on the first bar only by using the `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__
+  keyword to declare the ``lbl`` variable that contains the label's ID. The ``x``, ``y`` and ``text`` arguments in that
+  `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ call are irrelevant,
+  as the label will be updated on further bars. We do, however, take care to use the ``color`` and ``style``
+  we want for the labels, so they don't need updating later.
+- On every bar, we detect if a new high was found by testing for changes in the value of ``highestBarOffset``
+  (if the offset to the highest value in the last 50 bars changes, it means that a new high was found).
+- When a change in the high value occurs, we update our label with new information. 
+  To do this, we use three ``label.set*()`` calls to change the label's relevant information.
+  We refer to our label using the ``lbl`` variable, which contains our label's ID.
 
-
-
-
-Here is a modified version of the same script that shows the values of the ``x`` and ``y`` coordinates used to create the labels::
-
-    //@version=5
-    indicator("My Script", overlay = true)
-    label.new(bar_index, high, style = label.style_none,
-              text = "x=" + str.tostring(bar_index) + "\ny=" + str.tostring(high))
-
-.. image:: images/minimal_label_with_x_y_coordinates.png
-
-In this example labels are shown without background coloring (because of parameter ``style = label.style_none``) but with
-dynamically created text (``text = "x=" + str.tostring(bar_index) + "\ny=" + str.tostring(high)``) that prints label coordinates.
-
-This is an example of code that creates line objects on a chart::
+Here we create a label on each bar, but we set its properties conditionally,
+depending on the bar's polarity::
 
     //@version=5
-    indicator("My Script", overlay = true)
-    line.new(x1 = bar_index[1], y1 = low[1], x2 = bar_index, y2 = high)
+    indicator("", "", true)
+    lbl = label.new(bar_index, na)
+    if close >= open
+        label.set_text( lbl, "green")
+        label.set_color(lbl, color.green)
+        label.set_yloc( lbl, yloc.belowbar)
+        label.set_style(lbl, label.style_label_up)
+    else
+        label.set_text( lbl, "red")
+        label.set_color(lbl, color.red)
+        label.set_yloc( lbl, yloc.abovebar)
+        label.set_style(lbl, label.style_label_down)
 
-.. image:: images/minimal_line.png
+.. image:: images/TextAndShapes-CreatingLabels-03.png
 
-This is an example of code that creates box objects on a chart::
 
-    //@version=5
-    indicator("My Script", overlay = true)
-    box.new(left = bar_index[1], top = low[1], right = bar_index, bottom = high)
 
-.. image:: images/minimal_box.png
+Label setter functions
+""""""""""""""""""""""
+
+The available *setter* functions for label drawings are:
+
+- `label.set_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_color>`
+- `label.set_size() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_size>`
+- `label.set_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_style>`
+- `label.set_text() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_text>`
+- `label.set_textcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_textcolor>`
+- `label.set_x() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_x>`
+- `label.set_y() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_y>`
+- `label.set_xy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xy>`
+- `label.set_xloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xloc>`
+- `label.set_yloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_yloc>`
+- `label.set_tooltip() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_tooltip>`
+
+
+
+Label styles
+""""""""""""
+
+Various styles can be applied to labels with either the `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ or
+`label.set_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_style>`__
+function:
+
++--------------------------------+-------------------------------------------------+-------------------------------------------------+
+| Argument                       | Label                                           | Label with text                                 |
++================================+=================================================+=================================================+
+| ``label.style_none``           |                                                 | |label_style_none_t|                            |
++--------------------------------+-------------------------------------------------+-------------------------------------------------+
+| ``label.style_xcross``         | |label_style_xcross|                            | |label_style_xcross_t|                          |
++--------------------------------+-------------------------------------------------+-------------------------------------------------+
+| ``label.style_cross``          | |label_style_cross|                             | |label_style_cross_t|                           |
++--------------------------------+-------------------------------------------------+-------------------------------------------------+
+| ``label.style_triangleup``     | |label_style_triangleup|                        | |label_style_triangleup_t|                      |
++--------------------------------+-------------------------------------------------+-------------------------------------------------+
+| ``label.style_triangledown``   | |label_style_triangledown|                      | |label_style_triangledown_t|                    |
++--------------------------------+-------------------------------------------------+-------------------------------------------------+
+| ``label.style_flag``           | |label_style_flag|                              | |label_style_flag_t|                            |
++--------------------------------+-------------------------------------------------+-------------------------------------------------+
+| ``label.style_circle``         | |label_style_circle|                            | |label_style_circle_t|                          |
++--------------------------------+-------------------------------------------------+-------------------------------------------------+
+| ``label.style_arrowup``        | |label_style_arrowup|                           | |label_style_arrowup_t|                         |
++--------------------------------+-------------------------------------------------+-------------------------------------------------+
+| ``label.style_arrowdown``      | |label_style_arrowdown|                         | |label_style_arrowdown_t|                       |
++--------------------------------+-------------------------------------------------+-------------------------------------------------+
+| ``label.style_label_up``       | |label_style_label_up|                          | |label_style_label_up_t|                        |
++--------------------------------+-------------------------------------------------+-------------------------------------------------+
+| ``label.style_label_down``     | |label_style_label_down|                        | |label_style_label_down_t|                      |
++--------------------------------+-------------------------------------------------+-------------------------------------------------+
+| ``label.style_square``         | |label_style_square|                            | |label_style_square_t|                          |
++--------------------------------+-------------------------------------------------+-------------------------------------------------+
+| ``label.style_diamond``        | |label_style_diamond|                           | |label_style_diamond_t|                         |
++--------------------------------+-------------------------------------------------+-------------------------------------------------+
+
+.. |label_style_xcross| image:: images/label.style_xcross.png
+.. |label_style_cross| image:: images/label.style_cross.png
+.. |label_style_triangleup| image:: images/label.style_triangleup.png
+.. |label_style_triangledown| image:: images/label.style_triangledown.png
+.. |label_style_flag| image:: images/label.style_flag.png
+.. |label_style_circle| image:: images/label.style_circle.png
+.. |label_style_arrowup| image:: images/label.style_arrowup.png
+.. |label_style_arrowdown| image:: images/label.style_arrowdown.png
+.. |label_style_label_up| image:: images/label.style_labelup.png
+.. |label_style_label_down| image:: images/label.style_labeldown.png
+.. |label_style_square| image:: images/label.style_square.png
+.. |label_style_diamond| image:: images/label.style_diamond.png
+
+.. |label_style_none_t| image:: images/label.style_none_t.png
+.. |label_style_xcross_t| image:: images/label.style_xcross_t.png
+.. |label_style_cross_t| image:: images/label.style_cross_t.png
+.. |label_style_triangleup_t| image:: images/label.style_triangleup_t.png
+.. |label_style_triangledown_t| image:: images/label.style_triangledown_t.png
+.. |label_style_flag_t| image:: images/label.style_flag_t.png
+.. |label_style_circle_t| image:: images/label.style_circle_t.png
+.. |label_style_arrowup_t| image:: images/label.style_arrowup_t.png
+.. |label_style_arrowdown_t| image:: images/label.style_arrowdown_t.png
+.. |label_style_label_up_t| image:: images/label.style_labelup_t.png
+.. |label_style_label_down_t| image:: images/label.style_labeldown_t.png
+.. |label_style_square_t| image:: images/label.style_square_t.png
+.. |label_style_diamond_t| image:: images/label.style_diamond_t.png
 
 
 
@@ -531,14 +616,6 @@ When they are used, the value of the ``y`` parameter is ignored and the drawing 
 Modifying labels
 ^^^^^^^^^^^^^^^^
 
-A drawing object can be modified after its creation. The 
-`label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_, 
-`line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`_, and 
-`box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ functions return
-a reference to the created drawing object (of type "series label", "series line" and "series box" respectively).
-This reference can then be used as the first argument to the ``label.set_*()``, ``line.set_*()``, or ``box.set_*()`` functions used to modify drawings.
-For example::
-
     //@version=5
     indicator("My Script", overlay = true)
     l = label.new(bar_index, na)
@@ -562,89 +639,6 @@ text, color, *y* coordinate location (``yloc``) and label style.
 One may notice that ``na`` is passed as the ``y`` argument to the ``label.new`` function call. The reason for this is that
 the example's label uses either ``yloc.belowbar`` or ``yloc.abovebar`` y-locations, which don't require a y value.
 A finite value for ``y`` is needed only if a label uses ``yloc.price``.
-
-The available *setter* functions for label drawings are:
-
-    * `label.set_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_color>`__ --- changes color of label
-    * `label.set_size() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_size>`__ --- changes size of label
-    * `label.set_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_style>`__ --- changes :ref:`style of label <drawings_label_styles>`
-    * `label.set_text() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_text>`__ --- changes text of label
-    * `label.set_textcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_textcolor>`__ --- changes color of text
-    * `label.set_x() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_x>`__ --- changes x-coordinate of label
-    * `label.set_y() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_y>`__ --- changes y-coordinate of label
-    * `label.set_xy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xy>`__ --- changes both x and y coordinates of label
-    * `label.set_xloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xloc>`__ --- changes x-location of label
-    * `label.set_yloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_yloc>`__ --- changes y-location of label
-    * `label.set_tooltip() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_tooltip>`__ --- changes tooltip of label
-
-
-.. _drawings_label_styles:
-
-
-
-Label styles
-^^^^^^^^^^^^
-
-Various styles can be applied to labels with either the `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ or
-`label.set_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_style>`__
-function:
-
-+--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| Argument                       | Label                                           | Label with text                                 |
-+================================+=================================================+=================================================+
-| ``label.style_none``           |                                                 | |label_style_none_t|                            |
-+--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| ``label.style_xcross``         | |label_style_xcross|                            | |label_style_xcross_t|                          |
-+--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| ``label.style_cross``          | |label_style_cross|                             | |label_style_cross_t|                           |
-+--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| ``label.style_triangleup``     | |label_style_triangleup|                        | |label_style_triangleup_t|                      |
-+--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| ``label.style_triangledown``   | |label_style_triangledown|                      | |label_style_triangledown_t|                    |
-+--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| ``label.style_flag``           | |label_style_flag|                              | |label_style_flag_t|                            |
-+--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| ``label.style_circle``         | |label_style_circle|                            | |label_style_circle_t|                          |
-+--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| ``label.style_arrowup``        | |label_style_arrowup|                           | |label_style_arrowup_t|                         |
-+--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| ``label.style_arrowdown``      | |label_style_arrowdown|                         | |label_style_arrowdown_t|                       |
-+--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| ``label.style_label_up``       | |label_style_label_up|                          | |label_style_label_up_t|                        |
-+--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| ``label.style_label_down``     | |label_style_label_down|                        | |label_style_label_down_t|                      |
-+--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| ``label.style_square``         | |label_style_square|                            | |label_style_square_t|                          |
-+--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| ``label.style_diamond``        | |label_style_diamond|                           | |label_style_diamond_t|                         |
-+--------------------------------+-------------------------------------------------+-------------------------------------------------+
-
-.. |label_style_xcross| image:: images/label.style_xcross.png
-.. |label_style_cross| image:: images/label.style_cross.png
-.. |label_style_triangleup| image:: images/label.style_triangleup.png
-.. |label_style_triangledown| image:: images/label.style_triangledown.png
-.. |label_style_flag| image:: images/label.style_flag.png
-.. |label_style_circle| image:: images/label.style_circle.png
-.. |label_style_arrowup| image:: images/label.style_arrowup.png
-.. |label_style_arrowdown| image:: images/label.style_arrowdown.png
-.. |label_style_label_up| image:: images/label.style_labelup.png
-.. |label_style_label_down| image:: images/label.style_labeldown.png
-.. |label_style_square| image:: images/label.style_square.png
-.. |label_style_diamond| image:: images/label.style_diamond.png
-
-.. |label_style_none_t| image:: images/label.style_none_t.png
-.. |label_style_xcross_t| image:: images/label.style_xcross_t.png
-.. |label_style_cross_t| image:: images/label.style_cross_t.png
-.. |label_style_triangleup_t| image:: images/label.style_triangleup_t.png
-.. |label_style_triangledown_t| image:: images/label.style_triangledown_t.png
-.. |label_style_flag_t| image:: images/label.style_flag_t.png
-.. |label_style_circle_t| image:: images/label.style_circle_t.png
-.. |label_style_arrowup_t| image:: images/label.style_arrowup_t.png
-.. |label_style_arrowdown_t| image:: images/label.style_arrowdown_t.png
-.. |label_style_label_up_t| image:: images/label.style_labelup_t.png
-.. |label_style_label_down_t| image:: images/label.style_labeldown_t.png
-.. |label_style_square_t| image:: images/label.style_square_t.png
-.. |label_style_diamond_t| image:: images/label.style_diamond_t.png
 
 
 .. _drawings_line_styles:
