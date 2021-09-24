@@ -358,7 +358,7 @@ The default is ~50 and you can use the ``max_labels_count`` parameter in your
 `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ or 
 `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__
 declaration statement to specify up to 500. Labels, as other objects, 
-are managed using a garbage collection mechanism which deletes the oldest ones on the chart
+are managed using a garbage collection mechanism which deletes the oldest ones on the chart,
 such that only the newest displayed labels are visible.
 
 Your toolbox of built-ins to manage labels are all in the ``label`` namespace. They include:
@@ -390,13 +390,50 @@ This is how you can create labels in their simplest form::
     indicator("", "", true)
     label.new(bar_index, high)
 
-.. image:: images/minimal_label.png
+.. image:: images/TextAndShapes-CreatingLabels-01.png
 
-The label is created with the parameters ``x = bar_index`` (the index of the current bar,
-`bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__) and ``y = high`` (high price of the current bar).
-When a new bar opens, a new label is created on it. Label objects created on previous bars stay on the chart
-until the indicator deletes them with an explicit call of the `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`__
-function, or until the automatic garbage collection process removes them.
+Note that:
+
+- The label is created with the parameters ``x = bar_index`` (the index of the current bar,
+  `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__) and ``y = high`` 
+  (the bar's `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ value).
+- We do not supply an argument for the function's ``text`` parameter. Its default value being an empty string, no text is displayed.
+- No logic controls our `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ call, so labels are created on every bar.
+- Only the last 54 labels are displayed because our 
+  `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ call does not use
+  the ``max_labels_count`` parameter to specify a value other than the ~50 default.
+- Labels persist on bars until your script deletes them using
+  `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`__, or garbage collection removes them.
+
+In the next example we display a label on the bar with the highest `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__
+value in the last 50 bars:
+
+    //@version=5
+    indicator("", "", true)
+    
+    // Find the offset to the highest `high` in last 50 bars.
+    // Change it's sign so it is positive.
+    highestBarOffset = - ta.highestbars(50)
+    // Get the `high` value at that offset (`highest(50)` would be equivalent).
+    hi = high[highestBarOffset]
+    // Build label and tooltip strings.
+    labelText = "High: " + str.tostring(hi, format.mintick)
+    tooltipText = "Bar no.: " + str.tostring(bar_index) + "\nLow: " + str.tostring(low[highestBarOffset], format.mintick)
+    
+    // Create label on bar zero only.
+    var lbl = label.new(na, na, "", color = color.orange, style = label.style_label_lower_left)
+    // When a new high is found, move the label there and update its text and tooltip.
+    if ta.change(highestBarOffset)
+        label.set_xy(lbl, bar_index[highestBarOffset], hi)
+        label.set_text(lbl, labelText)
+        label.set_tooltip(lbl, tooltipText)
+
+.. image:: images/TextAndShapes-CreatingLabels-02.png
+
+
+
+
+
 
 Here is a modified version of the same script that shows the values of the ``x`` and ``y`` coordinates used to create the labels::
 
