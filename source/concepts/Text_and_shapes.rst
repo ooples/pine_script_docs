@@ -331,7 +331,7 @@ Labels are only available in v4 and higher versions of Pine. They work very diff
 `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
 `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__.
 
-Labels are objects, like :ref:`lines and boxes <PageLinesAndBoxes>` and :ref:`tables <PageTables>`.
+Labels are objects, like :ref:`lines and boxes <PageLinesAndBoxes>`, or :ref:`tables <PageTables>`.
 Like them, they are referred to using an ID of "label" type, which acts like a pointer.
 
 .. note:: On TradingView charts, a complete set of *Drawing Tools*
