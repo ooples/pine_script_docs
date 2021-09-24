@@ -210,7 +210,7 @@ for the ``style`` parameter.
 The available shapes you can use with the ``style`` parameter are:
 
 +------------------------+--------------------------+--------------------------+-+------------------------+--------------------------+--------------------------+
-| Shape Name             | Shape                    | Shape with Text          | | Shape Name             | Shape                    | Shape with Text          |
+| Argument               | Shape                    | With Text                | | Argument               | Shape                    | With Text                |
 +========================+==========================+==========================+=+========================+==========================+==========================+
 | ``shape.xcross``       | |Plotshape_xcross|       | |Xcross_with_text|       | | ``shape.arrowup``      | |Plotshape_arrowup|      | |Arrowup_with_text|      |
 +------------------------+--------------------------+--------------------------+-+------------------------+--------------------------+--------------------------+
