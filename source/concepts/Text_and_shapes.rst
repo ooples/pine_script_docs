@@ -650,7 +650,8 @@ Example for ``xloc.bar_index``::
 Deleting drawings
 ^^^^^^^^^^^^^^^^^
 
-The `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`__ is used to delete labels. Its syntax is:
+The `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`__ 
+function is used to delete labels. Its syntax is:
 
 .. code-block:: text
 
