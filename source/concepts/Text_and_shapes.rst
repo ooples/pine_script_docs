@@ -205,6 +205,20 @@ for the ``style`` parameter.
 
 .. image:: images/TextAndShapes-Plotshape-01.png
 
+It is possible to use different `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__
+call to superimpose text on bars. You will need to use ``\n`` followed by a special non-printing character that doesn’t get stripped out to preserve the newline's functionality. 
+Here we’re using a Unicode Zer-width space (U+200E). While you don’t see it in the following code’s strings, it is there and can be copy/pasted. 
+The special Unicode character needs to be the last one in the string for text going up, and the first one when you are plotting under the bar and text is going down::
+
+    //@version=5
+    indicator("Lift text", "", true)
+    plotshape(true, "", shape.arrowup,   location.abovebar, color.green,  text="A")
+    plotshape(true, "", shape.arrowup,   location.abovebar, color.lime,   text="B\n​")
+    plotshape(true, "", shape.arrowdown, location.belowbar, color.red,    text="C")
+    plotshape(true, "", shape.arrowdown, location.belowbar, color.maroon, text="​\nD")
+
+.. image:: images/TextAndShapes-Plotshape-02.png
+
 The available shapes you can use with the ``style`` parameter are:
 
 +------------------------+--------------------------+--------------------------+-+------------------------+--------------------------+--------------------------+
@@ -222,17 +236,6 @@ The available shapes you can use with the ``style`` parameter are:
 +------------------------+--------------------------+--------------------------+-+------------------------+--------------------------+--------------------------+
 | ``shape.flag``         | |Plotshape_flag|         | |Flag_with_text|         | | ``shape.labeldown``    | |Plotshape_labeldown|    | |Labeldown_with_text|    |
 +------------------------+--------------------------+--------------------------+-+------------------------+--------------------------+--------------------------+
-
-
-
-
-
-
-
-
-
-
-
 
 
 +------------------------+--------------------------+--------------------------+
