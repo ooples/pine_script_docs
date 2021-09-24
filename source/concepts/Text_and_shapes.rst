@@ -539,7 +539,7 @@ Five parameters affect this behavior: ``x``, ``y``, ``xloc``, ``yloc`` and ``sty
    Can be `yloc.price <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}price>`__ (the default), 
    `yloc.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}abovebar>`__ or 
    `yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__.
-   The argument used for ``y`` is only used with `yloc.price <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}price>`__. 
+   The argument used for ``y`` is only taken into account with `yloc.price <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}price>`__. 
    The ``yloc`` value of an existing label can be modified using `label.set_yloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_yloc>`__.
 
 ``style``
@@ -647,99 +647,61 @@ Example for ``xloc.bar_index``::
 
 
 
-
-Modifying labels
-^^^^^^^^^^^^^^^^
-
-    //@version=5
-    indicator("My Script", overlay = true)
-    l = label.new(bar_index, na)
-    if close >= open
-        label.set_text(l, "green")
-        label.set_color(l, color.green)
-        label.set_yloc(l, yloc.belowbar)
-        label.set_style(l, label.style_label_up)
-    else
-        label.set_text(l, "red")
-        label.set_color(l, color.red)
-        label.set_yloc(l, yloc.abovebar)
-        label.set_style(l, label.style_label_down)
-
-.. image:: images/label_changing_example.png
-
-This simple script first creates a label on the current bar and then it writes a reference to it in a variable ``l``.
-Then, depending on whether the current bar is rising or falling (condition ``close >= open``), a number of label drawing properties are modified:
-text, color, *y* coordinate location (``yloc``) and label style.
-
-One may notice that ``na`` is passed as the ``y`` argument to the ``label.new`` function call. The reason for this is that
-the example's label uses either ``yloc.belowbar`` or ``yloc.abovebar`` y-locations, which don't require a y value.
-A finite value for ``y`` is needed only if a label uses ``yloc.price``.
-
-
-.. _drawings_line_styles:
-
-
-
 Deleting drawings
 ^^^^^^^^^^^^^^^^^
 
-The `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`_, `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`__ and `box.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}delete>`__
-functions delete label, line, or box drawing objects from the chart.
+The `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`__ is used to delete labels. Its syntax is:
 
-Here is Pine code that keeps just one label drawing object on the current bar,
-*deleting the old ones*::
+.. code-block:: text
 
-    //@version=5
-    indicator("Last Bar Close 1", overlay = true)
+    label.delete(id) → void
 
-    c = close >= open ? color.lime : color.red
-    l = label.new(bar_index, na,
-      text = str.tostring(close), color = c,
-      style = label.style_label_down, yloc = yloc.abovebar)
-
-    label.delete(l[1])
-
-.. image:: images/Last_Bar_Close_1.png
-
-On every new bar update of the "Last Bar Close 1" indicator, a new label object is created and written to variable ``l``.
-Variable ``l`` is of type *series label*, so the ``[]`` operator is used to get the previous bar's label object.
-That previous label is then passed to the ``label.delete`` function to delete it.
-
-Functions ``label.delete`` and ``line.delete`` do nothing if the ``na`` value is used as an id, which makes code like the following unnecessary::
-
-    if not na(l[1])
-        label.delete(l[1])
-
-The previous script's behavior can be reproduced using another approach::
+To keep only a user-defined quantity of labels on the chart, one could use code like this:
 
     //@version=5
-    indicator("Last Bar Close 2", overlay = true)
+    MAX_LABELS = 500
+    indicator("", max_labels_count = MAX_LABELS)
+    qtyLabelsInput = input.int(5, "Labels to keep", minval = 0, maxval = MAX_LABELS)
+    myRSI = ta.rsi(close, 20)
+    if myRSI > ta.highest(myRSI, 20)[1]
+        label.new(bar_index, myRSI, str.tostring(myRSI, "#.00"), style = label.style_none)
+        if array.size(label.all) > qtyLabelsInput
+            label.delete(array.shift(label.all))
+    plot(myRSI)
 
-    var label l = na
-    label.delete(l)
-    c = close >= open ? color.lime : color.red
-    l := label.new(bar_index, na,
-      text = str.tostring(close), color = c,
-      style = label.style_label_down, yloc = yloc.abovebar)
+.. image:: images/TextAndShapes-DeletingLabels-01.png
 
-When the study "Last Bar Close 2" gets a new bar update, variable ``l`` is still referencing the old label object created on the previous bar. This label is deleted with the ``label.delete(l)`` call. A new label is then created and its id saved to ``l``. Using this approach there is no need to use the ``[]`` operator.
+Note that:
 
-Note the use of the :ref:`var keyword <variable_declaration>`. It creates variable ``l`` and initializes it with the ``na`` value only once. ``label.delete(l)`` would have no object to delete if it weren't for the fact that ``l`` is initialized only once.
+- We define a ``MAX_LABELS`` constant to hold the maximum quantity of labels a script can accommodate.
+  We use that value to set the ``max_labels_count`` parameter's value in our `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ call,
+  and also as the ``maxval`` value in our `input.int() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int>`__ call,
+  to cap the user value.
+- We create a new label when our RSI breachest its highest value of the last 20 bars.
+- After that, we delete the oldest label in the `label.all <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}all>`__
+  array that is automatically maintained by the Pine runtime and contains the ID of all the visible labels drawn by our script.
+  We use the `array.shift() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}shift>`__
+  function to remove the array element at index zero (the oldest visible label ID) and return its value.
+  We then use `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`__
+  to delete the label linked with that ID.
 
-There is yet another way to achieve the same objective as in the two previous scripts, this time by modifying the label rather than deleting it::
+Note that if one wants to position a label on the last bar only, 
+it is unnecessary and inefficent to create and delete the label as the script executes on all bars, 
+so that only the last label remains::
+
+    // INEFFICENT!
+    //@version=5
+    indicator("", "", true)
+    lbl = label.new(bar_index, high, str.tostring(high, format.mintick))
+    label.delete(lbl[1])
+
+This is the efficient way to realize the same task::
 
     //@version=5
-    indicator("Last Bar Close 3", overlay = true)
-
-    var label l = label.new(bar_index, na,
-      style = label.style_label_down, yloc = yloc.abovebar)
-
-    c = close >= open ? color.lime : color.red
-    label.set_color(l, c)
-    label.set_text(l, str.tostring(close))
-    label.set_x(l, bar_index)
-
-Once again, the use of new :ref:`var keyword <variable_declaration>` is essential. It is what allows the 
-`label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ call to be
-executed only once, on the very first historical bar.
-
+    indicator("", "", true)
+    if barstate.islast
+        // Create the label once, the first time the block executes on the last bar.
+        var lbl = label.new(na, na)
+        // On all iterations of the script on the last bar, update the label's information.
+        label.set_xy(lbl, bar_index, high)
+        label.set_text(lbl, str.tostring(high, format.mintick))
