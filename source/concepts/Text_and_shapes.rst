@@ -580,8 +580,8 @@ You can also offset using a bar index for the ``x`` value, e.g.::
 
 
 
-Deleting drawings
-^^^^^^^^^^^^^^^^^
+Deleting labels
+^^^^^^^^^^^^^^^
 
 The `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`__ 
 function is used to delete labels. Its syntax is:
