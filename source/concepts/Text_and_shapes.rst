@@ -411,8 +411,7 @@ value in the last 50 bars::
     //@version=5
     indicator("", "", true)
     
-    // Find the offset to the highest `high` in last 50 bars.
-    // Change it's sign so it is positive.
+    // Find the offset to the highest `high` in last 50 bars. Change it's sign so it is positive.
     highestBarOffset = - ta.highestbars(50)
     // Get the `high` value at that offset (`highest(50)` would be equivalent).
     hi = high[highestBarOffset]
