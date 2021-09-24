@@ -331,8 +331,8 @@ Labels are only available in v4 and higher versions of Pine. They work very diff
 `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
 `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__.
 
-Labels are objects, like :ref:`lines and boxes <PageLinesAndBoxes>` and are referred to using an ID of "label" type.
-Many functions exist in the ``label`` namespace. They are used to create, modify and delete labels.
+Labels are objects, like :ref:`lines and boxes <PageLinesAndBoxes>` and :ref:`tables <PageTables>`.
+Like them, they are referred to using an ID of "label" type, which acts like a pointer.
 
 .. note:: On TradingView charts, a complete set of *Drawing Tools*
   allows users to create and modify drawings using mouse actions. While they may sometimes look similar to
@@ -359,12 +359,7 @@ declaration statement to specify up to 500. Labels, as other objects,
 are managed using a garbage collection mechanism which deletes the oldest ones on the chart
 such that only the newest displayed labels are visible.
 
-
-
-Label functions
-^^^^^^^^^^^^^^^
-
-Your toolbox of built-ins to manage labels includes:
+Your toolbox of built-ins to manage labels are all in the ``label`` namespace. They include:
 
 - `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ to create labels
 - ``label.set_*()`` functions to modify the properties of an existing label
