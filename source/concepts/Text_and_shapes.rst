@@ -225,35 +225,6 @@ The available shapes you can use with the ``style`` parameter are:
 | ``shape.flag``         | |Plotshape_flag|         | |Flag_with_text|         | | ``shape.labeldown``    | |Plotshape_labeldown|    | |Labeldown_with_text|    |
 +------------------------+--------------------------+--------------------------+-+------------------------+--------------------------+--------------------------+
 
-
-+------------------------+--------------------------+--------------------------+
-| Shape Name             | Shape                    | Shape with Text          |
-+========================+==========================+==========================+
-| ``shape.xcross``       | |Plotshape_xcross|       | |Xcross_with_text|       |
-+------------------------+--------------------------+--------------------------+
-| ``shape.cross``        | |Plotshape_cross|        | |Cross_with_text|        |
-+------------------------+--------------------------+--------------------------+
-| ``shape.circle``       | |Plotshape_circle|       | |Circle_with_text|       |
-+------------------------+--------------------------+--------------------------+
-| ``shape.triangleup``   | |Plotshape_triangleup|   | |Triangleup_with_text|   |
-+------------------------+--------------------------+--------------------------+
-| ``shape.triangledown`` | |Plotshape_triangledown| | |Triangledown_with_text| |
-+------------------------+--------------------------+--------------------------+
-| ``shape.flag``         | |Plotshape_flag|         | |Flag_with_text|         |
-+------------------------+--------------------------+--------------------------+
-| ``shape.arrowup``      | |Plotshape_arrowup|      | |Arrowup_with_text|      |
-+------------------------+--------------------------+--------------------------+
-| ``shape.arrowdown``    | |Plotshape_arrowdown|    | |Arrowdown_with_text|    |
-+------------------------+--------------------------+--------------------------+
-| ``shape.square``       | |Plotshape_square|       | |Square_with_text|       |
-+------------------------+--------------------------+--------------------------+
-| ``shape.diamond``      | |Plotshape_diamond|      | |Diamond_with_text|      |
-+------------------------+--------------------------+--------------------------+
-| ``shape.labelup``      | |Plotshape_labelup|      | |Labelup_with_text|      |
-+------------------------+--------------------------+--------------------------+
-| ``shape.labeldown``    | |Plotshape_labeldown|    | |Labeldown_with_text|    |
-+------------------------+--------------------------+--------------------------+
-
 .. |Plotshape_xcross| image:: images/TextAndShapes-Plotshape-Xcross.png
 .. |Xcross_with_text| image:: images/TextAndShapes-Plotshape-Xcross_with_text.png
 .. |Plotshape_cross| image:: images/TextAndShapes-Plotshape-Cross.png
