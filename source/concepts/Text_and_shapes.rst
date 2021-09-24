@@ -18,7 +18,7 @@ You may display text or shapes using five different ways with Pine:
 - `plotarrow() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotarrow>`__
 - Labels created with `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__
 - Tables created with `table.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}new>`__
-  (not documented here; see the page on :ref:`Tables <PageTables>`)
+  (see :ref:`Tables <PageTables>`)
 
 Which one you use depends on your needs:
 
