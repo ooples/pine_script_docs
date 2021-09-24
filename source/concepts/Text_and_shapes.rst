@@ -514,7 +514,7 @@ Five parameters affect this behavior: ``x``, ``y``, ``xloc``, ``yloc`` and ``sty
 
 ``x``
    Is either a bar index or a time value. When a bar index is used, the value can be offset in the past or in the future (maximum of 500 bars in the future).
-   Past of future offsets can also be calculated when using time values.
+   Past or future offsets can also be calculated when using time values.
    The ``x`` value of an existing label can be modified using `label.set_x() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_x>`__ or
    `label.set_xy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xy>`__.
 
@@ -528,7 +528,7 @@ Five parameters affect this behavior: ``x``, ``y``, ``xloc``, ``yloc`` and ``sty
    The ``xloc`` value of an existing label can be modified using `label.set_xloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xloc>`__.
 
 ``y``
-   Is the price level. It is only taken into account with the default ``yloc`` value of ``yloc.price``.
+   Is the price level where the label is positioned. It is only taken into account with the default ``yloc`` value of ``yloc.price``.
    If ``yloc`` is `yloc.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}abovebar>`__ or 
    `yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__
    then the ``y`` argument is ignored.
@@ -536,7 +536,7 @@ Five parameters affect this behavior: ``x``, ``y``, ``xloc``, ``yloc`` and ``sty
    `label.set_xy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xy>`__.
 
 ``yloc``
-   Can be `yloc.price <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}price>`__, 
+   Can be `yloc.price <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}price>`__ (the default), 
    `yloc.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}abovebar>`__ or 
    `yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__.
    The argument used for ``y`` is only used with `yloc.price <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}price>`__. 
