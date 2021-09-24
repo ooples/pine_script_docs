@@ -20,7 +20,7 @@ You may display text or shapes using five different ways with Pine:
 - Tables created with `table.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}new>`__
   (see :ref:`Tables <PageTables>`)
 
-Which one you use depends on your needs:
+Which one to use depends on your needs:
 
 - Tables can display text in various relative positions on charts that will not move as users scroll of zoom the chart horizontally.
   Their content is not tethered to bars. In contrast, text displayed with 
@@ -54,14 +54,14 @@ These are a few things to keep in mind concerning Pine strings:
 - Since the ``text`` parameter in both 
   `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
   `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ 
-  require a "const string" argument, it cannot contain values such as prices that can only be known on the bar.
+  require a "const string" argument, it cannot contain values such as prices that can only be known on the bar ("series string").
 - To include "series" values in text displayed using `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__,
   they will first need to be converted to strings using 
   `str.tostring() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}tostring>`__.
 - The concatenation operator for strings in Pine is ``+``. It is used to join string components into one string, e.g.,
-  ``msg = "Chart symbol: " + syminfo.tickerid``, 
-  where `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__
-  is a Pine built-in variable that returns the chart's exchange and symbol information in string format.
+  ``msg = "Chart symbol: " + syminfo.tickerid`` 
+  (where `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__
+  is a Pine built-in variable that returns the chart's exchange and symbol information in string format).
 - Characters displayed by all these functions can be Unicode characters, which may include Unicode symbols.
   See this `Exploring Unicode <https://www.tradingview.com/script/0rFQOCKf-Exploring-Unicode/>`__
   script to get an idea of what can be done with Unicode characters.
