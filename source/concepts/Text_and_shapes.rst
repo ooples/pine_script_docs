@@ -467,7 +467,7 @@ depending on the bar's polarity::
 Label setter functions
 """"""""""""""""""""""
 
-The available *setter* functions for label drawings are:
+The *setter* functions allowing you to change a label's properties are:
 
 - `label.set_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_color>`
 - `label.set_size() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_size>`
