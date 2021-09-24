@@ -327,10 +327,9 @@ so you can see what values are used to determine the position and size of the ar
 Labels
 ------
 
-Labels are available in v4 and v5 of Pine only. They use a completely different mechanism that 
+Labels are only available in v4 and higher versions of Pine. They work very differently than 
 `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
-`plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__
-to position text in both *x* (which chart bar) and *y* (the price level) coordinates.
+`plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__.
 
 Labels are objects, like :ref:`lines and boxes <PageLinesAndBoxes>` and are referred to using an ID of "label" type.
 Many functions exist in the ``label`` namespace. They are used to create, modify and delete labels.
