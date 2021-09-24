@@ -587,7 +587,6 @@ Four parameters affect this behavior: ``x``, ``y``, ``xloc`` and ``yloc``:
 
 ``x``
    Is either a bar index or a time value. When a bar index is used, it can be offset in the past or in the future. The maximum future offset is 500 bars.
-
 ``xloc``
    Is either `xloc.bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_index>`__ (the default)
    or `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__.
