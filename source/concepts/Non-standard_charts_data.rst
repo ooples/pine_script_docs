@@ -26,33 +26,31 @@ the first argument in a `request.security() <https://www.tradingview.com/pine-sc
 \`ticker.heikinashi()\`
 -----------------------
 
-*Heikin-Ashi* means *average bar* in Japanese. The 
-`open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__,
-`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__,
-`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ and
-`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
-prices of Heikin-Ashi candlesticks are synthetic; they are not actual market prices.
-Each value is calculated using combinations of normal OHLC
-values from the current and previous bar. 
+*Heikin-Ashi* means *average bar* in Japanese. 
+The open/high/low/close values of Heikin-Ashi candlesticks are synthetic; they are not actual market prices.
+They are calculated by averaging combinations of real OHLC values from the current and previous bar. 
 The calculations used make Heikin-Ashi bars less noisy than normal candlesticks.
+They can be useful to make vsual assesments but are unsuited to backtesting or automated trading, 
+as orders execute on market prices — not Heikin-Ashi prices.
 
 The `ticker.heikinashi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}heikinashi>`__
 function creates a special ticker identifier for
 requesting Heikin-Ashi data with the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function.
 
-This script requests low prices of Heikin-Ashi bars and plots them on
-top of the usual candlesticks::
+This script requests the close value of Heikin-Ashi bars and plots them on top of the normal candlesticks::
 
     //@version=5
-    indicator("Example 5", overlay = true)
-    ha_t = ticker.heikinashi(syminfo.tickerid)
-    ha_low = request.security(ha_t, timeframe.period, low)
-    plot(ha_low)
+    indicator("HA Close", "", true)
+    haTicker = ticker.heikinashi(syminfo.tickerid)
+    haClose = request.security(haTicker, timeframe.period, close)
+    plot(haClose, "HA Close", color.black, 3)
 
-.. image:: images/Pine_Heikinashi.png
+.. image:: images/NonStandardCharts-TickerHeikinAshi-01.png
 
-Note that the low prices of Heikin-Ashi bars are different from the
-low prices of the normal candlesticks.
+Note that:
+
+- The close values for Heikin-Ashi bars plotted as the black line are very different from those of real candles using market prices. They act more like a moving average.
+- The black line appears over the chart bars because we have selected "Visual Order/Bring to From" from the script's "More" menu.
 
 If you wanted to switch off extended hours data in *Example 5*, you would
 need to use the `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__ function first, 
@@ -60,36 +58,46 @@ instead of using the `syminfo.tickerid <https://www.tradingview.com/pine-script-
 variable directly::
 
     //@version=5
-    indicator("Example 6", overlay = true)
-    t = ticker.new(syminfo.prefix, syminfo.ticker, session.regular)
-    ha_t = ticker.heikinashi(t)
-    ha_low = request.security(ha_t, timeframe.period, low, gaps=barmerge.gaps_on)
-    plot(ha_low, style=plot.style_linebr)
+    indicator("HA Close", "", true)
+    regularSessionTicker = ticker.new(syminfo.prefix, syminfo.ticker, session.regular)
+    haTicker = ticker.heikinashi(regularSessionTicker)
+    haClose = request.security(haTicker, timeframe.period, close, gaps = barmerge.gaps_on)
+    plot(haClose, "HA Close", color.black, 3, plot.style_linebr)
 
-Note that we use an additional fourth parameter with `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__: ``gaps=barmerge.gaps_on``,
-which instructs the function not to use previous values to fill slots where data is absent.
-This means we will get empty areas during extended hours.
-To be able to see this on the chart, we also need to use a special plot
-style (``style = plot.style_linebr``), the *Line With Breaks* style.
+.. image:: images/NonStandardCharts-TickerHeikinAshi-02.png
+
+Note that:
+
+- We use set the ``gaps`` parameter's value to ``barmerge.gaps_on`` in our
+  `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call.
+  This instructs the function not to use previous values to fill slots where data is absent.
+  This makes it possible for it to return `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
+  values outside of regular sessions.
+- To be able to see this on the chart, we also need to use a special ``plot.style_linebr`` style,
+  which breaks the plots on `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values.
 
 You may plot Heikin-Ashi bars from a script so they look exactly like a
 chart's Heikin-Ashi bars::
 
     //@version=5
-    indicator("Example 6.1")
-    ha_t = ticker.heikinashi(syminfo.tickerid)
-    ha_open = request.security(ha_t, timeframe.period, open)
-    ha_high = request.security(ha_t, timeframe.period, high)
-    ha_low = request.security(ha_t, timeframe.period, low)
-    ha_close = request.security(ha_t, timeframe.period, close)
-    palette = ha_close >= ha_open ? color.green : color.red
-    plotcandle(ha_open, ha_high, ha_low, ha_close, color=palette)
+    indicator("Heikin-Ashi candles")
+    CANDLE_GREEN = #26A69A
+    CANDLE_RED   = #EF5350
+    
+    haTicker = ticker.heikinashi(syminfo.tickerid)
+    haO = request.security(haTicker, timeframe.period, open)
+    haH = request.security(haTicker, timeframe.period, high)
+    haL = request.security(haTicker, timeframe.period, low)
+    haC = request.security(haTicker, timeframe.period, close)
+    candleColor = haC >= haO ? CANDLE_GREEN : CANDLE_RED
+    plotcandle(haO, haH, haL, haC, color = candleColor)
 
-.. image:: images/Pine_Heikinashi_2.png
+.. image:: images/NonStandardCharts-TickerHeikinAshi-03.png
 
-You will find more information on the `plotcandle() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__
-and `plotbar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotbar>`__ functions in
+You will find more information on `plotcandle() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__
+and the related `plotbar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotbar>`__ functions in
 the :ref:`Bar plotting <PageBarPlotting>` page.
+
 
 
 \`ticker.renko()\`

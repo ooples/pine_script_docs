@@ -7,9 +7,20 @@ Time
     :depth: 2
 
 
+Introduction
+------------
 
-\`time\` and \`time()\`
------------------------
+
+Dates and time built-ins
+
+
+
+time_close
+timenow
+
+
+\`time\`
+--------
 
 Pine provides means to work with trade session, time and date information. On this 30min chart, two scripts are running: "Bar date/time" and "Session bars".
 
@@ -64,89 +75,9 @@ the 09:30-16:00 trading session.
 
 
 
-Session specifications
-----------------------
+\`time()\`
+----------
 
-These are examples of trade session specifications:
-
-0000-0000
-   A monday to friday 24-hour session beginning at midnight.
-
-0900-1600,1700-2000
-   A session that begins at 9:00, breaks from 16:00 to 17:00 and continues until 20:00.
-   Applies to every day of the week.
-
-2000-1630:1234567
-   An overnight session that begins at 20:00 and ends at
-   16:30 the next day.
-
-0930-1700:146
-   A session that begins at 9:30 and
-   ends at 17:00 on Sundays (1), Wednesdays (4) and Fridays (6) (other days
-   of the week are days off).
-
-24x7
-   A complete 24-hour session beginning at 00:00 every day.
-
-0000-0000:1234567
-   Same as "24x7".
-
-0000-0000:23456
-   Same as previous example, but only Monday to Friday.
-
-1700-1700:23456
-   An *overnight session*. Monday session starts
-   Sunday at 17:00 and ends Monday at 17:00. Applies to Monday through Friday.
-
-1000-1001:26
-   A weird session that lasts only one minute on
-   Mondays (2) and one minute on Fridays (6).
-
-Session specification used for the `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ function's
-second argument does not need to correspond to the symbol's real trade
-session. Hypothetical session specifications can be used to highlight
-other bars of a data series.
-
-Pine provides an overloaded version of the `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ function which does not require
-custom session specification. This version of the function uses the
-regular session of a symbol. For example, it is possible to
-highlight the beginning of each half-hour bar on a minute chart in
-the following way::
-
-    //@version=5
-    indicator("new 30 min bar")
-    isNewBar(tf) =>
-        nz(ta.change(time(tf)) > 0, true)
-    plot(isNewBar("30") ? 1 : 0)
-
-.. image:: images/Chart_time_2.png
-
-
-Here, we use `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__
-with a ``session`` argument to display the market's opening
-`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and 
-`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ on an intraday chart::
-
-    //@version=5
-    indicator("Opening high/low", overlay = true)
-    
-    highTFInput = input.timeframe("D")
-    sessSpecInput = input.session("0930-1600")
-    
-    isNewBar(res, sess) =>
-        t = time(res, sess)
-        na(t[1]) and not na(t) or t[1] < t
-    
-    var float hi = na
-    var float lo = na
-    if isNewBar(highTFInput, sessSpecInput)
-        hi := high
-        lo := low
-    
-    plot(lo, "lo", color.red, 3, plot.style_circles)
-    plot(hi, "hi", color.lime, 3, plot.style_circles)
-
-.. image:: images/Chart_time_3.png
 
 
 Built-in variables for working with time
@@ -193,6 +124,11 @@ except for the `time <https://www.tradingview.com/pine-script-reference/v5/#var_
 `time_close <https://www.tradingview.com/pine-script-reference/v5/#var_time_close>`__, 
 `time_tradingday <https://www.tradingview.com/pine-script-reference/v5/#var_time_tradingday>`__, and 
 `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__ variables which return time in **UTC timezone**.
+
+
+
+\`timestamp()\`
+---------------
 
 
 .. rubric:: Footnotes
