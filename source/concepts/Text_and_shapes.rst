@@ -206,10 +206,11 @@ for the ``style`` parameter.
 .. image:: images/TextAndShapes-Plotshape-01.png
 
 It is possible to use different `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__
-call to superimpose text on bars. You will need to use ``\n`` followed by a special non-printing character that doesn’t get stripped out to preserve the newline's functionality. 
-Here we’re using a Unicode Zer-width space (U+200E). While you don’t see it in the following code’s strings, it is there and can be copy/pasted. 
-The special Unicode character needs to be the last one in the string for text going up, 
-and the first one when you are plotting under the bar and text is going down::
+calls to superimpose text on bars. 
+You will need to use ``\n`` followed by a special non-printing character that doesn’t get stripped out to preserve the newline's functionality. 
+Here we’re using a Unicode Zero-width space (U+200E). While you don’t see it in the following code’s strings, it is there and can be copy/pasted. 
+The special Unicode character needs to be the **last** one in the string for text going up, 
+and the **first** one when you are plotting under the bar and text is going down::
 
     //@version=5
     indicator("Lift text", "", true)
@@ -268,7 +269,10 @@ The available shapes you can use with the ``style`` parameter are:
 \`plotarrow()\`
 ---------------
 
-This function is useful to display pre-defined shapes and/or text on bars. It has the following syntax:
+The `plotarrow <https://www.tradingview.com/pine-script-reference/v5/#fun_plotarrow>`__
+function displays up or down arrows of variable length, 
+based on the relative value of the series used in the function's first argument. 
+It has the following syntax:
 
 .. code-block:: text
 
@@ -276,6 +280,47 @@ This function is useful to display pre-defined shapes and/or text on bars. It ha
 
 See the `Reference Manual entry for plotarrow() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotarrow>`__
 for details on its parameters.
+
+The ``series`` parameter in `plotarrow() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotarrow>`__
+is not a "series bool" as in `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
+`plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__; 
+it is a "series int/float" and there's more to it than the ``true`` or ``false`` value determining when the arrows are plotted.
+This is the logic governing how the argument supplied to ``series`` 
+affects the behavior of `plotarrow() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotarrow>`__:
+
+-  ``series > 0``: An *up arrow* is displayed, the length of which will be proportional to the
+   relative value of the series on that bar in relation to other series values.
+-  ``series < 0``: A *down arrow* is displayed, proportionally-size using the same rules.
+-  ``series is zero or na``: No arrow is displayed.
+
+The maximum and minimum possible sizes for the arrows (in pixels) 
+can be controlled using the ``minheight`` and ``maxheight`` parameters.
+
+Here is a simple script illustrating how `plotarrow() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotarrow>`__ works::
+	
+    //@version=5
+    indicator("", "", true)
+    body = close - open
+    plotarrow(body, colorup = color.teal, colordown = color.orange)
+
+.. image:: images/TextAndShapes-Plotarrow-01.png
+
+Note how the heigth of arrows is proportional to the relative size of the bar bodies.
+
+You can use any series to plot the arrows. Here we use the value of the
+"Chaikin Oscillator" to control the location and size of the arrows::
+
+    //@version=5
+    indicator("Chaikin Oscillator Arrows", overlay = true)
+    fastLengthInput = input.int(3,  minval = 1)
+    slowLengthInput = input.int(10, minval = 1)
+    osc = ta.ema(ta.accdist, fastLengthInput) - ta.ema(ta.accdist, slowLengthInput)
+    plotarrow(osc)
+
+.. image:: images/TextAndShapes-Plotarrow-02.png
+
+Note that we display the actual "Chaikin Oscillator" in a pane below the chart, 
+so you can see what values are used to determine the position and size of the arrows.
 
 
 
