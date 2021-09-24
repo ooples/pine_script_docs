@@ -207,6 +207,20 @@ for the ``style`` parameter.
 
 
 
+\`plotarrow()\`
+---------------
+
+This function is useful to display pre-defined shapes and/or text on bars. It has the following syntax:
+
+.. code-block:: text
+
+    plotarrow(series, title, colorup, colordown, offset, minheight, maxheight, editable, show_last, display) → void
+
+See the `Reference Manual entry for plotarrow() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotarrow>`__
+for details on its parameters.
+
+
+
 Labels
 ------
 
