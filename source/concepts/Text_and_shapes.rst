@@ -284,7 +284,7 @@ for details on its parameters.
 The ``series`` parameter in `plotarrow() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotarrow>`__
 is not a "series bool" as in `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
 `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__; 
-it is a "series int/float" and there's more to it than the ``true`` or ``false`` value determining when the arrows are plotted.
+it is a "series int/float" and there's more to it than a simple ``true`` or ``false`` value determining when the arrows are plotted.
 This is the logic governing how the argument supplied to ``series`` 
 affects the behavior of `plotarrow() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotarrow>`__:
 
