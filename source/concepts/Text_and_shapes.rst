@@ -406,7 +406,7 @@ Note that:
   `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`__, or garbage collection removes them.
 
 In the next example we display a label on the bar with the highest `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__
-value in the last 50 bars:
+value in the last 50 bars::
 
     //@version=5
     indicator("", "", true)
