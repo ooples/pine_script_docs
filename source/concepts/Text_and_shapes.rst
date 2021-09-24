@@ -18,6 +18,7 @@ You may display text or shapes using five different ways with Pine:
 - `plotarrow() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotarrow>`__
 - Labels created with `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__
 - Tables created with `table.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}new>`__
+  (not documented here; see the page on :ref:`Tables <PageTables>`)
 
 Which one you use depends on your needs:
 
@@ -173,7 +174,7 @@ to achieve a similar effect::
 This method has the inconvenience that, since there is no relative positioning mechanism with
 `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
 one must shift the circles down using something like 
-`ta.atr <https://www.tradingview.com/pine-script-reference/v5/#var_ta{dot}tr>`__
+`ta.tr <https://www.tradingview.com/pine-script-reference/v5/#var_ta{dot}tr>`__
 (the bar's "True Range"):
 
 .. image:: images/TextAndShapes-Plotchar-03.png
@@ -199,9 +200,12 @@ Let's use the function to achieve more or less the same result as with our secon
     longSignal = ta.rising(close, 2) and ta.rising(high, 2) and (na(volume) or ta.rising(volume, 2))
     plotshape(longSignal, "Long", shape.arrowup, location.belowbar)
 
+Note that here, rather than using an arrow character, we are using the ``shape.arrowup`` argument
+for the ``style`` parameter.
+
 .. image:: images/TextAndShapes-Plotshape-01.png
 
-The ``style`` parameter allows for the selection of many shapes:
+The available shapes you can use with the ``style`` parameter are:
 
 +------------------------+--------------------------+--------------------------+
 | Shape Name             | Shape                    | Shape with Text          |
