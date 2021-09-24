@@ -667,7 +667,7 @@ To keep only a user-defined quantity of labels on the chart, one could use code 
     if myRSI > ta.highest(myRSI, 20)[1]
         label.new(bar_index, myRSI, str.tostring(myRSI, "#.00"), style = label.style_none)
         if array.size(label.all) > qtyLabelsInput
-            label.delete(array.shift(label.all))
+            label.delete(array.get(label.all, 0))
     plot(myRSI)
 
 .. image:: images/TextAndShapes-DeletingLabels-01.png
@@ -684,8 +684,8 @@ Note that:
   would always include the current value of ``myRSI``, so ``myRSI`` would never be higher than the function's return value.
 - After that, we delete the oldest label in the `label.all <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}all>`__
   array that is automatically maintained by the Pine runtime and contains the ID of all the visible labels drawn by our script.
-  We use the `array.shift() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}shift>`__
-  function to remove the array element at index zero (the oldest visible label ID) and return its value.
+  We use the `array.get() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}get>`__
+  function to retrieve the array element at index zero (the oldest visible label ID).
   We then use `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`__
   to delete the label linked with that ID.
 
