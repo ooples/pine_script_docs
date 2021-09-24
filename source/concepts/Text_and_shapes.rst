@@ -656,7 +656,7 @@ The `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_l
 
     label.delete(id) → void
 
-To keep only a user-defined quantity of labels on the chart, one could use code like this:
+To keep only a user-defined quantity of labels on the chart, one could use code like this::
 
     //@version=5
     MAX_LABELS = 500
