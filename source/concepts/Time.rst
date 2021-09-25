@@ -17,16 +17,20 @@ and here for more information on `Unix Time <https://en.wikipedia.org/wiki/Unix_
 A value for the Unix time is called a *timestamp*.
 Note that since Unix time is measured from a fixed reference, i.e., the Unix Epoch, it does not vary with time zones.
 
+Another time-related key reference for traders is the **time zone of the exchange** where an instrument are traded.
+Some variables or functions use the UTC time zone, others use the exchange's time zone.
+We will note which time zone each one uses when mentioning them.
+
 Pine has built-in **variables** to:
 
-- Get timestamp information from the current bar: 
+- Get timestamp information from the current bar (UTC time zone): 
   `time <https://www.tradingview.com/pine-script-reference/v5/#var_time_close>`__ and
   `time_close <https://www.tradingview.com/pine-script-reference/v5/#var_time_close>`__
-- Get timestamp information for the beginning of the current trading day:
+- Get timestamp information for the beginning of the current trading day (UTC time zone):
   `time_tradingday <https://www.tradingview.com/pine-script-reference/v5/#var_time_tradingday>`__
-- Query the timezone of the exchange of the chart's symbol with
-  `syminfo.timezone <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}timezone>`__
-- Retrieve calendar and time values from the bar:
+- Get the current time in one-second increments (UTC time zone):
+  `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__
+- Retrieve calendar and time values from the bar (exchange time zone):
   `year <https://www.tradingview.com/pine-script-reference/v5/#var_year>`__,
   `month <https://www.tradingview.com/pine-script-reference/v5/#var_month>`__,
   `weekofyear <https://www.tradingview.com/pine-script-reference/v5/#var_weekofyear>`__,
@@ -35,8 +39,8 @@ Pine has built-in **variables** to:
   `hour <https://www.tradingview.com/pine-script-reference/v5/#var_hour>`__,
   `minute <https://www.tradingview.com/pine-script-reference/v5/#var_minute>`__ and
   `second <https://www.tradingview.com/pine-script-reference/v5/#var_second>`__
-- Get the current time in one-second increments:
-  `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__
+- Query the timezone of the exchange of the chart's symbol with
+  `syminfo.timezone <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}timezone>`__
 
 There are also built-in **functions** that can:
 
@@ -55,12 +59,19 @@ There are also built-in **functions** that can:
   `second() <https://www.tradingview.com/pine-script-reference/v5/#fun_second>`__
 
 - Create a timestamp using `timestamp() <https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp>`__
+- Convert a timestamp to a formatted date/time string for display, 
+  using `str.format() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}format>`__
 - Input data and time values. See the section on :ref:`Inputs <PageInputs>`.
 - Work with :ref:`session information <PageSessions>`.
 
 
-\`time\`
---------
+Time variables
+--------------
+
+
+
+\`time\` and \`time_close\`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Pine provides means to work with trade session, time and date information. On this 30min chart, two scripts are running: "Bar date/time" and "Session bars".
 
@@ -115,13 +126,25 @@ the 09:30-16:00 trading session.
 
 
 
-\`time()\`
-----------
+\`time_tradingday()\`
+^^^^^^^^^^^^^^^^^^^^^
 
 
 
-Built-in variables for working with time
-----------------------------------------
+Calendar dates and times
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+
+\`syminfo.timezone()\`
+^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+—————————————————————————————————————————————————————————————————————————————————————————————————
 
 Pine's standard library has an assortment of built-in variables and functions which
 make it possible to use time in the script's logic.
@@ -160,7 +183,8 @@ Functions for UNIX time "construction":
    Returns UNIX time of specified date and time. Note, there is also an overloaded version with an additional ``timezone`` parameter.
 
 All these variables and functions return time in the **exchange time zone**,
-except for the `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__, 
+except for the 
+`time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__, 
 `time_close <https://www.tradingview.com/pine-script-reference/v5/#var_time_close>`__, 
 `time_tradingday <https://www.tradingview.com/pine-script-reference/v5/#var_time_tradingday>`__, and 
 `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__ variables which return time in **UTC timezone**.
