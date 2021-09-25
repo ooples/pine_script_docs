@@ -236,9 +236,6 @@ except for the
 
 
 
-\`timestamp()\`
----------------
-
 
 .. rubric:: Footnotes
 
