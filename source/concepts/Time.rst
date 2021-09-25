@@ -12,8 +12,8 @@ Introduction
 
 
 
-Two references
-^^^^^^^^^^^^^^
+Three references
+^^^^^^^^^^^^^^^^
 
 The native format for time values in Pine is the **Unix time in milliseconds**. 
 Unix time is the time elapsed since the **Unix Epoch on January 1st, 1970 at UTC**.
@@ -21,10 +21,16 @@ See here for the `current Unix time in seconds <https://www.unixtimestamp.com/>`
 and here for more information on `Unix Time <https://en.wikipedia.org/wiki/Unix_time>`__.
 A value for the Unix time is called a *timestamp*.
 Note that since Unix time is measured from a fixed reference, i.e., the Unix Epoch, it does not vary with time zones.
+Some Pine built-ins use the UTC time zone as a reference.
 
-Another time-related key reference for traders is the **time zone of the exchange** where an instrument are traded.
-Some variables or functions use the UTC time zone, others use the exchange's time zone.
-We will note which time zone each one uses when mentioning them.
+A second time-related key reference for traders is the **time zone of the exchange** where an instrument are traded.
+Some built-ins use the exchange's time zone.
+
+A third time-related reference that comes into play is the chart's time zone,
+which is selected by traders.
+
+We will note, when discussing variables or functions, if they return dates or times in UTC or exchange time zone.
+Scripts do not have visiblity on the user's time zone setting on his chart.
 
 
 
@@ -81,7 +87,7 @@ Time zones
 TragingViewers can change the time zone used to display bar times on their charts.
 Pine scripts have no visiblity over this setting.
 While there is a `syminfo.timezone <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}timezone>`__
-variable to return the time zone of the exchange the intrument is trading on,
+variable to return the time zone of the exchange where the chart's intrument is traded,
 there is **no** ``chart.timezone`` equivalent.
 
 When displaying times on the chart, this shows one way of providing users a way of adjusting your script's time values to those of their chart.
