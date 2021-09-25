@@ -22,7 +22,7 @@ This does not necessarily make them less useful in all contexts, nor prevent kno
 
 While some types of repainting like plotting in the past can be merely misleading, others, such as future leak, are never good. 
 This does not entail that **all** repainting behavior should necessarily be avoided **all the time**.
-What's important is to understand exactly how the tools you use behave, or how you want the ones you build to behave.
+What's important is to understand exactly how the tools you use work, or how you want the ones you design to behave.
 
 
 
