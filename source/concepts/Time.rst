@@ -223,7 +223,7 @@ These are examples of various formats::
       timenow, timenow, timenow, timenow, 
       timenow - time, time_close - timenow), label.style_label_left)
 
-.. image:: images/Time-FormattingDatesAndTime-01
+.. image:: images/Time-FormattingDatesAndTime-01.png
 
 —————————————————————————————————————————————————————————————————————————————————————————————————
 
