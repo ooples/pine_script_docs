@@ -17,7 +17,8 @@ Repainting behavior is widespread and can be caused by many factors.
 Following our definition, our estimate is that more than 95% of indicators in existence repaint. 
 Widely used indicators like MACD and RSI, for example, repaint because they show one fixed value on historical bars,
 yet when running in realtime they will produce results that constantly fluctuate until the realtime bar closes. 
-They thus behave differently on historical and realtime bars. This does not make them less useful, nor prevent knowledgeable traders from using them.
+They thus behave differently on historical and realtime bars. 
+This does not necessarily make them less useful in all contexts, nor prevent knowledgeable traders from using them.
 
 **Repainting is not inherently good or bad.**
 
@@ -26,11 +27,13 @@ They thus behave differently on historical and realtime bars. This does not make
 For script users
 ^^^^^^^^^^^^^^^^
 
-You can very well decide to use repainting indicators if you understand how they behave and they suit your trading methodology.
+You can very well decide to use repainting indicators if you understand how they behave, 
+and that behavior meets your trading methodology's requirements.
 Don't be one of those newcomers to trading who slap "repaint" sentences on published scripts as if it discredits them.
 Doing so only reveals your incomprehension of the subject.
 
-The question "Does it repaint?" means nothing, and consequently cannot be answered. 
+The question "Does it repaint?" means nothing.
+Consequently, it cannot be answered in a meaningful way.
 Why? Because it needs to be qualified. Instead, one could ask:
 
 - Do the entry/exit markers your indicator displays repaint (or: Do you wait for the realtime bar to close before displaying your entry/exit markers)?
