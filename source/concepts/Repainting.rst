@@ -20,9 +20,12 @@ yet when running in realtime they will produce results that constantly fluctuate
 They thus behave differently on historical and realtime bars. 
 This does not necessarily make them less useful in all contexts, nor prevent knowledgeable traders from using them.
 
-While some types of repainting like plotting in the past can be merely misleading, others, such as future leak, are never good. 
-This does not entail that **all** repainting behavior should necessarily be avoided **all the time**.
+Some types of repainting, like plotting in the past, can be misleading. 
+If traders understand how plots are offset in the past and exactly when they will appear in realtime, they can be useful that way, even if they repaint.
+Others types of repainting such as future leak, however, are never good because they use data that is never available in realtime. 
+Not **all** repainting behavior should necessarily be avoided **all the time**.
 What's important is to understand exactly how the tools you use work, or how you want the ones you design to behave.
+If you publish scripts, then your script's key limitations, which include any repainting behavior, must imperatively be mentioned to potential users.
 
 
 
