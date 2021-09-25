@@ -10,6 +10,11 @@ Time
 Introduction
 ------------
 
+
+
+Two references
+^^^^^^^^^^^^^^
+
 The native format for time values in Pine is the **Unix time in milliseconds**. 
 Unix time is the time elapsed since the **Unix Epoch on January 1st, 1970 at UTC**.
 See here for the `current Unix time in seconds <https://www.unixtimestamp.com/>`__
@@ -20,6 +25,11 @@ Note that since Unix time is measured from a fixed reference, i.e., the Unix Epo
 Another time-related key reference for traders is the **time zone of the exchange** where an instrument are traded.
 Some variables or functions use the UTC time zone, others use the exchange's time zone.
 We will note which time zone each one uses when mentioning them.
+
+
+
+Time built-ins
+^^^^^^^^^^^^^^
 
 Pine has built-in **variables** to:
 
@@ -63,6 +73,39 @@ There are also built-in **functions** that can:
   using `str.format() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}format>`__
 - Input data and time values. See the section on :ref:`Inputs <PageInputs>`.
 - Work with :ref:`session information <PageSessions>`.
+
+
+Time zones
+^^^^^^^^^^
+
+TragingViewers can change the time zone used to display bar times on their charts.
+Pine scripts have no visiblity over this setting.
+While there is a `syminfo.timezone <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}timezone>`__
+variable to return the time zone of the exchange the intrument is trading on,
+there is **no** ``chart.timezone`` equivalent.
+
+When displaying times on the chart, this shows one way of providing users a way of adjusting your script's time values to those of their chart.
+This way, your displayed times can match the time zone used by traders on their chart::
+
+    //@version=5
+    indicator("Time zone control")
+    MS_IN_1H = 1000 * 60 * 60
+    TOOLTIP01 = "Enter your time zone's offset (+ or −), including a decimal fraction if needed."
+    timeOffsetInput = input.float(0.0, "Timezone offset (in hours)", minval = -12.0, maxval = 14.0, step = 1.0, tooltip = TOOLTIP01) * MS_IN_1H
+    printTable(txt) => var table t = table.new(position.middle_right, 1, 1), table.cell(t, 0, 0, txt, bgcolor = color.yellow)
+    printTable(
+      str.format("Last bar''s time: {0,date,yyyy.MM.dd HH:mm:ss}", time + timeOffsetInput) +
+      str.format("\nCurrent time: {0,date,yyyy.MM.dd HH:mm:ss}", timenow + timeOffsetInput))
+
+Note that:
+
+- We convert the user offset expressed in hours to milliseconds.
+  We then add that offset to whatever time values in UTC format to be displayed.
+- We use a tooltip to provide instructions to users.
+- We provide ``minval`` and ``maxval`` values to protect the input field.
+- The `str.format() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}format>`__
+  function is used to format our time values, namely the last bar's time and the current time.
+
 
 
 Time variables
