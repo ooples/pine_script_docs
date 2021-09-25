@@ -139,7 +139,13 @@ the 09:30-16:00 trading session.
 Calendar dates and times
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+::
 
+    //@version=5
+    indicator("")
+    plot(hour)
+    plot(hour(time(timeframe.period, syminfo.session, syminfo.timezone)))
+    plot(hour(time, "GMT+0"))
 
 
 
@@ -158,6 +164,7 @@ Time functions
 \`time()\` and \`time_close()\`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+The 
 
 
 Calendar dates and times
@@ -183,6 +190,29 @@ It can be specified in GMT notation (e.g. "GMT-5") or as an
 (e.g., "America/New_York").
 
 The third form is used as a ``defval`` value in `input.time() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}time>`__.
+See the `timestamp() <https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp>`__ entry in the Reference Manual for more information.
+
+`timestamp() <https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp>`__ 
+is useful to generate a timestamp for a specific date.
+To generate a timestamp for Jan 1, 2021, use either one of these methods::
+
+    //@version=5
+    indicator("")
+    yearBeginning1 = timestamp("2021-01-01")
+    yearBeginning2 = timestamp(2021, 1, 1, 0, 0)
+    printTable(txt) => var table t = table.new(position.middle_right, 1, 1), table.cell(t, 0, 0, txt, bgcolor = color.yellow)
+    printTable(str.format("yearBeginning1: {0,date,yyyy.MM.dd hh:mm}\nyearBeginning2: {1,date,yyyy.MM.dd hh:mm}", yearBeginning1, yearBeginning1))
+
+You can use offsets in `timestamp() <https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp>`__ arguments.
+Here, we subtract 2 from the value supplied for its ``day`` parameter to get the date/time two days ago from the chart's last bar.
+Note that because of different bar alignments on different instruments,
+the returned timestamp may not always be exactly 48 hours away::
+
+    //@version=5
+    indicator("")
+    twoDaysAgo = timestamp(year, month, dayofmonth - 2, hour, minute)
+    printTable(txt) => var table t = table.new(position.middle_right, 1, 1), table.cell(t, 0, 0, txt, bgcolor = color.yellow)
+    printTable(str.format("{0,date,yyyy.MM.dd hh:mm}", twoDaysAgo))
 
 
 
