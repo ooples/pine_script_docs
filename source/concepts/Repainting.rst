@@ -20,7 +20,9 @@ yet when running in realtime they will produce results that constantly fluctuate
 They thus behave differently on historical and realtime bars. 
 This does not necessarily make them less useful in all contexts, nor prevent knowledgeable traders from using them.
 
-**Repainting is not inherently good or bad.**
+While some types of repainting like plotting in the past can be merely misleading, others, such as future leak, are never good. 
+This does not entail that **all** repainting behavior should necessarily be avoided **all the time**.
+What's important is to understand exactly how the tools you use behave, or how you want the ones you build to behave.
 
 
 
