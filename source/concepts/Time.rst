@@ -10,7 +10,7 @@ Time
 Introduction
 ------------
 
-The native format for time values is the **Unix time in milliseconds**. 
+The native format for time values in Pine is the **Unix time in milliseconds**. 
 Unix time is the time elapsed since the **Unix Epoch on January 1st, 1970 at UTC**.
 See here for the `current Unix time in seconds <https://www.unixtimestamp.com/>`__
 and here for more information on `Unix Time <https://en.wikipedia.org/wiki/Unix_time>`__.
