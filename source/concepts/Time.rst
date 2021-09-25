@@ -40,10 +40,10 @@ Pine has built-in variables to:
 
 There are also built-in functions to:
 
-- Return timestamps of bars from other timeframes (without using 
-  `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__)
+- Return timestamps of bars from other timeframes 
   with `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and
-  `time_close <https://www.tradingview.com/pine-script-reference/v5/#fun_time_close>`__
+  `time_close <https://www.tradingview.com/pine-script-reference/v5/#fun_time_close>`__,
+  without the need for a `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call
 - Retrieve calendar and time values from any timestamp, which can be offset with a time zone:
   `year() <https://www.tradingview.com/pine-script-reference/v5/#fun_year>`__,
   `month() <https://www.tradingview.com/pine-script-reference/v5/#fun_month>`__,
