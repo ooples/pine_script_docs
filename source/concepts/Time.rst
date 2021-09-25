@@ -38,7 +38,7 @@ Pine has built-in variables to:
 - Get the current time in one-second increments:
   `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__
 
-There are built-in functions to:
+There are also built-in functions to:
 
 - Return timestamps from other timeframes (without using 
   `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__)
