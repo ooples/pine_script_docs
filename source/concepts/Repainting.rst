@@ -36,7 +36,7 @@ The question "Does it repaint?" means nothing.
 Consequently, it cannot be answered in a meaningful way.
 Why? Because it needs to be qualified. Instead, one could ask:
 
-- Do the entry/exit markers your indicator displays repaint (or: Do you wait for the realtime bar to close before displaying your entry/exit markers)?
+- Do you wait for the realtime bar to close before displaying your entry/exit markers?
 - Do alerts wait for the end of the realtime bar before triggering?
 - Do the higher timeframe plots repaint (which means they won't plot the same way on realtime bars as they do on historical bars)?
 - Does your script plot in the past (as most pivot or zigzag scripts will do)?
