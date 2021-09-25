@@ -295,6 +295,7 @@ no lookahead is possible in realtime because the future there is unknown, as it 
 
 This is an example::
 
+    // FUTURE LEAK! DO NOT USE!
     //@version=5
     indicator("Future leak", "", true)
     futureHigh = request.security(syminfo.tickerid, "D", high, lookahead = barmerge.lookahead_on)
@@ -304,6 +305,8 @@ This is an example::
 
 Note how the higher timeframe line is showing the timeframe's `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__
 value before it occurs. The solution is to use the function like we do in our ``nonRepaintingSecurity()`` shown earlier.
+
+Public scripts using this misleading technique will be moderated.
 
 
 
