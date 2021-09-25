@@ -15,7 +15,8 @@ We define repainting as: **script behavior causing historical vs realtime calcul
 
 Repainting behavior is widespread and can be caused by many factors. 
 Following our definition, our estimate is that more than 95% of indicators in existence repaint. 
-Widely used indicators like MACD and RSI, for example, repaint because they show one fixed value on historical bars,
+Widely used indicators like MACD and RSI, for example, 
+exhibit one form of repainting because they show one fixed value on historical bars,
 yet when running in realtime they will produce results that constantly fluctuate until the realtime bar closes. 
 They thus behave differently on historical and realtime bars. 
 This does not necessarily make them less useful in all contexts, nor prevent knowledgeable traders from using them.
