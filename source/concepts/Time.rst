@@ -17,7 +17,7 @@ and here for more information on `Unix Time <https://en.wikipedia.org/wiki/Unix_
 A value for the Unix time is called a *timestamp*.
 Note that since Unix time is measured from a fixed reference, i.e., the Unix Epoch, it does not vary with time zones.
 
-Pine has built-in variables to:
+Pine has built-in **variables** to:
 
 - Get timestamp information from the current bar: 
   `time <https://www.tradingview.com/pine-script-reference/v5/#var_time_close>`__ and
@@ -38,7 +38,7 @@ Pine has built-in variables to:
 - Get the current time in one-second increments:
   `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__
 
-There are also built-in functions to:
+There are also built-in **functions** that can:
 
 - Return timestamps of bars from other timeframes 
   with `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and
