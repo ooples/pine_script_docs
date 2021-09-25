@@ -109,7 +109,7 @@ Note that:
   We then add that offset to a timstamp in UTC format before converting it to display format, e.g., ``time + timeOffsetInput`` and ``timenow + timeOffsetInput``.
 - We use a tooltip to provide instructions to users.
 - We provide ``minval`` and ``maxval`` values to protect the input field, 
-  and a ``step`` value of 0.5 so that when they use the field's up/down arrows, they can intuitively figure out that fractions can be input.
+  and a ``step`` value of 0.5 so that when they use the field's up/down arrows, they can intuitively figure out that fractions can be used.
 - The `str.format() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}format>`__
   function is used to format our time values, namely the last bar's time and the current time.
 
