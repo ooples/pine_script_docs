@@ -30,7 +30,7 @@ A third time-related reference that comes into play is the chart's time zone,
 which is selected by traders.
 
 We will note, when discussing variables or functions, if they return dates or times in UTC or exchange time zone.
-Scripts do not have visiblity on the user's time zone setting on his chart.
+Scripts do not have visibility on the user's time zone setting on his chart.
 
 
 
@@ -106,7 +106,7 @@ This way, your displayed times can match the time zone used by traders on their 
 Note that:
 
 - We convert the user offset expressed in hours to milliseconds.
-  We then add that offset to whatever time values in UTC format to be displayed.
+  We then add that offset to a timstamp in UTC format before converting it to display format, e.g., ``time + timeOffsetInput`` and ``timenow + timeOffsetInput``.
 - We use a tooltip to provide instructions to users.
 - We provide ``minval`` and ``maxval`` values to protect the input field.
 - The `str.format() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}format>`__
