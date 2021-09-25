@@ -97,7 +97,7 @@ This way, your displayed times can match the time zone used by traders on their 
     indicator("Time zone control")
     MS_IN_1H = 1000 * 60 * 60
     TOOLTIP01 = "Enter your time zone's offset (+ or −), including a decimal fraction if needed."
-    timeOffsetInput = input.float(0.0, "Timezone offset (in hours)", minval = -12.0, maxval = 14.0, step = 1.0, tooltip = TOOLTIP01) * MS_IN_1H
+    timeOffsetInput = input.float(0.0, "Timezone offset (in hours)", minval = -12.0, maxval = 14.0, step = 0.5, tooltip = TOOLTIP01) * MS_IN_1H
     printTable(txt) => var table t = table.new(position.middle_right, 1, 1), table.cell(t, 0, 0, txt, bgcolor = color.yellow)
     printTable(
       str.format("Last bar''s time: {0,date,yyyy.MM.dd HH:mm:ss}", time + timeOffsetInput) +
@@ -108,7 +108,8 @@ Note that:
 - We convert the user offset expressed in hours to milliseconds.
   We then add that offset to a timstamp in UTC format before converting it to display format, e.g., ``time + timeOffsetInput`` and ``timenow + timeOffsetInput``.
 - We use a tooltip to provide instructions to users.
-- We provide ``minval`` and ``maxval`` values to protect the input field.
+- We provide ``minval`` and ``maxval`` values to protect the input field, 
+  and a ``step`` value of 0.5 so that when they use the field's up/down arrows, they can intuitively figure out that fractions can be input.
 - The `str.format() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}format>`__
   function is used to format our time values, namely the last bar's time and the current time.
 
