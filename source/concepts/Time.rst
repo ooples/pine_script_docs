@@ -131,6 +131,11 @@ the 09:30-16:00 trading session.
 
 
 
+\`timenow\`
+^^^^^^^^^^^
+
+
+
 Calendar dates and times
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -176,6 +181,12 @@ Its default value is `syminfo.timezone <https://www.tradingview.com/pine-script-
 It can be specified in GMT notation (e.g. "GMT-5") or as an 
 `IANA time zone database name <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>`__
  (e.g., "America/New_York").
+
+
+
+Formatting dates and time
+-------------------------
+
 
 
 —————————————————————————————————————————————————————————————————————————————————————————————————
