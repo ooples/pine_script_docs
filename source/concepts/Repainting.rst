@@ -62,7 +62,8 @@ and hopefully enable more meaningful discussions with script authors.
 For Pine coders
 ^^^^^^^^^^^^^^^
 
-As we discussed in the previous section, not all types of repainting behavior must necessarily be avoided at all costs.
+As we discussed in the previous section, not all types of repainting behavior must necessarily be avoided at all costs,
+and as we will see in the following text, some cannot be avoided.
 We hope this page helps you better understand the dynamics at play, so that you can make better design decisions concerning your trading tools.
 This page's content should help you avoid making the most common coding mistakes that lead to repainting or misleading plots.
 
