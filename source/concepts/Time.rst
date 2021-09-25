@@ -10,13 +10,53 @@ Time
 Introduction
 ------------
 
+The native format for time values is the **Unix time in milliseconds**. 
+Unix time is the time elapsed since the **Unix Epoch on January 1st, 1970 at UTC**.
+See here for the `current Unix time in seconds <https://www.unixtimestamp.com/>`__
+and here for more information on `Unix Time <https://en.wikipedia.org/wiki/Unix_time>`__.
+A value for the Unix time is called a *timestamp*.
+Note that since Unix time is measured from a fixed reference, the Unix Epoch, it does not vary with time zones.
 
-Dates and time built-ins
+Pine has built-in variables to:
 
+- Get timestamp information from the current bar: 
+  `time <https://www.tradingview.com/pine-script-reference/v5/#var_time_close>`__ and
+  `time_close <https://www.tradingview.com/pine-script-reference/v5/#var_time_close>`__
+- Get timestamp information for the beginning of the current trading day:
+  `time_tradingday <https://www.tradingview.com/pine-script-reference/v5/#var_time_tradingday>`__
+- Query the timezone of the exchange of the chart's symbol with
+  `syminfo.timezone <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}timezone>`__
+- Retrieve calendar and time values from the bar:
+  `year <https://www.tradingview.com/pine-script-reference/v5/#var_year>`__,
+  `month <https://www.tradingview.com/pine-script-reference/v5/#var_month>`__,
+  `weekofyear <https://www.tradingview.com/pine-script-reference/v5/#var_weekofyear>`__,
+  `dayofmonth <https://www.tradingview.com/pine-script-reference/v5/#var_dayofmonth>`__,
+  `dayofweek <https://www.tradingview.com/pine-script-reference/v5/#var_dayofweek>`__,
+  `hour <https://www.tradingview.com/pine-script-reference/v5/#var_hour>`__,
+  `minute <https://www.tradingview.com/pine-script-reference/v5/#var_minute>`__ and
+  `second <https://www.tradingview.com/pine-script-reference/v5/#var_second>`__
+- Get the current time in one-second increments:
+  `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__
 
+There are built-in functions to:
 
-time_close
-timenow
+- Return timestamps from other timeframes (without using 
+  `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__)
+  with `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and
+  `time_close <https://www.tradingview.com/pine-script-reference/v5/#fun_time_close>`__
+- Retrieve calendar and time values from any timestamp, which can be offset with a time zone:
+  `year() <https://www.tradingview.com/pine-script-reference/v5/#fun_year>`__,
+  `month() <https://www.tradingview.com/pine-script-reference/v5/#fun_month>`__,
+  `weekofyear() <https://www.tradingview.com/pine-script-reference/v5/#fun_weekofyear>`__,
+  `dayofmonth() <https://www.tradingview.com/pine-script-reference/v5/#fun_dayofmonth>`__,
+  `dayofweek() <https://www.tradingview.com/pine-script-reference/v5/#fun_dayofweek>`__,
+  `hour() <https://www.tradingview.com/pine-script-reference/v5/#fun_hour>`__,
+  `minute() <https://www.tradingview.com/pine-script-reference/v5/#fun_minute>`__ and
+  `second() <https://www.tradingview.com/pine-script-reference/v5/#fun_second>`__
+
+- Create a timestamp using `timestamp() <https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp>`__
+- Input data and time values. See the section on :ref:`Inputs <PageInputs>`.
+- Work with :ref:`session information <PageSessions>`.
 
 
 \`time\`
