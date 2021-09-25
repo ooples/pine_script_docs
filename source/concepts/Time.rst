@@ -23,7 +23,7 @@ A value for the Unix time is called a *timestamp*.
 Note that since Unix time is measured from a fixed reference, i.e., the Unix Epoch, it does not vary with time zones.
 Some Pine built-ins use the UTC time zone as a reference.
 
-A second time-related key reference for traders is the **time zone of the exchange** where an instrument are traded.
+A second time-related key reference for traders is the **time zone of the exchange** where an instrument is traded.
 Some built-ins use the exchange's time zone.
 
 A third time-related reference that comes into play is the chart's time zone,
