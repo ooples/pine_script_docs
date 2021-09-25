@@ -126,7 +126,7 @@ the 09:30-16:00 trading session.
 
 
 
-\`time_tradingday()\`
+\`time_tradingday\`
 ^^^^^^^^^^^^^^^^^^^^^
 
 
@@ -142,6 +142,40 @@ Calendar dates and times
 ^^^^^^^^^^^^^^^^^^^^^
 
 
+
+
+
+Time functions
+--------------
+
+
+
+\`time()\` and \`time_close()\`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+Calendar dates and times
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+\`timestamp()\`
+^^^^^^^^^^^^^^^^^^^^^
+
+The `timestamp() <https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp>`__ function has a few different signatures:
+
+.. code-block:: text
+
+    timestamp(year, month, day, hour, minute, second) → simple/series int
+    timestamp(timezone, year, month, day, hour, minute, second) → simple/series int
+    timestamp(dateString) → const int
+
+The only difference between the first two is the ``timezone`` parameter.
+Its default value is `syminfo.timezone <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}timezone>`__.
+It can be specified in GMT notation (e.g. "GMT-5") or as an 
+`IANA time zone database name <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>`__
+ (e.g., "America/New_York").
 
 
 —————————————————————————————————————————————————————————————————————————————————————————————————
