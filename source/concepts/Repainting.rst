@@ -229,7 +229,7 @@ Note that:
 - The behavior of the repainting line is completely different on historical bars and in realtime. On historical bars,
   it shows the new value of a completed timeframe on the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
   of the bar where it completes. It then stays stable until another timeframe completes. The problem is that in realtime,
-  it follows the current `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ price,
+  it follows the **current** `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ price,
   so it moves all the time and changes on each bar.
 - The behavior of the non-repainting, fuchsia line, in contrast, behaves exactly the same way on historical bars and in realtime.
   It updates on the bar following the completion of the higher timeframe, and doesn't move until the bar after another higher timeframe completes.
