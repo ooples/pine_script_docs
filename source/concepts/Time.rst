@@ -111,7 +111,7 @@ Note that:
 - We provide ``minval`` and ``maxval`` values to protect the input field, 
   and a ``step`` value of 0.5 so that when they use the field's up/down arrows, they can intuitively figure out that fractions can be used.
 - The `str.format() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}format>`__
-  function is used to format our time values, namely the last bar's time and the current time.
+  function formats our time values, namely the last bar's time and the current time.
 
 
 
