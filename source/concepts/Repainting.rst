@@ -69,7 +69,6 @@ This page's content should help you avoid making the most common coding mistakes
 
 Whatever your design decisions are, if you publish your script, you should explain them to traders so they can understand how your script behaves.
 
-Let's explore some of the causes of repainting, and discuss solutions when they exist.
 We will survey three broad categories of repainting causes:
 
 - Historical vs realtime calculations
