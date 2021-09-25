@@ -15,7 +15,7 @@ Unix time is the time elapsed since the **Unix Epoch on January 1st, 1970 at UTC
 See here for the `current Unix time in seconds <https://www.unixtimestamp.com/>`__
 and here for more information on `Unix Time <https://en.wikipedia.org/wiki/Unix_time>`__.
 A value for the Unix time is called a *timestamp*.
-Note that since Unix time is measured from a fixed reference, the Unix Epoch, it does not vary with time zones.
+Note that since Unix time is measured from a fixed reference, i.e., the Unix Epoch, it does not vary with time zones.
 
 Pine has built-in variables to:
 
