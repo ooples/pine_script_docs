@@ -266,14 +266,20 @@ Some scripts use `request.security() <https://www.tradingview.com/pine-script-re
 to request data from a timeframe **lower** than the chart's timeframe.
 This can be useful when functions specifically designed to handle intrabars at lower timeframes are sent down the timeframe.
 When this type of user-defined function requires the detection of the intrabars' first bar, as most do,
-the technique will only work on historical bars. This is due to the fact that realtime intrabars are not yet sorted
+the technique will only work on historical bars. This is due to the fact that realtime intrabars are not yet sorted.
 The impact of this is that such scripts will not be able to generate alerts, for example,
 and will require constant refreshing to recalculate elapsed realtime bars as historical bars.
 
 When used at lower timeframes than the chart's without specialized functions able to distinguish between intrabars,
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
-will only return the value of the **lasts** intrabar in the dilation of the chart's bar,
+will only return the value of the **last** intrabar in the dilation of the chart's bar,
 which is usually not useful, and will also not reproduce in realtime, so lead to repainting.
+
+For all these reasons, unless you understand the subtleties of using 
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+at lower timeframes than the chart's, it is best to avoid it.
+High-quality scripts will have logic to detect such anomalies,
+and prevent the display of results which would be invalid when a lower timeframe is used.
 
 
 
