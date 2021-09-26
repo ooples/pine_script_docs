@@ -201,9 +201,81 @@ it returns the starting time of the last trading day in the bar (e.g., at 1W it 
 
 
 
-
 \`timenow\`
 ^^^^^^^^^^^
+
+`timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__ returns the current time.
+It works in realtime, but also when a script executes on historical bars. 
+While `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__ is expressed in milliseconds,
+it has a second resolution, i.e., it will only update on seconds.
+Accordingly, it will only change during execution on historical bars if the script takes longer than one second to execute on them.
+
+This script uses variations in `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__
+during the script's execution on historical bars to time its performance::
+
+    //@version=5
+    indicator("Stopwatch", "", true, precision = 4, scale = scale.none)
+    loopCount = input.int(100000, "Loop iterations per bar", minval = 0, step = 10000)
+    
+    stopwatch() =>
+        // Get time at first bar.
+        var timeBegin = timenow
+        // Get ms elapsed since first bar.
+        var timeElapsed = 0.
+        if not barstate.islast
+            timeElapsed := timenow - timeBegin
+        // Calculate avg/bar only when time changes.
+        var msPerBar = 0.
+        // Total bars timed before last change in "timenow".
+        var barsTimed = 0
+        // ————— Bars elapsed since last change in "timenow".
+        var barsNotTimed = 0
+        if ta.change(timeElapsed)
+            barsTimed := bar_index + 1
+            msPerBar  := timeElapsed / barsTimed
+        // ————— In between time changes, which only occur every second, estimate elapsed time using avg time per bar.
+        if not barstate.islast
+            // Bars elapsed since last change of time.
+            barsNotTimed := bar_index  + 1 - barsTimed
+        // ————— Add (bars since "timenow" change * avg bar time) to time elapsed since last "timenow" change to get better estimate of total time elapsed.
+        totalTime = timeElapsed + (barsNotTimed * msPerBar)
+        [msPerBar, totalTime, barsTimed, barsNotTimed]
+    
+    [msPerBar, totalTime, barsTimed, barsNotTimed] = stopwatch()
+    
+    // ————— Script code to time.
+    var a = 0
+    for i = 0 to loopCount
+    	a := int(a + i + close)
+    	a := int(math.abs(a))
+    
+    // —————————— Display results
+    // ————— Print table at the end of chart.
+    if barstate.islast
+        var table t = table.new(position.middle_right, 1, 1)
+        var txt = str.tostring(msPerBar, "Avg time per bar\n#.#### ms\n\n") +
+                  str.tostring(totalTime / 1000, "Total time\n#.#### seconds\n\n") + 
+                  str.tostring(barsTimed + barsNotTimed, "Bars analyzed\n#")
+        table.cell(t, 0, 0, txt, bgcolor = color.yellow)
+    // ————— Plot elapsed time.
+    plot(totalTime,        "Execution time (ms)", color.gray)
+    // ————— Print Data Window values.
+    plotchar(msPerBar,     "Avg time / bar (ms)",  "", location.top)
+    plotchar(totalTime,    "Execution time (ms)",  "", location.top)
+    plotchar(barsTimed,    "Bars timed",           "", location.top)
+    
+This script uses the value of `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__
+to calculate a realtime countdown for intraday bars.
+Contrary to the countdown on the chart, this one will only update when a feed update causes the script to execute antoher iteration::
+
+    //@version=5
+    indicator("", "", true)
+    
+    printTable(txt) => 
+        var table t = table.new(position.middle_right, 1, 1)
+        table.cell(t, 0, 0, txt, text_halign = text.align_right, bgcolor = color.yellow)
+    
+    printTable(str.format("{0,time,HH:mm:ss}", time_close - timenow))
 
 
 
