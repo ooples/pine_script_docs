@@ -284,13 +284,35 @@ Contrary to the countdown on the chart, this one will only update when a feed up
 Calendar dates and times
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-::
+Calendar dates and times such as
+  `year <https://www.tradingview.com/pine-script-reference/v5/#var_year>`__,
+  `month <https://www.tradingview.com/pine-script-reference/v5/#var_month>`__,
+  `weekofyear <https://www.tradingview.com/pine-script-reference/v5/#var_weekofyear>`__,
+  `dayofmonth <https://www.tradingview.com/pine-script-reference/v5/#var_dayofmonth>`__,
+  `dayofweek <https://www.tradingview.com/pine-script-reference/v5/#var_dayofweek>`__,
+  `hour <https://www.tradingview.com/pine-script-reference/v5/#var_hour>`__,
+  `minute <https://www.tradingview.com/pine-script-reference/v5/#var_minute>`__ and
+  `second <https://www.tradingview.com/pine-script-reference/v5/#var_second>`__
+can be useful to test for specific dates or times and as arguments to 
+`timestamp() <https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp>`__.
+
+When testing for specific dates or times, ones needs to account for the possibility that the script will be executing on timeframes
+where the tested condition cannot be detected, or for cases where a bar with the specific requirement will not exist.
+Suppose, for example, we wanted to detect the first trading day of the month.
+This script shows how using only `dayofmonth <https://www.tradingview.com/pine-script-reference/v5/#var_dayofmonth>`__
+will not work when a weekly chart is used or when no trading occurs on the 1st of the month::
 
     //@version=5
-    indicator("")
-    plot(hour)
-    plot(hour(time(timeframe.period, syminfo.session, syminfo.timezone)))
-    plot(hour(time, "GMT+0"))
+    indicator("", "", true)
+    firstDayIncorrect = dayofmonth == 1
+    firstDay = ta.change(time("M"))
+    plotchar(firstDayIncorrect, "firstDayIncorrect", "•", location.top, size = size.small)
+    bgcolor(firstDay ? color.silver : na)
+
+.. image:: images/Time-CalendarDatesAndTimes-01.png
+
+Note how using ``ta.change(time("M"))`` is more robust as it works on all months, displayed as the silver background,
+whereas the blue dot detected using ``dayofmonth == 1`` does not work when the first trading day of September occurs on the 2nd.
 
 
 
