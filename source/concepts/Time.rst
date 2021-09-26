@@ -293,7 +293,7 @@ Calendar dates and times such as
 `hour <https://www.tradingview.com/pine-script-reference/v5/#var_hour>`__,
 `minute <https://www.tradingview.com/pine-script-reference/v5/#var_minute>`__ and
 `second <https://www.tradingview.com/pine-script-reference/v5/#var_second>`__
-can be useful to test for specific dates or times and as arguments to 
+can be useful to test for specific dates or times, and as arguments to 
 `timestamp() <https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp>`__.
 
 When testing for specific dates or times, ones needs to account for the possibility that the script will be executing on timeframes
@@ -311,9 +311,12 @@ will not work when a weekly chart is used or when no trading occurs on the 1st o
 
 .. image:: images/Time-CalendarDatesAndTimes-01.png
 
-Note how using ``ta.change(time("M"))`` is more robust as it works on all months (#1 and #2), displayed as the silver background,
-whereas the blue dot detected using ``dayofmonth == 1`` does not work (#1) when the first trading day of September occurs on the 2nd.
+Note that:
 
+- Using ``ta.change(time("M"))`` is more robust as it works on all months (#1 and #2), displayed as the silver background,
+  whereas the blue dot detected using ``dayofmonth == 1`` does not work (#1) when the first trading day of September occurs on the 2nd.
+- The ``dayofmonth == 1`` condition will be ``true`` on all intrabars of the first day of the month,
+  but ``ta.change(time("M"))`` will only be ``true`` on the first.
 
 
 \`syminfo.timezone()\`
