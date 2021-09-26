@@ -285,14 +285,14 @@ Calendar dates and times
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 Calendar dates and times such as
-  `year <https://www.tradingview.com/pine-script-reference/v5/#var_year>`__,
-  `month <https://www.tradingview.com/pine-script-reference/v5/#var_month>`__,
-  `weekofyear <https://www.tradingview.com/pine-script-reference/v5/#var_weekofyear>`__,
-  `dayofmonth <https://www.tradingview.com/pine-script-reference/v5/#var_dayofmonth>`__,
-  `dayofweek <https://www.tradingview.com/pine-script-reference/v5/#var_dayofweek>`__,
-  `hour <https://www.tradingview.com/pine-script-reference/v5/#var_hour>`__,
-  `minute <https://www.tradingview.com/pine-script-reference/v5/#var_minute>`__ and
-  `second <https://www.tradingview.com/pine-script-reference/v5/#var_second>`__
+`year <https://www.tradingview.com/pine-script-reference/v5/#var_year>`__,
+`month <https://www.tradingview.com/pine-script-reference/v5/#var_month>`__,
+`weekofyear <https://www.tradingview.com/pine-script-reference/v5/#var_weekofyear>`__,
+`dayofmonth <https://www.tradingview.com/pine-script-reference/v5/#var_dayofmonth>`__,
+`dayofweek <https://www.tradingview.com/pine-script-reference/v5/#var_dayofweek>`__,
+`hour <https://www.tradingview.com/pine-script-reference/v5/#var_hour>`__,
+`minute <https://www.tradingview.com/pine-script-reference/v5/#var_minute>`__ and
+`second <https://www.tradingview.com/pine-script-reference/v5/#var_second>`__
 can be useful to test for specific dates or times and as arguments to 
 `timestamp() <https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp>`__.
 
