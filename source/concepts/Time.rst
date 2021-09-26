@@ -97,16 +97,28 @@ This way, your displayed times can match the time zone used by traders on their 
     indicator("Time zone control")
     MS_IN_1H = 1000 * 60 * 60
     TOOLTIP01 = "Enter your time zone's offset (+ or −), including a decimal fraction if needed."
-    timeOffsetInput = input.float(0.0, "Timezone offset (in hours)", minval = -12.0, maxval = 14.0, step = 0.5, tooltip = TOOLTIP01) * MS_IN_1H
-    printTable(txt) => var table t = table.new(position.middle_right, 1, 1), table.cell(t, 0, 0, txt, bgcolor = color.yellow)
+    hoursOffsetInput = input.float(0.0, "Timezone offset (in hours)", minval = -12.0, maxval = 14.0, step = 0.5, tooltip = TOOLTIP01)
+    
+    printTable(txt) => 
+        var table t = table.new(position.middle_right, 1, 1)
+        table.cell(t, 0, 0, txt, text_halign = text.align_right, bgcolor = color.yellow)
+    
+    msOffsetInput = hoursOffsetInput * MS_IN_1H
     printTable(
-      str.format("Last bar''s time: {0,date,yyyy.MM.dd HH:mm:ss}", time + timeOffsetInput) +
-      str.format("\nCurrent time: {0,date,yyyy.MM.dd HH:mm:ss}", timenow + timeOffsetInput))
+      str.format("Last bar''s open time UTC: {0,date,HH:mm:ss yyyy.MM.dd}", time) +
+      str.format("\nLast bar''s close time UTC: {0,date,HH:mm:ss yyyy.MM.dd}", time_close) +
+      str.format("\n\nLast bar''s open time EXCHANGE: {0,date,HH:mm:ss yyyy.MM.dd}", time(timeframe.period, syminfo.session, syminfo.timezone)) +
+      str.format("\nLast bar''s close time EXCHANGE: {0,date,HH:mm:ss yyyy.MM.dd}", time_close(timeframe.period, syminfo.session, syminfo.timezone)) +
+      str.format("\n\nLast bar''s open time OFFSET ({0}): {1,date,HH:mm:ss yyyy.MM.dd}", hoursOffsetInput, time + msOffsetInput) +
+      str.format("\nLast bar''s close time OFFSET ({0}): {1,date,HH:mm:ss yyyy.MM.dd}", hoursOffsetInput, time_close + msOffsetInput) +
+      str.format("\n\nCurrent time OFFSET ({0}): {1,date,HH:mm:ss yyyy.MM.dd}", hoursOffsetInput, timenow + msOffsetInput))
+
+.. image:: images/Time-TimeZones-01.png
 
 Note that:
 
-- We convert the user offset expressed in hours to milliseconds.
-  We then add that offset to a timstamp in UTC format before converting it to display format, e.g., ``time + timeOffsetInput`` and ``timenow + timeOffsetInput``.
+- We convert the user offset expressed in hours to milliseconds with ``msOffsetInput``.
+  We then add that offset to a timstamp in UTC format before converting it to display format, e.g., ``time + msOffsetInput`` and ``timenow + msOffsetInput``.
 - We use a tooltip to provide instructions to users.
 - We provide ``minval`` and ``maxval`` values to protect the input field, 
   and a ``step`` value of 0.5 so that when they use the field's up/down arrows, they can intuitively figure out that fractions can be used.
@@ -178,6 +190,15 @@ the 09:30-16:00 trading session.
 
 \`time_tradingday\`
 ^^^^^^^^^^^^^^^^^^^^^
+
+`time_tradingday <https://www.tradingview.com/pine-script-reference/v5/#var_time_tradingday>`__ is useful
+when a symbol trades on overnight sessions that start and close on different calendar days.
+This happens in forex markets, for example, where a session can open Sunday at 17:00 and close Monday at 17:00.
+
+The variable returns the time of the beginning of the trading day when used at timeframes of 1D and less.
+When used on timeframes higher than 1D, 
+it returns the starting time of the last trading day in the bar (e.g., at 1W it will return the starting time of the last trading day of the week).
+
 
 
 
