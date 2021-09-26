@@ -311,7 +311,7 @@ will not work when a weekly chart is used or when no trading occurs on the 1st o
 
 .. image:: images/Time-CalendarDatesAndTimes-01.png
 
-Note that:
+Note that: 
 
 - Using ``ta.change(time("M"))`` is more robust as it works on all months (#1 and #2), displayed as the silver background,
   whereas the blue dot detected using ``dayofmonth == 1`` does not work (#1) when the first trading day of September occurs on the 2nd.
