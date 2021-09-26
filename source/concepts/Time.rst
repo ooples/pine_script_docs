@@ -209,6 +209,7 @@ It works in realtime, but also when a script executes on historical bars.
 While `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__ is expressed in milliseconds,
 it has a second resolution, i.e., it will only update on seconds.
 Accordingly, it will only change during execution on historical bars if the script takes longer than one second to execute on them.
+In realtime, your scripts will only perceive changes when they execute on feed updates.
 
 This script uses variations in `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__
 during the script's execution on historical bars to time its performance::
@@ -266,7 +267,7 @@ during the script's execution on historical bars to time its performance::
     
 This script uses the value of `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__
 to calculate a realtime countdown for intraday bars.
-Contrary to the countdown on the chart, this one will only update when a feed update causes the script to execute antoher iteration::
+Contrary to the countdown on the chart, this one will only update when a feed update causes the script to execute another iteration::
 
     //@version=5
     indicator("", "", true)
