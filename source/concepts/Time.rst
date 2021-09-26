@@ -265,7 +265,8 @@ during the script's execution on historical bars to time its performance::
     plotchar(totalTime,    "Execution time (ms)",  "", location.top)
     plotchar(barsTimed,    "Bars timed",           "", location.top)
     
-This script uses the value of `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__
+This script uses the values of `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__
+and `time_close <https://www.tradingview.com/pine-script-reference/v5/#var_time_close>`__
 to calculate a realtime countdown for intraday bars.
 Contrary to the countdown on the chart, this one will only update when a feed update causes the script to execute another iteration::
 
