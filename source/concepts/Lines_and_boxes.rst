@@ -7,6 +7,54 @@ Lines and boxes
     :depth: 2
 
 
+Introduction
+------------
+
+Lines and boxes are only available in v4 and higher versions of Pine.
+They are objects, like :ref:`labels <PageLabels>` and :ref:`tables <PageTables>`.
+Like them, they are referred to using an ID, which acts like a pointer. 
+Line IDs are of "line" type, and box IDs are of "box" type.
+As with other Pine objects, lines and box IDs are "time series" and all the functions used to manage them accept "series" arguments,
+which makes them very flexible.
+
+.. note:: On TradingView charts, a complete set of *Drawing Tools*
+  allows users to create and modify drawings using mouse actions. While they may sometimes look similar to
+  drawing objects created with Pine code, they are different entities.
+  Lines and boxes created using Pine code cannot be modified with mouse actions, 
+  and hand-drawn drawings from the chart user interface are not visible from Pine scripts.
+
+Lines can be horizontal, or not. Boxes are always rectangular.
+
+They share some common characteristics:
+
+- They can start and end from any point on the chart, including the future.
+- They can be extended to infinity, left or right of their anchoring coordinates.
+- Their attributes can be changed during the script's execution.
+- A maximum of 500 of each can be drawn on the chart at any given time.
+
+
+Lines
+-----
+
+One drawback to using labels is that you can only have a limited quantity of them on the chart.
+The default is ~50 and you can use the ``max_labels_count`` parameter in your 
+`indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ or 
+`indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__
+declaration statement to specify up to 500. Labels, as other objects, 
+are managed using a garbage collection mechanism which deletes the oldest ones on the chart,
+such that only the newest displayed labels are visible.
+
+Your toolbox of built-ins to manage labels are all in the ``label`` namespace. They include:
+
+- `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ to create labels
+- ``label.set_*()`` functions to modify the properties of an existing label
+- ``label.get_*()`` functions to read the properties of an existing label
+- `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`_ to delete labels
+- The `label.all <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}all>`__ 
+  array which always contains the IDs of all the visible labels on the chart. 
+  The array's size will depend on the maximum label count for your script and how many of those you have drawn.
+  ``aray.size(label.all)`` will return the array's size.
+
 
 Starting with Pine v4, indicators and strategies can
 create *drawing objects* on the chart. Three types of
@@ -175,20 +223,6 @@ text, color, *y* coordinate location (``yloc``) and label style.
 One may notice that ``na`` is passed as the ``y`` argument to the ``label.new`` function call. The reason for this is that
 the example's label uses either ``yloc.belowbar`` or ``yloc.abovebar`` y-locations, which don't require a y value.
 A finite value for ``y`` is needed only if a label uses ``yloc.price``.
-
-The available *setter* functions for label drawings are:
-
-    * `label.set_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_color>`__ --- changes color of label
-    * `label.set_size() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_size>`__ --- changes size of label
-    * `label.set_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_style>`__ --- changes :ref:`style of label <drawings_label_styles>`
-    * `label.set_text() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_text>`__ --- changes text of label
-    * `label.set_textcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_textcolor>`__ --- changes color of text
-    * `label.set_x() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_x>`__ --- changes x-coordinate of label
-    * `label.set_y() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_y>`__ --- changes y-coordinate of label
-    * `label.set_xy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xy>`__ --- changes both x and y coordinates of label
-    * `label.set_xloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xloc>`__ --- changes x-location of label
-    * `label.set_yloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_yloc>`__ --- changes y-location of label
-    * `label.set_tooltip() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_tooltip>`__ --- changes tooltip of label
 
 The available *setter* functions for line drawings are:
 

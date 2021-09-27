@@ -332,7 +332,7 @@ Labels are advantageous because:
 One drawback to using labels is that you can only have a limited quantity of them on the chart.
 The default is ~50 and you can use the ``max_labels_count`` parameter in your 
 `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ or 
-`indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__
+`strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
 declaration statement to specify up to 500. Labels, as other objects, 
 are managed using a garbage collection mechanism which deletes the oldest ones on the chart,
 such that only the newest displayed labels are visible.
