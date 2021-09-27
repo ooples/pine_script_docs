@@ -65,7 +65,7 @@ Pine has built-in **variables** to:
   `hour <https://www.tradingview.com/pine-script-reference/v5/#var_hour>`__,
   `minute <https://www.tradingview.com/pine-script-reference/v5/#var_minute>`__ and
   `second <https://www.tradingview.com/pine-script-reference/v5/#var_second>`__
-- Query the timezone of the exchange of the chart's symbol with
+- Return the timezone of the exchange of the chart's symbol with
   `syminfo.timezone <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}timezone>`__
 
 There are also built-in **functions** that can:
