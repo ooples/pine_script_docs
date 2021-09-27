@@ -330,7 +330,10 @@ The `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ 
    in the ``session`` argument.
 #. Detecting changes in higher timeframes than the chart's by using the higher timeframe for the ``timeframe`` argument.
    When using the function for this purpose, we are looking for changes in the returned value, which means the higher timeframe bar has changed.
-   This will usually require using `ta.change() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}change>`__ to test, e.g., ``ta.change(time("D"))``.
+   This will usually require using `ta.change() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}change>`__ to test, 
+   e.g., ``ta.change(time("D"))`` will return the change in time when a new higher timeframe bar comes in, 
+   so the expression's result will cast to a "bool" value when used in a conditional expression.
+   The "bool" result will be ``true`` when there is a change, and ``false`` when there is no change.
 
 
 
