@@ -135,8 +135,8 @@ is ``true`` if the script is executing on the dataset's last bar when the market
 It can be used to detect the first realtime bar with ``barstate.islastconfirmedhistory[1]``, or to postpone server-intensive calculations until the last historical bar, which would otherwise be undetectable on open markets.
 
 
-Example script
---------------
+Example
+-------
 
 Here is an example of a script using ``barstate.*`` variables::
 
