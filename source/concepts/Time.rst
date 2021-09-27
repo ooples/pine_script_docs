@@ -409,7 +409,7 @@ Calendar date and time functions such as
 `minute() <https://www.tradingview.com/pine-script-reference/v5/#fun_minute>`__ and
 `second() <https://www.tradingview.com/pine-script-reference/v5/#fun_second>`__
 can be useful to test for specific dates or times. They all have signatures similar to the ones shown here for
-`dayofmonth() <https://www.tradingview.com/pine-script-reference/v5/#fun_dayofmonth>`__::
+`dayofmonth() <https://www.tradingview.com/pine-script-reference/v5/#fun_dayofmonth>`__:
 
 .. code-block:: text
 
