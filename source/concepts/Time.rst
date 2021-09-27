@@ -318,23 +318,59 @@ They accept three arguments:
 ``timezone``
    An optional value that qualifies the argument for ``session`` when one is used.
 
-See the `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ entry in the Reference Manual for more information.
+See the `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and
+`time_close() <https://www.tradingview.com/pine-script-reference/v5/#fun_time_close>`__ entries in the Reference Manual for more information.
 
-::
+The `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ function is most often used to:
+
+#. Test if a bar is in a specific time period, which will require using the ``session`` parameter.
+   In those cases, ``timeframe.period``, i.e., the chart's timeframe, will often be used for the first parameter.
+   When using the functions this way, we are relying on the fact that they will return
+   `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ when the bar is not part of the period specified
+   in the ``session`` argument.
+#. Detecting changes in timeframes other than the chart's by using a higher timeframe for the ``timeframe`` argument.
+   When using the functions for this purpose, we are looking for changes in the returned value.
+   This will usually require using `ta.change() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}change>`__ to test, e.g., ``ta.change(time("D"))``.
+
+
+
+Testing for sessions
+""""""""""""""""""""
+
+Let's look at an example of the first case where we want to determine if a bar's starting time is part of a period between 11:00 and 13:00::
 
     //@version=5
-    indicator("Session bars")
-    t = time(timeframe.period, "0930-1600")
-    plot(na(t) ? 0 : 1)
+    indicator("Session bars", "", true)
+    inSession = not na(time(timeframe.period, "1100-1300"))
+    bgcolor(inSession ? color.silver : na)
 
-This shows how the user can distinguish between regular session and extended hours bars
-by using the built-in `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__
-function rather than the `time <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ variable. 
-The `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ call in our script returns the time of the
-bar's open in UNIX time (milliseconds), or `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ if the bar is located outside
-the 09:30-16:00 trading session.
+.. image:: images/Time-Time()AndTimeclose()-01.png
+
+Note that:
+
+- We use ``time(timeframe.period, "1100-1300")``, which says: "Check at the chart's timeframe if the current bar's opening time is situated between 11:00 and 13:00 inclusively.
+  If the bar is in the session, the function returns its opening time. If it is **not**, the function returns
+  `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__.
+- We are interested in identifying the instances when `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__
+  does not return `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
+  because that means the bar is in the session, so we test for ``not na(...)``.
 
 
+
+Testing for changes in higher timeframes
+""""""""""""""""""""""""""""""""""""""""
+
+It is often helpful to detect changes in a higher timeframe. 
+You may, for example, want to detect changes in trading days while on intraday charts.
+For these cases, you can use the fact that ``time("D")`` returns the opening time of the 1D bar,
+even if the chart is at an intraday timeframe such as 1H::
+
+    //@version=5
+    indicator("Session bars", "", true)
+    newDay = ta.change(time("D"))
+    bgcolor(newDay ? color.silver : na)
+
+.. image:: images/Time-TestingForChangesInHTF-01.png
 
 
 Calendar dates and times
