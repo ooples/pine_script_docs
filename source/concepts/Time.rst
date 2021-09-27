@@ -26,7 +26,8 @@ Four different references come into play when using date and time values in Pine
    They are measured from a fixed reference, i.e., the Unix Epoch, and do not vary with time zones.
    Some Pine built-ins use the UTC time zone as a reference.
 #. **Exchange time zone**: A second time-related key reference for traders is the time zone of the exchange where an instrument is traded.
-   Some built-ins use the exchange's time zone.
+   Some built-ins like `hour <https://www.tradingview.com/pine-script-reference/v5/#var_hour>`__
+   return values in the exchange's time zone.
 #. ``timezone`` parameter: Some functions that normally return values in the exchange's time zone,
    such as `hour() <https://www.tradingview.com/pine-script-reference/v5/#fun_hour>`__
    include a ``timezone`` parameter that allows you to adapt the function's result to another time zone.
