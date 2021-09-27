@@ -166,6 +166,7 @@ Note that:
 
 - Each state's name will appear in the label's text when it is ``true``.
 - There are four possible colors for the label's background:
+
   - fuchsia on the first bar
   - silver on historical bars
   - orange when a realtime bar is confirmed (when it closes and becomes an elapsed realtime bar)
