@@ -325,11 +325,11 @@ The `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ 
 
 #. Test if a bar is in a specific time period, which will require using the ``session`` parameter.
    In those cases, ``timeframe.period``, i.e., the chart's timeframe, will often be used for the first parameter.
-   When using the function this way, we are relying on the fact that they will return
+   When using the function this way, we are relying on the fact that it will return
    `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ when the bar is not part of the period specified
    in the ``session`` argument.
-#. Detecting changes in timeframes other than the chart's by using a higher timeframe for the ``timeframe`` argument.
-   When using the function for this purpose, we are looking for changes in the returned value.
+#. Detecting changes in higher timeframes than the chart's by using the higher timeframe for the ``timeframe`` argument.
+   When using the function for this purpose, we are looking for changes in the returned value, which means the higher timeframe bar has changed.
    This will usually require using `ta.change() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}change>`__ to test, e.g., ``ta.change(time("D"))``.
 
 
@@ -348,7 +348,8 @@ Let's look at an example of the first case where we want to determine if a bar's
 
 Note that:
 
-- We use ``time(timeframe.period, "1100-1300")``, which says: "Check at the chart's timeframe if the current bar's opening time is situated between 11:00 and 13:00 inclusively.
+- We use ``time(timeframe.period, "1100-1300")``, which says: 
+  "Check at the chart's timeframe if the current bar's opening time is situated between 11:00 and 13:00 inclusively".
   If the bar is in the session, the function returns its opening time. If it is **not**, the function returns
   `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__.
 - We are interested in identifying the instances when `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__
