@@ -329,19 +329,21 @@ Labels are advantageous because:
   making it easier to control their behavior.
 - You can add tooltips to labels.
 
-One drawback to using labels is that you can only have a limited quantity of them on the chart.
-The default is ~50 and you can use the ``max_labels_count`` parameter in your 
+One drawback to using labels versus `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
+`plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__
+is that you can only draw a limited quantity of them on the chart.
+The default is ~50, but you can use the ``max_labels_count`` parameter in your 
 `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ or 
 `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
-declaration statement to specify up to 500. Labels, as other objects, 
+declaration statement to specify up to 500. Labels, like :ref:`lines and boxes <PageLinesAndBoxes>`, 
 are managed using a garbage collection mechanism which deletes the oldest ones on the chart,
-such that only the newest displayed labels are visible.
+such that only the most recently drawn labels are visible.
 
 Your toolbox of built-ins to manage labels are all in the ``label`` namespace. They include:
 
-- `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ to create labels
-- ``label.set_*()`` functions to modify the properties of an existing label
-- ``label.get_*()`` functions to read the properties of an existing label
+- `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ to create labels.
+- ``label.set_*()`` functions to modify the properties of an existing label.
+- ``label.get_*()`` functions to read the properties of an existing label.
 - `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`_ to delete labels
 - The `label.all <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}all>`__ 
   array which always contains the IDs of all the visible labels on the chart. 

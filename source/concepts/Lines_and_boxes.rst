@@ -23,55 +23,69 @@ which makes them very flexible.
   Lines and boxes created using Pine code cannot be modified with mouse actions, 
   and hand-drawn drawings from the chart user interface are not visible from Pine scripts.
 
-Lines can be horizontal, or not. Boxes are always rectangular.
-
-They share some common characteristics:
+Lines can be horizontal or at an angle, while boxes are always rectangular, but they share many common characteristics:
 
 - They can start and end from any point on the chart, including the future.
 - They can be extended to infinity, left or right of their anchoring coordinates.
 - Their attributes can be changed during the script's execution.
+- The *x* coordinates used to position them can be expressed as a bar index or a time value.
+- In the *x* coordinate, they start and stop on the middle of the bar.
+- Different pre-defined styles can be used for line patterns and end points, and box borders.
 - A maximum of 500 of each can be drawn on the chart at any given time.
+  The default is ~50, but you can use the ``max_lines_count`` and ``max_boxes_count`` parameters in your 
+  `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ or 
+  `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
+  declaration statement to specify up to 500. Lines and boxes, like :ref:`labels <PageLabels>`, 
+  are managed using a garbage collection mechanism which deletes the oldest ones on the chart,
+  such that only the most recently displayed are visible.
+
+This script draws both lines and boxes::
+
+    //@version=5
+    indicator("Lines and boxes", "", true)
+    string tfInput = input.timeframe("D", "Timeframe")
+    bool newTF = ta.change(time(tfInput))
+    var hi = float(na)
+    var lo = float(na)
+    var line hiLine = na
+    var line loLine = na
+    var box hiLoBox = na
+    if newTF
+        hi := high
+        lo := low
+        hiLine := line.new(bar_index - 1, hi, bar_index, hi, color = color.green, width = 2)
+        loLine := line.new(bar_index - 1, lo, bar_index, lo, color = color.red, width = 2)
+        hiLoBox := box.new(bar_index - 1, hi, bar_index, lo, border_color = na, bgcolor = color.silver)
+        int(na)
+    else
+        line.set_x2(hiLine, bar_index)
+        line.set_x2(loLine, bar_index)
+        boxColor = high > hi ? color.green : low < lo ? color.red : color.silver
+        box.set_right(hiLoBox, bar_index)
+        box.set_bgcolor(hiLoBox, color.new(boxColor, 50))
+        int(na)
+
+.. image:: images/LinesAndBoxes-Introduction-01.png
+
+Note that:
+
+- 
 
 
 Lines
 -----
 
-One drawback to using labels is that you can only have a limited quantity of them on the chart.
-The default is ~50 and you can use the ``max_labels_count`` parameter in your 
-`indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ or 
-`indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__
-declaration statement to specify up to 500. Labels, as other objects, 
-are managed using a garbage collection mechanism which deletes the oldest ones on the chart,
-such that only the newest displayed labels are visible.
+Lines are managed using built-in functions in the ``line`` namespace. They include:
 
-Your toolbox of built-ins to manage labels are all in the ``label`` namespace. They include:
+- `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`_ to create them.
+- ``line.set_*()`` functions to modify the properties of an line.
+- ``line.get_*()`` functions to read the properties of an existing line.
+- `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`_ to delete them.
+- The `line.all <https://www.tradingview.com/pine-script-reference/v5/#var_line{dot}all>`__ 
+  array which always contains the IDs of all the visible lines on the chart. 
+  The array's size will depend on the maximum line count for your script and how many of those you have drawn.
+  ``aray.size(line.all)`` will return the array's size.
 
-- `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ to create labels
-- ``label.set_*()`` functions to modify the properties of an existing label
-- ``label.get_*()`` functions to read the properties of an existing label
-- `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`_ to delete labels
-- The `label.all <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}all>`__ 
-  array which always contains the IDs of all the visible labels on the chart. 
-  The array's size will depend on the maximum label count for your script and how many of those you have drawn.
-  ``aray.size(label.all)`` will return the array's size.
-
-
-Starting with Pine v4, indicators and strategies can
-create *drawing objects* on the chart. Three types of
-drawings are currently supported: "label", "line" and "box".
-You will find one instance of each on the following chart:
-
-.. image:: images/label_and_line_drawings.png
-
-.. note:: On TradingView charts, a complete set of *Drawing Tools*
-  allows users to create and modify drawings using mouse actions. While they may look similar to
-  drawing objects created with Pine code, they are essentially different entities.
-  Drawing objects created using Pine code cannot be modified with mouse actions, 
-  and hand-drawn drawings from the chart user interface are not visible from Pine scripts.
-
-The line, label, and box drawings in Pine allow you to create indicators with more sophisticated
-visual components, e.g., pivot points, support/resistance levels,
-zig zag lines, labels containing dynamic text, etc.
 
 In contrast to indicator plots (plots are created with functions 
 `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__, 
