@@ -12,22 +12,31 @@ Introduction
 
 
 
-Three references
-^^^^^^^^^^^^^^^^
+Four references
+^^^^^^^^^^^^^^^
 
-The native format for time values in Pine is the **Unix time in milliseconds**. 
-Unix time is the time elapsed since the **Unix Epoch on January 1st, 1970 at UTC**.
-See here for the `current Unix time in seconds <https://www.unixtimestamp.com/>`__
-and here for more information on `Unix Time <https://en.wikipedia.org/wiki/Unix_time>`__.
-A value for the Unix time is called a *timestamp*.
-Note that since Unix time is measured from a fixed reference, i.e., the Unix Epoch, it does not vary with time zones.
-Some Pine built-ins use the UTC time zone as a reference.
+Four different references come into play when using date and time values in Pine:
 
-A second time-related key reference for traders is the **time zone of the exchange** where an instrument is traded.
-Some built-ins use the exchange's time zone.
+#. **UTC**: The native format for time values in Pine is the **Unix time in milliseconds**. 
+   Unix time is the time elapsed since the **Unix Epoch on January 1st, 1970 at UTC**.
+   See here for the `current Unix time in seconds <https://www.unixtimestamp.com/>`__
+   and here for more information on `Unix Time <https://en.wikipedia.org/wiki/Unix_time>`__.
+   A value for the Unix time is called a *timestamp*.
+   Unix timestamps are always expressed in the UTC (or "GMT", or "GMT+0") time zone.
+   They are measured from a fixed reference, i.e., the Unix Epoch, and do not vary with time zones.
+   Some Pine built-ins use the UTC time zone as a reference.
+#. **Exchange time zone**: A second time-related key reference for traders is the time zone of the exchange where an instrument is traded.
+   Some built-ins use the exchange's time zone.
+#. ``timezone`` parameter: Some functions that normally return values in the exchange's time zone,
+   such as `hour() <https://www.tradingview.com/pine-script-reference/v5/#fun_hour>`__
+   include a ``timezone`` parameter that allows you to adapt the function's result to another time zone.
+   Other functions like `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__
+   include both ``session`` and ``timezone`` parameters. In those cases, the ``timezone`` arguments
+   applies to how the ``session`` argument is interpreted — not to the time value returned by the function.
+#. **Chart's time zone**: This is the time zone chosen by the user from the chart using the "Chart Settings/Symbol/Time Zone" field.
+   This setting only affects the display of dates and times on the chart. 
+   It does not affect the behavior of Pine scripts, and they have no visiblity over this setting.
 
-A third time-related reference that comes into play is the chart's time zone,
-which is selected by traders.
 
 We will note, when discussing variables or functions, if they return dates or times in UTC or exchange time zone.
 Scripts do not have visibility on the user's time zone setting on his chart.
@@ -79,6 +88,7 @@ There are also built-in **functions** that can:
   using `str.format() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}format>`__
 - Input data and time values. See the section on :ref:`Inputs <PageInputs>`.
 - Work with :ref:`session information <PageSessions>`.
+
 
 
 Time zones
