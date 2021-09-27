@@ -49,6 +49,10 @@ Many built-in variables, functions, and function arguments were renamed in Pine 
 These changes implement a more rational nomenclature and provide a more orderly growth path for the many additions planned for Pine. 
 Instructions on how to use the v5 converter and the full list of changes in v5 can be found in the :ref:`Migration guide to Pine v5 <PageToPineVersion5>`.
 
+The Reference Manual now includes the systematic mention of the form and type required for function parameters, e.g., "simple int".
+
+The User Manual was reorganized and new content was added.
+
 
 July 2021
 ---------

@@ -154,6 +154,8 @@ The `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`_
 
 
 
+.. _PageToPineVersion5_SomeFunctionParametersNowRequireBuiltInArguments:
+
 Some function parameters now require built-in arguments
 -------------------------------------------------------
 
@@ -233,6 +235,7 @@ This change in behavior will not affect scripts running on conventional markets 
 Gone are the days when the `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ function was allowed to loiter. Now it must actually have an effect on the strategy by using at least one of the following parameters: ``profit``, ``limit``, ``loss``, ``stop``, or one of the following pairs: ``trail_offset`` combined with either ``trail_price`` or ``trail_points``. When uses of `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ not meeting these criteria trigger an error while converting a strategy to v5, you can safely eliminate these lines, as they didn't do anything in your code anyway.
 
 
+
 .. _PageToPineVersion5_CommonConversionErrors::
 
 Common script conversion errors 
@@ -241,7 +244,8 @@ Common script conversion errors
 
 Invalid argument 'style'/'linestyle' in 'plot'/'hline' call
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-To make this work, you need to change integer ``plot`` and ``hline`` styles to built-in constants::
+
+To make this work, you need to change the "int" arguments used for the ``style`` and ``linestyle`` arguments in ``plot`` and ``hline`` for built-in constants::
 
 	// Will cause an error during conversion
 	plotStyle = input(1)
@@ -250,8 +254,10 @@ To make this work, you need to change integer ``plot`` and ``hline`` styles to b
 	hline(100, linestyle = hlineStyle)
 
 	// Will work in v5
-	plotStyleInput = input.string("Line", options=["Line", "Stepline", "Histogram", "Cross", "Area", "Columns", "Circles"])
-	hlineStyleInput = input.string("Solid", options=["Solid", "Dashed", "Dotted"])
+    //@version=5
+    indicator("")
+	plotStyleInput = input.string("Line", options = ["Line", "Stepline", "Histogram", "Cross", "Area", "Columns", "Circles"])
+	hlineStyleInput = input.string("Solid", options = ["Solid", "Dashed", "Dotted"])
 	
 	plotStyle = plotStyleInput == "Line" ? plot.style_line : 
 		     plotStyleInput == "Stepline" ? plot.style_stepline :
@@ -265,13 +271,17 @@ To make this work, you need to change integer ``plot`` and ``hline`` styles to b
 		     hlineStyleInput == "Dashed" ? hline.style_dashed :
 		     hline.style_dotted
 		     
-	plot(close, style=plotStyle)
-	hline(100, style=hlineStyle)
+	plot(close, style = plotStyle)
+	hline(100, linestyle = hlineStyle)
+
+See the :ref:`Some function parameters now require built-in arguments <PageToPineVersion5_SomeFunctionParametersNowRequireBuiltInArguments>`
+section of this guide for more information.
 
 
 Undeclated identifier 'input.%input_name%'
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-To fix this issue, remove the 'input.' constants from your code::
+
+To fix this issue, remove the ``input.*`` constants from your code::
 
 	// Will cause an error during conversion
 	_integer = input.integer
@@ -283,12 +293,24 @@ To fix this issue, remove the 'input.' constants from your code::
 	i1 = input.int(1, "Integer")
 	i2 = input.bool(true, "Boolean")
 	
+See the User Manual's page on :ref:`Inputs <PageInputs>`, and the 
+:ref:`Some function parameters now require built-in arguments <PageToPineVersion5_SomeFunctionParametersNowRequireBuiltInArguments>`
+section of this guide for more information.
+
 
 
 Invalid argument 'when' in 'strategy.close' call
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The issue is caused by the confusion in difference between ``strategy.entry()`` and ``strategy.close()``. The former's second argument specified whether the entry is long or short and as such, expects a ``strategy.long`` or ``strategy.short`` constant (which used to be boolean ``true`` and ``false`` in v4, respecively). The latter's second argument is ``when=``, i.e. when the close order should appear. Passing ``strategy.long`` there did effectively nothing - equivalent to ``strategy.long(when = true)``. To fix the issue, get rid of the second positional argument in the ``strategy.close()`` call::
+This is caused by a confusion between `strategy.entry() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}entry>`__ and 
+`strategy.close() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}close>`__.
+
+The second parameter of `strategy.close() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}close>`__
+is ``when``, which expects a "bool" argument. In v4, it was allowed to use ``strategy.long`` an argument because it was a "bool".
+With v5, however, named built-in constants must be used as arguments, so ``strategy.long`` is no longer allowed as an argument to the ``when`` parameter.
+
+The ``strategy.close("Short", strategy.long)`` call in this code is equivalent to ``strategy.close("Short")``,
+which is what must be used in v5::
 
 	// Will cause an error during conversion
 	if (longCondition)
@@ -300,16 +322,27 @@ The issue is caused by the confusion in difference between ``strategy.entry()`` 
 	    strategy.close("Short")
 	    strategy.entry("Long", strategy.long)
 
+See the :ref:`Some function parameters now require built-in arguments <PageToPineVersion5_SomeFunctionParametersNowRequireBuiltInArguments>`
+section of this guide for more information.
+
+
+
 Cannot call 'input.int' with argument 'minval'='%value%'. An argument of 'literal float' type was used but a 'const int' is expected
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In v4, it was possible to pass a 'float' minimal value to an input that is specifically typified as 'int'. This is no longer possible in v5. Use 'int' values instead of 'float' ones in the input to fix the issue::
+In v4, it was possible to pass a "float" argument to ``minval`` when an "int" value was being input.
+This is no longer possible in v5; "int" values are required for "int" inputs::
 
 	// Works in v4, will break on conversion because minval is a 'float' value
-	int_input = input(1, "Integer", input.integer, minval=1.0)
+	int_input = input(1, "Integer", input.integer, minval = 1.0)
 
 	// Works in v5
-	int_input = input.int(1, "Integer", minval=1)
+	int_input = input.int(1, "Integer", minval = 1)
+
+See the User Manual's page on :ref:`Inputs <PageInputs>`, and the 
+:ref:`Some function parameters now require built-in arguments <PageToPineVersion5_SomeFunctionParametersNowRequireBuiltInArguments>`
+section of this guide for more information.
+
 
 
 .. _PageToPineVersion5_AllVariables::

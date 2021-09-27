@@ -60,7 +60,7 @@ Arithmetic operators
 There are five arithmetic operators in Pine Script:
 
 +-------+------------------------------------+
-| ``+`` | Addition                           |
+| ``+`` | Addition and string concatenation  |
 +-------+------------------------------------+
 | ``-`` | Subtraction                        |
 +-------+------------------------------------+

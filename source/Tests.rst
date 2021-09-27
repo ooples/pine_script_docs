@@ -1,8 +1,8 @@
 .. _PageTests:
 
-========
-DocTitle
-========
+=====
+Tests
+=====
 
 Then use underlining only:
 
@@ -82,3 +82,5 @@ Alice <-- Bob: another authentication Response
 :ref:`Go back to top <PageTests>`
 
 Refer to the :ref:`Concepts <IndexConcepts>` section of this manual.
+
+`plotchar() <https://www.tradingview.com/pine-script-reference/|version|/#fun_plotchar>`__

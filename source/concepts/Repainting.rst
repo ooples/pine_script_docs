@@ -15,25 +15,34 @@ We define repainting as: **script behavior causing historical vs realtime calcul
 
 Repainting behavior is widespread and can be caused by many factors. 
 Following our definition, our estimate is that more than 95% of indicators in existence repaint. 
-Widely used indicators like MACD and RSI, for example, repaint because they show one fixed value on historical bars,
+Widely used indicators like MACD and RSI, for example, 
+exhibit one form of repainting because they show one fixed value on historical bars,
 yet when running in realtime they will produce results that constantly fluctuate until the realtime bar closes. 
-They thus behave differently on historical and realtime bars. This does not make them less useful, nor prevent knowledgeable traders from using them.
+They thus behave differently on historical and realtime bars. 
+This does not necessarily make them less useful in all contexts, nor prevent knowledgeable traders from using them.
 
-**Repainting is not inherently good or bad.**
+Some types of repainting, like plotting in the past, can be misleading. 
+If traders understand how plots are offset in the past and exactly when they will appear in realtime, they can be useful that way, even if they repaint.
+Others types of repainting such as future leak, however, are never good because they use data that is never available in realtime. 
+Not **all** repainting behavior should necessarily be avoided **all the time**.
+What's important is to understand exactly how the tools you use work, or how you want the ones you design to behave.
+If you publish scripts, then your script's key limitations, which include any repainting behavior, must imperatively be mentioned to potential users.
 
 
 
 For script users
 ^^^^^^^^^^^^^^^^
 
-You can very well decide to use repainting indicators if you understand how they behave and they suit your trading methodology.
+You can very well decide to use repainting indicators if you understand how they behave, 
+and that behavior meets your trading methodology's requirements.
 Don't be one of those newcomers to trading who slap "repaint" sentences on published scripts as if it discredits them.
 Doing so only reveals your incomprehension of the subject.
 
-The question "Does it repaint?" means nothing, and consequently cannot be answered. 
+The question "Does it repaint?" means nothing.
+Consequently, it cannot be answered in a meaningful way.
 Why? Because it needs to be qualified. Instead, one could ask:
 
-- Do the entry/exit markers your indicator displays repaint (or: Do you wait for the realtime bar to close before displaying your entry/exit markers)?
+- Do you wait for the realtime bar to close before displaying your entry/exit markers?
 - Do alerts wait for the end of the realtime bar before triggering?
 - Do the higher timeframe plots repaint (which means they won't plot the same way on realtime bars as they do on historical bars)?
 - Does your script plot in the past (as most pivot or zigzag scripts will do)?
@@ -53,13 +62,13 @@ and hopefully enable more meaningful discussions with script authors.
 For Pine coders
 ^^^^^^^^^^^^^^^
 
-As we discussed in the previous section, not all types of repainting behavior must necessarily be avoided at all costs.
+As we discussed in the previous section, not all types of repainting behavior need to be avoided at all costs,
+and as we will see in the following text, some can't.
 We hope this page helps you better understand the dynamics at play, so that you can make better design decisions concerning your trading tools.
 This page's content should help you avoid making the most common coding mistakes that lead to repainting or misleading plots.
 
-Whatever your design decisions are, if you publish your script, you should explain them to traders so they can understand how you script behaves.
+Whatever your design decisions are, if you publish your script, you should explain them to traders so they can understand how your script behaves.
 
-Let's explore some of the causes of repainting, and discuss solutions when they exist.
 We will survey three broad categories of repainting causes:
 
 - Historical vs realtime calculations
@@ -226,11 +235,11 @@ Note that:
 - The behavior of the repainting line is completely different on historical bars and in realtime. On historical bars,
   it shows the new value of a completed timeframe on the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
   of the bar where it completes. It then stays stable until another timeframe completes. The problem is that in realtime,
-  it follows the current `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ price,
+  it follows the **current** `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ price,
   so it moves all the time and changes on each bar.
-- The behavior of the non-repainting, fuchsia line, in contrast, behaves exactly the same way on historical bars and in realtime.
+- The behavior of the non-repainting fuchsia line, in contrast, behaves exactly the same way on historical bars and in realtime.
   It updates on the bar following the completion of the higher timeframe, and doesn't move until the bar after another higher timeframe completes.
-  Thus, it is more reliable. Note that while new higher timeframe data comes in at the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
+  It is more reliable and does not mislead script users. Note that while new higher timeframe data comes in at the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
   of historical bars, it will be available on the `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__
   of the same bar in realtime.
 
@@ -264,7 +273,22 @@ Using \`request.security()\` at lower timeframes
 
 Some scripts use `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
 to request data from a timeframe **lower** than the chart's timeframe.
-This works on historical bars but will not work in realtime.
+This can be useful when functions specifically designed to handle intrabars at lower timeframes are sent down the timeframe.
+When this type of user-defined function requires the detection of the intrabars' first bar, as most do,
+the technique will only work on historical bars. This is due to the fact that realtime intrabars are not yet sorted.
+The impact of this is that such scripts will not be able to generate alerts, for example,
+and will require constant refreshing to recalculate elapsed realtime bars as historical bars.
+
+When used at lower timeframes than the chart's without specialized functions able to distinguish between intrabars,
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+will only return the value of the **last** intrabar in the dilation of the chart's bar,
+which is usually not useful, and will also not reproduce in realtime, so lead to repainting.
+
+For all these reasons, unless you understand the subtleties of using 
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+at lower timeframes than the chart's, it is best to avoid it.
+High-quality scripts will have logic to detect such anomalies,
+and prevent the display of results which would be invalid when a lower timeframe is used.
 
 
 
@@ -280,6 +304,7 @@ no lookahead is possible in realtime because the future there is unknown, as it 
 
 This is an example::
 
+    // FUTURE LEAK! DO NOT USE!
     //@version=5
     indicator("Future leak", "", true)
     futureHigh = request.security(syminfo.tickerid, "D", high, lookahead = barmerge.lookahead_on)
@@ -289,6 +314,8 @@ This is an example::
 
 Note how the higher timeframe line is showing the timeframe's `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__
 value before it occurs. The solution is to use the function like we do in our ``nonRepaintingSecurity()`` shown earlier.
+
+Public scripts using this misleading technique will be moderated.
 
 
 
@@ -360,6 +387,17 @@ Note that:
 - This script repaints because an elapsed realtime bar showing no price may get a price placed on it if it is identified as a pivot, 5 bars after the actual pivot occurs.
 - The display looks great, but it can be misleading.
 
+The best solution to this problem when developing script for others is to plot **without** an offset by default,
+but give the option for script users to turn on plotting in the past through inputs, 
+so they are necessarily aware of what the script is doing, e.g.::
+
+    //@version=5
+    indicator("Plotting in the past", "", true)
+    plotInThePast = input(false, "Plot in the past")
+    pHi = ta.pivothigh(5, 5)
+    if not na(pHi)
+        label.new(bar_index[plotInThePast ? 5 : 0], na, str.tostring(pHi, format.mintick) + "\n🠇", yloc = yloc.abovebar, style = label.style_none, textcolor = color.black, size = size.normal)
+
 
 
 Dataset variations
@@ -374,7 +412,7 @@ Scripts begin executing on the chart's first historical bar, and then execute on
 as is explained in this manual's page on Pine's :ref:`execution model <PageExecutionModel>`.
 If the first bar changes, then the script will often not calculate the same way it did when the dataset began at a different point in time.
 
-The following factors have an impact on the quantity of bars you can see on your charts:
+The following factors have an impact on the quantity of bars you see on your charts, and their *starting point*:
 
 - The type of account you hold
 - The historical data available from the data supplier
