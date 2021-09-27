@@ -273,7 +273,7 @@ Note that:
 - The ``dayofmonth == 1`` condition will be ``true`` on all intrabars of the first day of the month,
   but ``ta.change(time("M"))`` will only be ``true`` on the first.
 
- If you wanted your script to only display for years 2020 and later, you could use::
+If you wanted your script to only display for years 2020 and later, you could use::
 
     //@version=5
     indicator("", "", true)
