@@ -70,7 +70,7 @@ Pine has built-in **variables** to:
 
 There are also built-in **functions** that can:
 
-- Return timestamps of bars from other timeframes 
+- Return timestamps of bars from other timeframes
   with `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and
   `time_close <https://www.tradingview.com/pine-script-reference/v5/#fun_time_close>`__,
   without the need for a `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call
@@ -83,7 +83,6 @@ There are also built-in **functions** that can:
   `hour() <https://www.tradingview.com/pine-script-reference/v5/#fun_hour>`__,
   `minute() <https://www.tradingview.com/pine-script-reference/v5/#fun_minute>`__ and
   `second() <https://www.tradingview.com/pine-script-reference/v5/#fun_second>`__
-
 - Create a timestamp using `timestamp() <https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp>`__
 - Convert a timestamp to a formatted date/time string for display, 
   using `str.format() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}format>`__
@@ -135,6 +134,26 @@ Note that:
   and a ``step`` value of 0.5 so that when they use the field's up/down arrows, they can intuitively figure out that fractions can be used.
 - The `str.format() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}format>`__
   function formats our time values, namely the last bar's time and the current time.
+
+Some functions that normally return values in the exchange's time zone provide means to adapt their result to another time zone.
+This script illustrates how to do this with `hour() <https://www.tradingview.com/pine-script-reference/v5/#fun_hour>`__::
+
+    //@version=5
+    indicator('`hour(time, "GMT+0")` in orange')
+    color BLUE_LIGHT = #0000FF30
+    plot(hour, "", BLUE_LIGHT, 8)
+    plot(hour(time, syminfo.timezone))
+    plot(hour(time, "GMT+0"),"UTC", color.orange)
+
+.. image:: images/Time-TimeZones-02.png
+
+Note that:
+
+- The `hour <https://www.tradingview.com/pine-script-reference/v5/#var_hour>`__ variable and the 
+  `hour() <https://www.tradingview.com/pine-script-reference/v5/#fun_hour>`__ function normally returns a value in the exchange's time zone.
+  Accordingly, plots in blue for both ``hour`` and ``hour(time, syminfo.timezone)`` overlap.
+- The orange line plotting ``hour(time, "GMT+0")``, however, returns the bar's hour at UTC, or "GMT+0" time,
+  which in this case is four hours less than the exchange's time, since MSFT trades on the NASDAQ whose time zone is UTC-4.
 
 
 
