@@ -65,7 +65,7 @@ Pine has built-in **variables** to:
   `hour <https://www.tradingview.com/pine-script-reference/v5/#var_hour>`__,
   `minute <https://www.tradingview.com/pine-script-reference/v5/#var_minute>`__ and
   `second <https://www.tradingview.com/pine-script-reference/v5/#var_second>`__
-- Return the timezone of the exchange of the chart's symbol with
+- Return the time zone of the exchange of the chart's symbol with
   `syminfo.timezone <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}timezone>`__
 
 There are also built-in **functions** that can:
@@ -166,8 +166,8 @@ Time variables
 \`time\` and \`time_close\`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Let's look at what `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ looks like when plotted.
-It is the bar's opening time in milliseconds::
+Let's start by plotting `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__,
+which is the bar's opening time in milliseconds::
 
     //@version=5
     indicator("`time` value on bars")
@@ -179,9 +179,10 @@ Note that:
 
 - The `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__
   variable returns the timestamp of each bar's opening time in `UNIX
-  time <https://en.wikipedia.org/wiki/Unix_time>`__ [#millis]_ which is independent of the timezone selected by the user on his chart.
-  In this case, our chart's time zone setting is the exchange time zone, so whatever symbol is on the chart, its exchange time zone will be used.
-  In this case the NASDAQ's time zone is UTC-4. While this affect the chart's display of date/time values, it has no impact on the
+  time <https://en.wikipedia.org/wiki/Unix_time>`__ [#millis]_. It is independent of the timezone selected by the user on his chart.
+  In this case, the **chart's** time zone setting is the exchange time zone, so whatever symbol is on the chart, 
+  its exchange time zone will be used for the display of the date and time values on the chart's cursor.
+  The NASDAQ's time zone is UTC-4, but this only affects the chart's display of date/time values; it has no impact on the
   value of `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ plotted by the script.
 - The last value for the plot shown in the scale is the number of milliseconds that have passed since 00:00:00 UTC, 1 January, 1970.
   It corresponds to 16:30 on the 27th of September 2021. Because the chart is using the UTC-4 time zone (the NASDAQ's time zone), however,
