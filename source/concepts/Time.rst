@@ -217,6 +217,8 @@ While `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timeno
 it has a second resolution, i.e., it will only move in increments of one second.
 Accordingly, it will only change during execution on historical bars if the script takes longer than one second to execute on them.
 In realtime, your scripts will only perceive changes when they execute on feed updates.
+When no updates occur the script is idle, so it cannot update its display.
+See the page on Pine's :ref:`execution model <PageExecutionModel>` for more information.
 
 This script uses the values of `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__
 and `time_close <https://www.tradingview.com/pine-script-reference/v5/#var_time_close>`__
