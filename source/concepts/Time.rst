@@ -301,17 +301,23 @@ Time functions
 \`time()\` and \`time_close()\`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Our second script will introduces the 
-`time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ function, which has the following signature::
+The `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and
+`time_close <https://www.tradingview.com/pine-script-reference/v5/#fun_time_close>`__
+functions have the following signature::
 
-    time(timeframe, session, timezone)
+    time(timeframe, session, timezone) → series int
+    time_close(timeframe, session, timezone) → series int
 
-The `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ function accepts
-three arguments:
+They accept three arguments:
 
-- ``timeframe``, a string in `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__ format
-- ``session``, an optional string in session specification format: ``"hhmm-hhmm[:days]"``, where the ``[:days]`` part is optional
-- ``timezone``, which is only allowed when ``session`` is used. See the `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ entry in the Reference Manual for more information.
+``timeframe``
+   A string in `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__ format
+``session``
+   An optional string in session specification format: ``"hhmm-hhmm[:days]"``, where the ``[:days]`` part is optional
+``timezone``
+   An optional value that qualifies the argument for ``session`` when one is used.
+
+See the `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ entry in the Reference Manual for more information.
 
 ::
 
