@@ -235,7 +235,7 @@ Gone are the days when the `strategy.exit() <https://www.tradingview.com/pine-sc
 
 
 
-.. _PageToPineVersion5_CommonConversionErrors::
+.. _PageToPineVersion5_CommonConversionErrors:
 
 Common script conversion errors 
 -------------------------------
@@ -344,7 +344,7 @@ section of this guide for more information.
 
 
 
-.. _PageToPineVersion5_AllVariables::
+.. _PageToPineVersion5_AllVariables:
 
 All variable, function, and parameter name changes
 --------------------------------------------------
