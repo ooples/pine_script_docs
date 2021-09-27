@@ -358,6 +358,9 @@ Note that:
 - We are interested in identifying the instances when `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__
   does not return `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
   because that means the bar is in the session, so we test for ``not na(...)``.
+  We do not use the actual return value of `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ when it is not
+  `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__;
+  we are only interested in whether it returns `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ or not.
 
 
 
