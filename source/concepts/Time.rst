@@ -166,12 +166,8 @@ Time variables
 \`time\` and \`time_close\`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Pine provides means to work with trade session, time and date information. On this 30min chart, two scripts are running: "Bar date/time" and "Session bars".
-
-.. image:: images/Chart_time_1.png
-
-
-This is the "Bar date/time" script::
+Let's look at what `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ looks like when plotted.
+It is the bar's opening time in milliseconds::
 
     //@version=5
     indicator("`time` value on bars")
