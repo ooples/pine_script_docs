@@ -19,8 +19,7 @@ The most frequent adaptations required to convert older scripts to v5 are:
 - Renaming built-in function calls to include their new namespace (e.g., `highest() <https://www.tradingview.com/pine-script-reference/v4/#fun_highest>`__ in v4 becomes `ta.highest() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}highest>`__ in v5).
 - Restructuring inputs to use the more specialized ``input.*()`` functions.
 - Eliminating uses of the deprecated ``transp`` parameter by using `color.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}new>`__ to simultaneously define color and transparency for use with the ``color`` parameter.
-  If you used the ``resolution`` and ``resolution_gaps`` parameters in v4's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__, 
-- they will require changing to ``timeframe`` and ``timeframe_gaps`` in v5's `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__.
+- If you used the ``resolution`` and ``resolution_gaps`` parameters in v4's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__, they will require changing to ``timeframe`` and ``timeframe_gaps`` in v5's `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__.
 
 
 
@@ -43,7 +42,7 @@ For clarity and consistency, many built-in functions and variables were renamed 
 The inclusion of v4 function names in a new namespace is the cause of most changes. 
 For example, the `sma() <https://www.tradingview.com/pine-script-reference/v4/#fun_sma>`__ function in v4 is moved to the ``ta.`` namespace in v5: 
 `ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__. 
-Remembering the new namespaces is not necessary; if you type the older name of a function without its namespace in the Editor, a popup showing matching suggestions appears:
+Remembering the new namespaces is not necessary; if you type the older name of a function without its namespace in the Editor and press the 'Autocomplete' hotkey (:kbd:`Ctrl` + :kbd:`Space` or :kbd:`Cmd` + :kbd:`Space` on MacOS), a popup showing matching suggestions appears:
 
 .. image:: images/v5_autocomplete.png
  
