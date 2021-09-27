@@ -325,11 +325,11 @@ The `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ 
 
 #. Test if a bar is in a specific time period, which will require using the ``session`` parameter.
    In those cases, ``timeframe.period``, i.e., the chart's timeframe, will often be used for the first parameter.
-   When using the functions this way, we are relying on the fact that they will return
+   When using the function this way, we are relying on the fact that they will return
    `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ when the bar is not part of the period specified
    in the ``session`` argument.
 #. Detecting changes in timeframes other than the chart's by using a higher timeframe for the ``timeframe`` argument.
-   When using the functions for this purpose, we are looking for changes in the returned value.
+   When using the function for this purpose, we are looking for changes in the returned value.
    This will usually require using `ta.change() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}change>`__ to test, e.g., ``ta.change(time("D"))``.
 
 
