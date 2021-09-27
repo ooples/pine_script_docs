@@ -286,7 +286,7 @@ If you wanted your script to only display for years 2020 and later, you could us
 
 `syminfo.timezone <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}timezone>`__
 returns the time zone of the chart symbol's exchange. 
-It can be useful when a ``timezone`` parameter is used to specify how session information 
+It can be useful when a ``timezone`` parameter is available in a function
 and you want to explicitly mention that you are using the exchange's timezone.
 It is usually redundant because when no argument is supplied to ``timezone``,
 the exchange's time zone is assumed.
