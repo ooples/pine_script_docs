@@ -214,7 +214,7 @@ it returns the starting time of the last trading day in the bar (e.g., at 1W it 
 `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__ returns the current time.
 It works in realtime, but also when a script executes on historical bars. 
 While `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__ is expressed in milliseconds,
-it has a second resolution, i.e., it will only update on seconds.
+it has a second resolution, i.e., it will only move in increments of one second.
 Accordingly, it will only change during execution on historical bars if the script takes longer than one second to execute on them.
 In realtime, your scripts will only perceive changes when they execute on feed updates.
 
