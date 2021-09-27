@@ -465,7 +465,8 @@ To generate a timestamp for Jan 1, 2021, use either one of these methods::
 You can use offsets in `timestamp() <https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp>`__ arguments.
 Here, we subtract 2 from the value supplied for its ``day`` parameter to get the date/time two days ago from the chart's last bar.
 Note that because of different bar alignments on different instruments,
-the returned timestamp may not always be exactly 48 hours away::
+the bar identified on the chart may not always be exactly 48 hours away,
+although the function's return value is correct::
 
     //@version=5
     indicator("")
