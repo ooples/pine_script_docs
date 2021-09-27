@@ -96,14 +96,14 @@ Educational videos
 #. `Pine Script Reference Material <https://player.vimeo.com/video/103135482>`__
 
 
-.. |Public_Library_tab| image:: images/Public_Library_tab.png
-.. |Add_to_Personal_Library| image:: images/Add_to_Personal_Library.png
-.. |Add_to_Personal_Library_2| image:: images/Add_to_Personal_Library_2.png
-.. |Favorites_section| image:: images/Favorites_section.png
-.. |Sorted_by_popularity| image:: images/Sorted_by_popularity.png
-.. |Open_the_script| image:: images/Open_the_script.png
-.. |Save_as| image:: images/Save_as.png
-.. |My_Scripts| image:: images/My_Scripts.png
-.. |Search_field| image:: images/Search_field.png
-.. |Search| image:: images/Search.png
+.. |Public_Library_tab| image:: images/PublicLibrary-Public_Library_tab.png
+.. |Add_to_Personal_Library| image:: images/PublicLibrary-Add_to_Personal_Library.png
+.. |Add_to_Personal_Library_2| image:: images/PublicLibrary-Add_to_Personal_Library_2.png
+.. |Favorites_section| image:: images/PublicLibrary-Favorites_section.png
+.. |Sorted_by_popularity| image:: images/PublicLibrary-Sorted_by_popularity.png
+.. |Open_the_script| image:: images/PublicLibrary-Open_the_script.png
+.. |Save_as| image:: images/PublicLibrary-Save_as.png
+.. |My_Scripts| image:: images/PublicLibrary-My_Scripts.png
+.. |Search_field| image:: images/PublicLibrary-Search_field.png
+.. |Search| image:: images/PublicLibrary-Search.png
 

@@ -1,3 +1,5 @@
+.. _PageReleaseNotes:
+
 Release notes
 =============
 
@@ -7,13 +9,14 @@ Release notes
 This page contains release notes of notable changes in Pine Script.
 
 
-.. _v5ReleaseNotes:
+
+.. _PageReleaseNotes_September2021:
 
 September 2021
 --------------
 Pine v5 is here! A number of new features were added in this release.
 
-Libraries are a new type of publication that allows you to create custom functions for reuse in other scripts. See the :doc:`/essential/Libraries` section of the User Manual.
+Libraries are a new type of publication that allows you to create custom functions for reuse in other scripts. See the :ref:`Libraries <PageLibraries>` page of the User Manual.
 
 Parameter definitions in user-created functions can now include a default value: a function defined as ``f(x = 1) => x`` will return 1 when called as ``f()``, i.e., without providing an argument for its ``x`` parameter.
 
@@ -42,7 +45,13 @@ New variables and functions provide better script visibility on strategy informa
 * ``strategy.convert2symbol()``
 * ``strategy.account_currency``
 
-Many built-in variables, functions, and function arguments were renamed in Pine v5. The behavior of some built-in functions was also improved. These changes implement a more rational nomenclature and provide a more orderly growth path for the many additions planned for Pine. Instructions on how to use the v5 converter and the full list of changes in v5 can be found in the :doc:`/migration_guides/v4_to_v5_migration_guide`.
+Many built-in variables, functions, and function arguments were renamed in Pine v5. The behavior of some built-in functions was also improved. 
+These changes implement a more rational nomenclature and provide a more orderly growth path for the many additions planned for Pine. 
+Instructions on how to use the v5 converter and the full list of changes in v5 can be found in the :ref:`Migration guide to Pine v5 <PageToPineVersion5>`.
+
+The Reference Manual now includes the systematic mention of the form and type required for function parameters, e.g., "simple int".
+
+The User Manual was reorganized and new content was added.
 
 
 July 2021
@@ -81,18 +90,21 @@ May 2021
 --------
 Improved backtesting functionality by adding the Leverage mechanism.
 
-Added support for table drawings and functions for working with them. Tables are unique objects that are not anchored to specific bars; they float in a script’s space, independently of the chart bars being viewed or the zoom factor used. For more information, see the :doc:`/essential/Tables` User Manual page.
+Added support for table drawings and functions for working with them. 
+Tables are unique objects that are not anchored to specific bars; they float in a script’s space, independently of the chart bars being viewed or the zoom factor used. 
+For more information, see the :ref:`Tables <PageTables>`` User Manual page.
 
 New functions were added:
 
 * ``color.rgb(red, green, blue, transp)`` - creates a new color with transparency using the RGB color model.
 * ``color.from_gradient(value, bottom_value, top_value, bottom_color, top_color)`` - returns color calculated from the linear gradient between bottom_color to top_color.
 * ``color.r(color)``, ``color.g(color)``, ``color.b(color)``, ``color.t(color)`` - retrieves the value of one of the color components.
-* ``array.from`` - takes a variable number of arguments with one of the types: ``int``, ``float``, ``bool``, ``string``, ``label``, ``line``, ``color``, ``box``, ``table`` and returns an array of the corresponding type. 
+* ``array.from()`` - takes a variable number of arguments with one of the types: ``int``, ``float``, ``bool``, ``string``, ``label``, ``line``, ``color``, ``box``, ``table`` and returns an array of the corresponding type. 
 
-A new ``box`` drawing has been added to Pine, making it possible to draw rectangles on charts using the Pine syntax. For more details see the `Pine Script reference <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ and the :doc:`/essential/Drawings` User Manual page.
+A new ``box`` drawing has been added to Pine, making it possible to draw rectangles on charts using the Pine syntax. 
+For more details see the `Pine Script reference <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ and the :ref:`Lines and boxes <PageLinesAndBoxes>` User Manual page.
 
-The ``color.new`` function can now accept series and input arguments, in which case, the colors will be calculated at runtime. For more information about this, see our :doc:`/essential/Colo` User Manual page.
+The ``color.new`` function can now accept series and input arguments, in which case, the colors will be calculated at runtime. For more information about this, see our :ref:`Colors <PageColors>` User Manual page.
 
 
 
@@ -150,11 +162,11 @@ A new keyword was added:
 
 New functions were added:
 
-* ``tonumber`` - converts a string value into a float.
-* ``time_close`` - returns the UNIX timestamp of the close of the current bar, based on the resolution and session that is passed to the function.
-* ``dividends`` - requests dividends data for the specified symbol.
-* ``earnings`` - requests earnings data for the specified symbol.
-* ``splits`` - requests splits data for the specified symbol.
+* ``tonumber()`` - converts a string value into a float.
+* ``time_close()`` - returns the UNIX timestamp of the close of the current bar, based on the resolution and session that is passed to the function.
+* ``dividends()`` - requests dividends data for the specified symbol.
+* ``earnings()`` - requests earnings data for the specified symbol.
+* ``splits()`` - requests splits data for the specified symbol.
 
 New arguments for the study() function were added:
 
@@ -175,24 +187,24 @@ January 2021
 ------------
 The following functions now accept a series length parameter:
 
-* `bb <https://www.tradingview.com/pine-script-reference/v4/#fun_bb>`__
-* `bbw <https://www.tradingview.com/pine-script-reference/v4/#fun_bbw>`__
-* `cci <https://www.tradingview.com/pine-script-reference/v4/#fun_cci>`__
-* `cmo <https://www.tradingview.com/pine-script-reference/v4/#fun_cmo>`__
-* `cog <https://www.tradingview.com/pine-script-reference/v4/#fun_cog>`__
-* `correlation <https://www.tradingview.com/pine-script-reference/v4/#fun_correlation>`__
-* `dev <https://www.tradingview.com/pine-script-reference/v4/#fun_dev>`__
-* `falling <https://www.tradingview.com/pine-script-reference/v4/#fun_falling>`__
-* `mfi <https://www.tradingview.com/pine-script-reference/v4/#fun_mfi>`__
-* `percentile_linear_interpolation <https://www.tradingview.com/pine-script-reference/v4/#fun_percentile_linear_interpolation>`__
-* `percentile_nearest_rank <https://www.tradingview.com/pine-script-reference/v4/#fun_percentile_nearest_rank>`__
-* `percentrank <https://www.tradingview.com/pine-script-reference/v4/#fun_percentrank>`__
-* `rising <https://www.tradingview.com/pine-script-reference/v4/#fun_rising>`__
-* `roc <https://www.tradingview.com/pine-script-reference/v4/#fun_roc>`__
-* `stdev <https://www.tradingview.com/pine-script-reference/v4/#fun_stdev>`__
-* `stoch <https://www.tradingview.com/pine-script-reference/v4/#fun_stoch>`__
-* `variance <https://www.tradingview.com/pine-script-reference/v4/#fun_variance>`__
-* `wpr <https://www.tradingview.com/pine-script-reference/v4/#fun_wpr>`__
+* `bb() <https://www.tradingview.com/pine-script-reference/v4/#fun_bb>`__
+* `bbw() <https://www.tradingview.com/pine-script-reference/v4/#fun_bbw>`__
+* `cci() <https://www.tradingview.com/pine-script-reference/v4/#fun_cci>`__
+* `cmo() <https://www.tradingview.com/pine-script-reference/v4/#fun_cmo>`__
+* `cog() <https://www.tradingview.com/pine-script-reference/v4/#fun_cog>`__
+* `correlation() <https://www.tradingview.com/pine-script-reference/v4/#fun_correlation>`__
+* `dev() <https://www.tradingview.com/pine-script-reference/v4/#fun_dev>`__
+* `falling() <https://www.tradingview.com/pine-script-reference/v4/#fun_falling>`__
+* `mfi() <https://www.tradingview.com/pine-script-reference/v4/#fun_mfi>`__
+* `percentile_linear_interpolation() <https://www.tradingview.com/pine-script-reference/v4/#fun_percentile_linear_interpolation>`__
+* `percentile_nearest_rank() <https://www.tradingview.com/pine-script-reference/v4/#fun_percentile_nearest_rank>`__
+* `percentrank() <https://www.tradingview.com/pine-script-reference/v4/#fun_percentrank>`__
+* `rising() <https://www.tradingview.com/pine-script-reference/v4/#fun_rising>`__
+* `roc() <https://www.tradingview.com/pine-script-reference/v4/#fun_roc>`__
+* `stdev() <https://www.tradingview.com/pine-script-reference/v4/#fun_stdev>`__
+* `stoch() <https://www.tradingview.com/pine-script-reference/v4/#fun_stoch>`__
+* `variance() <https://www.tradingview.com/pine-script-reference/v4/#fun_variance>`__
+* `wpr() <https://www.tradingview.com/pine-script-reference/v4/#fun_wpr>`__
 
 A new type of alerts was added - script alerts. More information can be found in our `Help Center <https://www.tradingview.com/chart/?solution=43000597494/>`__.
 
@@ -206,15 +218,15 @@ December 2020
 
 New array types were added:
 
-* ``array.new_line``
-* ``array.new_label``
-* ``array.new_string``
+* ``array.new_line()``
+* ``array.new_label()``
+* ``array.new_string()``
 
 New functions were added:
 
-* ``str.length`` - returns number of chars in source string.
-* ``array.join`` - concatenates all of the elements in the array into a string and separates these elements with the specified separator.
-* ``str.split`` - splits a string at a given substring separator.
+* ``str.length()`` - returns number of chars in source string.
+* ``array.join()`` - concatenates all of the elements in the array into a string and separates these elements with the specified separator.
+* ``str.split()`` - splits a string at a given substring separator.
 
 November 2020
 ^^^^^^^^^^^^^
@@ -223,12 +235,12 @@ November 2020
 
 New function was added:
 
-* ``array.range`` - return the difference between the min and max values in the array.
+* ``array.range()`` - return the difference between the min and max values in the array.
 
 October 2020
 ^^^^^^^^^^^^
 
-The behavior of ``rising`` and ``falling`` functions have changed. For example, ``rising(close,3)`` is now calculated as following::
+The behavior of ``rising()`` and ``falling()`` functions have changed. For example, ``rising(close,3)`` is now calculated as following::
 
     close[0] > close[1] and close[1] > close[2] and close[2] > close[3]
     
@@ -244,7 +256,7 @@ Added support for ``input.color`` to the ``input()`` function. Now you can provi
     label.set_x(l, bar_index)
     label.set_color(l, c_labelColor)
     
-.. image:: images/input_color.png
+.. image:: images/ReleaseNotes-input_color.png
 
 Added support for arrays and functions for working with them. You can now use the powerful new array feature to build custom datasets. See our `User Manual page on arrays <https://www.tradingview.com/pine-script-docs/en/v4/essential/Arrays.html>`__ and our `blog <https://www.tradingview.com/blog/en/arrays-are-now-available-in-pine-script-20052/>`__::
 
@@ -257,18 +269,18 @@ Added support for arrays and functions for working with them. You can now use th
 
 The following functions now accept a series length parameter. Learn more about this feature in our `blog <https://www.tradingview.com/blog/en/pine-functions-support-dynamic-length-arguments-20554/>`__:
 
-* `alma <https://www.tradingview.com/pine-script-reference/v4/#fun_alma>`__
-* `change <https://www.tradingview.com/pine-script-reference/v4/#fun_change>`__
-* `highest <https://www.tradingview.com/pine-script-reference/v4/#fun_highest>`__
-* `highestbars <https://www.tradingview.com/pine-script-reference/v4/#fun_highestbars>`__
-* `linreg <https://www.tradingview.com/pine-script-reference/v4/#fun_linreg>`__
-* `lowest <https://www.tradingview.com/pine-script-reference/v4/#fun_lowest>`__
-* `lowestbars <https://www.tradingview.com/pine-script-reference/v4/#fun_lowestbars>`__
-* `mom <https://www.tradingview.com/pine-script-reference/v4/#fun_mom>`__
-* `sma <https://www.tradingview.com/pine-script-reference/v4/#fun_sma>`__
-* `sum <https://www.tradingview.com/pine-script-reference/v4/#fun_sum>`__
-* `vwma <https://www.tradingview.com/pine-script-reference/v4/#fun_vwma>`__
-* `wma <https://www.tradingview.com/pine-script-reference/v4/#fun_wma>`__
+* `alma() <https://www.tradingview.com/pine-script-reference/v4/#fun_alma>`__
+* `change() <https://www.tradingview.com/pine-script-reference/v4/#fun_change>`__
+* `highest() <https://www.tradingview.com/pine-script-reference/v4/#fun_highest>`__
+* `highestbars() <https://www.tradingview.com/pine-script-reference/v4/#fun_highestbars>`__
+* `linreg() <https://www.tradingview.com/pine-script-reference/v4/#fun_linreg>`__
+* `lowest() <https://www.tradingview.com/pine-script-reference/v4/#fun_lowest>`__
+* `lowestbars() <https://www.tradingview.com/pine-script-reference/v4/#fun_lowestbars>`__
+* `mom() <https://www.tradingview.com/pine-script-reference/v4/#fun_mom>`__
+* `sma() <https://www.tradingview.com/pine-script-reference/v4/#fun_sma>`__
+* `sum() <https://www.tradingview.com/pine-script-reference/v4/#fun_sum>`__
+* `vwma() <https://www.tradingview.com/pine-script-reference/v4/#fun_vwma>`__
+* `wma() <https://www.tradingview.com/pine-script-reference/v4/#fun_wma>`__
 
 ::
 
@@ -295,7 +307,7 @@ June 2020
 
 * New ``resolution`` parameter was added to the ``study`` function. Now you can add MTF functionality to scripts and decide the timeframe you want the indicator to run on. 
 
-.. image:: images/Mtf.png
+.. image:: images/ReleaseNotes-Mtf.png
 
 Please note that you need to reapply the indicator in order for the `resolution` parameter to appear.
 
@@ -307,20 +319,20 @@ Please note that you need to reapply the indicator in order for the `resolution`
     label.set_x(l,bar_index)
     label.set_tooltip(l, "Label Tooltip")
     
-.. image:: images/Tooltip.png
+.. image:: images/ReleaseNotes-Tooltip.png
 
 * Added an ability to create `alerts on strategies <https://www.tradingview.com/chart/?solution=43000481368>`__.
 
-* A new function `line.get_price <https://www.tradingview.com/pine-script-reference/v4/#fun_line{dot}get_price>`__ can be used to determine the price level at which the line is located on a certain bar.
+* A new function `line.get_price() <https://www.tradingview.com/pine-script-reference/v4/#fun_line{dot}get_price>`__ can be used to determine the price level at which the line is located on a certain bar.
 
 * New `label styles <https://www.tradingview.com/pine-script-reference/v4/#fun_label{dot}new>`__ allow you to position the label pointer in any direction.
 
-.. image:: images/new_label_styles.png
+.. image:: images/ReleaseNotes-new_label_styles.png
 
 
 * Find and Replace was added to Pine Editor. To use this, press CTRL+F (find) or CTRL+H (find and replace).
 
-.. image:: images/FindReplace.jpg
+.. image:: images/ReleaseNotes-FindReplace.jpg
 
 * ``timezone`` argument was added for time functions. Now you can specify timezone for ``second``, ``minute``, ``hour``, ``year``, ``month``, ``dayofmonth``, ``dayofweek`` functions::
 
@@ -335,13 +347,13 @@ May 2020
 
 * ``else if`` statement was added
 
-* The behavior of ``security`` function has changed: the ``expression`` parameter can be series or tuple.
+* The behavior of ``security()`` function has changed: the ``expression`` parameter can be series or tuple.
 
 April 2020
 ^^^^^^^^^^
 New function was added:
 
-* ``quandl`` - request quandl data for a symbol
+* ``quandl()`` - request quandl data for a symbol
 
 
 March 2020
@@ -349,21 +361,21 @@ March 2020
 
 New function was added:
 
-* ``financial`` - request financial data for a symbol
+* ``financial()`` - request financial data for a symbol
 
 
 New functions for common indicators were added:
 
-* ``cmo`` - Chande Momentum Oscillator
-* ``mfi`` - Money Flow Index
-* ``bb`` - Bollinger Bands
-* ``bbw`` - Bollinger Bands Width
-* ``kc`` - Keltner Channels
-* ``kcw`` - Keltner Channels Width 
-* ``dmi`` - DMI/ADX
-* ``wpr`` - Williams % R 
-* ``hma`` - Hull Moving Average
-* ``supertrend`` - SuperTrend
+* ``cmo()`` - Chande Momentum Oscillator
+* ``mfi()`` - Money Flow Index
+* ``bb()`` - Bollinger Bands
+* ``bbw()`` - Bollinger Bands Width
+* ``kc()`` - Keltner Channels
+* ``kcw()`` - Keltner Channels Width 
+* ``dmi()`` - DMI/ADX
+* ``wpr()`` - Williams % R 
+* ``hma()`` - Hull Moving Average
+* ``supertrend()`` - SuperTrend
 
 
 Added a detailed description of all the fields in the `Strategy Tester Report <https://www.tradingview.com/chart/?solution=43000561856/>`__
@@ -376,9 +388,9 @@ February 2020
 
 * Fixed a problem with calculating ``percentrank`` function. Now it can return a zero value, which did not happen before due to an incorrect calculation.
 
-* The default ``transparency`` parameter for the ``plot``, ``plotshape``, and ``plotchar`` functions is now 0%.
+* The default ``transparency`` parameter for the ``plot()``, ``plotshape()``, and ``plotchar()`` functions is now 0%.
 
-* For the functions ``plot``, ``plotshape``, ``plotchar``, ``plotbar``, ``plotcandle``, ``plotarrow``, you can set the ``display`` parameter, which controls the display of the plot. The following values can be assigned to it:
+* For the functions ``plot()``, ``plotshape()``, ``plotchar()``, ``plotbar()``, ``plotcandle()``, ``plotarrow()``, you can set the ``display`` parameter, which controls the display of the plot. The following values can be assigned to it:
 
   * ``display.none`` - the plot is not displayed
   * ``display.all`` - the plot is displayed (Default)
@@ -390,7 +402,7 @@ February 2020
     var l = label.new(bar_index, high, text="Right\n aligned\n text", textalign=text.align_right)
     label.set_xy(l, bar_index, high)
 
-  .. image:: images/Label_text_align.png
+  .. image:: images/ReleaseNotes-Label_text_align.png
 
 
 January 2020
@@ -407,7 +419,7 @@ New built-in variables were added:
 * ``nvi`` - Negative Volume Index 
 * ``pvi`` - Positive Volume Index
    
-New parameters were added for ``strategy.close``:
+New parameters were added for ``strategy.close()``:
 
 
 * ``qty`` -  the number of contracts/shares/lots/units to exit a trade with
@@ -433,16 +445,16 @@ December 2019
 
 October 2019
 ^^^^^^^^^^^^
-* ``plotchar`` function now supports most of the Unicode symbols::
+* ``plotchar()`` function now supports most of the Unicode symbols::
 
     //@version=4
     study("My Script", overlay=true)
     plotchar(open > close, char="🐻")
 
 
-  .. image:: images/Bears_in_plotchar.png
+  .. image:: images/ReleaseNotes-Bears_in_plotchar.png
 
-* New ``bordercolor`` argument of the ``plotcandle`` function allows you to change the color of candles' borders::
+* New ``bordercolor`` argument of the ``plotcandle()`` function allows you to change the color of candles' borders::
 
     //@version=4
     study("My Script")
@@ -466,11 +478,11 @@ New parameters to the ``strategy`` function were added:
 
 Some fixes were made:
 
-* ``fill`` function now works correctly with ``na`` as the ``color`` parameter value
+* ``fill()`` function now works correctly with ``na`` as the ``color`` parameter value
 
-* ``sign`` function now calculates correctly for literals and constants
+* ``sign()`` function now calculates correctly for literals and constants
 
-``str.replace_all (source, target, replacement)`` function was added. It replaces each occurrence of a ``target`` string in the ``source`` string with a ``replacement`` string
+``str.replace_all(source, target, replacement)`` function was added. It replaces each occurrence of a ``target`` string in the ``source`` string with a ``replacement`` string
 
 July-August 2019
 ^^^^^^^^^^^^^^^^
@@ -489,9 +501,9 @@ The behavior of some functions, variables and operators has changed:
 
 * The ``time`` variable returns the correct open time of the bar for more special cases than before
 
-* An optional *seconds* parameter of the ``timestamp`` function allows you to set the time to within seconds 
+* An optional *seconds* parameter of the ``timestamp()`` function allows you to set the time to within seconds 
 
-* ``security`` function:
+* ``security()`` function:
   
   * Added the possibility of requesting resolutions in seconds:
 
