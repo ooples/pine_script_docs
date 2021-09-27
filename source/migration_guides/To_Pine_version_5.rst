@@ -254,11 +254,11 @@ To make this work, you need to change the "int" arguments used for the ``style``
 	hline(100, linestyle = hlineStyle)
 
 	// Will work in v5
-    //@version=5
-    indicator("")
+	//@version=5
+	indicator("")
 	plotStyleInput = input.string("Line", options = ["Line", "Stepline", "Histogram", "Cross", "Area", "Columns", "Circles"])
 	hlineStyleInput = input.string("Solid", options = ["Solid", "Dashed", "Dotted"])
-	
+
 	plotStyle = plotStyleInput == "Line" ? plot.style_line : 
 		     plotStyleInput == "Stepline" ? plot.style_stepline :
 		     plotStyleInput == "Histogram" ? plot.style_histogram :
@@ -266,11 +266,11 @@ To make this work, you need to change the "int" arguments used for the ``style``
 		     plotStyleInput == "Area" ? plot.style_area :
 		     plotStyleInput == "Columns" ? plot.style_columns :
 		     plot.style_circles
-		     
+
 	hlineStyle = hlineStyleInput == "Solid" ? hline.style_solid :
 		     hlineStyleInput == "Dashed" ? hline.style_dashed :
 		     hline.style_dotted
-		     
+
 	plot(close, style = plotStyle)
 	hline(100, linestyle = hlineStyle)
 
