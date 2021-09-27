@@ -311,9 +311,10 @@ functions have the following signature::
 They accept three arguments:
 
 ``timeframe``
-   A string in `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__ format
+   A string in `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__ format.
 ``session``
-   An optional string in session specification format: ``"hhmm-hhmm[:days]"``, where the ``[:days]`` part is optional
+   An optional string in session specification format: ``"hhmm-hhmm[:days]"``, where the ``[:days]`` part is optional. 
+   See the page on :ref:`sessions <PageSessions>` for more information.
 ``timezone``
    An optional value that qualifies the argument for ``session`` when one is used.
 
