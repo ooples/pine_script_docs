@@ -239,7 +239,7 @@ Contrary to the countdown on the chart, this one will only update when a feed up
 Calendar dates and times
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Calendar dates and times such as
+Calendar date and time variables such as
 `year <https://www.tradingview.com/pine-script-reference/v5/#var_year>`__,
 `month <https://www.tradingview.com/pine-script-reference/v5/#var_month>`__,
 `weekofyear <https://www.tradingview.com/pine-script-reference/v5/#var_weekofyear>`__,
@@ -375,7 +375,7 @@ For these cases, you can use the fact that ``time("D")`` returns the opening tim
 even if the chart is at an intraday timeframe such as 1H::
 
     //@version=5
-    indicator("Session bars", "", true)
+    indicator("", "", true)
     bool newDay = ta.change(time("D"))
     bgcolor(newDay ? color.silver : na)
     
@@ -399,15 +399,35 @@ Note that:
 Calendar dates and times
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Using the function version calendar dates and times can be useful if you want to detect if a bar belongs to a particular session.
-Let's look at which has the following signatures:
+Calendar date and time variables such as
+`year() <https://www.tradingview.com/pine-script-reference/v5/#fun_year>`__,
+`month() <https://www.tradingview.com/pine-script-reference/v5/#fun_month>`__,
+`weekofyear() <https://www.tradingview.com/pine-script-reference/v5/#fun_weekofyear>`__,
+`dayofmonth() <https://www.tradingview.com/pine-script-reference/v5/#fun_dayofmonth>`__,
+`dayofweek() <https://www.tradingview.com/pine-script-reference/v5/#fun_dayofweek>`__,
+`hour() <https://www.tradingview.com/pine-script-reference/v5/#fun_hour>`__,
+`minute() <https://www.tradingview.com/pine-script-reference/v5/#fun_minute>`__ and
+`second() <https://www.tradingview.com/pine-script-reference/v5/#fun_second>`__
+can be useful to test for specific dates or times. They all have signatures similar to the ones shown here for
+`dayofmonth() <https://www.tradingview.com/pine-script-reference/v5/#fun_dayofmonth>`__::
 
 .. code-block:: text
 
-    hour(time) → series int
-    hour(time, timezone) → series int
+    dayofmonth(time) → series int
+    dayofmonth(time, timezone) → series int
 
+This will plot the day of the opening of the bar where the January 1st, 2021 at 00:00 time falls between its
+`time <https://www.tradingview.com/pine-script-reference/v5/#var_time_close>`__ and
+`time_close <https://www.tradingview.com/pine-script-reference/v5/#var_time_close>`__ values::
 
+    //@version=5
+    indicator("")
+    exchangeDay = dayofmonth(timestamp("2021-01-01"))
+    plot(exchangeDay)
+
+The value will be the 31st or the 1st, depending on the calendar day of session opens on the chart's symbol.
+For symbols traded 24x7 at exchanges using the UTC time zone, the date will be the 1st.
+For symbols trading on exchanges at UTC-4, for example, the date will be the 31st.
 
 
 
