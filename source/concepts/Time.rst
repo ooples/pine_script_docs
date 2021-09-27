@@ -305,6 +305,8 @@ The `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ 
 `time_close() <https://www.tradingview.com/pine-script-reference/v5/#fun_time_close>`__
 functions have the following signature::
 
+.. code-block:: text
+
     time(timeframe, session, timezone) → series int
     time_close(timeframe, session, timezone) → series int
 
@@ -396,6 +398,16 @@ Note that:
 
 Calendar dates and times
 ^^^^^^^^^^^^^^^^^^^^^^^^
+
+Using the function version calendar dates and times can be useful if you want to detect if a bar belongs to a particular session.
+Let's look at which has the following signatures:
+
+.. code-block:: text
+
+    hour(time) → series int
+    hour(time, timezone) → series int
+
+
 
 
 
