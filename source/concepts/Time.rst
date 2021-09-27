@@ -166,28 +166,32 @@ Time variables
 \`time\` and \`time_close\`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Let's start by plotting `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__,
-which is the bar's opening time in milliseconds::
+Let's start by plotting `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ and
+`time_close <https://www.tradingview.com/pine-script-reference/v5/#var_time_close>`__,
+the Unix timestamp in milliseconds of the bar's opening and closing time::
 
     //@version=5
-    indicator("`time` value on bars")
-    plot(time)
+    indicator("`time` and `time_close` values on bars")
+    plot(time, "`time`")
+    plot(time_close, "`time_close`")
 
 .. image:: images/Time-TimeAndTimeclose-01.png
 
 Note that:
 
-- The `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__
-  variable returns the timestamp of each bar's opening time in `UNIX
-  time <https://en.wikipedia.org/wiki/Unix_time>`__ [#millis]_. It is independent of the timezone selected by the user on his chart.
+- The `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ and
+  `time_close <https://www.tradingview.com/pine-script-reference/v5/#var_time_close>`__ variables
+  returns a timestamp in `UNIX time <https://en.wikipedia.org/wiki/Unix_time>`__, which is independent of the timezone selected by the user on his chart.
   In this case, the **chart's** time zone setting is the exchange time zone, so whatever symbol is on the chart, 
   its exchange time zone will be used for the display of the date and time values on the chart's cursor.
   The NASDAQ's time zone is UTC-4, but this only affects the chart's display of date/time values; it has no impact on the
   value of `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ plotted by the script.
 - The last value for the plot shown in the scale is the number of milliseconds that have passed since 00:00:00 UTC, 1 January, 1970.
-  It corresponds to 16:30 on the 27th of September 2021. Because the chart is using the UTC-4 time zone (the NASDAQ's time zone), however,
-  it is displaying the 12:30 time (where the arrow is pointing), four hours earlier than UTC time.
-  corresponds to Tuesday, 15th of April, 2014 at 20:30:00 UTC.
+  It corresponds to 17:30 on the 27th of September 2021. Because the chart is using the UTC-4 time zone (the NASDAQ's time zone), however,
+  it is displaying the 13:30 time (where the arrow is pointing), four hours earlier than UTC time.
+- The difference between the two values on the last bar is the number of milliseconds in one hour (1000 * 60 * 60 = 3,600,000)
+  because we are on a 1H chart.
+
 
 
 \`time_tradingday\`
