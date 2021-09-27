@@ -186,7 +186,7 @@ Note that:
 
 - The realtime bar will become red on its first execution,
   because ``barstate.isnew`` is ``true`` and ``barstate.ishistory`` is no longer ``true``, so our 
- `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ structure
+  `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ structure
   determing our color uses the ``barstate.isnew => color.red`` branch.
   This will usually not last long because on the next update ``barstate.isnew`` will no longer be ``true``
   so the label's color will turn yellow.
