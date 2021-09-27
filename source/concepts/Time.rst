@@ -275,7 +275,7 @@ Note that:
 
  If you wanted your script to only display for years 2020 and later, you could use::
 
-     //@version=5
+    //@version=5
     indicator("", "", true)
     plot(year >= 2020 ? close : na, linewidth = 3)
 
