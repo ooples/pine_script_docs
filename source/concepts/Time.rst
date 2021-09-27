@@ -152,6 +152,7 @@ Note that:
 - The `hour <https://www.tradingview.com/pine-script-reference/v5/#var_hour>`__ variable and the 
   `hour() <https://www.tradingview.com/pine-script-reference/v5/#fun_hour>`__ function normally returns a value in the exchange's time zone.
   Accordingly, plots in blue for both ``hour`` and ``hour(time, syminfo.timezone)`` overlap.
+  Using the function form with ``syminfo.timezone`` is thus redundant if the exchange's hour is what's required.
 - The orange line plotting ``hour(time, "GMT+0")``, however, returns the bar's hour at UTC, or "GMT+0" time,
   which in this case is four hours less than the exchange's time, since MSFT trades on the NASDAQ whose time zone is UTC-4.
 
