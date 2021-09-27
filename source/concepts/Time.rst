@@ -374,10 +374,24 @@ even if the chart is at an intraday timeframe such as 1H::
 
     //@version=5
     indicator("Session bars", "", true)
-    newDay = ta.change(time("D"))
+    bool newDay = ta.change(time("D"))
     bgcolor(newDay ? color.silver : na)
+    
+    newExchangeDay = ta.change(dayofmonth)
+    plotchar(newExchangeDay, "newExchangeDay", "🠇", location.top, size = size.small)
 
 .. image:: images/Time-TestingForChangesInHTF-01.png
+
+Note that:
+
+- The ``newDay`` variable detects changes in the opening time of 1D bars, so it follows the conventions for the chart's symbol,
+  which uses overnight sessions of 17:00 to 17:00. It changes values when a new session comes in.
+- Because ``newExchangeDay`` detects change in `dayofmonth <https://www.tradingview.com/pine-script-reference/v5/#var_dayofmonth>`__
+  in the calendar day, it changes when the day changes on the chart.
+- The two change detection methods do not coincide on the chart, except when there are days without trading.
+  On Sundays here, for example, both detection methods will detect a change because the calendar day changes from the last trading day (Friday)
+  to the first calendar day of the new week, Sunday, which is when the Monday's overnight session begins at 17:00.
+
 
 
 Calendar dates and times
