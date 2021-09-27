@@ -273,18 +273,26 @@ Note that:
 - The ``dayofmonth == 1`` condition will be ``true`` on all intrabars of the first day of the month,
   but ``ta.change(time("M"))`` will only be ``true`` on the first.
 
- 
+ If you wanted your script to only display for years 2020 and later, you could use::
+
+     //@version=5
+    indicator("", "", true)
+    plot(year >= 2020 ? close : na, linewidth = 3)
+
 
 
 \`syminfo.timezone()\`
 ^^^^^^^^^^^^^^^^^^^^^
 
 `syminfo.timezone <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}timezone>`__
-returns the time zone of the chart symbol's exchange.
+returns the time zone of the chart symbol's exchange. 
+It can be useful when a ``timezone`` parameter is used to specify how session information 
+and you want to explicitly mention that you are using the exchange's timezone.
+It is usually redundant because when no argument is supplied to ``timezone``,
+the exchange's time zone is assumed.
 
 
 
-aa
 Time functions
 --------------
 
