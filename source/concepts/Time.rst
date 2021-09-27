@@ -188,7 +188,7 @@ Note that:
   values plotted by the script.
 - The last `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__
   value for the plot shown in the scale is the number of milliseconds elapsed from 00:00:00 UTC, 1 January, 1970, until the bar's opening time.
-  It corresponds to 17:30 on the 27th of September 2021. Because the chart is using the UTC-4 time zone (the NASDAQ's time zone), however,
+  It corresponds to 17:30 on the 27th of September 2021. However, because the chart is using the UTC-4 time zone (the NASDAQ's time zone),
   it is displaying the 13:30 time, four hours earlier than UTC time.
 - The difference between the two values on the last bar is the number of milliseconds in one hour (1000 * 60 * 60 = 3,600,000)
   because we are on a 1H chart.
