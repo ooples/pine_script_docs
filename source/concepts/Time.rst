@@ -399,7 +399,7 @@ Note that:
 Calendar dates and times
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Calendar date and time variables such as
+Calendar date and time functions such as
 `year() <https://www.tradingview.com/pine-script-reference/v5/#fun_year>`__,
 `month() <https://www.tradingview.com/pine-script-reference/v5/#fun_month>`__,
 `weekofyear() <https://www.tradingview.com/pine-script-reference/v5/#fun_weekofyear>`__,
