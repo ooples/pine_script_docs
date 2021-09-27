@@ -1,6 +1,6 @@
 .. _IndexMigrationGuides:
 
-Migration Guides
+Migration guides
 ================
 
 .. toctree::
