@@ -174,13 +174,21 @@ The lines project one bar after the current bar, after having been distributed a
     // Loop creating the fan of lines on each bar.
     for i = 0 to qtyOfLinesInput
         // End point in y if line stopped at current bar.
-        lineY2 = math.min(open, close) + (y2Increment * i * math.sign(y2Increment))
+        lineY2 = open + (y2Increment * i)
         // Extrapolate necessary y position to the next bar because we extend lines one bar in the future.
         lineY2 := lineY2 + (lineY2 - lineY1)
         lineColor = lineY2 > lineY1 ? color.lime : color.fuchsia
         line.new(bar_index - 1, lineY1, bar_index + 1, lineY2, color = lineColor)
 
 .. image:: images/LinesAndBoxes-CreatingAndModifyingLines-02.png
+
+Note that:
+
+- We are creating a set of lines from within a `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ structure.
+- We use the default ``xloc = xloc.bar_index``, so our ``x1`` and ``x2`` values are bar indices.
+- We want to start lines on the previous bar, so we use ``bar_index - 1`` for ``x1`` and ``bar_index + 1`` for ``x2``.
+- We use a "series color" value (it can change for any loop iteration) for the line's color.
+  When the line is going up we make it lime; if not we make it fuschia.
 
 The *setter* functions allowing you to change a line's properties are:
 
