@@ -274,7 +274,7 @@ where:
 - ``id`` is the ID of the line whose property is to be modified.
 - The next parameter is the property of the line to modify. It depends on the setter function used.
   `line.set_xy1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy1>`__ and
-  `line.set_xy2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy2>`__ changes two properties, so they have two such parameters.
+  `line.set_xy2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy2>`__ change two properties, so they have two such parameters.
 
 In the next example we display a line showing the highest `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__
 value in the last ``lookbackInput`` bars. We will be using setter functions to modify an existing line::
@@ -324,6 +324,7 @@ Note that:
   We draw the line from the preceding bar so that we see a one bar line when a new high is found.
 - We only start the line in the past, from the actual highest point,
   when the user explicitly chooses to do so through the script's inputs.
+  This gives the user control over the repainting behavior of the script.
 - We manage the historical buffer to avoid runtime error when referring to bars too far away in the past.
   We do two things for this: we use the ``max_bars_back`` parameter in our 
   `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ call,
