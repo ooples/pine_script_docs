@@ -471,25 +471,6 @@ depending on the bar's polarity::
 
 
 
-Realtime behavior
-^^^^^^^^^^^^^^^^^
-
-Labels are subject to both *commit* and *rollback* actions, which affect the behavior of a script when it executes
-in the realtime bar. See the page on Pine's :ref:`Execution model <Page_ExecutionModel>`.
-
-This script demonstrates the effect of rollback when running in the realtime bar::
-
-    //@version=5
-    indicator("", "", true)
-    label.new(bar_index, high)
-
-On realtime bars, `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ 
-creates a new label on every script update, but the because of the rollback process,
-the label created on the previous update on the same bar is deleted.
-Only the last label created before the realtime bar's close will be committed, and thus persist.
-
-
-
 Positioning labels
 ^^^^^^^^^^^^^^^^^^
 
@@ -650,6 +631,25 @@ This is the efficient way to realize the same task::
         // On all iterations of the script on the last bar, update the label's information.
         label.set_xy(lbl, bar_index, high)
         label.set_text(lbl, str.tostring(high, format.mintick))
+
+
+
+Realtime behavior
+^^^^^^^^^^^^^^^^^
+
+Labels are subject to both *commit* and *rollback* actions, which affect the behavior of a script when it executes
+in the realtime bar. See the page on Pine's :ref:`Execution model <Page_ExecutionModel>`.
+
+This script demonstrates the effect of rollback when running in the realtime bar::
+
+    //@version=5
+    indicator("", "", true)
+    label.new(bar_index, high)
+
+On realtime bars, `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ 
+creates a new label on every script update, but the because of the rollback process,
+the label created on the previous update on the same bar is deleted.
+Only the last label created before the realtime bar's close will be committed, and thus persist.
 
 
 
