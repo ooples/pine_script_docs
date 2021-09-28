@@ -325,6 +325,8 @@ Note that:
 - We only start the line in the past, from the actual highest point,
   when the user explicitly chooses to do so through the script's inputs.
   This gives the user control over the repainting behavior of the script.
+  It also avoids misleading traders into thinking that our script is prescient and can know in advance if a high
+  point will still be the high point in the lookback period n bars later.
 - We manage the historical buffer to avoid runtime error when referring to bars too far away in the past.
   We do two things for this: we use the ``max_bars_back`` parameter in our 
   `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ call,
