@@ -15,7 +15,6 @@ Concepts
    Chart_information
    Colors
    Fills
-   Formatting_values
    Inputs
    Levels
    Libraries
