@@ -122,6 +122,7 @@ line objects can be created at variable offsets in the past or the future.
 
 
 
+
 Creating lines
 ^^^^^^^^^^^^^^
 
@@ -381,7 +382,7 @@ Various styles can be applied to lines with either the
 `box.set_border_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_border_style>`__ function:
 
 +--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| Line style name                | Line                                            | Box                                             |
+| Argument                       | Line                                            | Box                                             |
 +================================+=================================================+=================================================+
 | ``line.style_solid``           | |line_style_solid|                              | |box_style_solid|                               |
 +--------------------------------+-------------------------------------------------+-------------------------------------------------+
