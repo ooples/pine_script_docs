@@ -327,6 +327,8 @@ Note that:
 
 
 
+.. _PageConditionalStructures_MatchingLocalBlockTypeRequirement:
+
 Matching local block type requirement
 -------------------------------------
 

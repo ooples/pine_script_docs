@@ -135,40 +135,62 @@ is ``true`` if the script is executing on the dataset's last bar when the market
 It can be used to detect the first realtime bar with ``barstate.islastconfirmedhistory[1]``, or to postpone server-intensive calculations until the last historical bar, which would otherwise be undetectable on open markets.
 
 
-Example script
---------------
+Example
+-------
 
 Here is an example of a script using ``barstate.*`` variables::
 
     //@version=5
-    indicator("Bar States", overlay = true)
-    first = barstate.isfirst
-    last = barstate.islast
+    indicator("Bar States", overlay = true, max_labels_count = 500)
 
-    hist = barstate.ishistory
-    rt = barstate.isrealtime
+    stateText() =>
+        string txt = ""
+        txt += barstate.isfirst     ? "isfirst\n"     : ""
+        txt += barstate.islast      ? "islast\n"      : ""
+        txt += barstate.ishistory   ? "ishistory\n"   : ""
+        txt += barstate.isrealtime  ? "isrealtime\n"  : ""
+        txt += barstate.isnew       ? "isnew\n"       : ""
+        txt += barstate.isconfirmed ? "isconfirmed\n" : ""
+        txt += barstate.islastconfirmedhistory ? "barstate.islastconfirmedhistory\n" : ""
+    
+    labelColor = switch
+        barstate.isfirst     => color.fuchsia
+        barstate.ishistory   => color.silver
+        barstate.isconfirmed => color.orange
+        barstate.isnew       => color.red
+        => color.yellow
 
-    new = barstate.isnew
-    conf = barstate.isconfirmed
+    label.new(bar_index, na, stateText(), yloc = yloc.abovebar, color = labelColor)
 
-    t = new ? "new" : conf ? "conf" : "intra-bar"
-    t := t + (hist ? "\nhist" : rt ? "\nrt" : "")
-    t := t + (first ? "\nfirst" : last ? "\nlast" : "")
-    label.new(bar_index, na, yloc=yloc.abovebar, text=t,
-              color=hist ? color.green : color.red)
+Note that:
 
-We begin by adding the indicator to a yearly chart and take a screenshot before any realtime update is received.
-This shows the *first* and the *last* bars, and the fact that all bars are *new* ones:
+- Each state's name will appear in the label's text when it is ``true``.
+- There are four possible colors for the label's background:
 
-.. image:: images/barstates_history_only.png
+  - fuchsia on the first bar
+  - silver on historical bars
+  - orange when a realtime bar is confirmed (when it closes and becomes an elapsed realtime bar)
+  - red on the realtime bar's first execution
+  - yellow for other executions of the realtime bar
 
-When a realtime update is received, the picture changes slightly. The current bar is no longer a historical bar; it has become a realtime bar. 
-Additionally, it is neither *new* nor *confirmed*, which we indicate with the "intra-bar" text in the label.
+We begin by adding the indicator to the chart of an open market, but before any realtime update is received.
+Note how the last confirmed history bar is identified in #1, and how the last bar is identified as the last one,
+but is still considered a historical bar because no realtime updates have been received.
 
-.. image:: images/barstates_history_then_realtime.png
+.. image:: images/BarStates-Example-01.png
 
-This is a screenshot of the same symbol at a 1min timeframe, after a few realtime bars have elapsed.
-The elapsed realtime bars show the *confirmed* state.
+Let's look at what happens when realtime updates start coming in:
 
-.. image:: images/barstates_history_then_more_realtime.png
+.. image:: images/BarStates-Example-02.png
 
+Note that:
+
+- The realtime bar will become red on its first execution,
+  because ``barstate.isnew`` is ``true`` and ``barstate.ishistory`` is no longer ``true``, so our 
+  `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ structure
+  determing our color uses the ``barstate.isnew => color.red`` branch.
+  This will usually not last long because on the next update ``barstate.isnew`` will no longer be ``true``
+  so the label's color will turn yellow.
+- The elapsed realtime bars' label is orange because those bars were not historical bars when they closed.
+  Accordingly, the ``barstate.ishistory => color.silver`` branch in the `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
+  structure was not executed, but the next one, ``barstate.isconfirmed => color.orange`` was.
