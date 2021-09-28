@@ -134,8 +134,9 @@ Note that:
 - The cursor is on the chart's last bar.
 - The value of `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__
   on **that** bar is displayed in indicator values (1) and in the Data Window (2).
-- We use ``location.top`` because the default ``location.abovebar`` will put the price into play in the script's scale,
-  which will often interfere with other plots.
+- We use `location.top <https://www.tradingview.com/pine-script-reference/v5/#var_location{dot}top>`__ 
+  because the default `location.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_location{dot}abovebar>`__ 
+  will put the price into play in the script's scale, which will often interfere with other plots.
 
 `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__
 also works well to identify specific points on the chart or to validate that conditions

@@ -11,7 +11,13 @@ Introduction
 ------------
 
 Lines and boxes are only available in v4 and higher versions of Pine.
-They are objects, like :ref:`labels <PageLabels>` and :ref:`tables <PageTables>`.
+They are useful to draw support and resistance levels, trend lines, price ranges.
+Multiple small line segments are also useful to draw complex geometric forms.
+
+The flexibility lines and boxes allow in their positioning mechanism makes them particularly well-suited to
+drawing objects at points in the past that are detected a variable number of bars after the fact.
+
+Lines and boxes are objects, like :ref:`labels <PageLabels>` and :ref:`tables <PageTables>`.
 Like them, they are referred to using an ID, which acts like a pointer. 
 Line IDs are of "line" type, and box IDs are of "box" type.
 As with other Pine objects, lines and box IDs are "time series" and all the functions used to manage them accept "series" arguments,
@@ -26,6 +32,7 @@ which makes them very flexible.
 Lines can be horizontal or at an angle, while boxes are always rectangular, but they share many common characteristics:
 
 - They can start and end from any point on the chart, including the future.
+- The functions used to manage them can be placed in conditional or loop structures, making it easier to control their behavior.
 - They can be extended to infinity, left or right of their anchoring coordinates.
 - Their attributes can be changed during the script's execution.
 - The *x* coordinates used to position them can be expressed as a bar index or a time value.
@@ -74,7 +81,26 @@ This script draws both lines and boxes::
 
 Note that:
 
-- 
+- We are detecting the first bar of a user-defined higher timeframe and saving its
+  `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and
+  `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ values.
+- We draw the ``hi`` and ``low`` levels using one line for each.
+- We fill the space in between with a box.
+- Every time we create two new lines and a box, we save their ID in variables ``hiLine``, ``loLine`` and ``hiLoBox``,
+  which we then use in the calls to the setter functions to prolong these objects as new bars come in during the
+  higher timeframe.
+- We change the color of the boxe's background (``boxColor``) using the position of the bar's
+  `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and
+  `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ with relative to the opening bar's
+  same values. This entails that our script is repainting, as the boxe's color on past bars will change,
+  depending on the current bar's values.
+- We artifically make the return type of both branches of our `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
+  structure ``int(na)`` so the compiler doesn't complain about them not returning the same type.
+  This occurs because `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`__
+  in the first branch returns a result of type "box", 
+  while `box.set_bgcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_bgcolor>`__
+  in the second branch returns type "void".
+
 
 
 Lines
@@ -91,15 +117,74 @@ Lines are managed using built-in functions in the ``line`` namespace. They inclu
   The array's size will depend on the maximum line count for your script and how many of those you have drawn.
   ``aray.size(line.all)`` will return the array's size.
 
+In contrast to plots created with `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__, 
+line objects can be created at variable offsets in the past or the future.
 
-In contrast to indicator plots (plots are created with functions 
-`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__, 
-`plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ and 
-`plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__), 
-drawing objects can be created on historical bars as well as in the future, where no bars exist yet.
 
-Creating drawings
------------------
+
+Creating lines
+^^^^^^^^^^^^^^
+
+The `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__
+function creates a new label. It has the following signature:
+
+.. code-block:: text
+
+    line.new(x1, y1, x2, y2, xloc, extend, color, style, width) → series line
+
+This is how you can create lines in their simplest form. We connect the preceding bar's 
+`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ to the current bar's
+`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__::
+
+    //@version=5
+    indicator("", "", true)
+    line.new(bar_index - 1, high[1], bar_index, low, width = 3)
+
+.. image:: images/LinesAndBoxes-CreatingLines-01.png
+
+Note that:
+
+- The label is created with the parameters ``x = bar_index`` (the index of the current bar,
+  `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__) and ``y = high`` 
+  (the bar's `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ value).
+- We do not supply an argument for the function's ``text`` parameter. Its default value being an empty string, no text is displayed.
+- No logic controls our `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ call, so labels are created on every bar.
+- Only the last 54 labels are displayed because our 
+  `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ call does not use
+  the ``max_labels_count`` parameter to specify a value other than the ~50 default.
+- Labels persist on bars until your script deletes them using
+  `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`__, or garbage collection removes them.
+
+In the next example we display a label on the bar with the highest `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__
+value in the last 50 bars::
+
+    //@version=5
+    indicator("", "", true)
+    
+    // Find the offset to the highest `high` in last 50 bars. Change it's sign so it is positive.
+    highestBarOffset = - ta.highestbars(50)
+    
+    // Create label on bar zero only.
+    var lbl = label.new(na, na, "", color = color.orange, style = label.style_label_lower_left)
+    // When a new high is found, move the label there and update its text and tooltip.
+    if ta.change(highestBarOffset)
+        // Get the `high` value at that offset. Note that `highest(50)` would be equivalent,  
+        // but it would require evaluation on every bar, prior to entry into this `if` structure.
+        hi = high[highestBarOffset]
+        // Build label and tooltip strings.
+        labelText = "High: " + str.tostring(hi, format.mintick)
+        tooltipText = "Offest in bars: " + str.tostring(highestBarOffset) + "\nLow: " + str.tostring(low[highestBarOffset], format.mintick)
+        label.set_xy(lbl, bar_index[highestBarOffset], hi)
+        label.set_text(lbl, labelText)
+        label.set_tooltip(lbl, tooltipText)
+
+
+
+
+
+
+
+
 
 Pine drawing objects are created with the `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ , 
 `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ and 
@@ -163,6 +248,8 @@ While `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_la
 creates a new label on every iteration of the script when price changes in the realtime bar,
 the most recent label created in the script's previous iteration is also automatically deleted because of rollback before the next iteration. 
 Only the last label created before the realtime bar's close will be committed, and will thus persist.
+
+
 
 .. _drawings_coordinates:
 
