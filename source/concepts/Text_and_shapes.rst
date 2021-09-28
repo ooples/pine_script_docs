@@ -216,10 +216,10 @@ and the **first** one when you are plotting under the bar and text is going down
 
     //@version=5
     indicator("Lift text", "", true)
-    plotshape(true, "", shape.arrowup,   location.abovebar, color.green,  text="A")
-    plotshape(true, "", shape.arrowup,   location.abovebar, color.lime,   text="B\n​")
-    plotshape(true, "", shape.arrowdown, location.belowbar, color.red,    text="C")
-    plotshape(true, "", shape.arrowdown, location.belowbar, color.maroon, text="​\nD")
+    plotshape(true, "", shape.arrowup,   location.abovebar, color.green,  text = "A")
+    plotshape(true, "", shape.arrowup,   location.abovebar, color.lime,   text = "B\n​")
+    plotshape(true, "", shape.arrowdown, location.belowbar, color.red,    text = "C")
+    plotshape(true, "", shape.arrowdown, location.belowbar, color.maroon, text = "​\nD")
 
 .. image:: images/TextAndShapes-Plotshape-02.png
 
