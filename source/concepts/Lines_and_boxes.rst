@@ -189,6 +189,10 @@ Note that:
 - We want to start lines on the previous bar, so we use ``bar_index - 1`` for ``x1`` and ``bar_index + 1`` for ``x2``.
 - We use a "series color" value (it can change for any loop iteration) for the line's color.
   When the line is going up we make it lime; if not we make it fuschia.
+- The script will repaint in realtime because it is using the 
+  `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ and
+  `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ values of the realtime bar to calculate line projections.
+  Once the realtime bar closes, the lines drawn on elapsed realtime bars will no longer update.
 
 The *setter* functions allowing you to change a line's properties are:
 
