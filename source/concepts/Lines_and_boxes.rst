@@ -199,7 +199,7 @@ Note that:
 
 
 Line coordinates
-""""""""""""""""
+^^^^^^^^^^^^^^^^
 
 Lines are positioned on the chart according to *x* (bars) and *y* (price) coordinates. 
 Five parameters affect this behavior: ``x1``, ``y1``, ``x2``, ``y2`` and ``xloc``:
