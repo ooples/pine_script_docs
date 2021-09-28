@@ -341,7 +341,7 @@ Note that:
   `line.set_x2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_x2>`__ on other bars, to extend the line.
 - We use time values for ``x1`` and ``x2`` because our 
   `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ call specifies ``xloc = xloc.bar_time``.
-- We use ``style = label.style_label_left`` in our 
+- We use ``style = line.style_arrow_right`` in our 
   `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__  call to display a right arrow line style.
 - Even though our label's background is not visible, we use ``style = label.style_label_left`` in our
   `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ call 
