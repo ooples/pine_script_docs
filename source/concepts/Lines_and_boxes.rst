@@ -99,7 +99,8 @@ Note that:
   This occurs because `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`__
   in the first branch returns a result of type "box", 
   while `box.set_bgcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_bgcolor>`__
-  in the second branch returns type "void".
+  in the second branch returns type "void". 
+  See the :ref:`Matching local block type requiremement <PageConditionalStructures_MatchingLocalBlockTypeRequirement>` section for more information.
 
 
 
