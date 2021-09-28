@@ -185,6 +185,58 @@ where:
   `line.set_xy2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy2>`__ changes two properties, so they have two such parameters.
 
 
+
+Line coordinates
+""""""""""""""""
+
+Lines are positioned on the chart according to *x* (bars) and *y* (price) coordinates. 
+Five parameters affect this behavior: ``x1``, ``y1``, ``x2``, ``y2`` and ``xloc``:
+
+``x1`` and ``x2``
+   Is either a bar index or a time value. When a bar index is used, the value can be offset in the past or in the future (maximum of 500 bars in the future).
+   Past or future offsets can also be calculated when using time values.
+   The ``x`` value of an existing label can be modified using `label.set_x() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_x>`__ or
+   `label.set_xy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xy>`__.
+
+``y1`` and ``y2``
+   Is the price level where the label is positioned. It is only taken into account with the default ``yloc`` value of ``yloc.price``.
+   If ``yloc`` is `yloc.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}abovebar>`__ or 
+   `yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__
+   then the ``y`` argument is ignored.
+   The ``y`` value of an existing label can be modified using `label.set_y() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_y>`__ or
+   `label.set_xy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xy>`__.
+
+``xloc``
+   Is either `xloc.bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_index>`__ (the default)
+   or `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__.
+   It determines which type of argument must be used with ``x``. 
+   With `xloc.bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_index>`__, ``x`` must be an absolute bar index.
+   With `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__, ``x`` must be a UNIX time in milliseconds 
+   corresponding to the `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ value of a bar's `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__.
+   The ``xloc`` value of an existing label can be modified using `label.set_xloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xloc>`__.
+
+Drawing objects are positioned on the chart according to *x* and *y* coordinates using a combination of 4 parameters: ``x``, ``y``, ``xloc`` and ``yloc``. The value of ``xloc`` determines whether ``x`` will hold a bar index or time value. When ``yloc = yloc.price``, ``y`` holds a price. ``y`` is ignored when ``yloc`` is set to `yloc.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}abovebar>`__ or `yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__.
+
+If a drawing object uses `xloc.bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_index>`__, then
+the x-coordinate is treated as an absolute bar index. The bar index of the current bar can be obtained from the built-in variable ``bar_index``. The bar index of previous bars is ``bar_index[1]``, ``bar_index[2]`` and so on. ``xloc.bar_index`` is the default value for x-location parameters of both label and line drawings.
+
+If a drawing object uses `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__, then
+the x-coordinate is treated as a UNIX time in milliseconds. The start time of the current bar can be obtained from the built-in variable ``time``.
+The bar time of previous bars is ``time[1]``, ``time[2]`` and so on. Time can also be set to an absolute time point with the
+`timestamp <https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp>`__ function.
+
+Both modes make it possible to place a drawing object in the future, to the right of the current bar. For example::
+
+    //@version=5
+    indicator("My Script", overlay = true)
+    dt = time - time[1]
+    if barstate.islast
+        label.new(time + 3*dt, close, xloc = xloc.bar_time)
+
+.. image:: images/label_in_the_future.png
+
+
+
 Line styles
 """""""""""
 
@@ -281,35 +333,6 @@ Deleting lines
 ^^^^^^^^^^^^^^
 
 
-Pine drawing objects are created with the `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ , 
-`line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ and 
-`box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`__ functions.
-While each function has many parameters, only the coordinates are mandatory.
-This is an example of code used to create a label on every bar::
-
-    //@version=5
-    indicator("My Script", overlay = true)
-    label.new(bar_index, high)
-
-.. image:: images/minimal_label.png
-
-The label is created with the parameters ``x = bar_index`` (the index of the current bar,
-`bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__) and ``y = high`` (high price of the current bar).
-When a new bar opens, a new label is created on it. Label objects created on previous bars stay on the chart
-until the indicator deletes them with an explicit call of the `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`__
-function, or until the automatic garbage collection process removes them.
-
-Here is a modified version of the same script that shows the values of the ``x`` and ``y`` coordinates used to create the labels::
-
-    //@version=5
-    indicator("My Script", overlay = true)
-    label.new(bar_index, high, style = label.style_none,
-              text = "x=" + str.tostring(bar_index) + "\ny=" + str.tostring(high))
-
-.. image:: images/minimal_label_with_x_y_coordinates.png
-
-In this example labels are shown without background coloring (because of parameter ``style = label.style_none``) but with
-dynamically created text (``text = "x=" + str.tostring(bar_index) + "\ny=" + str.tostring(high)``) that prints label coordinates.
 
 This is an example of code that creates line objects on a chart::
 
@@ -327,71 +350,14 @@ This is an example of code that creates box objects on a chart::
 
 .. image:: images/minimal_box.png
 
-Calculation of drawings on bar updates
---------------------------------------
-
-Drawing objects are subject to both *commit* and *rollback* actions, which affect the behavior of a script when it executes
-in the realtime bar. See the page on Pine's :ref:`Execution model <PageExecutionModel>`.
-
-This script demonstrates the effect of rollback when running in the realtime bar::
-
-    //@version=5
-    indicator("My Script", overlay = true)
-    label.new(bar_index, high)
-
-While `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ 
-creates a new label on every iteration of the script when price changes in the realtime bar,
-the most recent label created in the script's previous iteration is also automatically deleted because of rollback before the next iteration. 
-Only the last label created before the realtime bar's close will be committed, and will thus persist.
 
 
-
-.. _drawings_coordinates:
-
-Coordinates
------------
-
-Drawing objects are positioned on the chart according to *x* and *y* coordinates using a combination of 4 parameters: ``x``, ``y``, ``xloc`` and ``yloc``. The value of ``xloc`` determines whether ``x`` will hold a bar index or time value. When ``yloc = yloc.price``, ``y`` holds a price. ``y`` is ignored when ``yloc`` is set to `yloc.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}abovebar>`__ or `yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__.
-
-If a drawing object uses `xloc.bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_index>`__, then
-the x-coordinate is treated as an absolute bar index. The bar index of the current bar can be obtained from the built-in variable ``bar_index``. The bar index of previous bars is ``bar_index[1]``, ``bar_index[2]`` and so on. ``xloc.bar_index`` is the default value for x-location parameters of both label and line drawings.
-
-If a drawing object uses `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__, then
-the x-coordinate is treated as a UNIX time in milliseconds. The start time of the current bar can be obtained from the built-in variable ``time``.
-The bar time of previous bars is ``time[1]``, ``time[2]`` and so on. Time can also be set to an absolute time point with the
-`timestamp <https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp>`__ function.
-
-Both modes make it possible to place a drawing object in the future, to the right of the current bar. For example::
-
-    //@version=5
-    indicator("My Script", overlay = true)
-    dt = time - time[1]
-    if barstate.islast
-        label.new(time + 3*dt, close, xloc = xloc.bar_time)
-
-.. image:: images/label_in_the_future.png
-
-This code places a label object in the future. X-location logic works identically for label, line, and box drawings.
-
-Example for ``xloc.bar_index``::
-
-    //@version=5
-    indicator("My Script", overlay = true)
-    label.new(bar_index+100, high)
-
-.. image:: images/label_in_the_future_2.png
-
-In contrast, y-location logic is different for label and line or box drawings.
-Pine's *line* and *box* drawings always use `yloc.price <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}price>`__,
-so their y-coordinate is always treated as an absolute price value.
-
-Label drawings have additional y-location values: `yloc.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}abovebar>`__ and
-`yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__.
-When they are used, the value of the ``y`` parameter is ignored and the drawing object is placed above or below the bar.
+Boxes
+-----
 
 
-Modifying drawings
-------------------
+Creating and modifying boxes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A drawing object can be modified after its creation. The 
 `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_, 
@@ -425,24 +391,6 @@ One may notice that ``na`` is passed as the ``y`` argument to the ``label.new`` 
 the example's label uses either ``yloc.belowbar`` or ``yloc.abovebar`` y-locations, which don't require a y value.
 A finite value for ``y`` is needed only if a label uses ``yloc.price``.
 
-The available *setter* functions for line drawings are:
-
-    * `line.set_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_color>`__ --- changes color of line
-    * `line.set_extend() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_extend>`__ --- changes attribute that makes:
-
-      - ``extend.none`` - a line segment
-      - ``extend.left``/``extend.right`` - a ray
-      - ``extend.both`` - an endless line
-
-    * `line.set_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_style>`__ --- changes :ref:`style of line <drawings_line_styles>`
-    * `line.set_width() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_width>`__ --- changes width of line
-    * `line.set_xloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xloc>`__ --- changes x-location of line (both x1 and x2)
-    * `line.set_x1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_x1>`__ --- changes x1-coordinate of line
-    * `line.set_y1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_y1>`__ --- changes y1-coordinate of line
-    * `line.set_xy1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy1>`__ --- changes both x1 and y1 coordinates of line
-    * `line.set_x2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_x2>`__ --- changes x2-coordinate of line
-    * `line.set_y2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_y2>`__ --- changes y2-coordinate of line
-    * `line.set_xy2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy2>`__ --- changes both x2 and y2 coordinates of line at once
 
 The available *setter* functions for box drawings are:
 
@@ -466,111 +414,57 @@ The available *setter* functions for box drawings are:
 .. _drawings_label_styles:
 
 
-Line and box styles
------------
+Box styles
+""""""""""
 
 Various styles can be applied to lines with either the
-`line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`_, 
-`box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_, 
-`line.set_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_style>`__ or 
-`box.set_border_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_border_style>`__ function:
+`box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`__ or 
+`box.set_border_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_border_style>`__ functions:
 
-+--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| Argument                       | Line                                            | Box                                             |
-+================================+=================================================+=================================================+
-| ``line.style_solid``           | |line_style_solid|                              | |box_style_solid|                               |
-+--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| ``line.style_dotted``          | |line_style_dotted|                             | |box_style_dotted|                              |
-+--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| ``line.style_dashed``          | |line_style_dashed|                             | |box_style_dashed|                              |
-+--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| ``line.style_arrow_left``      | |line_style_arrow_left|                         | Not supported                                   |
-+--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| ``line.style_arrow_right``     | |line_style_arrow_right|                        | Not supported                                   |
-+--------------------------------+-------------------------------------------------+-------------------------------------------------+
-| ``line.style_arrow_both``      | |line_style_arrow_both|                         | Not supported                                   |
-+--------------------------------+-------------------------------------------------+-------------------------------------------------+
-
-
-.. |line_style_solid| image:: images/LinesAndBoxes-LineStyles-solid.png
-.. |line_style_dotted| image:: images/LinesAndBoxes-LineStyles-dotted.png
-.. |line_style_dashed| image:: images/LinesAndBoxes-LineStyles-dashed.png
-.. |line_style_arrow_left| image:: images/LinesAndBoxes-LineStyles-arrow_left.png
-.. |line_style_arrow_right| image:: images/LinesAndBoxes-LineStyles-arrow_right.png
-.. |line_style_arrow_both| image:: images/LinesAndBoxes-LineStyles-arrow_both.png
++----------------------------+--------------------+
+| Argument                   | Box                |
++============================+====================+
+| ``line.style_solid``       | |box_style_solid|  |
++----------------------------+--------------------+
+| ``line.style_dotted``      | |box_style_dotted| |
++----------------------------+--------------------+
+| ``line.style_dashed``      | |box_style_dashed| |
++----------------------------+--------------------+
 
 .. |box_style_solid| image:: images/LinesAndBoxes-BoxStyles-solid.png
 .. |box_style_dotted| image:: images/LinesAndBoxes-BoxStyles-dotted.png
 .. |box_style_dashed| image:: images/LinesAndBoxes-BoxStyles-dashed.png
 
 
-Deleting drawings
+
+Deleting boxes
+^^^^^^^^^^^^^^
+
+
+
+Realtime behavior
 -----------------
 
-The `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`_, `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`__ and `box.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}delete>`__
-functions delete label, line, or box drawing objects from the chart.
+Drawing objects are subject to both *commit* and *rollback* actions, which affect the behavior of a script when it executes
+in the realtime bar. See the page on Pine's :ref:`Execution model <PageExecutionModel>`.
 
-Here is Pine code that keeps just one label drawing object on the current bar,
-*deleting the old ones*::
-
-    //@version=5
-    indicator("Last Bar Close 1", overlay = true)
-
-    c = close >= open ? color.lime : color.red
-    l = label.new(bar_index, na,
-      text = str.tostring(close), color = c,
-      style = label.style_label_down, yloc = yloc.abovebar)
-
-    label.delete(l[1])
-
-.. image:: images/Last_Bar_Close_1.png
-
-On every new bar update of the "Last Bar Close 1" indicator, a new label object is created and written to variable ``l``.
-Variable ``l`` is of type *series label*, so the ``[]`` operator is used to get the previous bar's label object.
-That previous label is then passed to the ``label.delete`` function to delete it.
-
-Functions ``label.delete`` and ``line.delete`` do nothing if the ``na`` value is used as an id, which makes code like the following unnecessary::
-
-    if not na(l[1])
-        label.delete(l[1])
-
-The previous script's behavior can be reproduced using another approach::
+This script demonstrates the effect of rollback when running in the realtime bar::
 
     //@version=5
-    indicator("Last Bar Close 2", overlay = true)
+    indicator("My Script", overlay = true)
+    label.new(bar_index, high)
 
-    var label l = na
-    label.delete(l)
-    c = close >= open ? color.lime : color.red
-    l := label.new(bar_index, na,
-      text = str.tostring(close), color = c,
-      style = label.style_label_down, yloc = yloc.abovebar)
-
-When the study "Last Bar Close 2" gets a new bar update, variable ``l`` is still referencing the old label object created on the previous bar. This label is deleted with the ``label.delete(l)`` call. A new label is then created and its id saved to ``l``. Using this approach there is no need to use the ``[]`` operator.
-
-Note the use of the :ref:`var keyword <variable_declaration>`. It creates variable ``l`` and initializes it with the ``na`` value only once. ``label.delete(l)`` would have no object to delete if it weren't for the fact that ``l`` is initialized only once.
-
-There is yet another way to achieve the same objective as in the two previous scripts, this time by modifying the label rather than deleting it::
-
-    //@version=5
-    indicator("Last Bar Close 3", overlay = true)
-
-    var label l = label.new(bar_index, na,
-      style = label.style_label_down, yloc = yloc.abovebar)
-
-    c = close >= open ? color.lime : color.red
-    label.set_color(l, c)
-    label.set_text(l, str.tostring(close))
-    label.set_x(l, bar_index)
-
-Once again, the use of new :ref:`var keyword <variable_declaration>` is essential. It is what allows the 
-`label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ call to be
-executed only once, on the very first historical bar.
+While `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ 
+creates a new label on every iteration of the script when price changes in the realtime bar,
+the most recent label created in the script's previous iteration is also automatically deleted because of rollback before the next iteration. 
+Only the last label created before the realtime bar's close will be committed, and will thus persist.
 
 
 
 Limitations
 -----------
+
+
 
 Total number of drawings
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -597,10 +491,14 @@ You can change the drawing limit to a value in range from 1 to 500 using the max
 
 .. image:: images/drawings_with_max_labels_count.png
 
+
+
 Bars count in future with xloc.bar_index
-^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Objects positioned using xloc.bar_index cannot be drawn further than 500 bars into the future.
+
+
 
 Additional securities
 ^^^^^^^^^^^^^^^^^^^^^
@@ -610,6 +508,8 @@ Pine code sometimes uses additional symbols and/or timeframes with the
 Drawing functions can only be used in the main symbol's context.
 
 .. _max-bars-back-of-time:
+
+
 
 max_bars_back of time
 ^^^^^^^^^^^^^^^^^^^^^
