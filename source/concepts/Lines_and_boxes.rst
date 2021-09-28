@@ -234,8 +234,8 @@ Note that:
 - We are creating a set of lines from within a `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ structure.
 - We use the default ``xloc = xloc.bar_index``, so our ``x1`` and ``x2`` values are bar indices.
 - We want to start lines on the previous bar, so we use ``bar_index - 1`` for ``x1`` and ``bar_index + 1`` for ``x2``.
-- We use a "series color" value (it can change for any loop iteration) for the line's color.
-  When the line is going up we make it lime; if not we make it fuschia.
+- We use a "series color" value (its value can change in any of the loop's iterations) for the line's color.
+  When the line is going up we make it lime; if not we make it fuchsia.
 - The script will repaint in realtime because it is using the 
   `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ and
   `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ values of the realtime bar to calculate line projections.
