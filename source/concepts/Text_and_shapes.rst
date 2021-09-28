@@ -570,6 +570,26 @@ You can also offset using a bar index for the ``x`` value, e.g.::
 
 
 
+Reading label properties 
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+The following *getter* functions are available for labels:
+
+- `label.set_x() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_x>`__
+- `label.set_y() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_y>`__
+- `label.set_text() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_text>`__
+
+They all have a similar signature. 
+The one for `label.set_text() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_text>`__ is:
+
+.. code-block:: text
+
+    label.get_text(id) → series string
+
+where ``id`` is the label whose text is to be retrieved.
+
+
+
 Deleting labels
 ^^^^^^^^^^^^^^^
 

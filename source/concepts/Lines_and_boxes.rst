@@ -221,6 +221,36 @@ value in the last 50 bars::
 
 
 
+Reading line properties 
+^^^^^^^^^^^^^^^^^^^^^^^
+
+The following *getter* functions are available for lines:
+
+- `line.get_price() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_price>`__
+- `line.get_x1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_x1>`__
+- `line.get_y1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_y1>`__
+- `line.get_x2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_x2>`__
+- `line.get_y2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_y2>`__
+
+The signature for `line.get_price() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_price>`__ is
+
+.. code-block:: text
+
+    line.get_price(id, x) → series float
+
+where:
+
+- ``id`` is the line whose ``x1`` value is to be retrieved
+- ``x`` is the bar index of the point on the line whose *y* coordinate is to be returned.
+
+The last four functions all have a similar signature. 
+The one for `line.get_x1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_x1>`__ is:
+
+.. code-block:: text
+
+    line.get_x1(id) → series int
+
+where ``id`` is the line whose ``x1`` value is to be retrieved.
 
 
 
