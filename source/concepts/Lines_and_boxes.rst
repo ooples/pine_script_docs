@@ -330,6 +330,9 @@ Note that:
 - We create our line and label on the first bar only, using `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__.
   From that point, we only need to update their properties, so we are moving the same line and label along,
   resetting their starting properties when a new high is found, and then only updating their *x* coordinates as new bars come in.
+  We use the `line.set_xy1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy1>`__ and
+  `line.set_xy1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy1>`__ when we find a new high, and
+  `line.set_x2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_x2>`__ on other bars, to extend the line.
 - We use time values for ``x1`` and ``x2`` because our 
   `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ call specifies ``xloc = xloc.bar_time``.
 - We use ``style = label.style_label_left`` in our 
@@ -339,6 +342,11 @@ Note that:
   so that the price value is positioned to the right of the chart's last bar.
 - To better visualize on which bars a new high is found, 
   we plot a blue dot using `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__.
+  Note that this does not necessarily entail the bar where it appears **is** the new highest value.
+  While this may happen, a new highest value can also be calculated because a long-standing high has dropped off
+  from the lookback length and be replaced by another high that may not be on the bar where the blue dot appears.
+- When the user does not choose to plot in the past, our script does not repaint.
+
 
 
 
