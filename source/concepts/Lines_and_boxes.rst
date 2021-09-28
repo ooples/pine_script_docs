@@ -124,8 +124,8 @@ line objects can be created at variable offsets in the past or the future.
 
 
 
-Creating lines
-^^^^^^^^^^^^^^
+Creating and modifying lines
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__
 function creates a new label. It has the following signature:
@@ -146,16 +146,55 @@ This is how you can create lines in their simplest form. We connect the precedin
 
 Note that:
 
-- The label is created with the parameters ``x = bar_index`` (the index of the current bar,
-  `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__) and ``y = high`` 
-  (the bar's `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ value).
-- We do not supply an argument for the function's ``text`` parameter. Its default value being an empty string, no text is displayed.
-- No logic controls our `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ call, so labels are created on every bar.
-- Only the last 54 labels are displayed because our 
-  `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ call does not use
-  the ``max_labels_count`` parameter to specify a value other than the ~50 default.
-- Labels persist on bars until your script deletes them using
+- We use a different ``x1`` and ``x2`` value: ``bar_index - 1`` and ``bar_index``.
+  This is necessary, otherwise no line would be created.
+- We make the width of our line 3 pixels using ``width = 3``.
+- No logic controls our `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`_ call, so lines are created on every bar.
+- Only approximately the last 50 lines are shown because that is the default value for 
+  the ``max_lines_count`` parameter in `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
+  which we haven't specified.
+- Lines persist on bars until your script deletes them using
   `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`__, or garbage collection removes them.
+
+The *setter* functions allowing you to change a line's properties are:
+
+- `line.set_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_color>`__ --- changes color of line
+- `line.set_extend() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_extend>`__ --- changes attribute that makes:
+- `line.set_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_style>`__ --- changes :ref:`style of line <drawings_line_styles>`
+- `line.set_width() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_width>`__ --- changes width of line
+- `line.set_xloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xloc>`__ --- changes x-location of line (both x1 and x2)
+- `line.set_x1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_x1>`__ --- changes x1-coordinate of line
+- `line.set_y1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_y1>`__ --- changes y1-coordinate of line
+- `line.set_xy1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy1>`__ --- changes both x1 and y1 coordinates of line
+- `line.set_x2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_x2>`__ --- changes x2-coordinate of line
+- `line.set_y2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_y2>`__ --- changes y2-coordinate of line
+- `line.set_xy2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy2>`__ --- changes both x2 and y2 coordinates of line at once
+
+They all have a similar signature. 
+The one for `line.set_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_color>`__ is:
+
+.. code-block:: text
+
+    line.set_color(id, color) → void
+
+where:
+
+- ``id`` is the ID of the line whose property is to be modified.
+- The next parameter is the property of the line to modify. It depends on the setter function used.
+  `line.set_xy1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy1>`__ and
+  `line.set_xy2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy2>`__ changes two properties, so they have two such parameters.
+
+
+
+
+
+
+      - ``extend.none`` - a line segment
+      - ``extend.left``/``extend.right`` - a ray
+      - ``extend.both`` - an endless line
+
+
+
 
 In the next example we display a label on the bar with the highest `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__
 value in the last 50 bars::
@@ -185,7 +224,8 @@ value in the last 50 bars::
 
 
 
-
+Deleting lines
+^^^^^^^^^^^^^^
 
 
 Pine drawing objects are created with the `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ , 
