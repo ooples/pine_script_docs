@@ -260,4 +260,3 @@ Mixing things up this way is not allowed::
 To learn how to do this, one needs to understand Pine's :ref:`type system <PageTypeSytem>`.
 The Reference Manual entry for each built-in function includes an "ARGUMENTS" section
 which lists the form-type required for the argument supplied to each of the function's parameters.
-

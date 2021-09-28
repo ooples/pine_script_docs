@@ -4,7 +4,7 @@ Lines and boxes
 ===============
 
 .. contents:: :local:
-    :depth: 3
+    :depth: 2
 
 
 Introduction
