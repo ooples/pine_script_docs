@@ -202,10 +202,10 @@ Note that:
 
 
 
-.. Examples
-    --------
+Examples
+--------
 
-    These publications are examples of libraries published on TradingView:
+These publications are examples of libraries published on TradingView:
 
-    - 
+- 
 

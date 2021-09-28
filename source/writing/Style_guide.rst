@@ -8,8 +8,6 @@ Style guide
 
 .. include:: <isonum.txt>
 
-
-
 Introduction
 ------------
 
@@ -33,9 +31,7 @@ We recommend the use of:
 Script organization
 -------------------
 
-The Pine compiler is quite forgiving of the positioning of specific statements or compiler directives in the script. While other arrangements are syntactically correct, this is how we recommend organizing scripts:
-
-.. code-block:: text
+The Pine compiler is quite forgiving of the positioning of specific statements or compiler directives in the script. While other arrangements are syntactically correct, this is how we recommend organizing scripts::
 
     <license>
     <version>
@@ -48,7 +44,6 @@ The Pine compiler is quite forgiving of the positioning of specific statements o
     <strategy_calls>
     <plots>
     <alerts>
-
 
 
 <license>
@@ -204,8 +199,7 @@ Code sections in larger projects can be more cleanly defined using comments that
 Vertical alignment
 ------------------
 
-Vertical alignment using tabs or spaces can be useful in code sections containing many similar lines such as constant declarations or inputs. 
-They can make mass edits much easier using the Editor's multi-cursor feature (:kbd:`ctrl` + :kbd:`alt` + :kbd:`🠅`/:kbd:`🠇`)::
+Vertical alignment using tabs or spaces can be useful in code sections containing many similar lines such as constant declarations or inputs. They can make mass edits much easier using the Editor's multi-cursor feature (CTRL-ALT-▲/▼)::
 
     // ———————————————————— Constants {
 
