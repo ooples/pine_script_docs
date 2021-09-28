@@ -462,10 +462,6 @@ The *setter* functions allowing you to change a label's properties are:
 
 
 
-Label styles
-""""""""""""
-
-
 Realtime behavior
 ^^^^^^^^^^^^^^^^^
 

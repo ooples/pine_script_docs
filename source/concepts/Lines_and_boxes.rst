@@ -475,8 +475,90 @@ Once again, the use of new :ref:`var keyword <variable_declaration>` is essentia
 executed only once, on the very first historical bar.
 
 
-Examples of classic indicators
-------------------------------
+
+Limitations
+-----------
+
+Total number of drawings
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Drawing objects consume server resources, which is why there is a limit to the total number of drawings
+per indicator or strategy. When too many drawings are created, old ones are automatically deleted by the Pine runtime,
+in a process referred to as *garbage collection*.
+
+This code creates a drawing on every bar::
+
+    //@version=5
+    indicator("My Script", overlay = true)
+    label.new(bar_index, high)
+
+Scrolling the chart left, one will see there are no drawings after approximately 50 bars:
+
+.. image:: images/drawings_total_number_limit.png
+
+You can change the drawing limit to a value in range from 1 to 500 using the max_lines_count, max_labels_count, or max_boxes_count parameters for the indicator and strategy functions::
+
+    //@version=5
+    indicator("My Script", overlay = true, max_labels_count = 100)
+    label.new(bar_index, high)
+
+.. image:: images/drawings_with_max_labels_count.png
+
+Bars count in future with xloc.bar_index
+^^^^^^^^^^^^^^^^^^^^^
+
+Objects positioned using xloc.bar_index cannot be drawn further than 500 bars into the future.
+
+Additional securities
+^^^^^^^^^^^^^^^^^^^^^
+
+Pine code sometimes uses additional symbols and/or timeframes with the 
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function. 
+Drawing functions can only be used in the main symbol's context.
+
+.. _max-bars-back-of-time:
+
+max_bars_back of time
+^^^^^^^^^^^^^^^^^^^^^
+
+Use of ``barstate.isrealtime`` in combination with drawings may sometimes produce unexpected results.
+This code's intention, for example, is to ignore all historical bars and create a label drawing on the *realtime* bar::
+
+    //@version=5
+    indicator("My Script", overlay = true)
+
+    if barstate.isrealtime
+        label.new(bar_index[10], na, text = "Label", yloc = yloc.abovebar)
+
+It will, however, fail at runtime. The reason for the error is that Pine cannot determine the buffer size
+for historical values of the ``time`` plot, even though the ``time`` built-in variable isn't mentioned in the code.
+This is due to the fact that the built-in variable ``bar_index`` uses the ``time`` series in its inner workings.
+Accessing the value of the bar index 10 bars back requires that the history buffer size of the ``time`` series
+be of size 10 or more.
+
+In Pine, there is a mechanism that automaticaly detects the required historical buffer size for most cases.
+Autodetection works by letting Pine code access historical values any number of bars back for a limited duration.
+In this script's case, the ``if barstate.isrealtime`` condition prevents any such accesses to occur,
+so the required historical buffer size cannot be inferred and the code fails.
+
+The solution to this conundrum is to use the `max_bars_back <https://www.tradingview.com/pine-script-reference/v5/#fun_max_bars_back>`__ function to explicitly set the historical buffer size for the ``time`` series::
+
+    //@version=5
+    indicator("My Script", overlay = true)
+
+    max_bars_back(time, 10)
+
+    if barstate.isrealtime
+        label.new(bar_index[10], na, text = "Label", yloc = yloc.abovebar)
+
+Such occurrences are confusing, but rare. In time, the Pine team hopes to eliminate them.
+
+
+
+Examples
+--------
+
+
 
 Pivot Points Standard
 ^^^^^^^^^^^^^^^^^^^^^
@@ -522,7 +604,6 @@ Pivot Points Standard
 
 
 
-
 Pivot Points High/Low
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -556,7 +637,6 @@ Pivot Points High/Low
     
     pivot(high, lenHInput, true, label.style_label_down, yloc.abovebar, color.lime)
     pivot(low, lenLInput, false, label.style_label_up, yloc.belowbar, color.red)
-
 
 
 
@@ -693,6 +773,7 @@ Linear Regression
 		r
 
 
+
 Zig Zag
 ^^^^^^^
 
@@ -820,81 +901,3 @@ Zig Zag
 					iLast := iL
 					pLast := pL
 					pLast
-
-
-Limits
-------
-
-Total number of drawings
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-Drawing objects consume server resources, which is why there is a limit to the total number of drawings
-per indicator or strategy. When too many drawings are created, old ones are automatically deleted by the Pine runtime,
-in a process referred to as *garbage collection*.
-
-This code creates a drawing on every bar::
-
-    //@version=5
-    indicator("My Script", overlay = true)
-    label.new(bar_index, high)
-
-Scrolling the chart left, one will see there are no drawings after approximately 50 bars:
-
-.. image:: images/drawings_total_number_limit.png
-
-You can change the drawing limit to a value in range from 1 to 500 using the max_lines_count, max_labels_count, or max_boxes_count parameters for the indicator and strategy functions::
-
-    //@version=5
-    indicator("My Script", overlay = true, max_labels_count = 100)
-    label.new(bar_index, high)
-
-.. image:: images/drawings_with_max_labels_count.png
-
-Bars count in future with xloc.bar_index
-^^^^^^^^^^^^^^^^^^^^^
-
-Objects positioned using xloc.bar_index cannot be drawn further than 500 bars into the future.
-
-Additional securities
-^^^^^^^^^^^^^^^^^^^^^
-
-Pine code sometimes uses additional symbols and/or timeframes with the 
-`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function. 
-Drawing functions can only be used in the main symbol's context.
-
-.. _max-bars-back-of-time:
-
-max_bars_back of time
-^^^^^^^^^^^^^^^^^^^^^
-
-Use of ``barstate.isrealtime`` in combination with drawings may sometimes produce unexpected results.
-This code's intention, for example, is to ignore all historical bars and create a label drawing on the *realtime* bar::
-
-    //@version=5
-    indicator("My Script", overlay = true)
-
-    if barstate.isrealtime
-        label.new(bar_index[10], na, text = "Label", yloc = yloc.abovebar)
-
-It will, however, fail at runtime. The reason for the error is that Pine cannot determine the buffer size
-for historical values of the ``time`` plot, even though the ``time`` built-in variable isn't mentioned in the code.
-This is due to the fact that the built-in variable ``bar_index`` uses the ``time`` series in its inner workings.
-Accessing the value of the bar index 10 bars back requires that the history buffer size of the ``time`` series
-be of size 10 or more.
-
-In Pine, there is a mechanism that automaticaly detects the required historical buffer size for most cases.
-Autodetection works by letting Pine code access historical values any number of bars back for a limited duration.
-In this script's case, the ``if barstate.isrealtime`` condition prevents any such accesses to occur,
-so the required historical buffer size cannot be inferred and the code fails.
-
-The solution to this conundrum is to use the `max_bars_back <https://www.tradingview.com/pine-script-reference/v5/#fun_max_bars_back>`__ function to explicitly set the historical buffer size for the ``time`` series::
-
-    //@version=5
-    indicator("My Script", overlay = true)
-
-    max_bars_back(time, 10)
-
-    if barstate.isrealtime
-        label.new(bar_index[10], na, text = "Label", yloc = yloc.abovebar)
-
-Such occurrences are confusing, but rare. In time, the Pine team hopes to eliminate them.
