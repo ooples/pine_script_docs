@@ -350,7 +350,7 @@ Note that:
   we plot a blue dot using `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__.
   Note that this does not necessarily entail the bar where it appears **is** the new highest value.
   While this may happen, a new highest value can also be calculated because a long-standing high has dropped off
-  from the lookback length and be replaced by another high that may not be on the bar where the blue dot appears.
+  from the lookback length and been replaced by another high that may not be on the bar where the blue dot appears.
 - Our chart cursor points to the bar with the highest value in the last 50 bars.
 - When the user does not choose to plot in the past, our script does not repaint.
 
@@ -422,23 +422,65 @@ where ``id`` is the line whose ``x1`` value is to be retrieved.
 Deleting lines
 ^^^^^^^^^^^^^^
 
+The `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`__ 
+function is used to delete lines. Its syntax is:
 
+.. code-block:: text
 
-This is an example of code that creates line objects on a chart::
+    line.delete(id) → void
+
+To keep only a user-defined quantity of lines on the chart, one could use code like this::
+
 
     //@version=5
-    indicator("My Script", overlay = true)
-    line.new(x1 = bar_index[1], y1 = low[1], x2 = bar_index, y2 = high)
+    int MAX_LINES_COUNT = 500
+    indicator("RSI pivots", max_lines_count = MAX_LINES_COUNT)
+    
+    int linesToKeepInput = input.int(10, minval = 1, maxval = MAX_LINES_COUNT)
+    int sensitivityInput = input.int(5, minval = 1)
+    
+    float myRSI = ta.rsi(close, 20)
+    bool myRSIRises = ta.rising(myRSI, sensitivityInput)
+    bool myRSIFalls = ta.falling(myRSI, sensitivityInput)
+    if myRSIRises or myRSIFalls
+        color lineColor = myRSIRises ? color.new(color.green, 70) : color.new(color.red, 70)
+        line.new(bar_index, myRSI, bar_index + 1, myRSI, color = lineColor, width = 2)
+        // Once the new line is created, delete the oldest one if we have too many.
+        if array.size(line.all) > linesToKeepInput
+            line.delete(array.get(line.all, 0))
+        int(na)
+    else
+        // Extend all visible lines.
+        int lineNo = 0
+        while lineNo < array.size(line.all)
+            line.set_x2(array.get(line.all, lineNo), bar_index)
+            lineNo += 1
+        int(na)
+    
+    plot(myRSI)
+    hline(50)
+    // Plot markers to show where our triggering conditions are `true`.
+    plotchar(myRSIRises, "myRSIRises", "🠅", location.top,    color.green, size = size.tiny)
+    plotchar(myRSIFalls, "myRSIFalls", "🠇", location.bottom, color.red,   size = size.tiny)
 
-.. image:: images/minimal_line.png
+.. image:: images/LinesAndBoxes-DeletingLines-01.png
 
-This is an example of code that creates box objects on a chart::
+Note that:
 
-    //@version=5
-    indicator("My Script", overlay = true)
-    box.new(left = bar_index[1], top = low[1], right = bar_index, bottom = high)
-
-.. image:: images/minimal_box.png
+- We define a ``MAX_LINES_COUNT`` constant to hold the maximum quantity of lines a script can accommodate.
+  We use that value to set the ``max_lines_count`` parameter's value in our `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ call,
+  and also as the ``maxval`` value in our `input.int() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int>`__ call,
+  to cap the user value.
+- We create a new line when our RSI rises/falls for a user-defined number of consecutive bars, using the ``myRSIRises`` and ``myRSIFalls`` variable definitions.
+- After that, we delete the oldest line in the `line.all <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}all>`__
+  array that is automatically maintained by the Pine runtime and contains the ID of all the visible lines drawn by our script.
+  We use the `array.get() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}get>`__
+  function to retrieve the array element at index zero (the oldest visible line ID).
+  We then use `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`__
+  to delete the line linked with that ID.
+- Again, we need to artificially return ``int(na)`` in both local blocks of our 
+  `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ structure so the compiler doesn't not complain.
+  See the :ref:`Matching local block type requiremement <PageConditionalStructures_MatchingLocalBlockTypeRequirement>` section for more information.
 
 
 
