@@ -250,7 +250,6 @@ Modifying lines
 
 The *setter* functions allowing you to change a line's properties are:
 
-    line.new(x1, y1, x2, y2, xloc, extend, color, style, width) → series line
 - `line.set_x1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_x1>`__
 - `line.set_y1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_y1>`__
 - `line.set_xy1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy1>`__
