@@ -326,7 +326,7 @@ The one for `line.get_x1() <https://www.tradingview.com/pine-script-reference/v5
     line.get_x1(id) → series int
 
 where ``id`` is the line whose ``x1`` value is to be retrieved.
-
+ 
 
 
 Deleting lines
