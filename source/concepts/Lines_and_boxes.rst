@@ -7,7 +7,7 @@ Lines and boxes
     :depth: 3
 
 
-Introductionn
+Introduction
 ------------
 
 Lines and boxes are only available in v4 and higher versions of Pine.
@@ -142,7 +142,7 @@ This is how you can create lines in their simplest form. We connect the precedin
     indicator("", "", true)
     line.new(bar_index - 1, high[1], bar_index, low, width = 3)
 
-.. image:: images/LinesAndBoxes-CreatingLines-01.png
+.. image:: images/LinesAndBoxes-CreatingAndModifyingLines-01.png
 
 Note that:
 
@@ -155,6 +155,32 @@ Note that:
   which we haven't specified.
 - Lines persist on bars until your script deletes them using
   `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`__, or garbage collection removes them.
+
+In this next example, we use lines to create probable travel paths for price.
+We draw a user-selected quantity of lines from the previous bar's center point between its
+`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ and
+`open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ values.
+The lines project one bar after the current bar, after having been distributed along the 
+`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ and
+`open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ range of the current bar::
+
+    //@version=5
+    indicator("Price path projection", "PPP", true, max_lines_count = 100)
+    qtyOfLinesInput = input.int(10, minval = 1)
+    
+    y2Increment = (close - open) / qtyOfLinesInput
+    // Starting point of the fan in y.
+    lineY1 = math.avg(close[1], open[1])
+    // Loop creating the fan of lines on each bar.
+    for i = 0 to qtyOfLinesInput
+        // End point in y if line stopped at current bar.
+        lineY2 = math.min(open, close) + (y2Increment * i * math.sign(y2Increment))
+        // Extrapolate necessary y position to the next bar because we extend lines one bar in the future.
+        lineY2 := lineY2 + (lineY2 - lineY1)
+        lineColor = lineY2 > lineY1 ? color.lime : color.fuchsia
+        line.new(bar_index - 1, lineY1, bar_index + 1, lineY2, color = lineColor)
+
+.. image:: images/LinesAndBoxes-CreatingAndModifyingLines-02.png
 
 The *setter* functions allowing you to change a line's properties are:
 
