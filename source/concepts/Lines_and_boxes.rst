@@ -483,53 +483,59 @@ Limitations
 
 
 
-Total number of drawings
-^^^^^^^^^^^^^^^^^^^^^^^^
+Total number of objects
+^^^^^^^^^^^^^^^^^^^^^^^
 
-Drawing objects consume server resources, which is why there is a limit to the total number of drawings
-per indicator or strategy. When too many drawings are created, old ones are automatically deleted by the Pine runtime,
+Lines and boxes consume server resources, which is why there is a limit to the total number of drawings
+per indicator or strategy. When too many are created, old ones are automatically deleted by the Pine runtime,
 in a process referred to as *garbage collection*.
 
-This code creates a drawing on every bar::
+This code creates a line on every bar::
 
     //@version=5
-    indicator("My Script", overlay = true)
-    label.new(bar_index, high)
+    indicator("", "", true)
+    line.new(bar_index, high, bar_index, low, width = 6)
 
-Scrolling the chart left, one will see there are no drawings after approximately 50 bars:
+Scrolling the chart left, one will see there are no lines after approximately 50 bars:
 
-.. image:: images/drawings_total_number_limit.png
+.. image:: images/LinesAndBoxes-TotalNumberOfObjects-01.png
 
-You can change the drawing limit to a value in range from 1 to 500 using the max_lines_count, max_labels_count, or max_boxes_count parameters for the indicator and strategy functions::
+You can change the drawing limit to a value in range from 1 to 500 using the ``max_lines_count`` and ``max_boxes_count`` parameters 
+in the `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__
+or `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__ functions::
 
     //@version=5
-    indicator("My Script", overlay = true, max_labels_count = 100)
-    label.new(bar_index, high)
-
-.. image:: images/drawings_with_max_labels_count.png
+    indicator("", "", true, max_lines_count = 100)
+    line.new(bar_index, high, bar_index, low, width = 6)
 
 
 
 Bars count in future with xloc.bar_index
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Objects positioned using xloc.bar_index cannot be drawn further than 500 bars into the future.
+Objects positioned using ``xloc.bar_index`` cannot be drawn further than 500 bars into the future.
 
 
 
 Additional securities
 ^^^^^^^^^^^^^^^^^^^^^
 
-Pine code sometimes uses additional symbols and/or timeframes with the 
-`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function. 
-Drawing functions can only be used in the main symbol's context.
+Lines and boxes cannot be managed in functions sent with 
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls. 
+While they can use values fetched through `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__,
+they must be drawn in the main symbol's context.
+
+This is also the reason why line and box drawing code will not work in scripts using the ``timeframe`` parameter
+in `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__.
+
+
 
 .. _max-bars-back-of-time:
 
 
 
-max_bars_back of time
-^^^^^^^^^^^^^^^^^^^^^
+Historical buffer and \`max_bars_back\`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Use of ``barstate.isrealtime`` in combination with drawings may sometimes produce unexpected results.
 This code's intention, for example, is to ignore all historical bars and create a label drawing on the *realtime* bar::
