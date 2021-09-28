@@ -142,7 +142,7 @@ This is how you can create lines in their simplest form. We connect the precedin
     indicator("", "", true)
     line.new(bar_index - 1, high[1], bar_index, low, width = 3)
 
-.. image:: images/LinesAndBoxes-CreatingAndModifyingLines-01.png
+.. image:: images/LinesAndBoxes-CreatingLines-01.png
 
 Note that:
 
@@ -180,7 +180,7 @@ The lines project one bar after the current bar, after having been distributed a
         lineColor = lineY2 > lineY1 ? color.lime : color.fuchsia
         line.new(bar_index - 1, lineY1, bar_index + 1, lineY2, color = lineColor)
 
-.. image:: images/LinesAndBoxes-CreatingAndModifyingLines-02.png
+.. image:: images/LinesAndBoxes-CreatingLines-02.png
 
 Note that:
 
