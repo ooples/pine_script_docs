@@ -134,8 +134,9 @@ Note that:
 - The cursor is on the chart's last bar.
 - The value of `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__
   on **that** bar is displayed in indicator values (1) and in the Data Window (2).
-- We use ``location.top`` because the default ``location.abovebar`` will put the price into play in the script's scale,
-  which will often interfere with other plots.
+- We use `location.top <https://www.tradingview.com/pine-script-reference/v5/#var_location{dot}top>`__ 
+  because the default `location.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_location{dot}abovebar>`__ 
+  will put the price into play in the script's scale, which will often interfere with other plots.
 
 `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__
 also works well to identify specific points on the chart or to validate that conditions
@@ -215,10 +216,10 @@ and the **first** one when you are plotting under the bar and text is going down
 
     //@version=5
     indicator("Lift text", "", true)
-    plotshape(true, "", shape.arrowup,   location.abovebar, color.green,  text="A")
-    plotshape(true, "", shape.arrowup,   location.abovebar, color.lime,   text="B\n​")
-    plotshape(true, "", shape.arrowdown, location.belowbar, color.red,    text="C")
-    plotshape(true, "", shape.arrowdown, location.belowbar, color.maroon, text="​\nD")
+    plotshape(true, "", shape.arrowup,   location.abovebar, color.green,  text = "A")
+    plotshape(true, "", shape.arrowup,   location.abovebar, color.lime,   text = "B\n​")
+    plotshape(true, "", shape.arrowdown, location.belowbar, color.red,    text = "C")
+    plotshape(true, "", shape.arrowdown, location.belowbar, color.maroon, text = "​\nD")
 
 .. image:: images/TextAndShapes-Plotshape-02.png
 
@@ -329,19 +330,21 @@ Labels are advantageous because:
   making it easier to control their behavior.
 - You can add tooltips to labels.
 
-One drawback to using labels is that you can only have a limited quantity of them on the chart.
-The default is ~50 and you can use the ``max_labels_count`` parameter in your 
+One drawback to using labels versus `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
+`plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__
+is that you can only draw a limited quantity of them on the chart.
+The default is ~50, but you can use the ``max_labels_count`` parameter in your 
 `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ or 
-`indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__
-declaration statement to specify up to 500. Labels, as other objects, 
+`strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
+declaration statement to specify up to 500. Labels, like :ref:`lines and boxes <PageLinesAndBoxes>`, 
 are managed using a garbage collection mechanism which deletes the oldest ones on the chart,
-such that only the newest displayed labels are visible.
+such that only the most recently drawn labels are visible.
 
 Your toolbox of built-ins to manage labels are all in the ``label`` namespace. They include:
 
-- `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ to create labels
-- ``label.set_*()`` functions to modify the properties of an existing label
-- ``label.get_*()`` functions to read the properties of an existing label
+- `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ to create labels.
+- ``label.set_*()`` functions to modify the properties of an existing label.
+- ``label.get_*()`` functions to read the properties of an existing label.
 - `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`_ to delete labels
 - The `label.all <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}all>`__ 
   array which always contains the IDs of all the visible labels on the chart. 
@@ -359,6 +362,34 @@ function creates a new label. It has the following signature:
 .. code-block:: text
 
     label.new(x, y, text, xloc, yloc, color, style, textcolor, size, textalign, tooltip) → series label
+
+The *setter* functions allowing you to change a label's properties are:
+
+- `label.set_x() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_x>`__
+- `label.set_y() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_y>`__
+- `label.set_xy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xy>`__
+- `label.set_text() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_text>`__
+- `label.set_xloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xloc>`__
+- `label.set_yloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_yloc>`__
+- `label.set_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_color>`__
+- `label.set_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_style>`__
+- `label.set_textcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_textcolor>`__
+- `label.set_size() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_size>`__
+- `label.set_textalign() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_set_textalign>`__
+- `label.set_tooltip() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_tooltip>`__
+
+They all have a similar signature. 
+The one for `label.set_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_color>`__ is:
+
+.. code-block:: text
+
+    label.set_color(id, color) → void
+
+where:
+
+- ``id`` is the ID of the label whose property is to be modified.
+- The next parameter is the property of the label to modify. It depends on the setter function used.
+  `label.set_xy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xy>`__ changes two properties, so it has two such parameters.
 
 This is how you can create labels in their simplest form::
 
@@ -440,48 +471,6 @@ depending on the bar's polarity::
 
 
 
-Label setter functions
-""""""""""""""""""""""
-
-The *setter* functions allowing you to change a label's properties are:
-
-- `label.set_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_color>`__
-- `label.set_size() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_size>`__
-- `label.set_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_style>`__
-- `label.set_text() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_text>`__
-- `label.set_textcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_textcolor>`__
-- `label.set_x() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_x>`__
-- `label.set_y() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_y>`__
-- `label.set_xy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xy>`__
-- `label.set_xloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xloc>`__
-- `label.set_yloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_yloc>`__
-- `label.set_tooltip() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_tooltip>`__
-
-
-
-Label styles
-""""""""""""
-
-
-Realtime behavior
-^^^^^^^^^^^^^^^^^
-
-Labels are subject to both *commit* and *rollback* actions, which affect the behavior of a script when it executes
-in the realtime bar. See the page on Pine's :ref:`Execution model <Page_ExecutionModel>`.
-
-This script demonstrates the effect of rollback when running in the realtime bar::
-
-    //@version=5
-    indicator("", "", true)
-    label.new(bar_index, high)
-
-On realtime bars, `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ 
-creates a new label on every script update, but the because of the rollback process,
-the label created on the previous update on the same bar is deleted.
-Only the last label created before the realtime bar's close will be committed, and thus persist.
-
-
-
 Positioning labels
 ^^^^^^^^^^^^^^^^^^
 
@@ -525,7 +514,7 @@ Five parameters affect this behavior: ``x``, ``y``, ``xloc``, ``yloc`` and ``sty
    `yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__ are used.
    The ``style`` of an existing label can be modified using `label.set_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_style>`__.
 
-These are the avaible ``style`` arguments:
+These are the available ``style`` arguments:
 
 +------------------------------+----------------------------+------------------------------+-+-----------------------------------+---------------------------------+-----------------------------------+
 | Argument                     | Label                      | Label with text              | | Argument                          | Label                           | Label with text                   |
@@ -552,7 +541,8 @@ These are the avaible ``style`` arguments:
 +------------------------------+----------------------------+------------------------------+-+-----------------------------------+---------------------------------+-----------------------------------+
 
 When using `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__, 
-the ``x`` value must be a UNIX time in milliseconds. The start time of the current bar can be obtained from the 
+the ``x`` value must be a UNIX timestamp in milliseconds. See the page on :ref:`Time <PageTime>` for more information.
+The start time of the current bar can be obtained from the 
 `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ built-in variable.
 The bar time of previous bars is ``time[1]``, ``time[2]`` and so on. Time can also be set to an absolute value with the
 `timestamp <https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp>`__ function.
@@ -577,6 +567,26 @@ You can also offset using a bar index for the ``x`` value, e.g.::
     label.new(bar_index + 10, high)
     label.new(bar_index - 10, high[10])
     label.new(bar_index[10], high[10])
+
+
+
+Reading label properties 
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+The following *getter* functions are available for labels:
+
+- `label.get_x() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}get_x>`__
+- `label.get_y() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}get_y>`__
+- `label.get_text() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}get_text>`__
+
+They all have a similar signature. 
+The one for `label.get_text() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}get_text>`__ is:
+
+.. code-block:: text
+
+    label.get_text(id) → series string
+
+where ``id`` is the label whose text is to be retrieved.
 
 
 
@@ -642,6 +652,25 @@ This is the efficient way to realize the same task::
         // On all iterations of the script on the last bar, update the label's information.
         label.set_xy(lbl, bar_index, high)
         label.set_text(lbl, str.tostring(high, format.mintick))
+
+
+
+Realtime behavior
+^^^^^^^^^^^^^^^^^
+
+Labels are subject to both *commit* and *rollback* actions, which affect the behavior of a script when it executes
+in the realtime bar. See the page on Pine's :ref:`Execution model <Page_ExecutionModel>`.
+
+This script demonstrates the effect of rollback when running in the realtime bar::
+
+    //@version=5
+    indicator("", "", true)
+    label.new(bar_index, high)
+
+On realtime bars, `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ 
+creates a new label on every script update, but the because of the rollback process,
+the label created on the previous update on the same bar is deleted.
+Only the last label created before the realtime bar's close will be committed, and thus persist.
 
 
 
