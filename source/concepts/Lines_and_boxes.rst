@@ -124,8 +124,8 @@ line objects can be created at variable offsets in the past or the future.
 
 
 
-Creating and modifying lines
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Creating lines
+^^^^^^^^^^^^^^
 
 The `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__
 function creates a new label. It has the following signature:
@@ -196,34 +196,6 @@ Note that:
 - We use ``max_lines_count = 100`` in our `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ call to
   preserve the last 100 lines.
 
-The *setter* functions allowing you to change a line's properties are:
-
-- `line.set_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_color>`__ --- changes color of line
-- `line.set_extend() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_extend>`__ --- changes attribute that makes:
-- `line.set_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_style>`__ --- changes :ref:`style of line <drawings_line_styles>`
-- `line.set_width() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_width>`__ --- changes width of line
-- `line.set_xloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xloc>`__ --- changes x-location of line (both x1 and x2)
-- `line.set_x1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_x1>`__ --- changes x1-coordinate of line
-- `line.set_y1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_y1>`__ --- changes y1-coordinate of line
-- `line.set_xy1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy1>`__ --- changes both x1 and y1 coordinates of line
-- `line.set_x2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_x2>`__ --- changes x2-coordinate of line
-- `line.set_y2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_y2>`__ --- changes y2-coordinate of line
-- `line.set_xy2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy2>`__ --- changes both x2 and y2 coordinates of line at once
-
-They all have a similar signature. 
-The one for `line.set_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_color>`__ is:
-
-.. code-block:: text
-
-    line.set_color(id, color) → void
-
-where:
-
-- ``id`` is the ID of the line whose property is to be modified.
-- The next parameter is the property of the line to modify. It depends on the setter function used.
-  `line.set_xy1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy1>`__ and
-  `line.set_xy2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy2>`__ changes two properties, so they have two such parameters.
-
 
 
 Line coordinates
@@ -277,8 +249,41 @@ Both modes make it possible to place a drawing object in the future, to the righ
 
 
 
+Modifying lines
+^^^^^^^^^^^^^^^
+
+The *setter* functions allowing you to change a line's properties are:
+
+- `line.set_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_color>`__ --- changes color of line
+- `line.set_extend() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_extend>`__ --- changes attribute that makes:
+- `line.set_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_style>`__ --- changes :ref:`style of line <drawings_line_styles>`
+- `line.set_width() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_width>`__ --- changes width of line
+- `line.set_xloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xloc>`__ --- changes x-location of line (both x1 and x2)
+- `line.set_x1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_x1>`__ --- changes x1-coordinate of line
+- `line.set_y1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_y1>`__ --- changes y1-coordinate of line
+- `line.set_xy1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy1>`__ --- changes both x1 and y1 coordinates of line
+- `line.set_x2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_x2>`__ --- changes x2-coordinate of line
+- `line.set_y2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_y2>`__ --- changes y2-coordinate of line
+- `line.set_xy2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy2>`__ --- changes both x2 and y2 coordinates of line at once
+
+They all have a similar signature. 
+The one for `line.set_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_color>`__ is:
+
+.. code-block:: text
+
+    line.set_color(id, color) → void
+
+where:
+
+- ``id`` is the ID of the line whose property is to be modified.
+- The next parameter is the property of the line to modify. It depends on the setter function used.
+  `line.set_xy1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy1>`__ and
+  `line.set_xy2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy2>`__ changes two properties, so they have two such parameters.
+
+
+
 Line styles
-"""""""""""
+^^^^^^^^^^^
 
 Various styles can be applied to lines with either the
 `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ or 
@@ -336,7 +341,7 @@ value in the last 50 bars::
 
 
 
-Reading line properties 
+Getting line properties 
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 The following *getter* functions are available for lines:
