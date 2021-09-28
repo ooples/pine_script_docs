@@ -429,12 +429,13 @@ function is used to delete lines. Its syntax is:
 
     line.delete(id) → void
 
-To keep only a user-defined quantity of lines on the chart, one could use code like this::
+To keep only a user-defined quantity of lines on the chart, one could use code like this, 
+where we are dawing a level every time RSI rises/falls for a user-defined quantity of consecutive bars::
 
 
     //@version=5
     int MAX_LINES_COUNT = 500
-    indicator("RSI pivots", max_lines_count = MAX_LINES_COUNT)
+    indicator("RSI levels", max_lines_count = MAX_LINES_COUNT)
     
     int linesToKeepInput = input.int(10, minval = 1, maxval = MAX_LINES_COUNT)
     int sensitivityInput = input.int(5, minval = 1)
@@ -471,7 +472,7 @@ Note that:
   We use that value to set the ``max_lines_count`` parameter's value in our `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ call,
   and also as the ``maxval`` value in our `input.int() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int>`__ call,
   to cap the user value.
-- We create a new line when our RSI rises/falls for a user-defined number of consecutive bars, using the ``myRSIRises`` and ``myRSIFalls`` variable definitions.
+- We use the ``myRSIRises`` and ``myRSIFalls`` variables to hold the states determining when we create a new level.
 - After that, we delete the oldest line in the `line.all <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}all>`__
   array that is automatically maintained by the Pine runtime and contains the ID of all the visible lines drawn by our script.
   We use the `array.get() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}get>`__
@@ -481,6 +482,8 @@ Note that:
 - Again, we need to artificially return ``int(na)`` in both local blocks of our 
   `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ structure so the compiler doesn't not complain.
   See the :ref:`Matching local block type requiremement <PageConditionalStructures_MatchingLocalBlockTypeRequirement>` section for more information.
+- This time, we mention the type of variables explicitly when we declare them, as in ``float myRSI = ta.rsi(close, 20)``.
+  The declarations are functionally redundant, but they can help make your intention clear to readers of your code — you being the one reading it the most often.
 
 
 
