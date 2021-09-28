@@ -414,6 +414,11 @@ The available *setter* functions for box drawings are:
 .. _drawings_label_styles:
 
 
+Box coordinates
+""""""""""""""""
+
+
+
 Box styles
 """"""""""
 
@@ -434,6 +439,19 @@ Various styles can be applied to lines with either the
 .. |box_style_solid| image:: images/LinesAndBoxes-BoxStyles-solid.png
 .. |box_style_dotted| image:: images/LinesAndBoxes-BoxStyles-dotted.png
 .. |box_style_dashed| image:: images/LinesAndBoxes-BoxStyles-dashed.png
+
+
+
+Reading line properties 
+^^^^^^^^^^^^^^^^^^^^^^^
+
+The following *getter* functions are available for lines:
+
+- `line.get_price() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_price>`__
+- `line.get_x1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_x1>`__
+- `line.get_y1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_y1>`__
+- `line.get_x2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_x2>`__
+- `line.get_y2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_y2>`__
 
 
 
