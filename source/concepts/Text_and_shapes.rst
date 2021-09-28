@@ -541,7 +541,8 @@ These are the avaible ``style`` arguments:
 +------------------------------+----------------------------+------------------------------+-+-----------------------------------+---------------------------------+-----------------------------------+
 
 When using `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__, 
-the ``x`` value must be a UNIX time in milliseconds. The start time of the current bar can be obtained from the 
+the ``x`` value must be a UNIX timestamp in milliseconds. See the page on :ref:`Time <PageTime>` for more information.
+The start time of the current bar can be obtained from the 
 `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ built-in variable.
 The bar time of previous bars is ``time[1]``, ``time[2]`` and so on. Time can also be set to an absolute value with the
 `timestamp <https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp>`__ function.
