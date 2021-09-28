@@ -205,10 +205,14 @@ Lines are positioned on the chart according to *x* (bars) and *y* (price) coordi
 Five parameters affect this behavior: ``x1``, ``y1``, ``x2``, ``y2`` and ``xloc``:
 
 ``x1`` and ``x2``
-   Is either a bar index or a time value. When a bar index is used, the value can be offset in the past or in the future (maximum of 500 bars in the future).
+   Is either a bar index or a time value, as determined by the argument used for ``xloc``.
+   When a bar index is used, the value can be offset in the past (maximum of 5000 bars) or in the future (maximum of 500 bars).
    Past or future offsets can also be calculated when using time values.
-   The ``x`` value of an existing label can be modified using `label.set_x() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_x>`__ or
-   `label.set_xy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xy>`__.
+   The ``x1`` and ``x2`` values of an existing line can be modified using 
+   `line.set_x1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_x1>`__,
+   `line.set_x2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_x2>`__,
+   `line.set_xy1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy1>`__ or
+   `line.set_xy2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy2>`__.
 
 ``y1`` and ``y2``
    Is the price level where the label is positioned. It is only taken into account with the default ``yloc`` value of ``yloc.price``.
