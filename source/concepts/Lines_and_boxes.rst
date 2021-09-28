@@ -7,7 +7,7 @@ Lines and boxes
     :depth: 3
 
 
-Introduction
+Introductionn
 ------------
 
 Lines and boxes are only available in v4 and higher versions of Pine.
