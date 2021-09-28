@@ -473,7 +473,7 @@ Note that:
   and also as the ``maxval`` value in our `input.int() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int>`__ call,
   to cap the user value.
 - We use the ``myRSIRises`` and ``myRSIFalls`` variables to hold the states determining when we create a new level.
-- After that, we delete the oldest line in the `line.all <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}all>`__
+  After that, we delete the oldest line in the `line.all <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}all>`__
   array that is automatically maintained by the Pine runtime and contains the ID of all the visible lines drawn by our script.
   We use the `array.get() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}get>`__
   function to retrieve the array element at index zero (the oldest visible line ID).
