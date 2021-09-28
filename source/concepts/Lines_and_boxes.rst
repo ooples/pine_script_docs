@@ -397,16 +397,16 @@ Various styles can be applied to lines with either the
 +--------------------------------+-------------------------------------------------+-------------------------------------------------+
 
 
-.. |line_style_solid| image:: images/line.style_solid.png
-.. |line_style_dotted| image:: images/line.style_dotted.png
-.. |line_style_dashed| image:: images/line.style_dashed.png
-.. |line_style_arrow_left| image:: images/line.style_arrow_left.png
-.. |line_style_arrow_right| image:: images/line.style_arrow_right.png
-.. |line_style_arrow_both| image:: images/line.style_arrow_both.png
+.. |line_style_solid| image:: images/LinesAndBoxes-LineStyles-solid.png
+.. |line_style_dotted| image:: images/LinesAndBoxes-LineStyles-dotted.png
+.. |line_style_dashed| image:: images/LinesAndBoxes-LineStyles-dashed.png
+.. |line_style_arrow_left| image:: images/LinesAndBoxes-LineStyles-arrow_left.png
+.. |line_style_arrow_right| image:: images/LinesAndBoxes-LineStyles-arrow_right.png
+.. |line_style_arrow_both| image:: images/LinesAndBoxes-LineStyles-arrow_both.png
 
-.. |box_style_solid| image:: images/box.style_solid.png
-.. |box_style_dotted| image:: images/box.style_dotted.png
-.. |box_style_dashed| image:: images/box.style_dashed.png
+.. |box_style_solid| image:: images/LinesAndBoxes-BoxStyles-solid.png
+.. |box_style_dotted| image:: images/LinesAndBoxes-BoxStyles-dotted.png
+.. |box_style_dashed| image:: images/LinesAndBoxes-BoxStyles-dashed.png
 
 
 Deleting drawings
