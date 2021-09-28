@@ -193,6 +193,8 @@ Note that:
   `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ and
   `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ values of the realtime bar to calculate line projections.
   Once the realtime bar closes, the lines drawn on elapsed realtime bars will no longer update.
+- We use ``max_lines_count = 100`` in our `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ call to
+  preserve the last 100 lines.
 
 The *setter* functions allowing you to change a line's properties are:
 
