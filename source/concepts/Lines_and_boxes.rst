@@ -316,6 +316,8 @@ value in the last ``lookbackInput`` bars::
     // Show a blue dot when a new high is found.
     plotchar(newHi, "newHighFound", "•", location.top, size = size.tiny)
 
+.. image:: images/LinesAndBoxes-ModifyingLines-01.png
+
 Note that:
 
 - We plot the line starting on the bar preceding the point where the new high is found.
@@ -346,7 +348,6 @@ Note that:
   While this may happen, a new highest value can also be calculated because a long-standing high has dropped off
   from the lookback length and be replaced by another high that may not be on the bar where the blue dot appears.
 - When the user does not choose to plot in the past, our script does not repaint.
-
 
 
 
