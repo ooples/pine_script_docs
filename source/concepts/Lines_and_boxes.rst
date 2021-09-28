@@ -42,15 +42,18 @@ Lines can be horizontal or at an angle, while boxes are always rectangular, but 
 This script draws both lines and boxes::
 
     //@version=5
-    indicator("Lines and boxes", "", true)
+    indicator("Opening bar's range", "", true)
     string tfInput = input.timeframe("D", "Timeframe")
-    bool newTF = ta.change(time(tfInput))
+    // Initialize variables on bar zero only, so they preserve their values across bars.
     var hi = float(na)
     var lo = float(na)
     var line hiLine = na
     var line loLine = na
     var box hiLoBox = na
+    // Detect changes in timeframe.
+    bool newTF = ta.change(time(tfInput))
     if newTF
+        // New bar in higher timeframe; reset values and create new lines and box.
         hi := high
         lo := low
         hiLine := line.new(bar_index - 1, hi, bar_index, hi, color = color.green, width = 2)
@@ -58,10 +61,12 @@ This script draws both lines and boxes::
         hiLoBox := box.new(bar_index - 1, hi, bar_index, lo, border_color = na, bgcolor = color.silver)
         int(na)
     else
+        // On other bars, extend the right coordinate of lines and box.
         line.set_x2(hiLine, bar_index)
         line.set_x2(loLine, bar_index)
-        boxColor = high > hi ? color.green : low < lo ? color.red : color.silver
         box.set_right(hiLoBox, bar_index)
+        // Change the color of the boxe's background depending on whether high/low is higher/lower than the box. 
+        boxColor = high > hi ? color.green : low < lo ? color.red : color.silver
         box.set_bgcolor(hiLoBox, color.new(boxColor, 50))
         int(na)
 
