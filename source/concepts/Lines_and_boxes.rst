@@ -347,6 +347,7 @@ Note that:
   Note that this does not necessarily entail the bar where it appears **is** the new highest value.
   While this may happen, a new highest value can also be calculated because a long-standing high has dropped off
   from the lookback length and be replaced by another high that may not be on the bar where the blue dot appears.
+- Our chart cursor points to the bar with the highest value in the last 50 bars.
 - When the user does not choose to plot in the past, our script does not repaint.
 
 
