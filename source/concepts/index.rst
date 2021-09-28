@@ -12,6 +12,7 @@ Concepts
    Bar_coloring
    Bar_plotting
    Bar_states
+   Chart_information
    Colors
    Fills
    Formatting_values
