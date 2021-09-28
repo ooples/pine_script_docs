@@ -510,8 +510,8 @@ or `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strate
 
 
 
-Bars count in future with xloc.bar_index
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Future references with \`xloc.bar_index\`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Objects positioned using ``xloc.bar_index`` cannot be drawn further than 500 bars into the future.
 
