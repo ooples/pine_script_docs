@@ -514,7 +514,7 @@ Five parameters affect this behavior: ``x``, ``y``, ``xloc``, ``yloc`` and ``sty
    `yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__ are used.
    The ``style`` of an existing label can be modified using `label.set_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_style>`__.
 
-These are the avaible ``style`` arguments:
+These are the available ``style`` arguments:
 
 +------------------------------+----------------------------+------------------------------+-+-----------------------------------+---------------------------------+-----------------------------------+
 | Argument                     | Label                      | Label with text              | | Argument                          | Label                           | Label with text                   |

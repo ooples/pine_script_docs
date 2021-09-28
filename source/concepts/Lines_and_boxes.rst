@@ -185,13 +185,36 @@ where:
   `line.set_xy2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy2>`__ changes two properties, so they have two such parameters.
 
 
+Line styles
+"""""""""""
+
+Various styles can be applied to lines with either the
+`line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ or 
+`line.set_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_style>`__ functions:
+
++----------------------------+--------------------------+-+----------------------------+--------------------------+
+| Argument                   | Line                     | | Argument                   | Line                     |
++============================+==========================+=+============================+==========================+
+| ``line.style_solid``       | |line_style_solid|       | | ``line.style_arrow_left``  | |line_style_arrow_left|  |
++----------------------------+--------------------------+-+----------------------------+--------------------------+
+| ``line.style_dotted``      | |line_style_dotted|      | | ``line.style_arrow_right`` | |line_style_arrow_right| |
++----------------------------+--------------------------+-+----------------------------+--------------------------+
+| ``line.style_dashed``      | |line_style_dashed|      | | ``line.style_arrow_both``  | |line_style_arrow_both|  |
++----------------------------+--------------------------+-+----------------------------+--------------------------+
+
+.. |line_style_solid| image:: images/LinesAndBoxes-LineStyles-solid.png
+.. |line_style_dotted| image:: images/LinesAndBoxes-LineStyles-dotted.png
+.. |line_style_dashed| image:: images/LinesAndBoxes-LineStyles-dashed.png
+.. |line_style_arrow_left| image:: images/LinesAndBoxes-LineStyles-arrow_left.png
+.. |line_style_arrow_right| image:: images/LinesAndBoxes-LineStyles-arrow_right.png
+.. |line_style_arrow_both| image:: images/LinesAndBoxes-LineStyles-arrow_both.png
 
 
 
 
-      - ``extend.none`` - a line segment
-      - ``extend.left``/``extend.right`` - a ray
-      - ``extend.both`` - an endless line
+- ``extend.none`` - a line segment
+- ``extend.left``/``extend.right`` - a ray
+- ``extend.both`` - an endless line
 
 
 
