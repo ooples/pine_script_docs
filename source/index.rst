@@ -12,7 +12,7 @@ Pine Script |version| User Manual
    :maxdepth: 3
    :name: mastertoc
 
-   Welcome
+   Introduction
    primer/index
    language/index
    concepts/index
