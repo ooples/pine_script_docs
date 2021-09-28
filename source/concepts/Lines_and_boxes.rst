@@ -118,21 +118,68 @@ Lines are managed using built-in functions in the ``line`` namespace. They inclu
   The array's size will depend on the maximum line count for your script and how many of those you have drawn.
   ``aray.size(line.all)`` will return the array's size.
 
-In contrast to plots created with `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__, 
-line objects can be created at variable offsets in the past or the future.
-
-
 
 
 Creating lines
 ^^^^^^^^^^^^^^
 
 The `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__
-function creates a new label. It has the following signature:
+function creates a new line. It has the following signature:
 
 .. code-block:: text
 
     line.new(x1, y1, x2, y2, xloc, extend, color, style, width) → series line
+
+Lines are positioned on the chart according to *x* (bars) and *y* (price) coordinates. 
+Five parameters affect this behavior: ``x1``, ``y1``, ``x2``, ``y2`` and ``xloc``:
+
+``x1`` and ``x2``
+   They are the *x* coordinates of the line's start and end points.
+   They are either a bar index or a time value, as determined by the argument used for ``xloc``.
+   When a bar index is used, the value can be offset in the past (maximum of 5000 bars) or in the future (maximum of 500 bars).
+   Past or future offsets can also be calculated when using time values.
+   The ``x1`` and ``x2`` values of an existing line can be modified using 
+   `line.set_x1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_x1>`__,
+   `line.set_x2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_x2>`__,
+   `line.set_xy1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy1>`__ or
+   `line.set_xy2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy2>`__.
+
+``xloc``
+   Is either `xloc.bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_index>`__ (the default)
+   or `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__.
+   It determines which type of argument must be used with ``x1`` and ``x2``. 
+   With `xloc.bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_index>`__, ``x1`` and ``x2`` must be absolute bar indices.
+   With `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__, ``x1`` and ``x2`` must be a UNIX timestamp in milliseconds 
+   corresponding to the `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ value of a bar's `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__.
+   The ``xloc`` value of an existing line can be modified using `line.set_xloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xloc>`__.
+
+``y1`` and ``y2``
+   They are the *y* coordinates of the line's start and end points.
+   Are the price levels of the twwhere the label is positioned. It is only taken into account with the default ``yloc`` value of ``yloc.price``.
+   If ``yloc`` is `yloc.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}abovebar>`__ or 
+   `yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__
+   then the ``y`` argument is ignored.
+   The ``y`` value of an existing label can be modified using `label.set_y() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_y>`__ or
+   `label.set_xy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xy>`__.
+
+The remaining four parameters in `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__
+control the visual appearance of lines:
+
+``extend``
+   Determines if the line is extended past its coordinates.
+   It can be `extend.none <https://www.tradingview.com/pine-script-reference/v5/#var_extend{dot}none>`__,
+   `extend.left <https://www.tradingview.com/pine-script-reference/v5/#var_extend{dot}left>`__,
+   `extend.right <https://www.tradingview.com/pine-script-reference/v5/#var_extend{dot}right>`__ or
+   `extend.both <https://www.tradingview.com/pine-script-reference/v5/#var_extend{dot}both>`__.
+
+``color``
+   Is the line's color.
+   
+``style``
+   Is the style of line. See this page's :ref:`Line styles <PageLinesAndBoxes_LineStyles>` section.
+
+``width``
+   Determines the width of the line in pixels.
 
 This is how you can create lines in their simplest form. We connect the preceding bar's 
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ to the current bar's
@@ -198,61 +245,6 @@ Note that:
 
 
 
-Line coordinates
-^^^^^^^^^^^^^^^^
-
-Lines are positioned on the chart according to *x* (bars) and *y* (price) coordinates. 
-Five parameters affect this behavior: ``x1``, ``y1``, ``x2``, ``y2`` and ``xloc``:
-
-``x1`` and ``x2``
-   Is either a bar index or a time value, as determined by the argument used for ``xloc``.
-   When a bar index is used, the value can be offset in the past (maximum of 5000 bars) or in the future (maximum of 500 bars).
-   Past or future offsets can also be calculated when using time values.
-   The ``x1`` and ``x2`` values of an existing line can be modified using 
-   `line.set_x1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_x1>`__,
-   `line.set_x2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_x2>`__,
-   `line.set_xy1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy1>`__ or
-   `line.set_xy2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy2>`__.
-
-``y1`` and ``y2``
-   Is the price level where the label is positioned. It is only taken into account with the default ``yloc`` value of ``yloc.price``.
-   If ``yloc`` is `yloc.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}abovebar>`__ or 
-   `yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__
-   then the ``y`` argument is ignored.
-   The ``y`` value of an existing label can be modified using `label.set_y() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_y>`__ or
-   `label.set_xy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xy>`__.
-
-``xloc``
-   Is either `xloc.bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_index>`__ (the default)
-   or `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__.
-   It determines which type of argument must be used with ``x``. 
-   With `xloc.bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_index>`__, ``x`` must be an absolute bar index.
-   With `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__, ``x`` must be a UNIX time in milliseconds 
-   corresponding to the `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ value of a bar's `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__.
-   The ``xloc`` value of an existing label can be modified using `label.set_xloc() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_xloc>`__.
-
-Drawing objects are positioned on the chart according to *x* and *y* coordinates using a combination of 4 parameters: ``x``, ``y``, ``xloc`` and ``yloc``. The value of ``xloc`` determines whether ``x`` will hold a bar index or time value. When ``yloc = yloc.price``, ``y`` holds a price. ``y`` is ignored when ``yloc`` is set to `yloc.abovebar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}abovebar>`__ or `yloc.belowbar <https://www.tradingview.com/pine-script-reference/v5/#var_yloc{dot}belowbar>`__.
-
-If a drawing object uses `xloc.bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_index>`__, then
-the x-coordinate is treated as an absolute bar index. The bar index of the current bar can be obtained from the built-in variable ``bar_index``. The bar index of previous bars is ``bar_index[1]``, ``bar_index[2]`` and so on. ``xloc.bar_index`` is the default value for x-location parameters of both label and line drawings.
-
-If a drawing object uses `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__, then
-the x-coordinate is treated as a UNIX time in milliseconds. The start time of the current bar can be obtained from the built-in variable ``time``.
-The bar time of previous bars is ``time[1]``, ``time[2]`` and so on. Time can also be set to an absolute time point with the
-`timestamp <https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp>`__ function.
-
-Both modes make it possible to place a drawing object in the future, to the right of the current bar. For example::
-
-    //@version=5
-    indicator("My Script", overlay = true)
-    dt = time - time[1]
-    if barstate.islast
-        label.new(time + 3*dt, close, xloc = xloc.bar_time)
-
-.. image:: images/label_in_the_future.png
-
-
-
 Modifying lines
 ^^^^^^^^^^^^^^^
 
@@ -284,7 +276,73 @@ where:
   `line.set_xy1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy1>`__ and
   `line.set_xy2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy2>`__ changes two properties, so they have two such parameters.
 
+In the next example we display a line showing the highest `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__
+value in the last ``lookbackInput`` bars::
 
+    //@version=5
+    MAX_BARS_BACK = 500
+    indicator("Last high", "", true, max_bars_back = MAX_BARS_BACK)
+    
+    repaintInput  = input.bool(false, "Position bars in the past")
+    lookbackInput = input.int(50, minval = 1, maxval = MAX_BARS_BACK)
+    
+    // Keep track of highest `high` and detect when it changes.
+    hi = ta.highest(lookbackInput)
+    newHi = ta.change(hi)
+    // Find the offset to the highest `high` in last 50 bars. Change it's sign so it is positive.
+    highestBarOffset = - ta.highestbars(lookbackInput)
+    // Create label on bar zero only.
+    var lbl = label.new(na, na, "", color = color(na), style = label.style_label_left)
+    var lin = line.new(na, na, na, na, xloc = xloc.bar_time, style = line.style_arrow_right)
+    // When a new high is found, move the label there and update its text and tooltip.
+    if newHi
+        // Build line.
+        lineX1 = time[highestBarOffset + 1]
+        // Get the `high` value at that offset. Note that `highest(50)` would be equivalent,  
+        // but it would require evaluation on every bar, prior to entry into this `if` structure.
+        lineY = high[highestBarOffset]
+        // Determine line's starting point with user setting to plot in past or not.
+        line.set_xy1(lin, repaintInput ? lineX1 : time[1], lineY)
+        line.set_xy2(lin, repaintInput ? lineX1 : time,    lineY)
+    
+        // Reposition label and display new high's value.
+        label.set_xy(lbl, bar_index, lineY)
+        label.set_text(lbl, str.tostring(lineY, format.mintick))
+    else
+        // Update line's right end point and label to current bar's.
+        line.set_x2(lin, time)
+        label.set_x(lbl, bar_index)
+    
+    // Show a blue dot when a new high is found.
+    plotchar(newHi, "newHighFound", "•", location.top, size = size.tiny)
+
+Note that:
+
+- We plot the line starting on the bar preceding the point where the new high is found.
+  We draw the line from the preceding bar so that we see a one bar line when a new high is found.
+- We only start the line in the past, from the actual highest point,
+  when the user explicitly chooses to do so through the script's inputs.
+- We manage the historical buffer to avoid runtime error when referring to bars too far away in the past.
+  We do two things for this: we use the ``max_bars_back`` parameter in our 
+  `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ call,
+  and we cap the input for ``lookbackInput`` using ``maxval`` in our 
+  `input.int() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int>`__ call.
+- We create our line and label on the first bar only, using `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__.
+  From that point, we only need to update their properties, so we are moving the same line and label along,
+  resetting their starting properties when a new high is found, and then only updating their *x* coordinates as new bars come in.
+- We use time values for ``x1`` and ``x2`` because our 
+  `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ call specifies ``xloc = xloc.bar_time``.
+- We use ``style = label.style_label_left`` in our 
+  `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__  call to display a right arrow line style.
+- Even though our label's background is not visible, we use ``style = label.style_label_left`` in our
+  `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ call 
+  so that the price value is positioned to the right of the chart's last bar.
+- To better visualize on which bars a new high is found, 
+  we plot a blue dot using `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__.
+
+
+
+.. _PageLinesAndBoxes_LineStyles:
 
 Line styles
 ^^^^^^^^^^^
@@ -311,37 +369,6 @@ Various styles can be applied to lines with either the
 .. |line_style_arrow_both| image:: images/LinesAndBoxes-LineStyles-arrow_both.png
 
 
-
-
-- ``extend.none`` - a line segment
-- ``extend.left``/``extend.right`` - a ray
-- ``extend.both`` - an endless line
-
-
-
-
-In the next example we display a label on the bar with the highest `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__
-value in the last 50 bars::
-
-    //@version=5
-    indicator("", "", true)
-    
-    // Find the offset to the highest `high` in last 50 bars. Change it's sign so it is positive.
-    highestBarOffset = - ta.highestbars(50)
-    
-    // Create label on bar zero only.
-    var lbl = label.new(na, na, "", color = color.orange, style = label.style_label_lower_left)
-    // When a new high is found, move the label there and update its text and tooltip.
-    if ta.change(highestBarOffset)
-        // Get the `high` value at that offset. Note that `highest(50)` would be equivalent,  
-        // but it would require evaluation on every bar, prior to entry into this `if` structure.
-        hi = high[highestBarOffset]
-        // Build label and tooltip strings.
-        labelText = "High: " + str.tostring(hi, format.mintick)
-        tooltipText = "Offest in bars: " + str.tostring(highestBarOffset) + "\nLow: " + str.tostring(low[highestBarOffset], format.mintick)
-        label.set_xy(lbl, bar_index[highestBarOffset], hi)
-        label.set_text(lbl, labelText)
-        label.set_tooltip(lbl, tooltipText)
 
 
 
