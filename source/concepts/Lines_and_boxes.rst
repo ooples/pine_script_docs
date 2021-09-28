@@ -491,8 +491,8 @@ Boxes
 -----
 
 
-Creating and modifying boxes
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Creating boxes
+^^^^^^^^^^^^^^
 
 A drawing object can be modified after its creation. The 
 `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_, 
@@ -549,13 +549,14 @@ The available *setter* functions for box drawings are:
 .. _drawings_label_styles:
 
 
-Box coordinates
-""""""""""""""""
+
+Modifying boxes
+^^^^^^^^^^^^^^^
 
 
 
 Box styles
-""""""""""
+^^^^^^^^^^
 
 Various styles can be applied to lines with either the
 `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`__ or 
@@ -577,8 +578,8 @@ Various styles can be applied to lines with either the
 
 
 
-Reading box properties 
-^^^^^^^^^^^^^^^^^^^^^^^
+Getting box properties 
+^^^^^^^^^^^^^^^^^^^^^^
 
 The following *getter* functions are available for boxes:
 
