@@ -579,7 +579,7 @@ Examples
 Pivot Points Standard
 ^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: images/drawings_pivot_points_std.png
+.. image:: images/LinesAndBoxes-Examples-PivotPointsStandard-01.png
 
 ::
 
@@ -623,7 +623,7 @@ Pivot Points Standard
 Pivot Points High/Low
 ^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: images/drawings_pivot_points_hl.png
+.. image:: images/LinesAndBoxes-Examples-PivotPointsHighLow-01.png
 
 ::
 
@@ -659,7 +659,7 @@ Pivot Points High/Low
 Linear Regression
 ^^^^^^^^^^^^^^^^^
 
-.. image:: images/drawings_linear_regression.png
+.. image:: images/LinesAndBoxes-Examples-LinearRegression-01.png
 
 ::
 
@@ -793,7 +793,7 @@ Linear Regression
 Zig Zag
 ^^^^^^^
 
-.. image:: images/drawings_zig_zag.png
+.. image:: images/LinesAndBoxes-Examples-ZigZag-01.png
 
 ::
 
