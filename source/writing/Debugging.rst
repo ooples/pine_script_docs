@@ -437,7 +437,7 @@ The two techniques we use most frequently to debug our Pine code are::
 
     plotchar(v, "v", "", location.top, size = size.tiny)
 
-to plot variables of type *float*, *int* or *bool* in the indicator's values and the Data Window, and the one-line version of our ``f_print()`` function to debug strings::
+to plot variables of type *float*, *int* or *bool* in the indicator's values and the Data Window, and the one-line version of our ``print()`` function to debug strings::
 
     print(txt) => var _label = label.new(bar_index, na, txt, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left), label.set_xy(_label, bar_index, ta.highest(10)[1]), label.set_text(_label, txt)
     print(stringName)
@@ -450,14 +450,14 @@ As we use AutoHotkey for Windows to speed repetitive tasks, we include these lin
     ^+f:: SendInput plotchar(^v, "^v", "", location.top, size = size.tiny){Return}
     ^+p:: SendInput print(txt) => var lbl = label.new(bar_index, na, txt, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left), label.set_xy(lbl, bar_index, highest(10)[1]), label.set_text(lbl, txt)`nprint(){Left}
 
-The second line will type a debugging `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ call including an expression or variable name previously copied to the clipboard when we use ``CTRL-SHIFT-F``. 
-Copying the ``variableName`` variable name or the ``close > open`` conditional expression to the clipboard and hitting ``CTRL-SHIFT-F`` will, respectively, yield::
+The second line will type a debugging `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ call including an expression or variable name previously copied to the clipboard when we use :kbd:`ctrl` + :kbd:`shift` + :kbd:`f`. 
+Copying the ``variableName`` variable name or the ``close > open`` conditional expression to the clipboard and hitting :kbd:`ctrl` + :kbd:`shift` + :kbd:`f` will, respectively, yield::
 
 
     plotchar(variableName, "variableName", "", location.top, size = size.tiny)
     plotchar(close > open, "close > open", "", location.top, size = size.tiny)
 
-The third line triggers on ``CTRL-SHIFT-P``. It types our one-line ``f_print()`` function in a script and on a second line, 
+The third line triggers on :kbd:`ctrl` + :kbd:`shift` + :kbd:`p`. It types our one-line ``print()`` function in a script and on a second line, 
 an empty call to the function with the cursor placed so all that's left to do is type the string we want to display::
 
     print(txt) => var lbl = label.new(bar_index, na, txt, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left), label.set_xy(lbl, bar_index, ta.highest(10)[1]), label.set_text(lbl, txt)

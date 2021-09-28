@@ -67,7 +67,7 @@ Built-in variables exist for different purposes. These are a few examples:
   `hlc3 <https://www.tradingview.com/pine-script-reference/v5/#var_hlc3>`__,
   `ohlc4 <https://www.tradingview.com/pine-script-reference/v5/#var_ohlc4>`__, and
   `volume <https://www.tradingview.com/pine-script-reference/v5/#var_volume>`__.
-- Symbol-related information in the ``syminfo`` namespace (see the :ref:`Chart information <PageChartInformation>` page):
+- Symbol-related information in the ``syminfo`` namespace:
   `syminfo.basecurrency <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}basecurrency>`__,
   `syminfo.currency <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}currency>`__,
   `syminfo.description <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}description>`__,
@@ -81,7 +81,7 @@ Built-in variables exist for different purposes. These are a few examples:
   `syminfo.timezone <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}timezone>`__, and
   `syminfo.type <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}type>`__.
 - Timeframe (a.k.a. "interval" or "resolution", e.g., 15sec, 30min, 60min, 1D, 3M) 
-  variables in the ``timeframe`` namespace (see the :ref:`Chart information <PageChartInformation>` page):
+  variables in the ``timeframe`` namespace:
   `timeframe.isseconds <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isseconds>`__,
   `timeframe.isminutes <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isminutes>`__,
   `timeframe.isintraday <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isintraday>`__,
@@ -260,6 +260,4 @@ Mixing things up this way is not allowed::
 To learn how to do this, one needs to understand Pine's :ref:`type system <PageTypeSytem>`.
 The Reference Manual entry for each built-in function includes an "ARGUMENTS" section
 which lists the form-type required for the argument supplied to each of the function's parameters.
-
-
 
