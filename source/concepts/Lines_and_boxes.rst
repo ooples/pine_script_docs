@@ -442,16 +442,15 @@ Various styles can be applied to lines with either the
 
 
 
-Reading line properties 
+Reading box properties 
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-The following *getter* functions are available for lines:
+The following *getter* functions are available for boxes:
 
-- `line.get_price() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_price>`__
-- `line.get_x1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_x1>`__
-- `line.get_y1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_y1>`__
-- `line.get_x2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_x2>`__
-- `line.get_y2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_y2>`__
+- `box.get_bottom() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_bottom>`__
+- `box.get_left() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_left>`__
+- `box.get_right() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_right>`__
+- `box.get_top() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_top>`__
 
 
 
@@ -463,19 +462,19 @@ Deleting boxes
 Realtime behavior
 -----------------
 
-Drawing objects are subject to both *commit* and *rollback* actions, which affect the behavior of a script when it executes
+Lines and boxes are subject to both *commit* and *rollback* actions, which affect the behavior of a script when it executes
 in the realtime bar. See the page on Pine's :ref:`Execution model <PageExecutionModel>`.
 
 This script demonstrates the effect of rollback when running in the realtime bar::
 
     //@version=5
     indicator("My Script", overlay = true)
-    label.new(bar_index, high)
+    line.new(bar_index, high, bar_index, low, width = 6)
 
-While `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ 
-creates a new label on every iteration of the script when price changes in the realtime bar,
-the most recent label created in the script's previous iteration is also automatically deleted because of rollback before the next iteration. 
-Only the last label created before the realtime bar's close will be committed, and will thus persist.
+While `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`_ 
+creates a new line on every iteration of the script when price changes in the realtime bar,
+the most recent line created in the script's previous iteration is also automatically deleted because of the rollback before the next iteration. 
+Only the last line created before the realtime bar's close will be committed, and will thus persist.
 
 
 

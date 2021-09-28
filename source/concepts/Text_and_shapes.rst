@@ -575,12 +575,12 @@ Reading label properties
 
 The following *getter* functions are available for labels:
 
-- `label.set_x() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_x>`__
-- `label.set_y() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_y>`__
-- `label.set_text() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_text>`__
+- `label.get_x() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}get_x>`__
+- `label.get_y() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}get_y>`__
+- `label.get_text() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}get_text>`__
 
 They all have a similar signature. 
-The one for `label.set_text() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_text>`__ is:
+The one for `label.get_text() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}get_text>`__ is:
 
 .. code-block:: text
 
