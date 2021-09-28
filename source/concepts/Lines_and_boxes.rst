@@ -544,13 +544,13 @@ This code's intention, for example, is to ignore all historical bars and create 
     indicator("My Script", overlay = true)
 
     if barstate.isrealtime
-        label.new(bar_index[300], na, text = "Label", yloc = yloc.abovebar)
+        label.new(bar_index[10], na, text = "Label", yloc = yloc.abovebar)
 
 It will, however, fail at runtime. The reason for the error is that Pine cannot determine the buffer size
 for historical values of the ``time`` plot, even though the ``time`` built-in variable isn't mentioned in the code.
 This is due to the fact that the built-in variable ``bar_index`` uses the ``time`` series in its inner workings.
-Accessing the value of the bar index 300 bars back requires that the history buffer size of the ``time`` series
-be of size 300 or more.
+Accessing the value of the bar index 10 bars back requires that the history buffer size of the ``time`` series
+be of size 10 or more.
 
 In Pine, there is a mechanism that automaticaly detects the required historical buffer size for most cases.
 Autodetection works by letting Pine code access historical values any number of bars back for a limited duration.
@@ -562,10 +562,10 @@ The solution to this conundrum is to use the `max_bars_back <https://www.trading
     //@version=5
     indicator("My Script", overlay = true)
 
-    max_bars_back(time, 300)
+    max_bars_back(time, 10)
 
     if barstate.isrealtime
-        label.new(bar_index[300], na, text = "Label", yloc = yloc.abovebar)
+        label.new(bar_index[10], na, text = "Label", yloc = yloc.abovebar)
 
 Such occurrences are confusing, but rare. In time, the Pine team hopes to eliminate them.
 
@@ -663,130 +663,130 @@ Linear Regression
 
 ::
 
-	//@version=5
-	indicator('Linear Regression', shorttitle='LinReg', overlay=true)
+  //@version=5
+  indicator('Linear Regression', shorttitle='LinReg', overlay=true)
 
-	upperMult = input(title='Upper Deviation', defval=2)
-	lowerMult = input(title='Lower Deviation', defval=-2)
+  upperMult = input(title='Upper Deviation', defval=2)
+  lowerMult = input(title='Lower Deviation', defval=-2)
 
-	useUpperDev = input(title='Use Upper Deviation', defval=true)
-	useLowerDev = input(title='Use Lower Deviation', defval=true)
-	showPearson = input(title='Show Pearson\'s R', defval=true)
-	extendLines = input(title='Extend Lines', defval=false)
+  useUpperDev = input(title='Use Upper Deviation', defval=true)
+  useLowerDev = input(title='Use Lower Deviation', defval=true)
+  showPearson = input(title='Show Pearson\'s R', defval=true)
+  extendLines = input(title='Extend Lines', defval=false)
 
-	len = input(title='Count', defval=100)
-	src = input(title='Source', defval=close)
+  len = input(title='Count', defval=100)
+  src = input(title='Source', defval=close)
 
-	extend = extendLines ? extend.right : extend.none
+  extend = extendLines ? extend.right : extend.none
 
-	calcSlope(src, len) =>
-		if not barstate.islast or len <= 1
-			[float(na), float(na), float(na)]
-		else
-			sumX = 0.0
-			sumY = 0.0
-			sumXSqr = 0.0
-			sumXY = 0.0
-			for i = 0 to len - 1 by 1
-				val = src[i]
-				per = i + 1.0
-				sumX := sumX + per
-				sumY := sumY + val
-				sumXSqr := sumXSqr + per * per
-				sumXY := sumXY + val * per
-				sumXY
-			slope = (len * sumXY - sumX * sumY) / (len * sumXSqr - sumX * sumX)
-			average = sumY / len
-			intercept = average - slope * sumX / len + slope
-			[slope, average, intercept]
+  calcSlope(src, len) =>
+    if not barstate.islast or len <= 1
+      [float(na), float(na), float(na)]
+    else
+      sumX = 0.0
+      sumY = 0.0
+      sumXSqr = 0.0
+      sumXY = 0.0
+      for i = 0 to len - 1 by 1
+        val = src[i]
+        per = i + 1.0
+        sumX := sumX + per
+        sumY := sumY + val
+        sumXSqr := sumXSqr + per * per
+        sumXY := sumXY + val * per
+        sumXY
+      slope = (len * sumXY - sumX * sumY) / (len * sumXSqr - sumX * sumX)
+      average = sumY / len
+      intercept = average - slope * sumX / len + slope
+      [slope, average, intercept]
 
-	[s, a, i] = calcSlope(src, len)
+  [s, a, i] = calcSlope(src, len)
 
-	startPrice = i + s * (len - 1)
-	endPrice = i
-	var line baseLine = na
+  startPrice = i + s * (len - 1)
+  endPrice = i
+  var line baseLine = na
 
-	if na(baseLine) and not na(startPrice)
-		baseLine := line.new(bar_index - len + 1, startPrice, bar_index, endPrice, width=1, extend=extend, color=color.red)
-		baseLine
-	else
-		line.set_xy1(baseLine, bar_index - len + 1, startPrice)
-		line.set_xy2(baseLine, bar_index, endPrice)
-		na
+  if na(baseLine) and not na(startPrice)
+    baseLine := line.new(bar_index - len + 1, startPrice, bar_index, endPrice, width=1, extend=extend, color=color.red)
+    baseLine
+  else
+    line.set_xy1(baseLine, bar_index - len + 1, startPrice)
+    line.set_xy2(baseLine, bar_index, endPrice)
+    na
 
-	calcDev(src, len, slope, average, intercept) =>
-		upDev = 0.0
-		dnDev = 0.0
-		stdDevAcc = 0.0
-		dsxx = 0.0
-		dsyy = 0.0
-		dsxy = 0.0
+  calcDev(src, len, slope, average, intercept) =>
+    upDev = 0.0
+    dnDev = 0.0
+    stdDevAcc = 0.0
+    dsxx = 0.0
+    dsyy = 0.0
+    dsxy = 0.0
 
-		periods = len - 1
+    periods = len - 1
 
-		daY = intercept + slope * periods / 2
-		val = intercept
+    daY = intercept + slope * periods / 2
+    val = intercept
 
-		for i = 0 to periods by 1
-			price = high[i] - val
-			if price > upDev
-				upDev := price
-				upDev
+    for i = 0 to periods by 1
+      price = high[i] - val
+      if price > upDev
+        upDev := price
+        upDev
 
-			price := val - low[i]
-			if price > dnDev
-				dnDev := price
-				dnDev
+      price := val - low[i]
+      if price > dnDev
+        dnDev := price
+        dnDev
 
-			price := src[i]
-			dxt = price - average
-			dyt = val - daY
+      price := src[i]
+      dxt = price - average
+      dyt = val - daY
 
-			price := price - val
-			stdDevAcc := stdDevAcc + price * price
-			dsxx := dsxx + dxt * dxt
-			dsyy := dsyy + dyt * dyt
-			dsxy := dsxy + dxt * dyt
-			val := val + slope
-			val
+      price := price - val
+      stdDevAcc := stdDevAcc + price * price
+      dsxx := dsxx + dxt * dxt
+      dsyy := dsyy + dyt * dyt
+      dsxy := dsxy + dxt * dyt
+      val := val + slope
+      val
 
-		stdDev = math.sqrt(stdDevAcc / (periods == 0 ? 1 : periods))
-		pearsonR = dsxx == 0 or dsyy == 0 ? 0 : dsxy / math.sqrt(dsxx * dsyy)
-		[stdDev, pearsonR, upDev, dnDev]
+    stdDev = math.sqrt(stdDevAcc / (periods == 0 ? 1 : periods))
+    pearsonR = dsxx == 0 or dsyy == 0 ? 0 : dsxy / math.sqrt(dsxx * dsyy)
+    [stdDev, pearsonR, upDev, dnDev]
 
-	[stdDev, pearsonR, upDev, dnDev] = calcDev(src, len, s, a, i)
+  [stdDev, pearsonR, upDev, dnDev] = calcDev(src, len, s, a, i)
 
-	upperStartPrice = startPrice + (useUpperDev ? upperMult * stdDev : upDev)
-	upperEndPrice = endPrice + (useUpperDev ? upperMult * stdDev : upDev)
-	var line upper = na
+  upperStartPrice = startPrice + (useUpperDev ? upperMult * stdDev : upDev)
+  upperEndPrice = endPrice + (useUpperDev ? upperMult * stdDev : upDev)
+  var line upper = na
 
-	lowerStartPrice = startPrice + (useLowerDev ? lowerMult * stdDev : -dnDev)
-	lowerEndPrice = endPrice + (useLowerDev ? lowerMult * stdDev : -dnDev)
-	var line lower = na
+  lowerStartPrice = startPrice + (useLowerDev ? lowerMult * stdDev : -dnDev)
+  lowerEndPrice = endPrice + (useLowerDev ? lowerMult * stdDev : -dnDev)
+  var line lower = na
 
-	if na(upper) and not na(upperStartPrice)
-		upper := line.new(bar_index - len + 1, upperStartPrice, bar_index, upperEndPrice, width=1, extend=extend, color=#0000ff)
-		upper
-	else
-		line.set_xy1(upper, bar_index - len + 1, upperStartPrice)
-		line.set_xy2(upper, bar_index, upperEndPrice)
-		na
+  if na(upper) and not na(upperStartPrice)
+    upper := line.new(bar_index - len + 1, upperStartPrice, bar_index, upperEndPrice, width=1, extend=extend, color=#0000ff)
+    upper
+  else
+    line.set_xy1(upper, bar_index - len + 1, upperStartPrice)
+    line.set_xy2(upper, bar_index, upperEndPrice)
+    na
 
-	if na(lower) and not na(lowerStartPrice)
-		lower := line.new(bar_index - len + 1, lowerStartPrice, bar_index, lowerEndPrice, width=1, extend=extend, color=#0000ff)
-		lower
-	else
-		line.set_xy1(lower, bar_index - len + 1, lowerStartPrice)
-		line.set_xy2(lower, bar_index, lowerEndPrice)
-		na
+  if na(lower) and not na(lowerStartPrice)
+    lower := line.new(bar_index - len + 1, lowerStartPrice, bar_index, lowerEndPrice, width=1, extend=extend, color=#0000ff)
+    lower
+  else
+    line.set_xy1(lower, bar_index - len + 1, lowerStartPrice)
+    line.set_xy2(lower, bar_index, lowerEndPrice)
+    na
 
-	// Pearson's R
-	var label r = na
-	transparent = color.new(color.white, 100)
-	label.delete(r[1])
-	if showPearson and not na(pearsonR)
-		r := label.new(bar_index - len + 1, lowerStartPrice, str.tostring(pearsonR, '#.################'), color=transparent, textcolor=#0000ff, size=size.normal, style=label.style_label_up)
-		r
+  // Pearson's R
+  var label r = na
+  transparent = color.new(color.white, 100)
+  label.delete(r[1])
+  if showPearson and not na(pearsonR)
+    r := label.new(bar_index - len + 1, lowerStartPrice, str.tostring(pearsonR, '#.################'), color=transparent, textcolor=#0000ff, size=size.normal, style=label.style_label_up)
+    r
 
 
 
@@ -797,123 +797,124 @@ Zig Zag
 
 ::
 
-	//@version=5
-	indicator('Zig Zag', overlay=true)
+  //@version=5
+  indicator('Zig Zag', overlay=true)
 
-	dev_threshold = input.float(title='Deviation (%)', defval=5, minval=1, maxval=100)
-	depth = input.int(title='Depth', defval=10, minval=1)
+  dev_threshold = input.float(title='Deviation (%)', defval=5, minval=1, maxval=100)
+  depth = input.int(title='Depth', defval=10, minval=1)
 
-	pivots(src, length, isHigh) =>
-		p = nz(src[length])
+  pivots(src, length, isHigh) =>
+    p = nz(src[length])
 
-		if length == 0
-			[bar_index, p]
-		else
-			isFound = true
-			for i = 0 to length - 1 by 1
-				if isHigh and src[i] > p
-					isFound := false
-					isFound
-				if not isHigh and src[i] < p
-					isFound := false
-					isFound
+    if length == 0
+      [bar_index, p]
+    else
+      isFound = true
+      for i = 0 to length - 1 by 1
+        if isHigh and src[i] > p
+          isFound := false
+          isFound
+        if not isHigh and src[i] < p
+          isFound := false
+          isFound
 
-			for i = length + 1 to 2 * length by 1
-				if isHigh and src[i] >= p
-					isFound := false
-					isFound
-				if not isHigh and src[i] <= p
-					isFound := false
-					isFound
+      for i = length + 1 to 2 * length by 1
+        if isHigh and src[i] >= p
+          isFound := false
+          isFound
+        if not isHigh and src[i] <= p
+          isFound := false
+          isFound
 
-			if isFound and length * 2 <= bar_index
-				[bar_index[length], p]
-			else
-				[int(na), float(na)]
+      if isFound and length * 2 <= bar_index
+        [bar_index[length], p]
+      else
+        [int(na), float(na)]
 
-	[iH, pH] = pivots(high, math.floor(depth / 2), true)
-	[iL, pL] = pivots(low, math.floor(depth / 2), false)
+  [iH, pH] = pivots(high, math.floor(depth / 2), true)
+  [iL, pL] = pivots(low, math.floor(depth / 2), false)
 
-	calc_dev(base_price, price) =>
-		100 * (price - base_price) / base_price
+  calc_dev(base_price, price) =>
+    100 * (price - base_price) / base_price
 
-	var line lineLast = na
-	var int iLast = 0
-	var float pLast = 0
-	var bool isHighLast = true  // otherwise the last pivot is a low pivot
-	var int linesCount = 0
+  var line lineLast = na
+  var int iLast = 0
+  var float pLast = 0
+  var bool isHighLast = true  // otherwise the last pivot is a low pivot
+  var int linesCount = 0
 
-	pivotFound(dev, isHigh, index, price) =>
-		if isHighLast == isHigh and not na(lineLast)
-			// same direction
-			if isHighLast ? price > pLast : price < pLast
-				if linesCount <= 1
-					line.set_xy1(lineLast, index, price)
-				line.set_xy2(lineLast, index, price)
-				[lineLast, isHighLast, false]
-			else
-				[line(na), bool(na), false]
-		else
-			// reverse the direction (or create the very first line)
-			if na(lineLast)
-				id = line.new(index, price, index, price, color=color.red, width=2)
-				[id, isHigh, true]
-			else
-				// price move is significant
-				if math.abs(dev) >= dev_threshold
-					id = line.new(iLast, pLast, index, price, color=color.red, width=2)
-					[id, isHigh, true]
-				else
-					[line(na), bool(na), false]
+  pivotFound(dev, isHigh, index, price) =>
+    if isHighLast == isHigh and not na(lineLast)
+      // same direction
+      if isHighLast ? price > pLast : price < pLast
+        if linesCount <= 1
+          line.set_xy1(lineLast, index, price)
+        line.set_xy2(lineLast, index, price)
+        [lineLast, isHighLast, false]
+      else
+        [line(na), bool(na), false]
+    else
+      // reverse the direction (or create the very first line)
+      if na(lineLast)
+        id = line.new(index, price, index, price, color=color.red, width=2)
+        [id, isHigh, true]
+      else
+        // price move is significant
+        if math.abs(dev) >= dev_threshold
+          id = line.new(iLast, pLast, index, price, color=color.red, width=2)
+          [id, isHigh, true]
+        else
+          [line(na), bool(na), false]
 
-	if not na(iH) and not na(iL) and iH == iL
-		dev1 = calc_dev(pLast, pH)
-		[id2, isHigh2, isNew2] = pivotFound(dev1, true, iH, pH)
-		if isNew2
-			linesCount := linesCount + 1
-			linesCount
-		if not na(id2)
-			lineLast := id2
-			isHighLast := isHigh2
-			iLast := iH
-			pLast := pH
-			pLast
+  if not na(iH) and not na(iL) and iH == iL
+    dev1 = calc_dev(pLast, pH)
+    [id2, isHigh2, isNew2] = pivotFound(dev1, true, iH, pH)
+    if isNew2
+      linesCount := linesCount + 1
+      linesCount
+    if not na(id2)
+      lineLast := id2
+      isHighLast := isHigh2
+      iLast := iH
+      pLast := pH
+      pLast
 
-		dev2 = calc_dev(pLast, pL)
-		[id1, isHigh1, isNew1] = pivotFound(dev2, false, iL, pL)
-		if isNew1
-			linesCount := linesCount + 1
-			linesCount
-		if not na(id1)
-			lineLast := id1
-			isHighLast := isHigh1
-			iLast := iL
-			pLast := pL
-			pLast
-	else
+    dev2 = calc_dev(pLast, pL)
+    [id1, isHigh1, isNew1] = pivotFound(dev2, false, iL, pL)
+    if isNew1
+      linesCount := linesCount + 1
+      linesCount
+    if not na(id1)
+      lineLast := id1
+      isHighLast := isHigh1
+      iLast := iL
+      pLast := pL
+      pLast
+  else
 
-		if not na(iH)
-			dev1 = calc_dev(pLast, pH)
-			[id, isHigh, isNew] = pivotFound(dev1, true, iH, pH)
-			if isNew
-				linesCount := linesCount + 1
-				linesCount
-			if not na(id)
-				lineLast := id
-				isHighLast := isHigh
-				iLast := iH
-				pLast := pH
-				pLast
-		else
-			if not na(iL)
-				dev2 = calc_dev(pLast, pL)
-				[id, isHigh, isNew] = pivotFound(dev2, false, iL, pL)
-				if isNew
-					linesCount := linesCount + 1
-					linesCount
-				if not na(id)
-					lineLast := id
-					isHighLast := isHigh
-					iLast := iL
-					pLast := pL
-					pLast
+    if not na(iH)
+      dev1 = calc_dev(pLast, pH)
+      [id, isHigh, isNew] = pivotFound(dev1, true, iH, pH)
+      if isNew
+        linesCount := linesCount + 1
+        linesCount
+      if not na(id)
+        lineLast := id
+        isHighLast := isHigh
+        iLast := iH
+        pLast := pH
+        pLast
+    else
+      if not na(iL)
+        dev2 = calc_dev(pLast, pL)
+        [id, isHigh, isNew] = pivotFound(dev2, false, iL, pL)
+        if isNew
+          linesCount := linesCount + 1
+          linesCount
+        if not na(id)
+          lineLast := id
+          isHighLast := isHigh
+          iLast := iL
+          pLast := pL
+          pLast
+          
