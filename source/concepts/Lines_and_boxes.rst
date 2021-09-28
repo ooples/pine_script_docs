@@ -474,7 +474,7 @@ Note that:
   to cap the user value.
 - We use the ``myRSIRises`` and ``myRSIFalls`` variables to hold the states determining when we create a new level.
   After that, we delete the oldest line in the `line.all <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}all>`__
-  array that is automatically maintained by the Pine runtime and contains the ID of all the visible lines drawn by our script.
+  built-in array that is automatically maintained by the Pine runtime and contains the ID of all the visible lines drawn by our script.
   We use the `array.get() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}get>`__
   function to retrieve the array element at index zero (the oldest visible line ID).
   We then use `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`__
@@ -483,7 +483,7 @@ Note that:
   `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ structure so the compiler doesn't not complain.
   See the :ref:`Matching local block type requiremement <PageConditionalStructures_MatchingLocalBlockTypeRequirement>` section for more information.
 - This time, we mention the type of variables explicitly when we declare them, as in ``float myRSI = ta.rsi(close, 20)``.
-  The declarations are functionally redundant, but they can help make your intention clear to readers of your code — you being the one reading it the most often.
+  The declarations are functionally redundant, but they can help make your intention clear to readers of your code — you being the one who will read it the most frequently.
 
 
 
