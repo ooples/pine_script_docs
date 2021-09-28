@@ -798,13 +798,13 @@ This code's intention, for example, is to ignore all historical bars and create 
     indicator("My Script", overlay = true)
 
     if barstate.isrealtime
-        label.new(bar_index[10], na, text = "Label", yloc = yloc.abovebar)
+        label.new(bar_index[300], na, text = "Label", yloc = yloc.abovebar)
 
 It will, however, fail at runtime. The reason for the error is that Pine cannot determine the buffer size
 for historical values of the ``time`` plot, even though the ``time`` built-in variable isn't mentioned in the code.
 This is due to the fact that the built-in variable ``bar_index`` uses the ``time`` series in its inner workings.
-Accessing the value of the bar index 10 bars back requires that the history buffer size of the ``time`` series
-be of size 10 or more.
+Accessing the value of the bar index 300 bars back requires that the history buffer size of the ``time`` series
+be of size 300 or more.
 
 In Pine, there is a mechanism that automaticaly detects the required historical buffer size for most cases.
 Autodetection works by letting Pine code access historical values any number of bars back for a limited duration.
@@ -816,9 +816,9 @@ The solution to this conundrum is to use the `max_bars_back <https://www.trading
     //@version=5
     indicator("My Script", overlay = true)
 
-    max_bars_back(time, 10)
+    max_bars_back(time, 300)
 
     if barstate.isrealtime
-        label.new(bar_index[10], na, text = "Label", yloc = yloc.abovebar)
+        label.new(bar_index[300], na, text = "Label", yloc = yloc.abovebar)
 
 Such occurrences are confusing, but rare. In time, the Pine team hopes to eliminate them.
