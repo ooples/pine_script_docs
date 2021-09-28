@@ -332,6 +332,7 @@ Note that:
   `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ call,
   and we cap the input for ``lookbackInput`` using ``maxval`` in our 
   `input.int() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int>`__ call.
+  Rather than use the `500` literal in two places, we create a ``MAX_BARS_BACK`` constant for it.
 - We create our line and label on the first bar only, using `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__.
   From that point, we only need to update their properties, so we are moving the same line and label along,
   resetting their starting properties when a new high is found, and then only updating their *x* coordinates as new bars come in.
