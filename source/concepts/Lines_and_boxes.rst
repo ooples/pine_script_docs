@@ -277,7 +277,7 @@ where:
   `line.set_xy2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy2>`__ changes two properties, so they have two such parameters.
 
 In the next example we display a line showing the highest `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__
-value in the last ``lookbackInput`` bars::
+value in the last ``lookbackInput`` bars. We will be using setter functions to modify an existing line::
 
     //@version=5
     MAX_BARS_BACK = 500
