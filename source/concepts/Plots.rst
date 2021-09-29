@@ -154,18 +154,17 @@ The same distorted plots would occur if we placed the `RSI <https://www.tradingv
 Merging two indicators
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-If you are planning to merge two indicators in one, first consider the scale of each.
+If you are planning to merge two signals in one, first consider the scale of each.
 It is impossible, for example, to correctly plot an 
 `RSI <https://www.tradingview.com/u/?solution=43000502338>`__ and 
 a `MACD <https://www.tradingview.com/u/?solution=43000502344>`__ 
 in the same script's visual space because `RSI <https://www.tradingview.com/u/?solution=43000502338>`__
-has a fixed range of 0-100 while `MACD <https://www.tradingview.com/u/?solution=43000502344>`__ does not have 
-a fixed scale, as it plots moving averages calculated on price.
+has a fixed range (0 to 100) while `MACD <https://www.tradingview.com/u/?solution=43000502344>`__ doesn't, as it plots moving averages calculated on price.
 
 If both your indicators used fixed ranges, you can shift the values of one of them so they do not overlap.
 We could, for example, plot both `RSI <https://www.tradingview.com/u/?solution=43000502338>`__ (0 to 100)
-and the `True Strength Indicator (TSI) <https://www.tradingview.com/u/?solution=43000592290>`__ (-100 to +100).
-Our strategy will be compress and shift the `TSI <https://www.tradingview.com/u/?solution=43000592290>`__ values
+and the `True Strength Indicator (TSI) <https://www.tradingview.com/u/?solution=43000592290>`__ (-100 to +100) by displacing one of them.
+Our strategy here will be to compress and shift the `TSI <https://www.tradingview.com/u/?solution=43000592290>`__ values
 so they plot over `RSI <https://www.tradingview.com/u/?solution=43000502338>`__::
 
     //@version=5
@@ -191,9 +190,11 @@ so they plot over `RSI <https://www.tradingview.com/u/?solution=43000502338>`__:
 
 Note that:
 
-- In order for both indicator values to oscillate on the same range of 100,
+- We have added level using `hline <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__
+  to situate both signals.
+- In order for both signal lines to oscillate on the same range of 100,
   we divide the `TSI <https://www.tradingview.com/u/?solution=43000592290>`__ value by 2 because it has a 200 range (-100 to +100).
   We then shift this value up by 150 so it oscillates between 100 and 200, making 150 its centerline.
-- The manipulations we make are typical of the compromises required to bring two indicators
+- The manipulations we make here are typical of the compromises required to bring two indicators
   with different scales in the same visual space, even when their values, contrary to 
   `MACD <https://www.tradingview.com/u/?solution=43000502344>`__, are bounded in a fixed range.
