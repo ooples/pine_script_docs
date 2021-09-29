@@ -730,12 +730,12 @@ Getting box properties
 
 The following *getter* functions are available for boxes:
 
-- `box.get_bottom() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_bottom>`__
-- `box.get_left() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_left>`__
-- `box.get_right() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_right>`__
-- `box.get_top() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_top>`__
+- `box.get_bottom() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}get_bottom>`__
+- `box.get_left() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}get_left>`__
+- `box.get_right() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}get_right>`__
+- `box.get_top() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}get_top>`__
 
-The signature for `box.get_top() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_top>`__ is:
+The signature for `box.get_top() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}get_top>`__ is:
 
 .. code-block:: text
 
