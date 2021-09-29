@@ -582,6 +582,8 @@ Let's create simple boxes::
 Note that:
 
 - The start and end points of boxes, like lines, are always the horizontal **center** of bars.
+- We start these boxes at ``bar_index`` and end them on ``bar_index + 1`` (the following bar in the future)
+  so that we get an actual box. If we used ``bar_index`` for both coordinates, only a veritcal line would be drawn in the center of the bar.
 - No logic controls our `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ call, so boxes are created on every bar.
 - Only approximately the last 50 boxes are shown because that is the default value for 
   the ``max_boxes_count`` parameter in `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
