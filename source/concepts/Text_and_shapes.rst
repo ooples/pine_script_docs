@@ -418,19 +418,19 @@ value in the last 50 bars::
     //@version=5
     indicator("", "", true)
     
-    // Find the offset to the highest `high` in last 50 bars. Change it's sign so it is positive.
-    highestBarOffset = - ta.highestbars(50)
+    // Find the highest `high` in last 50 bars and its offset. Change it's sign so it is positive.
+    LOOKBACK = 50
+    hi = ta.highest(LOOKBACK)
+    highestBarOffset = - ta.highestbars(LOOKBACK)
     
     // Create label on bar zero only.
     var lbl = label.new(na, na, "", color = color.orange, style = label.style_label_lower_left)
     // When a new high is found, move the label there and update its text and tooltip.
-    if ta.change(highestBarOffset)
-        // Get the `high` value at that offset. Note that `highest(50)` would be equivalent,  
-        // but it would require evaluation on every bar, prior to entry into this `if` structure.
-        hi = high[highestBarOffset]
+    if ta.change(hi)
         // Build label and tooltip strings.
         labelText = "High: " + str.tostring(hi, format.mintick)
         tooltipText = "Offest in bars: " + str.tostring(highestBarOffset) + "\nLow: " + str.tostring(low[highestBarOffset], format.mintick)
+        // Update the label's position, text and tooltip.
         label.set_xy(lbl, bar_index[highestBarOffset], hi)
         label.set_text(lbl, labelText)
         label.set_tooltip(lbl, tooltipText)
@@ -444,11 +444,12 @@ Note that:
   `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ call are irrelevant,
   as the label will be updated on further bars. We do, however, take care to use the ``color`` and ``style``
   we want for the labels, so they don't need updating later.
-- On every bar, we detect if a new high was found by testing for changes in the value of ``highestBarOffset``
-  (if the offset to the highest value in the last 50 bars changes, it means that a new high was found).
+- On every bar, we detect if a new high was found by testing for changes in the value of ``hi``
 - When a change in the high value occurs, we update our label with new information. 
   To do this, we use three ``label.set*()`` calls to change the label's relevant information.
   We refer to our label using the ``lbl`` variable, which contains our label's ID.
+  The script is thus maintaining the same label throughout all bars,
+  but moving it and updating its information when a new high is detected.
 
 Here we create a label on each bar, but we set its properties conditionally,
 depending on the bar's polarity::
