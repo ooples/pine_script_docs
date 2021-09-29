@@ -83,4 +83,8 @@ Alice <-- Bob: another authentication Response
 
 Refer to the :ref:`Concepts <IndexConcepts>` section of this manual.
 
-`plotchar() <https://www.tradingview.com/pine-script-reference/|version|/#fun_plotchar>`__
+`plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__
+
+|Rplotchar|
+
+.. |Rplotchar| `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__
