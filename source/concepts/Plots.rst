@@ -118,7 +118,7 @@ Your scripts visual space is always bound by upper and lower limits that are dyn
 An RSI indicator will plot values between 0 and 100, which is why it is usually displayed in a distinct *pane* — or area — above or below the chart.
 If RSI values were plotted as an overlay on the chart, the effect would be to distort the symbol's normal price scale, 
 unless it just hapenned to be close to RSI's 0-100 range.
-This shows an RSI line and a center line at the 50 level, with the script running in a separate pane::
+This shows an RSI line and a centerline at the 50 level, with the script running in a separate pane::
 
     //@version=5
     indicator("RSI")
