@@ -129,8 +129,8 @@ This shows an RSI line and a center line at the 50 level::
 
 .. image:: images/Plots-Scale-01.png
 
-The *y* axis of our script's visual space is automatically sized using the minimal values plotted, i.e., 
-the values of RSI. If we try to plot the symbol's 
+The *y* axis of our script's visual space is automatically sized using the range of values plotted, i.e., the values of RSI. 
+If we try to plot the symbol's 
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ values in the same space
 by adding the following line to our script::
 
