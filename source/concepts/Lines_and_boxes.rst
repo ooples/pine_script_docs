@@ -570,9 +570,7 @@ control the visual appearance of boxes:
 ``bgcolor``
    Is the line's color.
    
-This is how you can create lines in their simplest form. We connect the preceding bar's 
-`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ to the current bar's
-`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__::
+This is how you can create boxes in their simplest form::
 
     //@version=5
     indicator("", "", true)
@@ -653,6 +651,81 @@ The available *setter* functions for box drawings are:
 
 Note that contrary to lines, there is no setter function to modify ``xloc`` for boxes.
 
+This script uses setter functions to update boxes. 
+It detects the largest up and down volume bars during a user-defined timeframe
+and draws boxes with the `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and
+`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ levels of those bars.
+If a higher volume bar comes in, the timeframe's box is redrawn using the new bar's
+`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and
+`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ levels::
+
+    //@version=5
+    indicator("High volume bar boxes", "", true)
+    string tfInput = input.timeframe("D", "Resetting timeframe")
+    color upColorInput = input.color(color.lime, "Lines  🠅", inline = "1")
+    color dnColorInput = input.color(color.fuchsia, "🠇", inline = "1")
+    int transpInput = 100 - input.int(30, "Brightness", minval = 0, maxval = 100, step = 5, inline = "1", tooltip = "100 is brightest")
+    
+    bool newTF = ta.change(time(tfInput))
+    bool barUp = close > open
+    
+    // These keep track of highest up/dn volume found during the TF.
+    var float hiVolUp = na
+    var float hiVolDn = na
+    // These always hold the IDs of the current TFs boxes.
+    var box boxUp = na
+    var box boxDn = na
+    
+    if newTF
+        // New TF begins; create new boxes, one of which will be invisible.
+        if barUp
+            hiVolUp := volume
+            hiVolDn := na
+            boxUp := box.new(bar_index, high, bar_index + 1, low, border_color = color.new(upColorInput, transpInput), bgcolor = na)
+            boxDn := box.new(na, na, na, na, border_color = color.new(dnColorInput, transpInput), bgcolor = na)
+        else
+            hiVolDn := volume
+            hiVolUp := na
+            boxDn := box.new(bar_index, high, bar_index + 1, low, border_color = color.new(dnColorInput, transpInput), bgcolor = na)
+            boxUp := box.new(na, na, na, na, border_color = color.new(upColorInput, transpInput), bgcolor = na)
+        int(na)
+    else
+        // On bars during the HTF, keep tracks of highest up/dn volume bar.
+        if barUp
+            hiVolUp := math.max(nz(hiVolUp), volume)
+        else
+            hiVolDn := math.max(nz(hiVolDn), volume)
+        // If a new bar has higher volume, reset its box.
+        if hiVolUp > nz(hiVolUp[1])
+            box.set_lefttop(boxUp, bar_index, high)
+            box.set_rightbottom(boxUp, bar_index + 1, low)
+        else if hiVolDn > nz(hiVolDn[1])
+            box.set_lefttop(boxDn, bar_index, high)
+            box.set_rightbottom(boxDn, bar_index + 1, low)
+        int(na)
+    
+    // On all bars, extend right side of both boxes.
+    box.set_right(boxUp, bar_index + 1)
+    box.set_right(boxDn, bar_index + 1)
+    // Plot circle mark on TF changes.
+    plotchar(newTF, "newTF", "•", location.top, size = size.tiny)
+
+Note that:
+
+- We use the ``inline`` parameter in the inputs relating to the boxes' visual appearance to place them on the same line.
+- When a new higher timeframe bar comes in, we reset our information. If the timeframe's first bar is up, 
+  we create a new visible ``boxUp`` box and an invisible ``boxDn`` box. We do the inverse if the first bar's polarity is down.
+  We take care to reassign the IDs of the newly created boxes to ``boxUp`` and ``boxUp`` so we will be able to update those boxes later in the script.
+  This is possible because we have declared those variables with `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__.
+  See the section on the :ref:`var declaration mode <PageVariableDeclarations_Var>` for more information.
+- On all other chart bars belonging to the same higher timeframe bar, we monitor volume values to keep track of the highest.
+  If a new higher volume bar is encountered, we reset the corresponding box's coordinates on that new bar using
+  `box.set_lefttop() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_lefttop>`__ and
+  `box.set_rightbottom() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_rightbottom>`__.
+- On all bars, we extend the right side of the timeframe's two boxes using `box.set_right() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_right>`__.
+- Approximately the last 50 boxes will be visible on the chart because we do not use
+  ``max_boxes_count`` in our `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ call
+  to change its default value.
 
 
 .. _PageLinesAndBoxes_BoxStyles:
