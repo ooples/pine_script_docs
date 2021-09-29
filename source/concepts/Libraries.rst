@@ -35,7 +35,7 @@ A library script has the following structure, where one or more exportable funct
     //@version=5
 
     // @description <library_description>
-    library(title, shorttitle, overlay)
+    library(title, overlay)
 
     <script_code>
 
@@ -59,7 +59,7 @@ This is an example library::
     //@version=5
 
     // @description Provides functions calculating the all-time high/low of values.
-    library("AllTimeHighLow", "", true)
+    library("AllTimeHighLow", true)
 
     // @function Calculates the all-time high of a series.
     // @param val Series to use (`high` is used if no argument is supplied).
