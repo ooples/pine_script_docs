@@ -115,10 +115,13 @@ Scale
 
 Not all values can be plotted everywhere. 
 Your scripts visual space is always bound by upper and lower limits that are dynamically adjusted with the values plotted.
-An `RSI <https://www.tradingview.com/u/?solution=43000502338>`__ indicator will plot values between 0 and 100, which is why it is usually displayed in a distinct *pane* — or area — above or below the chart.
-If `RSI <https://www.tradingview.com/u/?solution=43000502338>`__ values were plotted as an overlay on the chart, the effect would be to distort the symbol's normal price scale, 
+An `RSI <https://www.tradingview.com/u/?solution=43000502338>`__ indicator will plot values between 0 and 100, 
+which is why it is usually displayed in a distinct *pane* — or area — above or below the chart.
+If `RSI <https://www.tradingview.com/u/?solution=43000502338>`__ values were plotted as an overlay on the chart, 
+the effect would be to distort the symbol's normal price scale, 
 unless it just hapenned to be close to `RSI <https://www.tradingview.com/u/?solution=43000502338>`__'s 0 to 100 range.
-This shows an RSI line and a centerline at the 50 level, with the script running in a separate pane::
+This shows an `RSI <https://www.tradingview.com/u/?solution=43000502338>`__ signal line and a centerline at the 50 level, 
+with the script running in a separate pane::
 
     //@version=5
     indicator("RSI")
@@ -131,7 +134,8 @@ This shows an RSI line and a centerline at the 50 level, with the script running
 
 .. image:: images/Plots-Scale-01.png
 
-Note that the *y* axis of our script's visual space is automatically sized using the range of values plotted, i.e., the values of `RSI <https://www.tradingview.com/u/?solution=43000502338>`__. 
+Note that the *y* axis of our script's visual space is automatically sized using the range of values plotted, i.e., 
+the values of `RSI <https://www.tradingview.com/u/?solution=43000502338>`__. 
 See the page on :ref:`Colors <PageColors>` for more information on the 
 `color.from_gradient() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}from_gradient>`__ function used in the script.
 
