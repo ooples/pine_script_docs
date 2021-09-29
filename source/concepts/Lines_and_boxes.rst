@@ -574,61 +574,16 @@ This is how you can create boxes in their simplest form::
 
     //@version=5
     indicator("", "", true)
-    line.new(bar_index - 1, high[1], bar_index, low, width = 3)
-
-.. image:: images/LinesAndBoxes-CreatingLines-01.png
+    box.new(bar_index, high, bar_index, low)
 
 Note that:
 
-- We use a different ``x1`` and ``x2`` value: ``bar_index - 1`` and ``bar_index``.
-  This is necessary, otherwise no line would be created.
-- We make the width of our line 3 pixels using ``width = 3``.
-- No logic controls our `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`_ call, so lines are created on every bar.
-- Only approximately the last 50 lines are shown because that is the default value for 
-  the ``max_lines_count`` parameter in `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
+- No logic controls our `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ call, so boxes are created on every bar.
+- Only approximately the last 50 boxes are shown because that is the default value for 
+  the ``max_boxes_count`` parameter in `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
   which we haven't specified.
-- Lines persist on bars until your script deletes them using
-  `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`__, or garbage collection removes them.
-
-In this next example, we use lines to create probable travel paths for price.
-We draw a user-selected quantity of lines from the previous bar's center point between its
-`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ and
-`open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ values.
-The lines project one bar after the current bar, after having been distributed along the 
-`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ and
-`open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ range of the current bar::
-
-    //@version=5
-    indicator("Price path projection", "PPP", true, max_lines_count = 100)
-    qtyOfLinesInput = input.int(10, minval = 1)
-    
-    y2Increment = (close - open) / qtyOfLinesInput
-    // Starting point of the fan in y.
-    lineY1 = math.avg(close[1], open[1])
-    // Loop creating the fan of lines on each bar.
-    for i = 0 to qtyOfLinesInput
-        // End point in y if line stopped at current bar.
-        lineY2 = open + (y2Increment * i)
-        // Extrapolate necessary y position to the next bar because we extend lines one bar in the future.
-        lineY2 := lineY2 + (lineY2 - lineY1)
-        lineColor = lineY2 > lineY1 ? color.lime : color.fuchsia
-        line.new(bar_index - 1, lineY1, bar_index + 1, lineY2, color = lineColor)
-
-.. image:: images/LinesAndBoxes-CreatingLines-02.png
-
-Note that:
-
-- We are creating a set of lines from within a `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ structure.
-- We use the default ``xloc = xloc.bar_index``, so our ``x1`` and ``x2`` values are bar indices.
-- We want to start lines on the previous bar, so we use ``bar_index - 1`` for ``x1`` and ``bar_index + 1`` for ``x2``.
-- We use a "series color" value (its value can change in any of the loop's iterations) for the line's color.
-  When the line is going up we make it lime; if not we make it fuchsia.
-- The script will repaint in realtime because it is using the 
-  `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ and
-  `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ values of the realtime bar to calculate line projections.
-  Once the realtime bar closes, the lines drawn on elapsed realtime bars will no longer update.
-- We use ``max_lines_count = 100`` in our `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ call to
-  preserve the last 100 lines.
+- Boxes persist on bars until your script deletes them using
+  `box.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}delete>`__, or garbage collection removes them.
 
 
 
@@ -726,6 +681,7 @@ Note that:
 - Approximately the last 50 boxes will be visible on the chart because we do not use
   ``max_boxes_count`` in our `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ call
   to change its default value.
+
 
 
 .. _PageLinesAndBoxes_BoxStyles:
