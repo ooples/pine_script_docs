@@ -141,4 +141,4 @@ This is what happens:
 .. image:: images/Plots-Scale-02.png
 
 The chart is on the BTCUSD symbol, whose `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
-prices are around 40000 during this period. Plotting values in the 40000 size makes our RSI plots in the 0-100 range indiscernable.
+prices are around 40000 during this period. Plotting values in the 40000 range makes our RSI plots in the 0-100 range indiscernible.
