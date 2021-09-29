@@ -523,7 +523,7 @@ Five parameters affect this behavior: ``left``, ``top``, ``right``, ``bottom`` a
    They are either a bar index or a time value, as determined by the argument used for ``xloc``.
    When a bar index is used, the value can be offset in the past (maximum of 5000 bars) or in the future (maximum of 500 bars).
    Past or future offsets can also be calculated when using time values.
-   The ``left`` and ``x2`` values of an existing line can be modified using 
+   The ``left`` and ``right`` values of an existing line can be modified using 
    `box.set_left() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_left>`__,
    `box.set_right() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_right>`__,
    `box.set_lefttop() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_lefttop>`__ or
