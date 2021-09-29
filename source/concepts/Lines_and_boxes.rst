@@ -17,7 +17,7 @@ Multiple small line segments are also useful to draw complex geometric forms.
 The flexibility lines and boxes allow in their positioning mechanism makes them particularly well-suited to
 drawing objects at points in the past that are detected a variable number of bars after the fact.
 
-Lines and boxes are objects, like :ref:`labels <PageLabels>` and :ref:`tables <PageTables>`.
+Lines and boxes are objects, like :ref:`labels <PageTextAndShapes_Labels>` and :ref:`tables <PageTables>`.
 Like them, they are referred to using an ID, which acts like a pointer. 
 Line IDs are of "line" type, and box IDs are of "box" type.
 As with other Pine objects, lines and box IDs are "time series" and all the functions used to manage them accept "series" arguments,
@@ -25,11 +25,12 @@ which makes them very flexible.
 
 .. note:: On TradingView charts, a complete set of *Drawing Tools*
   allows users to create and modify drawings using mouse actions. While they may sometimes look similar to
-  drawing objects created with Pine code, they are different entities.
+  drawing objects created with Pine code, they are unrelated entities.
   Lines and boxes created using Pine code cannot be modified with mouse actions, 
   and hand-drawn drawings from the chart user interface are not visible from Pine scripts.
 
-Lines can be horizontal or at an angle, while boxes are always rectangular, but they share many common characteristics:
+Lines can be horizontal or at an angle, while boxes are always rectangular. 
+Both share many common characteristics:
 
 - They can start and end from any point on the chart, including the future.
 - The functions used to manage them can be placed in conditional or loop structures, making it easier to control their behavior.
@@ -205,7 +206,7 @@ Note that:
   the ``max_lines_count`` parameter in `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
   which we haven't specified.
 - Lines persist on bars until your script deletes them using
-  `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`__, or garbage collection removes them.
+  `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`__, or garbage collection removes them.
 
 In this next example, we use lines to create probable travel paths for price.
 We draw a user-selected quantity of lines from the previous bar's center point between its
@@ -331,17 +332,17 @@ Note that:
   This gives the user control over the repainting behavior of the script.
   It also avoids misleading traders into thinking that our script is prescient and can know in advance if a high
   point will still be the high point in the lookback period *n* bars later.
-- We manage the historical buffer to avoid runtime error when referring to bars too far away in the past.
+- We manage the historical buffer to avoid runtime errors when referring to bars too far away in the past.
   We do two things for this: we use the ``max_bars_back`` parameter in our 
   `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ call,
   and we cap the input for ``lookbackInput`` using ``maxval`` in our 
   `input.int() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int>`__ call.
   Rather than use the ``500`` literal in two places, we create a ``MAX_BARS_BACK`` constant for it.
 - We create our line and label on the first bar only, using `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__.
-  From that point, we only need to update their properties, so we are moving the same line and label along,
-  resetting their starting properties when a new high is found, and then only updating their *x* coordinates as new bars come in.
+  From that point on, we only need to update their properties, so we are moving the same line and label along,
+  resetting their position and the label's text when a new high is found, and then only updating their *x* coordinates as new bars come in.
   We use the `line.set_xy1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy1>`__ and
-  `line.set_xy1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy1>`__ when we find a new high, and
+  `line.set_xy1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy1>`__ functions when we find a new high, and
   `line.set_x2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_x2>`__ on other bars, to extend the line.
 - We use time values for ``x1`` and ``x2`` because our 
   `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ call specifies ``xloc = xloc.bar_time``.
@@ -480,7 +481,7 @@ Note that:
   We use the `array.get() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}get>`__
   function to retrieve the array element at index zero (the oldest visible line ID).
   We then use `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`__
-  to delete the line linked with that ID.
+  to delete the line referenced by that ID.
 - Again, we need to artificially return ``int(na)`` in both local blocks of our 
   `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ structure so the compiler doesn't not complain.
   See the :ref:`Matching local block type requiremement <PageConditionalStructures_MatchingLocalBlockTypeRequirement>` section for more information.

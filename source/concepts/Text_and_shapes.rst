@@ -301,6 +301,8 @@ so you can see what values are used to determine the position and size of the ar
 
 
 
+.. _PageTextAndShapes_Labels:
+
 Labels
 ------
 
@@ -315,7 +317,7 @@ which makes them very flexible.
 
 .. note:: On TradingView charts, a complete set of *Drawing Tools*
   allows users to create and modify drawings using mouse actions. While they may sometimes look similar to
-  drawing objects created with Pine code, they are different entities.
+  drawing objects created with Pine code, they are unrelated entities.
   Drawing objects created using Pine code cannot be modified with mouse actions, 
   and hand-drawn drawings from the chart user interface are not visible from Pine scripts.
 
