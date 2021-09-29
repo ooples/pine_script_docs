@@ -131,10 +131,13 @@ This shows an RSI line and a center line at the 50 level, with the script runnin
 
 .. image:: images/Plots-Scale-01.png
 
-The *y* axis of our script's visual space is automatically sized using the range of values plotted, i.e., the values of RSI. 
+Note that the *y* axis of our script's visual space is automatically sized using the range of values plotted, i.e., the values of RSI. 
+See the page on :ref:`Colors <PageColors>` for more information on the 
+`color.from_gradient() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}from_gradient>`__ function used in the script.
+
 If we try to plot the symbol's 
-`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ values in the same space
-by adding the following line to our script::
+`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ 
+values in the same space by adding the following line to our script::
 
     plot(close)
 
@@ -144,3 +147,6 @@ This is what happens:
 
 The chart is on the BTCUSD symbol, whose `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
 prices are around 40000 during this period. Plotting values in the 40000 range makes our RSI plots in the 0-100 range indiscernible.
+The same distorted plots would occur if we placed the RSI indicator on the chart as an overlay.
+
+
