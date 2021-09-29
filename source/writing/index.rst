@@ -1,4 +1,4 @@
-.. _IndexWriting::
+.. _IndexWriting:
 
 Writing scripts
 ===============

@@ -733,7 +733,7 @@ Deleting boxes
 ^^^^^^^^^^^^^^
 
 The `box.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}delete>`__ 
-function is used to delete boxes. Its syntax is:
+function is used to delete boxes. Its signature is:
 
 .. code-block:: text
 
