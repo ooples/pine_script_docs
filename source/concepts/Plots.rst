@@ -194,7 +194,7 @@ so they plot over `RSI <https://www.tradingview.com/u/?solution=43000502338>`__:
 
 Note that:
 
-- We have added level using `hline <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__
+- We have added levels using `hline <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__
   to situate both signals.
 - In order for both signal lines to oscillate on the same range of 100,
   we divide the `TSI <https://www.tradingview.com/u/?solution=43000592290>`__ value by 2 because it has a 200 range (-100 to +100).
