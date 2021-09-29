@@ -496,7 +496,7 @@ Boxes are managed using built-in functions in the ``box`` namespace. They includ
 
 - `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ to create them.
 - ``box.set_*()`` functions to modify the properties of a box.
-- ``box.get_*()`` functions to read the properties of an existing box.
+- ``box.get_*()`` functions to read some of the properties of an existing box.
 - `box.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}delete>`_ to delete them.
 - The `box.all <https://www.tradingview.com/pine-script-reference/v5/#var_box{dot}all>`__ 
   array which always contains the IDs of all the visible boxes on the chart. 
