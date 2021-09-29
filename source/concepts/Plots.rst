@@ -113,3 +113,32 @@ series has been shifted to the right (its value is positive).
 Scale
 -----
 
+Not all values can be plotted everywhere. 
+Your scripts visual space is always bound by upper and lower limits that are dynamically adjusted with the values plotted.
+An RSI indicator will plot values between 0 and 100, which is why it is usually display in a distinct *pane* — or area — above or below the chart.
+This shows an RSI line and a center line at the 50 level::
+
+    //@version=5
+    indicator("RSI")
+    myRSI = ta.rsi(close, 20)
+    bullColor = color.from_gradient(myRSI, 50, 80, color.new(color.lime, 70), color.new(color.lime, 0))
+    bearColor = color.from_gradient(myRSI, 20, 50, color.new(color.red,   0), color.new(color.red, 70))
+    myRSIColor = myRSI > 50 ? bullColor : bearColor
+    plot(myRSI, "RSI", myRSIColor, 3)
+    hline(50)
+
+.. image:: images/Plots-Scale-01.png
+
+The *y* axis of our script's visual space is automatically sized using the minimal values plotted, i.e., 
+the values of RSI. If we try to plot the symbol's 
+`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ values in the same space
+by adding the following line to our script::
+
+    plot(close)
+
+This is what happens:
+
+.. image:: images/Plots-Scale-02.png
+
+The chart is on the BTCUSD symbol, whose `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
+prices are around 40000 during this period. Plotting values in the 40000 size makes our RSI plots in the 0-100 range indiscernable.
