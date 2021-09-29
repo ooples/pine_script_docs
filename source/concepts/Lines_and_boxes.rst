@@ -651,7 +651,7 @@ The available *setter* functions for box drawings are:
 - `box.set_extend() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_extend>`__
 - `box.set_bgcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_bgcolor>`__
 
-Note that contrary to lines, there is no setter function for ``xloc``.
+Note that contrary to lines, there is no setter function to modify ``xloc`` for boxes.
 
 
 
