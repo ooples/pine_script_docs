@@ -553,23 +553,23 @@ The remaining five parameters in `box.new() <https://www.tradingview.com/pine-sc
 control the visual appearance of boxes:
 
 ``border_color``
-   Is the line's color.
+   Is the border's color. It defaults to `color.blue <https://www.tradingview.com/pine-script-reference/v5/#var_color{dot}blue>`__.
    
 ``border_width``
-   Determines the width of the line in pixels.
+   Determines the width of the border in pixels.
 
 ``border_style``
-   Is the style of line. See this page's :ref:`Line styles <PageLinesAndBoxes_BoxStyles>` section.
+   Is the style of border. See this page's :ref:`Box styles <PageLinesAndBoxes_BoxStyles>` section.
 
 ``extend``
-   Determines if the line is extended past its coordinates.
+   Determines if the borders is extended past the box's coordinates.
    It can be `extend.none <https://www.tradingview.com/pine-script-reference/v5/#var_extend{dot}none>`__,
    `extend.left <https://www.tradingview.com/pine-script-reference/v5/#var_extend{dot}left>`__,
    `extend.right <https://www.tradingview.com/pine-script-reference/v5/#var_extend{dot}right>`__ or
    `extend.both <https://www.tradingview.com/pine-script-reference/v5/#var_extend{dot}both>`__.
 
 ``bgcolor``
-   Is the line's color.
+   Is the background color of the box. It defaults to `color.blue <https://www.tradingview.com/pine-script-reference/v5/#var_color{dot}blue>`__.
    
 Let's create simple boxes::
 
