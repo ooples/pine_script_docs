@@ -544,8 +544,8 @@ Five parameters affect this behavior: ``left``, ``top``, ``right``, ``bottom`` a
    For an RSI indicator, they would typically be between 0 and 100, for example.
    When an indicator is running as an overlay, then the price scale will usually be that of the chart's symbol.
    The ``top`` and ``bottom`` values of an existing line can be modified using 
-   `line.set_top() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_top>`__,
-   `line.set_bottom() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_bottom>`__,
+   `box.set_top() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_top>`__,
+   `box.set_bottom() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_bottom>`__,
    `box.set_lefttop() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_lefttop>`__ or
    `box.set_rightbottom() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_rightbottom>`__.
 
