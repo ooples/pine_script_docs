@@ -108,3 +108,8 @@ the right). For example::
 As can be seen in the screenshot, the *red* series has been shifted to the
 left (since the argument's value is negative), while the *green*
 series has been shifted to the right (its value is positive).
+
+
+Scale
+-----
+
