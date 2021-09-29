@@ -535,7 +535,8 @@ Five parameters affect this behavior: ``left``, ``top``, ``right``, ``bottom`` a
    It determines which type of argument must be used with ``left`` and ``right``. 
    With `xloc.bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_index>`__, ``left`` and ``right`` must be absolute bar indices.
    With `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__, ``left`` and ``right`` must be a UNIX timestamp in milliseconds 
-   corresponding to the `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ value of a bar's `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__.
+   corresponding to a value between the bar's `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ (opening time) and
+   `time_close <https://www.tradingview.com/pine-script-reference/v5/#var_time_close>`__ (closing time) values.
 
 ``top`` and ``bottom``
    They are the *y* coordinates of the boxe's top and bottom levels (boxes are always rectangular).
