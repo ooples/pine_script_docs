@@ -570,21 +570,23 @@ control the visual appearance of boxes:
 ``bgcolor``
    Is the line's color.
    
-This is how you can create boxes in their simplest form::
+Let's create simple boxes::
 
     //@version=5
     indicator("", "", true)
-    box.new(bar_index, high, bar_index, low)
+    box.new(bar_index, high, bar_index + 1, low, border_color = color.gray, bgcolor = color.new(color.silver, 60))
+
+.. image:: images/LinesAndBoxes-CreatingBoxes-01.png
 
 Note that:
 
+- The start and end points of boxes, like lines, are always the horizontal **center** of bars.
 - No logic controls our `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ call, so boxes are created on every bar.
 - Only approximately the last 50 boxes are shown because that is the default value for 
   the ``max_boxes_count`` parameter in `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
   which we haven't specified.
 - Boxes persist on bars until your script deletes them using
   `box.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}delete>`__, or garbage collection removes them.
-
 
 
 Modifying boxes
@@ -616,10 +618,12 @@ If a higher volume bar comes in, the timeframe's box is redrawn using the new ba
 
     //@version=5
     indicator("High volume bar boxes", "", true)
-    string tfInput = input.timeframe("D", "Resetting timeframe")
-    color upColorInput = input.color(color.lime, "Lines  🠅", inline = "1")
-    color dnColorInput = input.color(color.fuchsia, "🠇", inline = "1")
-    int transpInput = 100 - input.int(30, "Brightness", minval = 0, maxval = 100, step = 5, inline = "1", tooltip = "100 is brightest")
+    
+    string tfInput      = input.timeframe("D", "Resetting timeframe")
+    int    transpInput  = 100 - input.int(100, "Line Brightness", minval = 0, maxval = 100, step = 5, inline = "1", tooltip = "100 is brightest")
+    int    widthInput   = input.int(2, "Width", minval = 0, maxval = 100, step = 5, inline = "1")
+    color  upColorInput = input.color(color.lime, "🠅", inline = "1")
+    color  dnColorInput = input.color(color.fuchsia, "🠇", inline = "1")
     
     bool newTF = ta.change(time(tfInput))
     bool barUp = close > open
@@ -631,18 +635,18 @@ If a higher volume bar comes in, the timeframe's box is redrawn using the new ba
     var box boxUp = na
     var box boxDn = na
     
-    if newTF
+    if newTF and not na(volume)
         // New TF begins; create new boxes, one of which will be invisible.
         if barUp
             hiVolUp := volume
             hiVolDn := na
-            boxUp := box.new(bar_index, high, bar_index + 1, low, border_color = color.new(upColorInput, transpInput), bgcolor = na)
-            boxDn := box.new(na, na, na, na, border_color = color.new(dnColorInput, transpInput), bgcolor = na)
+            boxUp := box.new(bar_index, high, bar_index + 1, low, border_color = color.new(upColorInput, transpInput), border_width = widthInput, bgcolor = na)
+            boxDn := box.new(na, na, na, na, border_color = color.new(dnColorInput, transpInput), border_width = widthInput, bgcolor = na)
         else
             hiVolDn := volume
             hiVolUp := na
-            boxDn := box.new(bar_index, high, bar_index + 1, low, border_color = color.new(dnColorInput, transpInput), bgcolor = na)
-            boxUp := box.new(na, na, na, na, border_color = color.new(upColorInput, transpInput), bgcolor = na)
+            boxDn := box.new(bar_index, high, bar_index + 1, low, border_color = color.new(dnColorInput, transpInput), border_width = widthInput, bgcolor = na)
+            boxUp := box.new(na, na, na, na, border_color = color.new(upColorInput, transpInput), border_width = widthInput, bgcolor = na)
         int(na)
     else
         // On bars during the HTF, keep tracks of highest up/dn volume bar.
@@ -665,10 +669,15 @@ If a higher volume bar comes in, the timeframe's box is redrawn using the new ba
     // Plot circle mark on TF changes.
     plotchar(newTF, "newTF", "•", location.top, size = size.tiny)
 
+.. image:: images/LinesAndBoxes-ModifyingBoxes-01.png
+
 Note that:
 
 - We use the ``inline`` parameter in the inputs relating to the boxes' visual appearance to place them on the same line.
-- When a new higher timeframe bar comes in, we reset our information. If the timeframe's first bar is up, 
+- We subtract the 0-100 brightness level given by the user from 100 to generate the correct transparency for our box borders.
+  We do this because it is more intuitive for users to specify a brightness level where 100 represents maximum brightness.
+  We provide a tooltip to explain the scale.
+- When a new higher timeframe bar comes in and the symbol's feed contains volume data, we reset our information. If the timeframe's first bar is up, 
   we create a new visible ``boxUp`` box and an invisible ``boxDn`` box. We do the inverse if the first bar's polarity is down.
   We take care to reassign the IDs of the newly created boxes to ``boxUp`` and ``boxUp`` so we will be able to update those boxes later in the script.
   This is possible because we have declared those variables with `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__.
