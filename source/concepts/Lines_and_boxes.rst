@@ -694,6 +694,10 @@ Note that:
   ``max_boxes_count`` in our `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ call
   to change its default value.
 
+This is our script's "Settings/Inputs" tab:
+
+.. image:: images/LinesAndBoxes-ModifyingBoxes-02.png
+
 
 
 .. _PageLinesAndBoxes_BoxStyles:
