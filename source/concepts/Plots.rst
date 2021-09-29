@@ -115,7 +115,7 @@ Scale
 
 Not all values can be plotted everywhere. 
 Your scripts visual space is always bound by upper and lower limits that are dynamically adjusted with the values plotted.
-An RSI indicator will plot values between 0 and 100, which is why it is usually display in a distinct *pane* — or area — above or below the chart.
+An RSI indicator will plot values between 0 and 100, which is why it is usually displayed in a distinct *pane* — or area — above or below the chart.
 This shows an RSI line and a center line at the 50 level::
 
     //@version=5
