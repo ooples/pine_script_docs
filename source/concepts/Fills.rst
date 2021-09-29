@@ -8,7 +8,9 @@ function lets you color the background between either
 two plots plotted using `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
 or two horizontal lines plotted using `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__.
 
-The function has two signatures::
+The function has two signatures:
+
+.. code-block:: text
 
     fill(plot1, plot2, color, title, editable, show_last, fillgaps) → void
     fill(hline1, hline2, color, title, editable, fillgaps) → void

@@ -8,28 +8,71 @@ Plots
 
 
 
-The `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ function
-has one mandatory parameter: a value of "series int/float" type, which it displays
-as a line. A basic call looks like this:
+Introduction
+------------
 
-::
+The `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ 
+function can be used to plot lines of different styles, histograms, areas, columns (like volume columns), circles or crosses.
+It has the following signature:
+
+.. code-block:: text
+
+    plot(series, title, color, linewidth, style, trackprice, histbase, offset, join, editable, show_last, display) → plot
+
+While the function is usually used to plot values that vary with time, such as in::
 
     plot(close)
 
-Pine's automatic type conversions makes it possible to also use
-any numeric value as an argument. For example:
-
-::
+it can also be used to plot horizontal levels, e.g.::
 
     plot(125.2)
 
-In this case, the value 125.2 will automatically be converted to a
-series type value which will be the same number on every bar. The plot
-will be represented as a horizontal line.
+Its parameters are:
 
-The `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
-function has many optional parameters, in particular those which set the line's display style: 
-``style``, ``color``, ``linewidth``, and others.
+``series``
+   It is the only mandatory parameter. Its argument must be of "series int/float" type.
+
+``title``
+   XXX
+
+``color``
+   XXX
+
+``linewidth``
+   XXX
+
+``style``
+   XXX
+
+``trackprice``
+   XXX
+
+``histbase``
+   XXX
+
+``offset``
+   XXX
+
+``join``
+   XXX
+
+``editable``
+   XXX
+
+``show_last``
+   XXX
+
+``display``
+   XXX
+
+
+Plot styles
+-----------
+
+
+
+Conditional plots
+-----------------
 
 The value of the ``color`` parameter can be defined in different ways.
 If it is a color constant, for example ``color.red``, then the whole line will be plotted using a *red* color::
@@ -46,6 +89,9 @@ color the rendered line. For example::
 
 .. image:: images/Plot-02.png
 
+
+Offsets
+-------
 
 The ``offset`` parameter specifies the shift used when the line is plotted
 (negative values shift to the left while positive values shift to
