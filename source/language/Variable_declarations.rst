@@ -260,6 +260,10 @@ Note that:
   that updates the line in an `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
   `barstate.islast <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islast>`__ structure.
 
+There is a very slight penalty performance for using the `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ declaration mode.
+For that reason, when declaring constants, it is preferable not to use `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ if performance is a concern.
+
+
 
 
 .. _PageVariableDeclarations_Varip:
