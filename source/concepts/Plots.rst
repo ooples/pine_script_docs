@@ -27,7 +27,7 @@ Calls to `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot
 be designed to plot conditionally in two ways, which we cover in the :ref:`Conditional plots <PagePlots_ConditionalPlots>`
 section of this page.
 
-A script can only plot in its own visual space, whether that be in a pane of as a chart overlay.
+A script can only plot in its own visual space, whether it is in a pane or on the chart as an overlay.
 Scripts running in a pane can only :ref:`color bars <PageBarColoring>` in the chart area.
 
 The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ are:
