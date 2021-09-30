@@ -49,14 +49,22 @@ Instructions on how to use the v5 converter and the full list of changes in v5 c
 
 New variables and functions provide better script visibility on strategy information:
 
-- `strategy.closedtrades.entry_price() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}entry_price>`__ and `strategy.opentrades.entry_price() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}opentrades{dot}entry_price>`__
-- `strategy.closedtrades.entry_bar_index() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}entry_bar_index>`__ and `strategy.opentrades.entry_bar_index() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}opentrades{dot}entry_bar_index>`__
-- `strategy.closedtrades.entry_time() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}entry_time>`__ and `strategy.opentrades.entry_time() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}opentrades{dot}entry_time>`__
-- `strategy.closedtrades.size() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}size>`__ and `strategy.opentrades.size() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}opentrades{dot}size>`__
-- `strategy.closedtrades.profit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}profit>`__ and `strategy.opentrades.profit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}opentrades{dot}profit>`__
-- `strategy.closedtrades.commission() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}commission>`__ and `strategy.opentrades.commission() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}opentrades{dot}commission>`__
-- `strategy.closedtrades.max_runup() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}max_runup>`__ and `strategy.opentrades.max_runup() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}opentrades{dot}max_runup>`__
-- `strategy.closedtrades.max_drawdown() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}max_drawdown>`__ and `strategy.opentrades.max_drawdown() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}opentrades{dot}max_drawdown>`__
+- `strategy.closedtrades.entry_price() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}entry_price>`__ and 
+  `strategy.opentrades.entry_price() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}opentrades{dot}entry_price>`__
+- `strategy.closedtrades.entry_bar_index() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}entry_bar_index>`__ and 
+  `strategy.opentrades.entry_bar_index() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}opentrades{dot}entry_bar_index>`__
+- `strategy.closedtrades.entry_time() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}entry_time>`__ and 
+  `strategy.opentrades.entry_time() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}opentrades{dot}entry_time>`__
+- `strategy.closedtrades.size() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}size>`__ and 
+  `strategy.opentrades.size() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}opentrades{dot}size>`__
+- `strategy.closedtrades.profit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}profit>`__ and 
+  `strategy.opentrades.profit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}opentrades{dot}profit>`__
+- `strategy.closedtrades.commission() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}commission>`__ and 
+  `strategy.opentrades.commission() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}opentrades{dot}commission>`__
+- `strategy.closedtrades.max_runup() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}max_runup>`__ and 
+  `strategy.opentrades.max_runup() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}opentrades{dot}max_runup>`__
+- `strategy.closedtrades.max_drawdown() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}max_drawdown>`__ and 
+  `strategy.opentrades.max_drawdown() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}opentrades{dot}max_drawdown>`__
 - `strategy.closedtrades.exit_price() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}exit_price>`__
 - `strategy.closedtrades.exit_bar_index() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}exit_bar_index>`__
 - `strategy.closedtrades.exit_time() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}exit_time>`__
