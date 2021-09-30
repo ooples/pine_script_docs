@@ -19,6 +19,52 @@ It has the following signature:
 
     plot(series, title, color, linewidth, style, trackprice, histbase, offset, join, editable, show_last, display) → plot
 
+This script showcases a few different uses of `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
+in an overlay script::
+
+    //@version=5
+    indicator("`plot()`", "", true)
+    plot(high, "Blue `high` line")
+    plot(math.avg(close, open), "Crosses in body center", close > open ? color.lime : color.purple, 6, plot.style_cross)
+    plot(math.min(open, close), "Navy step line on body low point", color.navy, 3, plot.style_stepline)
+    plot(low, "Gray dot on `low`", color.gray, 3, plot.style_circles)
+    
+    color VIOLET = #AA00FF
+    color GOLD   = #CCCC00
+    ma = ta.alma(hl2, 40, 0.85, 6)
+    var almaColor = color.silver
+    almaColor := ma > ma[2] ? GOLD : ma < ma[2]  ? VIOLET : almaColor
+    plot(ma, "Two-color ALMA", almaColor, 2)
+
+.. image:: images/Plots-Introduction-01.png
+
+This one shows other uses in a pane::
+
+    //@version=5
+    indicator("Volume change", format = format.volume)
+    
+    color GREEN         = #008000
+    color GREEN_LIGHT   = color.new(GREEN, 50)
+    color GREEN_LIGHTER = color.new(GREEN, 85)
+    color PINK          = #FF0080
+    color PINK_LIGHT    = color.new(PINK, 50)
+    color PINK_LIGHTER  = color.new(PINK, 90)
+    
+    bool  barUp = ta.rising(close, 1)
+    bool  barDn = ta.falling(close, 1)
+    float volumeChange = ta.change(volume)
+    
+    volumeColor = barUp ? GREEN_LIGHTER : barDn ? PINK_LIGHTER : color.gray
+    plot(volume, "Volume columns", volumeColor, style = plot.style_columns)
+    
+    volumeChangeColor = barUp ? volumeChange > 0 ? GREEN : GREEN_LIGHT : volumeChange > 0 ? PINK : PINK_LIGHT
+    plot(volumeChange, "Volume change columns", volumeChangeColor, 12, plot.style_histogram)
+    
+    plot(0, "Zero line", color.gray)
+
+.. image:: images/Plots-Introduction-02.png
+
+
 `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ 
 calls must always be placed in a line's first position, which entails they are always in the script's global scope.
 They cannot be placed in user-defined functions or structures like `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
@@ -57,7 +103,7 @@ The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/
 
 ``linewidth``
    Is the plotted element's size, but it does not apply to all styles. When a line is plotted, the unit is pixels.
-   When 
+   It has no impact when ``plot.style_columns`` is used.
 
 ``style``
    XXX
@@ -97,6 +143,9 @@ it can also be used to plot horizontal levels, e.g.::
 Plot styles
 -----------
 
+Lines
+^^^^^
+
 
 
 .. _PagePlots_ConditionalPlots:
@@ -118,6 +167,12 @@ color the rendered line. For example::
     plot(close, color = plotColor)
 
 .. image:: images/Plot-02.png
+
+
+Fills
+-----
+
+
 
 
 Offsets

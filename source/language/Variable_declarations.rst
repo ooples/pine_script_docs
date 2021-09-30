@@ -265,7 +265,6 @@ For that reason, when declaring constants, it is preferable not to use `var <htt
 
 
 
-
 .. _PageVariableDeclarations_Varip:
 
 \`varip\`
