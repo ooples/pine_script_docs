@@ -221,7 +221,7 @@ Changed the default session days for \`time()\` and \`time_close()\`
 
 The default set of days for ``session`` strings used in the `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and 
 `time_close() <https://www.tradingview.com/pine-script-reference/v5/#fun_time_close>`__ functions,
-and returned by `input.session() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}session>`__ 
+and returned by `input.session() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}session>`__, 
 has changed from ``"23456"`` (Monday to Friday) to ``"1234567"`` (Sunday to Saturday)::
 
     // On symbols that are traded during weekends, this will behave differently in v4 and v5.
