@@ -12,7 +12,7 @@ Introduction
 ------------
 
 The `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ 
-function can be used to plot lines of different styles, histograms, areas, columns (like volume columns), fills, circles or crosses.
+function can be used to plot different styles of lines, histograms, areas, columns (like volume columns), fills, circles or crosses.
 It has the following signature:
 
 .. code-block:: text
