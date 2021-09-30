@@ -49,7 +49,7 @@ New variables and functions provide better script visibility on strategy informa
 - `strategy.closedtrades.max_runup() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}max_runup>`__ and `strategy.opentrades.max_runup() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}opentrades{dot}max_runup>`__
 - `strategy.closedtrades.max_drawdown() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}max_drawdown>`__ and `strategy.opentrades.max_drawdown() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}opentrades{dot}max_drawdown>`__
 - `strategy.closedtrades.exit_price() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}exit_price>`__
-- `strategy.closedtrades.exit_price() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}exit_price>`__
+- `strategy.closedtrades.exit_bar_index() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}exit_bar_index>`__
 - `strategy.closedtrades.exit_time() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}exit_time>`__
 - `strategy.convert2account() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}convert2account>`__
 - `strategy.convert2symbol() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}convert2symbol>`__
