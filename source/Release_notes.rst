@@ -16,7 +16,7 @@ September 2021
 --------------
 Pine v5 is here! A number of new features were added in this release.
 
-Libraries are a new type of publication that allows you to create custom functions for reuse in other scripts. See the :ref:`Libraries <PageLibraries>` page of the User Manual.
+Libraries are a new type of publication. They allow you to create custom functions for reuse in other scripts. See this manual's page on :ref:`Libraries <PageLibraries>`.
 
 Pine now supports switch statements! The `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ 
 keyword provides a more convenient and readable alternative to long ternary operators and `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ statements.
