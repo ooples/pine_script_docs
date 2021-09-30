@@ -38,6 +38,15 @@ You can use any condition in your script to trigger the call.
 Parameter definitions in user-defined functions can now include a default value: 
 a function defined as ``f(x = 1) => x`` will return 1 when called as ``f()``, i.e., without providing an argument for its ``x`` parameter.
 
+Many built-in variables, functions, and function arguments were renamed in Pine v5. 
+The venerable ``study()``, for example, is now `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__.
+New namespaces now bring together functions and variables from the same families.
+These changes implement a more rational nomenclature and provide an orderly growth path for the many additions planned for Pine. 
+
+The behavior of some built-in functions was improved. 
+
+Instructions on how to use the v5 converter and the full list of changes in v5 can be found in the :ref:`Migration guide to Pine v5 <PageToPineVersion5>`.
+
 New variables and functions provide better script visibility on strategy information:
 
 - `strategy.closedtrades.entry_price() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}entry_price>`__ and `strategy.opentrades.entry_price() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}opentrades{dot}entry_price>`__
@@ -54,15 +63,6 @@ New variables and functions provide better script visibility on strategy informa
 - `strategy.convert2account() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}convert2account>`__
 - `strategy.convert2symbol() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}convert2symbol>`__
 - `strategy.account_currency() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}account_currency>`__
-
-Many built-in variables, functions, and function arguments were renamed in Pine v5. 
-The venerable ``study()``, for example, is now `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__.
-New namespaces now bring together functions and variables from the same families.
-These changes implement a more rational nomenclature and provide an orderly growth path for the many additions planned for Pine. 
-
-The behavior of some built-in functions was improved. 
-
-Instructions on how to use the v5 converter and the full list of changes in v5 can be found in the :ref:`Migration guide to Pine v5 <PageToPineVersion5>`.
 
 The `Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__ 
 now includes the systematic mention of the form and type (e.g., "simple int") required for each function parameter.
