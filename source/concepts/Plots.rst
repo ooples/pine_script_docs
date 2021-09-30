@@ -170,7 +170,7 @@ Scale
 -----
 
 Not all values can be plotted everywhere. 
-Your scripts visual space is always bound by upper and lower limits that are dynamically adjusted with the values plotted.
+Your script's visual space is always bound by upper and lower limits that are dynamically adjusted with the values plotted.
 An `RSI <https://www.tradingview.com/u/?solution=43000502338>`__ indicator will plot values between 0 and 100, 
 which is why it is usually displayed in a distinct *pane* — or area — above or below the chart.
 If `RSI <https://www.tradingview.com/u/?solution=43000502338>`__ values were plotted as an overlay on the chart, 
