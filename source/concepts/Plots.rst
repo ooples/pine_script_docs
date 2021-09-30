@@ -12,22 +12,22 @@ Introduction
 ------------
 
 The `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ 
-function can be used to plot lines of different styles, histograms, areas, columns (like volume columns), circles or crosses.
+function can be used to plot lines of different styles, histograms, areas, columns (like volume columns), fills, circles or crosses.
 It has the following signature:
 
 .. code-block:: text
 
     plot(series, title, color, linewidth, style, trackprice, histbase, offset, join, editable, show_last, display) → plot
 
-While the function is usually used to plot values that vary with time, such as in::
+`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ 
+calls must always be placed in a line's first position, which means they are always in the script's global scope
+and thus cannot be placed in structures like `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
+`for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__, etc. 
+Calls to `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ **can**, however, 
+be designed to plot conditionally in two ways, which we cover in the :ref:`Conditional plots <PagePlots_ConditionalPlots>`
+section of this page.
 
-    plot(close)
-
-it can also be used to plot horizontal levels, e.g.::
-
-    plot(125.2)
-
-Its parameters are:
+The function's parameters are:
 
 ``series``
    It is the only mandatory parameter. Its argument must be of "series int/float" type.
@@ -80,10 +80,22 @@ Its parameters are:
    XXX
 
 
+While the function is usually used to plot values that vary with time, such as in::
+
+    plot(close)
+
+it can also be used to plot horizontal levels, e.g.::
+
+    plot(125.2)
+
+
+
 Plot styles
 -----------
 
 
+
+.. _PagePlots_ConditionalPlots:
 
 Conditional plots
 -----------------
@@ -125,6 +137,12 @@ series has been shifted to the right (its value is positive).
 ..
    Note that the ``offset`` parameter requires a "simple int" argument,
    which means it cannot change during the script's execution.
+
+
+
+Limitations
+-----------
+
 
 
 
