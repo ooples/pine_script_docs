@@ -20,14 +20,17 @@ It has the following signature:
     plot(series, title, color, linewidth, style, trackprice, histbase, offset, join, editable, show_last, display) → plot
 
 `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ 
-calls must always be placed in a line's first position, which means they are always in the script's global scope
-and thus cannot be placed in structures like `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
+calls must always be placed in a line's first position, which entails they are always in the script's global scope.
+They cannot be placed in structures like `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
 `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__, etc. 
 Calls to `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ **can**, however, 
 be designed to plot conditionally in two ways, which we cover in the :ref:`Conditional plots <PagePlots_ConditionalPlots>`
 section of this page.
 
-The function's parameters are:
+A script can only plot in its own visual space, whether that be in a pane of as a chart overlay.
+Scripts running in a pane can only :ref:`color bars <PageBarColoring>` in the chart area.
+
+The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ are:
 
 ``series``
    It is the only mandatory parameter. Its argument must be of "series int/float" type.
