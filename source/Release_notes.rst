@@ -29,7 +29,7 @@ They provide a more convenient and readable alternative to long ternary operator
 `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ loops are here! 
 They allow you to create a loop that will only stop when its controlling condition is false, or a ``break`` command is used in the loop.
 
-New built-in array variables are maintained by the Pine runtime to hold the IDs of all the active objects of the specified type drawn by your script. They are 
+New built-in array variables are maintained by the Pine runtime to hold the IDs of all the active objects of the same type drawn by your script. They are 
 `label.all <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}all>`__,
 `line.all <https://www.tradingview.com/pine-script-reference/v5/#var_line{dot}all>`__,
 `box.all <https://www.tradingview.com/pine-script-reference/v5/#var_box{dot}all>`__ and
