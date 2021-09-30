@@ -16,7 +16,7 @@ September 2021
 --------------
 Pine v5 is here! 
 This is a list of the **new** features added to the language, and a few of the **changes** made.
-See the :ref:`Migration guide to Pine v5 <PageToPineVersion5>` for a complete list of the **changes** made in v5.
+See the :ref:`Migration guide to Pine v5 <PageToPineVersion5>` for a complete list of the **changes** in v5.
 
 
 New features
