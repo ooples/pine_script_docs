@@ -35,7 +35,7 @@ A library script has the following structure, where one or more exportable funct
     //@version=5
 
     // @description <library_description>
-    library(title, overlay)
+    library(title, shorttitle, overlay)
 
     <script_code>
 
