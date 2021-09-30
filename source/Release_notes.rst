@@ -12,7 +12,7 @@ This page contains release notes of notable changes in Pine Script.
 
 .. _PageReleaseNotes_September2021:
 
-September 2021
+October 2021
 --------------
 Pine v5 is here! A number of new features were added in this release.
 
@@ -52,6 +52,12 @@ Instructions on how to use the v5 converter and the full list of changes in v5 c
 The Reference Manual now includes the systematic mention of the form and type required for function parameters, e.g., "simple int".
 
 The User Manual was reorganized and new content was added.
+
+
+September 2021
+---------
+* ``earnings.standardized`` constant for the ``earnings()`` function. Is used to request the standardized earnings value.
+* ``ignore_resolve_errors`` parameter for the ``security()`` function. Determines the behavior of the function if the specified symbol is not found: if ``false``, the script will halt and return a runtime error; if ``true``, the function will return ``na`` and execution will continue.
 
 
 July 2021
