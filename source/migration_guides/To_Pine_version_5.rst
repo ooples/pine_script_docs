@@ -48,10 +48,10 @@ Remembering the new namespaces is not necessary; if you type the older name of a
 
 .. image:: images/v5_autocomplete.png
  
-The only two functions whose name changed are:
+Not counting functions moved to new namespaces, only two functions have been renamed:
 
-* ``study()`` was renamed to `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__.
-* ``tickerid()`` was renamed to `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__.
+* ``study()`` is now `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__.
+* ``tickerid()`` is now `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__.
 
 The full list of renamed functions and variables can be found in the :ref:`All variable, function, and parameter name changes <PageToPineVersion5_AllVariables>` section of this guide.
 
