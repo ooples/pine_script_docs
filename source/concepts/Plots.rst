@@ -37,8 +37,9 @@ Its parameters are:
    then ``newDay ? 1 : 0`` can be used to plot 1 when the variable is ``true``, and zero when it is ``false``.
 
 ``title``
-   Requires a "cnost string" argument, so it must be known at compile time.
+   Requires a "const string" argument, so it must be known at compile time.
    The string appears:
+
       - In the script's scale when the "Chart settings/Scales/Indicator Name Label" field is checked.
       - In the Data Window.
       - In the "Settings/Style" tab.
