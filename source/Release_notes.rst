@@ -83,8 +83,7 @@ The venerable ``study()``, for example, is now `indicator() <https://www.trading
 New namespaces now bring together functions and variables from the same families.
 These changes implement a more rational nomenclature and provide an orderly growth path for the many additions planned for Pine. 
 
-The behavior of some built-in functions was improved. 
-
+See the :ref:`Migration guide to Pine v5 <PageToPineVersion5>` for a complete list of the **changes** made in v5.
 
 
 July 2021
