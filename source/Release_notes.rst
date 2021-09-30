@@ -28,8 +28,8 @@ New built-in array variables
 `table.all <https://www.tradingview.com/pine-script-reference/v5/#var_table{dot}all>`__
 hold the IDs of all the active objects of the specified type drawn by your script.
 
- `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ loops are here! 
- They allow you to create a loop that will only stop when its controlling condition is false, or a ``break`` command is used in the loop.
+`while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ loops are here! 
+They allow you to create a loop that will only stop when its controlling condition is false, or a ``break`` command is used in the loop.
 
 The `runtime.error() <https://www.tradingview.com/pine-script-reference/v5/#fun_runtime{dot}error>`__
 function makes it possible to halt the execution of a script and display a runtime error with a custom message. 
