@@ -18,8 +18,8 @@ Pine v5 is here! A number of new features were added in this release.
 
 Libraries are a new type of publication. They allow you to create custom functions for reuse in other scripts. See this manual's page on :ref:`Libraries <PageLibraries>`.
 
-Pine now supports switch statements! The `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ 
-keyword provides a more convenient and readable alternative to long ternary operators and `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ statements.
+Pine now supports `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ structures!
+They provide a more convenient and readable alternative to long ternary operators and `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ statements.
 
 New built-in array variables 
 `label.all <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}all>`__,
