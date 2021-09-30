@@ -40,7 +40,7 @@ in an overlay script::
 
 Note that:
 
-- The first `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call plots a 1-pixel wide blue line across the bar highs.
+- The first `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call plots a 1-pixel blue line across the bar highs.
 - The secong plots crosses at the mid-point of bodies. The crosses are colored lime when the bar is up and purple when it is down.
   The argument used for ``linewidth`` is ``6`` but it is not a pixel value; just a relative size.
 - The third call plots a 3-pixel wide step line following the low point of bodies.
