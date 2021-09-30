@@ -40,12 +40,12 @@ Its parameters are:
    Requires a "const string" argument, so it must be known at compile time.
    The string appears:
 
-      - In the script's scale when the "Chart settings/Scales/Indicator Name Label" field is checked.
-      - In the Data Window.
-      - In the "Settings/Style" tab.
-      - In the dropdown of `input.source() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}source>`__ fields.
-      - In the "Condition" field of the "Create Alert" dialog box, when the script is selected.
-      - As the column header when exporting chart data to a CSV file.
+   - In the script's scale when the "Chart settings/Scales/Indicator Name Label" field is checked.
+   - In the Data Window.
+   - In the "Settings/Style" tab.
+   - In the dropdown of `input.source() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}source>`__ fields.
+   - In the "Condition" field of the "Create Alert" dialog box, when the script is selected.
+   - As the column header when exporting chart data to a CSV file.
 
 ``color``
    Accepts "series color", so can be calculated on the fly, bar by bar.
