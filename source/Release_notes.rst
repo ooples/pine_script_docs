@@ -15,7 +15,7 @@ This page contains release notes of notable changes in Pine Script.
 September 2021
 --------------
 Pine v5 is here! 
-Here, we list the **new** features added to the language, and a few of the **changes** made.
+This is a list of the **new** features added to the language, and a few of the **changes** made.
 See the :ref:`Migration guide to Pine v5 <PageToPineVersion5>` for a complete list of the **changes** made in v5.
 
 
