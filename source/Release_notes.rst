@@ -79,8 +79,9 @@ The :ref:`User Manual <IndexUserManual>` was reorganized and new content was add
 Changes
 ^^^^^^^
 Many built-in variables, functions and function arguments were renamed or moved to new namespaces in v5. 
-The venerable ``study()``, for example, is now `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__.
-New namespaces now bring together functions and variables from the same families.
+The venerable ``study()``, for example, is now `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
+and ``security()`` is now `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__.
+New namespaces pull together related functions and variables.
 These changes implement a more rational nomenclature and provide an orderly growth path for the many additions planned for Pine. 
 
 See the :ref:`Migration guide to Pine v5 <PageToPineVersion5>` for a complete list of the **changes** made in v5.
