@@ -666,8 +666,8 @@ No namespace change
 
 
 
-"str" namespace for functions that work with strings
-""""""""""""""""""""""""""""""""""""""""""""""""""""
+"str" namespace for functions that manipulate strings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 +------------------------------------------------------+--------------------------------------------------------+
 | v4                                                   | v5                                                     |
