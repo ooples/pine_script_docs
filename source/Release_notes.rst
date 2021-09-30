@@ -14,8 +14,8 @@ This page contains release notes of notable changes in Pine Script.
 
 September 2021
 --------------
-Pine v5 is here! A number of new features were added in this release. This lists features **added** to the language.
-See the :ref:`Migration guide to Pine v5 <PageToPineVersion5>` for a complete list of **changes** in v5.
+Pine v5 is here! This lists features **added** to the language.
+See the :ref:`Migration guide to Pine v5 <PageToPineVersion5>` for a complete list of the **changes** made in v5.
 
 Libraries are a new type of publication. They allow you to create custom functions for reuse in other scripts. See this manual's page on :ref:`Libraries <PageLibraries>`.
 
