@@ -82,7 +82,7 @@ Many built-in variables, functions and function arguments were renamed or moved 
 The venerable ``study()``, for example, is now `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
 and ``security()`` is now `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__.
 New namespaces pull together related functions and variables.
-These changes implement a more rational nomenclature and provide an orderly growth path for the many additions planned for Pine. 
+This consolidation implements a more rational nomenclature and provides an orderly space to accommodate the many additions planned for Pine. 
 
 See the :ref:`Migration guide to Pine v5 <PageToPineVersion5>` for a complete list of the **changes** made in v5.
 
