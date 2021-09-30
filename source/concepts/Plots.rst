@@ -31,12 +31,25 @@ Its parameters are:
 
 ``series``
    It is the only mandatory parameter. Its argument must be of "series int/float" type.
+   Note that because the auto-casting rules in Pine convert in the int 🠆 float 🠆 bool direction,
+   a "bool" type variable cannot be used as is; it must be converted to an "int" or a "float" for use as an argument.
+   For example, if ``newDay`` is of "bool" type, 
+   then ``newDay ? 1 : 0`` can be used to plot 1 when the variable is ``true``, and zero when it is ``false``.
 
 ``title``
-   XXX
+   Requires a "cnost string" argument, so it must be known at compile time.
+   The string appears:
+      - In the script's scale when the "Chart settings/Scales/Indicator Name Label" field is checked.
+      - In the Data Window.
+      - In the "Settings/Style" tab.
+      - In the dropdown of `input.source() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}source>`__ fields.
+      - In the "Condition" field of the "Create Alert" dialog box, when the script is selected.
+      - As the column header when exporting chart data to a CSV file.
 
 ``color``
-   XXX
+   Accepts "series color", so can be calculated on the fly, bar by bar.
+   Plotting with `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
+   as the color, or any color with a transparency of 100, is one way to hide plots when they are not needed.
 
 ``linewidth``
    XXX
@@ -94,20 +107,24 @@ Offsets
 -------
 
 The ``offset`` parameter specifies the shift used when the line is plotted
-(negative values shift to the left while positive values shift to
-the right). For example::
+(negative values shift in the past, positive values shift into the future.
+For example::
 
     //@version=5
-    indicator("My Script 12", overlay = true)
+    indicator("", "", true)
     plot(close, color = color.red, offset = -5)
     plot(close, color = color.lime, offset = 5)
 
-.. image:: images/Plot-03.png
-
+.. image:: images/Plots-Offsets-01.png
 
 As can be seen in the screenshot, the *red* series has been shifted to the
 left (since the argument's value is negative), while the *green*
 series has been shifted to the right (its value is positive).
+
+..
+   Note that the ``offset`` parameter requires a "simple int" argument,
+   which means it cannot change during the script's execution.
+
 
 
 Scale
