@@ -38,7 +38,22 @@ in an overlay script::
 
 .. image:: images/Plots-Introduction-01.png
 
-This one shows other uses in a pane::
+Note that:
+
+- The first `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call plots a 1-pixel wide blue line across the bar highs.
+- The secong plots crosses at the mid-point of bodies. The crosses are colored lime when the bar is up and purple when it is down.
+  The argument used for ``linewidth`` is ``6`` but it is not a pixel value; just a relative size.
+- The third call plots a 3-pixel wide step line following the low point of bodies.
+- The fourth call plot a gray circle at the bars' `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__.
+- The last plot requires more setup. We first define our bull/bear colors, 
+  we then calculate an `Arnaud Legoux Moving Average <https://www.tradingview.com/u/?solution=43000594683>`__.
+  Then we make our color calculations. We initialize our color variable on bar zero only, using `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__.
+  We initialize it to `color.silver <https://www.tradingview.com/pine-script-reference/v5/#var_color{dot}silver>`__, 
+  so on the dataset's first bars, until one of our conditions causes the color to change, the line will be silver.
+  The conditions that change the color of the line require it to be higher/lower than its value two bars ago.
+  This makes for less noisy color transitions than if we merely looked for a higher/lower value than the previous one.
+
+This script shows other uses of `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ in a pane::
 
     //@version=5
     indicator("Volume change", format = format.volume)
@@ -64,6 +79,28 @@ This one shows other uses in a pane::
 
 .. image:: images/Plots-Introduction-02.png
 
+Note that:
+
+- We are plotting normal `volume <https://www.tradingview.com/pine-script-reference/v5/#var_volume>`__ 
+  values as wide columns above the zero line 
+  (see the ``style = plot.style_columns`` in our `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call).
+- Before plotting the columns we calculate our ``volumeColor`` by using the values of the ``barUp`` and ``barDn`` boolean variables.
+  They become respectively ``true`` when the current bar's `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ 
+  is higher/lower than the previous one. Note that the "Volume" built-in does not use the same condition; it identifies an up bar with ``close > open``.
+  We use the ``GREEN_LIGHTER`` and ``PINK_LIGHTER`` colors for the volume columns.
+- Because the first plot plots columns, we do not use the ``linewidth`` parameter, as it has no effect on columns.
+- Our script's second plot is the **change** in volume, which we have calculated earlier using ``ta.change(volume)``.
+  This value is plotted as a histogram, for which the ``linewidth`` parameter controls the width of the column.
+  We make this width ``12`` so that histogram elements are thinner than the columns of the first plot.
+  Positive/negative ``volumeChange`` values plot above/below the zero line; no manipulation is required to achieve this effect.
+- Before plotting the histogram of ``volumeChange`` values, we calculate its color value, which can be one of four different colors.
+  We use the bright ``GREEN`` or ``PINK`` colors when the bar is up/down AND the volume has increased since the last bar (``volumeChange > 0``).
+  Because ``volumeChange`` is positive in this case, the histogram's element will be plotted above the zero line.
+  We use the bright ``GREEN_LIGHT`` or ``PINK_LIGHT`` colors when the bar is up/down AND the volume has NOT increased since the last bar.
+  Because ``volumeChange`` is negative in this case, the histogram's element will be plotted below the zero line.
+- Finally, we plot a zero line. We could just as well have used ``hline(0)`` there.
+- We use ``format = format.volume`` in our `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ call
+  so that large values displayed for this script are abbreviated like those of the built-in "Volume" indicator.
 
 `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ 
 calls must always be placed in a line's first position, which entails they are always in the script's global scope.
