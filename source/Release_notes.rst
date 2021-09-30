@@ -55,23 +55,6 @@ New variables and functions provide better script visibility on strategy informa
 - `strategy.convert2symbol() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}convert2symbol>`__
 - `strategy.account_currency() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}account_currency>`__
 
-
-
-* ``strategy.closedtrades.entry_price()`` and ``strategy.opentrades.entry_price()``
-* ``strategy.closedtrades.entry_bar_index()`` and ``strategy.opentrades.entry_bar_index()``
-* ``strategy.closedtrades.entry_time()`` and ``strategy.opentrades.entry_time()``
-* ``strategy.closedtrades.size()`` and ``strategy.opentrades.size()``
-* ``strategy.closedtrades.profit()`` and ``strategy.opentrades.profit()``
-* ``strategy.closedtrades.commission()`` and ``strategy.opentrades.commission()``
-* ``strategy.closedtrades.max_runup()`` and ``strategy.opentrades.max_runup()``
-* ``strategy.closedtrades.max_drawdown()`` and ``strategy.opentrades.max_drawdown()``
-* ``strategy.closedtrades.exit_price()``
-* ``strategy.closedtrades.exit_bar_index()``
-* ``strategy.closedtrades.exit_time()``
-* ``strategy.convert2account()``
-* ``strategy.convert2symbol()``
-* ``strategy.account_currency``
-
 Many built-in variables, functions, and function arguments were renamed in Pine v5. 
 The venerable ``study()``, for example, is now `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__.
 New namespaces now bring together functions and variables from the same families.
