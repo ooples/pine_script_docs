@@ -63,8 +63,8 @@ New variables and functions provide better script visibility on strategy informa
 - `strategy.closedtrades.exit_price() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}exit_price>`__
 - `strategy.closedtrades.exit_bar_index() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}exit_bar_index>`__
 - `strategy.closedtrades.exit_time() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}exit_time>`__
-- `strategy.convert2account() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}convert2account>`__
-- `strategy.convert2symbol() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}convert2symbol>`__
+- `strategy.convert_to_account() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}convert_to_account>`__
+- `strategy.convert_to_symbol() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}convert_to_symbol>`__
 - `strategy.account_currency() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}account_currency>`__
 
 A v4 to v5 converter is now included in the Pine Editor. 
