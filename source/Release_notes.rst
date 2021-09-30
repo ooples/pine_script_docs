@@ -14,23 +14,26 @@ This page contains release notes of notable changes in Pine Script.
 
 September 2021
 --------------
-Pine v5 is here! This lists features **added** to the language.
+Pine v5 is here! 
+Here, we list the **new** features added to the language, and a few of the **changes** made.
 See the :ref:`Migration guide to Pine v5 <PageToPineVersion5>` for a complete list of the **changes** made in v5.
 
+
+New features
+^^^^^^^^^^^^^
 Libraries are a new type of publication. They allow you to create custom functions for reuse in other scripts. See this manual's page on :ref:`Libraries <PageLibraries>`.
 
 Pine now supports `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ structures!
 They provide a more convenient and readable alternative to long ternary operators and `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ statements.
 
-New built-in array variables 
+`while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ loops are here! 
+They allow you to create a loop that will only stop when its controlling condition is false, or a ``break`` command is used in the loop.
+
+New built-in array variables are maintained by the Pine runtime to hold the IDs of all the active objects of the specified type drawn by your script. They are 
 `label.all <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}all>`__,
 `line.all <https://www.tradingview.com/pine-script-reference/v5/#var_line{dot}all>`__,
 `box.all <https://www.tradingview.com/pine-script-reference/v5/#var_box{dot}all>`__ and
-`table.all <https://www.tradingview.com/pine-script-reference/v5/#var_table{dot}all>`__
-hold the IDs of all the active objects of the specified type drawn by your script.
-
-`while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ loops are here! 
-They allow you to create a loop that will only stop when its controlling condition is false, or a ``break`` command is used in the loop.
+`table.all <https://www.tradingview.com/pine-script-reference/v5/#var_table{dot}all>`__.
 
 The `runtime.error() <https://www.tradingview.com/pine-script-reference/v5/#fun_runtime{dot}error>`__
 function makes it possible to halt the execution of a script and display a runtime error with a custom message. 
@@ -38,15 +41,6 @@ You can use any condition in your script to trigger the call.
 
 Parameter definitions in user-defined functions can now include a default value: 
 a function defined as ``f(x = 1) => x`` will return 1 when called as ``f()``, i.e., without providing an argument for its ``x`` parameter.
-
-Many built-in variables, functions, and function arguments were renamed in Pine v5. 
-The venerable ``study()``, for example, is now `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__.
-New namespaces now bring together functions and variables from the same families.
-These changes implement a more rational nomenclature and provide an orderly growth path for the many additions planned for Pine. 
-
-The behavior of some built-in functions was improved. 
-
-Instructions on how to use the v5 converter and the full list of changes in v5 can be found in the :ref:`Migration guide to Pine v5 <PageToPineVersion5>`.
 
 New variables and functions provide better script visibility on strategy information:
 
@@ -73,10 +67,24 @@ New variables and functions provide better script visibility on strategy informa
 - `strategy.convert2symbol() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}convert2symbol>`__
 - `strategy.account_currency() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}account_currency>`__
 
+A v4 to v5 converter is now included in the Pine Editor. 
+See the :ref:`Migration guide to Pine v5 <PageToPineVersion5>` for more information on converting your scripts to v5.
+
 The `Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__ 
 now includes the systematic mention of the form and type (e.g., "simple int") required for each function parameter.
 
 The :ref:`User Manual <IndexUserManual>` was reorganized and new content was added.
+
+
+Changes
+^^^^^^^
+Many built-in variables, functions and function arguments were renamed or moved to new namespaces in v5. 
+The venerable ``study()``, for example, is now `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__.
+New namespaces now bring together functions and variables from the same families.
+These changes implement a more rational nomenclature and provide an orderly growth path for the many additions planned for Pine. 
+
+The behavior of some built-in functions was improved. 
+
 
 
 July 2021
