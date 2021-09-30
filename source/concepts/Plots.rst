@@ -21,7 +21,7 @@ It has the following signature:
 
 `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ 
 calls must always be placed in a line's first position, which entails they are always in the script's global scope.
-They cannot be placed in structures like `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
+They cannot be placed in user-defined functions or structures like `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
 `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__, etc. 
 Calls to `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ **can**, however, 
 be designed to plot conditionally in two ways, which we cover in the :ref:`Conditional plots <PagePlots_ConditionalPlots>`
@@ -56,7 +56,8 @@ The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/
    as the color, or any color with a transparency of 100, is one way to hide plots when they are not needed.
 
 ``linewidth``
-   XXX
+   Is the plotted element's size, but it does not apply to all styles. When a line is plotted, the unit is pixels.
+   When 
 
 ``style``
    XXX

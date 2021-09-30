@@ -35,7 +35,8 @@ The `runtime.error() <https://www.tradingview.com/pine-script-reference/v5/#fun_
 function makes it possible to halt the execution of a script and display a runtime error with a custom message. 
 You can use any condition in your script to trigger the call.
 
-Parameter definitions in user-created functions can now include a default value: a function defined as ``f(x = 1) => x`` will return 1 when called as ``f()``, i.e., without providing an argument for its ``x`` parameter.
+Parameter definitions in user-defined functions can now include a default value: 
+a function defined as ``f(x = 1) => x`` will return 1 when called as ``f()``, i.e., without providing an argument for its ``x`` parameter.
 
 New variables and functions provide better script visibility on strategy information:
 
