@@ -147,6 +147,21 @@ series has been shifted to the right (its value is positive).
 Limitations
 -----------
 
+Each script is limited to a maximum plot count of 64.
+All ``plot*()`` calls and `alertcondition() <https://www.tradingview.com/pine-script-reference/v5/#func_alertcondition>`__ calls
+count in the plot count of a script. Some types of calls count for more than one in the total plot count.
+
+`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ 
+calls count for one in the total plot count if they use a "const color" argument for the ``color`` parameter, e.g.::
+
+    plot(close, color = color.green)
+
+When they use another form, such as any one of these, they will count for two in the total plot count::
+
+    plot(close, color = syminfo.mintick > 0.0001 ? color.green : color.red)) //🠆 "simple color"
+    plot(close, color = input.color(color.purple)) //🠆 "input color"
+    plot(close, color = close > open ? color.green : color.red) //🠆 "series color"
+    plot(close, color = color.new(color.silver, close > open ? 40 : 0)) //🠆 "series color"
 
 
 
