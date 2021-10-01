@@ -25,6 +25,7 @@ in an overlay script:
 .. image:: images/Plots-Introduction-01.png
 
 ::
+
     //@version=5
     indicator("`plot()`", "", true)
     plot(high, "Blue `high` line")
