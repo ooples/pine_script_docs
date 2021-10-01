@@ -47,9 +47,9 @@ Note that:
   The argument used for ``linewidth`` is ``6`` but it is not a pixel value; just a relative size.
 - The third call plots a 3-pixel wide step line following the low point of bodies.
 - The fourth call plot a gray circle at the bars' `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__.
-- The last plot requires more setup. We first define our bull/bear colors, 
-  we then calculate an `Arnaud Legoux Moving Average <https://www.tradingview.com/u/?solution=43000594683>`__.
-  Then we make our color calculations. We initialize our color variable on bar zero only, using `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__.
+- The last plot requires some preparation. We first define our bull/bear colors,
+  calculate an `Arnaud Legoux Moving Average <https://www.tradingview.com/u/?solution=43000594683>`__,
+  then make our color calculations. We initialize our color variable on bar zero only, using `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__.
   We initialize it to `color.silver <https://www.tradingview.com/pine-script-reference/v5/#var_color{dot}silver>`__, 
   so on the dataset's first bars, until one of our conditions causes the color to change, the line will be silver.
   The conditions that change the color of the line require it to be higher/lower than its value two bars ago.
