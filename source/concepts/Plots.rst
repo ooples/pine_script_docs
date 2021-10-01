@@ -22,6 +22,8 @@ It has the following signature:
 This script showcases a few different uses of `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
 in an overlay script::
 
+.. image:: images/Plots-Introduction-01.png
+
     //@version=5
     indicator("`plot()`", "", true)
     plot(high, "Blue `high` line")
@@ -35,8 +37,6 @@ in an overlay script::
     var almaColor = color.silver
     almaColor := ma > ma[2] ? GOLD : ma < ma[2]  ? VIOLET : almaColor
     plot(ma, "Two-color ALMA", almaColor, 2)
-
-.. image:: images/Plots-Introduction-01.png
 
 Note that:
 
