@@ -10,9 +10,9 @@ This page contains release notes of notable changes in Pine Script.
 
 
 
-.. _PageReleaseNotes_September2021:
+.. _PageReleaseNotes_October2021:
 
-September 2021
+October 2021
 --------------
 Pine v5 is here! 
 This is a list of the **new** features added to the language, and a few of the **changes** made.
@@ -67,6 +67,8 @@ New variables and functions provide better script visibility on strategy informa
 - `strategy.convert_to_symbol() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}convert_to_symbol>`__
 - `strategy.account_currency() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}account_currency>`__
 
+New ``earnings.standardized`` constant for the ``earnings()`` function allows requesting standardized earnings data.
+
 A v4 to v5 converter is now included in the Pine Editor. 
 See the :ref:`Migration guide to Pine v5 <PageToPineVersion5>` for more information on converting your scripts to v5.
 
@@ -74,7 +76,6 @@ The `Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__
 now includes the systematic mention of the form and type (e.g., "simple int") required for each function parameter.
 
 The :ref:`User Manual <IndexUserManual>` was reorganized and new content was added.
-
 
 Changes
 ^^^^^^^
@@ -85,6 +86,14 @@ New namespaces now group related functions and variables together.
 This consolidation implements a more rational nomenclature and provides an orderly space to accommodate the many additions planned for Pine. 
 
 See the :ref:`Migration guide to Pine v5 <PageToPineVersion5>` for a complete list of the **changes** made in v5.
+
+.. _PageReleaseNotes_September2021:
+
+September 2021
+---------
+New parameter has been added for the ``dividends()``, ``earnings()``, ``financial()``, ``quandl()``, ``security()``, and ``splits()`` functions:
+
+* ``ignore_resolve_errors`` - determines the behavior of the function if the specified symbol is not found: if ``false``, the script will halt and return a runtime error; if ``true``, the function will return ``na`` and execution will continue.
 
 
 July 2021
