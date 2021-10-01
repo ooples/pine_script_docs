@@ -41,9 +41,11 @@ New variables and functions provide better script visibility on strategy informa
 * ``strategy.closedtrades.exit_price()``
 * ``strategy.closedtrades.exit_bar_index()``
 * ``strategy.closedtrades.exit_time()``
-* ``strategy.convert2account()``
-* ``strategy.convert2symbol()``
+* ``strategy.convert_to_account()``
+* ``strategy.convert_to_symbol()``
 * ``strategy.account_currency``
+
+New ``earnings.standardized`` constant for the ``earnings()`` function allows requesting standardized earnings data.
 
 Many built-in variables, functions, and function arguments were renamed in Pine v5. The behavior of some built-in functions was also improved. 
 These changes implement a more rational nomenclature and provide a more orderly growth path for the many additions planned for Pine. 
@@ -56,8 +58,9 @@ The User Manual was reorganized and new content was added.
 
 September 2021
 ---------
-* ``earnings.standardized`` constant for the ``earnings()`` function. Is used to request the standardized earnings value.
-* ``ignore_resolve_errors`` parameter for the ``security()`` function. Determines the behavior of the function if the specified symbol is not found: if ``false``, the script will halt and return a runtime error; if ``true``, the function will return ``na`` and execution will continue.
+New parameter has been added for the ``dividends()``, ``earnings()``, ``financial()``, ``quandl()``, ``security()``, and ``splits()`` functions:
+
+* ``ignore_resolve_errors`` - determines the behavior of the function if the specified symbol is not found: if ``false``, the script will halt and return a runtime error; if ``true``, the function will return ``na`` and execution will continue.
 
 
 July 2021
