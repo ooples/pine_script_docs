@@ -20,10 +20,11 @@ It has the following signature:
     plot(series, title, color, linewidth, style, trackprice, histbase, offset, join, editable, show_last, display) → plot
 
 This script showcases a few different uses of `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
-in an overlay script::
+in an overlay script:
 
 .. image:: images/Plots-Introduction-01.png
 
+::
     //@version=5
     indicator("`plot()`", "", true)
     plot(high, "Blue `high` line")
