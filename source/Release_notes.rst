@@ -12,7 +12,7 @@ This page contains release notes of notable changes in Pine Script.
 
 .. _PageReleaseNotes_September2021:
 
-September 2021
+October 2021
 --------------
 Pine v5 is here! A number of new features were added in this release.
 
@@ -45,6 +45,8 @@ New variables and functions provide better script visibility on strategy informa
 * ``strategy.convert_to_symbol()``
 * ``strategy.account_currency``
 
+New ``earnings.standardized`` constant for the ``earnings()`` function allows requesting standardized earnings data.
+
 Many built-in variables, functions, and function arguments were renamed in Pine v5. The behavior of some built-in functions was also improved. 
 These changes implement a more rational nomenclature and provide a more orderly growth path for the many additions planned for Pine. 
 Instructions on how to use the v5 converter and the full list of changes in v5 can be found in the :ref:`Migration guide to Pine v5 <PageToPineVersion5>`.
@@ -52,6 +54,13 @@ Instructions on how to use the v5 converter and the full list of changes in v5 c
 The Reference Manual now includes the systematic mention of the form and type required for function parameters, e.g., "simple int".
 
 The User Manual was reorganized and new content was added.
+
+
+September 2021
+---------
+New parameter has been added for the ``dividends()``, ``earnings()``, ``financial()``, ``quandl()``, ``security()``, and ``splits()`` functions:
+
+* ``ignore_resolve_errors`` - determines the behavior of the function if the specified symbol is not found: if ``false``, the script will halt and return a runtime error; if ``true``, the function will return ``na`` and execution will continue.
 
 
 July 2021
