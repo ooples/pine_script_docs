@@ -102,7 +102,8 @@ Library functions always return a result that is either of "simple" or "series" 
 Argument form control
 ^^^^^^^^^^^^^^^^^^^^^
 
-The form of arguments supplied in calls to library functions is autodetected based on how the argument is used inside the function. If the argument can be used in "series" form, it is. If it cannot, an attempt is made with the "simple" type form. This explains why this code::
+The form of arguments supplied in calls to library functions is autodetected based on how the argument is used inside the function. 
+If the argument can be used in "series" form, it is. If it cannot, an attempt is made with the "simple" type form. This explains why this code::
 
     export myEma(int x) =>
         ta.ema(close, x)
@@ -166,7 +167,9 @@ With the provision that public Pine libraries are considered to be "public domai
 Using a library
 ---------------
 
-Using a library from another script (which can be an indicator, a strategy or another library), is done through the `import <https://www.tradingview.com/pine-script-reference/v5/#op_import>`__ statement::
+Using a library from another script (which can be an indicator, a strategy or another library), is done through the `import <https://www.tradingview.com/pine-script-reference/v5/#op_import>`__ statement:
+
+.. code-block:: text
 
     import <username>/<libraryName>/<libraryVersion> [as <alias>]
 

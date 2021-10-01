@@ -6,31 +6,33 @@ User-defined functions
 .. contents:: :local:
     :depth: 2
 
-User-defined functions are functions that you write, as opposed to the built-in functions in Pine. User-defined functions are useful to define calculations that you must do repetitevely, or that you want to isolate from your script's main section of calculations. Think of user-defined functions as a way to extend the capabilities of Pine, when no built-in function will do what you need.
+User-defined functions are functions that you write, as opposed to the built-in functions in Pine. 
+User-defined functions are useful to define calculations that you must do repetitevely, or that you want to isolate from your script's main section of calculations. 
+Think of user-defined functions as a way to extend the capabilities of Pine, when no built-in function will do what you need.
 
 
 
 Single-line functions
 ---------------------
 
-Simple functions can often be written on one line. This
+Simple functions can often be written in one line. This
 is the syntax of single-line functions:
 
 .. code-block:: text
 
-    <identifier>(<list of arguments>) => <expression>
+    <identifier>(<list of parameters>) => <expression>
 
 Here is an example::
 
     f(x, y) => x + y
 
-After the function ``f`` has been declared, it's possible to call it using different types of arguments::
+After the function ``f()`` has been declared, it's possible to call it using different types of arguments::
 
     a = f(open, close)
     b = f(2, 2)
     c = f(open, 2)
 
-The type of the value returned by function ``f`` is determined automatically
+The type of the value returned by function ``f()`` is determined automatically
 and depends on the type of the arguments used in each particular function call. In the example above, the
 type of variable ``a`` is *series* because the arguments are both *series*. The type of variable ``b`` is
 *integer* because arguments are both *literal integers*. The type of variable ``c`` is *series*
@@ -39,7 +41,6 @@ because the addition of a *series* and *literal integer* produces a *series* res
 Pine Scipt functions do not support recursion. It is **not allowed** for a function to call itself from within its own code.
 
 
-.. _multi_line_functions:
 
 Multi-line functions
 --------------------
@@ -48,7 +49,7 @@ Pine also supports multi-line functions with the following syntax:
 
 .. code-block:: text
 
-    <identifier>(<list of arguments>) =>
+    <identifier>(<list of parameters>) =>
         <variable declaration>
         ...
         <variable declaration or expression>
@@ -74,6 +75,8 @@ in the body: ``a`` and ``b``. The last statement calls the function ``math.sqrt`
 (an extraction of the square root). The ``geom_average`` call will return
 the value of the last expression: ``(math.sqrt(a + b))``.
 
+
+
 Scopes in the script
 --------------------
 
@@ -95,6 +98,7 @@ that the local scope is embedded into the global scope.
 In Pine, nested functions are not allowed, i.e., one cannot declare a
 function inside another one. All user functions are declared in the
 global scope. Local scopes cannot intersect with each other.
+
 
 
 Functions that return multiple results
@@ -128,8 +132,8 @@ User-defined functions can use any of the Pine built-ins, except:
 `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
 `library() <https://www.tradingview.com/pine-script-reference/v5/#fun_library>`__,
 `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__,
-`plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__,
-`plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__,
 `plotbar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotbar>`__,
-`plotcandle() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__ and
+`plotcandle() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__,
+`plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__,
+`plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ and
 `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__.

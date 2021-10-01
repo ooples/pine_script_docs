@@ -17,7 +17,7 @@ Multiple small line segments are also useful to draw complex geometric forms.
 The flexibility lines and boxes allow in their positioning mechanism makes them particularly well-suited to
 drawing objects at points in the past that are detected a variable number of bars after the fact.
 
-Lines and boxes are objects, like :ref:`labels <PageLabels>` and :ref:`tables <PageTables>`.
+Lines and boxes are objects, like :ref:`labels <PageTextAndShapes_Labels>` and :ref:`tables <PageTables>`.
 Like them, they are referred to using an ID, which acts like a pointer. 
 Line IDs are of "line" type, and box IDs are of "box" type.
 As with other Pine objects, lines and box IDs are "time series" and all the functions used to manage them accept "series" arguments,
@@ -25,11 +25,12 @@ which makes them very flexible.
 
 .. note:: On TradingView charts, a complete set of *Drawing Tools*
   allows users to create and modify drawings using mouse actions. While they may sometimes look similar to
-  drawing objects created with Pine code, they are different entities.
+  drawing objects created with Pine code, they are unrelated entities.
   Lines and boxes created using Pine code cannot be modified with mouse actions, 
   and hand-drawn drawings from the chart user interface are not visible from Pine scripts.
 
-Lines can be horizontal or at an angle, while boxes are always rectangular, but they share many common characteristics:
+Lines can be horizontal or at an angle, while boxes are always rectangular. 
+Both share many common characteristics:
 
 - They can start and end from any point on the chart, including the future.
 - The functions used to manage them can be placed in conditional or loop structures, making it easier to control their behavior.
@@ -205,7 +206,7 @@ Note that:
   the ``max_lines_count`` parameter in `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
   which we haven't specified.
 - Lines persist on bars until your script deletes them using
-  `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`__, or garbage collection removes them.
+  `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`__, or garbage collection removes them.
 
 In this next example, we use lines to create probable travel paths for price.
 We draw a user-selected quantity of lines from the previous bar's center point between its
@@ -331,17 +332,17 @@ Note that:
   This gives the user control over the repainting behavior of the script.
   It also avoids misleading traders into thinking that our script is prescient and can know in advance if a high
   point will still be the high point in the lookback period *n* bars later.
-- We manage the historical buffer to avoid runtime error when referring to bars too far away in the past.
+- We manage the historical buffer to avoid runtime errors when referring to bars too far away in the past.
   We do two things for this: we use the ``max_bars_back`` parameter in our 
   `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ call,
   and we cap the input for ``lookbackInput`` using ``maxval`` in our 
   `input.int() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}int>`__ call.
   Rather than use the ``500`` literal in two places, we create a ``MAX_BARS_BACK`` constant for it.
 - We create our line and label on the first bar only, using `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__.
-  From that point, we only need to update their properties, so we are moving the same line and label along,
-  resetting their starting properties when a new high is found, and then only updating their *x* coordinates as new bars come in.
+  From that point on, we only need to update their properties, so we are moving the same line and label along,
+  resetting their position and the label's text when a new high is found, and then only updating their *x* coordinates as new bars come in.
   We use the `line.set_xy1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy1>`__ and
-  `line.set_xy1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy1>`__ when we find a new high, and
+  `line.set_xy1() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy1>`__ functions when we find a new high, and
   `line.set_x2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_x2>`__ on other bars, to extend the line.
 - We use time values for ``x1`` and ``x2`` because our 
   `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ call specifies ``xloc = xloc.bar_time``.
@@ -480,7 +481,7 @@ Note that:
   We use the `array.get() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}get>`__
   function to retrieve the array element at index zero (the oldest visible line ID).
   We then use `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`__
-  to delete the line linked with that ID.
+  to delete the line referenced by that ID.
 - Again, we need to artificially return ``int(na)`` in both local blocks of our 
   `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ structure so the compiler doesn't not complain.
   See the :ref:`Matching local block type requiremement <PageConditionalStructures_MatchingLocalBlockTypeRequirement>` section for more information.
@@ -496,7 +497,7 @@ Boxes are managed using built-in functions in the ``box`` namespace. They includ
 
 - `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ to create them.
 - ``box.set_*()`` functions to modify the properties of a box.
-- ``box.get_*()`` functions to read the properties of an existing box.
+- ``box.get_*()`` functions to read some of the properties of an existing box.
 - `box.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}delete>`_ to delete them.
 - The `box.all <https://www.tradingview.com/pine-script-reference/v5/#var_box{dot}all>`__ 
   array which always contains the IDs of all the visible boxes on the chart. 
@@ -523,7 +524,7 @@ Five parameters affect this behavior: ``left``, ``top``, ``right``, ``bottom`` a
    They are either a bar index or a time value, as determined by the argument used for ``xloc``.
    When a bar index is used, the value can be offset in the past (maximum of 5000 bars) or in the future (maximum of 500 bars).
    Past or future offsets can also be calculated when using time values.
-   The ``left`` and ``x2`` values of an existing line can be modified using 
+   The ``left`` and ``right`` values of an existing line can be modified using 
    `box.set_left() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_left>`__,
    `box.set_right() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_right>`__,
    `box.set_lefttop() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_lefttop>`__ or
@@ -535,7 +536,8 @@ Five parameters affect this behavior: ``left``, ``top``, ``right``, ``bottom`` a
    It determines which type of argument must be used with ``left`` and ``right``. 
    With `xloc.bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_index>`__, ``left`` and ``right`` must be absolute bar indices.
    With `xloc.bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_xloc{dot}bar_time>`__, ``left`` and ``right`` must be a UNIX timestamp in milliseconds 
-   corresponding to the `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ value of a bar's `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__.
+   corresponding to a value between the bar's `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ (opening time) and
+   `time_close <https://www.tradingview.com/pine-script-reference/v5/#var_time_close>`__ (closing time) values.
 
 ``top`` and ``bottom``
    They are the *y* coordinates of the boxe's top and bottom levels (boxes are always rectangular).
@@ -543,8 +545,8 @@ Five parameters affect this behavior: ``left``, ``top``, ``right``, ``bottom`` a
    For an RSI indicator, they would typically be between 0 and 100, for example.
    When an indicator is running as an overlay, then the price scale will usually be that of the chart's symbol.
    The ``top`` and ``bottom`` values of an existing line can be modified using 
-   `line.set_top() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_top>`__,
-   `line.set_bottom() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_bottom>`__,
+   `box.set_top() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_top>`__,
+   `box.set_bottom() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_bottom>`__,
    `box.set_lefttop() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_lefttop>`__ or
    `box.set_rightbottom() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_rightbottom>`__.
 
@@ -552,86 +554,43 @@ The remaining five parameters in `box.new() <https://www.tradingview.com/pine-sc
 control the visual appearance of boxes:
 
 ``border_color``
-   Is the line's color.
+   Is the border's color. It defaults to `color.blue <https://www.tradingview.com/pine-script-reference/v5/#var_color{dot}blue>`__.
    
 ``border_width``
-   Determines the width of the line in pixels.
+   Determines the width of the border in pixels.
 
 ``border_style``
-   Is the style of line. See this page's :ref:`Line styles <PageLinesAndBoxes_BoxStyles>` section.
+   Is the style of border. See this page's :ref:`Box styles <PageLinesAndBoxes_BoxStyles>` section.
 
 ``extend``
-   Determines if the line is extended past its coordinates.
+   Determines if the borders is extended past the box's coordinates.
    It can be `extend.none <https://www.tradingview.com/pine-script-reference/v5/#var_extend{dot}none>`__,
    `extend.left <https://www.tradingview.com/pine-script-reference/v5/#var_extend{dot}left>`__,
    `extend.right <https://www.tradingview.com/pine-script-reference/v5/#var_extend{dot}right>`__ or
    `extend.both <https://www.tradingview.com/pine-script-reference/v5/#var_extend{dot}both>`__.
 
 ``bgcolor``
-   Is the line's color.
+   Is the background color of the box. It defaults to `color.blue <https://www.tradingview.com/pine-script-reference/v5/#var_color{dot}blue>`__.
    
-This is how you can create lines in their simplest form. We connect the preceding bar's 
-`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ to the current bar's
-`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__::
+Let's create simple boxes::
 
     //@version=5
     indicator("", "", true)
-    line.new(bar_index - 1, high[1], bar_index, low, width = 3)
+    box.new(bar_index, high, bar_index + 1, low, border_color = color.gray, bgcolor = color.new(color.silver, 60))
 
-.. image:: images/LinesAndBoxes-CreatingLines-01.png
+.. image:: images/LinesAndBoxes-CreatingBoxes-01.png
 
 Note that:
 
-- We use a different ``x1`` and ``x2`` value: ``bar_index - 1`` and ``bar_index``.
-  This is necessary, otherwise no line would be created.
-- We make the width of our line 3 pixels using ``width = 3``.
-- No logic controls our `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`_ call, so lines are created on every bar.
-- Only approximately the last 50 lines are shown because that is the default value for 
-  the ``max_lines_count`` parameter in `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
+- The start and end points of boxes, like lines, are always the horizontal **center** of bars.
+- We start these boxes at ``bar_index`` and end them on ``bar_index + 1`` (the following bar in the future)
+  so that we get an actual box. If we used ``bar_index`` for both coordinates, only a vertical line would be drawn in the center of the bar.
+- No logic controls our `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ call, so boxes are created on every bar.
+- Only approximately the last 50 boxes are shown because that is the default value for 
+  the ``max_boxes_count`` parameter in `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
   which we haven't specified.
-- Lines persist on bars until your script deletes them using
-  `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`__, or garbage collection removes them.
-
-In this next example, we use lines to create probable travel paths for price.
-We draw a user-selected quantity of lines from the previous bar's center point between its
-`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ and
-`open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ values.
-The lines project one bar after the current bar, after having been distributed along the 
-`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ and
-`open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ range of the current bar::
-
-    //@version=5
-    indicator("Price path projection", "PPP", true, max_lines_count = 100)
-    qtyOfLinesInput = input.int(10, minval = 1)
-    
-    y2Increment = (close - open) / qtyOfLinesInput
-    // Starting point of the fan in y.
-    lineY1 = math.avg(close[1], open[1])
-    // Loop creating the fan of lines on each bar.
-    for i = 0 to qtyOfLinesInput
-        // End point in y if line stopped at current bar.
-        lineY2 = open + (y2Increment * i)
-        // Extrapolate necessary y position to the next bar because we extend lines one bar in the future.
-        lineY2 := lineY2 + (lineY2 - lineY1)
-        lineColor = lineY2 > lineY1 ? color.lime : color.fuchsia
-        line.new(bar_index - 1, lineY1, bar_index + 1, lineY2, color = lineColor)
-
-.. image:: images/LinesAndBoxes-CreatingLines-02.png
-
-Note that:
-
-- We are creating a set of lines from within a `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ structure.
-- We use the default ``xloc = xloc.bar_index``, so our ``x1`` and ``x2`` values are bar indices.
-- We want to start lines on the previous bar, so we use ``bar_index - 1`` for ``x1`` and ``bar_index + 1`` for ``x2``.
-- We use a "series color" value (its value can change in any of the loop's iterations) for the line's color.
-  When the line is going up we make it lime; if not we make it fuchsia.
-- The script will repaint in realtime because it is using the 
-  `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ and
-  `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ values of the realtime bar to calculate line projections.
-  Once the realtime bar closes, the lines drawn on elapsed realtime bars will no longer update.
-- We use ``max_lines_count = 100`` in our `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ call to
-  preserve the last 100 lines.
-
+- Boxes persist on bars until your script deletes them using
+  `box.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}delete>`__, or garbage collection removes them.
 
 
 Modifying boxes
@@ -648,10 +607,97 @@ The available *setter* functions for box drawings are:
 - `box.set_border_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_border_color>`__
 - `box.set_border_width() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_border_width>`__
 - `box.set_border_style() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_border_style>`__
-- `box.set_extend() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_extend>`__
+- `box.set_extend() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_extend>`__
 - `box.set_bgcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_bgcolor>`__
 
 Note that contrary to lines, there is no setter function to modify ``xloc`` for boxes.
+
+This script uses setter functions to update boxes. 
+It detects the largest up and down volume bars during a user-defined timeframe
+and draws boxes with the `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and
+`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ levels of those bars.
+If a higher volume bar comes in, the timeframe's box is redrawn using the new bar's
+`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and
+`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ levels::
+
+    //@version=5
+    indicator("High volume bar boxes", "", true)
+    
+    string tfInput      = input.timeframe("D", "Resetting timeframe")
+    int    transpInput  = 100 - input.int(100, "Line Brightness", minval = 0, maxval = 100, step = 5, inline = "1", tooltip = "100 is brightest")
+    int    widthInput   = input.int(2, "Width", minval = 0, maxval = 100, step = 5, inline = "1")
+    color  upColorInput = input.color(color.lime, "🠅", inline = "1")
+    color  dnColorInput = input.color(color.fuchsia, "🠇", inline = "1")
+    
+    bool newTF = ta.change(time(tfInput))
+    bool barUp = close > open
+    
+    // These keep track of highest up/dn volume found during the TF.
+    var float hiVolUp = na
+    var float hiVolDn = na
+    // These always hold the IDs of the current TFs boxes.
+    var box boxUp = na
+    var box boxDn = na
+    
+    if newTF and not na(volume)
+        // New TF begins; create new boxes, one of which will be invisible.
+        if barUp
+            hiVolUp := volume
+            hiVolDn := na
+            boxUp := box.new(bar_index, high, bar_index + 1, low, border_color = color.new(upColorInput, transpInput), border_width = widthInput, bgcolor = na)
+            boxDn := box.new(na, na, na, na, border_color = color.new(dnColorInput, transpInput), border_width = widthInput, bgcolor = na)
+        else
+            hiVolDn := volume
+            hiVolUp := na
+            boxDn := box.new(bar_index, high, bar_index + 1, low, border_color = color.new(dnColorInput, transpInput), border_width = widthInput, bgcolor = na)
+            boxUp := box.new(na, na, na, na, border_color = color.new(upColorInput, transpInput), border_width = widthInput, bgcolor = na)
+        int(na)
+    else
+        // On bars during the HTF, keep tracks of highest up/dn volume bar.
+        if barUp
+            hiVolUp := math.max(nz(hiVolUp), volume)
+        else
+            hiVolDn := math.max(nz(hiVolDn), volume)
+        // If a new bar has higher volume, reset its box.
+        if hiVolUp > nz(hiVolUp[1])
+            box.set_lefttop(boxUp, bar_index, high)
+            box.set_rightbottom(boxUp, bar_index + 1, low)
+        else if hiVolDn > nz(hiVolDn[1])
+            box.set_lefttop(boxDn, bar_index, high)
+            box.set_rightbottom(boxDn, bar_index + 1, low)
+        int(na)
+    
+    // On all bars, extend right side of both boxes.
+    box.set_right(boxUp, bar_index + 1)
+    box.set_right(boxDn, bar_index + 1)
+    // Plot circle mark on TF changes.
+    plotchar(newTF, "newTF", "•", location.top, size = size.tiny)
+
+.. image:: images/LinesAndBoxes-ModifyingBoxes-01.png
+
+Note that:
+
+- We use the ``inline`` parameter in the inputs relating to the boxes' visual appearance to place them on the same line.
+- We subtract the 0-100 brightness level given by the user from 100 to generate the correct transparency for our box borders.
+  We do this because it is more intuitive for users to specify a brightness level where 100 represents maximum brightness.
+  We provide a tooltip to explain the scale.
+- When a new higher timeframe bar comes in and the symbol's feed contains volume data, we reset our information. If the timeframe's first bar is up, 
+  we create a new visible ``boxUp`` box and an invisible ``boxDn`` box. We do the inverse if the first bar's polarity is down.
+  We take care to reassign the IDs of the newly created boxes to ``boxUp`` and ``boxUp`` so we will be able to update those boxes later in the script.
+  This is possible because we have declared those variables with `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__.
+  See the section on the :ref:`var declaration mode <PageVariableDeclarations_Var>` for more information.
+- On all other chart bars belonging to the same higher timeframe bar, we monitor volume values to keep track of the highest.
+  If a new higher volume bar is encountered, we reset the corresponding box's coordinates on that new bar using
+  `box.set_lefttop() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_lefttop>`__ and
+  `box.set_rightbottom() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_rightbottom>`__.
+- On all bars, we extend the right side of the timeframe's two boxes using `box.set_right() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_right>`__.
+- Approximately the last 50 boxes will be visible on the chart because we do not use
+  ``max_boxes_count`` in our `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ call
+  to change its default value.
+
+This is our script's "Settings/Inputs" tab:
+
+.. image:: images/LinesAndBoxes-ModifyingBoxes-02.png
 
 
 
@@ -685,12 +731,12 @@ Getting box properties
 
 The following *getter* functions are available for boxes:
 
-- `box.get_bottom() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_bottom>`__
-- `box.get_left() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_left>`__
-- `box.get_right() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_right>`__
-- `box.get_top() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_top>`__
+- `box.get_bottom() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}get_bottom>`__
+- `box.get_left() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}get_left>`__
+- `box.get_right() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}get_right>`__
+- `box.get_top() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}get_top>`__
 
-The signature for `box.get_top() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}get_top>`__ is:
+The signature for `box.get_top() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}get_top>`__ is:
 
 .. code-block:: text
 
@@ -704,7 +750,7 @@ Deleting boxes
 ^^^^^^^^^^^^^^
 
 The `box.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}delete>`__ 
-function is used to delete boxes. Its syntax is:
+function is used to delete boxes. Its signature is:
 
 .. code-block:: text
 
