@@ -142,7 +142,7 @@ Here is an example of a script using ``barstate.*`` variables::
 
     //@version=5
     indicator("Bar States", overlay = true, max_labels_count = 500)
-
+    
     stateText() =>
         string txt = ""
         txt += barstate.isfirst     ? "isfirst\n"     : ""
@@ -151,15 +151,16 @@ Here is an example of a script using ``barstate.*`` variables::
         txt += barstate.isrealtime  ? "isrealtime\n"  : ""
         txt += barstate.isnew       ? "isnew\n"       : ""
         txt += barstate.isconfirmed ? "isconfirmed\n" : ""
-        txt += barstate.islastconfirmedhistory ? "barstate.islastconfirmedhistory\n" : ""
+        txt += barstate.islastconfirmedhistory ? "islastconfirmedhistory\n" : ""
     
     labelColor = switch
-        barstate.isfirst     => color.fuchsia
-        barstate.ishistory   => color.silver
-        barstate.isconfirmed => color.orange
-        barstate.isnew       => color.red
+        barstate.isfirst                => color.fuchsia
+        barstate.islastconfirmedhistory => color.gray
+        barstate.ishistory              => color.silver
+        barstate.isconfirmed            => color.orange
+        barstate.isnew                  => color.red
         => color.yellow
-
+    
     label.new(bar_index, na, stateText(), yloc = yloc.abovebar, color = labelColor)
 
 Note that:
@@ -185,7 +186,7 @@ Let's look at what happens when realtime updates start coming in:
 
 Note that:
 
-- The realtime bar will become red on its first execution,
+- The realtime bar is red because it is its first execution,
   because ``barstate.isnew`` is ``true`` and ``barstate.ishistory`` is no longer ``true``, so our 
   `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ structure
   determing our color uses the ``barstate.isnew => color.red`` branch.
@@ -194,3 +195,8 @@ Note that:
 - The elapsed realtime bars' label is orange because those bars were not historical bars when they closed.
   Accordingly, the ``barstate.ishistory => color.silver`` branch in the `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
   structure was not executed, but the next one, ``barstate.isconfirmed => color.orange`` was.
+
+This last example shows how the realtime bar's label will turn yellow after the first execution on the bar.
+This is the way the label will usually appear on realtime bars:
+
+.. image:: images/BarStates-Example-03.png
