@@ -269,8 +269,37 @@ Levels
 Pine has an `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ 
 function to plot horizontal lines (see the page on :ref:`Levels <PageLevels>`).
 `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ 
-is useful because it has some line styles unavailable with `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
+is useful because it has some line styles unavailable with `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__,
 but it also has some limitations.
+
+You can plot levels with `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
+in a few different ways. This shows a `CCI <https://www.tradingview.com/u/?solution=43000502001>`__
+indicator with levels plotted using `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__:
+
+.. image:: images/Plots-Levels-01.png
+
+    //@version=5
+    indicator("CCI levels with `plot()`")
+    plot(ta.cci(close, 20))
+    plot(0,  "Zero", color.gray, 1, plot.style_circles)
+    plot(bar_index % 2 == 0 ?  100 : na,  "100", color.lime, 1, plot.style_linebr)
+    plot(bar_index % 2 == 0 ? -100 : na, "-100", color.fuchsia, 1, plot.style_linebr)
+    plot( 200,  "200", color.green, 2, trackprice = true, show_last = 1, offset = -99999)
+    plot(-200, "-200", color.red,   2, trackprice = true, show_last = 1, offset = -99999)
+    plot( 300,  "300", color.new(color.green, 50), 1)
+    plot(-300, "-300", color.new(color.red, 50),   1)
+
+Note that:
+
+- The zero level is plotted using ``plot.style_circles``.
+- The 100 levels are plotted using a conditional value that only plots every second bar.
+  In order to prevent the `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
+  from being bridged, we use the ``plot.style_linebr`` line style.
+- The 200 levels are plotted using ``trackprice = true`` to plot a distinct pattern o fsmall squares that
+  extend the full width of the script's visual space. 
+  The ``show_last = 1`` in there displays only the last plotted value, which would appear as a one-bar straight line if the next trick wasn't used.
+  The ``offset = -99999`` pushes that one-bar segment far away in the past so that it is never visible.
+- The 300 levels are plotted using a straight line, but a lighter transparency is used to make them less prominent.
 
 
 
