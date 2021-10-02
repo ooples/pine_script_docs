@@ -151,10 +151,10 @@ The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/
 
 ``linewidth``
    Is the plotted element's size, but it does not apply to all styles. When a line is plotted, the unit is pixels.
-   It has no impact when ``plot.style_columns`` is used.
+   It has no impact when `plot.style_columns <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_columns>`__ is used.
 
 ``style``
-   The possible arguments are:
+   The available arguments are:
 
    - `plot.style_line <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_line>`__ (the default):
      It plots a continous line using the ``linewidth`` argument in pixels for its width.
@@ -172,25 +172,46 @@ The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/
      For these arguments, the ``linewidth`` argument becomes a relative sizing measure — its units are not pixels.
 
 ``trackprice``
-   The default value of this is ``false``. When it's ``true``
+   The default value of this is ``false``. When it is ``true``, a dotted line made up of small squares will be plotted
+   the full width of the script's visual space. It is often used in conjuction with ``show_last = 1, offset = -99999``
+   to hide the actual plot and only leave the residual dotted line.
 
 ``histbase``
-   XXX
+   It is the reference point used with `plot.style_area <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_area>`__,
+   `plot.style_columns <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_columns>`__ and
+   `plot.style_histogram <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_histogram>`__.
+   It determines the level separating positive and negative values of the ``series`` argument.
+   It cannot be calculated dynamically, as an "input int/float" is required.
 
 ``offset``
-   XXX
+   This allows shifting the plot in the past/future using a negative/positive offset in bars.
 
 ``join``
-   XXX
+   This only affect styles `plot.style_circles <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_circles>`__ or
+   `plot.style_cross <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_cross>`__.
+    When ``true``, the shapes are joined by a one-pixel line.
 
 ``editable``
-   XXX
+   This boolean parameter controls whether or not the plot's properties can be edited in the "Settings/Style" tab.
+   Its default value is ``false``.
 
 ``show_last``
-   XXX
+   Allows control over how many of the last bars the plotted values are visible.
+   An "input int" argument is required, so it cannot be calculated dynamically.
 
 ``display``
-   XXX
+  When it is set to `display.none <https://www.tradingview.com/pine-script-reference/v5/#var_display{dot}none>`__,
+  the plot is invisible and no value is displayed for it in indicator values or the Data Window.
+  It can be useful for plots destined for use as external inputs for other scripts,
+  or for values plotted for use with the ``{{plot("[plot_title]")}}`` placeholder in 
+  `xxx <https://www.tradingview.com/pine-script-reference/v5/#>`__ calls. e.g.::
+
+    //@version=5
+    indicator("")
+    r = ta.rsi(close, 14)
+    xUp = ta.crossover(r, 50)
+    plot(r, "RSI", display = display.none)
+    alertcondition(xUp, "xUp alert", message = 'RSI is bullish at: {{plot("RSI")}}')
 
 
 
