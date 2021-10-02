@@ -153,10 +153,25 @@ The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/
    It has no impact when ``plot.style_columns`` is used.
 
 ``style``
-   XXX
+   The possible arguments are:
+
+   - `plot.style_line <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_line>`__ (the default):
+     It plots a continous line using the ``linewidth`` argument in pixels for its width.
+     `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values will not plot in realtime,
+     but they will be briged when a value that is not `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ comes in.
+
+   - `plot.style_linebr <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_linebr>`__:
+   - `plot.style_stepline <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_stepline>`__:
+   - `plot.style_area <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_area>`__:
+   - `plot.style_columns <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_columns>`__:
+   - `plot.style_histogram <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_histogram>`__:
+   - `plot.style_circles <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_circles>`__ or
+     `plot.style_cross <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_cross>`__:
+     These plot a shape that is not joined across bars unless ``join = true`` is also used.
+     For these arguments, the ``linewidth`` argument becomes a relative sizing measure — its units are not pixels.
 
 ``trackprice``
-   XXX
+   The default value of this is ``false``. When it's ``true``
 
 ``histbase``
    XXX
@@ -183,7 +198,8 @@ The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/
 Plotting conditionally
 ----------------------
 
-Plot calls cannot be used in conditional structures such as `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
+`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ calls 
+cannot be used in conditional structures such as `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
 but they can be controlled by varying their plotted values, or their color.
 
 
@@ -242,6 +258,19 @@ color the rendered line. For example::
     plot(close, color = plotColor)
 
 .. image:: images/Plot-02.png
+
+
+
+.. _PagePlots_Levels:
+
+Levels
+------
+
+Pine has an `hline <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ 
+function to plot horizontal lines (see the page on :ref:`Levels <PageLevels>`).
+`hline <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ 
+is useful because it has some line styles unavailable with `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
+but it also has some limitations.
 
 
 
