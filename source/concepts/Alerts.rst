@@ -528,12 +528,12 @@ Note that users creating *alertcondition() alerts* from the "Create Alert" dialo
 
 ::
 
-    //@version=5
-    indicator("")
-    r = ta.rsi(close, 14)
-    xUp = ta.crossover(r, 50)
-    plot(r, "RSI")
-    alertcondition(xUp, message = 'RSI is bullish at: {{plot("RSI")}}')
+        //@version=5
+        indicator("A")
+        r = ta.rsi(close, 14)
+        xUp = ta.crossover(r, 50)
+        plot(r, "RSI", display = display.none)
+        alertcondition(xUp, "xUp alert", message = 'RSI is bullish at: {{plot("RSI")}}')
 
 ``{{ticker}}``
     Ticker of the symbol used in the alert (AAPL, BTCUSD, etc.).
