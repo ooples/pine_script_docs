@@ -166,10 +166,11 @@ Here is an example of a script using ``barstate.*`` variables::
 Note that:
 
 - Each state's name will appear in the label's text when it is ``true``.
-- There are four possible colors for the label's background:
+- There are five possible colors for the label's background:
 
   - fuchsia on the first bar
   - silver on historical bars
+  - gray on the last confirmed historical bar
   - orange when a realtime bar is confirmed (when it closes and becomes an elapsed realtime bar)
   - red on the realtime bar's first execution
   - yellow for other executions of the realtime bar
