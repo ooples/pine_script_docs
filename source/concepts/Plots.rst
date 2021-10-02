@@ -200,6 +200,7 @@ The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/
    An "input int" argument is required, so it cannot be calculated dynamically.
 
 ``display``
+  The default is `display.all <https://www.tradingview.com/pine-script-reference/v5/#var_display{dot}all>`__.
   When it is set to `display.none <https://www.tradingview.com/pine-script-reference/v5/#var_display{dot}none>`__,
   the plot is invisible and no value is displayed for it in indicator values or the Data Window.
   It can be useful for plots destined for use as external inputs for other scripts,
