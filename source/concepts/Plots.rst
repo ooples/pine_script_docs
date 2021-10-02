@@ -295,7 +295,7 @@ Note that:
 
 - The zero level is plotted using ``plot.style_circles``.
 - The 100 levels are plotted using a conditional value that only plots every second bar.
-  In order to prevent the `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
+  In order to prevent the `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values
   from being bridged, we use the ``plot.style_linebr`` line style.
 - The 200 levels are plotted using ``trackprice = true`` to plot a distinct pattern o fsmall squares that
   extend the full width of the script's visual space. 
