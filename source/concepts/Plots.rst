@@ -12,7 +12,8 @@ Introduction
 ------------
 
 The `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ 
-function can be used to plot different styles of lines, histograms, areas, columns (like volume columns), fills, circles or crosses.
+function is the most frequently used function used to display information calculated using Pine scripts.
+It is versatile and can be used to plot different styles of lines, histograms, areas, columns (like volume columns), fills, circles or crosses.
 
 This script showcases a few different uses of `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
 in an overlay script:
@@ -301,7 +302,7 @@ Note that:
   extends the full width of the script's visual space. 
   The ``show_last = 1`` in there displays only the last plotted value, which would appear as a one-bar straight line if the next trick wasn't also used:
   the ``offset = -99999`` pushes that one-bar segment far away in the past so that it is never visible.
-- The 300 levels are plotted using a straight line, but a lighter transparency is used to make them less prominent.
+- The 300 levels are plotted using a continuous line, but a lighter transparency is used to make them less prominent.
 
 
 
