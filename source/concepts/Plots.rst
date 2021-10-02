@@ -13,11 +13,6 @@ Introduction
 
 The `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ 
 function can be used to plot different styles of lines, histograms, areas, columns (like volume columns), fills, circles or crosses.
-It has the following signature:
-
-.. code-block:: text
-
-    plot(series, title, color, linewidth, style, trackprice, histbase, offset, join, editable, show_last, display) → plot
 
 This script showcases a few different uses of `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
 in an overlay script:
@@ -117,6 +112,17 @@ section of this page.
 A script can only plot in its own visual space, whether it is in a pane or on the chart as an overlay.
 Scripts running in a pane can only :ref:`color bars <PageBarColoring>` in the chart area.
 
+
+
+\`plot()\` parameters
+---------------------
+
+The `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ function has the following signature:
+
+.. code-block:: text
+
+    plot(series, title, color, linewidth, style, trackprice, histbase, offset, join, editable, show_last, display) → plot
+
 The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ are:
 
 ``series``
@@ -172,19 +178,18 @@ The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/
 
 
 
-Plot styles
------------
+.. _PagePlots_PlottingConditionally:
 
-Lines
-^^^^^
+Plotting conditionally
+----------------------
+
+Plot calls cannot be used in conditional structures such as `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
+but they can be controlled by varying their plotted values, or their color.
 
 
 
-Conditional plotsDiscontinuous lines
-"""""""""""""""""""
-
-See the :ref:`Conditional coloring <PageColors_ConditionalColoring>` section for more information about controlling the colors in your
-`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ calls.
+Value control
+^^^^^^^^^^^^^
 
 It is sometimes useful to plot discontinuous lines. This script shows three ways to do it:
 
@@ -197,7 +202,6 @@ It is sometimes useful to plot discontinuous lines. This script shows three ways
     plot(bar_index % 2 == 0 ? high : na, color = color.teal, linewidth = 6, style = plot.style_linebr)
     plot(bar_index % 2 == 0 ? high : na)
     plot(bar_index % 2 == 0 ? low : na, linewidth = 4, style = plot.style_circles)
-    plot(math.avg(open, close), color = bar_index % 2 == 0 ? color.purple : na, linewidth = 4, style = plot.style_line)
 
 Note that:
 
@@ -207,17 +211,22 @@ Note that:
   so the plot does not interrupt.
 - We plot circles on the bar's `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__in the third plot. 
   Along with the ``plot.style_cross``, they are a simple way to plot discontinuous values, e.g., for stop or take profit levels, or support & resistance levels.
+
+
+
+Color control
+^^^^^^^^^^^^^
+
+See the :ref:`Conditional coloring <PageColors_ConditionalColoring>` section for more information about controlling the colors in your
+`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ calls.
+
+    plot(math.avg(open, close), color = bar_index % 2 == 0 ? color.purple : na, linewidth = 4, style = plot.style_line)
+
+
 - The last plot is plotting a continuous value, but it is setting the plot's color to `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
   when no plot is needed. Note the difference between the first plot's display. In this last plot (the purple line joining the middle of alternating bodies)
   the line starts from the center of the previous bar and extends to the center of the current bar.
 
-
-
-
-.. _PagePlots_ConditionalPlots:
-
-Conditional plots
------------------
 
 The value of the ``color`` parameter can be defined in different ways.
 If it is a color constant, for example ``color.red``, then the whole line will be plotted using a *red* color::
@@ -233,6 +242,7 @@ color the rendered line. For example::
     plot(close, color = plotColor)
 
 .. image:: images/Plot-02.png
+
 
 
 Fills
