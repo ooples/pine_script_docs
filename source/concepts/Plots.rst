@@ -189,7 +189,7 @@ The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/
 ``join``
    This only affect styles `plot.style_circles <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_circles>`__ or
    `plot.style_cross <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_cross>`__.
-    When ``true``, the shapes are joined by a one-pixel line.
+   When ``true``, the shapes are joined by a one-pixel line.
 
 ``editable``
    This boolean parameter controls whether or not the plot's properties can be edited in the "Settings/Style" tab.
