@@ -13,6 +13,9 @@ Levels
 Levels are lines plotted using the 
 `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ function.
 It is designed to plot **horizontal** levels using a **single color**, i.e., it does not change on different bars.
+See the :ref:`Levels <PagePlots_Levels>` section of the page on `plot() <https://www.tradingview.com/pine-script-reference/v5/#plot>`__
+for alternative ways to plot levels when `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__
+won't do what you need.
 
 The function has the following signature:
 
