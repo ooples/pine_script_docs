@@ -266,7 +266,7 @@ color the rendered line. For example::
 Levels
 ------
 
-Pine has an `hline <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ 
+Pine has an `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ 
 function to plot horizontal lines (see the page on :ref:`Levels <PageLevels>`).
 `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ 
 is useful because it has some line styles unavailable with `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
