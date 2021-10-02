@@ -202,10 +202,11 @@ The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/
 ``display``
   The default is `display.all <https://www.tradingview.com/pine-script-reference/v5/#var_display{dot}all>`__.
   When it is set to `display.none <https://www.tradingview.com/pine-script-reference/v5/#var_display{dot}none>`__,
-  the plot is invisible and no value is displayed for it in indicator values or the Data Window.
-  It can be useful for plots destined for use as external inputs for other scripts,
-  or for values plotted for use with the ``{{plot("[plot_title]")}}`` placeholder in 
-  `xxx <https://www.tradingview.com/pine-script-reference/v5/#>`__ calls. e.g.::
+  plotted values will not affect the scale of the script's visual space.
+  The plot will be invisible and will not appear in indicator values or the Data Window.
+  It can be useful in plots destined for use as external inputs for other scripts,
+  or for plots used with the ``{{plot("[plot_title]")}}`` placeholder in 
+  `alertcondition() <https://www.tradingview.com/pine-script-reference/v5/#fun_alertcondition>`__ calls, e.g.::
 
     //@version=5
     indicator("")
