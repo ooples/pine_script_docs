@@ -128,6 +128,7 @@ The colors in the previous script do not vary as the script executes bar to bar.
 
 
 
+.. _PageColors_ConditionalColoring:
 
 Conditional coloring
 --------------------

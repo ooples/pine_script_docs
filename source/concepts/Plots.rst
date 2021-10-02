@@ -55,7 +55,11 @@ Note that:
   The conditions that change the color of the line require it to be higher/lower than its value two bars ago.
   This makes for less noisy color transitions than if we merely looked for a higher/lower value than the previous one.
 
-This script shows other uses of `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ in a pane::
+This script shows other uses of `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ in a pane:
+
+.. image:: images/Plots-Introduction-02.png
+
+::
 
     //@version=5
     indicator("Volume change", format = format.volume)
@@ -78,8 +82,6 @@ This script shows other uses of `plot() <https://www.tradingview.com/pine-script
     plot(volumeChange, "Volume change columns", volumeChangeColor, 12, plot.style_histogram)
     
     plot(0, "Zero line", color.gray)
-
-.. image:: images/Plots-Introduction-02.png
 
 Note that:
 
@@ -169,21 +171,46 @@ The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/
    XXX
 
 
-While the function is usually used to plot values that vary with time, such as in::
-
-    plot(close)
-
-it can also be used to plot horizontal levels, e.g.::
-
-    plot(125.2)
-
-
 
 Plot styles
 -----------
 
 Lines
 ^^^^^
+
+
+
+Conditional plotsDiscontinuous lines
+"""""""""""""""""""
+
+See the :ref:`Conditional coloring <PageColors_ConditionalColoring>` section for more information about controlling the colors in your
+`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ calls.
+
+It is sometimes useful to plot discontinuous lines. This script shows three ways to do it:
+
+.. image:: images/Plots-Line-Discontinous-01.png
+
+::
+
+    //@version=5
+    indicator("Discontinuous plots", "", true)
+    plot(bar_index % 2 == 0 ? high : na, color = color.teal, linewidth = 6, style = plot.style_linebr)
+    plot(bar_index % 2 == 0 ? high : na)
+    plot(bar_index % 2 == 0 ? low : na, linewidth = 4, style = plot.style_circles)
+    plot(math.avg(open, close), color = bar_index % 2 == 0 ? color.purple : na, linewidth = 4, style = plot.style_line)
+
+Note that:
+
+- In the first plot, we use ``plot.style_linebr``, which plots the green line on highs that is centered on the bar's horizontal midpoint.
+- The second plot shows the result of plotting the same values, but without using special care to break the line.
+  What's happening here is that the thin blue line is automatically bridged over `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values,
+  so the plot does not interrupt.
+- We plot circles on the bar's `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__in the third plot. 
+  Along with the ``plot.style_cross``, they are a simple way to plot discontinuous values, e.g., for stop or take profit levels, or support & resistance levels.
+- The last plot is plotting a continuous value, but it is setting the plot's color to `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
+  when no plot is needed. Note the difference between the first plot's display. In this last plot (the purple line joining the middle of alternating bodies)
+  the line starts from the center of the previous bar and extends to the center of the current bar.
+
 
 
 
