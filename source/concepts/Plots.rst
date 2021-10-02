@@ -299,8 +299,8 @@ Note that:
   from being bridged, we use the ``plot.style_linebr`` line style.
 - The 200 levels are plotted using ``trackprice = true`` to plot a distinct pattern of small squares that
   extends the full width of the script's visual space. 
-  The ``show_last = 1`` in there displays only the last plotted value, which would appear as a one-bar straight line if the next trick wasn't used.
-  The ``offset = -99999`` pushes that one-bar segment far away in the past so that it is never visible.
+  The ``show_last = 1`` in there displays only the last plotted value, which would appear as a one-bar straight line if the next trick wasn't also used:
+  the ``offset = -99999`` pushes that one-bar segment far away in the past so that it is never visible.
 - The 300 levels are plotted using a straight line, but a lighter transparency is used to make them less prominent.
 
 
