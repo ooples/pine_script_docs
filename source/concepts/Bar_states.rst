@@ -192,7 +192,7 @@ Note that:
   determing our color uses the ``barstate.isnew => color.red`` branch.
   This will usually not last long because on the next update ``barstate.isnew`` will no longer be ``true``
   so the label's color will turn yellow.
-- The elapsed realtime bars' label is orange because those bars were not historical bars when they closed.
+- The label of elapsed realtime bars is orange because those bars were not historical bars when they closed.
   Accordingly, the ``barstate.ishistory => color.silver`` branch in the `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
   structure was not executed, but the next one, ``barstate.isconfirmed => color.orange`` was.
 
