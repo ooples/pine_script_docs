@@ -275,8 +275,8 @@ series has been shifted to the right (its value is positive).
 
 
 
-Limitations
------------
+Plot count limit
+----------------
 
 Each script is limited to a maximum plot count of 64.
 All ``plot*()`` calls and `alertcondition() <https://www.tradingview.com/pine-script-reference/v5/#func_alertcondition>`__ calls
