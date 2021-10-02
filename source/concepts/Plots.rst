@@ -13,7 +13,7 @@ Introduction
 
 The `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ 
 function is the most frequently used function used to display information calculated using Pine scripts.
-It is versatile and can be used to plot different styles of lines, histograms, areas, columns (like volume columns), fills, circles or crosses.
+It is versatile and can plot different styles of lines, histograms, areas, columns (like volume columns), fills, circles or crosses.
 
 This script showcases a few different uses of `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
 in an overlay script:
