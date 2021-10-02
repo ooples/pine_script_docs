@@ -278,6 +278,8 @@ indicator with levels plotted using `plot() <https://www.tradingview.com/pine-sc
 
 .. image:: images/Plots-Levels-01.png
 
+::
+
     //@version=5
     indicator("CCI levels with `plot()`")
     plot(ta.cci(close, 20))
