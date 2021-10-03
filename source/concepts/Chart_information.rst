@@ -51,7 +51,22 @@ Other values are available through:
   `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ and
   `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ values.
 
-On historical bars, 
+On historical bars, the values for the above variables do not move because only OHLCV information
+is available on them. When running on historical bars, scripts execute on the bars'
+`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__, 
+when all the bar's information is known and cannot change during the script's execution on the bar.
+
+Realtime bars are another story altogether. 
+When indicators (or strategies using ``calc_on_every_tick = true``) run in realtime,
+the values of the above variables (except `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__)
+will vary during the script's execution, because they represent their **current** value on incomplete realtime bar.
+This may lead to one form of :ref:`repainting <PageRepainting>`.
+See the page on Pine's :ref:`execution model <PageExecutionModel>` for more details.
+
+The `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ :ref:`history-referencing operator <PageOperators_HistoryReferencingOperator>` 
+can be used to refer to past values of the built-in variables, e.g., ``close[1]`` refers to the 
+value of `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ on the previous bar,
+relative to the particular bar the script is executing on.
 
 
 
