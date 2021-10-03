@@ -263,7 +263,7 @@ Note that:
 
 - We define the condition determining when we plot using ``bar_index % 3 == 0``, 
   which becomes ``true`` when the remainder of the division of the bar index by 3 is zero. This will happen every three bars.
-- In the first plot, we use ``plot.style_linebr``, which plots the fuchsia line on highs that is centered on the bar's horizontal midpoint.
+- In the first plot, we use ``plot.style_linebr``, which plots the fuchsia line on highs. It is centered on the bar's horizontal midpoint.
 - The second plot shows the result of plotting the same values, but without using special care to break the line.
   What's happening here is that the thin blue line of the plain `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call
   is automatically bridged over `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values (or *gaps*), so the plot does not interrupt.
