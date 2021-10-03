@@ -198,7 +198,7 @@ The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/
    - `plot.style_circles <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_circles>`__ and
      `plot.style_cross <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_cross>`__:
      These plot a shape that is not joined across bars unless ``join = true`` is also used.
-     For these arguments, the ``linewidth`` argument becomes a relative sizing measure — its units are not pixels.
+     For these styles, the ``linewidth`` argument becomes a relative sizing measure — its units are not pixels.
 
 ``trackprice``
    The default value of this is ``false``. When it is ``true``, a dotted line made up of small squares will be plotted
