@@ -231,8 +231,8 @@ Plotting conditionally
 cannot be used in conditional structures such as `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
 but they can be controlled by varying their plotted values, or their color. When no plot is required, 
 you can either plot `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values,
-or plot values but color them with `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ color,
-or with any color using 100 transparency.
+or plot values using `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ color,
+or any color with 100 transparency (which also makes it invisible).
 
 
 
