@@ -180,9 +180,9 @@ The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/
    - `plot.style_areabr <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_area>`__:
      This is similar to `plot.style_area <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_area>`__
      but it doesn't bridge over `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values.
-     Another difference is that the indicator's scale is evaluated differently. 
-     Only the values plotted are used to calculate the *y* range of the script's visual space.
-     If only high values away from the ``histbase`` are plotted, for example, only those values will be used to calculate
+     Another difference is how the indicator's scale is calculated. 
+     Only the plotted values serve in the calculation of the *y* range of the script's visual space.
+     If only high values situated far away from the ``histbase`` are plotted, for example, those values will be used to calculate
      the *y* scale of the script's visual space.
    - `plot.style_columns <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_columns>`__:
      Plots columns similar to those of the "Volume" built-in indicator. The ``linewidth`` value does **not** affect the width of the columns.
