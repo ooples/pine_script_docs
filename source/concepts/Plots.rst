@@ -177,13 +177,22 @@ The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/
      plots a line of ``linewidth`` width, filling the area between the line and the ``histbase``.
      The ``color`` argument is used for both the line and the fill. You can make the line a different color
      by using another `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call.
+   - `plot.style_areabr <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_area>`__:
+     This is similar to `plot.style_area <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_area>`__
+     but it doesn't bridge over `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values.
+     Another difference is that the indicator's scale is evaluated differently. 
+     Only the values plotted are used to calculate the *y* range of the script's visual space.
+     If only high values away from the ``histbase`` are plotted, for example, only those values will be used to calculate
+     the *y* scale of the script's visual space.
    - `plot.style_columns <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_columns>`__:
      Plots columns similar to those of the "Volume" built-in indicator. The ``linewidth`` value does **not** affect the width of the columns.
      Positive values are plotted above the ``histbase``, negative values below it.
+     Always includes the value of ``histbase`` in the *y* scale of the script's visual space.
    - `plot.style_histogram <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_histogram>`__:
      Plots columns similar to those of the "Volume" built-in indicator, except that the ``linewidth`` value is used to determine the width of the histogram's bars in pixels.
      Note that since ``linewidth`` requires an "input int" value, the width of the histogram's bars cannot vary bar to bar.
      Positive values are plotted above the ``histbase``, negative values below it.
+     Always includes the value of ``histbase`` in the *y* scale of the script's visual space.
    - `plot.style_circles <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_circles>`__ or
      `plot.style_cross <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_cross>`__:
      These plot a shape that is not joined across bars unless ``join = true`` is also used.
