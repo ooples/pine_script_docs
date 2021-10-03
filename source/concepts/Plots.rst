@@ -271,8 +271,10 @@ Note that:
   The ``plot.style_circles`` and ``plot.style_cross`` style are a simple way to plot discontinuous values, e.g., for stop or take profit levels, or support & resistance levels.
 - The last plot in green on the bar lows is done using ``plot.style_stepline``. Note how its segments are wider than the fuchsia line segments plotted with ``plot.style_linebr``.
   Also note how on the last bar, it only plots halfway until the next bar comes in.
+- The plotting order of each plot is controlled by their order of appearance in the script.
+  See 
 
-This script shows how you can plot values only after a user-defined date. 
+This script shows how you can restrict plotting to bars after a user-defined date. 
 We use the `input.time() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}time>`__ function
 to create an input widget allowing script users to select a date and time, using Jan 1st 2021 as its default value::
 
