@@ -231,7 +231,7 @@ Plotting conditionally
 cannot be used in conditional structures such as `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
 but they can be controlled by varying their plotted values, or their color. When no plot is required, 
 you can either plot `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values,
-or plot values using `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ color,
+or plot values using `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ color
 or any color with 100 transparency (which also makes it invisible).
 
 
@@ -239,7 +239,12 @@ or any color with 100 transparency (which also makes it invisible).
 Value control
 ^^^^^^^^^^^^^
 
-It is sometimes useful to plot discontinuous lines. This script shows a few ways to do it:
+One way to control the display of plots is to plot `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values
+when no plot is needed. Sometimes, values returned by functions such as 
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+will return `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values, when ``gaps = barmerge.gaps_on`` is used, for example.
+In both these cases it is sometimes useful to plot discontinuous lines.
+This script shows a few ways to do it:
 
 .. image:: images/Plots-PlottingConditionally-01.png
 
@@ -266,6 +271,15 @@ Note that:
   The ``plot.style_circles`` and ``plot.style_cross`` style are a simple way to plot discontinuous values, e.g., for stop or take profit levels, or support & resistance levels.
 - The last plot in green on the bar lows is done using ``plot.style_stepline``. Note how its segments are wider than the fuchsia line segments plotted with ``plot.style_linebr``.
   Also note how on the last bar, it only plots halfway until the next bar comes in.
+
+This script shows how you can plot values only after a user-defined date. 
+We use the `input.time() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}time>`__ function
+to create an input widget allowing script users to select a date and time, using Jan 1st 2021 as its default value::
+
+    //@version=5
+    indicator("", "", true)
+    startInput = input.time(timestamp("2021-01-01"))
+    plot(time > startInput ? close : na)
 
 
 
