@@ -301,7 +301,7 @@ They are known at compile time::
     plot(close, color = color.gray)
 
 The color of a plot can also be determined using information that is only known when the script begins execution on the first historical bar of a chart
-(bar zero, i.e., ``bar_index == 0`` or ``barstate.isfirst == true``) as will be the case when the information needed to determine a color depends on the chart the script is running on. 
+(bar zero, i.e., ``bar_index == 0`` or ``barstate.isfirst == true``), as will be the case when the information needed to determine a color depends on the chart the script is running on. 
 Here, we calculate a plot color using the `syminfo.type <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}type>`__ built-in variable,
 which returns the type of the chart's symbol. The form-type of ``plotColor`` in this case will be **"simple color"**::
 
