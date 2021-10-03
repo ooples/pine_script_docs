@@ -195,7 +195,7 @@ The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/
      Note that since ``linewidth`` requires an "input int" value, the width of the histogram's bars cannot vary bar to bar.
      Positive values are plotted above the ``histbase``, negative values below it.
      Always includes the value of ``histbase`` in the *y* scale of the script's visual space.
-   - `plot.style_circles <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_circles>`__ or
+   - `plot.style_circles <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_circles>`__ and
      `plot.style_cross <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_cross>`__:
      These plot a shape that is not joined across bars unless ``join = true`` is also used.
      For these arguments, the ``linewidth`` argument becomes a relative sizing measure — its units are not pixels.
