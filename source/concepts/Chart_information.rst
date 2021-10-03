@@ -51,8 +51,8 @@ Other values are available through:
   `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ and
   `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ values.
 
-On historical bars, the values for the above variables do not move because only OHLCV information
-is available on them. When running on historical bars, scripts execute on the bars'
+On historical bars, the values for the above variables do not vary during the bar because only OHLCV information
+is available on them. When running on historical bars, scripts execute on the bar's
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__, 
 when all the bar's information is known and cannot change during the script's execution on the bar.
 
