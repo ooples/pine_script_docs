@@ -241,7 +241,7 @@ Value control
 
 It is sometimes useful to plot discontinuous lines. This script shows a few ways to do it:
 
-.. image:: images/Plots-Line-PlottingConditionally-01.png
+.. image:: images/Plots-PlottingConditionally-01.png
 
 ::
 
@@ -262,7 +262,7 @@ Note that:
 - The second plot shows the result of plotting the same values, but without using special care to break the line.
   What's happening here is that the thin blue line of the plain `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call
   is automatically bridged over `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values (or *gaps*), so the plot does not interrupt.
-- We then plot navy blue crosses and circles on the body tops and bottome.
+- We then plot navy blue crosses and circles on the body tops and bottoms.
   The ``plot.style_circles`` and ``plot.style_cross`` style are a simple way to plot discontinuous values, e.g., for stop or take profit levels, or support & resistance levels.
 - The last plot in green on the bar lows is done using ``plot.style_stepline``. Note how its segments are wider than the fuchsia line segments plotted with ``plot.style_linebr``.
   Also note how on the last bar, it only plots halfway until the next bar comes in.
@@ -272,31 +272,80 @@ Note that:
 Color control
 ^^^^^^^^^^^^^
 
-See the :ref:`Conditional coloring <PageColors_ConditionalColoring>` section for more information about controlling the colors in your
-`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ calls.
+The value of the ``color`` parameter in `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ can be a constant, 
+such as one of the built-in :ref:`constant colors <PageColors_ConstantColors>`.
+In Pine, the form-type of such colors is called **"const color"** (see the :ref:`Type system <PageTypeSystem>` page), e.g.::
 
-    plot(math.avg(open, close), color = bar_index % 2 == 0 ? color.purple : na, linewidth = 4, style = plot.style_line)
+    //@version=5
+    indicator("", "", true)
+    plot(close, color = color.gray)
 
+The color of a plot can also be determined using information that is only known when the script begins execution on bar zero
+and is determined by the chart's information. Here, we calculate a plot color using the
+`syminfo.type <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}type>`__ built-in variable,
+which returns the sector of the chart's symbol. The form-type of ``plotColor`` in this case will be **"simple color"**::
 
-- The last plot is plotting a continuous value, but it is setting the plot's color to `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
-  when no plot is needed. Note the difference between the first plot's display. In this last plot (the purple line joining the middle of alternating bodies)
-  the line starts from the center of the previous bar and extends to the center of the current bar.
+    //@version=5
+    indicator("", "", true)
+    plotColor = switch syminfo.type
+        "stock"     => color.purple
+        "futures"   => color.red
+        "index"     => color.gray
+        "forex"     => color.fuchsia
+        "crypto"    => color.lime
+        "fund"      => color.orange
+        "dr"        => color.aqua
+        "cfd"       => color.blue
+    plot(close, color = plotColor)
+    printTable(txt) => var table t = table.new(position.middle_right, 1, 1), table.cell(t, 0, 0, txt, bgcolor = color.yellow)
+    printTable(syminfo.type)
 
+Plot colors can also be determined through a script's inputs. In this case, the ``lineColorInput`` variable is of form-type **"input color"**::
 
-The value of the ``color`` parameter can be defined in different ways.
-If it is a color constant, for example ``color.red``, then the whole line will be plotted using a *red* color::
+    //@version=5
+    indicator("", "", true)
+    color lineColorInput  = input(#1848CC, "Line color")
+    plot(close, color = lineColorInput)
 
-    plot(close, color = color.red)
+Finally, plot colors can also be a *dynamic* value, i.e., a calculated value that is only known on each bar.
+These are of form-type **"series color"**::
 
-.. image:: images/Plot-01.png
-The value of ``color`` can also be an expression of a *series*
-type of color values. This series of colors will be used to
-color the rendered line. For example::
-
+    //@version=5
+    indicator("", "", true)
     plotColor = close >= open ? color.lime : color.red
     plot(close, color = plotColor)
 
-.. image:: images/Plot-02.png
+See the :ref:`Conditional coloring <PageColors_ConditionalColoring>` section of the page on colors for a complete discussion on controlling the colors in your
+`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ calls.
+
+When plotting pivot levels, one common requirement is to avoid plotting level transitions. 
+Using :ref:`lines <PageLinesAndBoxes>` is one alternative,
+but you can also use `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ like this:
+
+.. image:: images/Plots-PlottingConditionally-02.png
+
+::
+
+    //@version=5
+    indicator("Pivot plots", "", true)
+    pivotHigh = fixnan(ta.pivothigh(3,3))
+    plot(pivotHigh, "High pivot", ta.change(pivotHigh) ? na : color.olive, 3)
+    plotchar(ta.change(pivotHigh), "ta.change(pivotHigh)", "•", location.top, size = size.small)
+
+Note that:
+
+- We use ``pivotHigh = fixnan(ta.pivothigh(3,3))`` to hold our pivot values.
+  Because `ta.pivothigh() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}pivothigh>`__
+  only returns a value when a new pivot is found, we use `fixnan() <https://www.tradingview.com/pine-script-reference/v5/#fun_fixnan>`__
+  to fill the gaps with the last pivot value returned. The gaps here refer to the `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values
+  `ta.pivothigh() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}pivothigh>`__ returns when no new pivot is found.
+- Our pivots are detected three bars after they occur because we use the argument ``3`` for both the ``leftbars`` and ``rightbars`` parameters in our
+  `ta.pivothigh() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}pivothigh>`__ call.
+- The last plot is plotting a continuous value, but it is setting the plot's color to `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
+  when the pivot's value changes, so the plot isn't visible then. Because of this, a visible plot will only appear after two values are plotted.
+- The blue dot indicates when a new high pivot is detected and no plot is drawn between the preceding bar and that one.
+  Note how the the pivot on the bar indicated by the arrow has just been detected in the realtime bar,
+  yet no plot appears yet. It will only appear on the next bar, making the plot visible **four bars** after the actual pivot.
 
 
 

@@ -59,6 +59,8 @@ Note that by using ``explicit_plot_zorder = true`` in `indicator() <https://www.
 
 
 
+.. _PageColors_ConstantColors:
+
 Constant colors
 ---------------
 
