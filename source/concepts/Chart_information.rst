@@ -28,10 +28,13 @@ The Pine built-ins for OHLCV values are:
 
 - `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__: the bar's opening price.
 - `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__: the bar's highest price.
+  or the highest price reached during the realtime bar's elapsed time.
 - `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__: the bar's lowest price.
+  or the lowest price reached during the realtime bar's elapsed time.
 - `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__: the bar's closing price,
   or the current price in the realtime bar.
-- `volume <https://www.tradingview.com/pine-script-reference/v5/#var_volume>`__: the volume traded during the bar.
+- `volume <https://www.tradingview.com/pine-script-reference/v5/#var_volume>`__: the volume traded during the bar,
+  or the volume traded during the realtime bar's elapsed time.
 
 Other values are available through:
 
@@ -49,6 +52,8 @@ Other values are available through:
   `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ values.
 
 On historical bars, 
+
+
 
 Symbol information
 ------------------
