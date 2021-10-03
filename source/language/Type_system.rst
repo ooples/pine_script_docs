@@ -246,6 +246,7 @@ Built-in variables such as
 `dayofmonth <https://www.tradingview.com/pine-script-reference/v5/#var_dayofmonth>`__ all return values of type "int".
 
 
+
 float
 """""
 
@@ -261,6 +262,7 @@ Floating-point literals contain a delimiter (the symbol ``.``) and may also cont
 The internal precision of floats in Pine is 1e-10.
 
 
+
 bool
 """"
 
@@ -271,6 +273,9 @@ There are only two literals representing *bool* values::
 
 When an expression of type "bool" returns `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ and it is used to test a conditional statement or operator, the "false" branch is executed.
 
+
+
+.. _PageTypeSystem_Color:
 
 color
 """""
@@ -294,7 +299,7 @@ Examples::
     #FF0000ff    // same as #FF0000, fully opaque red color
     #FF000000    // completely transparent color
 
-Pine also has built-in color constants such as 
+Pine also has :ref:`built-in color constants <PageColors_ConstantColors>` such as 
 `color.green <https://www.tradingview.com/pine-script-reference/v5/#var_color{dot}green>`__, 
 `color.red <https://www.tradingview.com/pine-script-reference/v5/#var_color{dot}red>`__, 
 `color.orange <https://www.tradingview.com/pine-script-reference/v5/#var_color{dot}orange>`__, 
@@ -304,7 +309,9 @@ Pine also has built-in color constants such as
 When using color built-ins, is possible to add transparency information to them with 
 `color.new <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}new>`__. 
 
-Note that when specifying red, green or blue components in ``color.*()`` functions, a 0-255 decimal value must be used. When specifying transparency in such functions, it is in the form of a 0-100 value (which can be of "float" type to access the underlying 255 potential valoues) where the scale 00-FF scale for color literals is inverted: 100 is thus invisible and 0 is opaque.
+Note that when specifying red, green or blue components in ``color.*()`` functions, a 0-255 decimal value must be used. 
+When specifying transparency in such functions, it is in the form of a 0-100 value (which can be of "float" type to access the underlying 255 potential valoues) 
+where the scale 00-FF scale for color literals is inverted: 100 is thus invisible and 0 is opaque.
 
 Here is an example::
 
@@ -320,6 +327,7 @@ Here is an example::
     bgcolor(bgColor)
 
 See the page on :ref:`colors <PageColors>` for more information on using colors in Pine.
+
 
 
 string
@@ -368,6 +376,7 @@ Note that there is no ``plot`` or ``hline`` keyword to explicitly declare the ty
 `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ IDs.
 
 
+
 line, label, box and table
 """"""""""""""""""""""""""
 
@@ -378,6 +387,7 @@ and `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_labe
 `table.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}new>`__ functions. 
 
 These functions all return an ID that uniquely identifies each drawing object. The ID's type is "series line", "series label", "series box" and "series table", respectively, and an ID can exist in no other form than "series". Drawing IDs act like pointer in that they are used to reference a specific instance of a drawing in all the related functions of its namespace. The line ID returned by a `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ call is then used to refer to that line using `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`__, for example.
+
 
 
 array
@@ -405,12 +415,14 @@ An array containing elements of type "int" initalized with one element of value 
     int[] a4 = array.from(10)
 
 
+
 void
 """"
 
 There is a "void" type in Pine. Functions having only side-effects and returning no usable result return the "void" type. An example of such a function is `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__; it does something (triggers an alert event), but it returns no useful value.
 
 A "void" result cannot be used in an expression or assigned to a variable. No ``void`` keyword exists in Pine, as variables cannot be declared using the "void" type.
+
 
 
 Tuples
@@ -497,6 +509,7 @@ where we are replacing any `na <https://www.tradingview.com/pine-script-referenc
 
     var float ath = high
     ath := math.max(ath, high)
+
 
 
 .. _PageTypeSystem_TypeCasting:

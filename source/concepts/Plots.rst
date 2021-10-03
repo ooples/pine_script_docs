@@ -272,18 +272,22 @@ Note that:
 Color control
 ^^^^^^^^^^^^^
 
+The :ref:`Conditional coloring <PageColors_ConditionalColoring>` section of the page on colors discusses color control for plots.
+We'll look here at a few examples.
+
 The value of the ``color`` parameter in `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ can be a constant, 
-such as one of the built-in :ref:`constant colors <PageColors_ConstantColors>`.
-In Pine, the form-type of such colors is called **"const color"** (see the :ref:`Type system <PageTypeSystem>` page)::
+such as one of the built-in :ref:`constant colors <PageColors_ConstantColors>` or a :ref:`color literal <PageTypeSystem_Color>`.
+In Pine, the form-type of such colors is called **"const color"** (see the :ref:`Type system <PageTypeSystem>` page). 
+They are known at compile time::
 
     //@version=5
     indicator("", "", true)
     plot(close, color = color.gray)
 
-The color of a plot can also be determined using information that is only known when the script begins execution on bar zero
-and is determined by the chart's information. Here, we calculate a plot color using the
+The color of a plot can also be determined using information that is only known when the script begins execution on the first historical bar of a chart
+(bar zero, i.e., ``bar_index == 0`` or ``barstate.isfirst == true``) and is determined by the chart's information. Here, we calculate a plot color using the
 `syminfo.type <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}type>`__ built-in variable,
-which returns the sector of the chart's symbol. The form-type of ``plotColor`` in this case will be **"simple color"**::
+which returns the type of the chart's symbol. The form-type of ``plotColor`` in this case will be **"simple color"**::
 
     //@version=5
     indicator("", "", true)
@@ -314,9 +318,6 @@ These are of form-type **"series color"**::
     indicator("", "", true)
     plotColor = close >= open ? color.lime : color.red
     plot(close, color = plotColor)
-
-See the :ref:`Conditional coloring <PageColors_ConditionalColoring>` section of the page on colors for a complete discussion on controlling the colors in your
-`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ calls.
 
 When plotting pivot levels, one common requirement is to avoid plotting level transitions. 
 Using :ref:`lines <PageLinesAndBoxes>` is one alternative,
