@@ -32,7 +32,7 @@ The Pine built-ins for OHLCV values are:
 - `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__: the bar's lowest price,
   or the lowest price reached during the realtime bar's elapsed time.
 - `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__: the bar's closing price,
-  or the current price in the realtime bar.
+  or the **current price** in the realtime bar.
 - `volume <https://www.tradingview.com/pine-script-reference/v5/#var_volume>`__: the volume traded during the bar,
   or the volume traded during the realtime bar's elapsed time.
 
