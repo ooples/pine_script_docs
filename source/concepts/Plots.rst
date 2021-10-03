@@ -363,7 +363,7 @@ Note that:
   a visible plot will only appear on the bar following the one where we plotted using `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ color.
 - The blue dot indicates when a new high pivot is detected and no plot is drawn between the preceding bar and that one.
   Note how the pivot on the bar indicated by the arrow has just been detected in the realtime bar, three bars later,
-  abd how no plot is drawn. The plot will only appear on the next bar, making the plot visible **four bars** after the actual pivot.
+  and how no plot is drawn. The plot will only appear on the next bar, making the plot visible **four bars** after the actual pivot.
 
 
 
@@ -376,7 +376,8 @@ Pine has an `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_
 function to plot horizontal lines (see the page on :ref:`Levels <PageLevels>`).
 `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ 
 is useful because it has some line styles unavailable with `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__,
-but it also has some limitations.
+but it also has some limitations, namely that it does not accept "series color", 
+and that its ``price`` parameter requires an "input int/float", so cannot vary during the script's execution.
 
 You can plot levels with `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
 in a few different ways. This shows a `CCI <https://www.tradingview.com/u/?solution=43000502001>`__
