@@ -274,7 +274,7 @@ Color control
 
 The value of the ``color`` parameter in `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ can be a constant, 
 such as one of the built-in :ref:`constant colors <PageColors_ConstantColors>`.
-In Pine, the form-type of such colors is called **"const color"** (see the :ref:`Type system <PageTypeSystem>` page), e.g.::
+In Pine, the form-type of such colors is called **"const color"** (see the :ref:`Type system <PageTypeSystem>` page)::
 
     //@version=5
     indicator("", "", true)
@@ -300,7 +300,7 @@ which returns the sector of the chart's symbol. The form-type of ``plotColor`` i
     printTable(txt) => var table t = table.new(position.middle_right, 1, 1), table.cell(t, 0, 0, txt, bgcolor = color.yellow)
     printTable(syminfo.type)
 
-Plot colors can also be determined through a script's inputs. In this case, the ``lineColorInput`` variable is of form-type **"input color"**::
+Plot colors can also be chosen through a script's inputs. In this case, the ``lineColorInput`` variable is of form-type **"input color"**::
 
     //@version=5
     indicator("", "", true)
