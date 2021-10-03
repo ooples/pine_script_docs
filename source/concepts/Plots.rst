@@ -162,14 +162,28 @@ The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/
    - `plot.style_line <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_line>`__ (the default):
      It plots a continous line using the ``linewidth`` argument in pixels for its width.
      `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values will not plot as a line,
-     but they will be briged when a value that is not `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ comes in.
-
+     but they will be bridged when a value that is not `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ comes in.
+     Non-`na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values are only bridged
+     if they are visible on the chart.
    - `plot.style_linebr <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_linebr>`__:
-     Allows the plotting of discontinuous lines. 
+     Allows the plotting of discontinuous lines by not plotting on `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__  values,
+     and not joining gaps, i.e., bridging over `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values.
    - `plot.style_stepline <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_stepline>`__:
+     Plots using a staircase effect. Transitions between changes in values are done using a vertical line drawn in middle of bars,
+     as opposed to a point-to-point diagonal joining the midpoints of bars. Can also be used to achieve an effect similar to that of 
+     `plot.style_linebr <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_linebr>`__,
+     but only if care is taken to plot no color on `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values.
    - `plot.style_area <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_area>`__:
+     plots a line of ``linewidth`` width, filling the area between the line and the ``histbase``.
+     The ``color`` argument is used for both the line and the fill. You can make the line a different color
+     by using another `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call.
    - `plot.style_columns <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_columns>`__:
+     Plots columns similar to those of the "Volume" built-in indicator. The ``linewidth`` value does **not** affect the width of the columns.
+     Positive values are plotted above the ``histbase``, negative values below it.
    - `plot.style_histogram <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_histogram>`__:
+     Plots columns similar to those of the "Volume" built-in indicator, except that the ``linewidth`` value is used to determine the width of the histogram's bars in pixels.
+     Note that since ``linewidth`` requires an "input int" value, the width of the histogram's bars cannot vary bar to bar.
+     Positive values are plotted above the ``histbase``, negative values below it.
    - `plot.style_circles <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_circles>`__ or
      `plot.style_cross <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_cross>`__:
      These plot a shape that is not joined across bars unless ``join = true`` is also used.
@@ -263,13 +277,17 @@ Note that:
 
 - We define the condition determining when we plot using ``bar_index % 3 == 0``, 
   which becomes ``true`` when the remainder of the division of the bar index by 3 is zero. This will happen every three bars.
-- In the first plot, we use ``plot.style_linebr``, which plots the fuchsia line on highs. It is centered on the bar's horizontal midpoint.
+- In the first plot, we use `plot.style_linebr <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_linebr>`__, 
+  which plots the fuchsia line on highs. It is centered on the bar's horizontal midpoint.
 - The second plot shows the result of plotting the same values, but without using special care to break the line.
   What's happening here is that the thin blue line of the plain `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call
   is automatically bridged over `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values (or *gaps*), so the plot does not interrupt.
 - We then plot navy blue crosses and circles on the body tops and bottoms.
-  The ``plot.style_circles`` and ``plot.style_cross`` style are a simple way to plot discontinuous values, e.g., for stop or take profit levels, or support & resistance levels.
-- The last plot in green on the bar lows is done using ``plot.style_stepline``. Note how its segments are wider than the fuchsia line segments plotted with ``plot.style_linebr``.
+  The `plot.style_circles <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_circles>`__ and 
+  `plot.style_cross <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_cross>`__ 
+  style are a simple way to plot discontinuous values, e.g., for stop or take profit levels, or support & resistance levels.
+- The last plot in green on the bar lows is done using `plot.style_stepline <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_stepline>`__. 
+  Note how its segments are wider than the fuchsia line segments plotted with `plot.style_linebr <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_linebr>`__.
   Also note how on the last bar, it only plots halfway until the next bar comes in.
 - The plotting order of each plot is controlled by their order of appearance in the script.
   See 
@@ -400,10 +418,10 @@ indicator with levels plotted using `plot() <https://www.tradingview.com/pine-sc
 
 Note that:
 
-- The zero level is plotted using ``plot.style_circles``.
+- The zero level is plotted using `plot.style_circles <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_circles>`__.
 - The 100 levels are plotted using a conditional value that only plots every second bar.
   In order to prevent the `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values
-  from being bridged, we use the ``plot.style_linebr`` line style.
+  from being bridged, we use the `plot.style_linebr <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_linebr>`__ line style.
 - The 200 levels are plotted using ``trackprice = true`` to plot a distinct pattern of small squares that
   extends the full width of the script's visual space. 
   The ``show_last = 1`` in there displays only the last plotted value, which would appear as a one-bar straight line if the next trick wasn't also used:
