@@ -15,6 +15,9 @@ The `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
 function is the most frequently used function used to display information calculated using Pine scripts.
 It is versatile and can plot different styles of lines, histograms, areas, columns (like volume columns), fills, circles or crosses.
 
+The use of `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
+to create fills is explained in the page on :ref:`Fills <PageFills>`.
+
 This script showcases a few different uses of `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
 in an overlay script:
 
@@ -158,10 +161,11 @@ The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/
 
    - `plot.style_line <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_line>`__ (the default):
      It plots a continous line using the ``linewidth`` argument in pixels for its width.
-     `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values will not plot in realtime,
+     `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values will not plot as a line,
      but they will be briged when a value that is not `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ comes in.
 
    - `plot.style_linebr <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_linebr>`__:
+     Allows the plotting of discontinuous lines. 
    - `plot.style_stepline <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_stepline>`__:
    - `plot.style_area <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_area>`__:
    - `plot.style_columns <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_columns>`__:
@@ -185,6 +189,7 @@ The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/
 
 ``offset``
    This allows shifting the plot in the past/future using a negative/positive offset in bars.
+   The value cannot change during the script's execution.
 
 ``join``
    This only affect styles `plot.style_circles <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_circles>`__ or
@@ -193,7 +198,7 @@ The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/
 
 ``editable``
    This boolean parameter controls whether or not the plot's properties can be edited in the "Settings/Style" tab.
-   Its default value is ``false``.
+   Its default value is ``true``.
 
 ``show_last``
    Allows control over how many of the last bars the plotted values are visible.
@@ -329,12 +334,6 @@ Note that:
 
 
 
-Fills
------
-
-
-
-
 Offsets
 -------
 
@@ -429,7 +428,7 @@ The same distorted plots would occur if we placed the `RSI <https://www.tradingv
 Merging two indicators
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-If you are planning to merge two signals in one, first consider the scale of each.
+If you are planning to merge two signals in one script, first consider the scale of each.
 It is impossible, for example, to correctly plot an 
 `RSI <https://www.tradingview.com/u/?solution=43000502338>`__ and 
 a `MACD <https://www.tradingview.com/u/?solution=43000502344>`__ 
