@@ -229,33 +229,43 @@ Plotting conditionally
 
 `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ calls 
 cannot be used in conditional structures such as `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
-but they can be controlled by varying their plotted values, or their color.
+but they can be controlled by varying their plotted values, or their color. When no plot is required, 
+you can either plot `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values,
+or plot values but color them with `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ color,
+or with any color using 100 transparency.
 
 
 
 Value control
 ^^^^^^^^^^^^^
 
-It is sometimes useful to plot discontinuous lines. This script shows three ways to do it:
+It is sometimes useful to plot discontinuous lines. This script shows a few ways to do it:
 
-.. image:: images/Plots-Line-Discontinous-01.png
+.. image:: images/Plots-Line-PlottingConditionally-01.png
 
 ::
 
     //@version=5
     indicator("Discontinuous plots", "", true)
-    plot(bar_index % 2 == 0 ? high : na, color = color.teal, linewidth = 6, style = plot.style_linebr)
-    plot(bar_index % 2 == 0 ? high : na)
-    plot(bar_index % 2 == 0 ? low : na, linewidth = 4, style = plot.style_circles)
+    bool plotValues = bar_index % 3 == 0
+    plot(plotValues ? high : na, color = color.fuchsia, linewidth = 6, style = plot.style_linebr)
+    plot(plotValues ? high : na)
+    plot(plotValues ? math.max(open, close) : na, color = color.navy, linewidth = 6, style = plot.style_cross)
+    plot(plotValues ? math.min(open, close) : na, color = color.navy, linewidth = 6, style = plot.style_circles)
+    plot(plotValues ? low : na, color = plotValues ? color.green : na, linewidth = 6, style = plot.style_stepline)
 
 Note that:
 
-- In the first plot, we use ``plot.style_linebr``, which plots the green line on highs that is centered on the bar's horizontal midpoint.
+- We define the condition determining when we plot using ``bar_index % 3 == 0``, 
+  which becomes ``true`` when the remainder of the division of the bar index by 3 is zero. This will happen every three bars.
+- In the first plot, we use ``plot.style_linebr``, which plots the fuchsia line on highs that is centered on the bar's horizontal midpoint.
 - The second plot shows the result of plotting the same values, but without using special care to break the line.
-  What's happening here is that the thin blue line is automatically bridged over `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values,
-  so the plot does not interrupt.
-- We plot circles on the bar's `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__in the third plot. 
-  Along with the ``plot.style_cross``, they are a simple way to plot discontinuous values, e.g., for stop or take profit levels, or support & resistance levels.
+  What's happening here is that the thin blue line of the plain `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call
+  is automatically bridged over `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values, so the plot does not interrupt.
+- We then plot navy blue crosses and circles on the body tops and bottome.
+  The ``plot.style_circles`` and ``plot.style_cross`` style are a simple way to plot discontinuous values, e.g., for stop or take profit levels, or support & resistance levels.
+- The last plot in green on the bar lows is done using ``plot.style_stepline``. Note how its segments are wider than the fuchsia line segments plotted with ``plot.style_linebr``.
+  Also note how on the last bar, it only plots halfway until the next bar comes in.
 
 
 
