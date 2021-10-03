@@ -359,7 +359,8 @@ Note that:
 - Our pivots are detected three bars after they occur because we use the argument ``3`` for both the ``leftbars`` and ``rightbars`` parameters in our
   `ta.pivothigh() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}pivothigh>`__ call.
 - The last plot is plotting a continuous value, but it is setting the plot's color to `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
-  when the pivot's value changes, so the plot isn't visible then. Because of this, a visible plot will only appear after two values are plotted.
+  when the pivot's value changes, so the plot isn't visible then. Because of this, 
+  a visible plot will only appear on the bar following the one where we plotted using `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ color.
 - The blue dot indicates when a new high pivot is detected and no plot is drawn between the preceding bar and that one.
   Note how the the pivot on the bar indicated by the arrow has just been detected in the realtime bar,
   yet no plot appears yet. It will only appear on the next bar, making the plot visible **four bars** after the actual pivot.
