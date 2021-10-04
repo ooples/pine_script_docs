@@ -521,19 +521,17 @@ Note that users creating *alertcondition() alerts* from the "Create Alert" dialo
     alertcondition(volume > sma(volume,20), "Volume alert", "Volume ({{plot_0}}) > average ({{plot_1}})")
 
 ``{{plot("[plot_title]")}}``
-    This placeholder can be used when one needs to refer to a plot using the ``title`` argument used in a 
-    `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`_ call. 
-    Note that double quotation marks (``"``) **must** be used inside the placeholder to wrap the ``title`` argument. 
-    This requires that a single quotation mark (``'``) be used to wrap the ``message`` string:
-
-::
+  This placeholder can be used when one needs to refer to a plot using the ``title`` argument used in a 
+  `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`_ call. 
+  Note that double quotation marks (``"``) **must** be used inside the placeholder to wrap the ``title`` argument. 
+  This requires that a single quotation mark (``'``) be used to wrap the ``message`` string::
 
     //@version=5
     indicator("")
     r = ta.rsi(close, 14)
     xUp = ta.crossover(r, 50)
-    plot(r, "RSI")
-    alertcondition(xUp, message = 'RSI is bullish at: {{plot("RSI")}}')
+    plot(r, "RSI", display = display.none)
+    alertcondition(xUp, "xUp alert", message = 'RSI is bullish at: {{plot("RSI")}}')
 
 ``{{ticker}}``
     Ticker of the symbol used in the alert (AAPL, BTCUSD, etc.).

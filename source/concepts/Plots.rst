@@ -12,12 +12,11 @@ Introduction
 ------------
 
 The `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ 
-function can be used to plot different styles of lines, histograms, areas, columns (like volume columns), fills, circles or crosses.
-It has the following signature:
+function is the most frequently used function used to display information calculated using Pine scripts.
+It is versatile and can plot different styles of lines, histograms, areas, columns (like volume columns), fills, circles or crosses.
 
-.. code-block:: text
-
-    plot(series, title, color, linewidth, style, trackprice, histbase, offset, join, editable, show_last, display) → plot
+The use of `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
+to create fills is explained in the page on :ref:`Fills <PageFills>`.
 
 This script showcases a few different uses of `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
 in an overlay script:
@@ -55,7 +54,11 @@ Note that:
   The conditions that change the color of the line require it to be higher/lower than its value two bars ago.
   This makes for less noisy color transitions than if we merely looked for a higher/lower value than the previous one.
 
-This script shows other uses of `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ in a pane::
+This script shows other uses of `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ in a pane:
+
+.. image:: images/Plots-Introduction-02.png
+
+::
 
     //@version=5
     indicator("Volume change", format = format.volume)
@@ -78,8 +81,6 @@ This script shows other uses of `plot() <https://www.tradingview.com/pine-script
     plot(volumeChange, "Volume change columns", volumeChangeColor, 12, plot.style_histogram)
     
     plot(0, "Zero line", color.gray)
-
-.. image:: images/Plots-Introduction-02.png
 
 Note that:
 
@@ -115,6 +116,17 @@ section of this page.
 A script can only plot in its own visual space, whether it is in a pane or on the chart as an overlay.
 Scripts running in a pane can only :ref:`color bars <PageBarColoring>` in the chart area.
 
+
+
+\`plot()\` parameters
+---------------------
+
+The `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ function has the following signature:
+
+.. code-block:: text
+
+    plot(series, title, color, linewidth, style, trackprice, histbase, offset, join, editable, show_last, display) → plot
+
 The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ are:
 
 ``series``
@@ -142,75 +154,290 @@ The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/
 
 ``linewidth``
    Is the plotted element's size, but it does not apply to all styles. When a line is plotted, the unit is pixels.
-   It has no impact when ``plot.style_columns`` is used.
+   It has no impact when `plot.style_columns <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_columns>`__ is used.
 
 ``style``
-   XXX
+   The available arguments are:
+
+   - `plot.style_line <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_line>`__ (the default):
+     It plots a continous line using the ``linewidth`` argument in pixels for its width.
+     `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values will not plot as a line,
+     but they will be bridged when a value that is not `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ comes in.
+     Non-`na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values are only bridged
+     if they are visible on the chart.
+   - `plot.style_linebr <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_linebr>`__:
+     Allows the plotting of discontinuous lines by not plotting on `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__  values,
+     and not joining gaps, i.e., bridging over `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values.
+   - `plot.style_stepline <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_stepline>`__:
+     Plots using a staircase effect. Transitions between changes in values are done using a vertical line drawn in middle of bars,
+     as opposed to a point-to-point diagonal joining the midpoints of bars. Can also be used to achieve an effect similar to that of 
+     `plot.style_linebr <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_linebr>`__,
+     but only if care is taken to plot no color on `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values.
+   - `plot.style_area <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_area>`__:
+     plots a line of ``linewidth`` width, filling the area between the line and the ``histbase``.
+     The ``color`` argument is used for both the line and the fill. You can make the line a different color
+     by using another `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call.
+     Positive values are plotted above the ``histbase``, negative values below it.
+   - `plot.style_areabr <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_area>`__:
+     This is similar to `plot.style_area <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_area>`__
+     but it doesn't bridge over `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values.
+     Another difference is how the indicator's scale is calculated. 
+     Only the plotted values serve in the calculation of the *y* range of the script's visual space.
+     If only high values situated far away from the ``histbase`` are plotted, for example, those values will be used to calculate
+     the *y* scale of the script's visual space.
+     Positive values are plotted above the ``histbase``, negative values below it.
+   - `plot.style_columns <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_columns>`__:
+     Plots columns similar to those of the "Volume" built-in indicator. The ``linewidth`` value does **not** affect the width of the columns.
+     Positive values are plotted above the ``histbase``, negative values below it.
+     Always includes the value of ``histbase`` in the *y* scale of the script's visual space.
+   - `plot.style_histogram <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_histogram>`__:
+     Plots columns similar to those of the "Volume" built-in indicator, except that the ``linewidth`` value is used to determine the width of the histogram's bars in pixels.
+     Note that since ``linewidth`` requires an "input int" value, the width of the histogram's bars cannot vary bar to bar.
+     Positive values are plotted above the ``histbase``, negative values below it.
+     Always includes the value of ``histbase`` in the *y* scale of the script's visual space.
+   - `plot.style_circles <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_circles>`__ and
+     `plot.style_cross <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_cross>`__:
+     These plot a shape that is not joined across bars unless ``join = true`` is also used.
+     For these styles, the ``linewidth`` argument becomes a relative sizing measure — its units are not pixels.
 
 ``trackprice``
-   XXX
+   The default value of this is ``false``. When it is ``true``, a dotted line made up of small squares will be plotted
+   the full width of the script's visual space. It is often used in conjuction with ``show_last = 1, offset = -99999``
+   to hide the actual plot and only leave the residual dotted line.
 
 ``histbase``
-   XXX
+   It is the reference point used with `plot.style_area <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_area>`__,
+   `plot.style_columns <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_columns>`__ and
+   `plot.style_histogram <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_histogram>`__.
+   It determines the level separating positive and negative values of the ``series`` argument.
+   It cannot be calculated dynamically, as an "input int/float" is required.
 
 ``offset``
-   XXX
+   This allows shifting the plot in the past/future using a negative/positive offset in bars.
+   The value cannot change during the script's execution.
 
 ``join``
-   XXX
+   This only affect styles `plot.style_circles <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_circles>`__ or
+   `plot.style_cross <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_cross>`__.
+   When ``true``, the shapes are joined by a one-pixel line.
 
 ``editable``
-   XXX
+   This boolean parameter controls whether or not the plot's properties can be edited in the "Settings/Style" tab.
+   Its default value is ``true``.
 
 ``show_last``
-   XXX
+   Allows control over how many of the last bars the plotted values are visible.
+   An "input int" argument is required, so it cannot be calculated dynamically.
 
 ``display``
-   XXX
+  The default is `display.all <https://www.tradingview.com/pine-script-reference/v5/#var_display{dot}all>`__.
+  When it is set to `display.none <https://www.tradingview.com/pine-script-reference/v5/#var_display{dot}none>`__,
+  plotted values will not affect the scale of the script's visual space.
+  The plot will be invisible and will not appear in indicator values or the Data Window.
+  It can be useful in plots destined for use as external inputs for other scripts,
+  or for plots used with the ``{{plot("[plot_title]")}}`` placeholder in 
+  `alertcondition() <https://www.tradingview.com/pine-script-reference/v5/#fun_alertcondition>`__ calls, e.g.::
 
-
-While the function is usually used to plot values that vary with time, such as in::
-
-    plot(close)
-
-it can also be used to plot horizontal levels, e.g.::
-
-    plot(125.2)
-
-
-
-Plot styles
------------
-
-Lines
-^^^^^
+    //@version=5
+    indicator("")
+    r = ta.rsi(close, 14)
+    xUp = ta.crossover(r, 50)
+    plot(r, "RSI", display = display.none)
+    alertcondition(xUp, "xUp alert", message = 'RSI is bullish at: {{plot("RSI")}}')
 
 
 
-.. _PagePlots_ConditionalPlots:
+.. _PagePlots_PlottingConditionally:
 
-Conditional plots
------------------
+Plotting conditionally
+----------------------
 
-The value of the ``color`` parameter can be defined in different ways.
-If it is a color constant, for example ``color.red``, then the whole line will be plotted using a *red* color::
+`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ calls 
+cannot be used in conditional structures such as `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
+but they can be controlled by varying their plotted values, or their color. When no plot is required, 
+you can either plot `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values,
+or plot values using `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ color
+or any color with 100 transparency (which also makes it invisible).
 
-    plot(close, color = color.red)
 
-.. image:: images/Plot-01.png
-The value of ``color`` can also be an expression of a *series*
-type of color values. This series of colors will be used to
-color the rendered line. For example::
 
+Value control
+^^^^^^^^^^^^^
+
+One way to control the display of plots is to plot `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values
+when no plot is needed. Sometimes, values returned by functions such as 
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+will return `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values, when ``gaps = barmerge.gaps_on`` is used, for example.
+In both these cases it is sometimes useful to plot discontinuous lines.
+This script shows a few ways to do it:
+
+.. image:: images/Plots-PlottingConditionally-01.png
+
+::
+
+    //@version=5
+    indicator("Discontinuous plots", "", true)
+    bool plotValues = bar_index % 3 == 0
+    plot(plotValues ? high : na, color = color.fuchsia, linewidth = 6, style = plot.style_linebr)
+    plot(plotValues ? high : na)
+    plot(plotValues ? math.max(open, close) : na, color = color.navy, linewidth = 6, style = plot.style_cross)
+    plot(plotValues ? math.min(open, close) : na, color = color.navy, linewidth = 6, style = plot.style_circles)
+    plot(plotValues ? low : na, color = plotValues ? color.green : na, linewidth = 6, style = plot.style_stepline)
+
+Note that:
+
+- We define the condition determining when we plot using ``bar_index % 3 == 0``, 
+  which becomes ``true`` when the remainder of the division of the bar index by 3 is zero. This will happen every three bars.
+- In the first plot, we use `plot.style_linebr <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_linebr>`__, 
+  which plots the fuchsia line on highs. It is centered on the bar's horizontal midpoint.
+- The second plot shows the result of plotting the same values, but without using special care to break the line.
+  What's happening here is that the thin blue line of the plain `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call
+  is automatically bridged over `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values (or *gaps*), so the plot does not interrupt.
+- We then plot navy blue crosses and circles on the body tops and bottoms.
+  The `plot.style_circles <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_circles>`__ and 
+  `plot.style_cross <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_cross>`__ 
+  style are a simple way to plot discontinuous values, e.g., for stop or take profit levels, or support & resistance levels.
+- The last plot in green on the bar lows is done using `plot.style_stepline <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_stepline>`__. 
+  Note how its segments are wider than the fuchsia line segments plotted with `plot.style_linebr <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_linebr>`__.
+  Also note how on the last bar, it only plots halfway until the next bar comes in.
+- The plotting order of each plot is controlled by their order of appearance in the script.
+  See 
+
+This script shows how you can restrict plotting to bars after a user-defined date. 
+We use the `input.time() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}time>`__ function
+to create an input widget allowing script users to select a date and time, using Jan 1st 2021 as its default value::
+
+    //@version=5
+    indicator("", "", true)
+    startInput = input.time(timestamp("2021-01-01"))
+    plot(time > startInput ? close : na)
+
+
+
+Color control
+^^^^^^^^^^^^^
+
+The :ref:`Conditional coloring <PageColors_ConditionalColoring>` section of the page on colors discusses color control for plots.
+We'll look here at a few examples.
+
+The value of the ``color`` parameter in `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ can be a constant, 
+such as one of the built-in :ref:`constant colors <PageColors_ConstantColors>` or a :ref:`color literal <PageTypeSystem_Color>`.
+In Pine, the form-type of such colors is called **"const color"** (see the :ref:`Type system <PageTypeSystem>` page). 
+They are known at compile time::
+
+    //@version=5
+    indicator("", "", true)
+    plot(close, color = color.gray)
+
+The color of a plot can also be determined using information that is only known when the script begins execution on the first historical bar of a chart
+(bar zero, i.e., ``bar_index == 0`` or ``barstate.isfirst == true``), as will be the case when the information needed to determine a color depends on the chart the script is running on. 
+Here, we calculate a plot color using the `syminfo.type <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}type>`__ built-in variable,
+which returns the type of the chart's symbol. The form-type of ``plotColor`` in this case will be **"simple color"**::
+
+    //@version=5
+    indicator("", "", true)
+    plotColor = switch syminfo.type
+        "stock"     => color.purple
+        "futures"   => color.red
+        "index"     => color.gray
+        "forex"     => color.fuchsia
+        "crypto"    => color.lime
+        "fund"      => color.orange
+        "dr"        => color.aqua
+        "cfd"       => color.blue
+    plot(close, color = plotColor)
+    printTable(txt) => var table t = table.new(position.middle_right, 1, 1), table.cell(t, 0, 0, txt, bgcolor = color.yellow)
+    printTable(syminfo.type)
+
+Plot colors can also be chosen through a script's inputs. In this case, the ``lineColorInput`` variable is of form-type **"input color"**::
+
+    //@version=5
+    indicator("", "", true)
+    color lineColorInput  = input(#1848CC, "Line color")
+    plot(close, color = lineColorInput)
+
+Finally, plot colors can also be a *dynamic* value, i.e., a calculated value that is only known on each bar.
+These are of form-type **"series color"**::
+
+    //@version=5
+    indicator("", "", true)
     plotColor = close >= open ? color.lime : color.red
     plot(close, color = plotColor)
 
-.. image:: images/Plot-02.png
+When plotting pivot levels, one common requirement is to avoid plotting level transitions. 
+Using :ref:`lines <PageLinesAndBoxes>` is one alternative,
+but you can also use `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ like this:
+
+.. image:: images/Plots-PlottingConditionally-02.png
+
+::
+
+    //@version=5
+    indicator("Pivot plots", "", true)
+    pivotHigh = fixnan(ta.pivothigh(3,3))
+    plot(pivotHigh, "High pivot", ta.change(pivotHigh) ? na : color.olive, 3)
+    plotchar(ta.change(pivotHigh), "ta.change(pivotHigh)", "•", location.top, size = size.small)
+
+Note that:
+
+- We use ``pivotHigh = fixnan(ta.pivothigh(3,3))`` to hold our pivot values.
+  Because `ta.pivothigh() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}pivothigh>`__
+  only returns a value when a new pivot is found, we use `fixnan() <https://www.tradingview.com/pine-script-reference/v5/#fun_fixnan>`__
+  to fill the gaps with the last pivot value returned. The gaps here refer to the `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values
+  `ta.pivothigh() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}pivothigh>`__ returns when no new pivot is found.
+- Our pivots are detected three bars after they occur because we use the argument ``3`` for both the ``leftbars`` and ``rightbars`` parameters in our
+  `ta.pivothigh() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}pivothigh>`__ call.
+- The last plot is plotting a continuous value, but it is setting the plot's color to `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
+  when the pivot's value changes, so the plot isn't visible then. Because of this, 
+  a visible plot will only appear on the bar following the one where we plotted using `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ color.
+- The blue dot indicates when a new high pivot is detected and no plot is drawn between the preceding bar and that one.
+  Note how the pivot on the bar indicated by the arrow has just been detected in the realtime bar, three bars later,
+  and how no plot is drawn. The plot will only appear on the next bar, making the plot visible **four bars** after the actual pivot.
 
 
-Fills
------
 
+.. _PagePlots_Levels:
+
+Levels
+------
+
+Pine has an `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ 
+function to plot horizontal lines (see the page on :ref:`Levels <PageLevels>`).
+`hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ 
+is useful because it has some line styles unavailable with `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__,
+but it also has some limitations, namely that it does not accept "series color", 
+and that its ``price`` parameter requires an "input int/float", so cannot vary during the script's execution.
+
+You can plot levels with `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
+in a few different ways. This shows a `CCI <https://www.tradingview.com/u/?solution=43000502001>`__
+indicator with levels plotted using `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__:
+
+.. image:: images/Plots-Levels-01.png
+
+::
+
+    //@version=5
+    indicator("CCI levels with `plot()`")
+    plot(ta.cci(close, 20))
+    plot(0,  "Zero", color.gray, 1, plot.style_circles)
+    plot(bar_index % 2 == 0 ?  100 : na,  "100", color.lime, 1, plot.style_linebr)
+    plot(bar_index % 2 == 0 ? -100 : na, "-100", color.fuchsia, 1, plot.style_linebr)
+    plot( 200,  "200", color.green, 2, trackprice = true, show_last = 1, offset = -99999)
+    plot(-200, "-200", color.red,   2, trackprice = true, show_last = 1, offset = -99999)
+    plot( 300,  "300", color.new(color.green, 50), 1)
+    plot(-300, "-300", color.new(color.red, 50),   1)
+
+Note that:
+
+- The zero level is plotted using `plot.style_circles <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_circles>`__.
+- The 100 levels are plotted using a conditional value that only plots every second bar.
+  In order to prevent the `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values
+  from being bridged, we use the `plot.style_linebr <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_linebr>`__ line style.
+- The 200 levels are plotted using ``trackprice = true`` to plot a distinct pattern of small squares that
+  extends the full width of the script's visual space. 
+  The ``show_last = 1`` in there displays only the last plotted value, which would appear as a one-bar straight line if the next trick wasn't also used:
+  the ``offset = -99999`` pushes that one-bar segment far away in the past so that it is never visible.
+- The 300 levels are plotted using a continuous line, but a lighter transparency is used to make them less prominent.
 
 
 
@@ -238,8 +465,8 @@ series has been shifted to the right (its value is positive).
 
 
 
-Limitations
------------
+Plot count limit
+----------------
 
 Each script is limited to a maximum plot count of 64.
 All ``plot*()`` calls and `alertcondition() <https://www.tradingview.com/pine-script-reference/v5/#func_alertcondition>`__ calls
@@ -308,7 +535,7 @@ The same distorted plots would occur if we placed the `RSI <https://www.tradingv
 Merging two indicators
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-If you are planning to merge two signals in one, first consider the scale of each.
+If you are planning to merge two signals in one script, first consider the scale of each.
 It is impossible, for example, to correctly plot an 
 `RSI <https://www.tradingview.com/u/?solution=43000502338>`__ and 
 a `MACD <https://www.tradingview.com/u/?solution=43000502344>`__ 

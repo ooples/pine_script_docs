@@ -6,13 +6,25 @@ Bar states
 .. contents:: :local:
     :depth: 3
 
-A set of built-in variables in the ``barstate`` namespace allow your script to detect different properties of the bar on which the script is currently exectuting. 
+
+
+Introduction
+------------
+
+A set of built-in variables in the ``barstate`` namespace allow your script to detect different properties of the bar on which the script is currently executing. 
+
 These states can be used to restrict the execution or the logic of your code to specific bars.
+
+Some built-ins return information on the trading session the current bar belongs to. 
+They are explained in the :ref:`Session states <PageSessions_SessionStates>` section.
+
+
 
 Bar state built-in variables
 ----------------------------
 
-Note that while indicators and libraries run on all price or volume updates in real time, strategies not using ``calc_on_every_tick`` will not; they will only execute when the realtime bar closes. This will affect the detection of bar states in that type of script. 
+Note that while indicators and libraries run on all price or volume updates in real time, strategies not using ``calc_on_every_tick`` will not; 
+they will only execute when the realtime bar closes. This will affect the detection of bar states in that type of script. 
 On open markets, for example, this code will not display a background until the realtime closes because that is when the strategy runs::
 
     //@version=5
@@ -40,6 +52,7 @@ It can be useful to initialize variables on the first bar only, e.g.::
         array.push(fillColors, color.new(FILL_COLOR, 90))
 
 
+
 \`barstate.islast\`
 ^^^^^^^^^^^^^^^^^^^
 
@@ -61,6 +74,7 @@ We create the label only once and then update its properties using ``label.set_*
         label.set_text(hiLabel, str.tostring(high, format.mintick))
 
 
+
 \`barstate.ishistory\`
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -73,12 +87,14 @@ On closed markets, it can be ``true`` on the same bar where `barstate.islast <ht
 is also ``true``.
 
 
+
 \`barstate.isrealtime\`
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 `barstate.isrealtime <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isrealtime>`__ 
 is ``true`` if the current data update is a real-time bar update, ``false`` otherwise (thus it is historical). 
 Note that `barstate.islast <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islast>`__ is also ``true`` on all realtime bars.
+
 
 
 \`barstate.isnew\`
@@ -106,6 +122,7 @@ It calculates the number of realtime updates during each realtime bar::
     plot(updateNo())
 
 
+
 \`barstate.isconfirmed\`
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -126,6 +143,7 @@ is always ``true`` on them::
 will not work when used in a `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call.
 
 
+
 \`barstate.islastconfirmedhistory\`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -142,7 +160,7 @@ Here is an example of a script using ``barstate.*`` variables::
 
     //@version=5
     indicator("Bar States", overlay = true, max_labels_count = 500)
-
+    
     stateText() =>
         string txt = ""
         txt += barstate.isfirst     ? "isfirst\n"     : ""
@@ -151,24 +169,26 @@ Here is an example of a script using ``barstate.*`` variables::
         txt += barstate.isrealtime  ? "isrealtime\n"  : ""
         txt += barstate.isnew       ? "isnew\n"       : ""
         txt += barstate.isconfirmed ? "isconfirmed\n" : ""
-        txt += barstate.islastconfirmedhistory ? "barstate.islastconfirmedhistory\n" : ""
+        txt += barstate.islastconfirmedhistory ? "islastconfirmedhistory\n" : ""
     
     labelColor = switch
-        barstate.isfirst     => color.fuchsia
-        barstate.ishistory   => color.silver
-        barstate.isconfirmed => color.orange
-        barstate.isnew       => color.red
+        barstate.isfirst                => color.fuchsia
+        barstate.islastconfirmedhistory => color.gray
+        barstate.ishistory              => color.silver
+        barstate.isconfirmed            => color.orange
+        barstate.isnew                  => color.red
         => color.yellow
-
+    
     label.new(bar_index, na, stateText(), yloc = yloc.abovebar, color = labelColor)
 
 Note that:
 
 - Each state's name will appear in the label's text when it is ``true``.
-- There are four possible colors for the label's background:
+- There are five possible colors for the label's background:
 
   - fuchsia on the first bar
   - silver on historical bars
+  - gray on the last confirmed historical bar
   - orange when a realtime bar is confirmed (when it closes and becomes an elapsed realtime bar)
   - red on the realtime bar's first execution
   - yellow for other executions of the realtime bar
@@ -185,12 +205,17 @@ Let's look at what happens when realtime updates start coming in:
 
 Note that:
 
-- The realtime bar will become red on its first execution,
+- The realtime bar is red because it is its first execution,
   because ``barstate.isnew`` is ``true`` and ``barstate.ishistory`` is no longer ``true``, so our 
   `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ structure
   determing our color uses the ``barstate.isnew => color.red`` branch.
   This will usually not last long because on the next update ``barstate.isnew`` will no longer be ``true``
   so the label's color will turn yellow.
-- The elapsed realtime bars' label is orange because those bars were not historical bars when they closed.
+- The label of elapsed realtime bars is orange because those bars were not historical bars when they closed.
   Accordingly, the ``barstate.ishistory => color.silver`` branch in the `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
   structure was not executed, but the next one, ``barstate.isconfirmed => color.orange`` was.
+
+This last example shows how the realtime bar's label will turn yellow after the first execution on the bar.
+This is the way the label will usually appear on realtime bars:
+
+.. image:: images/BarStates-Example-03.png

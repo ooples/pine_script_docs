@@ -12,6 +12,7 @@ Concepts
    Bar_coloring
    Bar_plotting
    Bar_states
+   Chart_information
    Colors
    Fills
    Inputs
@@ -27,4 +28,5 @@ Concepts
    Tables
    Text_and_shapes
    Time
+   Timeframes
    

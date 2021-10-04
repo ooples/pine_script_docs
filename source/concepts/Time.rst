@@ -101,7 +101,11 @@ variable to return the time zone of the exchange where the chart's intrument is 
 there is **no** ``chart.timezone`` equivalent.
 
 When displaying times on the chart, this shows one way of providing users a way of adjusting your script's time values to those of their chart.
-This way, your displayed times can match the time zone used by traders on their chart::
+This way, your displayed times can match the time zone used by traders on their chart:
+
+.. image:: images/Time-TimeZones-01.png
+
+::
 
     //@version=5
     indicator("Time zone control")
@@ -123,8 +127,6 @@ This way, your displayed times can match the time zone used by traders on their 
       str.format("\nLast bar''s close time OFFSET ({0}): {1,date,HH:mm:ss yyyy.MM.dd}", hoursOffsetInput, time_close + msOffsetInput) +
       str.format("\n\nCurrent time OFFSET ({0}): {1,date,HH:mm:ss yyyy.MM.dd}", hoursOffsetInput, timenow + msOffsetInput))
 
-.. image:: images/Time-TimeZones-01.png
-
 Note that:
 
 - We convert the user offset expressed in hours to milliseconds with ``msOffsetInput``.
@@ -136,7 +138,11 @@ Note that:
   function formats our time values, namely the last bar's time and the current time.
 
 Some functions that normally return values in the exchange's time zone provide means to adapt their result to another time zone.
-This script illustrates how to do this with `hour() <https://www.tradingview.com/pine-script-reference/v5/#fun_hour>`__::
+This script illustrates how to do this with `hour() <https://www.tradingview.com/pine-script-reference/v5/#fun_hour>`__:
+
+.. image:: images/Time-TimeZones-02.png
+
+::
 
     //@version=5
     indicator('`hour(time, "GMT+0")` in orange')
@@ -144,8 +150,6 @@ This script illustrates how to do this with `hour() <https://www.tradingview.com
     plot(hour, "", BLUE_LIGHT, 8)
     plot(hour(time, syminfo.timezone))
     plot(hour(time, "GMT+0"),"UTC", color.orange)
-
-.. image:: images/Time-TimeZones-02.png
 
 Note that:
 
@@ -168,14 +172,16 @@ Time variables
 
 Let's start by plotting `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ and
 `time_close <https://www.tradingview.com/pine-script-reference/v5/#var_time_close>`__,
-the Unix timestamp in milliseconds of the bar's opening and closing time::
+the Unix timestamp in milliseconds of the bar's opening and closing time:
+
+.. image:: images/Time-TimeAndTimeclose-01.png
+
+::
 
     //@version=5
     indicator("`time` and `time_close` values on bars")
     plot(time, "`time`")
     plot(time_close, "`time_close`")
-
-.. image:: images/Time-TimeAndTimeclose-01.png
 
 Note that:
 
@@ -255,7 +261,11 @@ When testing for specific dates or times, ones needs to account for the possibil
 where the tested condition cannot be detected, or for cases where a bar with the specific requirement will not exist.
 Suppose, for example, we wanted to detect the first trading day of the month.
 This script shows how using only `dayofmonth <https://www.tradingview.com/pine-script-reference/v5/#var_dayofmonth>`__
-will not work when a weekly chart is used or when no trading occurs on the 1st of the month::
+will not work when a weekly chart is used or when no trading occurs on the 1st of the month:
+
+.. image:: images/Time-CalendarDatesAndTimes-01.png
+
+::
 
     //@version=5
     indicator("", "", true)
@@ -263,8 +273,6 @@ will not work when a weekly chart is used or when no trading occurs on the 1st o
     firstDay = ta.change(time("M"))
     plotchar(firstDayIncorrect, "firstDayIncorrect", "•", location.top, size = size.small)
     bgcolor(firstDay ? color.silver : na)
-
-.. image:: images/Time-CalendarDatesAndTimes-01.png
 
 Note that: 
 
@@ -303,7 +311,7 @@ Time functions
 
 The `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and
 `time_close() <https://www.tradingview.com/pine-script-reference/v5/#fun_time_close>`__
-functions have the following signature::
+functions have the following signature:
 
 .. code-block:: text
 
@@ -342,14 +350,16 @@ The `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ 
 Testing for sessions
 """"""""""""""""""""
 
-Let's look at an example of the first case where we want to determine if a bar's starting time is part of a period between 11:00 and 13:00::
+Let's look at an example of the first case where we want to determine if a bar's starting time is part of a period between 11:00 and 13:00:
+
+.. image:: images/Time-Time()AndTimeclose()-01.png
+
+::
 
     //@version=5
     indicator("Session bars", "", true)
     inSession = not na(time(timeframe.period, "1100-1300"))
     bgcolor(inSession ? color.silver : na)
-
-.. image:: images/Time-Time()AndTimeclose()-01.png
 
 Note that:
 
@@ -366,13 +376,19 @@ Note that:
 
 
 
+.. _PageTime_TestingForChangesInHigherTimeframes:
+
 Testing for changes in higher timeframes
 """"""""""""""""""""""""""""""""""""""""
 
 It is often helpful to detect changes in a higher timeframe. 
 You may, for example, want to detect changes in trading days while on intraday charts.
 For these cases, you can use the fact that ``time("D")`` returns the opening time of the 1D bar,
-even if the chart is at an intraday timeframe such as 1H::
+even if the chart is at an intraday timeframe such as 1H:
+
+.. image:: images/Time-TestingForChangesInHTF-01.png
+
+::
 
     //@version=5
     indicator("", "", true)
@@ -381,8 +397,6 @@ even if the chart is at an intraday timeframe such as 1H::
     
     newExchangeDay = ta.change(dayofmonth)
     plotchar(newExchangeDay, "newExchangeDay", "🠇", location.top, size = size.small)
-
-.. image:: images/Time-TestingForChangesInHTF-01.png
 
 Note that:
 
@@ -480,7 +494,11 @@ Formatting dates and time
 -------------------------
 
 Timestamps can be formatted using `str.format() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}format>`__.
-These are examples of various formats::
+These are examples of various formats:
+
+.. image:: images/Time-FormattingDatesAndTime-01.png
+
+::
 
     //@version=5
     indicator("", "", true)
@@ -513,4 +531,3 @@ These are examples of various formats::
       timenow, timenow, timenow, timenow, 
       timenow - time, time_close - timenow), label.style_label_left)
 
-.. image:: images/Time-FormattingDatesAndTime-01.png
