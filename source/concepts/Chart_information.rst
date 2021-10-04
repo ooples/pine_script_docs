@@ -160,13 +160,13 @@ Chart timeframe
 A script can obtain information on the type of timeframe used on the chart using these built-ins,
 which all return a "simple bool" result:
 
-- `timeframe.isseconds <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isseconds>`__,
-- `timeframe.isminutes <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isminutes>`__,
-- `timeframe.isintraday <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isintraday>`__,
-- `timeframe.isdaily <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isdaily>`__,
-- `timeframe.isweekly <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isweekly>`__,
-- `timeframe.ismonthly <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}ismonthly>`__ and
-- `timeframe.isdwm <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isdwm>`__.
+- `timeframe.isseconds <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isseconds>`__
+- `timeframe.isminutes <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isminutes>`__
+- `timeframe.isintraday <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isintraday>`__
+- `timeframe.isdaily <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isdaily>`__
+- `timeframe.isweekly <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isweekly>`__
+- `timeframe.ismonthly <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}ismonthly>`__
+- `timeframe.isdwm <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isdwm>`__
 
 Two additional built-ins return more specific timeframe information:
 
