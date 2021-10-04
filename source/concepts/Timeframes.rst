@@ -33,7 +33,7 @@ timeframes are expressed in Pine, and how to use them.
   See the :ref:`Testing for changes in higher timeframes <PageTime_TestingForChangesInHigherTimeframes>` section to see how to do this.
 - The `input.timeframe() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}session>`__ function
   provides a way to allow script users to define a timeframe through a script's "Inputs" tab
-  (see the :ref:`Session input <PageInputs_SessionInput>` section for more information).
+  (see the :ref:`Timeframe input <PageInputs_TimeframeInput>` section for more information).
 - The `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__
   declaration statement has an optional ``timeframe`` parameter that can be used to provide
   multi-timeframe capabilities to simple scripts without using
