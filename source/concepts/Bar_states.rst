@@ -6,13 +6,24 @@ Bar states
 .. contents:: :local:
     :depth: 3
 
+
+
+Introduction
+------------
+
 A set of built-in variables in the ``barstate`` namespace allow your script to detect different properties of the bar on which the script is currently exectuting. 
 These states can be used to restrict the execution or the logic of your code to specific bars.
+
+Note that some built-ins return information on the trading session the current bar belongs to. 
+They are explained in the :ref:`Session states <PageSessions_SessionStates>` section.
+
+
 
 Bar state built-in variables
 ----------------------------
 
-Note that while indicators and libraries run on all price or volume updates in real time, strategies not using ``calc_on_every_tick`` will not; they will only execute when the realtime bar closes. This will affect the detection of bar states in that type of script. 
+Note that while indicators and libraries run on all price or volume updates in real time, strategies not using ``calc_on_every_tick`` will not; 
+they will only execute when the realtime bar closes. This will affect the detection of bar states in that type of script. 
 On open markets, for example, this code will not display a background until the realtime closes because that is when the strategy runs::
 
     //@version=5
@@ -40,6 +51,7 @@ It can be useful to initialize variables on the first bar only, e.g.::
         array.push(fillColors, color.new(FILL_COLOR, 90))
 
 
+
 \`barstate.islast\`
 ^^^^^^^^^^^^^^^^^^^
 
@@ -61,6 +73,7 @@ We create the label only once and then update its properties using ``label.set_*
         label.set_text(hiLabel, str.tostring(high, format.mintick))
 
 
+
 \`barstate.ishistory\`
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -73,12 +86,14 @@ On closed markets, it can be ``true`` on the same bar where `barstate.islast <ht
 is also ``true``.
 
 
+
 \`barstate.isrealtime\`
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 `barstate.isrealtime <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isrealtime>`__ 
 is ``true`` if the current data update is a real-time bar update, ``false`` otherwise (thus it is historical). 
 Note that `barstate.islast <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islast>`__ is also ``true`` on all realtime bars.
+
 
 
 \`barstate.isnew\`
@@ -106,6 +121,7 @@ It calculates the number of realtime updates during each realtime bar::
     plot(updateNo())
 
 
+
 \`barstate.isconfirmed\`
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -124,6 +140,7 @@ is always ``true`` on them::
 
 `barstate.isconfirmed <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isconfirmed>`__ 
 will not work when used in a `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call.
+
 
 
 \`barstate.islastconfirmedhistory\`
