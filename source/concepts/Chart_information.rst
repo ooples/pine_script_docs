@@ -35,6 +35,8 @@ The Pine built-ins for OHLCV values are:
   or the **current price** in the realtime bar.
 - `volume <https://www.tradingview.com/pine-script-reference/v5/#var_volume>`__: the volume traded during the bar,
   or the volume traded during the realtime bar's elapsed time.
+  The unit of volume information varies with the instrument. 
+  It is in shares for stocks, in lots for forex, in contracts for futures, in the base currency for crypto, etc.
 
 Other values are available through:
 
@@ -74,6 +76,73 @@ relative to the particular bar the script is executing on.
 Symbol information
 ------------------
 
+Built-in variables in the ``syminfo`` namespace provide scripts with information on the symbol of the chart
+the script is running on. This information changes every time a script user changes the chart's symbol.
+The script then re-executes on all the chart's bars using the new values of the built-in variables:
+
+- `syminfo.basecurrency <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}basecurrency>`__:
+  the traded currency: "BTC" in "BTCUSD", or "EUR" in "EURUSD".
+- `syminfo.currency <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}currency>`__:
+  the quote currency: "USD" in "BTCUSD", or "CAD" in "USDCAD".
+- `syminfo.description <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}description>`__:
+  
+- `syminfo.mintick <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}mintick>`__:
+  
+- `syminfo.pointvalue <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}pointvalue>`__:
+  
+- `syminfo.prefix <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}prefix>`__:
+  
+- `syminfo.root <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}root>`__:
+  
+- `syminfo.session <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}session>`__:
+  
+- `syminfo.ticker <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}ticker>`__:
+  
+- `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__:
+  
+- `syminfo.timezone <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}timezone>`__:
+  
+- `syminfo.type <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}type>`__:
+  
+This script will display the values of those built-in variables on the chart::
+
+    //@version=5
+    indicator("`syminfo.*` built-ins", "", true)
+    printTable(txtLeft, txtRight) => 
+        var table t = table.new(position.middle_right, 2, 1)
+        table.cell(t, 0, 0, txtLeft, bgcolor = color.yellow, text_halign = text.align_right)
+        table.cell(t, 1, 0, txtRight, bgcolor = color.yellow, text_halign = text.align_left)
+    
+    nl = "\n"
+    left =
+      "syminfo.basecurrency: "  + nl +
+      "syminfo.currency: "      + nl +
+      "syminfo.description: "   + nl +
+      "syminfo.mintick: "       + nl +
+      "syminfo.pointvalue: "    + nl +
+      "syminfo.prefix: "        + nl +
+      "syminfo.root: "          + nl +
+      "syminfo.session: "       + nl +
+      "syminfo.ticker: "        + nl +
+      "syminfo.tickerid: "      + nl +
+      "syminfo.timezone: "      + nl +
+      "syminfo.type: "
+    
+    right =
+      syminfo.basecurrency  + nl +
+      syminfo.currency      + nl +
+      syminfo.description   + nl +
+      str.tostring(syminfo.mintick)       + nl +
+      str.tostring(syminfo.pointvalue)    + nl +
+      syminfo.prefix        + nl +
+      syminfo.root          + nl +
+      syminfo.session       + nl +
+      syminfo.ticker        + nl +
+      syminfo.tickerid      + nl +
+      syminfo.timezone      + nl +
+      syminfo.type
+    
+    printTable(left, right)
 
 
 
