@@ -191,6 +191,7 @@ Timeframe strings follow these rules:
 - When no multiplier is used, 1 is assumed: "S" is equivalent to "1S", "D" to "1D, etc. If only "1" is used, it is interpreted as "1min",
   since no unit letter identifier is used for minutes.
 - There is no "hour" unit; "1H" is **not** valid. The correct format for one hour is "60" (remember no unit letter is specified for minutes).
+
 - The valid multipliers vary for each timeframe unit:
     - For seconds, only the discrete 1, 5, 15 and 30 multipliers are valid.
     - For minutes, 1 to 1440 are valid multipliers.
