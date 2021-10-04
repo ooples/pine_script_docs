@@ -202,6 +202,8 @@ Timeframe strings follow these rules:
 
 
 
-Symbol Session
---------------
+Session information
+-------------------
+
+
 
