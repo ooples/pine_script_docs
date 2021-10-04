@@ -81,29 +81,38 @@ the script is running on. This information changes every time a script user chan
 The script then re-executes on all the chart's bars using the new values of the built-in variables:
 
 - `syminfo.basecurrency <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}basecurrency>`__:
-  the traded currency: "BTC" in "BTCUSD", or "EUR" in "EURUSD".
+  the base currency: "BTC" in "BTCUSD", or "EUR" in "EURUSD".
 - `syminfo.currency <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}currency>`__:
   the quote currency: "USD" in "BTCUSD", or "CAD" in "USDCAD".
 - `syminfo.description <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}description>`__:
-  
+  The long description of the symbol.
 - `syminfo.mintick <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}mintick>`__:
-  
+  The symbol's tick value, or the minimum increment price can move in.
+  Not to be confused with *pips* or *points*. On "ES1!" ("S&P 500 E-Mini") the tick size is 0.25 because that is the increment the price moves in.
 - `syminfo.pointvalue <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}pointvalue>`__:
-  
+  The point value is the multiple of the underlying asset determining a contract's value.
+  On "ES1!" ("S&P 500 E-Mini") the point value is 50, so a contract is worth 50 times the price of the instrument.
 - `syminfo.prefix <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}prefix>`__:
-  
+  The prefix is the exchange or broker's identifier: "NASDAQ" for "AAPL", "CME_MINI_DL" for "ES1!".
 - `syminfo.root <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}root>`__:
-  
+  It is the ticker's prefix for structured tickers like those of futures. It is "ES" for "ES1!", "ZW" for "ZW1!".
 - `syminfo.session <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}session>`__:
-  
+  It reflects the session setting on the chart for that symbol. If the "Chart settings/Symbol/Session" field is set to "Extended",
+  `syminfo.session <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}session>`__ will only return "extended" if the symbol
+  and the user's feed allow for extended sessions.
 - `syminfo.ticker <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}ticker>`__:
-  
+  It is the symbol's name, without the exchange part 
+  (`syminfo.prefix <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}prefix>`__): "BTCUSD", "AAPL", "ES1!", "USDCAD".
 - `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__:
-  
+  This is a string that is rarely displayed. It is mostly used as an argument for 
+  `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__'s ``symbol`` parameter.
+  It includes session, prefix and ticker information.
 - `syminfo.timezone <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}timezone>`__:
-  
+  The timezone the symbol is traded in. The string is an `IANA time zone database name <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>`__
+  (e.g., "America/New_York").
 - `syminfo.type <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}type>`__:
-  
+  The type of market the symbol belongs to. The values are: "stock", "futures", "index", "forex", "crypto", "fund", "dr" and "cfd".
+
 This script will display the values of those built-in variables on the chart::
 
     //@version=5
