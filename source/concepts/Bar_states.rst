@@ -11,7 +11,7 @@ Bar states
 Introduction
 ------------
 
-A set of built-in variables in the ``barstate`` namespace allow your script to detect different properties of the bar on which the script is currently exectuting. 
+A set of built-in variables in the ``barstate`` namespace allow your script to detect different properties of the bar on which the script is currently executing. 
 These states can be used to restrict the execution or the logic of your code to specific bars.
 
 Note that some built-ins return information on the trading session the current bar belongs to. 
