@@ -46,7 +46,7 @@ timeframes are expressed in Pine, and how to use them.
 
 
 Timeframe string specifications
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------
 
 Timeframe strings follow these rules:
 
@@ -65,3 +65,55 @@ Timeframe strings follow these rules:
 
 
 
+Comparing timeframes
+--------------------
+
+It can be useful to compare different timeframe strings to determine,
+for example, if the timeframe used on the chart is lower than the higher timeframes used in the script,
+as using timeframes lower than the chart is usually not a good idea.
+See the :ref:`Requesting data of a lower timeframe <PageOtherTimeframesAndData_RequestingDataOfALowerTimeframe>` section
+for more information on the subject.
+
+Converting timeframe strings to a representation in fractional minutes provides a way to compare them
+using a universal unit. This script uses the ``tfInMinutes()`` function to convert a timeframe into float minutes::
+
+    //@version=5
+    indicator("", "", true)
+    string tfInput = input.timeframe("")
+    
+    tfInMinutes(simple string tf = "") => 
+        float chartTf =
+          timeframe.multiplier * (
+          timeframe.isseconds ? 1. / 60             :
+          timeframe.isminutes ? 1.                  :
+          timeframe.isdaily   ? 60. * 24            :
+          timeframe.isweekly  ? 60. * 24 * 7        :
+          timeframe.ismonthly ? 60. * 24 * 30.4375  : na)
+        float result = tf == "" ? chartTf : request.security(syminfo.tickerid, tf, chartTf)
+    
+    float chartTFInMinutes = tfInMinutes()
+    float inputTFInMinutes = tfInMinutes(tfInput)
+    
+    printTable(txt) => var table t = table.new(position.middle_right, 1, 1), table.cell(t, 0, 0, txt, bgcolor = color.yellow)
+    printTable(
+      "Chart TF: "    + str.tostring(chartTFInMinutes, "#.##### minutes") +
+      "\n`tfInput`: " + str.tostring(inputTFInMinutes, "#.##### minutes"))
+    
+    if chartTFInMinutes > inputTFInMinutes
+        runtime.error("The chart's timeframe nust not be higher than the input's timeframe.")
+    
+Note that:
+
+- We define the single parameter of our ``tfInMinutes()`` as ``simple string tf = ""``.
+  This allows the compiler to restrict its arguments to the "simple string" form-type,
+  which ensures it will work as an argument to the ``timeframe`` parameter in our
+  `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call.
+  It also says that if no argument is supplied for our ``tf`` parameter, an empty string will be used as its default value.
+  This will cause the function's logic to return the chart's timeframe in minutes.
+- We use two calls to ``tfInMinutes()`` in the initialization of the ``chartTFInMinutes`` and ``inputTFInMinutes``.
+  In the first instance we do not supply an argument for its ``tf`` parameter, so the function returns the chart's timeframe.
+  In the second call we supply the timeframe selected by the script's user through the call to
+  `input.timeframe() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}session>`__.
+- Then we validate the timeframes to ensure that the input timeframe is equal to or higher than the chart's timeframe.
+  If it is not, we generate a runtime error.
+- We finally print the two timeframe values converted to minutes.
