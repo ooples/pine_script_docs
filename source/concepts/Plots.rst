@@ -498,7 +498,11 @@ If `RSI <https://www.tradingview.com/u/?solution=43000502338>`__ values were plo
 the effect would be to distort the symbol's normal price scale, 
 unless it just hapenned to be close to `RSI <https://www.tradingview.com/u/?solution=43000502338>`__'s 0 to 100 range.
 This shows an `RSI <https://www.tradingview.com/u/?solution=43000502338>`__ signal line and a centerline at the 50 level, 
-with the script running in a separate pane::
+with the script running in a separate pane:
+
+.. image:: images/Plots-Scale-01.png
+
+::
 
     //@version=5
     indicator("RSI")
@@ -508,8 +512,6 @@ with the script running in a separate pane::
     myRSIColor = myRSI > 50 ? bullColor : bearColor
     plot(myRSI, "RSI", myRSIColor, 3)
     hline(50)
-
-.. image:: images/Plots-Scale-01.png
 
 Note that the *y* axis of our script's visual space is automatically sized using the range of values plotted, i.e., 
 the values of `RSI <https://www.tradingview.com/u/?solution=43000502338>`__. 
@@ -546,7 +548,11 @@ If both your indicators used fixed ranges, you can shift the values of one of th
 We could, for example, plot both `RSI <https://www.tradingview.com/u/?solution=43000502338>`__ (0 to 100)
 and the `True Strength Indicator (TSI) <https://www.tradingview.com/u/?solution=43000592290>`__ (-100 to +100) by displacing one of them.
 Our strategy here will be to compress and shift the `TSI <https://www.tradingview.com/u/?solution=43000592290>`__ values
-so they plot over `RSI <https://www.tradingview.com/u/?solution=43000502338>`__::
+so they plot over `RSI <https://www.tradingview.com/u/?solution=43000502338>`__:
+
+.. image:: images/Plots-Scale-03.png
+
+::
 
     //@version=5
     indicator("RSI and TSI")
@@ -566,8 +572,6 @@ so they plot over `RSI <https://www.tradingview.com/u/?solution=43000502338>`__:
     plot(ta.ema(myTSI, 13), "TSI EMA", #FF006E)
     hline(200)
     hline(150)
-
-.. image:: images/Plots-Scale-03.png
 
 Note that:
 
