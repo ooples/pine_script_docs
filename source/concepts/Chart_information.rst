@@ -88,7 +88,7 @@ The script then re-executes on all the chart's bars using the new values of the 
   The long description of the symbol.
 - `syminfo.mintick <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}mintick>`__:
   The symbol's tick value, or the minimum increment price can move in.
-  Not to be confused with *pips* or *points*. On "ES1!" ("S&P 500 E-Mini") the tick size is 0.25 because that is the increment the price moves in.
+  Not to be confused with *pips* or *points*. On "ES1!" ("S&P 500 E-Mini") the tick size is 0.25 because that is the minimal increment the price moves in.
 - `syminfo.pointvalue <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}pointvalue>`__:
   The point value is the multiple of the underlying asset determining a contract's value.
   On "ES1!" ("S&P 500 E-Mini") the point value is 50, so a contract is worth 50 times the price of the instrument.
@@ -98,8 +98,7 @@ The script then re-executes on all the chart's bars using the new values of the 
   It is the ticker's prefix for structured tickers like those of futures. It is "ES" for "ES1!", "ZW" for "ZW1!".
 - `syminfo.session <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}session>`__:
   It reflects the session setting on the chart for that symbol. If the "Chart settings/Symbol/Session" field is set to "Extended",
-  `syminfo.session <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}session>`__ will only return "extended" if the symbol
-  and the user's feed allow for extended sessions.
+  it will only return "extended" if the symbol and the user's feed allow for extended sessions.
 - `syminfo.ticker <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}ticker>`__:
   It is the symbol's name, without the exchange part 
   (`syminfo.prefix <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}prefix>`__): "BTCUSD", "AAPL", "ES1!", "USDCAD".
