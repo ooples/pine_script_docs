@@ -21,26 +21,27 @@ timeframes are expressed in Pine, and how to use them.
 
 **Timeframe strings** come into play in different contexts:
 
-#. They must be used in `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
-   when requesting data from another symbol and/or timeframe.
-   See the page on :ref:`Other timeframes and data <PageOtherTimeframesAndData>` to explore the use of
-   `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__.
-#. They can be used as an argument to `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and
-   `time_close() <https://www.tradingview.com/pine-script-reference/v5/#fun_time_close>`__
-   functions, to return the time of a higher timeframe bar. 
-   This, in turn, can be used to detect changes in higher timeframes from the chart's timeframe
-   without using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__.
-   See the :ref:`Testing for changes in higher timeframes <PageTime_TestingForChangesInHigherTimeframes>` section to see how to do this.
-#. The `input.timeframe() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}session>`__ function
-   provides a way to allow script users to define a timeframe through a script's "Inputs" tab
-   (see the :ref:`Session input <PageInputs_SessionInput>` section for more information).
-#. The `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__
-   declaration statement has an optional ``timeframe`` parameter that can be used to provide
-   multi-timeframe capabilities to simple scripts without using
-   `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__.
-
-Many built-in variables provide information on the timeframe used by the chart the script is running on.
-See the :ref:`Chart timeframe <PageChartInformation_ChartTimeframe>` section for more information on them.
+- They must be used in `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+  when requesting data from another symbol and/or timeframe.
+  See the page on :ref:`Other timeframes and data <PageOtherTimeframesAndData>` to explore the use of
+  `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__.
+- They can be used as an argument to `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and
+  `time_close() <https://www.tradingview.com/pine-script-reference/v5/#fun_time_close>`__
+  functions, to return the time of a higher timeframe bar. 
+  This, in turn, can be used to detect changes in higher timeframes from the chart's timeframe
+  without using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__.
+  See the :ref:`Testing for changes in higher timeframes <PageTime_TestingForChangesInHigherTimeframes>` section to see how to do this.
+- The `input.timeframe() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}session>`__ function
+  provides a way to allow script users to define a timeframe through a script's "Inputs" tab
+  (see the :ref:`Session input <PageInputs_SessionInput>` section for more information).
+- The `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__
+  declaration statement has an optional ``timeframe`` parameter that can be used to provide
+  multi-timeframe capabilities to simple scripts without using
+  `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__.
+- Many built-in variables provide information on the timeframe used by the chart the script is running on.
+  See the :ref:`Chart timeframe <PageChartInformation_ChartTimeframe>` section for more information on them,
+  including `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__
+  which returns a string in Pine's timeframe specification format.
 
 
 
