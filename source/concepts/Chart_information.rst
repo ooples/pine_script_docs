@@ -187,8 +187,9 @@ Timeframe string specifications
 Timeframe strings follow these rules:
 
 - They are composed of the multiplier and the timeframe unit, e.g., "1S", "30" (30 minutes), "1D" (one day), "3M" (three months).
-- The units are "S" for seconds, none for minutes, "D" for days, "W" for weeks and "M" for months.
-- When no multiplier is used, 1 is assumed: "S" is equivalent to "1S", "D" to "1D, etc.
+- The unit is represented by a single letter, with no letter used for minutes: "S" for seconds, "D" for days, "W" for weeks and "M" for months.
+- When no multiplier is used, 1 is assumed: "S" is equivalent to "1S", "D" to "1D, etc. If only "1" is used, it is interpreted as "1min",
+  since no unit letter identifier is used for minutes.
 - There is no "hour" unit; "1H" is **not** valid. The correct format for one hour is "60" (remember no unit letter is specified for minutes).
 - The valid multipliers vary for each timeframe unit:
     - For seconds, only the discrete 1, 5, 15 and 30 multipliers are valid.
