@@ -157,6 +157,46 @@ This script will display the values of those built-in variables on the chart::
 Chart timeframe
 ---------------
 
+A script can obtain information on the type of timeframe used on the chart using these built-ins,
+which all return a "simple bool" result:
+
+- `timeframe.isseconds <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isseconds>`__,
+- `timeframe.isminutes <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isminutes>`__,
+- `timeframe.isintraday <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isintraday>`__,
+- `timeframe.isdaily <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isdaily>`__,
+- `timeframe.isweekly <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isweekly>`__,
+- `timeframe.ismonthly <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}ismonthly>`__ and
+- `timeframe.isdwm <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}isdwm>`__.
+
+Two additional built-ins return more specific timeframe information:
+
+- `timeframe.multiplier <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}multiplier>`__
+  returns a "simple int" containing the multiplier of the timeframe unit. 
+  A chart timeframe of one hour will return ``60`` because intraday timeframes are expressed in minutes.
+  A 30sec timeframe will return ``30`` (seconds), a daily chart will return ``1`` (day), a quarterly chart will return ``3`` (months),
+  and a yearly chart will return ``12`` (months). The value of this variable cannot be used as an argument to ``timeframe`` parameters in
+  built-in functions, as they expect a string in timeframe specifications format.
+- `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__
+  returns a string in Pine's timeframe specification format.
+
+
+
+Timeframe string specifications
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Timeframe strings follow these rules:
+
+- They are composed of the multiplier and the timeframe unit, e.g., "1S", "30" (30 minutes), "1D" (one day), "3M" (three months).
+- The units are "S" for seconds, none for minutes, "D" for days, "W" for weeks and "M" for months.
+- When no multiplier is used, 1 is assumed: "S" is equivalent to "1S", "D" to "1D, etc.
+- There is no "hour" unit; "1H" is **not** valid. The correct format for one hour is "60" (remember no unit letter is specified for minutes).
+- The valid multipliers vary for each timeframe unit:
+    - For seconds, only the discrete 1, 5, 15 and 30 multipliers are valid.
+    - For minutes, 1 to 1440 are valid multipliers.
+    - For days, 1 to 365 are valid.
+    - For weeks, 1 to 52 are valid.
+    - For months, 1 to 12 are valid.
+
 
 
 
