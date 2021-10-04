@@ -99,6 +99,8 @@ The script then re-executes on all the chart's bars using the new values of the 
 - `syminfo.session <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}session>`__:
   It reflects the session setting on the chart for that symbol. If the "Chart settings/Symbol/Session" field is set to "Extended",
   it will only return "extended" if the symbol and the user's feed allow for extended sessions.
+  It is rarely displayed and used mostly as an argument to the ``session`` parameter in
+  `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__.
 - `syminfo.ticker <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}ticker>`__:
   It is the symbol's name, without the exchange part 
   (`syminfo.prefix <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}prefix>`__): "BTCUSD", "AAPL", "ES1!", "USDCAD".
@@ -179,31 +181,24 @@ Two additional built-ins return more specific timeframe information:
 - `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__
   returns a string in Pine's timeframe specification format.
 
-
-
-Timeframe string specifications
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Timeframe strings follow these rules:
-
-- They are composed of the multiplier and the timeframe unit, e.g., "1S", "30" (30 minutes), "1D" (one day), "3M" (three months).
-- The unit is represented by a single letter, with no letter used for minutes: "S" for seconds, "D" for days, "W" for weeks and "M" for months.
-- When no multiplier is used, 1 is assumed: "S" is equivalent to "1S", "D" to "1D, etc. If only "1" is used, it is interpreted as "1min",
-  since no unit letter identifier is used for minutes.
-- There is no "hour" unit; "1H" is **not** valid. The correct format for one hour is "60" (remember no unit letter is specified for minutes).
-- The valid multipliers vary for each timeframe unit:
-
-    - For seconds, only the discrete 1, 5, 15 and 30 multipliers are valid.
-    - For minutes, 1 to 1440 are valid multipliers.
-    - For days, 1 to 365 are valid.
-    - For weeks, 1 to 52 are valid.
-    - For months, 1 to 12 are valid.
-
+See the page on :ref:`Timeframes <PageTimeframes>` for more information.
 
 
 
 Session information
 -------------------
 
+Session information is available in different forms:
+
+- The `syminfo.session <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}session>`__
+  built-in variable returns a value that is either 
+  `session.regular <https://www.tradingview.com/pine-script-reference/v5/#var_session{dot}regular>`__ or
+  `session.extended <https://www.tradingview.com/pine-script-reference/v5/#var_session{dot}extended>`__.
+  It reflects the session setting on the chart for that symbol. If the "Chart settings/Symbol/Session" field is set to "Extended",
+  it will only return "extended" if the symbol and the user's feed allow for extended sessions.
+  It is used when a session type is expected, for example as the argument for the ``session`` parameter in
+  `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__.
+- :ref:`Session state built-ins <PageSessions_SessionStates>` provide information on the trading session
+  a bar belongs to.
 
 
