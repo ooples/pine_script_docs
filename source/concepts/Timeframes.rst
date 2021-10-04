@@ -105,7 +105,7 @@ using a universal unit. This script uses the ``tfInMinutes()`` function to conve
 Note that:
 
 - We define the single parameter of our ``tfInMinutes()`` function using ``simple string tf = ""``.
-  This allows the compiler to restrict its arguments to the "simple string" form-type,
+  This allows the compiler to restrict its argument to the "simple string" form-type,
   which ensures it will work as an argument for the ``timeframe`` parameter in our
   `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call.
   It also says that if no argument is supplied for our ``tf`` parameter, an empty string will be used as its default value.
