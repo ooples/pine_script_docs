@@ -103,7 +103,7 @@ The script then re-executes on all the chart's bars using the new values of the 
   It is the symbol's name, without the exchange part 
   (`syminfo.prefix <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}prefix>`__): "BTCUSD", "AAPL", "ES1!", "USDCAD".
 - `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__:
-  This is a string that is rarely displayed. It is mostly used as an argument for 
+  This string is rarely displayed. It is mostly used as an argument for 
   `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__'s ``symbol`` parameter.
   It includes session, prefix and ticker information.
 - `syminfo.timezone <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}timezone>`__:
