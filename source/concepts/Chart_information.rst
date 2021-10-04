@@ -193,11 +193,11 @@ Timeframe strings follow these rules:
 - There is no "hour" unit; "1H" is **not** valid. The correct format for one hour is "60" (remember no unit letter is specified for minutes).
 - The valid multipliers vary for each timeframe unit:
 
-     - For seconds, only the discrete 1, 5, 15 and 30 multipliers are valid.
-     - For minutes, 1 to 1440 are valid multipliers.
-     - For days, 1 to 365 are valid.
-     - For weeks, 1 to 52 are valid.
-     - For months, 1 to 12 are valid.
+      - For seconds, only the discrete 1, 5, 15 and 30 multipliers are valid.
+      - For minutes, 1 to 1440 are valid multipliers.
+      - For days, 1 to 365 are valid.
+      - For weeks, 1 to 52 are valid.
+      - For months, 1 to 12 are valid.
 
 
 
