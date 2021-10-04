@@ -81,9 +81,9 @@ the script is running on. This information changes every time a script user chan
 The script then re-executes on all the chart's bars using the new values of the built-in variables:
 
 - `syminfo.basecurrency <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}basecurrency>`__:
-  the base currency: "BTC" in "BTCUSD", or "EUR" in "EURUSD".
+  the base currency, e.g., "BTC" in "BTCUSD", or "EUR" in "EURUSD".
 - `syminfo.currency <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}currency>`__:
-  the quote currency: "USD" in "BTCUSD", or "CAD" in "USDCAD".
+  the quote currency, e.g., "USD" in "BTCUSD", or "CAD" in "USDCAD".
 - `syminfo.description <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}description>`__:
   The long description of the symbol.
 - `syminfo.mintick <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}mintick>`__:
@@ -111,7 +111,7 @@ The script then re-executes on all the chart's bars using the new values of the 
   The timezone the symbol is traded in. The string is an `IANA time zone database name <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>`__
   (e.g., "America/New_York").
 - `syminfo.type <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}type>`__:
-  The type of market the symbol belongs to. The values are: "stock", "futures", "index", "forex", "crypto", "fund", "dr" and "cfd".
+  The type of market the symbol belongs to. The values are "stock", "futures", "index", "forex", "crypto", "fund", "dr" and "cfd".
 
 This script will display the values of those built-in variables on the chart::
 
