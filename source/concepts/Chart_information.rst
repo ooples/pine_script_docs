@@ -156,6 +156,8 @@ This script will display the values of those built-in variables on the chart::
 
 
 
+.. _PageChartInformation_ChartTimeframe:
+
 Chart timeframe
 ---------------
 

@@ -16,7 +16,10 @@ It is the unit of time represented by one bar on the chart.
 All standard chart types use a timeframe: "Bars", "Candles", "Hollow Candles", "Line", "Area" and "Baseline".
 One non-standard chart type also uses timeframes: "Heikin Ashi".
 
-**Timeframe strings** come into play in a few different context in Pine scripts:
+Programmers interested in accessing data from multiple timeframes will need to become familiar with how
+timeframes are expressed in Pine, and how to use them.
+
+**Timeframe strings** come into play in different contexts:
 
 #. They must be used in `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
    when requesting data from another symbol or timeframe.
@@ -33,14 +36,9 @@ One non-standard chart type also uses timeframes: "Heikin Ashi".
    declaration statement has an optional ``timeframe`` parameter that can be used to provide
    multi-timeframe capabilities to simple scripts without using
    `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__.
-#. The `xxx <https://www.tradingview.com/pine-script-reference/v5/#>`__
-In the following sections, we cover the use of timeframes in all these contexts.
 
-Note that:
-
-- Not all user accounts on TradingView have access to extended session information.
-- There is no special "session" type in Pine. Session strings are of "string" type,
-  but they must conform to the session string syntax.
+Many built-in variables provide information on the timeframe used by the chart the script is running on.
+See the :ref:`Chart timeframe <PageChartInformation_ChartTimeframe>` section for more information on them.
 
 
 
