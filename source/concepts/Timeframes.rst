@@ -22,7 +22,9 @@ timeframes are expressed in Pine, and how to use them.
 **Timeframe strings** come into play in different contexts:
 
 #. They must be used in `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
-   when requesting data from another symbol or timeframe.
+   when requesting data from another symbol and/or timeframe.
+   See the page on :ref:`Other timeframes and data <PageOtherTimeframesAndData>` to explore the use of
+   `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__.
 #. They can be used as an argument to `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and
    `time_close() <https://www.tradingview.com/pine-script-reference/v5/#fun_time_close>`__
    functions, to return the time of a higher timeframe bar. 
