@@ -58,10 +58,10 @@ Timeframe strings follow these rules:
 - The valid multipliers vary for each timeframe unit:
 
     - For seconds, only the discrete 1, 5, 15 and 30 multipliers are valid.
-    - For minutes, 1 to 1440 are valid multipliers.
-    - For days, 1 to 365 are valid.
-    - For weeks, 1 to 52 are valid.
-    - For months, 1 to 12 are valid.
+    - For minutes, 1 to 1440.
+    - For days, 1 to 365.
+    - For weeks, 1 to 52.
+    - For months, 1 to 12.
 
 
 
