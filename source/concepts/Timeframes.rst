@@ -110,10 +110,15 @@ Note that:
   `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call.
   It also says that if no argument is supplied for our ``tf`` parameter, an empty string will be used as its default value.
   This will cause the function's logic to return the chart's timeframe in minutes.
-- We use two calls to ``tfInMinutes()`` in the initialization of the ``chartTFInMinutes`` and ``inputTFInMinutes``.
+- We use two calls to ``tfInMinutes()`` in the initialization of the ``chartTFInMinutes`` and ``inputTFInMinutes`` variables.
   In the first instance we do not supply an argument for its ``tf`` parameter, so the function returns the chart's timeframe.
   In the second call we supply the timeframe selected by the script's user through the call to
   `input.timeframe() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}session>`__.
+  Note that the ``tfInMinutes()`` function produces a "series float" value, 
+  which entails its result cannot be transformed in a tiemframe string for use with
+  `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__,
+  as its ``timeframe`` parameter requires a "simple string".
+  See the page on Pine's :ref:`Type system <PageTypeSystem>` for more information on Pine forms and types.
 - Then we validate the timeframes to ensure that the input timeframe is equal to or higher than the chart's timeframe.
   If it is not, we generate a runtime error.
 - We finally print the two timeframe values converted to minutes.
