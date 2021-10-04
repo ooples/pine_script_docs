@@ -111,7 +111,7 @@ Note that:
   It also says that if no argument is supplied for our ``tf`` parameter, an empty string will be used as its default value.
   This will cause the function's logic to return the chart's timeframe in minutes.
 - We use two calls to ``tfInMinutes()`` in the initialization of the ``chartTFInMinutes`` and ``inputTFInMinutes`` variables.
-  In the first instance we do not supply an argument for its ``tf`` parameter, so the function returns the chart's timeframe.
+  In the first instance we do not supply an argument for its ``tf`` parameter, so the function returns the chart's timeframe in minutes.
   In the second call we supply the timeframe selected by the script's user through the call to
   `input.timeframe() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}session>`__.
   Note that the ``tfInMinutes()`` function produces a "series float" value, 
