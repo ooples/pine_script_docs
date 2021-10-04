@@ -21,7 +21,8 @@ One non-standard chart type also uses timeframes: "Heikin Ashi".
 1. They can be used as an argument to `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and
    `time_close() <https://www.tradingview.com/pine-script-reference/v5/#fun_time_close>`__
    functions, to return the time of a higher timeframe bar. 
-   This, in turn, can also be used to detect changes in higher timeframes.
+   This, in turn, can be used to detect changes in higher timeframes from the chart's timeframe,
+   without using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__.
    See the :ref:`Testing for changes in higher timeframes <PageTime_TestingForChangesInHigherTimeframes>` section to see how to do this.
 2. They must be used in `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
    when requesting data from another symbol or timeframe.
