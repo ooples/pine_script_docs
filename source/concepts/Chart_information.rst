@@ -138,21 +138,21 @@ This script will display the values of those built-in variables on the chart::
       "syminfo.type: "
     
     right =
-      syminfo.basecurrency  + nl +
-      syminfo.currency      + nl +
-      syminfo.description   + nl +
-      str.tostring(syminfo.mintick)       + nl +
-      str.tostring(syminfo.pointvalue)    + nl +
-      syminfo.prefix        + nl +
-      syminfo.root          + nl +
-      syminfo.session       + nl +
-      syminfo.ticker        + nl +
-      syminfo.tickerid      + nl +
-      syminfo.timezone      + nl +
+      syminfo.basecurrency              + nl +
+      syminfo.currency                  + nl +
+      syminfo.description               + nl +
+      str.tostring(syminfo.mintick)     + nl +
+      str.tostring(syminfo.pointvalue)  + nl +
+      syminfo.prefix                    + nl +
+      syminfo.root                      + nl +
+      syminfo.session                   + nl +
+      syminfo.ticker                    + nl +
+      syminfo.tickerid                  + nl +
+      syminfo.timezone                  + nl +
       syminfo.type
     
     printTable(left, right)
-
+    
 
 
 Chart timeframe
