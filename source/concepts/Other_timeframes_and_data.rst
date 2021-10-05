@@ -92,7 +92,7 @@ Note that:
 ^^^^^^^^^^^^^
 
 The ``lookahead`` parameter controls whether future data is returned by the function.
-It only affects historical bars, as there are no future bars to look forward to in realtime, where the future is unknown.
+It only affects historical bars, as there are no future bars to look forward to in realtime, where the future is unknown — as it should.
 One may wonder why Pine offers the possibility to look into the future when this is not possible in real life.
 The intended use of the ``lookahead`` parameter is to allow ``request.*()`` functions to return correct information in special circumstances
 where unreliable data would otherwise be returned.
