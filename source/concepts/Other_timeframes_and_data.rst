@@ -277,8 +277,8 @@ Fetching standard prices for a non-standard chart
 
 
 
-\`request.earnings()\`
-----------------------
+\`request.splits()\`
+--------------------
 
 
 
