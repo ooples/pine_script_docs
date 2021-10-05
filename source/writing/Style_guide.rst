@@ -6,8 +6,6 @@ Style guide
 .. contents:: :local:
     :depth: 2
 
-.. include:: <isonum.txt>
-
 
 
 Introduction
@@ -20,6 +18,7 @@ Every Pine programmer is, of course, free to use all or as many of our recommend
 As Ed Seykota says: *Follow the rules without question, and know when to break the rules*.
 
 
+
 Naming Conventions
 ------------------
 
@@ -28,6 +27,7 @@ We recommend the use of:
 - ``camelCase`` for all identifiers, i.e., variable or function names: ``ma``, ``maFast``, ``maLengthInput``, ``maColor``, ``roundedOHLC()``, ``pivotHi()``.
 - All caps ``SNAKE_CASE`` for constants: ``BULL_COLOR``, ``BEAR_COLOR``, ``MAX_LOOKBACK``.
 - The use of qualifying suffixes when it provides valuable clues to the nature of the variable: ``maShowInput``, ``bearColor``, ``bearColorInput``, ``volumesArray``, ``maPlotID``, ``resultsTable``, ``levelsColorArray``.
+
 
 
 Script organization
@@ -53,33 +53,36 @@ The Pine compiler is quite forgiving of the positioning of specific statements o
 
 <license>
 ^^^^^^^^^
-If you publish your open-source scripts publicly on TradingView (scripts can also be published privately), your open-source code is by default protected by the Mozilla license. You may choose any other license you prefer.
+If you publish your open-source scripts publicly on TradingView (scripts can also be published privately), 
+your open-source code is by default protected by the Mozilla license. You may choose any other license you prefer.
 
-The reuse of code from those scripts is governed by our `House Rules on Script Publishing <https://www.tradingview.com/house-rules/?solution=43000590599>`__ which preempt the author's license. Because these rules require permission from the author before one can reuse his code in other public scripts, authors who do not wish to receive requests for reuse may find it useful to mention their preference in the license section, e.g.,::
+The reuse of code from those scripts is governed by our `House Rules on Script Publishing <https://www.tradingview.com/house-rules/?solution=43000590599>`__ 
+which preempt the author's license.
 
-    // REUSING THIS CODE: You are welcome to reuse this code without permission. Credits are appreciated.
-
-or::
-
-    // REUSING THIS CODE: You are welcome to reuse this code without permission, including in closed-source publications. Credits are always appreciated.
 
 
 <version>
 ^^^^^^^^^
+
 This is the compiler directive defining the version of Pine the script will use. If none is present, v1 is used. For v5, use::
 
     //@version=5
 
 
+
 <indicator/strategy/library_declaration_statement>
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This is the call to `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__, `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__ or  `library() <https://www.tradingview.com/pine-script-reference/v5/#fun_library>`__, which defines the type of your script.
+This is the call to `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__, 
+`strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__ or  
+`library() <https://www.tradingview.com/pine-script-reference/v5/#fun_library>`__, which defines the type of your script.
+
 
 
 <import_statements>
 ^^^^^^^^^^^^^^^^^^^
 If your script uses one or more Pine :ref:`here <PageLibraries>`, your `import <https://www.tradingview.com/pine-script-reference/v5/#op_import>`__ statements belong here.
+
 
 
 <constant_declarations>
@@ -89,28 +92,41 @@ What we consider to be constant definitions to be included in this section — a
 - Initialized using a literal (e.g., ``100`` or ``"AAPL"``) or a built-in of "const" form (e.g., ``color.green``)
 - Whose value does not change during the script's execution
 
-Literals used in more than one place in a script should always be used to initialize a constant. Using the constant rather than the literal makes it more readable if it is given a meaningful name, and the practice makes code easier to maintain. Even though the quantity of milliseconds in a day is unlikely to change in the future, ``MS_IN_1D`` is more meaningful than ``1000 * 60 * 60 * 24``.
+Literals used in more than one place in a script should always be used to initialize a constant. 
+Using the constant rather than the literal makes it more readable if it is given a meaningful name, and the practice makes code easier to maintain. 
+Even though the quantity of milliseconds in a day is unlikely to change in the future, ``MS_IN_1D`` is more meaningful than ``1000 * 60 * 60 * 24``.
 
 Note that:
 
-- Constants only used in the local block of a function or `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__, `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__, etc., statement for example, can be declared in that local block.
+- Constants only used in the local block of a function or `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__, 
+  `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__, etc., statement for example, can be declared in that local block.
 - Using the `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ to initialize constants is unnecessary, and will incur a minor penalty on script performance.
+
 
 
 <inputs>
 ^^^^^^^^
 
-It is **much** easier to read scripts when all their inputs are in the same code section. Placing that section at the beginning of the script also corresponds to how they are processed, i.e., before the script begins execution.
+It is **much** easier to read scripts when all their inputs are in the same code section. 
+Placing that section at the beginning of the script also corresponds to how they are processed, i.e., before the script begins execution.
 
+
+
+.. _PageStyleGuide_FunctionDeclarations:
 
 <function_declarations>
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 All user-defined functions must be defined in the script's global scope; nested function definitions are not allowed in Pine.
 
-Optimal function design should minimize the use of global variables in the function's scope, as they undermine function portability. When it cannot be avoided, those functions must follow the global variable declarations in the code, which entails they cannot always be placed in the <function_declarations> section. Such dependencies on global variables should ideally be documented in the function's comments.
+Optimal function design should minimize the use of global variables in the function's scope, as they undermine function portability. 
+When it cannot be avoided, those functions must follow the global variable declarations in the code, which entails they cannot always be placed in the <function_declarations> section. 
+Such dependencies on global variables should ideally be documented in the function's comments.
 
-It will also help readers if you document the function's objective, parameters and result. The same syntax used in :ref:`libraries <PageLibraries>` can be used to document your functions. This can make it easier to port your functions to a library should you ever decide to do so. Placing the documentation inside the function, as opposed to outside of it as is done in libraries, will prevent confusion::
+It will also help readers if you document the function's objective, parameters and result. 
+The same syntax used in :ref:`libraries <PageLibraries>` can be used to document your functions. 
+This can make it easier to port your functions to a library should you ever decide to do so. 
+Placing the documentation inside the function, as opposed to outside of it as is done in libraries, will prevent confusion::
 
 
     //@version=5
@@ -135,10 +151,15 @@ It will also help readers if you document the function's objective, parameters a
         label.new(bar_index, na, yloc = yloc.abovebar, style = label.style_arrowup, size = getSize(sizeInput))
 
 
+
 <calculations>
 ^^^^^^^^^^^^^^
 
-This is where the script's core calculations and logic should be placed. Code can be easier to read when variable declarations are placed near the code segment using the variables. Some coders prefer to place all their non-constant variable declarations at the beginning of this section, which is not always possible for all variables, as some may require some calculations to have been executed before their declaration.
+This is where the script's core calculations and logic should be placed. 
+Code can be easier to read when variable declarations are placed near the code segment using the variables. 
+Some coders prefer to place all their non-constant variable declarations at the beginning of this section, 
+which is not always possible for all variables, as some may require some calculations to have been executed before their declaration.
+
 
 
 <strategy_calls>
@@ -147,11 +168,13 @@ This is where the script's core calculations and logic should be placed. Code ca
 Strategies are easier to read when strategy calls are grouped in the same section of the script.
 
 
+
 <plots>
 ^^^^^^^
 
 This section should ideally include all the statements producing the script's visuals, whether they be plots, drawings, background colors, candle-plotting, etc. 
 See the User Manual's section on :ref:`here <PageColors_ZIndex>` for more information on how the relative depth of visuals is determined.
+
 
 
 <alerts>
@@ -164,7 +187,8 @@ Alert code will usually require the script's calculations to have executed befor
 Spacing
 -------
 
-A space should be used on both sides of all operators, except unary operators (``-1``). A space is also recommended after all commas and when using named function arguments, as in ``plot(series = close)``::
+A space should be used on both sides of all operators, except unary operators (``-1``). 
+A space is also recommended after all commas and when using named function arguments, as in ``plot(series = close)``::
 
     a = close > open ? 1 : -1
     var newLen = 2
@@ -179,7 +203,9 @@ A space should be used on both sides of all operators, except unary operators (`
 Line Wrapping
 -------------
 
-Line wrapping can make long lines easier to read. Line wraps are defined by using an indentation level that is not a multiple of four, as four spaces or a tab are used to define local blocks. Here we use two spaces::
+Line wrapping can make long lines easier to read. 
+Line wraps are defined by using an indentation level that is not a multiple of four, as four spaces or a tab are used to define local blocks. 
+Here we use two spaces::
 
     plot(
       series = close,
@@ -193,7 +219,8 @@ Line wrapping can make long lines easier to read. Line wraps are defined by usin
 Collapsible code sections
 -------------------------
 
-Code sections in larger projects can be more cleanly defined using comments that make them easily identifiable and expandable/collapsible. Curly braces can be used in comments to define the beginning and end of code sections, which you can then expand or collapse using the small arrows in the Editor's left margin::
+Code sections in larger projects can be more cleanly defined using comments that make them easily identifiable and expandable/collapsible. 
+Curly braces can be used in comments to define the beginning and end of code sections, which you can then expand or collapse using the small arrows in the Editor's left margin::
 
     // ———————————————————— Constants {
     <constant_declarations>
@@ -222,7 +249,9 @@ They can make mass edits much easier using the Editor's multi-cursor feature (:k
 Explicit typing
 ---------------
 
-Including the type of variables when declaring them is not required and is usually overkill for small scripts; we rarely use it in this manual. It can be useful to make the type of a function's result clearer, and to distinguish a variable's declaration (using ``=``) from its reassignments (using ``:=``). Using explicit typing can also make it easier for readers to find their way in larger scripts. We use explicit typing in both variable declarations here::
+Including the type of variables when declaring them is not required and is usually overkill for small scripts; we rarely use it in this manual. 
+It can be useful to make the type of a function's result clearer, and to distinguish a variable's declaration (using ``=``) from its reassignments (using ``:=``). 
+Using explicit typing can also make it easier for readers to find their way in larger scripts. We use explicit typing in both variable declarations here::
 
     //@version=5
     indicator("", "", true)

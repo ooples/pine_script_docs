@@ -221,7 +221,7 @@ arrays must be checked on each bar, and there is no Pine built-in that can do th
 ---------
 
 The `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ 
-structure allows the repetitive execution of statements until a condition is true. 
+structure allows the repetitive execution of statements until a condition is false. 
 Its syntax is:
 
 .. code-block:: text

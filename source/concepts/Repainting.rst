@@ -22,8 +22,9 @@ They thus behave differently on historical and realtime bars.
 This does not necessarily make them less useful in all contexts, nor prevent knowledgeable traders from using them.
 
 Some types of repainting, like plotting in the past, can be misleading. 
-If traders understand how plots are offset in the past and exactly when they will appear in realtime, they can be useful that way, even if they repaint.
+If, however, traders understand how plots are offset in the past and exactly when they will appear in realtime, they can be useful that way, even if they repaint.
 Others types of repainting such as future leak, however, are never good because they use data that is never available in realtime. 
+
 Not **all** repainting behavior should necessarily be avoided **all the time**.
 What's important is to understand exactly how the tools you use work, or how you want the ones you design to behave.
 If you publish scripts, then your script's key limitations, which include any repainting behavior, must imperatively be mentioned to potential users.
@@ -184,7 +185,7 @@ in the cross detection logic::
     plot(ma, "MA", color.black, 2)
     bgcolor(xUp ? color.new(color.lime, 80) : xDn ? color.new(color.fuchsia, 80) : na)
 
-**Notice that all these methods have one thing in common: while they prevent repainting, 
+**Note that all these methods have one thing in common: while they prevent repainting, 
 they will also trigger signals later than repainting scripts. 
 This is an inevitable compromise if one wants to avoid repainting.
 You just can't have your cake and eat it too.**
