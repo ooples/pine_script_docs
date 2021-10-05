@@ -11,7 +11,8 @@ To Pine version 5
 Introduction
 ------------
 
-This guide documents the changes made to Pine from v4 to v5. It will guide you in the adaptation of existing Pine scripts to Pine v5. See our :ref:`Release notes <PageReleaseNotes_September2021>` for a list of the **new** features in Pine v5.
+This guide documents the **changes** made to Pine from v4 to v5. It will guide you in the adaptation of existing Pine scripts to Pine v5. 
+See our :ref:`Release notes <PageReleaseNotes_September2021>` for a list of the **new** features in Pine v5.
 
 The most frequent adaptations required to convert older scripts to v5 are:
 
@@ -19,7 +20,8 @@ The most frequent adaptations required to convert older scripts to v5 are:
 - Renaming built-in function calls to include their new namespace (e.g., `highest() <https://www.tradingview.com/pine-script-reference/v4/#fun_highest>`__ in v4 becomes `ta.highest() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}highest>`__ in v5).
 - Restructuring inputs to use the more specialized ``input.*()`` functions.
 - Eliminating uses of the deprecated ``transp`` parameter by using `color.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}new>`__ to simultaneously define color and transparency for use with the ``color`` parameter.
-- If you used the ``resolution`` and ``resolution_gaps`` parameters in v4's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__, they will require changing to ``timeframe`` and ``timeframe_gaps`` in v5's `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__.
+- If you used the ``resolution`` and ``resolution_gaps`` parameters in v4's `study() <https://www.tradingview.com/pine-script-reference/v4/#fun_study>`__, 
+  they will require changing to ``timeframe`` and ``timeframe_gaps`` in v5's `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__.
 
 
 
@@ -46,10 +48,10 @@ Remembering the new namespaces is not necessary; if you type the older name of a
 
 .. image:: images/v5_autocomplete.png
  
-The only two functions whose name changed are:
+Not counting functions moved to new namespaces, only two functions have been renamed:
 
-* ``study()`` was renamed to ``indicator()``.
-* ``tickerid()`` was renamed to ``ticker.new()``.
+* ``study()`` is now `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__.
+* ``tickerid()`` is now `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__.
 
 The full list of renamed functions and variables can be found in the :ref:`All variable, function, and parameter name changes <PageToPineVersion5_AllVariables>` section of this guide.
 
@@ -96,7 +98,9 @@ If your v4 code used a length that was "const int", "input int" or "simple int",
 Reserved keywords
 -----------------
 
-A number of words are reserved and cannot be used for variable or function names. They are: ``catch``, ``class``, ``do``, ``ellipse``, ``in``, ``is``, ``polygon``, ``range``, ``return``, ``struct``, ``text``, ``throw``, ``try``. If your v4 indicator uses any of these, rename your variable or function for the script to work in v5.
+A number of words are reserved and cannot be used for variable or function names. 
+They are: ``catch``, ``class``, ``do``, ``ellipse``, ``in``, ``is``, ``polygon``, ``range``, ``return``, ``struct``, ``text``, ``throw``, ``try``. 
+If your v4 indicator uses any of these, rename your variable or function for the script to work in v5.
 
 
 Removed \`iff()\` and \`offset()\`
@@ -215,7 +219,10 @@ In v5 we need to explictly mention the 90 transparency with the color, yielding:
 Changed the default session days for \`time()\` and \`time_close()\`
 --------------------------------------------------------------------
 
-The default set of days for ``session`` arguments used in the `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and `time_close() <https://www.tradingview.com/pine-script-reference/v5/#fun_time_close>`__ functions has changed from "23456" (Monday to Friday) to "1234567" (Sunday to Saturday)::
+The default set of days for ``session`` strings used in the `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and 
+`time_close() <https://www.tradingview.com/pine-script-reference/v5/#fun_time_close>`__ functions,
+and returned by `input.session() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}session>`__, 
+has changed from ``"23456"`` (Monday to Friday) to ``"1234567"`` (Sunday to Saturday)::
 
     // On symbols that are traded during weekends, this will behave differently in v4 and v5.
     t0 = time("1D", "1000-1200")
@@ -224,14 +231,20 @@ The default set of days for ``session`` arguments used in the `time() <https://w
     // v5 equivalent of the behavior of `t0` in v5.
     t2 = time("1D", "1000-1200:1234567")
 
-This change in behavior will not affect scripts running on conventional markets that are closed during weekends. If it is important for you to ensure your session definitions preserve their v4 behavior in v5 code, add ":23456" to your session strings.
+This change in behavior should not have much impact on scripts running on conventional markets that are closed during weekends. 
+If it is important for you to ensure your session definitions preserve their v4 behavior in v5 code, add ``":23456"`` to your session strings.
+See this manual's page on :ref:`Sessions <PageSessions>` for more information.
 
 
 
 \`strategy.exit()\` now must do something
 -----------------------------------------
 
-Gone are the days when the `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ function was allowed to loiter. Now it must actually have an effect on the strategy by using at least one of the following parameters: ``profit``, ``limit``, ``loss``, ``stop``, or one of the following pairs: ``trail_offset`` combined with either ``trail_price`` or ``trail_points``. When uses of `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ not meeting these criteria trigger an error while converting a strategy to v5, you can safely eliminate these lines, as they didn't do anything in your code anyway.
+Gone are the days when the `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ function was allowed to loiter. 
+Now it must actually have an effect on the strategy by using at least one of the following parameters: ``profit``, ``limit``, ``loss``, ``stop``, or one of the following pairs: 
+``trail_offset`` combined with either ``trail_price`` or ``trail_points``. 
+When uses of `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ not meeting these criteria trigger an error while converting a strategy to v5, 
+you can safely eliminate these lines, as they didn't do anything in your code anyway.
 
 
 
@@ -244,7 +257,9 @@ Common script conversion errors
 Invalid argument 'style'/'linestyle' in 'plot'/'hline' call
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To make this work, you need to change the "int" arguments used for the ``style`` and ``linestyle`` arguments in ``plot`` and ``hline`` for built-in constants::
+To make this work, you need to change the "int" arguments used for the ``style`` and ``linestyle`` arguments in 
+`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ and
+`hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ for built-in constants::
 
 	// Will cause an error during conversion
 	plotStyle = input(1)
@@ -497,7 +512,7 @@ No namespace change
 +------------------------------------------------------+--------------------------------------------------------+
 | ``wvad``                                             | ``ta.wvad``                                            |
 +------------------------------------------------------+--------------------------------------------------------+
-| Supporting functions and variables                                                                            |
+| Supporting functions                                                                                          |
 +------------------------------------------------------+--------------------------------------------------------+
 | ``barsince()``                                       | ``ta.barsince()``                                      |
 +------------------------------------------------------+--------------------------------------------------------+
@@ -651,8 +666,8 @@ No namespace change
 
 
 
-"str" namespace for functions that work with strings
-""""""""""""""""""""""""""""""""""""""""""""""""""""
+"str" namespace for functions that manipulate strings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 +------------------------------------------------------+--------------------------------------------------------+
 | v4                                                   | v5                                                     |

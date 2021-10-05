@@ -257,7 +257,7 @@ Mixing things up this way is not allowed::
     indicator(precision = 3, "Example") // Compilation error!
     
 **When calling Pine built-ins, it is critical to ensure that the arguments you use are of the form and type required, which will vary for each parameter.**
-To learn how to do this, one needs to understand Pine's :ref:`type system <PageTypeSytem>`.
+
+To learn how to do this, one needs to understand Pine's :ref:`type system <PageTypeSystem>`.
 The Reference Manual entry for each built-in function includes an "ARGUMENTS" section
 which lists the form-type required for the argument supplied to each of the function's parameters.
-

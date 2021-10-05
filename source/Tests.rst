@@ -83,4 +83,17 @@ Alice <-- Bob: another authentication Response
 
 Refer to the :ref:`Concepts <IndexConcepts>` section of this manual.
 
-`plotchar() <https://www.tradingview.com/pine-script-reference/|version|/#fun_plotchar>`__
+`plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__
+
+|plotchar()|
+
+|var|
+
+|var2|
+
+A sentence with box.set_rightbottom() |box.set_rightbottom()| in it.
+
+.. |plotchar()| `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__
+.. |var| `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__
+.. |var2|                   `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__
+.. |box.set_rightbottom()| `var <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_rightbottom>`__

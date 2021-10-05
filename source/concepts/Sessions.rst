@@ -13,7 +13,7 @@ Sessions
 Introduction
 ------------
 
-Sessions information is usable in two different ways in Pine:
+Session information is usable in two different ways in Pine:
 
 1. **Session strings** containing from-to start times and day information that can be used in functions
    such as `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and
@@ -22,7 +22,9 @@ Sessions information is usable in two different ways in Pine:
    The `input.session() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}session>`__ function
    provides a way to allow script users to define session values through a script's "Inputs" tab
    (see the :ref:`Session input <PageInputs_SessionInput>` section for more information).
-2. When fetching data with `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+2. **Session states** built-in variables such as `session.ismarket <https://www.tradingview.com/pine-script-reference/v5/#var_session{dot}ismarket>`__
+   can identify which session a bar belongs to.
+3. When fetching data with `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
    you can choose to return data from *regular* sessions only, or from *extended* sessions also.
    In this case, the definition of **regular and extended sessions** is that of the exchange.
    It is part of the instrument's properties — not user-defined as in point #1.
@@ -120,7 +122,11 @@ This is accomplished in Pine by using one of the following two signatures of the
 Here, we use `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__
 with a ``session`` argument to display the market's opening
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and 
-`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ values on an intraday chart::
+`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ values on an intraday chart:
+
+.. image:: images/Sessions-UsingSessionStrings-01.png
+
+::
 
     //@version=5
     indicator("Opening high/low", overlay = true)
@@ -140,8 +146,6 @@ with a ``session`` argument to display the market's opening
     plot(lo, "lo", color.fuchsia, 2, plot.style_circles)
     plot(hi, "hi", color.lime,    2, plot.style_circles)
     
-.. image:: images/Sessions-UsingSessionStrings-01.png
-
 Note that:
 
 - We use a session input to allow users to specify the time they want to detect.
@@ -163,8 +167,25 @@ Note that:
 
 
 
-Regular and extended sessions
------------------------------
+.. _PageSessions_SessionStates:
+
+Session states
+--------------
+
+Three built-in variables allow you to distinguish the type of session the current bar belongs to.
+They are only useful on intraday timeframes:
+
+- `session.ismarket <https://www.tradingview.com/pine-script-reference/v5/#var_session{dot}ismarket>`__
+  returns ``true`` when the bar belongs to regular trading hours.
+- `session.ispremarket <https://www.tradingview.com/pine-script-reference/v5/#var_session{dot}ispremarket>`__
+  returns ``true`` when the bar belongs to the extended session preceding regular trading hours.
+- `session.ispostmarket <https://www.tradingview.com/pine-script-reference/v5/#var_session{dot}ispostmarket>`__
+  returns ``true`` when the bar belongs to the extended session following regular trading hours.
+
+
+
+Using sessions with \`request.security()\`
+------------------------------------------
 
 When your TradingView account provides access to extended sessions,
 you can choose to see their bars with the "Settings/Symbol/Session" field.
@@ -174,26 +195,30 @@ There are two types of sessions:
 - **extended** (which includes pre- and post-market data).
 
 Scripts using the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
-function to access data can return extended session data, or not. This is an example where only regular session data is fetched::
+function to access data can return extended session data, or not. This is an example where only regular session data is fetched:
+
+.. image:: images/Sessions-RegularAndExtendedSessions-01.png
+
+::
 
     //@version=5
     indicator("Example 1: Regular Session Data")
     regularSessionData = request.security("NASDAQ:AAPL", timeframe.period, close, barmerge.gaps_on)
     plot(regularSessionData, style = plot.style_linebr)
 
-.. image:: images/Sessions-RegularAndExtendedSessions-01.png
-
 If you want the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call to return extended session data, 
 you must first use the `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__ function
-to build the first argument of the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call::
+to build the first argument of the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call:
+
+.. image:: images/Sessions-RegularAndExtendedSessions-02.png
+
+::
 
     //@version=5
     indicator("Example 2: Extended Session Data")
     t = ticker.new("NASDAQ", "AAPL", session.extended)
     extendedSessionData = request.security(t, timeframe.period, close, barmerge.gaps_on)
     plot(extendedSessionData, style = plot.style_linebr)
-
-.. image:: images/Sessions-RegularAndExtendedSessions-02.png
 
 Note that the previous chart's gaps in the script's plot are now filled. Also keep in mind
 that the background coloring on the chart is not produced by our example scripts;
@@ -224,7 +249,8 @@ Our first example could be rewritten as::
 
 If you want to use the same session specifications used for the chart's main
 symbol, omit the third argument in `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__; it is optional. 
-If you want your code to explicitly declare your intention, use the ``syminfo.session``
+If you want your code to explicitly declare your intention, 
+use the `syminfo.session <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}session>`__
 built-in variable. It holds the session type of the chart's main symbol::
 
     //@version=5

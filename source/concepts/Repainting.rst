@@ -256,15 +256,17 @@ This script shows a ``nonRepaintingSecurity()`` function that can be used to do 
     nonRepaintingClose = nonRepaintingSecurity(syminfo.tickerid, "1", close)
     plot(nonRepaintingClose, "Non-repainting close", color.fuchsia, 3)
 
-Another way that can be used to produce non-repainting higher timeframe data is this,
-which use an offset of ``[1]`` on the series, and ``lookahead``::
+Another way to produce non-repainting higher timeframe data is this,
+which uses an offset of ``[1]`` on the series, and ``lookahead``::
 
-    request.security(sym, tf, close[1], lookahead = barmerge.lookahead_on)
+    nonRepaintingSecurityAlternate(sym, tf, src) =>
+        request.security(sym, tf, close[1], lookahead = barmerge.lookahead_on)
 
-While it will produce the same non-repainting behavior as ``nonRepaintingSecurity()`` in realtime,
-it has the disadvantage of showing the higher timeframe values one bar earlier on historical bars.
-This may look better, but the problem is that it does not reflect its behavior in realtime.
-While the method used in ``nonRepaintingSecurity()`` is more complex, we find it more reliable.
+It will produce the same non-repainting behavior as ``nonRepaintingSecurity()``.
+Note that the ``[1]`` offset to the series and the use of ``lookahead = barmerge.lookahead_on`` are interdependent.
+One **cannot** be removed without compromising the functionality of the function.
+Also note that occasional one-bar variations between when the ``nonRepaintingSecurity()`` and ``nonRepaintingSecurityAlternate()``
+values come in on historical bars are to be expected.
 
 
 
