@@ -12,7 +12,7 @@ Introduction
 ------------
 
 This guide documents the **changes** made to Pine from v4 to v5. It will guide you in the adaptation of existing Pine scripts to Pine v5. 
-See our :ref:`Release notes <PageReleaseNotes_September2021>` for a list of the **new** features in Pine v5.
+See our :ref:`Release notes <PageReleaseNotes_October2021>` for a list of the **new** features in Pine v5.
 
 The most frequent adaptations required to convert older scripts to v5 are:
 
@@ -44,7 +44,7 @@ For clarity and consistency, many built-in functions and variables were renamed 
 The inclusion of v4 function names in a new namespace is the cause of most changes. 
 For example, the `sma() <https://www.tradingview.com/pine-script-reference/v4/#fun_sma>`__ function in v4 is moved to the ``ta.`` namespace in v5: 
 `ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__. 
-Remembering the new namespaces is not necessary; if you type the older name of a function without its namespace in the Editor and press the 'Autocomplete' hotkey (:kbd:`Ctrl` + :kbd:`Space`, or :kbd:`Cmd` + :kbd:`Space` on MacOS), a popup showing matching suggestions appears:
+Remembering the new namespaces is not necessary; if you type the older name of a function without its namespace in the Editor and press the 'Auto-complete' hotkey (:kbd:`Ctrl` + :kbd:`Space`, or :kbd:`Cmd` + :kbd:`Space` on MacOS), a popup showing matching suggestions appears:
 
 .. image:: images/v5_autocomplete.png
  

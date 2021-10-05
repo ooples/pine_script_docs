@@ -11,26 +11,100 @@ Other timeframes and data
 Introduction
 ------------
 
+The functions we present here all fetch data from other sources than the chart the script is running on.
+That data can be:
+
+- From other another symbol, timeframe or context, with `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__.
+- Financial data from `FactSet <https://www.factset.com/>`__, with `request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__.
+- Dividends, earnings and splits information from the exchange, with
+  `request.dividends() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}dividends>`__,
+  `request.earnings() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}earnings>`__ or
+  `request.splits() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}splits>`__.
+- Information from the `NASDAQ Data Link (formerly Quandl) <https://data.nasdaq.com/search>`__, 
+  with  `request.quandl() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}quandl>`__.
 
 
-Timeframes
-----------
+
+Common parameters
+-----------------
+
+Most of the functions in the ``request`` namespace share some common parameters.
+Before exploring each function, let's go over their common parameters.
 
 
 
-.. _PageOtherTimeframesAndData_GapsAndLookahead:
+.. _PageOtherTimeframesAndData_Gaps:
 
-Gaps
-----
+\`gaps\`
+^^^^^^^^
 
-There are two switches that define how data requested with `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
-will be mapped to the current timeframe.
+All the ``request.*()`` functions include the ``gaps`` parameter in their signature.
+*Gaps* are `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values
+(see the :ref:`section on \`na\` <PageTypeSystem_NaValue>` if you are not familiar with it).
 
-The first one, ``gaps``, controls gaps in data. With the default value
-`barmerge.gaps_off <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}gaps_off>`__, data is
-merged continuously (without ``na`` gaps). All gaps, if any, are filled with the previous nearest non-``na`` value.
-If `barmerge.gaps_on <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}gaps_on>`__
-is used, then merged data may contain gaps in the form of ``na`` values.
+A script running on a 60min chart has access to prices such as `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
+on each bar of the chart. When retrieving data from other contexts, however, new values for that data may not be coming in for each new bar on the chart,
+every 60 minutes for example. A choice must thus be made as to how the data from the outside context will be *merged* on chart bars.
+That behavior is what the ``gaps`` parameter controls.
+
+When functions do not return a value on each of the chart bars the calling script is running on,
+one must determine if the function should return `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values in those cases,
+or the latest non-`na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ value returned by the function.
+When the default `barmerge.gaps_off <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}gaps_off>`__ argument is used,
+the function does not return gaps; it does with `barmerge.gaps_on <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}gaps_on>`__.
+
+In cases where no gaps are allowed, the last non-`na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ value
+will repeat on chart bars until a new value comes in. This shows the diffence between using gaps or not:
+
+.. image:: images/OtherTimeframesAndData-Gaps-01.png
+
+::
+
+    //@version=5
+    indicator("", "", true)
+    noGaps = request.security(syminfo.tickerid, "1", close)
+    withGaps = request.security(syminfo.tickerid, "1", close, gaps = barmerge.gaps_on)
+    plot(noGaps, "noGaps", color.blue, 3, plot.style_linebr)
+    plot(withGaps, "withGaps", color.fuchsia, 12, plot.style_linebr)
+    bgcolor(barstate.isrealtime ? #00000020 : na)
+
+Note that:
+
+- We are requesting the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ value
+  from the chart's symbol at the 1min timeframe, so we are viewing a 5sec chart to display higher timeframe values.
+- We plot both our lines using the `plot.style_linebr <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_linebr>`__ style
+  because it does not bridge over `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values,
+  like the `plot.style_line <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_line>`__ style would.
+  This way we can distinguish between bars where a value is returned, and others where `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ is returned.
+- The blue line plotting ``noGaps`` shows no gaps. We initialize ``noGaps`` using a `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+  call that does not specify a value for the ``gaps`` parameter, so the default
+  `barmerge.gaps_off <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}gaps_off>`__ is used.
+- The fuchsia line plotting ``withGaps`` shows gaps.
+- New values for the higher timeframe come in at the same time, whether we use gaps or not.
+
+
+
+.. _PageOtherTimeframesAndData_Lookahead:
+
+\`lookahead\`
+^^^^^^^^^^^^^
+
+The ``lookahead`` parameter controls whether future data is returned by the function.
+It only affects historical bars, as there are no future bars to look forward to in realtime, where the future is unknown — as it should.
+One may wonder why Pine offers the possibility to look into the future when this is not possible in real life.
+The intended use of the ``lookahead`` parameter is to allow ``request.*()`` functions to return correct information in special circumstances
+where unreliable data would otherwise be returned.
+
+.. note:: Using ``lookahead = barmerge.lookahead_on`` to access future price information on historical bars causes *future leak*, or *lookahead bias*,
+   which means your script is using future information it should **not** have access to.
+   This is usually a bad idea; using ``request.*()`` functions this way is misleading, and not allowed in script publications.
+   It is considered a serious violation, so it is your responsability, if you publish scripts, 
+   to ensure you do not mislead users of your script by using future information on historical bars.
+   While your plots on historical bars will look great because your script will magically acquire prescience (which will not reproduce in realtime),
+   you will be misleading users of your scripts — and yourself.
+   Using ``lookahead = barmerge.lookahead_on`` should be reserved to a few rare cases, 
+   such as when using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+   to fetch normal chart prices from a non-standard chart, or when using an offset to the series, as in ``close[1]``.
 
 The second switch, ``lookahead``, was added in Pine Script version
 1. The parameter has two possible values:
@@ -52,6 +126,9 @@ This example shows the difference on a 5min chart::
 
 .. image:: images/V3.png
 
+   Accordingly,  and always used function always used lookahead, which unless the series requested was offset in the past, 
+produce *future leak*, or *lookahead bias*, i.e., it was fetching data from the future, which is undesirable::
+
 The green line on the chart is the *low* price of an hourly bar that is
 requested with *lookahead on*. It's the old behavior of the security
 function. The green line based on
@@ -68,14 +145,10 @@ The fuchsia dotted line represents the beginning of real-time data. You can see 
 on real-time data, i.e., as ``barmerge.lookahead_off`` does.
 
 
+.. note:: In Pine v1 and v2, the ``security()`` did not include a ``lookahead`` parameter, but it behaved as it does in later versions of Pine
+   with ``lookahead = barmerge.lookahead_on``. This means that is was systematically using future data. 
+   v1 and v2 scripts using ``security()`` should therefore be treated with caution, unless they offset the series fetched, e.g., using ``close[1]``.
 
-.. _PageOtherTimeframesAndData_UnderstandingLookahead:
-
-\`lookahead\`
--------------
-
-In Pine v1 and v2, the ``security()`` function always used lookahead, which unless the series requested was offset in the past, 
-produce *future leak*, or *lookahead bias*, i.e., it was fetching data from the future, which is undesirable::
 
     //@version=2
     //...
@@ -114,12 +187,28 @@ realtime data, we take the *close* of the previous day without shifting the
 
 
 \`ignore_resolve_errors\`
--------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+\`currency\`
+^^^^^^^^^^^^
 
 
 
 \`request.security()\`
 ----------------------
+
+The function's signature is:
+
+.. code-block:: text
+
+    request.security(symbol, timeframe, expression, gaps, lookahead, ignore_resolve_errors, currency) → series int/float/bool/color
+
+
+
+Timeframes
+^^^^^^^^^^
 
 The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
 function enables scripts to request data from other symbols and/or timeframes than those of the active chart.
@@ -217,6 +306,16 @@ individual stocks participating in an upward or downward trend.
 
 
 
+Avoiding repainting
+^^^^^^^^^^^^^^^^^^^
+
+
+
+Returning tuples
+^^^^^^^^^^^^^^^^
+
+
+
 .. _PageOtherTimeframesAndData_RequestingDataOfALowerTimeframe:
 
 Requesting data of a lower timeframe
@@ -247,11 +346,16 @@ The next example illustrates this::
 This study plots two lines which correspond to different values of the ``lookahead`` parameter.
 The red line shows data returned by 
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ with ``lookahead = barmerge.lookahead_on``. 
-The blue line with ``lookahead=barmerge.lookahead_off``. Let's look at the *5 minutes* bar starting at 07:50.
+The blue line with ``lookahead = barmerge.lookahead_off``. Let's look at the *5 minutes* bar starting at 07:50.
 The red line at this bar has a value of 1.13151 which corresponds to the
 value of *the first of the five 1 minute bars* that fall into the time range 07:50--07:54.
 On the other hand, the blue line at the same bar has a value of 1.13121 which corresponds to
 *the last of the five 1 minute bars* of the same time range.
+
+
+
+Fetching standard prices for a non-standard chart
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 
@@ -273,8 +377,8 @@ On the other hand, the blue line at the same bar has a value of 1.13121 which co
 
 
 
-\`request.earnings()\`
-----------------------
+\`request.splits()\`
+--------------------
 
 
 

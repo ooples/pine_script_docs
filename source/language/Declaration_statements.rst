@@ -1,3 +1,18 @@
+.. _PageDeclarationStatements:
+
+Declaration statements
+======================
+
+.. contents:: :local:
+    :depth: 2
+
+
+
+Introduction
+------------
+
+
+
 \`indicator()\`
 ---------------
 
@@ -42,6 +57,18 @@ If the format is ``format.inherit`` and the ``precision`` parameter is used with
 then the study will not inherit formatting from the chart's settings and 
 the value specified will be used instead, as if ``format = format.price`` 
 had been used.
+
+
+
+\`strategy()\`
+--------------
+
+
+
+\`library()\`
+-------------
+
+
 
 .. rubric:: Footnote
 
