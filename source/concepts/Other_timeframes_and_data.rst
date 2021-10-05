@@ -42,14 +42,16 @@ All the ``request.*()`` functions include the ``gaps`` parameter in their signat
 *Gaps* are `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values
 (see the :ref:`section on \`na\` <PageTypeSystem_NaValue>` if you are not familiar with it).
 
+A script running on a 60min chart has access to prices such as `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
+on each bar of the chart. When retrieving data from other contexts, however, new values for that data may not be coming in for each new bar on the chart,
+every 60 minutes. A choice must thus be made as to how the data from the outside context will be *merged* on chart bars.
+That nehavior is what the ``gaps`` parameter controls.
+
 When functions do not return a value on each of the chart bars the calling script is running on,
 one must determine if the function should return `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values in those cases,
 or the latest non-`na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ value returned by the function.
-
 When the default `barmerge.gaps_off <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}gaps_off>`__ argument is used,
 the function does not return gaps; it does with `barmerge.gaps_on <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}gaps_on>`__.
-
-.. note:: The term *bar merge* refers to the process of *merging* data from another context on bar charts.
 
 In cases where no gaps are allowed, the last non-`na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ value
 will repeat on chart bars until a new value comes in. This shows the diffence between using gaps or not:
@@ -76,7 +78,8 @@ Note that:
   because it does not bridge over `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values,
   like the `plot.style_line <https://www.tradingview.com/pine-script-reference/v5/#var_plot{dot}style_line>`__ style would.
   This way we can distinguish between bars where a value is returned, and others where `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ is returned.
-- The blue line plotting ``noGaps`` shows no gaps.
+- The blue line plotting ``noGaps`` shows no gaps. It does not specify a value for the ``gaps`` parameter, so the default
+  `barmerge.gaps_off <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}gaps_off>`__ is used.
 - The fuchsia line plotting ``withGaps`` shows gaps.
 - New values for the higher timeframe come in at the same time, whether we use gaps or not.
 
