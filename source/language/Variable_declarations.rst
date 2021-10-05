@@ -41,7 +41,7 @@ These are all valid variable declarations. The last one requires four lines::
 
     BULL_COLOR = color.lime
     i = 1
-    len = input(20, "Length)
+    len = input(20, "Length")
     float f = 10.5
     closeRoundedToTick = math.round_to_mintick(close)
     st = ta.supertrend(4, 14)
@@ -196,7 +196,7 @@ the following declarations from our first set of examples in this page's introdu
 
     BULL_COLOR = color.lime
     i = 1
-    len = input(20, "Length)
+    len = input(20, "Length")
     float f = 10.5
     closeRoundedToTick = math.round_to_mintick(close)
     st = ta.supertrend(4, 14)
