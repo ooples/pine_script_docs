@@ -12,7 +12,7 @@ Introduction
 ------------
 
 This guide documents the **changes** made to Pine from v4 to v5. It will guide you in the adaptation of existing Pine scripts to Pine v5. 
-See our :ref:`Release notes <PageReleaseNotes_September2021>` for a list of the **new** features in Pine v5.
+See our :ref:`Release notes <PageReleaseNotes_October2021>` for a list of the **new** features in Pine v5.
 
 The most frequent adaptations required to convert older scripts to v5 are:
 

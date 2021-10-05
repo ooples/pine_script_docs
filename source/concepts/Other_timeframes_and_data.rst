@@ -13,11 +13,6 @@ Introduction
 
 
 
-Timeframes
-----------
-
-
-
 .. _PageOtherTimeframesAndData_GapsAndLookahead:
 
 Gaps
@@ -120,6 +115,10 @@ realtime data, we take the *close* of the previous day without shifting the
 
 \`request.security()\`
 ----------------------
+
+
+Timeframes
+^^^^^^^^^^
 
 The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
 function enables scripts to request data from other symbols and/or timeframes than those of the active chart.
@@ -252,6 +251,11 @@ The red line at this bar has a value of 1.13151 which corresponds to the
 value of *the first of the five 1 minute bars* that fall into the time range 07:50--07:54.
 On the other hand, the blue line at the same bar has a value of 1.13121 which corresponds to
 *the last of the five 1 minute bars* of the same time range.
+
+
+
+Fetching standard prices for a non-standard chart
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 
