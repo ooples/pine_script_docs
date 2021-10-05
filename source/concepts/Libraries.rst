@@ -182,7 +182,7 @@ To use the library we published in the previous section, our next script will re
 
     import PineCoders/AllTimeHighLow/1 as allTime
 
-As you type the user name of the library's author, you can use the Editor's "Auto-complete" hotkey (:kbd:`Ctrl` + :kbd:`Space` or :kbd:`Cmd` + :kbd:`Space` on MacOS)
+As you type the user name of the library's author, you can use the Editor's :kbd:`ctrl` + :kbd:`space` / :kbd:`cmd` + :kbd:`space` "Auto-complete" command
 to display a popup providing selections that match the available libraries:
 
 .. image:: images/Libraries-UsingALibrary-1.png
