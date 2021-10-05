@@ -284,10 +284,8 @@ Note that:
   MA type the user selects will be executing on each bar, which is a requirement for functions like
   `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__
   which require a "simple int" argument for their ``length`` parameter.
-- We do not use a catch-all clause with an ending local block introduced by ``=>``
-  in our `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ structure.
-- If no matching value is found for ``maType`` the `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
-  executes the last local block introduced by ``=>``. We generate a runtime error in that block.
+- If no matching value is found for ``maType``, the `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
+  executes the last local block introduced by ``=>``, which acts as a catch-all. We generate a runtime error in that block.
   We also end it with ``float(na)`` so the local block returns a value whose type is compatible with that of the other local blocks in the structure,
   to avoid a compilation error.
 
