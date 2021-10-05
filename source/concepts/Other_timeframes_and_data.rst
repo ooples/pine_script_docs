@@ -13,10 +13,15 @@ Introduction
 
 
 
+Common parameters
+-----------------
+
+
+
 .. _PageOtherTimeframesAndData_GapsAndLookahead:
 
 \`gaps\`
---------
+^^^^^^^^
 
 There are two switches that define how data requested with `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
 will be mapped to the current timeframe.
@@ -67,7 +72,7 @@ on real-time data, i.e., as ``barmerge.lookahead_off`` does.
 .. _PageOtherTimeframesAndData_UnderstandingLookahead:
 
 \`lookahead\`
--------------
+^^^^^^^^^^^^^
 
 In Pine v1 and v2, the ``security()`` function always used lookahead, which unless the series requested was offset in the past, 
 produce *future leak*, or *lookahead bias*, i.e., it was fetching data from the future, which is undesirable::
@@ -109,7 +114,7 @@ realtime data, we take the *close* of the previous day without shifting the
 
 
 \`ignore_resolve_errors\`
--------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 
