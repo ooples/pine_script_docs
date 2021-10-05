@@ -58,7 +58,7 @@ The local blocks in conditional structures must be indented by four spaces or a 
 An `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ 
 structure used for its side effects has the following syntax:
 
-.. code-block::
+.. code-block:: text
 
     if <expression>
         <local_block>
@@ -154,7 +154,7 @@ Note that:
 An `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ 
 structure used to return one or more values has the following syntax:
 
-.. code-block::
+.. code-block:: text
 
     [<declaration_mode>] [<type>] <identifier> = if <expression>
         <local_block>
@@ -215,7 +215,7 @@ is returned when no local block is executed. If ``close > open`` is ``false`` in
 The `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
 structure exists in two forms. One switches on the different values of a key expression:
 
-.. code-block::
+.. code-block:: text
 
     [[<declaration_mode>] [<type>] <identifier> = ]switch <expression>
         {<expression> => <local_block>}
@@ -223,7 +223,7 @@ structure exists in two forms. One switches on the different values of a key exp
 
 The other form does not use an expression as a key; it switches on the evaluation of different expressions:
 
-.. code-block::
+.. code-block:: text
 
     [[<declaration_mode>] [<type>] <identifier> = ]switch
         {<expression> => <local_block>}
@@ -240,6 +240,7 @@ where:
   It must be indented by four spaces or a tab.
 - The value assigned to the variable is the return value of the <local_block>, or 
   `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ if no local block is executed.
+- The ``=> <local_block>`` at the end allows you to specify a return value which acts as a default to be used when no other case in the structure is executed.
 
 Only one local block of a `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
 structure is executed. It is thus a *structured switch* that doesn't *fall through* cases. 
@@ -269,6 +270,9 @@ using an expression::
     	"SMA" => ta.sma(close, maLength)
     	"RMA" => ta.rma(close, maLength)
     	"WMA" => ta.wma(close, maLength)
+        => 
+            runtime.error("No matching MA type found.")
+            float(na)
     
     plot(ma)
 
@@ -282,7 +286,10 @@ Note that:
   which require a "simple int" argument for their ``length`` parameter.
 - We do not use a catch-all clause with an ending local block introduced by ``=>``
   in our `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ structure.
-
+- If no matching value is found for ``maType`` the `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
+  executes the last local block introduced by ``=>``. We generate a runtime error in that block.
+  We also end it with ``float(na)`` so the local block returns a value whose type is compatible with that of the other local blocks in the structure,
+  to avoid a compilation error.
 
 
 

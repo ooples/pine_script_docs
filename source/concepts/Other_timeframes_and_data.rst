@@ -62,13 +62,11 @@ will repeat on chart bars until a new value comes in. This shows the diffence be
 
     //@version=5
     indicator("", "", true)
-    
     noGaps = request.security(syminfo.tickerid, "1", close)
     withGaps = request.security(syminfo.tickerid, "1", close, gaps = barmerge.gaps_on)
-    
-    plot(noGaps, "noGaps1", color.new(color.blue, 60), 8)
-    plot(withGaps, "noGaps2", color.fuchsia, 8, plot.style_circles)
-    bgcolor(barstate.isrealtime ? color.new(color.silver, 80) : na)
+    plot(noGaps, "noGaps", color.blue, 3, plot.style_linebr)
+    plot(withGaps, "withGaps", color.fuchsia, 12, plot.style_linebr)
+    bgcolor(barstate.isrealtime ? #00000020 : na)
 
 Note that:
 
