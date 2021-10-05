@@ -462,6 +462,8 @@ They cannot be used in ternaries, however, because the return values of a ternar
 
 
 
+.. _PageTypeSystem_NaValue:
+
 \`na\` value
 ------------
 

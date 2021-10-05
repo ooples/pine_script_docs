@@ -27,6 +27,9 @@ The data may be:
 Common parameters
 -----------------
 
+Most of the functions in the ``request`` namespace share some common parameters.
+Before exploring each function, let's go over their common parameters.
+
 
 
 .. _PageOtherTimeframesAndData_GapsAndLookahead:
@@ -34,6 +37,23 @@ Common parameters
 \`gaps\`
 ^^^^^^^^
 
+All the ``request.*()`` functions include the ``gaps`` parameter in their signature.
+*Gaps* are `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values
+(see the :ref:`section on \`na\` <PageTypeSystem_NaValue>` if you are not familiar with it).
+
+When functions do not return a value on each of the chart bars the calling script is running on,
+one must determine if the function should return `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values in those cases,
+or the latest non-`na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ value returned by the function.
+
+When the default `barmerge.gaps_off <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}gaps_off>`__ argument is used,
+the function does not return gaps; it does with `barmerge.gaps_on <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}gaps_on>`__.
+
+In cases where no gaps are allowed, the last non-`na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ value
+will repeat on chart bars until a new value comes in. The effect is equivalent to::
+
+
+ The ``gaps`` parameter allows control over whether the function returns 
+`na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ values or not.
 There are two switches that define how data requested with `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
 will be mapped to the current timeframe.
 
@@ -229,6 +249,12 @@ The script requests two additional securities. The results of the
 requests are then used in an arithmetic formula. As a result, we have a
 stock market indicator used by investors to measure the number of
 individual stocks participating in an upward or downward trend.
+
+
+
+Avoiding repainting
+^^^^^^^^^^^^^^^^^^^
+
 
 
 
