@@ -12,12 +12,12 @@ The Pine Editor
 The Pine Editor is where you will be working on your scripts. While you can use any text editor you want to write your Pine scripts,
 using our Editor has many advantages:
 
-- It highlights your code following Pine syntax
-- It pops up syntax reminders for built-in and library functions when you hover over them
-- It provides quick access to the Pine Reference Manual popup when you :kbd:`ctrl` + :kbd:`click` / :kbd:`cmd` + :kbd:`click` on Pine keywords
-- It provides an auto-complete feature that you can activate with :kbd:`ctrl` + :kbd:`space` / :kbd:`cmd` + :kbd:`space`
-- It makes the write/compile/run cycle fast because saving a new version of a script loaded on the chart also executes it immediately
-- While not as feature-rich as the top editors out there, it provides key functionality such as auto-complete, search and replace, multi-cursor and versioning.
+- It highlights your code following Pine syntax.
+- It pops up syntax reminders for built-in and library functions when you hover over them.
+- It provides quick access to the Pine Reference Manual popup when you :kbd:`ctrl` + :kbd:`click` / :kbd:`cmd` + :kbd:`click` on Pine keywords.
+- It provides an auto-complete feature that you can activate with :kbd:`ctrl` + :kbd:`space` / :kbd:`cmd` + :kbd:`space`.
+- It makes the write/compile/run cycle fast because saving a new version of a script loaded on the chart also executes it immediately.
+- While not as feature-rich as the top editors out there, it provides key functionality such as search and replace, multi-cursor and versioning.
 
 To open the Editor, click on the "Pine Editor" tab at the bottom of your TradingView chart. This will open up the Editor's pane.
 

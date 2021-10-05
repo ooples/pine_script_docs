@@ -53,6 +53,7 @@ The Pine compiler is quite forgiving of the positioning of specific statements o
 
 <license>
 ^^^^^^^^^
+
 If you publish your open-source scripts publicly on TradingView (scripts can also be published privately), 
 your open-source code is by default protected by the Mozilla license. You may choose any other license you prefer.
 
@@ -81,12 +82,14 @@ This is the call to `indicator() <https://www.tradingview.com/pine-script-refere
 
 <import_statements>
 ^^^^^^^^^^^^^^^^^^^
+
 If your script uses one or more Pine :ref:`here <PageLibraries>`, your `import <https://www.tradingview.com/pine-script-reference/v5/#op_import>`__ statements belong here.
 
 
 
 <constant_declarations>
 ^^^^^^^^^^^^^^^^^^^^^^^
+
 What we consider to be constant definitions to be included in this section — and thus named using our ``SNAKE_CASE`` convention — are variables:
 
 - Initialized using a literal (e.g., ``100`` or ``"AAPL"``) or a built-in of "const" form (e.g., ``color.green``)
