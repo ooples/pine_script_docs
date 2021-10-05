@@ -47,7 +47,11 @@ Both share many common characteristics:
   are managed using a garbage collection mechanism which deletes the oldest ones on the chart,
   such that only the most recently displayed are visible.
 
-This script draws both lines and boxes::
+This script draws both lines and boxes:
+
+.. image:: images/LinesAndBoxes-Introduction-01.png
+
+::
 
     //@version=5
     indicator("Opening bar's range", "", true)
@@ -77,8 +81,6 @@ This script draws both lines and boxes::
         boxColor = high > hi ? color.green : low < lo ? color.red : color.silver
         box.set_bgcolor(hiLoBox, color.new(boxColor, 50))
         int(na)
-
-.. image:: images/LinesAndBoxes-Introduction-01.png
 
 Note that:
 
@@ -188,13 +190,15 @@ control the visual appearance of lines:
 
 This is how you can create lines in their simplest form. We connect the preceding bar's 
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ to the current bar's
-`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__::
+`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__:
+
+.. image:: images/LinesAndBoxes-CreatingLines-01.png
+
+::
 
     //@version=5
     indicator("", "", true)
     line.new(bar_index - 1, high[1], bar_index, low, width = 3)
-
-.. image:: images/LinesAndBoxes-CreatingLines-01.png
 
 Note that:
 
@@ -214,7 +218,11 @@ We draw a user-selected quantity of lines from the previous bar's center point b
 `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ values.
 The lines project one bar after the current bar, after having been distributed along the 
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ and
-`open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ range of the current bar::
+`open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ range of the current bar:
+
+.. image:: images/LinesAndBoxes-CreatingLines-02.png
+
+::
 
     //@version=5
     indicator("Price path projection", "PPP", true, max_lines_count = 100)
@@ -231,8 +239,6 @@ The lines project one bar after the current bar, after having been distributed a
         lineY2 := lineY2 + (lineY2 - lineY1)
         lineColor = lineY2 > lineY1 ? color.lime : color.fuchsia
         line.new(bar_index - 1, lineY1, bar_index + 1, lineY2, color = lineColor)
-
-.. image:: images/LinesAndBoxes-CreatingLines-02.png
 
 Note that:
 
@@ -282,7 +288,11 @@ where:
   `line.set_xy2() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}set_xy2>`__ change two properties, so they have two such parameters.
 
 In the next example we display a line showing the highest `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__
-value in the last ``lookbackInput`` bars. We will be using setter functions to modify an existing line::
+value in the last ``lookbackInput`` bars. We will be using setter functions to modify an existing line:
+
+.. image:: images/LinesAndBoxes-ModifyingLines-01.png
+
+::
 
     //@version=5
     MAX_BARS_BACK = 500
@@ -320,8 +330,6 @@ value in the last ``lookbackInput`` bars. We will be using setter functions to m
     
     // Show a blue dot when a new high is found.
     plotchar(newHi, "newHighFound", "•", location.top, size = size.tiny)
-
-.. image:: images/LinesAndBoxes-ModifyingLines-01.png
 
 Note that:
 
@@ -433,8 +441,11 @@ function is used to delete lines. Its syntax is:
     line.delete(id) → void
 
 To keep only a user-defined quantity of lines on the chart, one could use code like this, 
-where we are dawing a level every time RSI rises/falls for a user-defined quantity of consecutive bars::
+where we are dawing a level every time RSI rises/falls for a user-defined quantity of consecutive bars:
 
+.. image:: images/LinesAndBoxes-DeletingLines-01.png
+
+::
 
     //@version=5
     int MAX_LINES_COUNT = 500
@@ -466,8 +477,6 @@ where we are dawing a level every time RSI rises/falls for a user-defined quanti
     // Plot markers to show where our triggering conditions are `true`.
     plotchar(myRSIRises, "myRSIRises", "🠅", location.top,    color.green, size = size.tiny)
     plotchar(myRSIFalls, "myRSIFalls", "🠇", location.bottom, color.red,   size = size.tiny)
-
-.. image:: images/LinesAndBoxes-DeletingLines-01.png
 
 Note that:
 
@@ -572,13 +581,15 @@ control the visual appearance of boxes:
 ``bgcolor``
    Is the background color of the box. It defaults to `color.blue <https://www.tradingview.com/pine-script-reference/v5/#var_color{dot}blue>`__.
    
-Let's create simple boxes::
+Let's create simple boxes:
+
+.. image:: images/LinesAndBoxes-CreatingBoxes-01.png
+
+::
 
     //@version=5
     indicator("", "", true)
     box.new(bar_index, high, bar_index + 1, low, border_color = color.gray, bgcolor = color.new(color.silver, 60))
-
-.. image:: images/LinesAndBoxes-CreatingBoxes-01.png
 
 Note that:
 
@@ -618,7 +629,11 @@ and draws boxes with the `high <https://www.tradingview.com/pine-script-referenc
 `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ levels of those bars.
 If a higher volume bar comes in, the timeframe's box is redrawn using the new bar's
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and
-`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ levels::
+`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ levels:
+
+.. image:: images/LinesAndBoxes-ModifyingBoxes-01.png
+
+::
 
     //@version=5
     indicator("High volume bar boxes", "", true)
@@ -672,8 +687,6 @@ If a higher volume bar comes in, the timeframe's box is redrawn using the new ba
     box.set_right(boxDn, bar_index + 1)
     // Plot circle mark on TF changes.
     plotchar(newTF, "newTF", "•", location.top, size = size.tiny)
-
-.. image:: images/LinesAndBoxes-ModifyingBoxes-01.png
 
 Note that:
 

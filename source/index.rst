@@ -31,3 +31,94 @@ Pine Script |version| User Manual
 .. TODO: Delete gotcha - operation could not be reverted
 .. TODO: Notes about Pine souce code versioning. How to revert to any previous version
 .. TODO: Pine publishing gotcha https://jira.xtools.tv/browse/JV-193
+
+.. usrman TOC
+..
+.. •• indicates pages that will be added post-v5 rollout.
+.. -  indicates pages that must be completed before the rollout.
+.. 
+.. Welcome to Pine
+.. 
+.. Pine Primer
+..     First steps
+..     First indicator
+..     ••First strategy
+..     Next steps
+.. 
+.. Language
+..     Execution model
+..     Time series
+..     Script structure
+..     ••Declaration statements
+..     Identifiers
+..     Operators
+..     Variable declarations
+..     Conditional structures
+..     Loop structures
+..     Type system
+..     Built-ins
+..     User-defined functions
+..     ••Scopes
+..     Arrays
+..     ••Pine grammar
+.. 
+.. Concepts
+..     Alerts
+..     Backgrounds
+..     Bar states
+..     Bar coloring
+..     Bar plotting
+..     Chart information
+..     Colors
+..     Fills
+..     ••Formatting values
+..     Inputs
+..     Levels
+..     Libraries
+..     Lines and boxes
+..     Non-standard charts data
+..     -Other timeframes and data
+..     Plots
+..     Repainting
+..     Sessions
+..     Strategies
+..     Tables
+..     Text and shapes
+..     Time
+..     Timeframes
+..     ••Tools of the trade
+.. 
+.. Writing scripts
+..     ••Types of scripts
+..     ••Editor
+..     Style guide
+..     Debugging
+..     ••Optimization
+..     ••The Pine compiler
+..     ••The Pine runtime
+..     Publishing
+..     ••Limitations
+.. 
+.. FAQ
+..     ••Alerts
+..     ••Arrays
+..     ••Built-in functions
+..     ••Built-in variables
+..     ••Debugging
+..     ••Editor
+..     ••Indicators
+..     ••Math
+..     ••Labels and Lines
+..     ••Operators
+..     ••Other Timeframes
+..     ••Plotting
+..     ••Strategies
+..     ••Techniques
+..     ••Text
+..     ••Time, dates and Sessions
+.. 
+.. ••Compiler error messages
+.. ••Known issues
+.. Migration guides
+.. Release notes
+.. Where can I get more information

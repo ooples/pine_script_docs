@@ -20,7 +20,6 @@ Concepts
    Libraries
    Lines_and_boxes
    Non-standard_charts_data
-   Other_timeframes_and_data
    Plots
    Repainting
    Sessions
@@ -30,3 +29,4 @@ Concepts
    Time
    Timeframes
    
+.. Other_timeframes_and_data

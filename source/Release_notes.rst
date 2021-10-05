@@ -65,9 +65,10 @@ New variables and functions provide better script visibility on strategy informa
 - `strategy.closedtrades.exit_time() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}exit_time>`__
 - `strategy.convert_to_account() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}convert_to_account>`__
 - `strategy.convert_to_symbol() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}convert_to_symbol>`__
-- `strategy.account_currency() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}account_currency>`__
+- `strategy.account_currency <https://www.tradingview.com/pine-script-reference/v5/#var_strategy{dot}account_currency>`__
 
-New ``earnings.standardized`` constant for the ``earnings()`` function allows requesting standardized earnings data.
+A new `earnings.standardized <https://www.tradingview.com/pine-script-reference/v5/#var_earnings{dot}standardized>`__ constant for the 
+`request.earnings() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}earnings>`__ function allows requesting standardized earnings data.
 
 A v4 to v5 converter is now included in the Pine Editor. 
 See the :ref:`Migration guide to Pine v5 <PageToPineVersion5>` for more information on converting your scripts to v5.
