@@ -91,6 +91,23 @@ Note that:
 \`lookahead\`
 ^^^^^^^^^^^^^
 
+The ``lookahead`` parameter controls whether future data is returned by the function.
+It only affects historical bars, as there are no future bars to look forward to in realtime, where the future is unknown.
+One may wonder why Pine offers the possibility to look into the future when this is not possible in real life.
+The intended use of the ``lookahead`` parameter is to allow ``request.*()`` functions to return correct information in special circumstances
+where unreliable data would otherwise be returned.
+
+.. note:: Using ``lookahead = barmerge.lookahead_on`` to access future price information on historical bars causes *future leak*, or *lookahead bias*,
+   which means your script is using future information it should **not** have access to.
+   This is usually a bad idea; using ``request.*()`` functions this way is misleading, and not allowed in script publications.
+   It is considered a serious violation, so it is your responsability, if you publish scripts, 
+   to ensure you do not mislead users of your script by using future information on historical bars.
+   While your plots on historical bars will look great because your script will magically acquire prescience (which will not reproduce in realtime),
+   you will be misleading users of your scripts — and yourself.
+   Using ``lookahead = barmerge.lookahead_on`` should be reserved to a few rare cases, 
+   such as when using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+   to fetch normal chart prices from a non-standard chart, or when using an offset to the series, as in ``close[1]``.
+
 The second switch, ``lookahead``, was added in Pine Script version
 1. The parameter has two possible values:
 `barmerge.lookahead_off <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}lookahead_off>`__
