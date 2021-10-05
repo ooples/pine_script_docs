@@ -15,8 +15,8 @@ Introduction
 
 .. _PageOtherTimeframesAndData_GapsAndLookahead:
 
-Gaps
-----
+\`gaps\`
+--------
 
 There are two switches that define how data requested with `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
 will be mapped to the current timeframe.
@@ -246,7 +246,7 @@ The next example illustrates this::
 This study plots two lines which correspond to different values of the ``lookahead`` parameter.
 The red line shows data returned by 
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ with ``lookahead = barmerge.lookahead_on``. 
-The blue line with ``lookahead=barmerge.lookahead_off``. Let's look at the *5 minutes* bar starting at 07:50.
+The blue line with ``lookahead = barmerge.lookahead_off``. Let's look at the *5 minutes* bar starting at 07:50.
 The red line at this bar has a value of 1.13151 which corresponds to the
 value of *the first of the five 1 minute bars* that fall into the time range 07:50--07:54.
 On the other hand, the blue line at the same bar has a value of 1.13121 which corresponds to
