@@ -6,7 +6,7 @@
    :width: 50
    :height: 50
 
-
+|TVLogoHeader|
 
 Header 1
 ========
