@@ -100,3 +100,5 @@ A sentence with box.set_rightbottom() |box.set_rightbottom()| in it.
 
 .. image:: images/TradingView-Logo-Block.svg
     :height: 100px
+
+.. image:: images/TradingView-Logo-Block.svg
