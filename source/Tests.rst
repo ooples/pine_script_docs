@@ -1,6 +1,6 @@
 .. _PageTests:
 
-.. image:: images/Pine_Script_logo_small.png
+.. |TVLogoHeader| image:: images/Pine_Script_logo_small.png
    :alt: Pine Script
    :align: right
    :width: 50
