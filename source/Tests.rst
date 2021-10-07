@@ -99,3 +99,4 @@ A sentence with box.set_rightbottom() |box.set_rightbottom()| in it.
 .. |box.set_rightbottom()| `var <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_rightbottom>`__
 
 .. image:: images/TradingView-Logo-Block.svg
+    :height: 100px
