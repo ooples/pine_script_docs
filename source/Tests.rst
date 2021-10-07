@@ -1,15 +1,20 @@
 .. _PageTests:
 
-=====
-Tests
-=====
+.. image:: images/Pine_Script_logo_small.png
+   :alt: Pine Script
+   :align: right
+   :width: 50
+   :height: 50
 
-Then use underlining only:
 
-.. _header1:
 
 Header 1
 ========
+
+Texttext Texttext Texttext Texttext Texttext Texttext Texttext Texttext Texttext 
+Texttext Texttext Texttext Texttext Texttext Texttext Texttext Texttext 
+Texttext Texttext Texttext Texttext Texttext Texttext Texttext Texttext Texttext Texttext Texttext 
+
 
 Header 1.1
 ----------
