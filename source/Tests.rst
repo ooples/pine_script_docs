@@ -1,11 +1,5 @@
 .. _PageTests:
 
-.. image:: /source/images/Pine_Script_logo_small.png
-   :alt: Pine Script
-   :align: right
-   :width: 50
-   :height: 50
-
 .. |TVLogoHeader| image:: /source/images/Pine_Script_logo_small.png
    :alt: Pine Script
    :align: right
