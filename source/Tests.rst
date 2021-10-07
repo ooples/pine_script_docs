@@ -102,3 +102,7 @@ A sentence with box.set_rightbottom() |box.set_rightbottom()| in it.
     :height: 100px
     :align: center
 
+.. image:: images/TradingView-Logo-Block.svg
+    :width: 400px
+    :align: center
+
