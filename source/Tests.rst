@@ -119,8 +119,7 @@ and click on "View page source".
     :width: 400px
     :align: center
 
-TIP: To look at the reST source of this rendered page, scroll to the bottom
-and click on "View page source".
+Root path name
 
 .. image:: /images/TradingView-Logo-Block.svg
 
