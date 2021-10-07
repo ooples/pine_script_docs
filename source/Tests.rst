@@ -98,6 +98,8 @@ A sentence with box.set_rightbottom() |box.set_rightbottom()| in it.
 .. |var2|                   `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__
 .. |box.set_rightbottom()| `var <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_rightbottom>`__
 
+.. |TVLogo| image::images/TradingView-Logo-Block.svg
+
 TIP: To look at the reST source of this rendered page, scroll to the bottom
 and click on "View page source".
 
@@ -118,3 +120,6 @@ and click on "View page source".
 .. image:: images/TradingView-Logo-Block.svg
 
 
+Macro here:
+
+|TVLogo|
