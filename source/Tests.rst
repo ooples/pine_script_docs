@@ -5,6 +5,7 @@
    :align: right
    :width: 50
    :height: 50
+
 .. |TVLogoFooter| image:: /source/images/TradingView-Logo-Block.svg
 
 |TVLogoHeader|
