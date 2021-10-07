@@ -121,7 +121,7 @@ and click on "View page source".
 
 Root path name
 
-.. image:: /images/TradingView-Logo-Block.svg
+.. image:: /source/images/TradingView-Logo-Block.svg
 
 
 Macro here:
