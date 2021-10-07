@@ -5,6 +5,7 @@
    :align: right
    :width: 50
    :height: 50
+.. |TVLogoFooter| image:: /source/images/TradingView-Logo-Block.svg
 
 |TVLogoHeader|
 
@@ -102,8 +103,6 @@ A sentence with box.set_rightbottom() |box.set_rightbottom()| in it.
 .. |var| `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__
 .. |var2|                   `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__
 .. |box.set_rightbottom()| `var <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_rightbottom>`__
-
-.. |TVLogo| image:: /source/images/TradingView-Logo-Block.svg
 
 TIP: To look at the reST source of this rendered page, scroll to the bottom
 and click on "View page source".
