@@ -87,7 +87,7 @@ Function definitions in libraries are slightly different than those of user-defi
 
 In library function signatures (their first line):
 
-- The `export <https://demo-alerts.xstaging.tv/pine-script-reference/v5/#op_export>`__ keyword is mandatory.
+- The `export <https://www.tradingview.com/pine-script-reference/v5/#op_export>`__ keyword is mandatory.
 - The type of argument expected for each parameter must be explicitly mentioned.
 - A `simple <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ or `series <https://www.tradingview.com/pine-script-reference/v5/#op_series>`__ form modifier can restrict the allowable forms of arguments (the next section explains their use).
 
