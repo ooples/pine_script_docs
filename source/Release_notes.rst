@@ -94,7 +94,7 @@ September 2021
 ---------
 New parameter has been added for the ``dividends()``, ``earnings()``, ``financial()``, ``quandl()``, ``security()``, and ``splits()`` functions:
 
-* ``ignore_resolve_errors`` - determines the behavior of the function if the specified symbol is not found: if ``false``, the script will halt and return a runtime error; if ``true``, the function will return ``na`` and execution will continue.
+* ``ignore_invalid_symbol`` - determines the behavior of the function if the specified symbol is not found: if ``false``, the script will halt and return a runtime error; if ``true``, the function will return ``na`` and execution will continue.
 
 
 July 2021
