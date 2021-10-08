@@ -1,15 +1,22 @@
 .. _PageTests:
 
-=====
-Tests
-=====
+.. |TVLogoHeader| image:: /source/images/Pine_Script_logo_small.png
+   :alt: Pine Script
+   :align: right
+   :width: 50
+   :height: 50
 
-Then use underlining only:
+.. |TVLogoFooter| image:: /source/images/TradingView-Logo-Block.svg
 
-.. _header1:
+|TVLogoHeader|
 
 Header 1
 ========
+
+Texttext Texttext Texttext Texttext Texttext Texttext Texttext Texttext Texttext 
+Texttext Texttext Texttext Texttext Texttext Texttext Texttext Texttext 
+Texttext Texttext Texttext Texttext Texttext Texttext Texttext Texttext Texttext Texttext Texttext 
+
 
 Header 1.1
 ----------
@@ -97,3 +104,26 @@ A sentence with box.set_rightbottom() |box.set_rightbottom()| in it.
 .. |var| `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__
 .. |var2|                   `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__
 .. |box.set_rightbottom()| `var <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_rightbottom>`__
+
+TIP: To look at the reST source of this rendered page, scroll to the bottom
+and click on "View page source".
+
+.. image:: images/TradingView-Logo-Block.svg
+    :height: 100px
+    :align: right
+
+TIP: To look at the reST source of this rendered page, scroll to the bottom
+and click on "View page source".
+
+.. image:: images/TradingView-Logo-Block.svg
+    :width: 400px
+    :align: center
+
+Root path name
+
+.. image:: /source/images/TradingView-Logo-Block.svg
+
+
+Macro here:
+
+|TVLogo|
