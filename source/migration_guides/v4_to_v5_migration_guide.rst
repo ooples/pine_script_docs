@@ -292,7 +292,7 @@ See the :ref:`Some function parameters now require built-in arguments <PageToPin
 section of this guide for more information.
 
 
-Undeclared identifier 'input.%input_name%'
+Undeclated identifier 'input.%input_name%'
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To fix this issue, remove the ``input.*`` constants from your code::
