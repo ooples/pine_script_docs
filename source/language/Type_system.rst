@@ -6,7 +6,6 @@ Type system
 .. contents:: :local:
     :depth: 3
 
-.. include:: <isonum.txt>
 
 
 Introduction
@@ -66,12 +65,16 @@ The Pine **types** are:
 - "void"
 - tuples
 
-Each type refers to the nature of the value contained in a variable: ``1`` is of type "int", ``1.0`` is of type "float", ``"AAPL"`` is of type "string", etc.
+Each fundamental type refers to the nature of the value contained in a variable: ``1`` is of type "int", ``1.0`` is of type "float", ``"AAPL"`` is of type "string", etc.
+The special types all contain IDs referring to an object of the type's name, e.g., a variable of type "label" contains an ID referring to a label, and so on.
+The "void" type means no value is returned.
+Tuples are a syntactic arrangement of variables, e.g., ``[macdLine, signalLine, histLine]``.
 
-The Pine compiler can automatically convert some types into others when a value is not of the required type. The auto-casting rules are: **int** |rarr| **float** |rarr| **bool**. 
+The Pine compiler can automatically convert some types into others when a value is not of the required type. The auto-casting rules are: **int** 🠆 **float** 🠆 **bool**. 
 See the :ref:`Type casting <PageTypeSystem_TypeCasting>` section of this page for more information on type casting.
 
-Except in library function signatures, Pine forms are implicit in code; they are never declared because they are always determined by the compiler. Types, however, can be specified when declaring variables, e.g.::
+Except in library function signatures, Pine forms are implicit in code; they are never declared because they are always determined by the compiler. 
+Types, however, can be specified when declaring variables, e.g.::
 
     //@version=5
     indicator("", "", true)
@@ -574,7 +577,7 @@ Type casting
 ------------
 
 There is an automatic type-casting mechanism in Pine which can *cast* (or convert) certain types to another. 
-The auto-casting rules are: **int** |rarr| **float** |rarr| **bool**, which means that when a "float" is required, an "int" can be used in its place, 
+The auto-casting rules are: **int** 🠆 **float** 🠆 **bool**, which means that when a "float" is required, an "int" can be used in its place, 
 and when a "bool" value is required, an "int" or "float" value can be used in its place.
 
 See auto-casting in action in this code::
