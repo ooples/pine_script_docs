@@ -73,7 +73,7 @@ Tuples are a syntactic arrangement of variables, e.g., ``[macdLine, signalLine, 
 The Pine compiler can automatically convert some types into others when a value is not of the required type. The auto-casting rules are: **int** 🠆 **float** 🠆 **bool**. 
 See the :ref:`Type casting <PageTypeSystem_TypeCasting>` section of this page for more information on type casting.
 
-Except in library function signatures, Pine forms are implicit in code; they are never declared because they are always determined by the compiler. 
+Except in function signatures, Pine forms are implicit in code; they are never declared because they are always determined by the compiler. 
 Types, however, can be specified when declaring variables, e.g.::
 
     //@version=5
