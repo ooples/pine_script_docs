@@ -317,7 +317,7 @@ Note that:
   The fact that only **one** local block of the `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
   structure is ever executed is thus not an issue for us.
 - We evaluate the calls to `ta.crossover() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}crossover>`__
-  and `ta.crossunder() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}crossover>`__ **prior** to entry in the
+  and `ta.crossunder() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}crossunder>`__ **prior** to entry in the
   `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ structure. 
   Not doing so, as in the following example, would prevent the functions to be executed on each bar, 
   which would result in a compiler warning and erratic behavior::
