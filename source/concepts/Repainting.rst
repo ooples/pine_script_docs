@@ -261,7 +261,7 @@ Another way to produce non-repainting higher timeframe data is this,
 which uses an offset of ``[1]`` on the series, and ``lookahead``::
 
     nonRepaintingSecurityAlternate(sym, tf, src) =>
-        request.security(sym, tf, close[1], lookahead = barmerge.lookahead_on)
+        request.security(sym, tf, src[1], lookahead = barmerge.lookahead_on)
 
 It will produce the same non-repainting behavior as ``nonRepaintingSecurity()``.
 Note that the ``[1]`` offset to the series and the use of ``lookahead = barmerge.lookahead_on`` are interdependent.

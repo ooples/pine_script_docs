@@ -15,13 +15,13 @@ Pine libraries are publications containing functions that can be reused in Pine 
 They are useful to define frequently-used functions so their source code does not have to be included in every script where they are needed.
 
 A library must be published (privately or publicly) before it can be used in another script. All libraries are published open-source. 
-Public scripts can only use public libraries. Private scripts or personal scripts saved in the Pine Editor can use public or private libraries. 
+Public scripts can only use public libraries and they must be open-source. 
+Private scripts or personal scripts saved in the Pine Editor can use public or private libraries. 
 A library can use other libraries, or even previous versions of itself.
 
 Library programmers should be familiar with Pine's typing nomenclature, scopes and user-defined functions. 
 If you need to brush up on Pine forms and types, see the User Manual's page on the :ref:`Type system <PageTypeSystem>`. 
 For more information on user-defined functions and scopes, see the :ref:`User-defined functions <PageUserDefinedFunctions>` page.
-
 
 
 
@@ -99,6 +99,7 @@ In library function code:
 Library functions always return a result that is either of "simple" or "series" form. You cannot use them to calculate values where "const" or "input" forms are required, as is the case with some Pine built-in function arguments. For example, a library function cannot be used to calculate an argument for the ``show_last`` parameter in a `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call, because an "input int" argument is required for ``show_last``.
 
 
+
 Argument form control
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -126,7 +127,6 @@ One can also use the `series <https://www.tradingview.com/pine-script-reference/
 
 
 
-
 Publishing a library
 --------------------
 
@@ -151,14 +151,16 @@ The intended users of public libraries being other Pine coders; the better you e
 House Rules
 ^^^^^^^^^^^
 
-Public libraries are considered public domain code in our `House Rules on Script Publishing <https://www.tradingview.com/house-rules/?solution=43000590599>`__, which entails that, contrary to open-source indicators and strategies, permission is **not** required from their author if you reuse their functions in your open-source scripts. If you intend to reuse a public library's functions in a public, closed-source publication (protected or invite-only), explicit permission for reuse in that form **is** required from its author.
+Pine libraries are considered public domain code in our `House Rules on Script Publishing <https://www.tradingview.com/house-rules/?solution=43000590599>`__, 
+which entails that, contrary to open-source indicators and strategies, permission is **not** required from their author if you reuse their functions in your open-source scripts. 
+If you intend to reuse code from a Pine library's functions in a public, closed-source publication (protected or invite-only), explicit permission for reuse in that form **is** required from its author.
 
 With the provision that public Pine libraries are considered to be "public domain", our House Rules on the reuse of open-source Pine scripts apply to them:
 
-- You must obtain permission from the original author, unless the original code meets our "public domain" criteria.
-- You must credit the author in your publication's description. It is also good form to credit in open-source comments.
+- You must credit the author in your publication’s description. It is also good form to credit in open-source comments.
 - You must make significant improvements to the original code base, and it must account for a small proportion of your script.
-- Your script must also be published open-source, unless explicit permission to that effect was granted by the original author, or unless the reused code is considered public domain AND it constitutes an insignificant part of your codebase.
+- Your script must also be published open-source, unless explicit permission to that effect was granted by the original author, 
+  or unless the reused code is considered public domain AND it constitutes an insignificant part of your codebase.
 
 
 
@@ -176,7 +178,9 @@ Using a library from another script (which can be an indicator, a strategy or an
 where:
 
 - The <username>/<libraryName>/<libraryVersion> path will uniquely identify the library.
-- The ``as <alias>`` part is optional. When used, it defines the namespace that will refer to the library's functions. For example, if you import a library using the ``allTime`` alias as we do in the example below, you will refer to that library's functions as ``allTime.<function_mame>()``. When no alias is defined, the library's name becomes its namespace.
+- The ``as <alias>`` part is optional. When used, it defines the namespace that will refer to the library's functions. 
+  For example, if you import a library using the ``allTime`` alias as we do in the example below, you will refer to that library's functions as ``allTime.<function_mame>()``. 
+  When no alias is defined, the library's name becomes its namespace.
 
 To use the library we published in the previous section, our next script will require an `import <https://www.tradingview.com/pine-script-reference/v5/#op_import>`__ statement::
 
