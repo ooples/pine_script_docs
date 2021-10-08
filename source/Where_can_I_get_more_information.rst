@@ -29,7 +29,7 @@ Where can I get more information?
 External resources
 ------------------
 
-- The `PineCoders <https://www.tradingview.com/u/PineCoders/#published-scripts>`__` account on TradingView publishes useful information for Pine coders.
+- The `PineCoders <https://www.tradingview.com/u/PineCoders/#published-scripts>`__ account on TradingView publishes useful information for Pine coders.
   They also have content on their `website <https://www.pinecoders.com/>`__.
 - `Kodify <https://kodify.net/tradingview-programming-articles>`__ has TradingView tutorials on various topics for beginners and more experienced coders alike.
   Topics include plotting, alerts, strategy orders, and complete example indicators and strategies.
