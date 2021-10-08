@@ -5,9 +5,8 @@ Where can I get more information?
 
 ..    include:: <isonum.txt>
 
-* Additional descriptions of all built-in operators, variables,
-  functions and annotation functions can be found in the
-  `Pine Script Reference <https://www.tradingview.com/pine-script-reference/v5/>`__.
+* A description of all the Pine operators, variables and functions can be found in the
+  `Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__.
 
 * Use the code from one of TradingView's built-in scripts to start from. Open a new chart and click the
   *Pine Editor* button on the toolbar. Once in the editor
@@ -22,15 +21,17 @@ Where can I get more information?
   Script (as well as other features) is regularly published on
   `TradingView's blog <https://www.tradingview.com/blog/en/category/market-analysis/pine/>`__.
 
-* TradingView's *Public Library* contains all user-published scripts. All
-  published scripts are also listed in the `Scripts <https://www.tradingview.com/script/>`__ section
-  of the tradingview.com home page and in the *Indicators* |rarr| *Public Library* dialog box.
+* TradingView's `Public Library <https://www.tradingview.com/script/>`__ contains all user-published scripts. 
+  They can also be accessed from charts using the "Indicators & Strategies" button and the "Public Library" tab of the script searching dialog box.
+
+
 
 External resources
 ------------------
 
-- `PineCoders <https://pinecoders.com>`__ publishes useful information for Pine coders.
+- The `PineCoders <https://www.tradingview.com/u/PineCoders/#published-scripts>`__` account on TradingView publishes useful information for Pine coders.
+  They also have content on their `website <https://www.pinecoders.com/>`__.
 - `Kodify <https://kodify.net/tradingview-programming-articles>`__ has TradingView tutorials on various topics for beginners and more experienced coders alike.
   Topics include plotting, alerts, strategy orders, and complete example indicators and strategies.
 - `Backtest Rookies <https://backtest-rookies.com/category/tradingview>`__ publishes good quality blog articles focusing on realizing specific tasks in Pine.
-- There is a Pine Script community growing on `StackOverflow <https://stackoverflow.com/questions/tagged/pine-script>`__ where you can ask questions. See questions tagged with *pine-script*.
+- You can ask questions about programming in Pine in the ``[pine-script]`` tag on `StackOverflow <https://stackoverflow.com/questions/tagged/pine-script>`__.
