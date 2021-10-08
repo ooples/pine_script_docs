@@ -6,21 +6,55 @@ User-defined functions
 .. contents:: :local:
     :depth: 2
 
+
+
+Introduction
+------------
+
 User-defined functions are functions that you write, as opposed to the built-in functions in Pine. 
-User-defined functions are useful to define calculations that you must do repetitevely, or that you want to isolate from your script's main section of calculations. 
+They are useful to define calculations that you must do repetitevely, or that you want to isolate from your script's main section of calculations. 
 Think of user-defined functions as a way to extend the capabilities of Pine, when no built-in function will do what you need.
+
+You can write your functions in two ways:
+
+- In a single line, when they are simple, or
+- On multiple lines
+
+Functions can be located in two places:
+
+- If a function is only used in one script, you can include it in the script where it is used.
+  See our :ref:`Style guide <PageStyleGuide_FunctionDeclarations>` for recommendations on where to place functions in your script.
+- You can create a :ref:`Pine library <PageLibraries>` to include your functions, which makes them reusable in other scripts without having to copy their code.
+  Distinct requirements exist for library functions. They are explained in the page on :ref:`libraries <PageLibraries>`.
+
+Whether they use one line or multiple lines, user-defined functions have the following characteristics:
+
+- They cannot be embedded. All functions are defined in the script's global scope.
+- They do not support recursion. It is **not allowed** for a function to call itself from within its own code.
+- The type of the value returned by a function is determined automatically and depends on the type of arguments used in each particular function call.
+- Each function call 
+
 
 
 
 Single-line functions
 ---------------------
 
-Simple functions can often be written in one line. This
-is the syntax of single-line functions:
+Simple functions can often be written in one line. This is the formal definition of single-line functions:
 
 .. code-block:: text
 
-    <identifier>(<list of parameters>) => <expression>
+    <function_declaration>
+        <identifier>(<parameter_list>) => <return_value>
+
+    <parameter_list>
+        {<parameter_definition>{, <parameter_definition>}}
+
+    <parameter_definition>
+        [<identifier> = <default_value>]
+
+    <return_value>
+        <statement> | <expression> | <tuple>
 
 Here is an example::
 
@@ -32,13 +66,9 @@ After the function ``f()`` has been declared, it's possible to call it using dif
     b = f(2, 2)
     c = f(open, 2)
 
-The type of the value returned by function ``f()`` is determined automatically
-and depends on the type of the arguments used in each particular function call. In the example above, the
-type of variable ``a`` is *series* because the arguments are both *series*. The type of variable ``b`` is
-*integer* because arguments are both *literal integers*. The type of variable ``c`` is *series*
-because the addition of a *series* and *literal integer* produces a *series* result.
-
-Pine Scipt functions do not support recursion. It is **not allowed** for a function to call itself from within its own code.
+In the example above, the type of variable ``a`` is *series* because the arguments are both *series*. 
+The type of variable ``b`` is *integer* because arguments are both *literal integers*. 
+The type of variable ``c`` is *series* because the addition of a *series* and *literal integer* produces a *series* result.
 
 
 
@@ -49,10 +79,23 @@ Pine also supports multi-line functions with the following syntax:
 
 .. code-block:: text
 
+    <identifier>(<parameter_list>) => 
+        <local_block>
+
     <identifier>(<list of parameters>) =>
         <variable declaration>
         ...
         <variable declaration or expression>
+
+where:
+
+.. code-block:: text
+
+    <parameter_list>
+        {<parameter_definition>{, <parameter_definition>}}
+
+    <parameter_definition>
+        [<identifier> = <default_value>]
 
 The body of a multi-line function consists of several statements. Each
 statement is placed on a separate line and must be preceded by 1
