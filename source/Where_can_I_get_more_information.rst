@@ -3,8 +3,6 @@
 Where can I get more information?
 =================================
 
-..    include:: <isonum.txt>
-
 * A description of all the Pine operators, variables and functions can be found in the
   `Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__.
 
