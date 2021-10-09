@@ -186,7 +186,7 @@ realtime data, we take the *close* of the previous day without shifting the
 
 
 
-\`ignore_resolve_errors\`
+\`ignore_invalid_symbol\`
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
