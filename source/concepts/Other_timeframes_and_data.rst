@@ -128,11 +128,8 @@ This example shows the difference when fetching the 1min `high <https://www.trad
 Note that:
 
 - The red line shows the result of using lookahead. The black line does not use it.
-- In realtime (the bars with the silver background), there is no difference between the plots because there are no futures bars to look into.
-- On historical bars, the red line is showing the 1min highs before they actually occur.
-- 
-The red line is displaying 
-
+- On historical bars, the red line is showing the 1min highs before they actually occur (see #1 and #2, where it is most obvious).
+- In realtime (the bars after #3 with the silver background), there is no difference between the plots because there are no futures bars to look into.
 
 
    Accordingly,  and always used function always used lookahead, which unless the series requested was offset in the past, 
