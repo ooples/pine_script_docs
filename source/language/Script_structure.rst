@@ -1,6 +1,6 @@
 .. _PageScriptStructure:
 
-Script Structure
+Script structure
 ================
 
 .. contents:: :local:
