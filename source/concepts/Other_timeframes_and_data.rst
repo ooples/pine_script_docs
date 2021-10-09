@@ -62,7 +62,7 @@ will repeat on chart bars until a new value comes in. This shows the diffence be
 ::
 
     //@version=5
-    indicator("", "", true)
+    indicator("gaps", "", true)
     noGaps = request.security(syminfo.tickerid, "1", close)
     withGaps = request.security(syminfo.tickerid, "1", close, gaps = barmerge.gaps_on)
     plot(noGaps, "noGaps", color.blue, 3, plot.style_linebr)
@@ -91,44 +91,52 @@ Note that:
 ^^^^^^^^^^^^^
 
 The ``lookahead`` parameter controls whether future data is returned by the function.
-It only affects historical bars, as there are no future bars to look forward to in realtime, where the future is unknown — as it should.
-One may wonder why Pine offers the possibility to look into the future when this is not possible in real life.
-The intended use of the ``lookahead`` parameter is to allow ``request.*()`` functions to return correct information in special circumstances
-where unreliable data would otherwise be returned.
+In order to avoid *future leak*, or *lookahead bias*, which produces unrealistic results, **it should avoided — or treated with extreme caution**.
+``lookahead`` is only useful in special circumstances, when they don't compromise the integrity of your script's logic. e.g.:
+
+- When retrieving the underlying normal chart data from non-standard charts.
+- When used with an offset on the series (such as ``close[1]``), is to produce non-repainting
+  `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls.
+
+The parameter only affects the script's behavior on historical bars, as there are no future bars to look forward to in realtime, where the future is unknown — as it should.
 
 .. note:: Using ``lookahead = barmerge.lookahead_on`` to access future price information on historical bars causes *future leak*, or *lookahead bias*,
    which means your script is using future information it should **not** have access to.
-   This is usually a bad idea; using ``request.*()`` functions this way is misleading, and not allowed in script publications.
+   Except in very rare cases, this is a bad idea. Using ``request.*()`` functions this way is misleading, and not allowed in script publications.
    It is considered a serious violation, so it is your responsability, if you publish scripts, 
    to ensure you do not mislead users of your script by using future information on historical bars.
    While your plots on historical bars will look great because your script will magically acquire prescience (which will not reproduce in realtime),
    you will be misleading users of your scripts — and yourself.
-   Using ``lookahead = barmerge.lookahead_on`` should be reserved to a few rare cases, 
-   such as when using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
-   to fetch normal chart prices from a non-standard chart, or when using an offset to the series, as in ``close[1]``.
 
-The second switch, ``lookahead``, was added in Pine Script version
-1. The parameter has two possible values:
-`barmerge.lookahead_off <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}lookahead_off>`__
-and
-`barmerge.lookahead_on <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}lookahead_on>`__
-to respectively switch between the new, default behavior of
-`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__,
-and the old behavior dating from Pine v1 and v2.
+The default value for ``lookahead`` is `barmerge.lookahead_off <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}lookahead_off>`__.
+To enable it, use `barmerge.lookahead_on <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}lookahead_on>`__.
 
-This example shows the difference on a 5min chart::
+This example shows the difference when fetching the 1min `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ from a 5sec chart:
+
+.. image:: images/OtherTimeframesAndData-Lookahead-01.png
+
+::
 
     //@version=5
-    indicator('My Script', overlay = true)
-    a = request.security(syminfo.tickerid, '60', low, lookahead = barmerge.lookahead_off)
-    plot(a, color=color.red)
-    b = request.security(syminfo.tickerid, '60', low, lookahead = barmerge.lookahead_on)
-    plot(b, color = color.lime)
+    indicator("lookahead", "", true)
+    lookaheadOn  = request.security(syminfo.tickerid, '1', high, lookahead = barmerge.lookahead_on)
+    lookaheadOff = request.security(syminfo.tickerid, '1', high, lookahead = barmerge.lookahead_off)
+    plot(lookaheadOn,  "lookaheadOn", color.new(color.red, 60), 6)
+    plot(lookaheadOff, "lookaheadOff",  color.gray, 2)
+    bgcolor(barstate.isrealtime ? #00000020 : na)
 
-.. image:: images/V3.png
+Note that:
+
+- The red line shows the result of using lookahead. The black line does not use it.
+- In realtime (the bars with the silver background), there is no difference between the plots because there are no futures bars to look into.
+- On historical bars, the red line is showing the 1min highs before they actually occur.
+- 
+The red line is displaying 
+
+
 
    Accordingly,  and always used function always used lookahead, which unless the series requested was offset in the past, 
-produce *future leak*, or *lookahead bias*, i.e., it was fetching data from the future, which is undesirable::
+produce , i.e., it was fetching data from the future, which is undesirable::
 
 The green line on the chart is the *low* price of an hourly bar that is
 requested with *lookahead on*. It's the old behavior of the security
