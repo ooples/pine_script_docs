@@ -43,8 +43,9 @@ All the ``request.*()`` functions include the ``gaps`` parameter in their signat
 (see the :ref:`section on \`na\` <PageTypeSystem_NaValue>` if you are not familiar with it).
 
 A script running on a 60min chart has access to prices such as `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
-on each bar of the chart. When retrieving data from other contexts, however, new values for that data may not be coming in for each new bar on the chart,
-every 60 minutes for example. A choice must thus be made as to how the data from the outside context will be *merged* on chart bars.
+on each bar of the chart. When retrieving data from other contexts, however, new values for that data may not be coming in for each new bar on the chart.
+When fetching daily data on our 60min chart, for example, new data will not be coming in on every chart bar. 
+A choice must thus be made as to how the data from the outside context will be *merged* on chart bars.
 That behavior is what the ``gaps`` parameter controls.
 
 When functions do not return a value on each of the chart bars the calling script is running on,
