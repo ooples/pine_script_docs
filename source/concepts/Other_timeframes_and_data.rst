@@ -39,11 +39,32 @@ Accordingly, this page is quite lengthy.
 
 
 
-Common parameters
------------------
+Common characteristics
+----------------------
 
-Many of the functions in the ``request`` namespace share common parameters.
-Before exploring each function, let's go over their common parameters.
+Many of the functions in the ``request`` namespace share common properties and parameters.
+Before exploring each function in detail, let's go over their common characteristics.
+
+
+
+Use
+^^^
+
+While the ``request.*()`` functions return "series" results, which means their result can change on every bar,
+their parameters require arguments of either "const" or "simple" form, 
+wich entails they must be known at either compile time or when the script begins execution on bar zero.
+This **also** entails that the function calls cannot vary during the execution of a script, e.g.:
+
+- The argument used for the ``symbol`` parameter in a `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+  call must be a "simple string". This means is can be determined through the script's inputs, but it cannot then change on the script's last bar, for example.
+  The same goes for its ``timeframe`` parameter.
+- Except for ``expression`` in `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__,
+  all its other parameters (``gaps``, ``lookahead``,  ``ignore_invalid_symbol`` and ``currency``) require a "const" argument,
+  which means it must be known at compile time and cannot be determined through inputs.
+- ``request.*()`` functions cannot be used in local blocks of either conditional structures or loops, nor in library functions.
+  They can be used in user-defined functions.
+
+
 
 
 
