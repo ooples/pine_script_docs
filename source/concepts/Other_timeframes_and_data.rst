@@ -163,7 +163,7 @@ the ``ZARUSD*USDHKD`` spread would be used, as there is no instrument providing 
 
 .. note:: Not all values returned by ``request.*()`` functions may be in currency, so it does not always make sense to convert them into another currency.
    When requesting financial information with `request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__
-   for example, many of the values are ratios or are expressed in other units than currency, such as ``PIOTROSKI_F_SCORE`` or ``NUMBER_OF_EMPLOYEES``.
+   for example, many of the values are ratios, or expressed in other units than currency, such as ``PIOTROSKI_F_SCORE`` or ``NUMBER_OF_EMPLOYEES``.
    It is the programmer's responsibility to determine when conversion is possible.
 
 
