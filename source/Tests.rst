@@ -12,7 +12,6 @@
    :width: 50
    :height: 50
 
-.. |TVLogoFooter| image:: /source/images/TradingView-Logo-Block.svg
 
 
 Tests
@@ -122,6 +121,12 @@ Root path name
 .. image:: /images/TradingView-Logo-Block.svg
 
 
+Inline macro here:
+
+Before inline macro: |TVLogoFooter| After inline macro
+
 Macro here:
 
-|TVLogo|
+|TVLogoFooter|
+
+.. |TVLogoFooter| image:: /source/images/TradingView-Logo-Block.svg
