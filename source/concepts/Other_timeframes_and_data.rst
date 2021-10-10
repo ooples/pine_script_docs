@@ -116,7 +116,7 @@ When the default ``ignore_invalid_symbol = false`` is used, a runtime error will
 When ``ignore_invalid_symbol = true`` is used, rather than throwing a runtime error, the function will return `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__.
 
 This script demonstrates how to use ``ignore_invalid_symbol = true`` to handle invalid results when requesting
-the shares outstanding for stocks:
+the shares outstanding for stocks. It will only display information on instruments where valid data can be obtained:
 
 .. image:: images/OtherTimeframesAndData-IgnoreValidSymbol-01.png
 
@@ -242,6 +242,13 @@ The function's signature is:
 .. code-block:: text
 
     request.security(symbol, timeframe, expression, gaps, lookahead, ignore_resolve_errors, currency) → series int/float/bool/color
+
+It is used to request data from:
+
+- Other symbols
+- Other timeframes (see the page on :ref:`Timeframes <PageTimeframes>` to timeframe specifications in Pine)
+- Other chart types (see the page on :ref:`Non-standard chart data <PageNonStandardChartsData>`)
+- Other contexts, in combination with `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__
 
 
 
@@ -370,8 +377,8 @@ Tuples
 
 
 
-Ticker id generation
-^^^^^^^^^^^^^^^^^^^^
+Other contexts, with \`ticker.new()\`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. TODO write about syminfo.tickerid in extended format and function tickerid
 
