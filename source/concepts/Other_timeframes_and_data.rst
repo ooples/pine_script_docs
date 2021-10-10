@@ -4,7 +4,7 @@ Other timeframes and data
 =========================
 
 .. contents:: :local:
-    :depth: 2
+    :depth: 3
 
 
 
@@ -228,32 +228,9 @@ Note that:
 - On historical bars, the red line is showing the 1min highs before they actually occur (see #1 and #2, where it is most obvious).
 - In realtime (the bars after #3 with the silver background), there is no difference between the plots because there are no futures bars to look into.
 
-.. note:: In Pine v1 and v2, the ``security()`` did not include a ``lookahead`` parameter, but it behaved as it does in later versions of Pine
-   with ``lookahead = barmerge.lookahead_on``. This means that is was systematically using future data. 
-   Scripts written with Pine v1 and v2 that use ``security()`` should therefore be treated with caution, unless they offset the series fetched, e.g., using ``close[1]``.
-
-
-In general, ``barmerge.lookahead_on`` should only be used when the series is offset, as when you want to avoid repainting::
-
-    //@version=5
-    //...
-    a = request.security(syminfo.tickerid, 'D', close[1], lookahead = barmerge.lookahead_on)
-
-If you use ``barmerge.lookahead_off``, a non-repainting value can still be achieved, but it's more complex::
-
-    //@version=5
-    //...
-    indexHighTF = barstate.isrealtime ? 1 : 0
-    indexCurrTF = barstate.isrealtime ? 0 : 1
-    a0 = request.security(syminfo.tickerid, 'D', close[indexHighTF], lookahead = barmerge.lookahead_off)
-    a = a0[indexCurrTF]
-
-When an indicator is based on historical data (i.e.,
-``barstate.isrealtime`` is ``false``), we take the current *close* of
-the daily timeframe and shift the result of `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
-function call one bar to the right in the current timeframe. When an indicator is calculated on
-realtime data, we take the *close* of the previous day without shifting the
-`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ data.
+.. note:: In Pine v1 and v2, ``security()`` did not include a ``lookahead`` parameter, but it behaved as it does in later versions of Pine
+   with ``lookahead = barmerge.lookahead_on``, which means it was systematically using future data. 
+   Scripts written with Pine v1 or v2 and using ``security()`` should therefore be treated with caution, unless they offset the series fetched, e.g., using ``close[1]``.
 
 
 
@@ -304,6 +281,11 @@ contains the value of the symbol name with its exchange prefix, for example,
 `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__ to avoid
 ambiguity in the values returned by `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__.
 
+
+
+Ticker id generation
+^^^^^^^^^^^^^^^^^^^^
+
 .. TODO write about syminfo.tickerid in extended format and function tickerid
 
 The second argument of the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function, ``timeframe``, is
@@ -333,9 +315,7 @@ displaying an 1D SMA like this::
     out1 = request.security(syminfo.tickerid, 'D', out)
     plot(out1)
 
-One can declare the following variable:
-
-::
+One can declare the following variable::
 
     spread = high - low
 
@@ -367,13 +347,58 @@ individual stocks participating in an upward or downward trend.
 
 
 
+Information requested
+^^^^^^^^^^^^^^^^^^^^^
+
+int/float/bool/color
+no arrays, strings
+
+
+
+Built-ins
+"""""""""
+
+
+
+Calculated variables
+""""""""""""""""""""
+
+
+
+Function calls
+""""""""""""""
+
+
+
+Tuples
+""""""
+
+
+
 Avoiding repainting
 ^^^^^^^^^^^^^^^^^^^
 
+In general, ``barmerge.lookahead_on`` should only be used when the series is offset, as when you want to avoid repainting::
 
+    //@version=5
+    //...
+    a = request.security(syminfo.tickerid, 'D', close[1], lookahead = barmerge.lookahead_on)
 
-Returning tuples
-^^^^^^^^^^^^^^^^
+If you use ``barmerge.lookahead_off``, a non-repainting value can still be achieved, but it's more complex::
+
+    //@version=5
+    //...
+    indexHighTF = barstate.isrealtime ? 1 : 0
+    indexCurrTF = barstate.isrealtime ? 0 : 1
+    a0 = request.security(syminfo.tickerid, 'D', close[indexHighTF], lookahead = barmerge.lookahead_off)
+    a = a0[indexCurrTF]
+
+When an indicator is based on historical data (i.e.,
+``barstate.isrealtime`` is ``false``), we take the current *close* of
+the daily timeframe and shift the result of `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
+function call one bar to the right in the current timeframe. When an indicator is calculated on
+realtime data, we take the *close* of the previous day without shifting the
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ data.
 
 
 
