@@ -127,7 +127,6 @@ Note that:
 - New values for the higher timeframe come in at the same time, whether we use gaps or not.
 
 
-
 \`ignore_invalid_symbol\`
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -175,6 +174,8 @@ Note that:
   ``str.tostring(MarketCap, format.volume)`` converts the ``MarketCap`` "float" value to a string, formatting it like volume, by abbreviating large values.
   Adding ``syminfo.currency`` provides script users with the instrument's quote currency.
   In our example, Tencent is traded on HKEX, Hong Kong's stock exchange, so the currency is HKD, the Hong Kong dollar.
+- We use a :ref:`table <PageTables>` to display our script's output. Our ``printTable()`` function declared just after our script's
+  `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ declaration statement handles the table code.
 
 
 
