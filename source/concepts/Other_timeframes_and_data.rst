@@ -179,7 +179,7 @@ The ``lookahead`` parameter controls whether future data is returned by the
 `request.dividends() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}dividends>`__,
 `request.earnings() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}earnings>`__ and
 `request.splits() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}splits>`__ functions.
-In order to avoid *future leak*, or *lookahead bias*, which produces unrealistic results, **it should be avoided — or treated with extreme caution**.
+In order to avoid *future leak*, or *lookahead bias*, which produces unrealistic results, **it should generally be avoided — or treated with extreme caution**.
 ``lookahead`` is only useful in special circumstances, when they don't compromise the integrity of your script's logic. e.g.:
 
 - When retrieving the underlying normal chart data from non-standard charts.
