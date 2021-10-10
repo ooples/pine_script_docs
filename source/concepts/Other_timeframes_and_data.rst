@@ -142,6 +142,7 @@ Note that:
   ``"Market cap\n"`` is our legend, with a newline character. 
   ``str.tostring(MarketCap, format.volume)`` converts the ``MarketCap`` float value to a string, formatting it like volume, by abbreviating large values.
   Adding ``syminfo.currency`` provides script users with the instrument's quote currency.
+  In our example, Tencent is traded on HKEX, Hong Kong's stock exchange, so the currency is the Hong Kong dollar.
 
 
 
