@@ -34,6 +34,9 @@ These are the signatures of the functions in the ``request`` namespace:
     request.splits(ticker, field, gaps, lookahead, ignore_invalid_symbol, currency) → series float
     request.quandl(ticker, gaps, index, ignore_invalid_symbol, currency) → series float
 
+The ``request`` family of functions have many different applications and their use can be quite involved.
+Accordingly, this page is quite lengthy.
+
 
 
 Common parameters
