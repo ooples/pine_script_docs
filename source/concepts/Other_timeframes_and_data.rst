@@ -53,18 +53,26 @@ Use
 While the ``request.*()`` functions return "series" results, which means their result can change on every bar,
 their parameters require arguments of either "const" or "simple" form, 
 wich entails they must be known at either compile time or when the script begins execution on bar zero.
-This **also** entails that the function calls cannot vary during the execution of a script, e.g.:
+This **also** entails that, except for the ``expression`` parameter in `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+which allows a "series" argument, the arguments of ``request.*()`` function calls cannot vary during the execution of a script, e.g.:
 
 - The argument used for the ``symbol`` parameter in a `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
   call must be a "simple string". This means is can be determined through the script's inputs, but it cannot then change on the script's last bar, for example.
   The same goes for its ``timeframe`` parameter.
-- Except for ``expression`` in `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__,
-  all its other parameters (``gaps``, ``lookahead``,  ``ignore_invalid_symbol`` and ``currency``) require a "const" argument,
+- All the other `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ parameters except ``expression``, i.e.,
+  ``gaps``, ``lookahead``, ``ignore_invalid_symbol`` and ``currency``, require a "const" argument,
   which means it must be known at compile time and cannot be determined through inputs.
 - ``request.*()`` functions cannot be used in local blocks of either conditional structures or loops, nor in library functions.
   They can be used in user-defined functions.
 
+Think of ``request.*()`` function calls as requiring to be executable on bar zero and not varying during the script's execution on all bars.
+You can make multiple calls in one script and choose which result you will use based on "series" criteria that may vary bar to bar,
+but all the necessary calls whose results you will be selecting from will need to have been previously made by the script, available for picking among them.
 
+Because of the fact that one cannot turn ``request.*()`` function calls on or off during the script's execution,
+the only way to improve the performance of scripts using such functions is to minimize the number of different calls defined in the script.
+While a maximum of 40 calls can be made in any goven script, programmers should strive to minimize the quantity of calls,
+as they have an sizable impact on script preformance.
 
 
 
