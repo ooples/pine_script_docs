@@ -113,7 +113,7 @@ When the default ``ignore_invalid_symbol = false`` is used, a runtime error will
 When ``ignore_invalid_symbol = true`` is used, rather than throwing a runtime error, the function will return `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__.
 
 This script demonstrates how to use ``ignore_invalid_symbol = true`` to handle invalid results when requesting
-the shares outstanding for stocks::
+the shares outstanding for stocks:
 
 .. image:: images/OtherTimeframesAndData-IgnoreValidSymbol-01.png
 
