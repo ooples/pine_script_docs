@@ -204,7 +204,11 @@ The parameter only affects the script's behavior on historical bars, as there ar
 The default value for ``lookahead`` is `barmerge.lookahead_off <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}lookahead_off>`__.
 To enable it, use `barmerge.lookahead_on <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}lookahead_on>`__.
 
-This example shows the difference when fetching the 1min `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ from a 5sec chart:
+This example shows why using ``lookahead = barmerge.lookahead_on`` to fetch price information can be so dangerous.
+We retrieve the 1min `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ from a 5sec chart
+and show the difference in results between using 
+`barmerge.lookahead_on <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}lookahead_on>`__ (bad, in red) and
+`barmerge.lookahead_off <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}lookahead_off>`__ (good, in gray):
 
 .. image:: images/OtherTimeframesAndData-Lookahead-01.png
 
