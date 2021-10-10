@@ -188,15 +188,17 @@ In order to avoid *future leak*, or *lookahead bias*, which produces unrealistic
 - When used with an offset on the series (such as ``close[1]``), to produce non-repainting
   `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls.
 - When retrieving the underlying, normal chart data from non-standard charts.
+- When using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+  at intrabar timeframes, i.e., timeframes lower than the charts.
 
 The parameter only affects the script's behavior on historical bars, as there are no future bars to look forward to in realtime, where the future is unknown — as it should.
 
-.. note:: Using ``lookahead = barmerge.lookahead_on`` to access future price information on historical bars causes *future leak*, or *lookahead bias*,
+.. note:: Using ``lookahead = barmerge.lookahead_on`` when fetching price information, or calculations depending on prices, causes future leak,
    which means your script is using future information it should **not** have access to.
-   Except in very rare cases, this is a bad idea. Using ``request.*()`` functions this way is misleading, and not allowed in script publications.
-   It is considered a serious violation, so it is your responsability, if you publish scripts, 
-   to ensure you do not mislead users of your script by using future information on historical bars.
-   While your plots on historical bars will look great because your script will magically acquire prescience (which will not reproduce in realtime),
+   Except in rare cases, this is a very bad idea. Using ``request.*()`` functions this way is misleading, and not allowed in script publications.
+   It is considered a serious violation of `Script publishing rules <https://www.tradingview.com/house-rules/?solution=43000590599>`__, 
+   so it is your responsability, if you publish scripts, to ensure you do not mislead users of your script by using future information on historical bars.
+   While your plots on historical bars will look great because your script will magically acquire prescience (which will not reproduce in realtime, by the way),
    you will be misleading users of your scripts — and yourself.
 
 The default value for ``lookahead`` is `barmerge.lookahead_off <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}lookahead_off>`__.
