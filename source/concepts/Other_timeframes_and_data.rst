@@ -117,6 +117,8 @@ the shares outstanding for stocks:
 
 .. image:: images/OtherTimeframesAndData-IgnoreValidSymbol-01.png
 
+::
+
     //@version=5
     indicator("", "", true)
     printTable(txt) => var table t = table.new(position.middle_right, 1, 1), table.cell(t, 0, 0, txt, bgcolor = color.yellow, text_size = size.huge)
