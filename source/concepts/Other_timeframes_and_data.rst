@@ -185,9 +185,9 @@ The ``lookahead`` parameter controls whether future data is returned by the
 In order to avoid *future leak*, or *lookahead bias*, which produces unrealistic results, **it should generally be avoided — or treated with extreme caution**.
 ``lookahead`` is only useful in special circumstances, when it doesn't compromise the integrity of your script's logic, e.g.:
 
-- When retrieving the underlying normal chart data from non-standard charts.
 - When used with an offset on the series (such as ``close[1]``), is to produce non-repainting
   `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls.
+- When retrieving the underlying, normal chart data from non-standard charts.
 
 The parameter only affects the script's behavior on historical bars, as there are no future bars to look forward to in realtime, where the future is unknown — as it should.
 
