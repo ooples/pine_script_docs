@@ -23,7 +23,16 @@ That data can be:
 - Information from the `NASDAQ Data Link (formerly Quandl) <https://data.nasdaq.com/search>`__, 
   with  `request.quandl() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}quandl>`__.
 
+These are the signatures of the functions in the ``request`` namespace:
 
+.. code-block:: text
+
+    request.security(symbol, timeframe, expression, gaps, lookahead, ignore_resolve_errors) → series int/float/bool/color
+    request.financial(symbol, financial_id, period, gaps, ignore_resolve_errors) → series float
+    request.dividends(ticker, field, gaps, lookahead, ignore_resolve_errors) → series float
+    request.earnings(ticker, field, gaps, lookahead, ignore_resolve_errors) → series float
+    request.splits(ticker, field, gaps, lookahead, ignore_resolve_errors) → series float
+    request.quandl(ticker, gaps, index, ignore_resolve_errors) → series float
 
 Common parameters
 -----------------
@@ -90,8 +99,12 @@ Note that:
 \`lookahead\`
 ^^^^^^^^^^^^^
 
-The ``lookahead`` parameter controls whether future data is returned by the function.
-In order to avoid *future leak*, or *lookahead bias*, which produces unrealistic results, **it should avoided — or treated with extreme caution**.
+The ``lookahead`` parameter controls whether future data is returned by the 
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__,
+`request.dividends() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}dividends>`__,
+`request.earnings() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}earnings>`__ and
+`request.splits() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}splits>`__ functions.
+In order to avoid *future leak*, or *lookahead bias*, which produces unrealistic results, **it should be avoided — or treated with extreme caution**.
 ``lookahead`` is only useful in special circumstances, when they don't compromise the integrity of your script's logic. e.g.:
 
 - When retrieving the underlying normal chart data from non-standard charts.
@@ -131,42 +144,10 @@ Note that:
 - On historical bars, the red line is showing the 1min highs before they actually occur (see #1 and #2, where it is most obvious).
 - In realtime (the bars after #3 with the silver background), there is no difference between the plots because there are no futures bars to look into.
 
-
-   Accordingly,  and always used function always used lookahead, which unless the series requested was offset in the past, 
-produce , i.e., it was fetching data from the future, which is undesirable::
-
-The green line on the chart is the *low* price of an hourly bar that is
-requested with *lookahead on*. It's the old behavior of the security
-function. The green line based on
-historical data is displayed at the price level of an hourly *low* right
-after a new hourly bar is created (dotted blue vertical lines).
-
-The red line is a *low* price of an hourly bar that is requested with *lookahead
-off*. In this case the requested *low* price of an hourly historical bar
-will be given only on the last minute bar of the requested hour, when an
-hourly bar's *low* won't return future data.
-
-The fuchsia dotted line represents the beginning of real-time data. You can see that
-``barmerge.lookahead_on`` and ``barmerge.lookahead_off`` behave the same way
-on real-time data, i.e., as ``barmerge.lookahead_off`` does.
-
-
 .. note:: In Pine v1 and v2, the ``security()`` did not include a ``lookahead`` parameter, but it behaved as it does in later versions of Pine
    with ``lookahead = barmerge.lookahead_on``. This means that is was systematically using future data. 
-   v1 and v2 scripts using ``security()`` should therefore be treated with caution, unless they offset the series fetched, e.g., using ``close[1]``.
+   Scripts written with Pine v1 and v2 that use ``security()`` should therefore be treated with caution, unless they offset the series fetched, e.g., using ``close[1]``.
 
-
-    //@version=2
-    //...
-    // `security()` calls use `barmerge.lookahead_on` because the script uses Pine v2
-    // WRONG: Uses future data:
-    a = security(tickerid, 'D', close)
-    // GOOD: Does not use future data:
-    a = security(tickerid, 'D', close[1])
-
-In Pine v3 or later, the ``lookahead`` parameter was introduced to provide more control. 
-Its default value is off, so the function doesn't use future data. 
-We can now use the function with ``barmerge.lookahead_on`` or ``barmerge.lookahead_off``.
 
 In general, ``barmerge.lookahead_on`` should only be used when the series is offset, as when you want to avoid repainting::
 
@@ -371,20 +352,9 @@ Fetching standard prices for a non-standard chart
 
 
 
-\`request.dividends()\`
------------------------
+\`request.dividends()\`, \`request.earnings()\` and \`request.splits()\`
+------------------------------------------------------------------------
 
-
-
-
-\`request.earnings()\`
-----------------------
-
-
-
-
-\`request.splits()\`
---------------------
 
 
 
