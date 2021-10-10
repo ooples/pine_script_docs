@@ -283,11 +283,6 @@ ambiguity in the values returned by `request.security() <https://www.tradingview
 
 
 
-Ticker id generation
-^^^^^^^^^^^^^^^^^^^^
-
-.. TODO write about syminfo.tickerid in extended format and function tickerid
-
 The second argument of the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function, ``timeframe``, is
 also a string. All intraday timeframes are defined using a
 number of minutes (from ``"1"`` to ``"1440"``), with the exception of four second-based timeframes: ``"1S"``, ``"5S"``, ``"15S"``, and ``"30S"`` [#seconds]_. It is possible to request any [#minutes]_ number of minutes: ``"5"``, ``"10"``,
@@ -372,6 +367,13 @@ Function calls
 
 Tuples
 """"""
+
+
+
+Ticker id generation
+^^^^^^^^^^^^^^^^^^^^
+
+.. TODO write about syminfo.tickerid in extended format and function tickerid
 
 
 
