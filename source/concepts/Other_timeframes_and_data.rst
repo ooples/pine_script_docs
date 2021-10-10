@@ -155,9 +155,9 @@ The currency being converted **from** is the symbol's quote currency, i.e., `sym
 which is determined by the exchange it trades on.
 The currency being converted **to** is the value used for the ``currency`` parameter, 
 which can be any currency in the `ISO 4217 format <https://en.wikipedia.org/wiki/ISO_4217#Active_codes>`__,
-or one the currency built-ins in the ``currency.XXX`` format, such as `currency.JPY <https://www.tradingview.com/pine-script-reference/v5/#var_currency{dot}JPY>`__.
+or one of the currency built-ins in the ``currency.XXX`` format, such as `currency.JPY <https://www.tradingview.com/pine-script-reference/v5/#var_currency{dot}JPY>`__.
 
-The conversion rates used are based on the FX_IDC pairs' daily rates of the previous day (relative to the bar where the calculation is done).
+The conversion rates used are based on the FX_IDC pairs' daily rates of the previous day, relative to the bar where the calculation occurs.
 When no instrument exists to determine a particular pair's conversion rate, a spread is used. For example, to convert ZAR to USD, 
 the ``ZARUSD*USDHKD`` spread would be used, as there is no instrument providing a ``ZARUSD`` rate.
 
