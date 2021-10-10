@@ -449,8 +449,8 @@ On the other hand, the blue line at the same bar has a value of 1.13121 which co
 
 
 
-Fetching standard prices for a non-standard chart
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Fetching standard prices from a non-standard chart
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 
