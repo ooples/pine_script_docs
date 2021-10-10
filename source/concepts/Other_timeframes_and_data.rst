@@ -21,7 +21,7 @@ That data can be:
   `request.earnings() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}earnings>`__ or
   `request.splits() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}splits>`__.
 - Information from the `NASDAQ Data Link (formerly Quandl) <https://data.nasdaq.com/search>`__, 
-  with  `request.quandl() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}quandl>`__.
+  with `request.quandl() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}quandl>`__.
 
 These are the signatures of the functions in the ``request`` namespace:
 
@@ -163,8 +163,9 @@ the ``ZARUSD*USDHKD`` spread would be used, as there is no instrument providing 
 
 .. note:: Not all values returned by ``request.*()`` functions may be in currency, so it does not always make sense to convert them into another currency.
    When requesting financial information with `request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__
+   or `request.quandl() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}quandl>`__
    for example, many of the values are ratios, or expressed in other units than currency, such as ``PIOTROSKI_F_SCORE`` or ``NUMBER_OF_EMPLOYEES``.
-   It is the programmer's responsibility to determine when conversion is possible.
+   It is the programmer's responsibility to determine when currency conversion is applicable.
 
 
 
