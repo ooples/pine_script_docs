@@ -140,16 +140,31 @@ Note that:
   It would be inefficient to call it on each bar.
 - We format the displayed string and assign its content to the ``txt`` variable.
   ``"Market cap\n"`` is our legend, with a newline character. 
-  ``str.tostring(MarketCap, format.volume)`` converts the ``MarketCap`` float value to a string, formatting it like volume, by abbreviating large values.
+  ``str.tostring(MarketCap, format.volume)`` converts the ``MarketCap`` "float" value to a string, formatting it like volume, by abbreviating large values.
   Adding ``syminfo.currency`` provides script users with the instrument's quote currency.
-  In our example, Tencent is traded on HKEX, Hong Kong's stock exchange, so the currency is the Hong Kong dollar.
+  In our example, Tencent is traded on HKEX, Hong Kong's stock exchange, so the currency is HKD, the Hong Kong dollar.
 
 
 
 \`currency\`
 ^^^^^^^^^^^^
 
+All the ``request.*()`` functions also include the ``currency`` parameter in their signature.
+It allows conversion of the value returned by the function in another currency.
+The currency being converted from is the symbol's quote currency (`syminfo.currency <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}currency>`__
+which is determined by the exchange it trades on.
+The currency being converted to is the value used for the ``currency`` parameter, 
+which can be any currency in the `ISO 4217 format <https://en.wikipedia.org/wiki/ISO_4217#Active_codes>`__
+or one the currency built-ins in the ``currency.XXX`` format, such as `currency.JPY <https://www.tradingview.com/pine-script-reference/v5/#var_currency{dot}JPY>`__.
 
+The conversion rates used are based on the FX_IDC pairs' daily rates of the previous day (relative to the bar where the calculation is done).
+When no instrument exists to determine a particular pair's conversion rate, a spread is used. For example, to convert ZAR to USD, 
+the ``ZARUSD*USDHKD`` spread would be used, as there is no instrument providing a ``ZARUSD`` rate.
+
+.. note:: Not all values returned by ``request.*()`` functions may be in currency, so it does not always make sense to convert them into another currency.
+   When requesting financial information with `request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__
+   for example, many of the values are ratios or are expressed in other units than currency, such as ``PIOTROSKI_F_SCORE`` or ``NUMBER_OF_EMPLOYEES``.
+   It is the programmer's responsibility to determine when conversion is possible.
 
 
 
