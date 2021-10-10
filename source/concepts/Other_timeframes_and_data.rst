@@ -71,8 +71,8 @@ but all the necessary calls whose results you will be selecting from will need t
 
 Because of the fact that one cannot turn ``request.*()`` function calls on or off during the script's execution,
 the only way to improve the performance of scripts using such functions is to minimize the number of different calls defined in the script.
-While a maximum of 40 calls can be made in any goven script, programmers should strive to minimize the quantity of calls,
-as they have an sizable impact on script preformance.
+While a maximum of 40 calls can be made in any given script, programmers should strive to minimize the quantity of calls,
+as they have a sizable impact on script performance.
 
 
 
