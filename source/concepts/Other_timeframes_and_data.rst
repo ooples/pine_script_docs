@@ -27,17 +27,19 @@ These are the signatures of the functions in the ``request`` namespace:
 
 .. code-block:: text
 
-    request.security(symbol, timeframe, expression, gaps, lookahead, ignore_resolve_errors) → series int/float/bool/color
-    request.financial(symbol, financial_id, period, gaps, ignore_resolve_errors) → series float
-    request.dividends(ticker, field, gaps, lookahead, ignore_resolve_errors) → series float
-    request.earnings(ticker, field, gaps, lookahead, ignore_resolve_errors) → series float
-    request.splits(ticker, field, gaps, lookahead, ignore_resolve_errors) → series float
-    request.quandl(ticker, gaps, index, ignore_resolve_errors) → series float
+    request.security(symbol, timeframe, expression, gaps, lookahead, ignore_invalid_symbol, currency) → series int/float/bool/color
+    request.financial(symbol, financial_id, period, gaps, ignore_invalid_symbol, currency) → series float
+    request.dividends(ticker, field, gaps, lookahead, ignore_invalid_symbol, currency) → series float
+    request.earnings(ticker, field, gaps, lookahead, ignore_invalid_symbol, currency) → series float
+    request.splits(ticker, field, gaps, lookahead, ignore_invalid_symbol, currency) → series float
+    request.quandl(ticker, gaps, index, ignore_invalid_symbol, currency) → series float
+
+
 
 Common parameters
 -----------------
 
-Most of the functions in the ``request`` namespace share some common parameters.
+Many of the functions in the ``request`` namespace share common parameters.
 Before exploring each function, let's go over their common parameters.
 
 
@@ -91,6 +93,60 @@ Note that:
   `barmerge.gaps_off <https://www.tradingview.com/pine-script-reference/v5/#var_barmerge{dot}gaps_off>`__ is used.
 - The fuchsia line plotting ``withGaps`` shows gaps.
 - New values for the higher timeframe come in at the same time, whether we use gaps or not.
+
+
+
+\`ignore_invalid_symbol\`
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+All the ``request.*()`` functions include the ``ignore_invalid_symbol`` parameter in their signature.
+The parameter's values can be ``true`` or ``false`` (the default).
+It controls the behavior of functions when they are used with arguments that cannot produce valid results, e.g.:
+
+- The symbol or ticker doesn't exist.
+- There is no financial information available for a symbol used with 
+  `request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__, 
+  (as is the case for crypto, forex or derivative instruments). 
+  This will also be the case when information for the particular ``period`` requested is not available.
+
+When the default ``ignore_invalid_symbol = false`` is used, a runtime error will be generated and the script will stop when no result can be returned.
+When ``ignore_invalid_symbol = true`` is used, rather than throwing a runtime error, the function will return `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__.
+
+This script demonstrates how to use ``ignore_invalid_symbol = true`` to handle invalid results when requesting
+the shares outstanding for stocks::
+
+.. image:: images/OtherTimeframesAndData-IgnoreValidSymbol-01.png
+
+    //@version=5
+    indicator("", "", true)
+    printTable(txt) => var table t = table.new(position.middle_right, 1, 1), table.cell(t, 0, 0, txt, bgcolor = color.yellow, text_size = size.huge)
+    TSO = request.financial(syminfo.tickerid, "TOTAL_SHARES_OUTSTANDING", "FQ", ignore_invalid_symbol = true) 
+    MarketCap = TSO * close
+    if not na(MarketCap) and barstate.islast
+        txt = "Market cap\n" + str.tostring(MarketCap, format.volume) + " " + syminfo.currency
+        printTable(txt)
+
+Note that:
+
+- We use ``ignore_invalid_symbol = true`` in our 
+  `request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__ call.
+  This will produce `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ results when the function cannot return a valid value.
+- We use the ``TSO`` value to calculate the stock's ``MarketCap``.
+- The ``not na(MarketCap)`` condition prevents us from displaying anything when ``TSO`` 
+  — and thus ``MarketCap`` — is `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__.
+- The ``barstate.islast`` condition ensures we only make a call to ``printTable(txt)`` on the chart's last bar.
+  It would be inefficient to call it on each bar.
+- We format the displayed string and assign its content to the ``txt`` variable.
+  ``"Market cap\n"`` is our legend, with a newline character. 
+  ``str.tostring(MarketCap, format.volume)`` converts the ``MarketCap`` float value to a string, formatting it like volume, by abbreviating large values.
+  Adding ``syminfo.currency`` provides script users with the instrument's quote currency.
+
+
+
+\`currency\`
+^^^^^^^^^^^^
+
+
 
 
 
@@ -170,16 +226,6 @@ the daily timeframe and shift the result of `request.security() <https://www.tra
 function call one bar to the right in the current timeframe. When an indicator is calculated on
 realtime data, we take the *close* of the previous day without shifting the
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ data.
-
-
-
-\`ignore_invalid_symbol\`
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
-
-\`currency\`
-^^^^^^^^^^^^
 
 
 
