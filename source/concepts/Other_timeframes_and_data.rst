@@ -280,12 +280,13 @@ It is used to request data from:
 - Other chart types (see the page on :ref:`Non-standard chart data <PageNonStandardChartsData>`)
 - Other contexts, in combination with `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__
 
+This script plots one of the source values of a given symbol for a given timeframe. All these are selectable via the script's "Settings/Inputs" tab:
+
 
 
 Timeframes
 ^^^^^^^^^^
 
-tttt
 The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
 function enables scripts to request data from other symbols and/or timeframes than those of the active chart.
 Let's assume the following script is running on an IBM chart at 1min. 
@@ -446,6 +447,28 @@ Other contexts, with \`ticker.new()\`
 
 
 
+Historical vs realtime values
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The behavior of `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+on historical and realtime bars is not the same. On historical bars, new values come in at the 
+`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ of the last chart bar in the higher timeframe bar.
+It then stays stable until another timeframe completes. In realtime, however,
+the function will return the **current** value of the incomplete higher timeframe bar, which causes it to vary during a realtime bar,
+and accross all realtime bars in the higher timeframe bar, until the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
+of the last realtime bar in the higher timeframe bar, at which point its value is final.
+
+These fluctuating values of `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+values in realtime can sometimes be just what is needed by a script's logic — if it using volume information, for example,
+and needs the current volume transacted at the current point in time of the incomplete higher timeframe bar.
+Fluctuating values are also called *repainting* values.
+
+In other circumstances, for example when a script is using higher timeframe information to provide a broader context to the script
+executing on a lower timeframe, one will often need confirmed and stable — as opposed to fluctuating — higher timeframe values.
+These are called *non-repainting* values because they are fixed values from a the previously *complete* higher timeframe bar only.
+
+
+
 Avoiding repainting
 ^^^^^^^^^^^^^^^^^^^
 
@@ -473,10 +496,10 @@ realtime data, we take the *close* of the previous day without shifting the
 
 
 
-.. _PageOtherTimeframesAndData_RequestingDataOfALowerTimeframe:
+.. _PageOtherTimeframesAndData_RequestingDataFromALowerTimeframe:
 
-Requesting data of a lower timeframe
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Requesting data from a lower timeframe
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
 function was designed to request data of a timeframe *higher*

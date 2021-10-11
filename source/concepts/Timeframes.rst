@@ -71,7 +71,7 @@ Comparing timeframes
 It can be useful to compare different timeframe strings to determine,
 for example, if the timeframe used on the chart is lower than the higher timeframes used in the script,
 as using timeframes lower than the chart is usually not a good idea.
-See the :ref:`Requesting data of a lower timeframe <PageOtherTimeframesAndData_RequestingDataOfALowerTimeframe>` section
+See the :ref:`Requesting data of a lower timeframe <PageOtherTimeframesAndData_RequestingDataFromALowerTimeframe>` section
 for more information on the subject.
 
 Converting timeframe strings to a representation in fractional minutes provides a way to compare them
