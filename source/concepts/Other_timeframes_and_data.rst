@@ -280,7 +280,48 @@ It is used to request data from:
 - Other chart types (see the page on :ref:`Non-standard chart data <PageNonStandardChartsData>`)
 - Other contexts, in combination with `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__
 
-This script plots one of the source values of a given symbol for a given timeframe. All these are selectable via the script's "Settings/Inputs" tab:
+This script plots the `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and
+`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ values of a user-defined (through the script's inputs) symbol and timeframe:
+
+.. image:: images/OtherTimeframesAndData-RequestSecurity()-01.png
+
+::
+
+    //@version=5
+    indicator("Symbol/TF")
+    symbolInput = input.symbol("", "Symbol & timeframe", inline = "1")
+    tfInput = input.timeframe("", "", inline = "1")
+    
+    [hi, lo] = request.security(symbolInput, tfInput, [high, low])
+    
+    plot(hi, "hi", color.lime, 3)
+    plot(lo, "lo", color.fuchsia, 3)
+    plotchar(ta.change(time(tfInput)), "ta.change(time(tfInput))", "•", location.top, size = size.tiny)
+    plotchar(barstate.isrealtime, "barstate.isrealtime", "•", location.bottom, color.red, size = size.tiny)
+
+Note that:
+
+- As is revealed by the input values showing to the right of the script's name on the chart, we are viewing higher timeframe
+  information from the same symbol as the chart's at 1min, but from the 5min timeframe.
+- The lime line plots highs and the fuchsia line plots lows.
+- We plot a blue dot when the higher timeframe change is detected by the script.
+- On historical bars (those without a fuchsia dot at the bottom), new values come in on the higher timeframe's last chart bar.
+  Point #1 shows the value for the 03:15 5min timeframe coming in at the close of the 03:19 bar 
+  (keep in mind that scripts execute on the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ of historical bars).
+- On realtime bars, the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ values
+  fluctuate with incoming data from the higher timeframe. At point #2, a new higher timeframe begins at 03:30,
+  so the `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ of that bar, which was fluctuating during the bar,
+  becomes the current `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ value for the higher timeframe bar.
+  That value, however, is uncertain because it could be superceded by any lower `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__
+  coming in in further reaaltime bars, until the close of the 03:34 bar. As it happens, none does, 
+  so the fuchsia line stays the same across the remaining realtime bars, until the 03:35 bar brings in a new higher timeframe bar.
+  During that 03:30 5min timeframe, we can see the lime line fluctuating, as higher highs are made on successive bars.
+  This reveals the repainting behavior of a `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+  call on realtime bars.
+- Our inputs appear on a single line in the "Settings/Inputs" tab because we use ``inline = "1"`` in both inputs.
+- One `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call
+  fetches both `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and
+  `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ values by using a :ref:`tuple <PageTypeSystem_Tuples>`.
 
 
 
@@ -466,7 +507,7 @@ Fluctuating values are also called *repainting* values.
 
 In other circumstances, for example when a script is using higher timeframe information to provide a broader context to the script
 executing on a lower timeframe, one will often need confirmed and stable — as opposed to fluctuating — higher timeframe values.
-These are called *non-repainting* values because they are fixed values from a the previously *complete* higher timeframe bar only.
+These are called *non-repainting* values because they are fixed values from a the previously **completed** higher timeframe bar only.
 
 
 

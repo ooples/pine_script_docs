@@ -467,10 +467,11 @@ A "void" result cannot be used in an expression or assigned to a variable. No ``
 
 
 
+.. _PageTypeSystem_Tuples:
+
 Tuples
 """"""
 
-There is limited support for a "tuple" type in Pine. 
 A *tuple* is a comma-separated set of expressions enclosed in brackets that can be used when a function or a local block must return more than one variable as a result. 
 For example::
 
@@ -480,11 +481,13 @@ For example::
         [sum, mult]
 
 In this example there is a 2-tuple on the last statement of the function's code block, which is the result returned by the function. Tuple elements can be of any type.
-There is also a special syntax for calling functions that return tuples. Accordingly, ``calcSumAndMul()`` must be called as follows::
+There is also a special syntax for calling functions that return tuples, which uses a *tuple declaration* on the left side of the equal sign in what is a multi-variable declaration.
+The result of a function such as ``calcSumAndMult()`` that returns a tuple must be assigned to a *tuple declaration*, i.e., 
+a set of comma-separated list of *new* variables that will receive the values returned by the function. 
+Here, the value of the ``sum`` and ``mult`` variables calculated by the function will be assigned to the ``s`` and ``m`` variables::
 
     [s, m] = calcSumAndMul(high, low)
 
-where the value of local variables ``sum`` and ``mul`` will be assigned to the ``s`` and ``m`` variables. 
 Note that the type of ``s`` and ``m`` cannot be explicitly defined; it is always inferred by the type of the function return results.
 
 Tuples can be useful to request multiple values in one `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call, e.g.::
@@ -492,6 +495,14 @@ Tuples can be useful to request multiple values in one `request.security() <http
     roundedOHLC() =>
         [math.round_to_mintick(open), math.round_to_mintick(high), math.round_to_mintick(low), math.round_to_mintick(close)]
     [op, hi, lo, cl] = request.security(syminfo.tickerid, "D", roundedOHLC())
+
+or:
+
+    [op, hi, lo, cl] = request.security(syminfo.tickerid, "D", [math.round_to_mintick(open), math.round_to_mintick(high), math.round_to_mintick(low), math.round_to_mintick(close)])
+
+or this form if no rounding is required::
+
+    [op, hi, lo, cl] = request.security(syminfo.tickerid, "D", [open, high, low, close])
 
 Tuples can also be used as return results of local blocks, in an `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ statement for example::
 
