@@ -267,20 +267,51 @@ Note that:
 \`request.security()\`
 ----------------------
 
-The function's signature is:
-
-.. code-block:: text
-
-    request.security(symbol, timeframe, expression, gaps, lookahead, ignore_resolve_errors, currency) → series int/float/bool/color
-
-It is used to request data from:
+The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function is used to request data from:
 
 - Other symbols
 - Other timeframes (see the page on :ref:`Timeframes <PageTimeframes>` to timeframe specifications in Pine)
 - Other chart types (see the page on :ref:`Non-standard chart data <PageNonStandardChartsData>`)
 - Other contexts, in combination with `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__
 
-This script plots the `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and
+Its signature is:
+
+.. code-block:: text
+
+    request.security(symbol, timeframe, expression, gaps, lookahead, ignore_resolve_errors, currency) → series int/float/bool/color
+
+``symbol``
+
+   This is the ticker identifier of the symbol whose information is to be fetched. It is a "string" value and can be defined in multiple ways:
+      - With a literal string containing either a simple ticker, such as ``"IBM"``, ``"700"``, ``"BTCUSD"`` or ``"EURUSD"``.
+        When an exchange is not provided, ``"BATS"`` will be used as the default.
+        While this will work for certain instruments, it will not work with all tickers.
+      - With a literal string include both the exchange (or data provider) and ticker information, such as ``"NYSE:IBM"``, ``"BATS:IBM"`` or ``"NASDAQ:AAPL"``.
+      - Using the `syminfo.ticker <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}ticker>`__ or
+        `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__ built-in variables,
+        which respectively return only the ticker or the exchange:ticker information of the chart's symbol.
+        It is recommended to use `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__ 
+        to avoid ambiguity. See the :ref:`Symbol information <PageChartInformation_SymbolInformation>` section for more information.
+
+
+The second argument of the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function, ``timeframe``, is
+also a string. All intraday timeframes are defined using a
+number of minutes (from ``"1"`` to ``"1440"``), with the exception of four second-based timeframes: ``"1S"``, ``"5S"``, ``"15S"``, and ``"30S"`` [#seconds]_. It is possible to request any [#minutes]_ number of minutes: ``"5"``, ``"10"``,
+``"21"``, etc. *Hourly* timeframe is also set by minutes [#hours]_. For example, the
+following lines signify one hour, two hours and four hours respectively:
+``"60"``, ``"120"``, ``"240"``. A timeframe with a value of *1 day* is indicated by
+``"D"`` or ``"1D"``. It is possible to request any number of days: ``"2D"``,
+``"3D"``, etc. *Weekly* and *Monthly* timeframes are set in a similar way: ``"W"``,
+``"1W"``, ``"2W"``, ..., ``"M"``, ``"1M"``, ``"2M"``. ``"M"`` and ``"1M"`` denote the same monthly
+timeframe, and ``"W"`` and ``"1W"`` the same weekly timeframe. The
+third parameter of the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function can be any arithmetic
+expression or a function call, which will be calculated in the context of the chosen series.
+The timeframe of the main chart's symbol is stored in the
+`timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__
+built-in variable.
+
+This script uses `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+to fetch the `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and
 `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ values of a user-defined symbol and timeframe:
 
 .. image:: images/OtherTimeframesAndData-RequestSecurity()-01.png
@@ -342,42 +373,6 @@ It will display the `close <https://www.tradingview.com/pine-script-reference/v5
 
 .. image:: images/Chart_security_1.png
 
-The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
-function's first argument is the name of the requested symbol. The second
-argument is the required timeframe and the third one is an expression
-which will be calculated on the requested series *within* the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call.
-
-The name of the symbol can be defined using two variants: with a prefix that
-contains the exchange (or data provider), or without it. For example:
-``"NYSE:IBM"``, ``"BATS:IBM"`` or ``"IBM"``. When an exchange is not provided,
-BATS will be used as the default. The current symbol name is stored in the
-`syminfo.ticker <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}ticker>`__ and
-`syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__
-built-in variables. `syminfo.ticker <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}ticker>`__ 
-contains the value of the symbol name without its exchange prefix, for example ``"MSFT"``.
-`syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__ 
-contains the value of the symbol name with its exchange prefix, for example,
-``"BATS:MSFT"`` or ``"NASDAQ:MSFT"``. It is recommended to use 
-`syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__ to avoid
-ambiguity in the values returned by `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__.
-
-
-
-The second argument of the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function, ``timeframe``, is
-also a string. All intraday timeframes are defined using a
-number of minutes (from ``"1"`` to ``"1440"``), with the exception of four second-based timeframes: ``"1S"``, ``"5S"``, ``"15S"``, and ``"30S"`` [#seconds]_. It is possible to request any [#minutes]_ number of minutes: ``"5"``, ``"10"``,
-``"21"``, etc. *Hourly* timeframe is also set by minutes [#hours]_. For example, the
-following lines signify one hour, two hours and four hours respectively:
-``"60"``, ``"120"``, ``"240"``. A timeframe with a value of *1 day* is indicated by
-``"D"`` or ``"1D"``. It is possible to request any number of days: ``"2D"``,
-``"3D"``, etc. *Weekly* and *Monthly* timeframes are set in a similar way: ``"W"``,
-``"1W"``, ``"2W"``, ..., ``"M"``, ``"1M"``, ``"2M"``. ``"M"`` and ``"1M"`` denote the same monthly
-timeframe, and ``"W"`` and ``"1W"`` the same weekly timeframe. The
-third parameter of the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function can be any arithmetic
-expression or a function call, which will be calculated in the context of the chosen series.
-The timeframe of the main chart's symbol is stored in the
-`timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__
-built-in variable.
 
 Using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__, one can view a 1min chart while
 displaying an 1D SMA like this::
