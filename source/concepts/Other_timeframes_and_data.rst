@@ -285,7 +285,7 @@ It is used to request data from:
 Timeframes
 ^^^^^^^^^^
 
-tt
+tttt
 The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
 function enables scripts to request data from other symbols and/or timeframes than those of the active chart.
 Let's assume the following script is running on an IBM chart at 1min. 
