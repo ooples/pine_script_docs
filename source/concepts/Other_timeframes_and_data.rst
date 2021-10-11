@@ -281,7 +281,7 @@ It is used to request data from:
 - Other contexts, in combination with `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__
 
 This script plots the `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and
-`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ values of a user-defined (through the script's inputs) symbol and timeframe:
+`low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ values of a user-defined symbol and timeframe:
 
 .. image:: images/OtherTimeframesAndData-RequestSecurity()-01.png
 
@@ -305,7 +305,7 @@ Note that:
   information from the same symbol as the chart's at 1min, but from the 5min timeframe.
 - The lime line plots highs and the fuchsia line plots lows.
 - We plot a blue dot when the higher timeframe change is detected by the script.
-- On historical bars (those without a fuchsia dot at the bottom), new values come in on the higher timeframe's last chart bar.
+- On historical bars (those without a red dot at the bottom), new values come in on the higher timeframe's last chart bar.
   Point #1 shows the value for the 03:15 5min timeframe coming in at the close of the 03:19 bar 
   (keep in mind that scripts execute on the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ of historical bars).
 - On realtime bars, the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ values
