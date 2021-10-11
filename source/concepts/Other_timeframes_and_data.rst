@@ -315,7 +315,7 @@ Note that:
   That value, however, is uncertain because it could be superceded by any lower `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__
   coming in further realtime bars, until the close of the 03:34 bar. As it happens, none does, 
   so the fuchsia line stays the same across the remaining realtime bars, until the 03:35 bar brings in a new higher timeframe bar.
-  During that 03:30 5min timeframe, we can see the lime line fluctuating, as higher highs are made on successive bars.
+  During that 03:30 5min timeframe, we can see the lime line (#3) fluctuating, as higher highs are made on successive bars.
   This reveals the repainting behavior of a `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
   call on realtime bars.
 - Our inputs appear on a single line in the "Settings/Inputs" tab because we use ``inline = "1"`` in both inputs.
