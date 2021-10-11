@@ -456,7 +456,7 @@ on historical and realtime bars is not the same. On historical bars, new values 
 Values then do not move until another timeframe completes, which accounts for the staircase effect of higher timeframe values. 
 In realtime, however, `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
 will return the **current** value of the incomplete higher timeframe bar, which causes it to vary during a realtime bar,
-and accross all realtime bars in the higher timeframe bar, until the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
+and accross all bars until the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__
 of the last realtime bar in the higher timeframe bar, at which point its value is final.
 
 These fluctuating values of `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
