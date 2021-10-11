@@ -652,18 +652,19 @@ All financial data available in Pine is listed below. The table columns contain 
 
 To make the financials easier to search, they are divided into four categories:
 
-- Income statements
-- Balance sheet
-- Cash flow
-- Statistics
+- :ref:`Income statements <PageOtherTimeframesAndData_IncomeStatements>`
+- :ref:`Balance sheet <PageOtherTimeframesAndData_BalanceSheet>`
+- :ref:`Cash flow <PageOtherTimeframesAndData_CashFlow>`
+- :ref:`Statistics <PageOtherTimeframesAndData_Statistics>`
 
 
+
+.. _PageOtherTimeframesAndData_IncomeStatements:
 
 Income statements
 """""""""""""""""
 
 
-.. | **Financial**                                       | **Periods** | **ID**                                     |
 
 +-----------------------------------------------------+-------------+--------------------------------------------+
 | **Financial**                                       | ``period``  | ``financial_id``                           |
@@ -746,6 +747,8 @@ Income statements
 +-----------------------------------------------------+-------------+--------------------------------------------+
 
 
+
+.. _PageOtherTimeframesAndData_BalanceSheet:
 
 Balance sheet
 """""""""""""
@@ -889,6 +892,8 @@ Balance sheet
 
 
 
+.. _PageOtherTimeframesAndData_CashFlow:
+
 Cash flow
 """""""""
 
@@ -988,6 +993,8 @@ Cash flow
 +-----------------------------------------------------+-------------+--------------------------------------------+
 
 
+
+.. _PageOtherTimeframesAndData_Statistics:
 
 Statistics
 """"""""""
