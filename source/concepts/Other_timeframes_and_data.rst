@@ -379,7 +379,7 @@ individual stocks participating in an upward or downward trend.
 
 
 
-Data feedss
+Data feeds
 ^^^^^^^^^^
 
 Different data feeds supplied by exchanges/brokers can be used to display information about an instrument on charts:
