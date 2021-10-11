@@ -267,12 +267,15 @@ Note that:
 \`request.security()\`
 ----------------------
 
-The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function is used to request data from:
+The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
+function is used to request data from other contexts than the chart's. They may be:
 
 - Other symbols
+- Spreads
 - Other timeframes (see the page on :ref:`Timeframes <PageTimeframes>` to timeframe specifications in Pine)
 - Other chart types (see the page on :ref:`Non-standard chart data <PageNonStandardChartsData>`)
 - Other contexts, in combination with `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__
+  (see the :ref:`Other contexts, with \`ticker.new()\` <PageOtherTimeframesAndData_OtherContextsWithTickerNew>` section of this page)
 
 Its signature is:
 
@@ -293,6 +296,10 @@ Its signature is:
         It is recommended to use `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__ 
         to avoid ambiguity. See the :ref:`Symbol information <PageChartInformation_SymbolInformation>` section for more information.
         Note that an empty string can also be supplied as a value, in which case the chart's symbol is used.
+      - Spreads can also be used, e.g., ``"AAPL/BTCUSD"`` or ``"ETH/BTC"``. Note that spreads will not replay in "Replay mode".
+      - A ticker identifier created using `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__,
+        which provides access to data from non-standard charts, extended hours or other contexts
+        (see the :ref:`Other contexts, with \`ticker.new()\` <PageOtherTimeframesAndData_OtherContextsWithTickerNew>` section of this page).
 
 ``timeframe``
    This is a "simple string" in :ref:`timeframe specifications <PageTimeframes>` format.
@@ -356,60 +363,20 @@ Timeframes
 ^^^^^^^^^^
 
 The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
-function enables scripts to request data from other symbols and/or timeframes than those of the active chart.
-Let's assume the following script is running on an IBM chart at 1min. 
-It will display the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ price of the IBM symbol, but from the 15min timeframe.
+function makes it possible for scripts to request data from other timeframes than the one the chart is running on,
+which can be done while also accessing another symbol, or not. 
+When another timeframe is accessed, it can be higher than the chart's (accessing 1D data from a 60min chart),
+or lower (accessing a 1min timeframe from a 60min chart).
+The behavior of `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
+in both cases is very different. We assume in most of our discussions that higher timeframes are accessed,
+but we also discuss the special cases when :ref:`lower timeframes are accessed <PageOtherTimeframesAndData_RequestingDataFromALowerTimeframe>`
+in a dedicated section.
 
-::
-
-    //@version=5
-    indicator("Example security 1", overlay = true)
-    ibm_15 = request.security("NYSE:IBM", "15", close)
-    plot(ibm_15)
-
-.. image:: images/Chart_security_1.png
-
-
-Using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__, one can view a 1min chart while
-displaying an 1D SMA like this::
-
-    //@version=5
-    indicator("High Time Frame MA", overlay = true)
-    src = close
-    len = 9
-    out = ta.sma(src, len)
-    out1 = request.security(syminfo.tickerid, 'D', out)
-    plot(out1)
-
-One can declare the following variable::
-
-    spread = high - low
-
-and calculate it at *1 minute*, *15 minutes* and *60 minutes*::
-
-    spread_1 = request.security(syminfo.tickerid, '1', spread)
-    spread_15 = request.security(syminfo.tickerid, '15', spread)
-    spread_60 = request.security(syminfo.tickerid, '60', spread)
-
-The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function
-returns a series which is then adapted to the time scale of
-the current chart's symbol. This result can be either shown directly on
-the chart (i.e., with ``plot``), or used in further calculations.
-The "Advance Decline Ratio" script illustrates a more
-involved use of `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__::
-
-    //@version=5
-    indicator("Advance Decline Ratio", "ADR")
-    ratio(t1, t2, source) =>
-        s1 = request.security(t1, timeframe.period, source)
-        s2 = request.security(t2, timeframe.period, source)
-        s1 / s2
-    plot(ratio("USI:ADVN.NY", "USI:DECL.NY", close))
-
-The script requests two additional securities. The results of the
-requests are then used in an arithmetic formula. As a result, we have a
-stock market indicator used by investors to measure the number of
-individual stocks participating in an upward or downward trend.
+Scripts not written specifically to user lower timeframe data should, when they are published for a broader audience,
+include protection against running it on chart timeframes where 
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
+would be accessing lower timeframes than the chart's. 
+See the :ref:`Comparing timeframes <PageTimeframes_ComparingTimeframes>` section for a code example doing just that.
 
 
 
@@ -468,16 +435,52 @@ Function calls
 """"""""""""""
 
 
+One can declare the following variable::
+
+    spread = high - low
+
+and calculate it at *1 minute*, *15 minutes* and *60 minutes*::
+
+    spread_1 = request.security(syminfo.tickerid, '1', spread)
+    spread_15 = request.security(syminfo.tickerid, '15', spread)
+    spread_60 = request.security(syminfo.tickerid, '60', spread)
+
+The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function
+returns a series which is then adapted to the time scale of
+the current chart's symbol. This result can be either shown directly on
+the chart (i.e., with ``plot``), or used in further calculations.
+The "Advance Decline Ratio" script illustrates a more
+involved use of `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__::
+
+    //@version=5
+    indicator("Advance Decline Ratio", "ADR")
+    ratio(t1, t2, source) =>
+        s1 = request.security(t1, timeframe.period, source)
+        s2 = request.security(t2, timeframe.period, source)
+        s1 / s2
+    plot(ratio("USI:ADVN.NY", "USI:DECL.NY", close))
+
+The script requests two additional securities. The results of the
+requests are then used in an arithmetic formula. As a result, we have a
+stock market indicator used by investors to measure the number of
+individual stocks participating in an upward or downward trend.
+
+
 
 Tuples
 """"""
 
 
 
+
+.. _PageOtherTimeframesAndData_OtherContextsWithTickerNew:
+
 Other contexts, with \`ticker.new()\`
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. TODO write about syminfo.tickerid in extended format and function tickerid
+`ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__,
+        which allows access to :ref:`Non-standard chart data <PageNonStandardChartsData>` or :ref:`other sessions <PageSessions_UsingSessionsWithRequestSecurity>`
 
 
 
@@ -578,9 +581,11 @@ Fetching standard prices from a non-standard chart
 -----------------------
 
 
-In order to get the value of a certain financial metric, you need to use the function: 
+The function's signature is: 
 
-financial(symbol, financial_id, period, gaps)
+.. code-block:: text
+
+    request.financial(symbol, financial_id, period, gaps, ignore_invalid_symbol, currency) → series float
 
 The first argument here is similar to the first argument of the security function, and is the name of the symbol for which the metric is requested. For example: ”NASDAQ:AAPL”.
 

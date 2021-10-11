@@ -65,6 +65,8 @@ Timeframe strings follow these rules:
 
 
 
+.. _PageTimeframes_ComparingTimeframes:
+
 Comparing timeframes
 --------------------
 
