@@ -281,7 +281,6 @@ Its signature is:
     request.security(symbol, timeframe, expression, gaps, lookahead, ignore_resolve_errors, currency) → series int/float/bool/color
 
 ``symbol``
-
    This is the ticker identifier of the symbol whose information is to be fetched. It is a "string" value and can be defined in multiple ways:
       - With a literal string containing either a simple ticker, such as ``"IBM"``, ``"700"``, ``"BTCUSD"`` or ``"EURUSD"``.
         When an exchange is not provided, ``"BATS"`` will be used as the default.
