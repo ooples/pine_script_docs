@@ -282,6 +282,7 @@ Its signature is:
 
 ``symbol``
    This is the ticker identifier of the symbol whose information is to be fetched. It is a "string" value and can be defined in multiple ways:
+
       - With a literal string containing either a simple ticker, such as ``"IBM"``, ``"700"``, ``"BTCUSD"`` or ``"EURUSD"``.
         When an exchange is not provided, ``"BATS"`` will be used as the default.
         While this will work for certain instruments, it will not work with all tickers.
