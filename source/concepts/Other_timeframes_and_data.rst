@@ -292,6 +292,7 @@ Its signature is:
         which respectively return only the ticker or the exchange:ticker information of the chart's symbol.
         It is recommended to use `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__ 
         to avoid ambiguity. See the :ref:`Symbol information <PageChartInformation_SymbolInformation>` section for more information.
+        Note that an empty string can also be supplied as a value, in which case the chart's symbol is used.
 
 ``timeframe``
    This is a "simple string" in :ref:`timeframe specifications <PageTimeframes>` format.
@@ -300,7 +301,7 @@ Its signature is:
    built-in variable.
    
 ``expression``
-   This can be "series int/float/bool/color" variable, expression, function call or tuple.
+   This can be a "series int/float/bool/color" variable, expression, function call or tuple.
    It is the value that must be calculated in `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__'s
    context and returned to the script.
    For more details, see the :ref:`Information requested <PageOtherTimeframesAndData_InformationRequested>` section later in this page.
@@ -576,8 +577,123 @@ Fetching standard prices from a non-standard chart
 \`request.financial()\`
 -----------------------
 
+All financial data available in Pine is listed below.
+
+In the first column of each table are the names of each metric. The second column lists how frequently the corresponding data is published: TTM - Trailing Twelve Months, FY - Financial Year, and FQ - Financial Quarter. The third column lists the identifiers of the financial data.
+
+In order to get the value of a certain financial metric, you need to use the function: 
+
+financial(symbol, financial_id, period, gaps)
+
+The first argument here is similar to the first argument of the security function, and is the name of the symbol for which the metric is requested. For example: ”NASDAQ:AAPL”.
+
+The second argument is the identifier of the required metric: the value from the third column of the table.
+
+The third argument indicates how frequently this metric is published: one of the values from the corresponding cells in the second column.
+
+The fourth argument is optional and is similar to the gaps argument of the security function. If gaps = true, values are displayed only on bars corresponding to the publication date of the data.
+
+The function returns the values of the requested financial data.
+
+For example:
+
+f = financial ("NASDAQ:AAPL", "ACCOUNTS_PAYABLE", "FQ")
+You can read more about the financial data here.
+
+Note that when you request financial data using the dividends and earnings functions, the new value is returned on the bar where the report was published. Using the financial function, you get a new value on the bar where the next fiscal period begins.
+
+Ratios based on market price
+
+Some of the financial indicators in the Financial menu are not in the table below because they are calculated using a financial metric and the current price on the chart. This entails you cannot request their values directly, but you can calculate them with a few lines of Pine code.
+
+Market Capitalization
+
+Market capitalization is equal to the share price multiplied by the number of shares outstanding (FQ).
+
+TSO = financial(syminfo.tickerid, "TOTAL_SHARES_OUTSTANDING", "FQ")
+MarketCap = TSO*close
+Earnings Yield
+
+The earnings yield is calculated by dividing earnings per share for the last 12-month period by the current market price per share. Multiplying the result by 100 yields the Earnings Yield % value.
+
+EPS = financial(syminfo.tickerid, "EARNINGS_PER_SHARE", "TTM")
+EarningsYield = (EPS/close)*100
+Price Book Ratio
+
+Price Book Ratio is calculated by dividing the price per share by the book value per share.
+
+BVPS = financial(syminfo.tickerid, "BOOK_VALUE_PER_SHARE", "FQ")
+PriceBookRatio = close/BVPS
+Price Earnings Ratio
+
+Price Earnings Ratio is calculated by dividing the current market price per share by the earnings per share for the last 12-month period.
+
+EPS = financial(syminfo.tickerid, "EARNINGS_PER_SHARE", "TTM")
+PriceEarningsRatio = close/EPS
+Price Sales Ratio
+
+Price Sales Ratio is calculated by dividing the company’s market capitalization by its total revenue over the last twelve months.
+
+TSO = financial(syminfo.tickerid, "TOTAL_SHARES_OUTSTANDING", "FQ")
+TR = financial(syminfo.tickerid, "TOTAL_REVENUE", "TTM")
+MarketCap = TSO*close
+PriseSalesRatio = MarketCap/TR
 
 
+
+Income statements
+"""""""""""""""""
+
++-----------------------------------------------------+-------------+--------------------------------------------+
+| After tax other income/expense                      | FQ, FY      | AFTER_TAX_OTHER_INCOME                     |
++-----------------------------------------------------+-------------+--------------------------------------------+
+| Average basic shares outstanding                    | FQ, FY      | BASIC_SHARES_OUTSTANDING                   |
++-----------------------------------------------------+-------------+--------------------------------------------+
+| Other COGS                                          | FQ, FY      | COST_OF_GOODS_EXCL_DEP_AMORT               |
++-----------------------------------------------------+-------------+--------------------------------------------+
+| Cost of goods                                       | FQ, FY      | COST_OF_GOODS                              |
++-----------------------------------------------------+-------------+--------------------------------------------+
+| Deprecation and amortization                        | FQ, FY      | DEP_AMORT_EXP_INCOME_S                     |
++-----------------------------------------------------+-------------+--------------------------------------------+
+| Diluted net income available to common stockholders | FQ, FY      | DILUTED_NET_INCOME                         |
++-----------------------------------------------------+-------------+--------------------------------------------+
+| Diluted shares outstanding                          | FQ, FY      | DILUTED_SHARES_OUTSTANDING                 |
++-----------------------------------------------------+-------------+--------------------------------------------+
+| Dilution adjustment                                 | FQ, FY      | DILUTION_ADJUSTMENT                        |
++-----------------------------------------------------+-------------+--------------------------------------------+
+| Discontinued operations                             | FQ, FY      | DISCONTINUED_OPERATIONS                    |
++-----------------------------------------------------+-------------+--------------------------------------------+
+| Basic EPS                                           | FQ, FY, TTM | EARNINGS_PER_SHARE_BASIC                   |
++-----------------------------------------------------+-------------+--------------------------------------------+
+
+| Diluted EPS                                         | FQ, FY      | EARNINGS_PER_SHARE_DILUTED                 |
+| EBIT                                                | FQ, FY      | EBIT                                       |
+| EBITDA                                              | FQ, FY, TTM | EBITDA                                     |
+| Equity in earnings                                  | FQ, FY      | EQUITY_IN_EARNINGS                         |
+| Gross profit                                        | FQ, FY      | GROSS_PROFIT                               |
+| Taxes                                               | FQ, FY      | INCOME_TAX                                 |
+| Interest capitalized                                | FQ, FY      | INTEREST_CAPITALIZED                       |
+| Interest expense on debt                            | FQ, FY      | INTEREST_EXPENSE_ON_DEBT                   |
+| Non-controlling/minority interest                   | FQ, FY      | MINORITY_INTEREST_EXP                      |
+| Net income before discontinued operations           | FQ, FY      | NET_INCOME_BEF_DISC_OPER                   |
+| Net income                                          | FQ, FY      | NET_INCOME                                 |
+| Non-operating income, excl. interest expenses       | FQ, FY      | NON_OPER_INCOME                            |
+| Interest expense, net of interest capitalized       | FQ, FY      | NON_OPER_INTEREST_EXP                      |
+| Non-operating interest income                       | FQ, FY      | NON_OPER_INTEREST_INCOME                   |
+| Operating income                                    | FQ, FY      | OPER_INCOME                                |
+| Operating expenses (excl. COGS)                     | FQ, FY      | OPERATING_EXPENSES                         |
+| Miscellaneous non-operating expense                 | FQ, FY      | OTHER_INCOME                               |
+| Other operating expenses, total                     | FQ, FY      | OTHER_OPER_EXPENSE_TOTAL                   |
+| Preferred dividends                                 | FQ, FY      | PREFERRED_DIVIDENDS                        |
+| Pretax equity in earnings                           | FQ, FY      | PRETAX_EQUITY_IN_EARNINGS                  |
+| Pretax income                                       | FQ, FY      | PRETAX_INCOME                              |
+| Research & development                              | FQ, FY      | RESEARCH_AND_DEV                           |
+| Selling/general/admin expenses, other               | FQ, FY      | SELL_GEN_ADMIN_EXP_OTHER                   |
+| Selling/general/admin expenses, total               | FQ, FY      | SELL_GEN_ADMIN_EXP_TOTAL                   |
+| Non-operating income, total                         | FQ, FY      | TOTAL_NON_OPER_INCOME                      |
+| Total operating expenses                            | FQ, FY      | TOTAL_OPER_EXPENSE                         |
+| Total revenue                                       | FQ, FY      | TOTAL_REVENUE                              |
+| Unusual income/expense                              | FQ, FY      | UNUSUAL_EXPENSE_INC                        |
 
 \`request.dividends()\`, \`request.earnings()\` and \`request.splits()\`
 ------------------------------------------------------------------------
