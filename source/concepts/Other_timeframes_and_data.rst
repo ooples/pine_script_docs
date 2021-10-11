@@ -647,7 +647,7 @@ All financial data available in Pine is listed below. The table columns contain 
 - The "Periods" column lists the strings that can be used as values for the 
   `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function's
   ``period`` parameter: ``"TTM"`` (trailing twelve months), ``"FY"`` (financial year) or ``"FQ"`` (financial quarter).
-  Not all periods are available for all financials.
+  Only one must be used per function call. Not all periods are available for all financials.
 - The "ID" column lists the strings to be used for the ``financial_id`` parameter.
 
 To make the financials easier to search, they are divided into four categories:
@@ -663,9 +663,10 @@ Income statements
 """""""""""""""""
 
 
+.. | **Financial**                                       | **Periods** | **ID**                                     |
 
 +-----------------------------------------------------+-------------+--------------------------------------------+
-| **Financial**                                       | **Periods** | **ID**                                     |
+| **Financial**                                       | ``period``  | **ID**                                     |
 +-----------------------------------------------------+-------------+--------------------------------------------+
 | After tax other income/expense                      | FQ, FY      | AFTER_TAX_OTHER_INCOME                     |
 +-----------------------------------------------------+-------------+--------------------------------------------+
