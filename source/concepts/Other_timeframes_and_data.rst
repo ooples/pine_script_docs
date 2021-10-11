@@ -318,7 +318,7 @@ Note that:
   During that 03:30 5min timeframe, we can see the lime line (#3) fluctuating, as higher highs are made on successive bars.
   This reveals the repainting behavior of a `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
   call on realtime bars.
-- Our inputs appear on a single line in the "Settings/Inputs" tab because we use ``inline = "1"`` in both inputs.
+- Our inputs appear on a single line in the "Settings/Inputs" tab because we use ``inline = "1"`` in both ``input.*()`` calls.
 - One `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call
   fetches both `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and
   `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ values by using a :ref:`tuple <PageTypeSystem_Tuples>`.
