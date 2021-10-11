@@ -66,8 +66,8 @@ The Pine **types** are:
 - tuples
 
 Each fundamental type refers to the nature of the value contained in a variable: ``1`` is of type "int", ``1.0`` is of type "float", ``"AAPL"`` is of type "string", etc.
-The special types all contain IDs referring to an object of the type's name, e.g., a variable of type "label" contains an ID referring to a label, and so on.
-The "void" type means no value is returned.
+The special types all contain IDs referring to an object of the type's name, e.g., a variable of type "label" contains an ID (or *pointer*) referring to a label, and so on.
+The "void" type means no value is returned.     
 Tuples are a syntactic arrangement of variables, e.g., ``[macdLine, signalLine, histLine]``.
 
 The Pine compiler can automatically convert some types into others when a value is not of the required type. The auto-casting rules are: **int** 🠆 **float** 🠆 **bool**. 
