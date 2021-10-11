@@ -219,7 +219,7 @@ In order to avoid *future leak*, or *lookahead bias*, which produces unrealistic
   `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls.
 - When retrieving the underlying, normal chart data from non-standard charts.
 - When using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
-  at intrabar timeframes, i.e., timeframes lower than the charts.
+  at intrabar timeframes, i.e., timeframes lower than the chart's.
 
 The parameter only affects the script's behavior on historical bars, as there are no future bars to look forward to in realtime, where the future is unknown — as it should.
 
