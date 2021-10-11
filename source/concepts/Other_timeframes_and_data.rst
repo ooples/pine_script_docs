@@ -365,18 +365,24 @@ Timeframes
 The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
 function makes it possible for scripts to request data from other timeframes than the one the chart is running on,
 which can be done while also accessing another symbol, or not. 
-When another timeframe is accessed, it can be higher than the chart's (accessing 1D data from a 60min chart),
-or lower (accessing a 1min timeframe from a 60min chart).
+When another timeframe is accessed, it can be:
+
+- Higher than the chart's (accessing 1D data from a 60min chart)
+- Lower (accessing a 1min timeframe from a 60min chart)
+- The same timeframe as the chart's 
+  (when `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__ or an empty string is used)
+
 The behavior of `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
-in both cases is very different. We assume in most of our discussions that higher timeframes are accessed,
+when accessing higher and lower timeframes is very different. We assume in our discussions that higher timeframes are accessed,
 but we also discuss the special cases when :ref:`lower timeframes are accessed <PageOtherTimeframesAndData_RequestingDataFromALowerTimeframe>`
 in a dedicated section.
 
 Scripts not written specifically to user lower timeframe data should, when they are published for a broader audience,
 include protection against running it on chart timeframes where 
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
-would be accessing lower timeframes than the chart's. 
-See the :ref:`Comparing timeframes <PageTimeframes_ComparingTimeframes>` section for a code example doing just that.
+would be accessing lower timeframes than the chart's, as it will not produce reliable results in those cases.
+See the :ref:`Comparing timeframes <PageTimeframes_ComparingTimeframes>` section for a code example 
+providing error-checking to avoid just that.
 
 
 
