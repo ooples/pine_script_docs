@@ -30,14 +30,34 @@ The most frequent limitations Pine programmers encounter are:
 - The 200 ms maximum execution time for any loop on one bar.
 - The limit of 40 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls.
 
+Here are the limits imposed in the Pine environment. They are divided into ones imposed at compile time and runtime.
+
 
 
 Compiler
 --------
 
-- local blocks
-- compiled tokens
+- 60K compiled tokens
 - 100,000 elements array size
+- Two-minute compile time limit issues warning. After three warnings, you are blocked for 1 hour.
+- 1K variables per local block
+- 500 local blocks
+
+
+
+Plot count
+^^^^^^^^^^
+
+- plot*()
+- alertcondition()
+
+
+
+\`request.*()\` functions
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- 40 calls
+- 100K intrabars (20K bars and no replay mode if a spread is used)
 
 
 
@@ -48,15 +68,6 @@ Runtime
 - 20,000 ms per script
 - Memory
 
-
-
-Plot count
-----------
-
-
-
-\`request.*()\` functions
--------------------------
 
 
 
