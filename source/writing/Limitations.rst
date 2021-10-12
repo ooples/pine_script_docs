@@ -37,9 +37,13 @@ Here are the limits imposed in the Pine environment. They are divided into ones 
 Compiler
 --------
 
+
+
+Code
+^^^^
+
 - 60K compiled tokens
 - 100,000 elements array size
-- Two-minute compile time limit issues warning. After three warnings, you are blocked for 1 hour.
 - 1K variables per local block
 - 500 local blocks
 
@@ -58,6 +62,11 @@ Plot count
 
 - 40 calls
 - 100K intrabars (20K bars and no replay mode if a spread is used)
+
+Compile time
+^^^^^^^^^^^^
+
+- Two-minute compile time limit issues warning. After three warnings, you are blocked for 1 hour.
 
 
 
