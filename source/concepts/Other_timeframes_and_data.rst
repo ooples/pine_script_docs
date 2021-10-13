@@ -277,7 +277,7 @@ function is used to request data from other contexts than the chart's. Those dif
 - Other chart types or sessions, through ``ticker.*()`` functions
   (see this page's :ref:`Other contexts, with \`ticker.new()\` <PageOtherTimeframesAndData_OtherContextsWithTickerNew>` section)
 
-Its signature is:
+The function's signature is:
 
 .. code-block:: text
 
@@ -377,8 +377,8 @@ when accessing higher and lower timeframes is very different. We assume in our d
 but we also discuss the special cases when :ref:`lower timeframes are accessed <PageOtherTimeframesAndData_RequestingDataFromALowerTimeframe>`
 in a dedicated section.
 
-Scripts not written specifically to user lower timeframe data should, when they are published for a broader audience,
-include protection against running it on chart timeframes where 
+Scripts not written specifically to user lower timeframe data, when they are published for a broader audience,
+should ideally include protection against running them on chart timeframes where 
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
 would be accessing lower timeframes than the chart's, as it will not produce reliable results in those cases.
 See the :ref:`Comparing timeframes <PageTimeframes_ComparingTimeframes>` section for a code example 
