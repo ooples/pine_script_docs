@@ -398,7 +398,7 @@ Different data feeds supplied by exchanges/brokers can be used to display inform
 
 Not all of these types of feed may exist for every instrument. "ICEEUR:BRN1!" for example, only has EOD data.
 
-For some instruments where both intraday and EOD historical feeds exist, volume data will not be the same because some volume such as block trades or OTC trades 
+For some instruments where both intraday and EOD historical feeds exist, volume data will not be the same because some trades (block trades, OTC trades, etc.) 
 may only be reported at the end of the day. It will thus appear in the EOD feed, but not in the intraday feed. 
 Differences in volume data are almost inexistent in the crypto sector, but commonplace in stocks.
 
