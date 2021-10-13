@@ -422,8 +422,18 @@ As a rule, TradingView does not generate data; it relies on its data providers f
 Information requested
 ^^^^^^^^^^^^^^^^^^^^^
 
-int/float/bool/color
-no arrays, strings
+The data fetched using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+is specified with the ``expression`` parameter. It can be of types "int", "float", "bool" or "color". Arrays or strings are thus not allowed.
+
+The expression supplied to `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+can be:
+
+- A built-in variable or function, such as `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ or
+  `ta.crossover() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}crossover>`__
+- A variable previously calculated by your script, which will then be recalculated in
+  `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__'s context
+- A user-defined function call
+- A tuple
 
 
 
