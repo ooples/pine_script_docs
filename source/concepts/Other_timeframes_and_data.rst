@@ -268,14 +268,14 @@ Note that:
 ----------------------
 
 The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
-function is used to request data from other contexts than the chart's. They may be:
+function is used to request data from other contexts than the chart's. Those different contexts may be:
 
 - Other symbols
 - Spreads
 - Other timeframes (see the page on :ref:`Timeframes <PageTimeframes>` to timeframe specifications in Pine)
 - Other chart types (see the page on :ref:`Non-standard chart data <PageNonStandardChartsData>`)
-- Other contexts, in combination with `ticker.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}new>`__
-  (see the :ref:`Other contexts, with \`ticker.new()\` <PageOtherTimeframesAndData_OtherContextsWithTickerNew>` section of this page)
+- Other chart types or sessions, through ``ticker.*()`` functions
+  (see this page's :ref:`Other contexts, with \`ticker.new()\` <PageOtherTimeframesAndData_OtherContextsWithTickerNew>` section)
 
 Its signature is:
 
