@@ -184,6 +184,8 @@ They are only useful on intraday timeframes:
 
 
 
+.. _PageSessions_UsingSessionsWithRequestSecurity:
+
 Using sessions with \`request.security()\`
 ------------------------------------------
 

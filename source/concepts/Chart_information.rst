@@ -73,6 +73,8 @@ relative to the particular bar the script is executing on.
 
 
 
+.. _PageChartInformation_SymbolInformation:
+
 Symbol information
 ------------------
 
@@ -93,7 +95,7 @@ The script then re-executes on all the chart's bars using the new values of the 
   The point value is the multiple of the underlying asset determining a contract's value.
   On "ES1!" ("S&P 500 E-Mini") the point value is 50, so a contract is worth 50 times the price of the instrument.
 - `syminfo.prefix <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}prefix>`__:
-  The prefix is the exchange or broker's identifier: "NASDAQ" for "AAPL", "CME_MINI_DL" for "ES1!".
+  The prefix is the exchange or broker's identifier: "NASDAQ" or "BATS" for "AAPL", "CME_MINI_DL" for "ES1!".
 - `syminfo.root <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}root>`__:
   It is the ticker's prefix for structured tickers like those of futures. It is "ES" for "ES1!", "ZW" for "ZW1!".
 - `syminfo.session <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}session>`__:

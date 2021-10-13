@@ -214,7 +214,7 @@ function; one when ``options`` is not used, the other when it is:
     input.int(defval, title, minval, maxval, step, tooltip, inline, group, confirm) → input int
     input.int(defval, title, options, tooltip, inline, group, confirm) → input int
 
-This call uses ``options`` parameter to propose a pre-defined list of lengths for the MA::
+This call uses the ``options`` parameter to propose a pre-defined list of lengths for the MA::
 
     //@version=5
     indicator("MA", "", true)

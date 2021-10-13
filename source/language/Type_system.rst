@@ -6,7 +6,6 @@ Type system
 .. contents:: :local:
     :depth: 3
 
-.. include:: <isonum.txt>
 
 
 Introduction
@@ -66,12 +65,16 @@ The Pine **types** are:
 - "void"
 - tuples
 
-Each type refers to the nature of the value contained in a variable: ``1`` is of type "int", ``1.0`` is of type "float", ``"AAPL"`` is of type "string", etc.
+Each fundamental type refers to the nature of the value contained in a variable: ``1`` is of type "int", ``1.0`` is of type "float", ``"AAPL"`` is of type "string", etc.
+The special types all contain IDs referring to an object of the type's name, e.g., a variable of type "label" contains an ID (or *pointer*) referring to a label, and so on.
+The "void" type means no value is returned.     
+Tuples are a syntactic arrangement of variables, e.g., ``[macdLine, signalLine, histLine]``.
 
-The Pine compiler can automatically convert some types into others when a value is not of the required type. The auto-casting rules are: **int** |rarr| **float** |rarr| **bool**. 
+The Pine compiler can automatically convert some types into others when a value is not of the required type. The auto-casting rules are: **int** 🠆 **float** 🠆 **bool**. 
 See the :ref:`Type casting <PageTypeSystem_TypeCasting>` section of this page for more information on type casting.
 
-Except in library function signatures, Pine forms are implicit in code; they are never declared because they are always determined by the compiler. Types, however, can be specified when declaring variables, e.g.::
+Except in function signatures, Pine forms are implicit in code; they are never declared because they are always determined by the compiler. 
+Types, however, can be specified when declaring variables, e.g.::
 
     //@version=5
     indicator("", "", true)
@@ -101,9 +104,9 @@ Compilation occurs when you save a script in the Pine Editor, which doesn't even
 
 Variables of "const" form can be intialized using a *literal* value, or calculated from expressions using only literal values or other variables of "const" form. 
 Pine's :ref:`Style guide <PageStyleGuide>` recommends using upper case SNAKE_CASE to name variables of "const" form. 
-While it is not a requirement, "const" variables are often declared using the `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ keyword so they are only initialized on the first bar of the dataset. 
-Declaring "const" variables using `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ incurs a minor performance penalty on script execution time, 
-so when your logic does not require it, declaring "const" variables without `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ is preferable.
+While it is not a requirement, "const" variables are often declared using the 
+`var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ keyword so they are only initialized on the first bar of the dataset. 
+See the :ref:`section on \`var\` <PageVariableDeclarations_Var>` for more information.
 
 These are examples of literal values:
 
@@ -116,7 +119,8 @@ These are examples of literal values:
 .. note:: In Pine, the built-in variables ``open``, ``high``, ``low``, ``close``, ``volume``, ``time``,
     ``hl2``, ``hlc3``, ``ohlc4``, etc., are not of "const" form. Because they change bar to bar, they are of *series* form.
 
-The "const" form is a requirement for the arguments to the ``title`` and ``shorttitle`` parameters in `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__, for example. 
+The "const" form is a requirement for the arguments to the ``title`` and ``shorttitle`` parameters in 
+`indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__, for example. 
 All these are valid variables that can be used as arguments for those parameters when calling the function::
 
     //@version=5
@@ -134,8 +138,10 @@ This will trigger a compilation error::
     indicator(NAME, "", true)
     plot(close)
 
-The reason for the error is that the ``NAME`` variable's calculation depends on the value of `syminfo.type <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}type>`__ 
-which is a "simple string" (`syminfo.type <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}type>`__ returns a string corresponding to the sector the chart's symbol belongs to, eg., ``"crypto"``, ``"forex"``, etc.).
+The reason for the error is that the ``NAME`` variable's calculation depends on the value of 
+`syminfo.type <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}type>`__ 
+which is a "simple string" (`syminfo.type <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}type>`__ 
+returns a string corresponding to the sector the chart's symbol belongs to, eg., ``"crypto"``, ``"forex"``, etc.).
 
 Note that using the ``:=`` operator to assign a new value to a previously declared "const" variable will transform it into a "simple" variable, e.g., here with ``name1``, 
 for which we do not use an uppercase name because it is not of "const" form::
@@ -150,7 +156,10 @@ for which we do not use an uppercase name because it is not of "const" form::
 input
 """""
 
-Values of "input" form are known when the values initialized through ``input.*()`` functions are determined. These functions determine the values that can be modified by script users in the script's "Settings/Inputs" tab. When these values are changed, this always triggers a re-execution of the script from the beginning of the chart's history (bar zero), so variables of "input" form are always known when the script begins execution, and they do not change during the script's execution.
+Values of "input" form are known when the values initialized through ``input.*()`` functions are determined. 
+These functions determine the values that can be modified by script users in the script's "Settings/Inputs" tab. 
+When these values are changed, this always triggers a re-execution of the script from the beginning of the chart's history (bar zero), 
+so variables of "input" form are always known when the script begins execution, and they do not change during the script's execution.
 
 .. note:: The `input.source() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}source>`__ function yields a value of "series" type — not "input". 
     This is because built-in variables such as `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__, 
@@ -176,7 +185,10 @@ Note that:
 
 - The ``symbolInput``, ``timeframeInput`` and ``periodInput`` variables are of "input" form.
 - The ``sourceInput`` variable is of "series" form because it is determined from a call to `input.source() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}source>`__.
-- Our `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call is valid because its ``symbol`` and ``timeframe`` parameters require a "simple" argument and the "input" form we use is weaker than "simple". The function's ``expression`` parameter requires a "series" form argument, and that is what form our ``sourceInput`` variable is. Note that because a "series" form is required there, we could have used "const", "input" or "simple" forms as well.
+- Our `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call 
+  is valid because its ``symbol`` and ``timeframe`` parameters require a "simple" argument and the "input" form we use is weaker than "simple". 
+  The function's ``expression`` parameter requires a "series" form argument, and that is what form our ``sourceInput`` variable is. 
+  Note that because a "series" form is required there, we could have used "const", "input" or "simple" forms as well.
 - As per our style guide's recommendations, we use the "Input" suffix with our input variables to help readers of our code remember the origin of these variables.
 
 Wherever an "input" form is required, a "const" form can also be used.
@@ -185,9 +197,15 @@ Wherever an "input" form is required, a "const" form can also be used.
 simple
 """"""
 
-Values of "simple" form are known only when a script begins execution on the first bar of a chart's history, and they never change during the execution of the script. Built-in variables of the ``syminfo.*``, ``timeframe.*`` and ``ticker.*`` families, for example, all return results of "simple" form because their value depends on the chart's symbol, which can only be detected when the script executes on it.
+Values of "simple" form are known only when a script begins execution on the first bar of a chart's history, 
+and they never change during the execution of the script. 
+Built-in variables of the ``syminfo.*``, ``timeframe.*`` and ``ticker.*`` families, for example, 
+all return results of "simple" form because their value depends on the chart's symbol, which can only be detected when the script executes on it.
 
-A "simple" form argument is also required for the ``length`` argument of functions such as `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__ or `ta.rma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}rma>`__ which cannot work with dynamic lengths that could change during the script's execution.
+A "simple" form argument is also required for the ``length`` argument of functions such as 
+`ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__ or 
+`ta.rma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}rma>`__ 
+which cannot work with dynamic lengths that could change during the script's execution.
 
 Wherever a "simple" form is required, a "const" or "input" form can also be used.
 
@@ -195,13 +213,23 @@ Wherever a "simple" form is required, a "const" or "input" form can also be used
 series
 """"""
 
-Values of "series" form (also sometimes called *dynamic*) provide the most flexibility because they can change on any bar, or even multiples times during the same bar, in loops for example. Built-in variables such as `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__, 
+Values of "series" form (also sometimes called *dynamic*) provide the most flexibility because they can change on any bar, 
+or even multiples times during the same bar, in loops for example. 
+Built-in variables such as `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__, 
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__,
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__, 
 `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ or
-`volume <https://www.tradingview.com/pine-script-reference/v5/#var_volume>`__ are of "series" form, as would be the result of expressions calculated using them. Functions such as `barssince() <https://www.tradingview.com/pine-script-reference/v5/#fun_barssince>`__ or `crossover() <https://www.tradingview.com/pine-script-reference/v5/#fun_crossover>`__ yield a result of "series" form because it varies bar to bar, as does that of the `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ history-referencing operator used to access past values of a time series. While the "series" form is the most common form used in Pine, it is not always allowed as arguments to Pine built-in functions.
+`volume <https://www.tradingview.com/pine-script-reference/v5/#var_volume>`__ are of "series" form, 
+as would be the result of expressions calculated using them. 
+Functions such as `barssince() <https://www.tradingview.com/pine-script-reference/v5/#fun_barssince>`__ or 
+`crossover() <https://www.tradingview.com/pine-script-reference/v5/#fun_crossover>`__ yield a result of "series" form because it varies bar to bar, 
+as does that of the `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ history-referencing operator used to access past values of a time series. 
+While the "series" form is the most common form used in Pine, it is not always allowed as arguments to Pine built-in functions.
 
-Suppose you want to display the value of pivots on your chart. This will require converting values into strings, so the string values your code will be using will be of "series string" type. Pine's `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ function can be used to place such "series string" text on the chart because its ``text`` parameter accepts arguments of "series" form::
+Suppose you want to display the value of pivots on your chart. This will require converting values into strings, 
+so the string values your code will be using will be of "series string" type. 
+Pine's `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ function 
+can be used to place such "series string" text on the chart because its ``text`` parameter accepts arguments of "series" form::
 
     //@version=5
     indicator("", "", true)
@@ -216,10 +244,16 @@ Suppose you want to display the value of pivots on your chart. This will require
 
 Note that:
 
-- The ``str.tostring(hiP, format.mintick)`` call we use to convert the pivot's value to a string yields a "series string" result, which will work with `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__.
-- While prices appear at the pivot, the pivots actually require ``pivotBarsInput`` bars to have elapsed before they can be detected. Pivot prices only appear on the pivot because we plot them in the past after the pivot's detection, using ``bar_index[pivotBarsInput]`` (the `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__'s value, offset ``pivotBarsInput`` bars back). In real time, these prices would only appear ``pivotBarsInput`` bars after the actual pivot.
+- The ``str.tostring(hiP, format.mintick)`` call we use to convert the pivot's value to a string yields a "series string" result, 
+  which will work with `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__.
+- While prices appear at the pivot, the pivots actually require ``pivotBarsInput`` bars to have elapsed before they can be detected. 
+  Pivot prices only appear on the pivot because we plot them in the past after the pivot's detection, 
+  using ``bar_index[pivotBarsInput]`` (the `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__'s value, 
+  offset ``pivotBarsInput`` bars back). In real time, these prices would only appear ``pivotBarsInput`` bars after the actual pivot.
 - We print a blue dot using `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ when a pivot is detected in our code.
-- Pine's `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ can also be used to position text on the chart, but because its ``text`` parameter requires a "const string" argument, we could not have used it in place of `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ in our script.
+- Pine's `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ can also be used to position text on the chart, 
+  but because its ``text`` parameter requires a "const string" argument, 
+  we could not have used it in place of `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ in our script.
 
 Wherever a "series" form is required, a "const", "input" or "simple" form can also be used.
 
@@ -271,7 +305,8 @@ There are only two literals representing *bool* values::
     true    // true value
     false   // false value
 
-When an expression of type "bool" returns `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ and it is used to test a conditional statement or operator, the "false" branch is executed.
+When an expression of type "bool" returns `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ 
+and it is used to test a conditional statement or operator, the "false" branch is executed.
 
 
 
@@ -386,7 +421,11 @@ and `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_labe
 `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`__ and
 `table.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}new>`__ functions. 
 
-These functions all return an ID that uniquely identifies each drawing object. The ID's type is "series line", "series label", "series box" and "series table", respectively, and an ID can exist in no other form than "series". Drawing IDs act like pointer in that they are used to reference a specific instance of a drawing in all the related functions of its namespace. The line ID returned by a `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ call is then used to refer to that line using `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`__, for example.
+These functions all return an ID that uniquely identifies each drawing object. 
+The ID's type is "series line", "series label", "series box" and "series table", respectively, and an ID can exist in no other form than "series". 
+Drawing IDs act like pointer in that they are used to reference a specific instance of a drawing in all the related functions of its namespace. 
+The line ID returned by a `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ 
+call is then used to refer to that line using `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`__, for example.
 
 
 
@@ -395,7 +434,8 @@ array
 
 Arrays in Pine are identified by an array ID. There is no single type representing an array ID, 
 but rather an overloaded version of a subset of Pine types which represents the type of an array's elements. 
-These type names are constructed by appending the ``[]`` suffix (not to be confused with the `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ history-referencing operator) to one of the Pine types allowed for array elements:
+These type names are constructed by appending the ``[]`` suffix (not to be confused with the 
+`[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ history-referencing operator) to one of the Pine types allowed for array elements:
 
 - ``int[]``
 - ``float[]``
@@ -419,16 +459,21 @@ An array containing elements of type "int" initalized with one element of value 
 void
 """"
 
-There is a "void" type in Pine. Functions having only side-effects and returning no usable result return the "void" type. An example of such a function is `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__; it does something (triggers an alert event), but it returns no useful value.
+There is a "void" type in Pine. Functions having only side-effects and returning no usable result return the "void" type. 
+An example of such a function is `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__; 
+it does something (triggers an alert event), but it returns no useful value.
 
 A "void" result cannot be used in an expression or assigned to a variable. No ``void`` keyword exists in Pine, as variables cannot be declared using the "void" type.
 
 
 
+.. _PageTypeSystem_Tuples:
+
 Tuples
 """"""
 
-There is limited support for a "tuple" type in Pine. A *tuple* is a comma-separated set of expressions enclosed in brackets that can be used when a function or a local block must return more than one variable as a result. For example::
+A *tuple* is a comma-separated set of expressions enclosed in brackets that can be used when a function or a local block must return more than one variable as a result. 
+For example::
 
     calcSumAndMult(a, b) =>
         sum = a + b
@@ -436,17 +481,28 @@ There is limited support for a "tuple" type in Pine. A *tuple* is a comma-separa
         [sum, mult]
 
 In this example there is a 2-tuple on the last statement of the function's code block, which is the result returned by the function. Tuple elements can be of any type.
-There is also a special syntax for calling functions that return tuples. Accordingly, ``calcSumAndMul()`` must be called as follows::
+There is also a special syntax for calling functions that return tuples, which uses a *tuple declaration* on the left side of the equal sign in what is a multi-variable declaration.
+The result of a function such as ``calcSumAndMult()`` that returns a tuple must be assigned to a *tuple declaration*, i.e., 
+a set of comma-separated list of *new* variables that will receive the values returned by the function. 
+Here, the value of the ``sum`` and ``mult`` variables calculated by the function will be assigned to the ``s`` and ``m`` variables::
 
     [s, m] = calcSumAndMul(high, low)
 
-where the value of local variables ``sum`` and ``mul`` will be assigned to the ``s`` and ``m`` variables. Note that the type of ``s`` and ``m`` cannot be explicitly defined; it is always inferred by the type of the function return results.
+Note that the type of ``s`` and ``m`` cannot be explicitly defined; it is always inferred by the type of the function return results.
 
 Tuples can be useful to request multiple values in one `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ call, e.g.::
 
     roundedOHLC() =>
         [math.round_to_mintick(open), math.round_to_mintick(high), math.round_to_mintick(low), math.round_to_mintick(close)]
     [op, hi, lo, cl] = request.security(syminfo.tickerid, "D", roundedOHLC())
+
+or:
+
+    [op, hi, lo, cl] = request.security(syminfo.tickerid, "D", [math.round_to_mintick(open), math.round_to_mintick(high), math.round_to_mintick(low), math.round_to_mintick(close)])
+
+or this form if no rounding is required::
+
+    [op, hi, lo, cl] = request.security(syminfo.tickerid, "D", [open, high, low, close])
 
 Tuples can also be used as return results of local blocks, in an `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ statement for example::
 
@@ -470,7 +526,10 @@ They cannot be used in ternaries, however, because the return values of a ternar
 In Pine there is a special value called `na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__, which is an acronym for *not available*, meaning
 the value of an expression or variable is undefined. It is similar to the ``null`` value in Java, or ``None`` in Python.
 
-`na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__ values can be automatically cast to almost any type. In some cases, however, the Pine compiler cannot automatically infer a type for an `na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__ value because more that one automatic type-casting rule can be applied. For example::
+`na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__ values can be automatically cast to almost any type. 
+In some cases, however, the Pine compiler cannot automatically infer a type for an 
+`na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__ value because more that one automatic type-casting rule can be applied. 
+For example::
 
     // Compilation error!
     myVar = na
@@ -491,11 +550,20 @@ a special function must be used: `na() <https://www.tradingview.com/pine-script-
 
 Do not use the ``==`` operator to test for `na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__ values, as this method is unreliable.
 
-Designing your calculations so they are `na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__-resistant is often useful. In this example, we define a condition that is ``true`` when the bar's `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ is higher than the previous one. For this calculation to work correctly on the dataset's first bar where no previous close exists and ``close[1]`` will return `na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__, we use the `nz() <https://www.tradingview.com/pine-script-reference/v4/#fun_nz>`__ function to replace it with the current bar's `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ for that special case::
+Designing your calculations so they are `na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__-resistant is often useful. 
+In this example, we define a condition that is ``true`` when the bar's `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ 
+is higher than the previous one. For this calculation to work correctly on the dataset's first bar where no previous close exists and ``close[1]`` will return 
+`na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__, we use the 
+`nz() <https://www.tradingview.com/pine-script-reference/v4/#fun_nz>`__ function to replace it with the current bar's 
+`open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ for that special case::
 
     bool risingClose = close > nz(close[1], open)
 
-Protecting against `na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__ values can also be useful to prevent an initial `na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__ value from propagating in a calculation's result on all bars. This happens here because the initial value of ``ath`` is `na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__, and `math.max() <https://www.tradingview.com/pine-script-reference/v5/#fun_math{dot}max>`__ returns `na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__ if one of its arguments is `na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__::
+Protecting against `na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__ values can also be useful to prevent an initial 
+`na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__ value from propagating in a calculation's result on all bars. 
+This happens here because the initial value of ``ath`` is `na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__, and 
+`math.max() <https://www.tradingview.com/pine-script-reference/v5/#fun_math{dot}max>`__ returns 
+`na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__ if one of its arguments is `na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__::
 
     // Declare `ath` and initialize it with `na` on the first bar.
     var float ath = na
@@ -520,7 +588,7 @@ Type casting
 ------------
 
 There is an automatic type-casting mechanism in Pine which can *cast* (or convert) certain types to another. 
-The auto-casting rules are: **int** |rarr| **float** |rarr| **bool**, which means that when a "float" is required, an "int" can be used in its place, 
+The auto-casting rules are: **int** 🠆 **float** 🠆 **bool**, which means that when a "float" is required, an "int" can be used in its place, 
 and when a "bool" value is required, an "int" or "float" value can be used in its place.
 
 See auto-casting in action in this code::
@@ -531,8 +599,13 @@ See auto-casting in action in this code::
 
 Note that:
 
-- `plotshape(() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ requires a "series bool" argument for its first parameter named ``series``. The ``true``/``false`` value of that "bool" argument determines if the function plots a shape or not.
-- We are here calling `plotshape(() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ with `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ as its first argument. This would not be allowed without Pine's auto-casting rules, which allow a "float" to be cast to a "bool". When a "float" is cast to a bool, any non-zero values are converted to ``true``, and zero values are converted to ``false``. As a result of this, our code will plot an "X" on all bars, as long as `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ is not equal to zero.
+- `plotshape(() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ requires a "series bool" argument for its first parameter named ``series``. 
+  The ``true``/``false`` value of that "bool" argument determines if the function plots a shape or not.
+- We are here calling `plotshape(() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ with 
+  `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ as its first argument. 
+  This would not be allowed without Pine's auto-casting rules, which allow a "float" to be cast to a "bool". 
+  When a "float" is cast to a bool, any non-zero values are converted to ``true``, and zero values are converted to ``false``. 
+  As a result of this, our code will plot an "X" on all bars, as long as `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ is not equal to zero.
 
 It may sometimes be necessary to cast one type into another because auto-casting rules will not suffice. 
 For these cases, explicit type-casting functions exist. They are:
@@ -558,7 +631,8 @@ This is code that will not compile because we fail to convert the type of the ar
 The code fails to compile with the following error: 
 *Cannot call 'ta.sma` with argument 'length'='len'. An argument of 'const float' type was used but a 'series int' is expected;*. 
 The compiler is telling us that we supplied a "float" value where an "int" is required. There is no auto-casting rule that can automatically cast a "float" to an "int", 
-so we will need to do the job ourselves. For this, we will use the `int() <https://www.tradingview.com/pine-script-reference/v5/#fun_int>`__ function to force the type conversion of the value we supply as a length to `ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__ from "float" to "int"::
+so we will need to do the job ourselves. For this, we will use the `int() <https://www.tradingview.com/pine-script-reference/v5/#fun_int>`__ 
+function to force the type conversion of the value we supply as a length to `ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__ from "float" to "int"::
 
     //@version=5
     indicator("")
