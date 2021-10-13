@@ -21,7 +21,7 @@ yet when running in realtime they will produce results that constantly fluctuate
 They thus behave differently on historical and realtime bars. 
 This does not necessarily make them less useful in all contexts, nor prevent knowledgeable traders from using them.
 
-The different types of repainting we discuss in this page can be divided as such:
+The different types of repainting we discuss in this page can be divided this way:
 
 - **Widespread and often acceptable**: recalculation during the realtime bar 
   (most classic indicators like MACD, RSI, and the vast majority of indicators in the `Public Library <https://www.tradingview.com/scripts/>`__).
