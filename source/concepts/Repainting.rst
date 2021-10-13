@@ -21,13 +21,22 @@ yet when running in realtime they will produce results that constantly fluctuate
 They thus behave differently on historical and realtime bars. 
 This does not necessarily make them less useful in all contexts, nor prevent knowledgeable traders from using them.
 
+The different types of repainting we discuss in this page can be divided as such:
+
+- **Widespread and often acceptable**: recalculation during the realtime bar 
+  (most classic indicators like MACD, RSI, and the vast majority of indicators in the `Public Library <https://www.tradingview.com/scripts/>`__).
+- **Potentially misleading**: plotting in the past, recalculating and re-situating past events 
+  (Ichimoku, most pivot scripts, most strategies using ``calc_on_evey_tick = true``).
+- **Unacceptable**: scripts using future information, strategies running on non-standard charts.
+- **Unavoidable**: revision of historical feeds by data suppliers, varying starting bar on historical bars.
+
 Some types of repainting, like plotting in the past, can be misleading. 
 If, however, traders understand how plots are offset in the past and exactly when they will appear in realtime, they can be useful that way, even if they repaint.
 Others types of repainting such as future leak, however, are never good because they use data that is never available in realtime. 
 
 Not **all** repainting behavior should necessarily be avoided **all the time**.
 What's important is to understand exactly how the tools you use work, or how you want the ones you design to behave.
-If you publish scripts, then your script's key limitations, which include any repainting behavior, must imperatively be mentioned to potential users.
+If you publish scripts, any potentially misleading repainting behavior should be mentioned along with the other limitations of your script.
 
 
 
