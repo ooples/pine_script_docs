@@ -27,7 +27,7 @@ The different types of repainting we discuss in this page can be divided this wa
   (most classic indicators like MACD, RSI, and the vast majority of indicators in the `Public Library <https://www.tradingview.com/scripts/>`__). 
   If you elect to use these scripts to issue alerts or generate orders, 
   then you should know if they are being generated using the realtime or confirmed values,
-  and decide for yourself if their behavior meets your requirements.
+  and decide for yourself if the script`s behavior meets your requirements.
 - **Potentially misleading**: plotting in the past, recalculating and re-situating past events 
   (Ichimoku, most pivot scripts, most strategies using ``calc_on_evey_tick = true``).
 - **Unacceptable**: scripts using future information, strategies running on non-standard charts.
