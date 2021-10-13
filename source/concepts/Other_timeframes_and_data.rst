@@ -393,12 +393,12 @@ Different data feeds supplied by exchanges/brokers can be used to display inform
 
 - Intraday historical data (for timeframes < 1D)
 - End-of-day (EOD) historical data (for timeframes >= 1D)
-- Realtime feed (which may or may not be delayed, depending on your type of account and the extra data services you may have purchased)
-- Extended hours data (which may be available or not, depending on instruments and the type of account you hold on TradingView).
+- Realtime feed (which may be delayed, depending on your type of account and the extra data services you may have purchased)
+- Extended hours data (which may be available or not, depending on instruments and the type of account you hold on TradingView)
 
 Not all of these types of feed may exist for every instrument. "ICEEUR:BRN1!" for example, only has EOD data.
 
-For some instruments, where both intraday and EOD historical feeds exist, volume data will not be the same because some volume such as block trades or OTC trades 
+For some instruments where both intraday and EOD historical feeds exist, volume data will not be the same because some volume such as block trades or OTC trades 
 may only be reported at the end of the day. It will thus appear in the EOD feed, but not in the intraday feed. 
 Differences in volume data are almost inexistent in the crypto sector, but commonplace in stocks.
 
