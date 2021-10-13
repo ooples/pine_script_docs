@@ -399,17 +399,17 @@ Different data feeds supplied by exchanges/brokers can be used to display inform
 Not all of these types of feed may exist for every instrument. "ICEEUR:BRN1!" for example, only has EOD data.
 
 For some instruments where both intraday and EOD historical feeds exist, volume data will not be the same because some trades (block trades, OTC trades, etc.) 
-may only be reported at the end of the day. It will thus appear in the EOD feed, but not in the intraday feed. 
+may only be reported at the end of the day. That volume will thus appear in the EOD feed, but not in the intraday feed. 
 Differences in volume data are almost inexistent in the crypto sector, but commonplace in stocks.
 
-Prices discrepancies may also occur between both feeds, such that the `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ 
+Slight prices discrepancies may also occur between both feeds, such that the `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ 
 for one day's bar on the EOD feed may not match any of the `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ values of intraday bars for that day.
 
 Another distinction between intraday and EOD feeds is that EOD feeds do not contain data from extended hours.
 
 These differences may account for variations in the values fetched by 
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
-because it can access data from varying timeframes, thus shifting between historical feeds.
+when it is accessing data from varying timeframes, thus shifting between intraday and EOD feeds.
 The differences may also cause discrepancies between data received in realtime vs the way it is reported on historical data.
 There are no steadfast rules about the variations. 
 To understand their details, one must consult the exchange/broker information on the feeds available for each of their markets.
