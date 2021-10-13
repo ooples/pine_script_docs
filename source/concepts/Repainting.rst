@@ -23,14 +23,19 @@ This does not necessarily make them less useful in all contexts, nor prevent kno
 
 The different types of repainting we discuss in this page can be divided this way:
 
-- **Widespread**: recalculation during the realtime bar 
-  (most classic indicators like MACD, RSI, and the vast majority of indicators in the `Public Library <https://www.tradingview.com/scripts/>`__). 
+- **Widespread**: recalculation during the realtime bar on fluid values
+  (most classic indicators like MACD, RSI, and the vast majority of indicators in the `Public Library <https://www.tradingview.com/scripts/>`__,
+  scripts using repainting `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls). 
   If you elect to use these scripts to issue alerts or generate orders, 
   then you should know if they are being generated using the realtime or confirmed values,
   and decide for yourself if the script's behavior meets your requirements.
-- **Misleading**: plotting in the past, recalculating and re-situating past events 
-  (Ichimoku, most pivot scripts, most strategies using ``calc_on_evey_tick = true``).
-- **Unacceptable**: scripts using future information, strategies running on non-standard charts.
+- **Misleading**: plotting in the past, calculating results in realtime that cannot be replicated on historical bars, relocating past events 
+  (Ichimoku, most pivot scripts, most strategies using ``calc_on_evey_tick = true``, 
+  most scripts using `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__,
+  most scripts using `timenow <https://www.tradingview.com/pine-script-reference/v5/#op_timenow>`__,
+  some scripts using ``barstate.*`` variables).
+- **Unacceptable**: scripts using future information, strategies running on non-standard charts, 
+  scripts using realtime intrabar timeframes to generate alerts or orders.
 - **Unavoidable**: revision of historical feeds by data suppliers, varying starting bar on historical bars.
 
 Some types of repainting, like plotting in the past, can be misleading. 
@@ -40,6 +45,11 @@ Others types of repainting such as future leak, however, are never good because 
 Not **all** repainting behavior should necessarily be avoided **all the time**.
 What's important is to understand exactly how the tools you use work, or how you want the ones you design to behave.
 If you publish scripts, any potentially misleading repainting behavior should be mentioned along with the other limitations of your script.
+
+.. note:: We will not discuss the perils of using strategies on non-standard charts,
+   as this problem is not related to repainting.
+   See the `Backtesting on Non-Standard Charts: Caution! <https://www.tradingview.com/script/q9laJNG9-Backtesting-on-Non-Standard-Charts-Caution-PineCoders-FAQ/>`__
+   script for a discussion of the subject.
 
 
 
@@ -98,13 +108,13 @@ Historical vs realtime calculations
 Fluid data values
 ^^^^^^^^^^^^^^^^^
 
-Historical data does not include records of intrabar movements of price; only
+Historical data does not include records of intermediary price movements on bars; only
 `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__,
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__,
 `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ and
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ values (OHLC).
 
-Conversely, on realtime bars (bars running when the instrument's market is open), the
+On realtime bars (bars running when the instrument's market is open), however, the
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__,
 `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ and
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ values are not fixed;
@@ -118,7 +128,7 @@ Any script using values like
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ 
 in realtime is subject to producing calculations that may not be repeatable on historical bars — thus repaint.
 
-Let's look at this simple script. It detect crosses of the
+Let's look at this simple script. It detects crosses of the
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ value
 (in the realtime bar, this corresponds to the current price of the instrument) 
 over and under an `EMA <https://www.tradingview.com/u/?solution=43000592270#>`__::
