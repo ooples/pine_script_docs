@@ -23,10 +23,10 @@ This does not necessarily make them less useful in all contexts, nor prevent kno
 
 The different types of repainting we discuss in this page can be divided this way:
 
-- **Widespread**: recalculation during the realtime bar on fluid values
+- **Widespread**: recalculation during the realtime bar
   (most classic indicators like MACD, RSI, and the vast majority of indicators in the `Public Library <https://www.tradingview.com/scripts/>`__,
-  scripts using repainting `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls). 
-  If you elect to use these scripts to issue alerts or generate orders, 
+  scripts using repainting `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls, etc.). 
+  If you elect to use these scripts to issue alerts or issue orders, 
   then you should know if they are being generated using the realtime or confirmed values,
   and decide for yourself if the script's behavior meets your requirements.
 - **Misleading**: plotting in the past, calculating results in realtime that cannot be replicated on historical bars, relocating past events 
