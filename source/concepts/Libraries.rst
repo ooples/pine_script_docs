@@ -211,6 +211,9 @@ Using a library from another script (which can be an indicator, a strategy or an
 where:
 
 - The <username>/<libraryName>/<libraryVersion> path will uniquely identify the library.
+- The <libraryVersion> must be specified explicitly. To ensure the reliability of scripts using libraries, there is no way to automatically use the latest version of a library.
+  Every time a library is updated by its author, its version number increases. If you intend to use the latest version of the library, 
+  the <libraryVersion> value will require updating in the `import <https://www.tradingview.com/pine-script-reference/v5/#op_import>`__ statement.
 - The ``as <alias>`` part is optional. When used, it defines the namespace that will refer to the library's functions. 
   For example, if you import a library using the ``allTime`` alias as we do in the example below, you will refer to that library's functions as ``allTime.<function_mame>()``. 
   When no alias is defined, the library's name becomes its namespace.
@@ -243,3 +246,4 @@ Note that:
   `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ built-in variables will be used for their series, respectively.
 - We use a second call to ``allTime.hi()``, but this time using `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ as its argument, 
   to plot the highest `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ in the chart's history.
+

@@ -38,11 +38,13 @@ The different types of repainting we discuss in this page can be divided this wa
   scripts using realtime intrabar timeframes to generate alerts or orders.
 - **Unavoidable**: revision of historical feeds by data suppliers, varying starting bar on historical bars.
 
-Some types of repainting, like plotting in the past, can be misleading. 
-If, however, traders understand how plots are offset in the past and exactly when they will appear in realtime, they can be useful that way, even if they repaint.
-Others types of repainting such as future leak, however, are never good because they use data that is never available in realtime. 
+The first two types of repainting can be perfectly acceptable to you if:
 
-Not **all** repainting behavior should necessarily be avoided **all the time**.
+#. You are aware of the behavior.
+#. You can live with it, or
+#. You can circumvent it.
+
+Not **all** repainting behavior should thus necessarily be avoided **all the time**.
 What's important is to understand exactly how the tools you use work, or how you want the ones you design to behave.
 If you publish scripts, any potentially misleading repainting behavior should be mentioned along with the other limitations of your script.
 
