@@ -31,6 +31,8 @@ The different types of repainting we discuss in this page can be divided this wa
   and decide for yourself if the script's behavior meets your requirements.
 - **Misleading**: plotting in the past, calculating results in realtime that cannot be replicated on historical bars, relocating past events 
   (Ichimoku, most pivot scripts, most strategies using ``calc_on_evey_tick = true``, 
+  scripts using repainting `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls when their values are plotted on historical bars,
+  as their behavior will not be the same in realtime,
   most scripts using `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__,
   most scripts using `timenow <https://www.tradingview.com/pine-script-reference/v5/#op_timenow>`__,
   some scripts using ``barstate.*`` variables).
