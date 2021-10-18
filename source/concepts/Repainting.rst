@@ -40,7 +40,7 @@ The different types of repainting we discuss in this page can be divided this wa
   scripts using realtime intrabar timeframes to generate alerts or orders.
 - **Unavoidable**: revision of historical feeds by data suppliers, varying starting bar on historical bars.
 
-The first two types of repainting can be perfectly acceptable to you if:
+The first two types of repainting can be perfectly acceptable if:
 
 #. You are aware of the behavior.
 #. You can live with it, or
@@ -305,8 +305,9 @@ to request data from a timeframe **lower** than the chart's timeframe.
 This can be useful when functions specifically designed to handle intrabars at lower timeframes are sent down the timeframe.
 When this type of user-defined function requires the detection of the intrabars' first bar, as most do,
 the technique will only work on historical bars. This is due to the fact that realtime intrabars are not yet sorted.
-The impact of this is that such scripts will not be able to generate alerts, for example,
-and will require constant refreshing to recalculate elapsed realtime bars as historical bars.
+The impact of this is that such scripts cannot reproduce in realtime their behavior on historical bars.
+Any logic generating alerts, for example, will be flawed,
+and constant refreshing will be required to recalculate elapsed realtime bars as historical bars.
 
 When used at lower timeframes than the chart's without specialized functions able to distinguish between intrabars,
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
@@ -315,8 +316,8 @@ which is usually not useful, and will also not reproduce in realtime, so lead to
 
 For all these reasons, unless you understand the subtleties of using 
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
-at lower timeframes than the chart's, it is best to avoid it.
-High-quality scripts will have logic to detect such anomalies,
+at lower timeframes than the chart's, it is best to avoid using the function at those timeframes.
+Higher-quality scripts will have logic to detect such anomalies
 and prevent the display of results which would be invalid when a lower timeframe is used.
 
 
