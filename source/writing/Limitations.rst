@@ -46,6 +46,7 @@ Code
 - 100,000 elements array size
 - 1K variables per local block
 - 500 local blocks
+- 9 tables (one in each of the possible locations)
 
 
 
@@ -63,6 +64,8 @@ Plot count
 - 40 calls
 - 100K intrabars (20K bars and no replay mode if a spread is used)
 
+
+
 Compile time
 ^^^^^^^^^^^^
 
@@ -73,10 +76,8 @@ Compile time
 Runtime
 -------
 
-- 200 ms per loop
-- 20,000 ms per script
+- 300 ms per loop
+- 40,000 ms per script
 - Memory
-
-
 
 

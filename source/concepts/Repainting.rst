@@ -278,7 +278,7 @@ This script shows a ``nonRepaintingSecurity()`` function that can be used to do 
     tfInput = input.timeframe("1")
     
     nonRepaintingSecurity(sym, tf, src) =>
-        request.security(sym, tf, close[barstate.isrealtime ? 1 : 0])[barstate.isrealtime ? 0 : 1]
+        request.security(sym, tf, src[barstate.isrealtime ? 1 : 0])[barstate.isrealtime ? 0 : 1]
     
     nonRepaintingClose = nonRepaintingSecurity(syminfo.tickerid, "1", close)
     plot(nonRepaintingClose, "Non-repainting close", color.fuchsia, 3)
@@ -305,14 +305,14 @@ to request data from a timeframe **lower** than the chart's timeframe.
 This can be useful when functions specifically designed to handle intrabars at lower timeframes are sent down the timeframe.
 When this type of user-defined function requires the detection of the intrabars' first bar, as most do,
 the technique will only work on historical bars. This is due to the fact that realtime intrabars are not yet sorted.
-The impact of this is that such scripts cannot reproduce in realtime their behavior on historical bars.
+The impact of this is that such scripts cannot reproduce in real time their behavior on historical bars.
 Any logic generating alerts, for example, will be flawed,
 and constant refreshing will be required to recalculate elapsed realtime bars as historical bars.
 
 When used at lower timeframes than the chart's without specialized functions able to distinguish between intrabars,
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
 will only return the value of the **last** intrabar in the dilation of the chart's bar,
-which is usually not useful, and will also not reproduce in realtime, so lead to repainting.
+which is usually not useful, and will also not reproduce in real time, so lead to repainting.
 
 For all these reasons, unless you understand the subtleties of using 
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
