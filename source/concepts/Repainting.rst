@@ -20,12 +20,14 @@ exhibit one form of repainting because they show one value on historical bars,
 yet when running in realtime they will produce results that constantly fluctuate until the realtime bar closes. 
 They thus behave differently on historical and realtime bars. 
 This does not necessarily make them less useful in all contexts, nor prevent knowledgeable traders from using them.
+Who would think of discrediting a volume profile indicator, for example because it updates in real time, and so repaints?
 
 The different types of repainting we discuss in this page can be divided this way:
 
 - **Widespread**: recalculation during the realtime bar
   (most classic indicators like MACD, RSI, and the vast majority of indicators in the `Public Library <https://www.tradingview.com/scripts/>`__,
   scripts using repainting `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls, etc.). 
+  There is often nothing wrong in using such scripts, provided you understand how they work.
   If you elect to use these scripts to issue alerts or trade orders, 
   then you should know if they are being generated using the realtime or confirmed values,
   and decide for yourself if the script's behavior meets your requirements.
@@ -46,8 +48,10 @@ The first two types of repainting can be perfectly acceptable if:
 #. You can live with it, or
 #. You can circumvent it.
 
-Not **all** repainting behavior should thus necessarily be avoided **all the time**.
-What's important is to understand exactly how the tools you use work, or how you want the ones you design to behave.
+It should now be clear to you that not **all** repainting behavior is inherently wrong and should be avoided at all cost.
+In many situations, repainting indicators are exactly what's needed.
+What's important is to know when repainting behavior is **not** acceptable to you.
+To avoid such situations, you must understand exactly how the tools you use work, or how you should design the ones you build.
 If you publish scripts, any potentially misleading repainting behavior should be mentioned along with the other limitations of your script.
 
 .. note:: We will not discuss the perils of using strategies on non-standard charts,
