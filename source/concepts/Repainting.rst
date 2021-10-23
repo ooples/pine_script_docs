@@ -24,7 +24,7 @@ Who would think of discrediting a volume profile indicator, for example because 
 
 The different types of repainting we discuss in this page can be divided this way:
 
-- **Widespread**: recalculation during the realtime bar
+- **Widespread and often acceptable**: recalculation during the realtime bar
   (most classic indicators like MACD, RSI, and the vast majority of indicators in the `Public Library <https://www.tradingview.com/scripts/>`__,
   scripts using repainting `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls, etc.). 
   There is often nothing wrong in using such scripts, provided you understand how they work.
