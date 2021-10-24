@@ -28,7 +28,7 @@ The different types of repainting we discuss in this page can be divided this wa
   (most classic indicators like MACD, RSI, and the vast majority of indicators in the `Public Library <https://www.tradingview.com/scripts/>`__,
   scripts using repainting `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls, etc.). 
   There is often nothing wrong in using such scripts, provided you understand how they work.
-  If you elect to use these scripts to issue alerts or trade orders, 
+  If you elect to use these scripts to issue alerts or trade orders, however,
   then you should know if they are being generated using the realtime or confirmed values,
   and decide for yourself if the script's behavior meets your requirements.
 - **Misleading**: plotting in the past, calculating results in realtime that cannot be replicated on historical bars, relocating past events 
