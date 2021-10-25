@@ -648,11 +648,11 @@ Note that:
 
 
 
-Calculated values
-^^^^^^^^^^^^^^^^^
+Calculated financial metrics
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Some common financial metrics cannot be retrieved with `request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__
-because they are calculated by combining financial metrics with an instrument's current chart price.
+Some common financial metrics cannot be fetched with `request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__
+because they require combining financial metrics with an instrument's current chart price.
 Such is the case for:
 
 - Market Capitalization (price X number of shares outstanding)
