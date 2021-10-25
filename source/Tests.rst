@@ -70,46 +70,19 @@ GIF
 
    
 
-Go back link
-""""""""""""
-
-:ref:`Go back to top <PageTests>`
-
-
-
-Macro urls
-""""""""""
-
-.. |plotchar()| `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__
-
-.. |plotchar()replace| replace:: `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__
-
-.. |var| `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__
-
-.. |var2|                   `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__
-
-.. |box.set_rightbottom()| `var <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_rightbottom>`__
-
-Refer to the :ref:`Concepts <IndexConcepts>` section of this manual.
-
-`plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__
-
-|plotchar()|
-
-|plotchar()replace|
-
-|var|
-
-|var2|
-
-A sentence with box.set_rightbottom() |box.set_rightbottom()| in it.
-
-
-
 Page footer
 """""""""""
 
 .. image:: images/TradingView-Logo-Block.svg
+    :width: 400px
+    :align: center
+
+
+
+Macro path
+""""""""""
+
+.. image:: /source/images/TradingView-Logo-Block.svg
     :width: 400px
     :align: center
 
@@ -123,10 +96,10 @@ Root path name
 
 Inline macro here:
 
-Before inline macro: |TVLogoFooter| After inline macro
+Before inline macro: |tvlogofooter| After inline macro
 
 Macro here:
 
-|TVLogoFooter|
+|tvlogofooter|
 
-.. |TVLogoFooter| image:: /source/images/TradingView-Logo-Block.svg
+.. |tvlogofooter| image:: /source/images/TradingView-Logo-Block.svg

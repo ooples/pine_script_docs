@@ -28,16 +28,21 @@ These are the signatures of the functions in the ``request`` namespace:
 .. code-block:: text
 
     request.security(symbol, timeframe, expression, gaps, lookahead, ignore_invalid_symbol, currency) → series int/float/bool/color
+
     request.financial(symbol, financial_id, period, gaps, ignore_invalid_symbol, currency) → series float
+    
     request.dividends(ticker, field, gaps, lookahead, ignore_invalid_symbol, currency) → series float
     request.earnings(ticker, field, gaps, lookahead, ignore_invalid_symbol, currency) → series float
     request.splits(ticker, field, gaps, lookahead, ignore_invalid_symbol, currency) → series float
+    
     request.quandl(ticker, gaps, index, ignore_invalid_symbol, currency) → series float
 
 Functions in the ``request.*()`` family have many different applications, and their use can be rather involved.
 Accordingly, this page is quite lengthy.
 
 
+
+.. _PageOtherTimeframesAndData_CommonCharacteristics:
 
 Common characteristics
 ----------------------
@@ -596,87 +601,170 @@ Fetching standard prices from a non-standard chart
 \`request.financial()\`
 -----------------------
 
+This function returns a financial metric from `FactSet <https://www.factset.com/>`__ for a given fiscal period. More than 200 financial metrics are available, although not for every symbol or fiscal period. 
+Note that financial data is also available on TradingView through the chart's `"Fundamental metrics for stocks" button <https://www.tradingview.com/?solution=43000543506>`__ in the top menu.
 
-The function's signature is: 
+The signature of `request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__ is: 
 
 .. code-block:: text
 
     request.financial(symbol, financial_id, period, gaps, ignore_invalid_symbol, currency) → series float
 
-The first argument here is similar to the first argument of the security function, and is the name of the symbol for which the metric is requested. For example: ”NASDAQ:AAPL”.
+We have covered the last three parameters in the :ref:`Common characteristics <PageOtherTimeframesAndData_CommonCharacteristics>` section of this page.
+The first three parameters all require a "simple string" argument. They are:
 
-The second argument is the identifier of the required metric: the value from the third column of the table.
+``symbol``
+   This is similar to the first parameter of the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__.
+   It is the name of the symbol for which a financial metric is requested. For example: `"NASDAQ:AAPL"`.
 
-The third argument indicates how frequently this metric is published: one of the values from the corresponding cells in the second column.
+``financial_id``
+   This is the identifier of the required metric. There are more than 200 IDs. They are listed in the third column of the :ref:`Financial IDs <PageOtherTimeframesAndData_FinancialIDs>` section below.
 
-The fourth argument is optional and is similar to the gaps argument of the security function. If gaps = true, values are displayed only on bars corresponding to the publication date of the data.
-
-The function returns the values of the requested financial data.
-
-For example:
-
-f = financial ("NASDAQ:AAPL", "ACCOUNTS_PAYABLE", "FQ")
-You can read more about the financial data here.
-
-Note that when you request financial data using the dividends and earnings functions, the new value is returned on the bar where the report was published. Using the financial function, you get a new value on the bar where the next fiscal period begins.
-
-Ratios based on market price
-
-Some of the financial indicators in the Financial menu are not in the table below because they are calculated using a financial metric and the current price on the chart. This entails you cannot request their values directly, but you can calculate them with a few lines of Pine code.
-
-Market Capitalization
-
-Market capitalization is equal to the share price multiplied by the number of shares outstanding (FQ).
-
-TSO = financial(syminfo.tickerid, "TOTAL_SHARES_OUTSTANDING", "FQ")
-MarketCap = TSO*close
-Earnings Yield
-
-The earnings yield is calculated by dividing earnings per share for the last 12-month period by the current market price per share. Multiplying the result by 100 yields the Earnings Yield % value.
-
-EPS = financial(syminfo.tickerid, "EARNINGS_PER_SHARE", "TTM")
-EarningsYield = (EPS/close)*100
-Price Book Ratio
-
-Price Book Ratio is calculated by dividing the price per share by the book value per share.
-
-BVPS = financial(syminfo.tickerid, "BOOK_VALUE_PER_SHARE", "FQ")
-PriceBookRatio = close/BVPS
-Price Earnings Ratio
-
-Price Earnings Ratio is calculated by dividing the current market price per share by the earnings per share for the last 12-month period.
-
-EPS = financial(syminfo.tickerid, "EARNINGS_PER_SHARE", "TTM")
-PriceEarningsRatio = close/EPS
-Price Sales Ratio
-
-Price Sales Ratio is calculated by dividing the company’s market capitalization by its total revenue over the last twelve months.
-
-TSO = financial(syminfo.tickerid, "TOTAL_SHARES_OUTSTANDING", "FQ")
-TR = financial(syminfo.tickerid, "TOTAL_REVENUE", "TTM")
-MarketCap = TSO*close
-PriseSalesRatio = MarketCap/TR
+``period``
+   This represents the frequency at which you require the values to update on your chart. There are three possible arguments: ``"FQ"`` (quarterly), ``"FY"`` (yearly) and ``"TTM"`` (trailing twelve months).
+   Not all frequencies are available for all metrics. Possible values for each metric are listed in the second column of the :ref:`Financial IDs <PageOtherTimeframesAndData_FinancialIDs>` section below.
+   Note that each frequency is fixed and independent of the exact date where the data is made available within each period.
+   If for dividends or earnings you require the data when it is made available, use
+   `request.dividends() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}dividends>`__ or
+   `request.earnings() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}earnings>`__ instead.
 
 
+This plots the quaterly value of accounts payable for Apple:
+
+.. image:: images/OtherTimeframesAndData-RequestFinancial()-01.png
+
+::
+
+    //@version=5
+    indicator("")
+    f = request.financial ("NASDAQ:AAPL", "ACCOUNTS_PAYABLE", "FQ")
+    plot(f)
+
+Note that:
+
+- The data begins in 2013.
+- We are not using gaps, so the fetched value stays the same for during each fiscal quarter.
+- New values appear on the bar where the next fiscal period begins.
+
+
+
+Calculated financial metrics
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Some common financial metrics cannot be fetched with `request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__
+because they require combining metrics with an instrument's current chart price.
+Such is the case for:
+
+- Market Capitalization (price X number of shares outstanding)
+- Earnings Yield (earnings per share for the last 12-month / current market price)
+- Price Book Ratio (price / book value per share)
+- Price Earnings Ratio (price / earnings per share)
+- Price Sales Ratio (company’s market capitalization / total revenue over the last twelve months)
+
+Here, we calculates all five values:
+
+.. image:: images/OtherTimeframesAndData-RequestFinancial()-02.png
+
+::
+
+    //@version=5
+    indicator("")
+    
+    // ————— Market capitalization
+    marketCap() =>
+        totalSharesOutstanding = request.financial(syminfo.tickerid, "TOTAL_SHARES_OUTSTANDING", "FQ")
+        marketCap = totalSharesOutstanding * close
+    
+    // ————— Earnings yield
+    earningsYield() =>
+        earningsPerShare = request.financial(syminfo.tickerid, "EARNINGS_PER_SHARE", "TTM")
+        earningsYield = (earningsPerShare / close) * 100
+    
+    // ————— Price Book Ratio
+    priceBookRatio() =>
+        bookValuePerShare = request.financial(syminfo.tickerid, "BOOK_VALUE_PER_SHARE", "FQ")
+        priceBookRatio = close / bookValuePerShare
+    
+    // ————— Price Earnings Ratio
+    priceEarningsRatio() =>
+        earningsPerShare = request.financial(syminfo.tickerid, "EARNINGS_PER_SHARE", "TTM")
+        priceEarningsRatio = close / earningsPerShare
+    
+    // ————— Price Sales Ratio
+    priseSalesRatio() =>
+        totalSharesOutstanding = request.financial(syminfo.tickerid, "TOTAL_SHARES_OUTSTANDING", "FQ")
+        mktCap = totalSharesOutstanding * close
+        totalRevenue = request.financial(syminfo.tickerid, "TOTAL_REVENUE", "TTM")
+        priseSalesRatio = mktCap / totalRevenue
+    
+    plot(earningsYield(), "Earnings yield", color.aqua, 2)
+    plot(priceBookRatio(), "Price Book Ratio", color.orange, 2)
+    plot(priceEarningsRatio(), "Price Earnings Ratio", color.purple, 2)
+    plot(priseSalesRatio(), "Price Sales Ratio", color.teal, 2)
+    
+    // ————— Display market cap using a label because its values are too large compared to the others.
+    // New function using gaps.
+    marketCapWithGaps() =>
+        totalSharesOutstanding = request.financial(syminfo.tickerid, "TOTAL_SHARES_OUTSTANDING", "FQ", gaps = barmerge.gaps_on)
+        mktCapGaps = totalSharesOutstanding * close
+    // Convert value to a string, abbreviating large values as is done for volume. Add currency.
+    mktCapGapsTxt = str.tostring(marketCapWithGaps(), format.volume) + " " + syminfo.currency
+    // Label's y position is the highest value among the last 50 of the four plotted values.
+    labelY = ta.highest(math.max(earningsYield(), priceBookRatio(), priceEarningsRatio(), priseSalesRatio()), 50)
+    // When the function returns a value instead of `na`, display a label.
+    if not na(marketCapWithGaps())
+        label.new(bar_index, labelY, mktCapGapsTxt, color = color.new(color.blue, 85), size = size.large)
+
+Note that:
+
+- We create a :ref:`user-defined function <PageUserDefinedFunctions>` for each value, which makes it easier to reuse the code.
+- We plot all the values except the market cap. That value being much larger than the others, plotting it would more or less turn the other plots into flat lines.
+- We use another method to display the market cap, which involves creating a version of its function that uses gaps, so we have an easy way to 
+  detect when a new value comes in for it and should be shown. We also format the value using 
+  `format.volume <https://www.tradingview.com/pine-script-reference/v5/#var_format{dot}volume>`__ to abbreviate large values,
+  and add the currency using `syminfo.currency <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}currency>`__.
+  To determine the height of the label, we calculate the maximum value plotted in the last 50 bars.
+
+
+
+.. _PageOtherTimeframesAndData_FinancialIDs:
 
 Financial IDs
 ^^^^^^^^^^^^^
 
-All financial data available in Pine is listed below. The table columns contain the following information:
+All financial metrics available with `request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__ is listed below. 
+The table columns contain the following information:
 
-- The "Financial" column is a description of the value.
-- The ``period`` column lists the strings that can be used as values for 
-  `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__'s
-  ``period`` parameter: ``"TTM"`` (trailing twelve months), ``"FY"`` (financial year) or ``"FQ"`` (financial quarter).
-  Only one must be used per function call. Not all periods are available for all financials.
-- The ``financial_id`` column lists the strings to be used for the ``financial_id`` parameter.
+- The "Financial" column is a description of the value. It links to a corresponding Help Center page providing more information on the metric.
+- The ``period`` column lists the arguments that can be used for the namesake parameter in
+  `request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__.
+  Only one period can be used per function call. Not all periods are available for all metrics.
+- The ``financial_id`` column lists the string to be used for the ``financial_id`` parameter.
 
-To make the financials easier to search, they are divided into four categories:
+Metrics are divided in four categories:
 
 - :ref:`Income statements <PageOtherTimeframesAndData_IncomeStatements>`
 - :ref:`Balance sheet <PageOtherTimeframesAndData_BalanceSheet>`
 - :ref:`Cash flow <PageOtherTimeframesAndData_CashFlow>`
 - :ref:`Statistics <PageOtherTimeframesAndData_Statistics>`
+
+
+
+
+Income
+"""""""""""""""""
+
++-------------------------------------------------------------------------------------------------------------+-------------+--------------------------------------------+
+| **Financial**                                                                                               | ``period``  | ``financial_id``                           |
++-------------------------------------------------------------------------------------------------------------+-------------+--------------------------------------------+
+| `After tax other income/expense <https://www.tradingview.com/?solution=43000563497>`__                      | FQ, FY      | AFTER_TAX_OTHER_INCOME                     |
++-------------------------------------------------------------------------------------------------------------+-------------+--------------------------------------------+
+| `Average basic shares outstanding <https://www.tradingview.com/?solution=43000      >`__                    | FQ, FY      | BASIC_SHARES_OUTSTANDING                   |
++-------------------------------------------------------------------------------------------------------------+-------------+--------------------------------------------+
+| `Other COGS <https://www.tradingview.com/?solution=43000563478>`__                                          | FQ, FY      | COST_OF_GOODS_EXCL_DEP_AMORT               |
++-------------------------------------------------------------------------------------------------------------+-------------+--------------------------------------------+
+| Cost of goods                                                                                               | FQ, FY      | COST_OF_GOODS                              |
++-------------------------------------------------------------------------------------------------------------+-------------+--------------------------------------------+
 
 
 
@@ -1172,7 +1260,7 @@ Statistics
 \`request.dividends()\`, \`request.earnings()\` and \`request.splits()\`
 ------------------------------------------------------------------------
 
-
+Note that when you request financial data using the dividends and earnings functions, the new value is returned on the bar where the report was published.
 
 
 

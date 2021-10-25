@@ -50,7 +50,7 @@ Time built-ins
 Pine has built-in **variables** to:
 
 - Get timestamp information from the current bar (UTC time zone): 
-  `time <https://www.tradingview.com/pine-script-reference/v5/#var_time_close>`__ and
+  `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ and
   `time_close <https://www.tradingview.com/pine-script-reference/v5/#var_time_close>`__
 - Get timestamp information for the beginning of the current trading day (UTC time zone):
   `time_tradingday <https://www.tradingview.com/pine-script-reference/v5/#var_time_tradingday>`__

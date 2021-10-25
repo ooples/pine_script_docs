@@ -16,18 +16,48 @@ We define repainting as: **script behavior causing historical vs realtime calcul
 Repainting behavior is widespread and can be caused by many factors. 
 Following our definition, our estimate is that more than 95% of indicators in existence repaint. 
 Widely used indicators like MACD and RSI, for example, 
-exhibit one form of repainting because they show one fixed value on historical bars,
+exhibit one form of repainting because they show one value on historical bars,
 yet when running in realtime they will produce results that constantly fluctuate until the realtime bar closes. 
 They thus behave differently on historical and realtime bars. 
 This does not necessarily make them less useful in all contexts, nor prevent knowledgeable traders from using them.
+Who would think of discrediting a volume profile indicator, for example because it updates in real time, and so repaints?
 
-Some types of repainting, like plotting in the past, can be misleading. 
-If, however, traders understand how plots are offset in the past and exactly when they will appear in realtime, they can be useful that way, even if they repaint.
-Others types of repainting such as future leak, however, are never good because they use data that is never available in realtime. 
+The different types of repainting we discuss in this page can be divided this way:
 
-Not **all** repainting behavior should necessarily be avoided **all the time**.
-What's important is to understand exactly how the tools you use work, or how you want the ones you design to behave.
-If you publish scripts, then your script's key limitations, which include any repainting behavior, must imperatively be mentioned to potential users.
+- **Widespread and often acceptable**: recalculation during the realtime bar
+  (most classic indicators like MACD, RSI, and the vast majority of indicators in the `Public Library <https://www.tradingview.com/scripts/>`__,
+  scripts using repainting `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls, etc.). 
+  There is often nothing wrong in using such scripts, provided you understand how they work.
+  If you elect to use these scripts to issue alerts or trade orders, however,
+  then you should know if they are being generated using the realtime or confirmed values,
+  and decide for yourself if the script's behavior meets your requirements.
+- **Misleading**: plotting in the past, calculating results in realtime that cannot be replicated on historical bars, relocating past events 
+  (Ichimoku, most pivot scripts, most strategies using ``calc_on_evey_tick = true``, 
+  scripts using repainting `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls when their values are plotted on historical bars,
+  as their behavior will not be the same in realtime,
+  most scripts using `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__,
+  most scripts using `timenow <https://www.tradingview.com/pine-script-reference/v5/#op_timenow>`__,
+  some scripts using ``barstate.*`` variables).
+- **Unacceptable**: scripts using future information, strategies running on non-standard charts, 
+  scripts using realtime intrabar timeframes to generate alerts or orders.
+- **Unavoidable**: revision of historical feeds by data suppliers, varying starting bar on historical bars.
+
+The first two types of repainting can be perfectly acceptable if:
+
+#. You are aware of the behavior.
+#. You can live with it, or
+#. You can circumvent it.
+
+It should now be clear to you that not **all** repainting behavior is inherently wrong and should be avoided at all cost.
+In many situations, repainting indicators are exactly what's needed.
+What's important is to know when repainting behavior is **not** acceptable to you.
+To avoid such situations, you must understand exactly how the tools you use work, or how you should design the ones you build.
+If you publish scripts, any potentially misleading repainting behavior should be mentioned along with the other limitations of your script.
+
+.. note:: We will not discuss the perils of using strategies on non-standard charts,
+   as this problem is not related to repainting.
+   See the `Backtesting on Non-Standard Charts: Caution! <https://www.tradingview.com/script/q9laJNG9-Backtesting-on-Non-Standard-Charts-Caution-PineCoders-FAQ/>`__
+   script for a discussion of the subject.
 
 
 
@@ -86,13 +116,13 @@ Historical vs realtime calculations
 Fluid data values
 ^^^^^^^^^^^^^^^^^
 
-Historical data does not include records of intrabar movements of price; only
+Historical data does not include records of intermediary price movements on bars; only
 `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__,
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__,
 `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ and
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ values (OHLC).
 
-Conversely, on realtime bars (bars running when the instrument's market is open), the
+On realtime bars (bars running when the instrument's market is open), however, the
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__,
 `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ and
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ values are not fixed;
@@ -106,7 +136,7 @@ Any script using values like
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ 
 in realtime is subject to producing calculations that may not be repeatable on historical bars — thus repaint.
 
-Let's look at this simple script. It detect crosses of the
+Let's look at this simple script. It detects crosses of the
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ value
 (in the realtime bar, this corresponds to the current price of the instrument) 
 over and under an `EMA <https://www.tradingview.com/u/?solution=43000592270#>`__::
@@ -252,7 +282,7 @@ This script shows a ``nonRepaintingSecurity()`` function that can be used to do 
     tfInput = input.timeframe("1")
     
     nonRepaintingSecurity(sym, tf, src) =>
-        request.security(sym, tf, close[barstate.isrealtime ? 1 : 0])[barstate.isrealtime ? 0 : 1]
+        request.security(sym, tf, src[barstate.isrealtime ? 1 : 0])[barstate.isrealtime ? 0 : 1]
     
     nonRepaintingClose = nonRepaintingSecurity(syminfo.tickerid, "1", close)
     plot(nonRepaintingClose, "Non-repainting close", color.fuchsia, 3)
@@ -279,18 +309,19 @@ to request data from a timeframe **lower** than the chart's timeframe.
 This can be useful when functions specifically designed to handle intrabars at lower timeframes are sent down the timeframe.
 When this type of user-defined function requires the detection of the intrabars' first bar, as most do,
 the technique will only work on historical bars. This is due to the fact that realtime intrabars are not yet sorted.
-The impact of this is that such scripts will not be able to generate alerts, for example,
-and will require constant refreshing to recalculate elapsed realtime bars as historical bars.
+The impact of this is that such scripts cannot reproduce in real time their behavior on historical bars.
+Any logic generating alerts, for example, will be flawed,
+and constant refreshing will be required to recalculate elapsed realtime bars as historical bars.
 
 When used at lower timeframes than the chart's without specialized functions able to distinguish between intrabars,
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
 will only return the value of the **last** intrabar in the dilation of the chart's bar,
-which is usually not useful, and will also not reproduce in realtime, so lead to repainting.
+which is usually not useful, and will also not reproduce in real time, so lead to repainting.
 
 For all these reasons, unless you understand the subtleties of using 
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
-at lower timeframes than the chart's, it is best to avoid it.
-High-quality scripts will have logic to detect such anomalies,
+at lower timeframes than the chart's, it is best to avoid using the function at those timeframes.
+Higher-quality scripts will have logic to detect such anomalies
 and prevent the display of results which would be invalid when a lower timeframe is used.
 
 

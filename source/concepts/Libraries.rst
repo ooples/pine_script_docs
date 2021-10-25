@@ -23,12 +23,17 @@ Library programmers should be familiar with Pine's typing nomenclature, scopes a
 If you need to brush up on Pine forms and types, see the User Manual's page on the :ref:`Type system <PageTypeSystem>`. 
 For more information on user-defined functions and scopes, see the :ref:`User-defined functions <PageUserDefinedFunctions>` page.
 
+You can browse the public library scripts published by TradingView members in the `Public Library <https://www.tradingview.com/scripts/?script_type=libraries>`__.
+
 
 
 Creating a library
 ------------------
 
-A Pine library is a special kind of script that begins with the `library() <https://www.tradingview.com/pine-script-reference/v5/#fun_library>`__ declaration statement, rather than `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ or `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__. A library contains exportable function definitions, which constitute the only visible part of the library when it is used by another script. Libraries can also use other Pine code in their global scope, like a normal indicator. This code will typically serve to demonstrate how to use the library's functions.
+A Pine library is a special kind of script that begins with the `library() <https://www.tradingview.com/pine-script-reference/v5/#fun_library>`__ declaration statement, 
+rather than `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ or `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__. 
+A library contains exportable function definitions, which constitute the only visible part of the library when it is used by another script. 
+Libraries can also use other Pine code in their global scope, like a normal indicator. This code will typically serve to demonstrate how to use the library's functions.
 
 A library script has the following structure, where one or more exportable functions must be defined::
 
@@ -49,7 +54,8 @@ A library script has the following structure, where one or more exportable funct
 
 Note that:
 
-- The ``// @description``, ``// @function``, ``// @param`` and ``// @returns`` compiler directives are optional but we highly recommend you use them. They serve a double purpose: document the library's code and populate the default library description which authors can use when publishing the library.
+- The ``// @description``, ``// @function``, ``// @param`` and ``// @returns`` compiler directives are optional but we highly recommend you use them. 
+  They serve a double purpose: document the library's code and populate the default library description which authors can use when publishing the library.
 - The `export <https://www.tradingview.com/pine-script-reference/v5/#op_export>`__ keyword is mandatory.
 - <parameter_type> is mandatory, contrary to user-defined function parameter definitions in indicators or strategies, which are typeless.
 - <script_code> can be any code you would normally use in an indicator, including inputs or plots.
@@ -83,20 +89,29 @@ This is an example library::
 Library functions
 ^^^^^^^^^^^^^^^^^
 
-Function definitions in libraries are slightly different than those of user-defined functions in indicators and strategies. There are constraints as to what can be included in the body of library functions.
+Function definitions in libraries are slightly different than those of user-defined functions in indicators and strategies. 
+There are constraints as to what can be included in the body of library functions.
 
 In library function signatures (their first line):
 
 - The `export <https://www.tradingview.com/pine-script-reference/v5/#op_export>`__ keyword is mandatory.
 - The type of argument expected for each parameter must be explicitly mentioned.
-- A `simple <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ or `series <https://www.tradingview.com/pine-script-reference/v5/#op_series>`__ form modifier can restrict the allowable forms of arguments (the next section explains their use).
+- A `simple <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ or 
+  `series <https://www.tradingview.com/pine-script-reference/v5/#op_series>`__ 
+  form modifier can restrict the allowable forms of arguments (the next section explains their use).
 
-In library function code:
+These are the constraints imposed on library functions:
 
-- You cannot use variables from the library's global scope unless they are of "const" form. This means you cannot use global variables initialized from script inputs, for example, or globally declared arrays.
-- You cannot use functions in the ``request.*()`` namespace.
+- They cannot use variables from the library's global scope unless they are of "const" form. 
+  This means you cannot use global variables initialized from script inputs, for example, or globally declared arrays.
+- ``request.*()`` calls are not allowed.
+- ``input.*()`` calls are not allowed.
+- ``plot*()``, ``fill()`` and ``bgcolor()`` calls are not allowed.
 
-Library functions always return a result that is either of "simple" or "series" form. You cannot use them to calculate values where "const" or "input" forms are required, as is the case with some Pine built-in function arguments. For example, a library function cannot be used to calculate an argument for the ``show_last`` parameter in a `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call, because an "input int" argument is required for ``show_last``.
+Library functions always return a result that is either of "simple" or "series" form. 
+You cannot use them to calculate values where "const" or "input" forms are required, as is the case with some Pine built-in function arguments. 
+For example, a library function cannot be used to calculate an argument for the ``show_last`` parameter in a 
+`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call, because an "input int" argument is required for ``show_last``.
 
 
 
@@ -109,43 +124,61 @@ If the argument can be used in "series" form, it is. If it cannot, an attempt is
     export myEma(int x) =>
         ta.ema(close, x)
 
-will work when called using ``t.myEma(20)``, even though `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__'s ``length`` parameter requires a "simple int" argument. When the Pine compiler detects that a "series" length cannot be used with `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__, it tries the "simple" form, which in this case is allowed.
+will work when called using ``t.myEma(20)``, 
+even though `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__'s ``length`` parameter requires a "simple int" argument. 
+When the Pine compiler detects that a "series" length cannot be used with `ta.ema() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}ema>`__, 
+it tries the "simple" form, which in this case is allowed.
 
-While library functions cannot return results of "const" or "input" forms, they can be written to produce a result of "simple" form. This makes them useful in more contexts than functions returning a result of "series" form, because some Pine built-in functions do not allow "series" arguments. For example, `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ requires a "simple string" for its ``symbol`` parameter. If we wrote a library function to assemble the argument to ``symbol`` in the following way, the function's result would not work because it is of "series" form::
+While library functions cannot return results of "const" or "input" forms, they can be written to produce a result of "simple" form. 
+This makes them useful in more contexts than functions returning a result of "series" form, because some Pine built-in functions do not allow "series" arguments. 
+For example, `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ requires a "simple string" for its ``symbol`` parameter. 
+If we wrote a library function to assemble the argument to ``symbol`` in the following way, the function's result would not work because it is of "series" form::
 
     export makeTickerid(string prefix, string ticker) =>
         prefix + ":" + ticker
 
-However, by restricting the form of its parameters to "simple", we could force the function to yield a "simple" result. We can achieve this by prefixing the parameters' type with the `simple <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ keyword::
+However, by restricting the form of its parameters to "simple", we could force the function to yield a "simple" result. 
+We can achieve this by prefixing the parameters' type with the `simple <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ keyword::
 
     export makeTickerid(simple string prefix, simple string ticker) =>
         prefix + ":" + ticker
 
 Note that for the function to return a "simple" result, no "series" values can be used in its calculation; otherwise the result will be of "series" form.
 
-One can also use the `series <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ keyword to prefix the type of a library function parameter. However, because arguments are by default cast to the "series" form, using the `series <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ modifier is redundant; it exists more for completeness.
+One can also use the `series <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ keyword to prefix the type of a library function parameter. 
+However, because arguments are by default cast to the "series" form, using the 
+`series <https://www.tradingview.com/pine-script-reference/v5/#op_simple>`__ modifier is redundant; it exists more for completeness.
 
 
 
 Publishing a library
 --------------------
 
-Before you or other Pine coders can reuse any library, it must be published. If you want to share your library with all TradingViewers, publish it publicly. To use it privately, use a private publication. As with indicators or strategies, the active chart when you publish a library will appear in both its widget (the small placeholder denoting libraries in the TradingView scripts stream) and script page (the page users see when they click on the widget).
+Before you or other Pine coders can reuse any library, it must be published. 
+If you want to share your library with all TradingViewers, publish it publicly. To use it privately, use a private publication. 
+As with indicators or strategies, the active chart when you publish a library will appear in both its widget 
+(the small placeholder denoting libraries in the TradingView scripts stream) and script page (the page users see when they click on the widget).
 
-After adding our example library to the chart and setting up a clean chart showing our library plots the way we want them, we use the Pine Editor's "Publish Script" button. The "Publish Library" window comes up:
+After adding our example library to the chart and setting up a clean chart showing our library plots the way we want them, 
+we use the Pine Editor's "Publish Script" button. The "Publish Library" window comes up:
 
 .. image:: images/Libraries-CreatingALibrary-PublishWindow.png
 
 Note that:
 
-- We leave the library's title as is (the ``title`` argument in our `library() <https://www.tradingview.com/pine-script-reference/v5/#fun_library>`__ declaration statement is used as the default). While you can change the publication's title, it is preferable to keep its default value because the ``title`` argument is used to reference imported libraries in the `import <https://www.tradingview.com/pine-script-reference/v5/#op_import>`__ statement. It makes life easier for library users when your publication's title matches the actual name of the library.
+- We leave the library's title as is (the ``title`` argument in our `library() <https://www.tradingview.com/pine-script-reference/v5/#fun_library>`__ 
+  declaration statement is used as the default). While you can change the publication's title, 
+  it is preferable to keep its default value because the ``title`` argument is used to reference imported libraries in the 
+  `import <https://www.tradingview.com/pine-script-reference/v5/#op_import>`__ statement. 
+  It makes life easier for library users when your publication's title matches the actual name of the library.
 - A default description is built from the compiler directives we used in our library. We will publish the library wihout retouching it.
 - We chose to publish our library publicly, so it will be visible to all TradingViewers.
 - We do not have the possibility of selecting a visibility type other than "Open" because libraries are always open-source.
 - The list of categories for libraries is different than for indicators and strategies. We have selected the "Statistics and Metrics" category.
 - We have added some custom tags: "all-time", "high" and "low".
 
-The intended users of public libraries being other Pine coders; the better you explain and document your library's functions, the more chances others will use them. Providing examples demonstrating how to use your library's functions in your publication's code will also help.
+The intended users of public libraries being other Pine coders; the better you explain and document your library's functions, 
+the more chances others will use them. Providing examples demonstrating how to use your library's functions in your publication's code will also help.
 
 
 House Rules
@@ -178,6 +211,9 @@ Using a library from another script (which can be an indicator, a strategy or an
 where:
 
 - The <username>/<libraryName>/<libraryVersion> path will uniquely identify the library.
+- The <libraryVersion> must be specified explicitly. To ensure the reliability of scripts using libraries, there is no way to automatically use the latest version of a library.
+  Every time a library is updated by its author, its version number increases. If you intend to use the latest version of the library, 
+  the <libraryVersion> value will require updating in the `import <https://www.tradingview.com/pine-script-reference/v5/#op_import>`__ statement.
 - The ``as <alias>`` part is optional. When used, it defines the namespace that will refer to the library's functions. 
   For example, if you import a library using the ``allTime`` alias as we do in the example below, you will refer to that library's functions as ``allTime.<function_mame>()``. 
   When no alias is defined, the library's name becomes its namespace.
@@ -203,18 +239,11 @@ This is an indicator that reuses our library::
 
 Note that:
 
-- We have chosen to use the "allTime" alias for the library's instance in our script. When typing that alias in the Editor, a popup will appear to help you select the particular function you want to use from the library.
-- We use the library's ``hi()`` and ``lo()`` functions without an argument, so the default `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ built-in variables will be used for their series, respectively.
-- We use a second call to ``allTime.hi()``, but this time using `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ as its argument, to plot the highest `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ in the chart's history.
-
-
-
-..
-    Examples
-
-    --------
-
-    These publications are examples of libraries published on TradingView:
-
-    - 
+- We have chosen to use the "allTime" alias for the library's instance in our script. When typing that alias in the Editor, 
+  a popup will appear to help you select the particular function you want to use from the library.
+- We use the library's ``hi()`` and ``lo()`` functions without an argument, 
+  so the default `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and 
+  `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ built-in variables will be used for their series, respectively.
+- We use a second call to ``allTime.hi()``, but this time using `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ as its argument, 
+  to plot the highest `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ in the chart's history.
 
