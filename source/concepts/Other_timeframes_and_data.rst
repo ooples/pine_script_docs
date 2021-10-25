@@ -39,6 +39,8 @@ Accordingly, this page is quite lengthy.
 
 
 
+.. _PageOtherTimeframesAndData_CommonCharacteristics:
+
 Common characteristics
 ----------------------
 
@@ -597,25 +599,32 @@ Fetching standard prices from a non-standard chart
 -----------------------
 
 
-The function's signature is: 
+This function returns a periodic value for one of more than 200 financial metrics. Its signature is: 
 
 .. code-block:: text
 
     request.financial(symbol, financial_id, period, gaps, ignore_invalid_symbol, currency) → series float
 
-The first argument here is similar to the first argument of the security function, and is the name of the symbol for which the metric is requested. For example: ”NASDAQ:AAPL”.
+We have covered the last three parameters in the :ref:`Common characteristics <PageOtherTimeframesAndData_CommonCharacteristics>` section of this page.
+The first three parameters all require a "simple string" argument. They are:
 
-The second argument is the identifier of the required metric: the value from the third column of the table.
+``symbol``
+   This is similar to the first parameter of the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__.
+   It is the name of the symbol for which the a financial metric is requested. For example: `"NASDAQ:AAPL"`.
 
-The third argument indicates how frequently this metric is published: one of the values from the corresponding cells in the second column.
+``financial_id``
+   This is the identifier of the required metric. There are more than 200 IDs. They are listed in the third column of the following section's tables.
 
-The fourth argument is optional and is similar to the gaps argument of the security function. If gaps = true, values are displayed only on bars corresponding to the publication date of the data.
+``period``
+   This represents the frequency at which you require the values to update on your chart. There are three possible arguments: ``"FQ"`` (quaterly), ``"FY"`` (yearly) and ``"TTM"`` (trailing twelve months).
+   Not all frequencies are available for all metrics. Possible values for each one are listed in the second column of the following section's tables.
 
-The function returns the values of the requested financial data.
+Not all symbols on TradingVIew have financial metrics for them.
 
 For example:
 
 f = financial ("NASDAQ:AAPL", "ACCOUNTS_PAYABLE", "FQ")
+
 You can read more about the financial data here.
 
 Note that when you request financial data using the dividends and earnings functions, the new value is returned on the bar where the report was published. Using the financial function, you get a new value on the bar where the next fiscal period begins.
@@ -690,9 +699,9 @@ Income statements
 +-----------------------------------------------------+-------------+--------------------------------------------+
 | After tax other income/expense                      | FQ, FY      | AFTER_TAX_OTHER_INCOME                     |
 +-----------------------------------------------------+-------------+--------------------------------------------+
-| Average basic shares outstanding                    | FQ, FY      | BASIC_SHARES_OUTSTANDING                   |
+| `Average basic shares outstanding <https://www.tradingview.com/?solution=43000      >`__                    | FQ, FY      | BASIC_SHARES_OUTSTANDING                   |
 +-----------------------------------------------------+-------------+--------------------------------------------+
-| Other COGS                                          | FQ, FY      | COST_OF_GOODS_EXCL_DEP_AMORT               |
+| `Other COGS <https://www.tradingview.com/?solution=43000563478>`__                                          | FQ, FY      | COST_OF_GOODS_EXCL_DEP_AMORT               |
 +-----------------------------------------------------+-------------+--------------------------------------------+
 | Cost of goods                                       | FQ, FY      | COST_OF_GOODS                              |
 +-----------------------------------------------------+-------------+--------------------------------------------+
