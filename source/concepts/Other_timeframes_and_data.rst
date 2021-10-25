@@ -626,9 +626,11 @@ The first three parameters all require a "simple string" argument. They are:
    `request.earnings() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}earnings>`__ instead.
 
 
-This plots the quaterly value of accounts payable for Apple::
+This plots the quaterly value of accounts payable for Apple:
 
 .. image:: images/OtherTimeframesAndData-RequestFinancial()-01.png
+
+::
 
     //@version=5
     indicator("")
@@ -659,6 +661,8 @@ Such is the case for:
 Here, we calculates all five values:
 
 .. image:: images/OtherTimeframesAndData-RequestFinancial()-02.png
+
+::
 
     //@version=5
     indicator("")
