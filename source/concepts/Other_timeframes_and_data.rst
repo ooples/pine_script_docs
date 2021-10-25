@@ -28,10 +28,13 @@ These are the signatures of the functions in the ``request`` namespace:
 .. code-block:: text
 
     request.security(symbol, timeframe, expression, gaps, lookahead, ignore_invalid_symbol, currency) → series int/float/bool/color
+
     request.financial(symbol, financial_id, period, gaps, ignore_invalid_symbol, currency) → series float
+    
     request.dividends(ticker, field, gaps, lookahead, ignore_invalid_symbol, currency) → series float
     request.earnings(ticker, field, gaps, lookahead, ignore_invalid_symbol, currency) → series float
     request.splits(ticker, field, gaps, lookahead, ignore_invalid_symbol, currency) → series float
+    
     request.quandl(ticker, gaps, index, ignore_invalid_symbol, currency) → series float
 
 Functions in the ``request.*()`` family have many different applications, and their use can be rather involved.
