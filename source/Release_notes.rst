@@ -660,7 +660,7 @@ February 2017
 
 December 2016
 ^^^^^^^^^^^^^
-* Added invite-only scripts. The invite-only indicators are visible in the Public Library, but nobody can use them without explicit permission from the author, and only the author can see the source code.
+* Added invite-only scripts. The invite-only indicators are visible in the Community Scripts, but nobody can use them without explicit permission from the author, and only the author can see the source code.
 
 October 2016
 ^^^^^^^^^^^^

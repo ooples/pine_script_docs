@@ -159,12 +159,11 @@ Note that:
   as that of the global scope, but actually be a very confusing independent entity that would persist
   only for the length of the local block, and then disappear without a trace.
 
-A variable can be reassigned as many times as needed during the script's execution on one bar,
+All user-defined variables in Pine are *mutable*, which means their value can be changed using the :ref:`:= <PageOperators_ReassignmentOperator>` reassignment operator.
+Assigning a new value to a variable may change its *form* (see the page on Pine's :ref:`type system <PageTypeSystem>` for more information).
+A variable can be assigned a new value as many times as needed during the script's execution on one bar,
 so a script can contain any number of reassignments of one variable.
-
-Reassigning a value to a variable makes it a **mutable variable**.
-It may also change a variable's *form* 
-(see the page on Pine's :ref:`type system <PageTypeSystem>` for more information).
+A variable's :ref:`declaration mode <PageVariableDeclarations_DeclarationModes>` determines how new values assigned to a variable will be saved.
 
 
 

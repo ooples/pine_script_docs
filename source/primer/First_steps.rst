@@ -58,11 +58,9 @@ The dialog box presents different categories of scripts in its left pane:
 
 - **Favorites** lists the scripts you have "favorited" by clicking on the star that appears to the left of its name when you mouse over it.
 - **My scripts** displays the scipts you have written and saved in the Pine Editor. They are saved in TradingView's cloud.
-- **Built-ins** groups the classic trading indicators that TradingView has written (mostly in Pine) and which are available for free.
-- **Candlestick Patterns** are also built-ins supplied by TradingView. They have their distinct category because there are many.
-- **Public Library** is where you can search from the 100,000+ published scripts written by TradingView users.
-- **Volume Profile** includes volume profile indicators supplied by TradingView, but only available to Pro and Premium accounts. 
-  These are not written in Pine and their source code is `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ (in Pine, ``na`` means "not available").
+- **Built-ins** groups all TradingVIew built-ins organized in four categories: indicators, strategies, candlestick patterns and volume profiles. Most are written in Pine and available for free.
+- **Community Scripts** is where you can search from the 100,000+ published scripts written by TradingView users.
+- **Invite-only scripts** contains the list of the invite-only scripts you have been granted access to by their authors.
 
 Here, the section containing the TradingView built-ins is selected:
 
@@ -71,22 +69,22 @@ Here, the section containing the TradingView built-ins is selected:
 When you click on one of the indicators or strategies (the ones with the green and red arrows following their name), it loads on your chart.
 
 
-Browsing public scripts in the Public Library
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Browsing Community Scripts
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-From `TradingView's homepage <https://www.tradingview.com/>`__, you can bring up the Public Library's script stream from the "Community" menu. 
+From `TradingView's homepage <https://www.tradingview.com/>`__, you can bring up the Community Scripts stream from the "Community" menu. 
 Here, we are pointing to the "Editors' Picks" section, but there are many other categories you can choose from:
 
 .. image:: images/FirstSteps-FromThePublicLibrary-1.png
 
 You can also search for scripts using the homepage's "Search" field, and filter scripts using different criteria. 
-The Help Center has a page explaining the `different types of scripts <https://www.tradingview.com/scripts/?solution=43000558522>`__ in the Public Library.
+The Help Center has a page explaining the `different types of scripts <https://www.tradingview.com/scripts/?solution=43000558522>`__ that are available.
 
-The script feed shows script *widgets*, i.e., placeholders showing a miniature view of each publication's chart and description, and its author.
+The scripts stream shows script *widgets*, i.e., placeholders showing a miniature view of each publication's chart and description, and its author.
 By clicking on it you will open the *script's page*, where you can see the script on a chart, read the author's description, like the script, leave comments or 
 read the script's source code if it was published open-source.
 
-Once you find an interesting script in the Public Library, follow the instructions in the Help Center to `load it on your chart 
+Once you find an interesting script in the Community Scripts, follow the instructions in the Help Center to `load it on your chart 
 <https://www.tradingview.com/script/?solution=43000555216>`__.
 
 
