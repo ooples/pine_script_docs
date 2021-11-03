@@ -38,8 +38,8 @@ you can first start exploring the thousands of indicators already available on o
 You can access existing indicators on the platform in two different ways:
 
 - By using the chart's "Indicators & Strategies" button, or
-- By browsing TradingView's `Puclic Library <https://www.tradingview.com/scripts/>`__, 
-  the largest repository of scripts in the world, with more than 100,000 scripts, most of which are free and open-source, which means you can see their Pine code.
+- By browsing TradingView's `Community Scripts <https://www.tradingview.com/scripts/>`__, 
+  the largest repository of trading scripts in the world, with more than 100,000 scripts, most of which are free and open-source, which means you can see their Pine code.
 
 If you can find the tools you need already written for you, it can be a good way to get started and gradually become proficient as a script user, 
 until you are ready to start your programming journey in Pine.
@@ -52,7 +52,7 @@ Loading scripts from the chart
 
 To explore and load scripts from you chart, use the "Indicators & Strategies" button:
 
-.. image:: images/FirstSteps-FromTheChart-1.png
+.. image:: images/FirstSteps-LoadingScriptsFromTheChart-01.png
 
 The dialog box presents different categories of scripts in its left pane:
 
@@ -64,7 +64,7 @@ The dialog box presents different categories of scripts in its left pane:
 
 Here, the section containing the TradingView built-ins is selected:
 
-.. image:: images/FirstSteps-FromTheChart-2.png
+.. image:: images/FirstSteps-LoadingScriptsFromTheChart-02.png
 
 When you click on one of the indicators or strategies (the ones with the green and red arrows following their name), it loads on your chart.
 
@@ -75,7 +75,7 @@ Browsing Community Scripts
 From `TradingView's homepage <https://www.tradingview.com/>`__, you can bring up the Community Scripts stream from the "Community" menu. 
 Here, we are pointing to the "Editors' Picks" section, but there are many other categories you can choose from:
 
-.. image:: images/FirstSteps-FromThePublicLibrary-1.png
+.. image:: images/FirstSteps-BrowsingCommunityScripts-01.png
 
 You can also search for scripts using the homepage's "Search" field, and filter scripts using different criteria. 
 The Help Center has a page explaining the `different types of scripts <https://www.tradingview.com/scripts/?solution=43000558522>`__ that are available.
@@ -94,7 +94,7 @@ Changing script settings
 
 Once a script is loaded on the chart, you can double-click on its name (#1) to bring up its "Settings/Inputs" tab (#2): 
 
-.. image:: images/FirstSteps-ChangingScriptSettings-1.png
+.. image:: images/FirstSteps-ChangingScriptSettings-01.png
 
 The "Inputs" tab allows you to change the settings which the script's author has decided to make editable. 
 You can configure some of the script's visuals using the "Style" tab of the same dialog box,
@@ -103,7 +103,7 @@ and which timeframes the script should appear on using the "Visibility" tab.
 Other settings are available to all scripts from the buttons that appear to the right of its name when you mouse over it, 
 and from the "More" menu (the three dots):
 
-.. image:: images/FirstSteps-ChangingScriptSettings-2.png
+.. image:: images/FirstSteps-ChangingScriptSettings-02.png
 
 
 Reading scripts
@@ -116,7 +116,7 @@ Finding good open-source Pine code is relatively easy. These are reliable source
 - The TradingView built-in indicators
 - Scripts selected as `Editors' Picks <https://www.tradingview.com/scripts/editors-picks/>`__
 - Scripts by the `authors the PineCoders account follows <https://www.tradingview.com/u/PineCoders/#following-people>`__
-- Scripts by authors with high reputation and many open-source publications.
+- Many scripts by authors with high reputation and open-source publications.
 
 Reading code from scripts you find in the `Puclic Library <https://www.tradingview.com/scripts/>`__ is easy; 
 if you don't see a grey or red "lock" icon in the upper-right corner of the script's widget, this indicates the script is open-source.
@@ -131,7 +131,7 @@ you will need to use the Editor's "Add to Chart" button to add that new copy to 
 This shows the Pine Editor having just opened after we selected the "View source" button from the indicator on our chart. 
 We are about to make a copy of its source because it is read-only for now (indicated by the "lock" icon near its filename in the Editor):
 
-.. image:: images/FirstSteps-ReadingScripts-1.png
+.. image:: images/FirstSteps-ReadingScripts-01.png
 
 You can also open TradingView built-in indicators from the Pine Editor (accessible from the "Pine Editor" tab at the bottom of the chart) by 
 using the "Open/New default built-in script..." menu selection.
