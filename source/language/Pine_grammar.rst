@@ -1,18 +1,12 @@
-Pine v5 grammar
-===============
+// Pine v5 syntax
+//
+// {} Curly braces content can be repeated zero or more times: {, <parameter>}
+// [] Square brackets content can appear zero or one time: [ by <expression>]
+// \  Backslash escapes one character: \[ means a literal [ in the syntax.
+// |  Pipe means "or".
+// <token_name> is a token called "token_name".
 
-``{}`` Curly braces content can be repeated zero or more times: {, <parameter>}
-
-``[]`` Square brackets content can appear zero or one time: [ by <expression>]
-
-``\``  Backslash escapes one character: \[ means a literal [ in the syntax.
-
-``|``  Pipe means "or".
-
-``<token_name>`` is a token called "token_name".
-
-
-
+::
 
 <Pine_script>
     [<version>]
@@ -26,13 +20,10 @@ Pine v5 grammar
 <statement>
     <variable_declaration> | <variable_reassignment> | <function_declaration> | <function_call> | <structure>
 
-<variable_initialization>
-    <variable_declaration> = <expression> | <structure>
-
 <variable_declaration>
-    [<declaration_mode>] [<type>] <identifier>
+    [<declaration_mode>] [<type>] <identifier> = <expression> | <structure>
     |
-    <tuple_declaration>
+    <tuple_declaration> = <function_call> | <structure>
 
 <declaration_mode>
     [var | varip]
@@ -71,16 +62,12 @@ Pine v5 grammar
     for <identifier> = <expression> to <expression>[ by <expression>]
         <local_block_loop>
 
-<for_structure>
-    for <identifier> = <expression> to <expression>[ by <expression>]
-        <local_block_loop>
-
 <while_structure>
     while <expression>
         <local_block_loop>
 
 <local_block_loop>
-    {<statement> | break | continue}
+    {<statement> break | continue}
     <return_value>
 
 <switch_structure>

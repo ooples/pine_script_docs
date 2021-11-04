@@ -137,7 +137,7 @@ Note that:
 - The `str.format() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}format>`__
   function formats our time values, namely the last bar's time and the current time.
 
-Some functions that normally return values in the exchange's time zone provide means to adapt their result to another time zone through the ``timezone`` parameter.
+Some functions that normally return values in the exchange's time zone provide means to adapt their result to another time zone.
 This script illustrates how to do this with `hour() <https://www.tradingview.com/pine-script-reference/v5/#fun_hour>`__:
 
 .. image:: images/Time-TimeZones-02.png
@@ -159,31 +159,6 @@ Note that:
   Using the function form with ``syminfo.timezone`` is thus redundant if the exchange's hour is what's required.
 - The orange line plotting ``hour(time, "GMT+0")``, however, returns the bar's hour at UTC, or "GMT+0" time,
   which in this case is four hours less than the exchange's time, since MSFT trades on the NASDAQ whose time zone is UTC-4.
-
-
-
-
-.. _PageTime_TimeZoneStrings:
-
-Time zone strings
-"""""""""""""""""
-
-The argument used for the ``timezone`` parameter in functions such as 
-`time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__,
-`timestamp() <https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp>`__,
-`hour() <https://www.tradingview.com/pine-script-reference/v5/#fun_hour>`__, etc., can be in different formats,
-which you can find in the `IANA time zone database name <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>`__ reference page.
-Contents from the "TZ database name", "UTC offset ±hh:mm" and "UTC DST offset ±hh:mm" columns of that page's table can be used.
-
-To express an offset of +5.5 hours from UTC, these strings found in the reference page are all equivalent:
-
-- ``"GMT+05:30"``
-- ``"Asia/Calcutta"``
-- ``"Asia/Colombo"``
-- ``"Asia/Kolkata"``
-
-
-Non-fractional offsets can be expressed in the ``"GMT+5"`` form. ``"GMT+5.5"`` is not allowed.
 
 
 
@@ -480,7 +455,9 @@ The `timestamp() <https://www.tradingview.com/pine-script-reference/v5/#fun_time
 
 The only difference between the first two is the ``timezone`` parameter.
 Its default value is `syminfo.timezone <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}timezone>`__.
-See the :ref:`Time zone strings <PageTime_TimeZoneStrings>` section of this page for valid values.
+It can be specified in GMT notation (e.g. "GMT-5") or as an 
+`IANA time zone database name <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>`__
+(e.g., "America/New_York").
 
 The third form is used as a ``defval`` value in `input.time() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}time>`__.
 See the `timestamp() <https://www.tradingview.com/pine-script-reference/v5/#fun_timestamp>`__ entry in the Reference Manual for more information.
