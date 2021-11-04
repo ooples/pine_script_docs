@@ -35,7 +35,7 @@ Understanding all three is key to making the most of the power of Pine.
 Forms
 ^^^^^
 
-The Pine **forms** are:
+Pine **forms** identify when a variable's value is known. They are:
 
 - "const" for values known at compile time (when adding an indicator to a chart or saving it in the Pine Editor)
 - "input" for values known at input time (when values are changed in a script's "Settings/Inputs" tab)
@@ -53,12 +53,13 @@ Such values include `close <https://www.tradingview.com/pine-script-reference/v5
 Variables of "const", "input" or "simple" forms cannot change values once execution of the script has begun.
 
 
+
 .. _PageTypeSystem_Types:
 
 Types
 ^^^^^
 
-The Pine **types** are:
+Pine **types** identify the nature of a value. They are:
 
 - The fundamental types: "int", "float", "bool", "color" and "string"
 - The special types: "plot", "hline", "line", "label", "box", "table", "array"

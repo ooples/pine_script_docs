@@ -23,7 +23,7 @@ Library programmers should be familiar with Pine's typing nomenclature, scopes a
 If you need to brush up on Pine forms and types, see the User Manual's page on the :ref:`Type system <PageTypeSystem>`. 
 For more information on user-defined functions and scopes, see the :ref:`User-defined functions <PageUserDefinedFunctions>` page.
 
-You can browse the public library scripts published by TradingView members in the `Public Library <https://www.tradingview.com/scripts/?script_type=libraries>`__.
+You can browse the library scripts published publicly by members in TradingView's `Community Scripts <https://www.tradingview.com/scripts/?script_type=libraries>`__.
 
 
 

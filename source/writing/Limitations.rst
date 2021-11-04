@@ -81,3 +81,6 @@ Runtime
 - Memory
 
 
+•	syminfo.ticker does not work properly on spreads. When a non-standard chart uses a spread, the function returns "Cannot get a 'ticker' of a spread symbol",.
+•	External Indicator input: only one is allowed per script.
+•	& not allowed in options= strings
