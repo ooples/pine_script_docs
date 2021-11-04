@@ -6,11 +6,6 @@
    :width: 50
    :height: 50
 
-.. |tvlogofooter| image:: images/TradingView-Logo-Block.svg
-   :width: 400px
-   :align: center
-
-
 .. image:: /source/images/Pine_Script_logo_small.png
    :alt: Pine Script
    :align: right
@@ -68,16 +63,36 @@ Uni‒code Figure Dash‒
 
 
 
-Animated GIF
-""""""""""""
+GIF
+"""
 
 .. image:: image/Test-GIF-01.gif
 
    
 
-
-Macro tests
+Page footer
 """""""""""
+
+.. image:: images/TradingView-Logo-Block.svg
+    :width: 400px
+    :align: center
+
+
+
+Macro path
+""""""""""
+
+.. image:: /source/images/TradingView-Logo-Block.svg
+    :width: 400px
+    :align: center
+
+
+
+Root path name
+""""""""""""""
+
+.. image:: /images/TradingView-Logo-Block.svg
+
 
 Inline macro here:
 
@@ -87,29 +102,4 @@ Macro here:
 
 |tvlogofooter|
 
-
-
-Footer with /images/TradingView-Logo-Block and no width/align
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-.. image:: /images/TradingView-Logo-Block.svg
-
-
-
-Footer with /source/images/TradingView-Logo-Block
-"""""""""""""""""""""""""""""""""""""""""""""""""
-
-.. image:: /source/images/TradingView-Logo-Block.svg
-    :width: 400px
-    :align: center
-
-
-
-Footer with images/TradingView-Logo-Block
-"""""""""""""""""""""""""""""""""""""""
-
-.. image:: images/TradingView-Logo-Block.svg
-    :width: 400px
-    :align: center
-
-
+.. |tvlogofooter| image:: /source/images/TradingView-Logo-Block.svg

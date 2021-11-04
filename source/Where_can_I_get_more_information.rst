@@ -19,8 +19,8 @@ Where can I get more information?
   Script (as well as other features) is regularly published on
   `TradingView's blog <https://www.tradingview.com/blog/en/category/market-analysis/pine/>`__.
 
-* TradingView's `Community Scripts <https://www.tradingview.com/script/>`__ contain all user-published scripts. 
-  They can also be accessed from charts using the "Indicators & Strategies" button and the "Community Scripts" tab of the script searching dialog box.
+* TradingView's `Public Library <https://www.tradingview.com/script/>`__ contains all user-published scripts. 
+  They can also be accessed from charts using the "Indicators & Strategies" button and the "Public Library" tab of the script searching dialog box.
 
 
 

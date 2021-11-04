@@ -35,8 +35,7 @@ When you publish a script
   That title is also used when TradingViewers search for script names.
 - The name of your script on the chart will be the argument used for the ``shorttitle`` parameter in the script's 
   `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ or 
-  `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__ declaration statement,
-  or the `title` argument in `library() <https://www.tradingview.com/pine-script-reference/v5/#fun_library>`__.
+  `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__ declaration statement.
 - Your script must have a description explaining what your script does and how to use it.
 - The chart you are using when you publish will become visible in your publication, including any other scripts or drawings on it. 
   Remove unrelated scripts or drawings from your chart before publishing your script.
@@ -56,10 +55,10 @@ Public
 
 When you publish a public script:
 
-- Your script will be inluded in our `Community Scripts <https://www.tradingview.com/scripts/>`__ 
-  where it becomes visible to the millions of TradingViewers on all internationalized versions of the site.
+- Your script will be inluded in our `Public Library <https://www.tradingview.com/scripts/>`__ 
+- where it becomes visible to the millions of TradingViewers on all internationalized versions of the site.
 - Your publication must comply with `House Rules <https://www.tradingview.com/?solution=43000591638>`__ 
-  and `Script Publishing Rules <https://www.tradingview.com/?solution=43000590599>`__. 
+- and `Script Publishing Rules <https://www.tradingview.com/?solution=43000590599>`__. 
 - If your script is an invite-only script, you must comply with our `Vendor Requirements <https://www.tradingview.com/?solution=43000549951>`__.
 - It becomes accessible through the search functions for scripts.
 - You will not be able to edit your original description or its title, nor change its public/private visibility, nor its access type (open-source, protected, invite-only).
