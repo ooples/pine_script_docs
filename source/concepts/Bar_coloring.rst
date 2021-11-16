@@ -4,15 +4,19 @@ Bar coloring
 ============
 
 The `barcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_barcolor>`__ function lets you color chart bars.
-It is the only Pine function that will work, whether your script is running in a pane or in overlay mode (``overlay = true``).
+It is the only Pine function that allows a script running in a pane to affect the chart.
 
-The function signature is::
+The function's signature is::
 
     barcolor(color, offset, editable, show_last, title) → void
 
-The coloring can be conditional because its ``color`` parameter accepts "series color" arguments.
+The coloring can be conditional because the ``color`` parameter accepts "series color" arguments.
 
-The following script renders *inside* and *outside* bars in different colors::
+The following script renders *inside* and *outside* bars in different colors:
+
+.. image:: images/BarColoring-1.png
+
+::
 
     //@version=5
     indicator("barcolor example", overlay = true)
@@ -22,8 +26,6 @@ The following script renders *inside* and *outside* bars in different colors::
     isOutsideDown = high > high[1] and low < low[1] and isDown
     isInside = high < high[1] and low > low[1]
     barcolor(isInside ? color.yellow : isOutsideUp ? color.aqua : isOutsideDown ? color.purple : na)
-
-.. image:: images/BarColoring-1.png
 
 Note that:
 

@@ -125,6 +125,9 @@ Pine v5 grammar
 <logical_expression>
 
 
+<ternary_expression>
+
+
 <identifier>
     <letter> | <underscore> {<letter><underscore><digit>}
 

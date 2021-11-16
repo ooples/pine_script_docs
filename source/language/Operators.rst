@@ -336,8 +336,8 @@ It says *use this variable that was declared earlier in my script, and give it a
 
 Variables which have been first declared, then reassigned using ``:=``, are called *mutable* variables.
 All the following examples are valid variable reassignments. 
-Don't fret if you can't yet make much sense of what the `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ thing does in there; 
-you can find out more about it :ref:`here <PageExpressionsDeclarationsStatements_VariableDeclaration>`::
+You will find more information on how `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ works in 
+the section on the :ref:``\`var\` declaration mode <PageVariableDeclarations_Var>`::
 
     //@version=5
     indicator("", "", true)
