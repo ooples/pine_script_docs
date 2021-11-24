@@ -38,7 +38,7 @@ you can first start exploring the thousands of indicators already available on o
 You can access existing indicators on the platform in two different ways:
 
 - By using the chart's "Indicators & Strategies" button, or
-- By browsing TradingView's `Puclic Library <https://www.tradingview.com/scripts/>`__, 
+- By browsing TradingView's `Public Library <https://www.tradingview.com/scripts/>`__, 
   the largest repository of scripts in the world, with more than 100,000 scripts, most of which are free and open-source, which means you can see their Pine code.
 
 If you can find the tools you need already written for you, it can be a good way to get started and gradually become proficient as a script user, 
