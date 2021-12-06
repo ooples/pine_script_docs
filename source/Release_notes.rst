@@ -8,7 +8,81 @@ Release notes
 
 This page contains release notes of notable changes in Pine Script.
 
+November 2021
+-------------
 
+for...in
+^^^^^^^^
+
+Added a new `for...in <https://www.tradingview.com/pine-script-reference/v5/#op_for{dot}{dot}{dot}in>`__ operator to iterate over all elements of an array::
+
+	//@version=5
+	indicator("My Script")
+	int[] a1 = array.from(1, 3, 6, 3, 8, 0, -9, 5)
+
+	highest(array) =>
+	    var int highestNum = na
+	    for item in array
+                if na(highestNum) or item > highestNum
+		    highestNum := item
+	    highestNum
+
+	plot(highest(a1))
+	
+Function overloads
+^^^^^^^^^^^^^^^^^^
+Added function overloads. Several functions in a script can share the same name as long one of the following conditions is true:
+
+* Each function has a different number of parameters::
+
+	//@version=5
+	indicator("Function overload")
+
+	// Two parameters
+	mult(x1, x2) =>
+	    x1 * x2
+	
+	// Three parameters
+	mult(x1, x2, x3) =>
+	    x1 * x2 * x3
+
+	plot(mult(7, 4))
+	plot(mult(7, 4, 2))
+
+* When there are several functions with the same number of parameters, each parameter in each of these functions should be explicitly typified::
+
+	//@version=5
+	indicator("Function overload")
+
+	// Accepts both 'int' and 'float' values - any 'int' can be automatically cast to 'float'
+	mult(float x1, float x2) =>
+	    x1 * x2
+
+	// Returns a 'bool' value instead of a number
+	mult(bool x1, bool x2) =>
+	    x1 and x2 ? true : false
+
+	mult(string x1, string x2) =>
+	    str.tonumber(x1) * str.tonumber(x2)
+
+	// Has three parameters, so explicit types are not required
+	mult(x1, x2, x3) =>
+	    x1 * x2 * x3
+
+	plot(mult(7, 4))
+	plot(mult(7.5, 4.2))
+	plot(mult(true, false) ? 1 : 0)
+	plot(mult("5", "6"))
+	plot(mult(7, 4, 2))
+
+Currency conversion
+^^^^^^^^^^^^^^^^^^^
+Added a new `currency` argument to most functions in the ``request.*`` namespace. If specified, the values returned by the function will be automatically converted from the source currency to the target currency. The following functions are affected:
+
+* `request.dividends() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}dividends>`__
+* `request.earnings() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}earnings>`__
+* `request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__
+* `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
 
 .. _PageReleaseNotes_October2021:
 
