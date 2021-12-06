@@ -21,11 +21,11 @@ Added a new `for...in <https://www.tradingview.com/pine-script-reference/v5/#op_
 	int[] a1 = array.from(1, 3, 6, 3, 8, 0, -9, 5)
 
 	highest(array) =>
-		var int highestNum = na
-		for item in array
-			if na(highestNum) or item > highestNum
-				highestNum := item
-		highestNum
+	    var int highestNum = na
+	    for item in array
+                na(highestNum) or item > highestNum
+		    highestNum := item
+	    highestNum
 
 	plot(highest(a1))
 	
@@ -40,11 +40,11 @@ Added function overloads. Several functions in a script can share the same name 
 
 	// Two parameters
 	mult(x1, x2) =>
-		x1 * x2
+	    x1 * x2
 	
 	// Three parameters
 	mult(x1, x2, x3) =>
-		x1 * x2 * x3
+	    x1 * x2 * x3
 
 	plot(mult(7, 4))
 	plot(mult(7, 4, 2))
@@ -56,18 +56,18 @@ Added function overloads. Several functions in a script can share the same name 
 
 	// Accepts both 'int' and 'float' values - any 'int' can be automatically cast to 'float'
 	mult(float x1, float x2) =>
-		x1 * x2
+	    x1 * x2
 
 	// Returns a 'bool' value instead of a number
 	mult(bool x1, bool x2) =>
-		x1 and x2 ? true : false
+	    x1 and x2 ? true : false
 
 	mult(string x1, string x2) =>
-		str.tonumber(x1) * str.tonumber(x2)
+	    str.tonumber(x1) * str.tonumber(x2)
 
 	// Has three parameters, so explicit types are not required
 	mult(x1, x2, x3) =>
-		x1 * x2 * x3
+	    x1 * x2 * x3
 
 	plot(mult(7, 4))
 	plot(mult(7.5, 4.2))
