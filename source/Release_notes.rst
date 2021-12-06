@@ -23,7 +23,7 @@ Added a new `for...in <https://www.tradingview.com/pine-script-reference/v5/#op_
 	highest(array) =>
 	    var int highestNum = na
 	    for item in array
-                na(highestNum) or item > highestNum
+                if na(highestNum) or item > highestNum
 		    highestNum := item
 	    highestNum
 
