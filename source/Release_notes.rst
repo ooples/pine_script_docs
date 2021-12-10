@@ -8,6 +8,20 @@ Release notes
 
 This page contains release notes of notable changes in Pine Script.
 
+December 2021
+-------------
+
+Added a number of new functions that provide more ways to process strings and introduce regular expressions to Pine:
+
+* `str.contains(source, str) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}contains>`__ - Determines if the ``source`` string contains the ``str`` substring.
+* `str.pos(source, str) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}pos>`__ - Returns the position of the ``str`` string in the ``source`` string.
+* `str.substring(source, begin_pos, end_pos) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}substring>`__ - Extracts a substring from the ``source`` string.
+* `str.replace(source, target, replacement, occurrence) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}replace>`__ - Contrary to the existing `str.replace_all() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}replace_all>`__ function, str.replace() allows the selective replacement of a matched substring with a replacement string.
+* `str.lower(source) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}lower>`__ and `str.upper(source) <https://www.tradingview.com/pine-script-reference/v5/#fun_str%7Bdot%7Dupper>`__ - Converts all letters of the ``source`` string to lower or upper case:
+* `str.startswith(source, str) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}startswith>`__ and `str.endswith(source, str) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}endswith>`__ - Determines if the ``source`` string starts or ends with the ``str`` substring.
+* `str.match(source, regex) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}match>`__ - Extract the substring matching the specified `regular expression <https://en.wikipedia.org/wiki/Regular_expression#Perl_and_PCRE>`__.
+
+
 November 2021
 -------------
 
