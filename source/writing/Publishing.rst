@@ -101,8 +101,7 @@ While the script's code is not accessible, protected scripts can be used freely 
 Invite-only
 """""""""""
 
-The **invite-only** access type protects both the script's code and its use. T
-he publisher of an invite-only script must explicitly grant access to individual users. 
+The **invite-only** access type protects both the script's code and its use. The publisher of an invite-only script must explicitly grant access to individual users. 
 Invite-only scripts are mostly used by script vendors providing paid access to their scripts. 
 Only Premium accounts can publish invite-only scripts, and they must comply with our `Vendor Requirements <https://www.tradingview.com/?solution=43000549951>`__.
 
