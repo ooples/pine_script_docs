@@ -223,7 +223,7 @@ Improved backtesting functionality by adding the Leverage mechanism.
 
 Added support for table drawings and functions for working with them. 
 Tables are unique objects that are not anchored to specific bars; they float in a script’s space, independently of the chart bars being viewed or the zoom factor used. 
-For more information, see the :ref:`Tables <PageTables>`` User Manual page.
+For more information, see the :ref:`Tables <PageTables>` User Manual page.
 
 New functions were added:
 
