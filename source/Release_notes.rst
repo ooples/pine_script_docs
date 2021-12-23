@@ -11,6 +11,8 @@ This page contains release notes of notable changes in Pine Script.
 December 2021
 -------------
 
+New ``str.`` functions
+^^^^^^^^^^^^^^^^^^^^^^
 
 Added a number of new functions that provide more ways to process strings and introduce regular expressions to Pine:
 
@@ -23,12 +25,26 @@ Added a number of new functions that provide more ways to process strings and in
 * `str.match(source, regex) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}match>`__ - Extract the substring matching the specified `regular expression <https://en.wikipedia.org/wiki/Regular_expression#Perl_and_PCRE>`__.
 
 
-New built-in variables for referring to the last bars in the dataset. Values is known from the beginning of the script calculation:
+Textboxes
+^^^^^^^^^
 
-* `last_bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_last_bar_index>`__ - Bar index of the last chart bar. 
-* `last_bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_last_bar_time>`__ - Time in UNIX format of the last chart bar.
+The box drawing in Pine now supports text. The `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`__ function has five new parameters for text manipulation: ``text``, ``text_size``, ``text_color``, ``text_valign``, and ``text_halign``. Additionally, five new functions to set these values for existing boxes were added:
 
-New source built-in variable:
+* `box.set_text() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_text>`__
+* `box.set_text_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_text_color>`__
+* `box.set_text_size() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_text_size>`__
+* `box.set_text_valign() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_text_valign>`__
+* `box.set_text_halign() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_text_halign>`__
+
+New built-in variables
+^^^^^^^^^^^^^^^^^^^^^^
+
+Added new built-in variables for referring to the last bars in the dataset. Their values are known at the beginning of the script's calculation:
+
+* `last_bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_last_bar_index>`__ - Bar index of the last chart bar.
+* `last_bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_last_bar_time>`__ - UNIX time of the last chart bar.
+
+New built-in ``source`` variable:
 
 * `hlcc4 <https://www.tradingview.com/pine-script-reference/v5/#var_hlcc4>`__ - A shortcut for ``(high + low + close + close)/4``. It averages the high and low values with the double-weighted close.
 
