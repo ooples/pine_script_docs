@@ -11,6 +11,7 @@ This page contains release notes of notable changes in Pine Script.
 December 2021
 -------------
 
+
 Added a number of new functions that provide more ways to process strings and introduce regular expressions to Pine:
 
 * `str.contains(source, str) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}contains>`__ - Determines if the ``source`` string contains the ``str`` substring.
@@ -21,6 +22,15 @@ Added a number of new functions that provide more ways to process strings and in
 * `str.startswith(source, str) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}startswith>`__ and `str.endswith(source, str) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}endswith>`__ - Determines if the ``source`` string starts or ends with the ``str`` substring.
 * `str.match(source, regex) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}match>`__ - Extract the substring matching the specified `regular expression <https://en.wikipedia.org/wiki/Regular_expression#Perl_and_PCRE>`__.
 
+
+New built-in variables for referring to the last bars in the dataset. Values is known from the beginning of the script calculation:
+
+* `last_bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_last_bar_index>`__ - Bar index of the last chart bar. 
+* `last_bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_last_bar_time>`__ - Time in UNIX format of the last chart bar.
+
+New source built-in variable:
+
+* `hlcc4 <https://www.tradingview.com/pine-script-reference/v5/#var_hlcc4>`__ - A shortcut for ``(high + low + close + close)/4``. It averages the high and low values with the double-weighted close.
 
 November 2021
 -------------
