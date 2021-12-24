@@ -17,14 +17,14 @@ The space between lines drawn in Pine can now be filled! We’ve added a new ``l
 
 New linefill-related functions:
 
-* `array.new_linefill() <https://www.tradingview.com/chart/iGdGEZbE/#fun_array{dot}new_linefill>`__
-* `linefill() <https://www.tradingview.com/chart/iGdGEZbE/#fun_linefill>`__
-* `linefill.delete() <https://www.tradingview.com/chart/iGdGEZbE/#fun_linefill{dot}delete>`__
-* `linefill.get_line1() <https://www.tradingview.com/chart/iGdGEZbE/#fun_linefill{dot}get_line1>`__
-* `linefill.get_line2() <https://www.tradingview.com/chart/iGdGEZbE/#fun_linefill{dot}get_line2>`__
-* `linefill.new() <https://www.tradingview.com/chart/iGdGEZbE/#fun_linefill{dot}new>`__
-* `linefill.set_color() <https://www.tradingview.com/chart/iGdGEZbE/#fun_linefill{dot}set_color>`__
-* `linefill.all() <https://www.tradingview.com/chart/iGdGEZbE/#var_linefill{dot}all>`__
+* `array.new_linefill() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}new_linefill>`__
+* `linefill() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill>`__
+* `linefill.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}delete>`__
+* `linefill.get_line1() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}get_line1>`__
+* `linefill.get_line2() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}get_line2>`__
+* `linefill.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}new>`__
+* `linefill.set_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}set_color>`__
+* `linefill.all() <https://www.tradingview.com/pine-script-reference/v5/#var_linefill{dot}all>`__
 
 
 New functions for string manipulation
