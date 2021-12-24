@@ -11,8 +11,24 @@ This page contains release notes of notable changes in Pine Script.
 December 2021
 -------------
 
-New ``str.`` functions
-^^^^^^^^^^^^^^^^^^^^^^
+Linefills
+^^^^^^^^^
+The space between lines drawn in Pine can now be filled! We’ve added a new ``linefill`` drawing type, along with a number of functions dedicated to manipulating it. Linefills are created by passing two lines and a color to the ``linefill.new()`` function, and their behavior is based on the lines they're tied to: they extend in the same direction as the lines, move when their lines move, and get deleted when any of the two lines is deleted.
+
+New linefill-related functions:
+
+* `array.new_linefill() <https://www.tradingview.com/chart/iGdGEZbE/#fun_array{dot}new_linefill>`__
+* `linefill() <https://www.tradingview.com/chart/iGdGEZbE/#fun_linefill>`__
+* `linefill.delete() <https://www.tradingview.com/chart/iGdGEZbE/#fun_linefill{dot}delete>`__
+* `linefill.get_line1() <https://www.tradingview.com/chart/iGdGEZbE/#fun_linefill{dot}get_line1>`__
+* `linefill.get_line2() <https://www.tradingview.com/chart/iGdGEZbE/#fun_linefill{dot}get_line2>`__
+* `linefill.new() <https://www.tradingview.com/chart/iGdGEZbE/#fun_linefill{dot}new>`__
+* `linefill.set_color() <https://www.tradingview.com/chart/iGdGEZbE/#fun_linefill{dot}set_color>`__
+* `linefill.all() <https://www.tradingview.com/chart/iGdGEZbE/#var_linefill{dot}all>`__
+
+
+New functions for string manipulation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Added a number of new functions that provide more ways to process strings and introduce regular expressions to Pine:
 
