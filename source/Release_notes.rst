@@ -13,7 +13,9 @@ December 2021
 
 Linefills
 ^^^^^^^^^
-The space between lines drawn in Pine can now be filled! We’ve added a new ``linefill`` drawing type, along with a number of functions dedicated to manipulating it. Linefills are created by passing two lines and a color to the ``linefill.new()`` function, and their behavior is based on the lines they're tied to: they extend in the same direction as the lines, move when their lines move, and get deleted when any of the two lines is deleted.
+The space between lines drawn in Pine can now be filled! We’ve added a new ``linefill`` drawing type, along with a number of functions dedicated to manipulating it. 
+Linefills are created by passing two lines and a color to the ``linefill.new()`` function, and their behavior is based on the lines they're tied to: 
+they extend in the same direction as the lines, move when their lines move, and are deleted when one of the two lines is deleted.
 
 New linefill-related functions:
 
@@ -30,7 +32,7 @@ New linefill-related functions:
 New functions for string manipulation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Added a number of new functions that provide more ways to process strings and introduce regular expressions to Pine:
+Added a number of new functions that provide more ways to process strings, and introduce regular expressions to Pine:
 
 * `str.contains(source, str) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}contains>`__ - Determines if the ``source`` string contains the ``str`` substring.
 * `str.pos(source, str) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}pos>`__ - Returns the position of the ``str`` string in the ``source`` string.
