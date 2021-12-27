@@ -93,7 +93,7 @@ Added a new `for...in <https://www.tradingview.com/pine-script-reference/v5/#op_
 	
 Function overloads
 ^^^^^^^^^^^^^^^^^^
-Added function overloads. Several functions in a script can share the same name, as long one of the following conditions is true:
+Added function overloads. Several functions in a script can now share the same name, as long one of the following conditions is true:
 
 * Each overload has a different number of parameters::
 
