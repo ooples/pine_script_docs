@@ -37,16 +37,20 @@ Added a number of new functions that provide more ways to process strings, and i
 * `str.contains(source, str) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}contains>`__ - Determines if the ``source`` string contains the ``str`` substring.
 * `str.pos(source, str) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}pos>`__ - Returns the position of the ``str`` string in the ``source`` string.
 * `str.substring(source, begin_pos, end_pos) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}substring>`__ - Extracts a substring from the ``source`` string.
-* `str.replace(source, target, replacement, occurrence) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}replace>`__ - Contrary to the existing `str.replace_all() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}replace_all>`__ function, ``str.replace()`` allows the selective replacement of a matched substring with a replacement string.
-* `str.lower(source) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}lower>`__ and `str.upper(source) <https://www.tradingview.com/pine-script-reference/v5/#fun_str%7Bdot%7Dupper>`__ - Converts all letters of the ``source`` string to lower or upper case:
-* `str.startswith(source, str) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}startswith>`__ and `str.endswith(source, str) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}endswith>`__ - Determines if the ``source`` string starts or ends with the ``str`` substring.
-* `str.match(source, regex) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}match>`__ - Extract the substring matching the specified `regular expression <https://en.wikipedia.org/wiki/Regular_expression#Perl_and_PCRE>`__.
+* `str.replace(source, target, replacement, occurrence) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}replace>`__ - 
+  Contrary to the existing `str.replace_all() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}replace_all>`__ function, ``str.replace()`` allows the selective replacement of a matched substring with a replacement string.
+* `str.lower(source) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}lower>`__ and 
+  `str.upper(source) <https://www.tradingview.com/pine-script-reference/v5/#fun_str%7Bdot%7Dupper>`__ - Convert all letters of the ``source`` string to lower or upper case:
+* `str.startswith(source, str) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}startswith>`__ and 
+  `str.endswith(source, str) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}endswith>`__ - Determine if the ``source`` string starts or ends with the ``str`` substring.
+* `str.match(source, regex) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}match>`__ - Extracts the substring matching the specified `regular expression <https://en.wikipedia.org/wiki/Regular_expression#Perl_and_PCRE>`__.
 
 
 Textboxes
 ^^^^^^^^^
 
-The box drawing in Pine now supports text. The `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`__ function has five new parameters for text manipulation: ``text``, ``text_size``, ``text_color``, ``text_valign``, and ``text_halign``. Additionally, five new functions to set these values for existing boxes were added:
+Box drawings now supports text. The `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`__ function has five new parameters for text manipulation: 
+``text``, ``text_size``, ``text_color``, ``text_valign``, and ``text_halign``. Additionally, five new functions to set the text properties of existing boxes were added:
 
 * `box.set_text() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_text>`__
 * `box.set_text_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_text_color>`__
@@ -57,7 +61,7 @@ The box drawing in Pine now supports text. The `box.new() <https://www.tradingvi
 New built-in variables
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Added new built-in variables for referring to the last bars in the dataset. Their values are known at the beginning of the script's calculation:
+Added new built-in variables that return the ``bar_index`` and ``time`` values of the last bar in the dataset. Their values are known at the beginning of the script's calculation:
 
 * `last_bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_last_bar_index>`__ - Bar index of the last chart bar.
 * `last_bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_last_bar_time>`__ - UNIX time of the last chart bar.
@@ -89,9 +93,9 @@ Added a new `for...in <https://www.tradingview.com/pine-script-reference/v5/#op_
 	
 Function overloads
 ^^^^^^^^^^^^^^^^^^
-Added function overloads. Several functions in a script can share the same name as long one of the following conditions is true:
+Added function overloads. Several functions in a script can share the same name, as long one of the following conditions is true:
 
-* Each function has a different number of parameters::
+* Each overload has a different number of parameters::
 
 	//@version=5
 	indicator("Function overload")
@@ -107,7 +111,7 @@ Added function overloads. Several functions in a script can share the same name 
 	plot(mult(7, 4))
 	plot(mult(7, 4, 2))
 
-* When there are several functions with the same number of parameters, each parameter in each of these functions should be explicitly typified::
+* When overloads have the same number of parameters, all parameters in each overload must be explicitly typified, and their type combinations must be unique::
 
 	//@version=5
 	indicator("Function overload")
@@ -135,7 +139,8 @@ Added function overloads. Several functions in a script can share the same name 
 
 Currency conversion
 ^^^^^^^^^^^^^^^^^^^
-Added a new `currency` argument to most functions in the ``request.*`` namespace. If specified, the values returned by the function will be automatically converted from the source currency to the target currency. The following functions are affected:
+Added a new `currency` argument to most ``request.*()`` functions. If specified, price values returned by the function will be converted from the source currency to the target currency. 
+The following functions are affected:
 
 * `request.dividends() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}dividends>`__
 * `request.earnings() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}earnings>`__
