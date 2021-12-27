@@ -8,7 +8,137 @@ Release notes
 
 This page contains release notes of notable changes in Pine Script.
 
+December 2021
+-------------
 
+Linefills
+^^^^^^^^^
+The space between lines drawn in Pine can now be filled! We’ve added a new ``linefill`` drawing type, along with a number of functions dedicated to manipulating it. Linefills are created by passing two lines and a color to the ``linefill.new()`` function, and their behavior is based on the lines they're tied to: they extend in the same direction as the lines, move when their lines move, and get deleted when any of the two lines is deleted.
+
+New linefill-related functions:
+
+* `array.new_linefill() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}new_linefill>`__
+* `linefill() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill>`__
+* `linefill.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}delete>`__
+* `linefill.get_line1() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}get_line1>`__
+* `linefill.get_line2() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}get_line2>`__
+* `linefill.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}new>`__
+* `linefill.set_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}set_color>`__
+* `linefill.all() <https://www.tradingview.com/pine-script-reference/v5/#var_linefill{dot}all>`__
+
+
+New functions for string manipulation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Added a number of new functions that provide more ways to process strings and introduce regular expressions to Pine:
+
+* `str.contains(source, str) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}contains>`__ - Determines if the ``source`` string contains the ``str`` substring.
+* `str.pos(source, str) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}pos>`__ - Returns the position of the ``str`` string in the ``source`` string.
+* `str.substring(source, begin_pos, end_pos) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}substring>`__ - Extracts a substring from the ``source`` string.
+* `str.replace(source, target, replacement, occurrence) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}replace>`__ - Contrary to the existing `str.replace_all() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}replace_all>`__ function, ``str.replace()`` allows the selective replacement of a matched substring with a replacement string.
+* `str.lower(source) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}lower>`__ and `str.upper(source) <https://www.tradingview.com/pine-script-reference/v5/#fun_str%7Bdot%7Dupper>`__ - Converts all letters of the ``source`` string to lower or upper case:
+* `str.startswith(source, str) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}startswith>`__ and `str.endswith(source, str) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}endswith>`__ - Determines if the ``source`` string starts or ends with the ``str`` substring.
+* `str.match(source, regex) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}match>`__ - Extract the substring matching the specified `regular expression <https://en.wikipedia.org/wiki/Regular_expression#Perl_and_PCRE>`__.
+
+
+Textboxes
+^^^^^^^^^
+
+The box drawing in Pine now supports text. The `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`__ function has five new parameters for text manipulation: ``text``, ``text_size``, ``text_color``, ``text_valign``, and ``text_halign``. Additionally, five new functions to set these values for existing boxes were added:
+
+* `box.set_text() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_text>`__
+* `box.set_text_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_text_color>`__
+* `box.set_text_size() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_text_size>`__
+* `box.set_text_valign() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_text_valign>`__
+* `box.set_text_halign() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_text_halign>`__
+
+New built-in variables
+^^^^^^^^^^^^^^^^^^^^^^
+
+Added new built-in variables for referring to the last bars in the dataset. Their values are known at the beginning of the script's calculation:
+
+* `last_bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_last_bar_index>`__ - Bar index of the last chart bar.
+* `last_bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_last_bar_time>`__ - UNIX time of the last chart bar.
+
+New built-in ``source`` variable:
+
+* `hlcc4 <https://www.tradingview.com/pine-script-reference/v5/#var_hlcc4>`__ - A shortcut for ``(high + low + close + close)/4``. It averages the high and low values with the double-weighted close.
+
+November 2021
+-------------
+
+for...in
+^^^^^^^^
+
+Added a new `for...in <https://www.tradingview.com/pine-script-reference/v5/#op_for{dot}{dot}{dot}in>`__ operator to iterate over all elements of an array::
+
+	//@version=5
+	indicator("My Script")
+	int[] a1 = array.from(1, 3, 6, 3, 8, 0, -9, 5)
+
+	highest(array) =>
+	    var int highestNum = na
+	    for item in array
+                if na(highestNum) or item > highestNum
+		    highestNum := item
+	    highestNum
+
+	plot(highest(a1))
+	
+Function overloads
+^^^^^^^^^^^^^^^^^^
+Added function overloads. Several functions in a script can share the same name as long one of the following conditions is true:
+
+* Each function has a different number of parameters::
+
+	//@version=5
+	indicator("Function overload")
+
+	// Two parameters
+	mult(x1, x2) =>
+	    x1 * x2
+	
+	// Three parameters
+	mult(x1, x2, x3) =>
+	    x1 * x2 * x3
+
+	plot(mult(7, 4))
+	plot(mult(7, 4, 2))
+
+* When there are several functions with the same number of parameters, each parameter in each of these functions should be explicitly typified::
+
+	//@version=5
+	indicator("Function overload")
+
+	// Accepts both 'int' and 'float' values - any 'int' can be automatically cast to 'float'
+	mult(float x1, float x2) =>
+	    x1 * x2
+
+	// Returns a 'bool' value instead of a number
+	mult(bool x1, bool x2) =>
+	    x1 and x2 ? true : false
+
+	mult(string x1, string x2) =>
+	    str.tonumber(x1) * str.tonumber(x2)
+
+	// Has three parameters, so explicit types are not required
+	mult(x1, x2, x3) =>
+	    x1 * x2 * x3
+
+	plot(mult(7, 4))
+	plot(mult(7.5, 4.2))
+	plot(mult(true, false) ? 1 : 0)
+	plot(mult("5", "6"))
+	plot(mult(7, 4, 2))
+
+Currency conversion
+^^^^^^^^^^^^^^^^^^^
+Added a new `currency` argument to most functions in the ``request.*`` namespace. If specified, the values returned by the function will be automatically converted from the source currency to the target currency. The following functions are affected:
+
+* `request.dividends() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}dividends>`__
+* `request.earnings() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}earnings>`__
+* `request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__
+* `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
 
 .. _PageReleaseNotes_October2021:
 
@@ -135,7 +265,7 @@ Improved backtesting functionality by adding the Leverage mechanism.
 
 Added support for table drawings and functions for working with them. 
 Tables are unique objects that are not anchored to specific bars; they float in a script’s space, independently of the chart bars being viewed or the zoom factor used. 
-For more information, see the :ref:`Tables <PageTables>`` User Manual page.
+For more information, see the :ref:`Tables <PageTables>` User Manual page.
 
 New functions were added:
 

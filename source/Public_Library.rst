@@ -88,13 +88,6 @@ You may also search for scripts from the tradingview.com home page
 by first selecting *Scripts* from the *Ticker* dropdown menu and
 entering your search criteria.
 
-Educational videos
-------------------
-
-#. `Importing Custom Indicators <https://player.vimeo.com/video/86111066>`__
-#. `Publishing Custom Indicators <https://player.vimeo.com/video/103138248>`__
-#. `Pine Script Reference Material <https://player.vimeo.com/video/103135482>`__
-
 
 .. |Public_Library_tab| image:: images/PublicLibrary-Public_Library_tab.png
 .. |Add_to_Personal_Library| image:: images/PublicLibrary-Add_to_Personal_Library.png
