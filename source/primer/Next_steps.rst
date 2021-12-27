@@ -75,7 +75,7 @@ much can be accomplished in very few lines of Pine code.
 Publishing scripts
 ------------------
 
-TradingView is home to a large community of Pine coders and millions of traders from all around the world. Once you beocme proficient enough in Pine, 
+TradingView is home to a large community of Pine coders and millions of traders from all around the world. Once you become proficient enough in Pine, 
 you can choose to share your scripts with other traders. Before doing so, please take the time to learn Pine well-enough to supply traders with an original and reliable tool.
 All publicly published scripts are analyzed by our team of moderators and must comply with our `Script Publishing Rules <https://www.tradingview.com/house-rules/?solution=43000590599>`__, 
 which require them to be original and well-documented.

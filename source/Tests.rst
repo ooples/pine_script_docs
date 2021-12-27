@@ -1,21 +1,27 @@
 .. _PageTests:
 
-.. |TVLogoHeader| image:: /source/images/Pine_Script_logo_small.png
+.. |TVLogoHeader| image:: /images/Pine_Script_logo_small.png
    :alt: Pine Script
    :align: right
    :width: 50
    :height: 50
 
-.. |tvlogofooter| image:: images/TradingView-Logo-Block.svg
+.. |tvlogofooter| image:: /images/TradingView-Logo-Block.svg
    :width: 400px
    :align: center
 
 
-.. image:: /source/images/Pine_Script_logo_small.png
+.. image:: /images/Pine_Script_logo_small.png
    :alt: Pine Script
    :align: right
    :width: 50
    :height: 50
+
+
+Pine small logo with macro
+==========================
+
+|TVLogoHeader|
 
 
 
@@ -36,42 +42,16 @@ Header 1.1.1
 Header 1.1.1.1
 """"""""""""""
 
-:php:`$result = $a + 23;`
+file directive :file:`/etc/passwd`
 
-:typoscript:`lib.hello.value = Hello World!`
-
-:file:`/etc/passwd`
-
-:kbd:`ctrl` + :kbd:`s`
-
-You tube video:
-
-.. youtube:: wNxO-aXY5Yw
-
-
-
-UNICODE chars
-""""""""""""""
-xxx🠆xxx🠄xxx
-
-xxx 💙.
-
-Uni—code EM dash—
-
-Uni–code EN dash–
-
-Uni−code Minus−
-
-Uni‒code Figure Dash‒
-
-🡠 🡢 🡡 🡣 🡤 🡥 🡦 🡧 🡨 🡪 🡩 🡫 🡬 🡭 🡮 🡯 🡰 🡲 🡱 🡳 🡴 🡵 🡶 🡷 🡸 🡺 🡹 🡻 🡼 🡽 🡾 🡿 🢀 🢂 🢁 🢃 🢄 🢅 🢆 🢇
+kbd directive :kbd:`ctrl` + :kbd:`s`
 
 
 
 Animated GIF
 """"""""""""
 
-.. image:: image/Test-GIF-01.gif
+.. image:: /image/Test-GIF-01.gif
 
    
 
@@ -96,19 +76,10 @@ Footer with /images/TradingView-Logo-Block and no width/align
 
 
 
-Footer with /source/images/TradingView-Logo-Block
-"""""""""""""""""""""""""""""""""""""""""""""""""
-
-.. image:: /source/images/TradingView-Logo-Block.svg
-    :width: 400px
-    :align: center
-
-
-
 Footer with images/TradingView-Logo-Block
 """""""""""""""""""""""""""""""""""""""
 
-.. image:: images/TradingView-Logo-Block.svg
+.. image:: /images/TradingView-Logo-Block.svg
     :width: 400px
     :align: center
 
