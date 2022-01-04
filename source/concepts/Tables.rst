@@ -42,8 +42,8 @@ For this reason, it is strongly recommended to always restrict execution of all 
 - Use the `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ keyword to declare tables.
 - Enclose all other calls inside an `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ `barstate.islast <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islast>`__ block.
 
-Multiple tables can be used in one script, as long as they are each anchored to a different position. Each table object is identified by its own ID.
-Limits on the quantity of cells in all tables are determined by the total number of cells used in one script.
+**Multiple tables can be used in one script, as long as they are each anchored to a different position. Each table object is identified by its own ID.
+Limits on the quantity of cells in all tables are determined by the total number of cells used in one script.**
 
 
 
