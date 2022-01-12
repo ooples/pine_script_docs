@@ -143,14 +143,13 @@ You can bring up a simple Pine v5 strategy by selecting "New blank strategy" ins
     //@version=5
     strategy("My Strategy", overlay=true, margin_long=100, margin_short=100)
 
-    longCondition = crossover(sma(close, 14), sma(close, 28))
+    longCondition = ta.crossover(ta.sma(close, 14), ta.sma(close, 28))
     if (longCondition)
         strategy.entry("My Long Entry Id", strategy.long)
 
-    shortCondition = crossunder(sma(close, 14), sma(close, 28))
+    shortCondition = ta.crossunder(ta.sma(close, 14), ta.sma(close, 28))
     if (shortCondition)
         strategy.entry("My Short Entry Id", strategy.short)
-
 
 
 Line wrapping
