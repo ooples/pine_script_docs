@@ -118,7 +118,7 @@ Finding good open-source Pine code is relatively easy. These are reliable source
 - Scripts by the `authors the PineCoders account follows <https://www.tradingview.com/u/PineCoders/#following-people>`__
 - Many scripts by authors with high reputation and open-source publications.
 
-Reading code from scripts you find in the `Puclic Library <https://www.tradingview.com/scripts/>`__ is easy; 
+Reading code from `Community Scripts <https://www.tradingview.com/scripts/>`__ is easy; 
 if you don't see a grey or red "lock" icon in the upper-right corner of the script's widget, this indicates the script is open-source.
 By opening its script page, you will be able to see its source.
 
