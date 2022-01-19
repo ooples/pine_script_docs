@@ -76,7 +76,7 @@ Compile time
 Runtime
 -------
 
-- 300 ms per loop
+- 500 ms per loop
 - 40,000 ms per script
 - Memory
 
