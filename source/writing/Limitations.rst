@@ -27,7 +27,7 @@ in order to assess the probability of your script running into limitations later
 
 The most frequent limitations Pine programmers encounter are:
 
-- The 200 ms maximum execution time for any loop on one bar.
+- The 500 ms maximum execution time for any loop on one bar.
 - The limit of 40 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls.
 
 Here are the limits imposed in the Pine environment. They are divided into ones imposed at compile time and runtime.
@@ -76,7 +76,7 @@ Compile time
 Runtime
 -------
 
-- 300 ms per loop
+- 500 ms per loop
 - 40,000 ms per script
 - Memory
 
