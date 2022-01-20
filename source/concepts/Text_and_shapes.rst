@@ -593,6 +593,18 @@ where ``id`` is the label whose text is to be retrieved.
 
 
 
+Clonning labels
+^^^^^^^^^^^^^^
+
+The `label.copy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}copy>`__  
+function is used to clone labels. Its syntax is:
+
+.. code-block:: text
+
+    label.delete(id) → void
+
+
+
 Deleting labels
 ^^^^^^^^^^^^^^^
 
