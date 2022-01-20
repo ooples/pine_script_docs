@@ -601,7 +601,7 @@ function is used to clone labels. Its syntax is:
 
 .. code-block:: text
 
-    label.delete(id) → void
+    label.copy(id) → void
 
 
 
