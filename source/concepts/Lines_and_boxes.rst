@@ -431,7 +431,7 @@ where ``id`` is the ID of the line whose ``x1`` value is to be retrieved.
  
 
 
-Clonning lines
+Cloning lines
 ^^^^^^^^^^^^^^
 
 The `line.copy() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}copy>`__  
@@ -773,7 +773,7 @@ where ``id`` is the ID of the box whose ``top`` value is to be retrieved.
 
 
 
-Clonning boxes
+Cloning boxes
 ^^^^^^^^^^^^^^
 
 The `box.copy() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}copy>`__  
