@@ -439,7 +439,7 @@ function is used to clone lines. Its syntax is:
 
 .. code-block:: text
 
-    line.delete(id) → void
+    line.copy(id) → void
 
 
 
@@ -781,7 +781,7 @@ function is used to clone boxes. Its syntax is:
 
 .. code-block:: text
 
-    box.delete(id) → void
+    box.copy(id) → void
 
 
 
