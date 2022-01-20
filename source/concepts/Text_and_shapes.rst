@@ -593,7 +593,7 @@ where ``id`` is the label whose text is to be retrieved.
 
 
 
-Clonning labels
+Cloning labels
 ^^^^^^^^^^^^^^
 
 The `label.copy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}copy>`__  
