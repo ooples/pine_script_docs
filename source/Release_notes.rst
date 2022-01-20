@@ -8,6 +8,15 @@ Release notes
 
 This page contains release notes of notable changes in Pine Script.
 
+January 2022
+-------------
+
+Added new functions to clone drawings:
+
+* `line.copy() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}copy>`__ 
+* `label.copy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}copy>`__ 
+* `box.copy() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}copy>`__ 
+
 December 2021
 -------------
 
