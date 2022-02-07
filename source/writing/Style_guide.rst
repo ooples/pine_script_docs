@@ -83,7 +83,7 @@ This is the call to `indicator() <https://www.tradingview.com/pine-script-refere
 <import_statements>
 ^^^^^^^^^^^^^^^^^^^
 
-If your script uses one or more Pine :ref:`here <PageLibraries>`, your `import <https://www.tradingview.com/pine-script-reference/v5/#op_import>`__ statements belong here.
+If your script uses one or more :ref:`Pine libraries <PageLibraries>`, your `import <https://www.tradingview.com/pine-script-reference/v5/#op_import>`__ statements belong here.
 
 
 
