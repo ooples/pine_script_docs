@@ -22,7 +22,7 @@ This section provides you with an overview of the limitations that you may encou
 There are currently no means for Pine programmers to get data on the resources consumed by their scripts.
 We hope this will change in the future.
 
-In the meantime, when you are considering large projects, it is safest to make a proof of concept in code,
+In the meantime, when you are considering large projects, it is safest to make a proof of concept 
 in order to assess the probability of your script running into limitations later in your project.
 
 The most frequent limitations Pine programmers encounter are:
