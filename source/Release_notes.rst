@@ -8,6 +8,14 @@ Release notes
 
 This page contains release notes of notable changes in Pine Script.
 
+February 2022
+-------------
+
+New function was added:
+
+* `timeframe.in_seconds(timeframe) <https://www.tradingview.com/pine-script-reference/v5/#fun_timeframe{dot}in_seconds>`__ - converts the timeframe passed to the ``timeframe`` argument into seconds.
+
+
 January 2022
 -------------
 
