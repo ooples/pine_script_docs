@@ -11,7 +11,18 @@ This page contains release notes of notable changes in Pine Script.
 February 2022
 -------------
 
-New function was added:
+Added templates and the ability to create arrays via templates. Instead of using one of the ``array.new_*()`` functions, a template function `array.new_\<type> <https://www.tradingview.com/pine-script-reference/v5/#fun_array%7Bdot%7Dnew%3Ctype%3E>`__ can be used. In the example below, we use this functionality to create an array filled with ``float`` values::
+
+	//@version=5
+	indicator("array.new<float> example")
+	length = 5
+	var a = array.new<float>(length, close)
+	if array.size(a) == length
+		array.remove(a, 0)
+		array.push(a, close)
+	plot(array.sum(a) / length, "SMA")
+
+A new function was added:
 
 * `timeframe.in_seconds(timeframe) <https://www.tradingview.com/pine-script-reference/v5/#fun_timeframe{dot}in_seconds>`__ - converts the timeframe passed to the ``timeframe`` argument into seconds.
 
