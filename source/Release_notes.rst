@@ -22,10 +22,11 @@ Added templates and the ability to create arrays via templates. Instead of using
 		array.push(a, close)
 	plot(array.sum(a) / length, "SMA")
 
-A new function was added:
+New functions were added:
 
 * `timeframe.in_seconds(timeframe) <https://www.tradingview.com/pine-script-reference/v5/#fun_timeframe{dot}in_seconds>`__ - converts the timeframe passed to the ``timeframe`` argument into seconds.
 
+* `input.text_area() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}text_area>`__ - adds multiline text input area to the Script settings.
 
 January 2022
 -------------
