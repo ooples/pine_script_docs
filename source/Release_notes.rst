@@ -8,6 +8,16 @@ Release notes
 
 This page contains release notes of notable changes in Pine Script.
 
+March 2022
+-------------
+
+Table merging and cell tooltips
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* It is now possible to merge several cells in a table. A merged cell doesn't have to be a header: you can merge cells in any direction, as long as the resulting cell doesn't affect any already merged cells and doesn't go outside of the table's bounds. Cells can be merged with the new  `table.merge_cells() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}merge_cells>`__ function.
+
+* Tables now support tooltips, floating labels that appear when you hover over a table's cell. To add a tooltip, pass a string to the ``tooltip`` argument of the `table.cell() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}cell>`__ function or use the new `table.cell_set_tooltip() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}cell_set_tooltip>`__ function.
+
 February 2022
 -------------
 
