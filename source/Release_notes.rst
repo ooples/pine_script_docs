@@ -11,6 +11,20 @@ This page contains release notes of notable changes in Pine Script.
 March 2022
 -------------
 
+New array functions were added:
+
+* `array.sort_indices() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}sort_indices>`__  - returns an array of indices which, when used to index the original array, will access its elements in their sorted order.
+* `array.percentrank() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}percentrank>`__ - returns the percentile rank of a value in the array.
+* `array.percentile_nearest_rank() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}percentile_nearest_rank>`__ - returns the value for which the specified percentage of array values (percentile) are less than or equal to it, using the nearest-rank method.	
+* `array.percentile_linear_interpolation() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}percentile_linear_interpolation>`__ - returns the value for which the specified percentage of array values (percentile) are less than or equal to it, using linear interpolation.
+* `array.abs() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}abs>`__ - returns an array containing the absolute value of each element in the original array.
+* `array.binary_search() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}binary_search>`__ - returns the index of the value, or -1 if the value is not found.
+* `array.binary_search_leftmost() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}binary_search_leftmost>`__ - returns the index of the value if it is found or the index of the next smallest element to the left of where the value would lie if it was in the array.
+* `array.binary_search_rightmost() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}binary_search_rightmost>`__ - returns the index of the value if it is found or the index of the element to the right of where the value would lie if it was in the array.
+	
+		
+Added a new optional ``nth`` parameter for the `array.min() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}min>`__ and `array.max()      <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}max>`__ functions.
+
 Table merging and cell tooltips
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
