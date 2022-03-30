@@ -25,4 +25,4 @@ install_hooks:
 	cp -r ./git-hooks/. ./.git/hooks
 
 install_tools:
-	pip install sphinx==1.8.5
+	pip install sphinx==1.8.6
