@@ -25,6 +25,8 @@ New array functions were added:
 		
 Added a new optional ``nth`` parameter for the `array.min() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}min>`__ and `array.max()      <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}max>`__ functions.
 
+Added ``index`` in `for..in <https://www.tradingview.com/pine-script-reference/v5/#op_for{dot}{dot}{dot}in>`__ operator. It tracks the current iteration's index.
+
 Table merging and cell tooltips
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
