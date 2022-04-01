@@ -23,7 +23,7 @@ Comments
 --------
 
 Double slashes (``//``) define comments in Pine. Comments can begin anywhere on the line. 
-Except on wrapped lines, they can also follow Pine code on the same line::
+They can also follow Pine code on the same line::
 
     //@version=5
     indicator("")
@@ -194,7 +194,7 @@ example::
                        -1 :
                        nz(ud[1])-1)
 
-Do not use comments in wrapped lines. The following code does NOT compile::
+You can use comments in wrapped lines::
 
     //@version=5
     indicator("")
