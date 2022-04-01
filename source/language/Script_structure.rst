@@ -199,6 +199,6 @@ You can use comments in wrapped lines::
     //@version=5
     indicator("")
     c = open > close ? color.red :
-      high > high[1] ? color.lime : // A comment causing a compilation error.
+      high > high[1] ? color.lime : // A comment
       low < low[1] ? color.blue : color.black
     bgcolor(c)
