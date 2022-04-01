@@ -13,13 +13,13 @@ April 2022
 
 New matrix functions were added:
 
-* `matrix.new<type> <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}new<type>>`__ - Creates a new matrix object. A matrix is a two-dimensional data structure containing rows and columns. All elements in the matrix must be of the type specified in the type template (“<type>”).
+* `matrix.new<type> <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix%7Bdot%7Dnew%3Ctype%3E>`__ - Creates a new matrix object. A matrix is a two-dimensional data structure containing rows and columns. All elements in the matrix must be of the type specified in the type template (“<type>”).
 * `matrix.row() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}row>`__  - Creates a one-dimensional array from the elements of a matrix row.
 * `matrix.col() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}col>`__  - Creates a one-dimensional array from the elements of a matrix column.
 * `matrix.get() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}get>`__  - Returns the element with the specified index of the matrix.
 * `matrix.set() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}set>`__  - Assigns ``value`` to the element at the ``column`` and ``row`` index of the matrix.
 * `matrix.rows() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}rows>`__  - Returns the number of rows in the matrix.
-* `matrix.columns() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}columns`__  - Returns the number of columns in the matrix.
+* `matrix.columns() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}columns>`__  - Returns the number of columns in the matrix.
 * `matrix.elements_count() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}elements_count>`__  - Returns the total number of matrix elements.
 * `matrix.add_row() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}add_row>`__  - Adds a row to the matrix. The row can consist of ``na`` values, or an array can be used to provide values.
 * `matrix.add_col() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}add_col>`__  - Adds a column to the matrix. The column can consist of ``na`` values, or an array can be used to provide values.
