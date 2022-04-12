@@ -115,6 +115,7 @@ Lines are managed using built-in functions in the ``line`` namespace. They inclu
 - `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`_ to create them.
 - ``line.set_*()`` functions to modify the properties of an line.
 - ``line.get_*()`` functions to read the properties of an existing line.
+- `line.copy() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}copy>`_ to clone them.
 - `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`_ to delete them.
 - The `line.all <https://www.tradingview.com/pine-script-reference/v5/#var_line{dot}all>`__ 
   array which always contains the IDs of all the visible lines on the chart. 
@@ -430,6 +431,18 @@ where ``id`` is the ID of the line whose ``x1`` value is to be retrieved.
  
 
 
+Cloning lines
+^^^^^^^^^^^^^^
+
+The `line.copy() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}copy>`__  
+function is used to clone lines. Its syntax is:
+
+.. code-block:: text
+
+    line.copy(id) → void
+
+
+
 Deleting lines
 ^^^^^^^^^^^^^^
 
@@ -507,6 +520,7 @@ Boxes are managed using built-in functions in the ``box`` namespace. They includ
 - `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ to create them.
 - ``box.set_*()`` functions to modify the properties of a box.
 - ``box.get_*()`` functions to read some of the properties of an existing box.
+- `box.copy() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}copy>`_ to clone them.
 - `box.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}delete>`_ to delete them.
 - The `box.all <https://www.tradingview.com/pine-script-reference/v5/#var_box{dot}all>`__ 
   array which always contains the IDs of all the visible boxes on the chart. 
@@ -756,6 +770,18 @@ The signature for `box.get_top() <https://www.tradingview.com/pine-script-refere
     box.get_top(id) → series float
 
 where ``id`` is the ID of the box whose ``top`` value is to be retrieved.
+
+
+
+Cloning boxes
+^^^^^^^^^^^^^^
+
+The `box.copy() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}copy>`__  
+function is used to clone boxes. Its syntax is:
+
+.. code-block:: text
+
+    box.copy(id) → void
 
 
 

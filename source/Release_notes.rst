@@ -8,6 +8,117 @@ Release notes
 
 This page contains release notes of notable changes in Pine Script.
 
+April 2022
+-------------
+
+New matrix functions were added:
+
+* `matrix.new<type> <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix%7Bdot%7Dnew%3Ctype%3E>`__ - Creates a new matrix object. A matrix is a two-dimensional data structure containing rows and columns. All elements in the matrix must be of the type specified in the type template (“<type>”).
+* `matrix.row() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}row>`__  - Creates a one-dimensional array from the elements of a matrix row.
+* `matrix.col() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}col>`__  - Creates a one-dimensional array from the elements of a matrix column.
+* `matrix.get() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}get>`__  - Returns the element with the specified index of the matrix.
+* `matrix.set() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}set>`__  - Assigns ``value`` to the element at the ``column`` and ``row`` index of the matrix.
+* `matrix.rows() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}rows>`__  - Returns the number of rows in the matrix.
+* `matrix.columns() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}columns>`__  - Returns the number of columns in the matrix.
+* `matrix.elements_count() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}elements_count>`__  - Returns the total number of matrix elements.
+* `matrix.add_row() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}add_row>`__  - Adds a row to the matrix. The row can consist of ``na`` values, or an array can be used to provide values.
+* `matrix.add_col() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}add_col>`__  - Adds a column to the matrix. The column can consist of ``na`` values, or an array can be used to provide values.
+* `matrix.remove_row() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}remove_row>`__  - Removes the row of the matrix and returns an array containing the removed row's values.
+* `matrix.remove_col() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}remove_col>`__  - Removes the column of the matrix and returns an array containing the removed column's values.
+* `matrix.swap_rows() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}swap_rows>`__  - Swaps the rows in the matrix.
+* `matrix.swap_columns() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}swap_columns>`__  - Swaps the columns in the matrix.
+* `matrix.fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}fill>`__  - Fills a rectangular area of the matrix defined by the indices ``from_column`` to ``to_column``.
+* `matrix.copy() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}copy>`__  - Creates a new matrix which is a copy of the original.
+* `matrix.submatrix() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}submatrix>`__  - Extracts a submatrix within the specified indices.
+* `matrix.reverse() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}reverse>`__  - Reverses the order of rows and columns in the matrix. The first row and first column become the last, and the last become the first.
+* `matrix.reshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}reshape>`__  - Rebuilds the matrix to ``rows`` x ``cols`` dimensions.
+* `matrix.concat() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}concat>`__  - Append one matrix to another.
+* `matrix.sum() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}sum>`__  - Returns a new matrix resulting from the sum of two matrices, or of a matrix and a scalar (a numerical value).
+* `matrix.diff() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}diff>`__  - Returns a new matrix resulting from the subtraction between matrices, or of matrix and a scalar (a numerical value).
+* `matrix.mult() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}mult>`__  - Returns a new matrix resulting from the product between the matrices, or between a matrix and a scalar (a numerical value), or between a matrix and a vector (an array of values).
+* `matrix.sort() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}sort>`__  - Rearranges the rows in the ``id`` matrix following the sorted order of the values in the ``column``.
+* `matrix.avg() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}avg>`__  - Calculates the average of all elements in the matrix.
+* `matrix.max() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}max>`__  - Returns the largest value from the matrix elements.
+* `matrix.min() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}min>`__  - Returns the smallest value from the matrix elements.
+* `matrix.median() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}median>`__  - Calculates the median ("the middle" value) of matrix elements.
+* `matrix.mode() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}mode>`__  - Calculates the mode of the matrix, which is the most frequently occurring value from the matrix elements. When there are multiple values occurring equally frequently, the function returns the smallest of those values.
+* `matrix.pow() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}pow>`__  - Calculates the product of the matrix by itself ``power`` times.
+* `matrix.det() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}det>`__  - Returns the determinant of a square matrix.
+* `matrix.transpose() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}transpose>`__  - Creates a new, transposed version of the matrix by interchanging the row and column index of each element.
+* `matrix.pinv() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}pinv>`__  - Returns the pseudoinverse of a matrix.
+* `matrix.inv() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}inv>`__  - Returns the inverse of a square matrix.
+* `matrix.rank() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}rank>`__  - Calculates the rank of the matrix.
+* `matrix.trace() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}eigenvalues>`__  - Calculates the trace of a matrix (the sum of the main diagonal's elements).
+* `matrix.eigenvalues() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}eigenvectors>`__  - Returns an array containing the eigenvalues of a square matrix.
+* `matrix.eigenvectors() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}>`__  - Returns a matrix of eigenvectors, in which each column is an eigenvector of the matrix.
+* `matrix.kron() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}kronis_zero>`__  - Returns the Kronecker product for the two matrices.
+* `matrix.is_zero() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}is_zero>`__  - Determines if all elements of the matrix are zero.
+* `matrix.is_identity() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}is_identity>`__  - Determines if a matrix is an identity matrix (elements with ones on the main diagonal and zeros elsewhere).
+* `matrix.is_binary() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}is_binary>`__  - Determines if the matrix is binary (when all elements of the matrix are 0 or 1).
+* `matrix.is_symmetric() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}is_symmetric>`__  - Determines if a square matrix is symmetric (elements are symmetric with respect to the main diagonal).
+* `matrix.is_antisymmetric() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}is_antisymmetric>`__  - Determines if a matrix is antisymmetric (its transpose equals its negative).
+* `matrix.is_diagonal() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}is_diagonal>`__  - Determines if the matrix is diagonal (all elements outside the main diagonal are zero).
+* `matrix.is_antidiagonal() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}is_antidiagonal>`__  - Determines if the matrix is anti-diagonal (all elements outside the secondary diagonal are zero).
+* `matrix.is_triangular() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}is_triangular>`__  - Determines if the matrix is triangular (if all elements above or below the main diagonal are zero).
+* `matrix.is_stochastic() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}is_stochastic>`__  - Determines if the matrix is stochastic.
+* `matrix.is_square() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}is_square>`__  - Determines if the matrix is square (it has the same number of rows and columns).
+
+
+March 2022
+-------------
+
+New array functions were added:
+
+* `array.sort_indices() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}sort_indices>`__  - returns an array of indices which, when used to index the original array, will access its elements in their sorted order.
+* `array.percentrank() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}percentrank>`__ - returns the percentile rank of a value in the array.
+* `array.percentile_nearest_rank() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}percentile_nearest_rank>`__ - returns the value for which the specified percentage of array values (percentile) are less than or equal to it, using the nearest-rank method.	
+* `array.percentile_linear_interpolation() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}percentile_linear_interpolation>`__ - returns the value for which the specified percentage of array values (percentile) are less than or equal to it, using linear interpolation.
+* `array.abs() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}abs>`__ - returns an array containing the absolute value of each element in the original array.
+* `array.binary_search() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}binary_search>`__ - returns the index of the value, or -1 if the value is not found.
+* `array.binary_search_leftmost() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}binary_search_leftmost>`__ - returns the index of the value if it is found or the index of the next smallest element to the left of where the value would lie if it was in the array.
+* `array.binary_search_rightmost() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}binary_search_rightmost>`__ - returns the index of the value if it is found or the index of the element to the right of where the value would lie if it was in the array.
+	
+		
+Added a new optional ``nth`` parameter for the `array.min() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}min>`__ and `array.max()      <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}max>`__ functions.
+
+Added ``index`` in `for..in <https://www.tradingview.com/pine-script-reference/v5/#op_for{dot}{dot}{dot}in>`__ operator. It tracks the current iteration's index.
+
+Table merging and cell tooltips
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* It is now possible to merge several cells in a table. A merged cell doesn't have to be a header: you can merge cells in any direction, as long as the resulting cell doesn't affect any already merged cells and doesn't go outside of the table's bounds. Cells can be merged with the new  `table.merge_cells() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}merge_cells>`__ function.
+
+* Tables now support tooltips, floating labels that appear when you hover over a table's cell. To add a tooltip, pass a string to the ``tooltip`` argument of the `table.cell() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}cell>`__ function or use the new `table.cell_set_tooltip() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}cell_set_tooltip>`__ function.
+
+February 2022
+-------------
+
+Added templates and the ability to create arrays via templates. Instead of using one of the ``array.new_*()`` functions, a template function `array.new<type> <https://www.tradingview.com/pine-script-reference/v5/#fun_array%7Bdot%7Dnew%3Ctype%3E>`__ can be used. In the example below, we use this functionality to create an array filled with ``float`` values::
+
+	//@version=5
+	indicator("array.new<float> example")
+	length = 5
+	var a = array.new<float>(length, close)
+	if array.size(a) == length
+		array.remove(a, 0)
+		array.push(a, close)
+	plot(array.sum(a) / length, "SMA")
+
+New functions were added:
+
+* `timeframe.in_seconds(timeframe) <https://www.tradingview.com/pine-script-reference/v5/#fun_timeframe{dot}in_seconds>`__ - converts the timeframe passed to the ``timeframe`` argument into seconds.
+
+* `input.text_area() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}text_area>`__ - adds multiline text input area to the Script settings.
+
+January 2022
+-------------
+
+Added new functions to clone drawings:
+
+* `line.copy() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}copy>`__ 
+* `label.copy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}copy>`__ 
+* `box.copy() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}copy>`__ 
+
 December 2021
 -------------
 
