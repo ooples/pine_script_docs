@@ -671,7 +671,7 @@ This script demonstrates the effect of rollback when running in the realtime bar
     label.new(bar_index, high)
 
 On realtime bars, `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_ 
-creates a new label on every script update, but the because of the rollback process,
+creates a new label on every script update, but because of the rollback process,
 the label created on the previous update on the same bar is deleted.
 Only the last label created before the realtime bar's close will be committed, and thus persist.
 
