@@ -337,6 +337,6 @@ Because `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`
 only affects the behavior of your code in the realtime bar, 
 it follows that backtest results on strategies designed using logic based on 
 `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ 
-variables will not be able to reproduce that behavior on hisotrical bars, which will invalidate test results on them.
+variables will not be able to reproduce that behavior on historical bars, which will invalidate test results on them.
 This also entails that plots on historical bars will not be able to reproduce the script's behavior in realtime.
 
