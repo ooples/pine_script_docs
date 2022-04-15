@@ -428,11 +428,12 @@ Information requested
 ^^^^^^^^^^^^^^^^^^^^^
 
 The data fetched using `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
-is specified with the ``expression`` parameter. It can be of types "int", "float", "bool" or "color". Arrays or strings are thus not allowed.
+is specified with the ``expression`` parameter. It can be of types "int", "float", "bool", "color", or an "array". Strings are thus not allowed.
 
 The expression supplied to `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
 can be:
 
+- An array
 - A built-in variable or function, such as `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ or
   `ta.crossover() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}crossover>`__
 - A variable previously calculated by your script, which will then be recalculated in
@@ -441,20 +442,61 @@ can be:
 - A tuple
 
 
+Arrays
+""""""
+
+One relatively new feature on Pine is the inclusion of arrays which we will go over in depth in a separate article. In short, arrays
+are a fairly complicated topic so not a recommended area to cover for a new Pine coder. They are special data structures that are
+one-dimensional and can be used to hold a collection of multiple values. 
+
+  //@version=5
+  indicator("New 60 Minute Highs")
+  var highs = array.new_float(0)
+
+  if ta.rising(high, 1)
+      array.push(highs, high)
+    
+  src = request.security('AAPL', '60', highs)
+  float[] srcArray = array.copy(src)
+  plot(array.size(srcArray) > 0 ? array.pop(srcArray) : na)
+
+Note that we are initializing an array at the first index by using the var keyword and adding new 2 bar highs to this array as they
+appear. We use this array structure in a security function so we can easily use a custom timeframe like **60 minutes** in our example.
+This allows us to use this same array format to use in a security call in combination with any timeframe.
+
 
 Built-ins
 """""""""
 
+The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function is extremely
+versatile and can easily be used in combination with one of TradingView's many built-in indicators. A common use case would be
+to plot different timeframes of a built-in indicator on the same chart. 
+
+Consider for example you are on a 5 minute chart and want to plot the 20 period SMA for the 1 day timeframe you might try the following::
+
+  src = request.security('AAPL', '1D', close)
+  sma = ta.sma(src, 20)
+
+This would actually give you incorrect output because when you are on a lower timeframe, the security function would probably return
+20 copies of the same daily bar since the current timeframe most likely falls on the same day. What you would want to do instead is pass in the built-in
+indicator directly into the security call and allow TradingView to calculate it properly on their end by doing the following instead::
+
+  sma = request.security('AAPL', '1D', ta.sma(close, 20))
+
+Here is an example showing how you can easily plot a built-in indicator such as RSI 
+for both the 5 minute and 30 minute timeframes on the same chart::
+
+    //@version=5
+    indicator("Relative Strength Index MTF", "RSI")
+    sym = input.symbol('AAPL')
+    rsi1 = request.security(sym, '5', ta.rsi(close, 14))
+    rsi2 = request.security(sym, '30', ta.rsi(close, 14))
+    plot(rsi1, color=color.red)
+    plot(rsi2, color=color.blue)
 
 
 Calculated variables
 """"""""""""""""""""
-
-
-
-Function calls
-""""""""""""""
-
 
 One can declare the following variable::
 
@@ -487,11 +529,52 @@ stock market indicator used by investors to measure the number of
 individual stocks participating in an upward or downward trend.
 
 
+Function calls
+""""""""""""""
+
+A more advanced way of using the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function
+would be to pass in a user defined function into the ``expression`` parameter. This would allow you to create a custom function and then
+use this function to plot the results for different timeframes or for different symbols on the same chart. Keep in mind that the same limitations
+for security functions apply when using function calls, so for example you wouldn't be able to use a custom function that returns a string.
+
+    //@version=5
+    indicator("`request.security()` User Defined Function Example")
+
+    f_udf(_src, _length, _lbLength) =>
+        uCount = 0, dCount = 0
+        for i = 0 to _length - 1 by 1
+            uCount += (nz(_src[i]) > nz(src[i + _lbLength]) ? 1 : 0)
+            dCount += (nz(_src[i]) < nz(src[i + _lbLength]) ? 1 : 0)
+        [uCount, dCount]
+
+    [upCount, dnCount] = f_udf(close, 9, 4)
+    sym = input.symbol('AAPL')
+    // We are using a blank string for the timeframe so it defaults to the current timeframe
+    plot(request.security(sym, ' ', upCount)
+    plot(request.security(sym, ' ', dnCount)
+
+Note that: this is a bit more complicated example that plots the sum amount of bars that were higher than X bars ago and vice versa. We are using a 
+user defined function to create a tuple with our output which is the sum of up bars and the sum of down bars. We pass in a variable
+from the tuple and Pine handles the heavy lifting for us.
+
 
 Tuples
 """"""
 
+Tuples are a special data structure that is immutable (meaning it can't be changed once it is created). They can be used to combine different variables
+into a single variable that you can reference much easier and using fewer lines of code. This is very handy for use cases where
+you would like to declare a variable once and then reference it multiple times such as the following::
 
+  //@version=5
+  indicator("`request.security()` Tuple Example")
+  [h5, l5] = request.security('AAPL', '5', [high, low])
+  plot(math.avg(h5, high))
+  plot(math.avg(l5, low))
+  plot(math.avg(h5, l5))
+
+Note that: we are creating a tuple variable using a request security function and we set the ``expression`` parameter to a tuple containing
+the 5 minute timeframe ``high`` and ``low``. We are then plotting the average of the current timeframe and the aforementioned 5 minute timeframe
+as well as the midpoint of our tuple values.
 
 
 .. _PageOtherTimeframesAndData_OtherContextsWithTickerNew:
@@ -565,37 +648,76 @@ function was designed to request data of a timeframe *higher*
 than the current chart timeframe. On a *60 minutes* chart,
 this would mean requesting 240, D, W, or any higher timeframe.
 
-It is not recommended to request data of a timeframe *lower* that the current chart timeframe,
-for example *1 minute* data from a *5 minutes* chart. The main problem with such a case is that
-some part of a 1 minute data will be inevitably lost, as it's impossible to display it on a *5 minutes*
-chart and not to break the time axis. In such cases the behavior of 
-`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ can be rather unexpected.
-The next example illustrates this::
+However if you are on a *60 minutes* chart and want to use the data from the *1 minute* bars, you would need
+to specifically use the new `request.security_lower_tf() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security_lower_tf>`__
+function. If you were to use the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
+function in our example you would actually only get the final minute bar for the last hour since ``barmerge.lookahead_off`` is the default.
+If you were to use ``barmerge.lookahead_on`` then you would get the first minute bar instead. 
 
-    // Add this script on a "5" minute chart
-    //@version=5
-    indicator("Lookahead On/Off", overlay = true, precision = 5)
-    l_on = request.security(syminfo.tickerid, "1", close, lookahead = barmerge.lookahead_on)
-    l_off = request.security(syminfo.tickerid, "1", close, lookahead = barmerge.lookahead_off)
-    plot(l_on, color = color.red)
-    plot(l_off, color = color.blue)
+This is why we added the `request.security_lower_tf() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security_lower_tf>`__
+function so you will now receive an array containing all of the minute bars in the last hour as per our example. The returned array will contain
+all of the available intrabars sorted by the timestamp in ascending order. However if you were to request a lower timeframe that is equal or 
+higher than the current timeframe, you would get a runtime error. You can now do further calculations on this array as per our example below.
 
-.. image:: images/SecurityLowerTF_LookaheadOnOff.png
+  //@version=5
+  indicator("`request.security_lower_tf()` Example")
+  float travel = math.abs(high - low)
+  float[] ltfTravelArray = request.security_lower_tf(syminfo.tickerid, "1", travel)
+  float volatility = nz(array.sum(ltfTravelArray) / travel)
+  plot(volatility)
 
-This study plots two lines which correspond to different values of the ``lookahead`` parameter.
-The red line shows data returned by 
-`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ with ``lookahead = barmerge.lookahead_on``. 
-The blue line with ``lookahead = barmerge.lookahead_off``. Let's look at the *5 minutes* bar starting at 07:50.
-The red line at this bar has a value of 1.13151 which corresponds to the
-value of *the first of the five 1 minute bars* that fall into the time range 07:50--07:54.
-On the other hand, the blue line at the same bar has a value of 1.13121 which corresponds to
-*the last of the five 1 minute bars* of the same time range.
-
-
+Note that:
+  - There is a max of 40 function calls allowed in a script
+  - The amount of intrabars will vary based on the chart's timeframe as well as the underlyingg instrument or sector so you may expect 60 intrabars returned 
+  but receive a smaller amount.
+  - We are calculating volatility in this example by comparing the absolute sum of high - low in the lower timeframe to the current timeframe of high - low.
+  - Tuples are not allowed currently in the *expression* parameter and you will receive an error if you try to use a tuple.
+  - You must use a lower timeframe than the chart timeframe so the same timeframe or a higher timeframe will throw an error.
+  - This function only works on chart timeframes higher than *1 minute* or else a runtime error will occur.
+  - A maximum of 100K total intrabars can be accessed by a script. This means that on a 24x7 market you have a max of 1440 intrabars per chart bar, 
+  so will only see values for the last ~70 days because: 70 days * 24 hours * 60 minutes ═ 100,800 minutes.
 
 Fetching standard prices from a non-standard chart
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+
+\`request.economic()\`
+----------------------
+
+This function returns economic data for a given country or region (i.e. US or EU). Economic data includes information such as the state of a country's economy 
+(GDP, inflation rate, etc.) or of a particular industry (steel production, ICU beds, etc.).
+
+The signature of `request.economic() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}economic>`__ is: 
+
+.. code-block:: text
+
+    request.economic(country_code, field, gaps, ignore_invalid_symbol) → series float
+
+We have covered the last two parameters in the :ref:`Common characteristics <PageOtherTimeframesAndData_CommonCharacteristics>` section of this page.
+The first two parameters require a "simple string" argument. They are:
+
+``country_code``
+   This is the identifier for the country or region that you want to request economic data for such as "US" or "EU". 
+   A full list of countries/regions and their codes can be found `here <https://www.tradingview.com/chart/?solution=43000665359>`__ and please note that
+   the available metrics will depend on the country or region selected.
+
+``field``
+   This is the identifier of the required metric. We have a full list of the available metrics along with the list of countries that support each metric by 
+   going `here <https://www.tradingview.com/support/folders/43000581956-list-of-available-economic-indicators/>`__
+
+This example plots the current US GDP values
+
+  //@version=5
+  indicator("Economic Data Example")
+  e = request.economic("US", "GDP")
+  plot(e)
+
+Note that:
+
+  - You will receive an error if the requested metric is not available for the country or region you have selected.
+  - You can also view this data on a chart like you would with a symbol so for this example you would replace
+  the exchange name with Economic and the symbol name with a single string combining the ``country_code`` with ``field``.
+  For this example you would use "/"Economic.USGDP"/" in the symbol search box.
 
 
 \`request.financial()\`
@@ -629,7 +751,7 @@ The first three parameters all require a "simple string" argument. They are:
    `request.earnings() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}earnings>`__ instead.
 
 
-This plots the quaterly value of accounts payable for Apple:
+This plots the quarterly value of accounts payable for Apple:
 
 .. image:: images/OtherTimeframesAndData-RequestFinancial()-01.png
 
@@ -637,7 +759,7 @@ This plots the quaterly value of accounts payable for Apple:
 
     //@version=5
     indicator("")
-    f = request.financial ("NASDAQ:AAPL", "ACCOUNTS_PAYABLE", "FQ")
+    f = request.financial("NASDAQ:AAPL", "ACCOUNTS_PAYABLE", "FQ")
     plot(f)
 
 Note that:
@@ -1247,7 +1369,6 @@ Note that when you request financial data using the dividends and earnings funct
 
 \`request.quandl()\`
 --------------------
-
 
 
 
