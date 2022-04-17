@@ -1383,3 +1383,4 @@ Note that when you request financial data using the dividends and earnings funct
 .. [#seconds] These are the only second-based timeframes available. To use a second-based timeframe, the timeframe of the chart should be equal to or less than the requested timeframe.
 
 ttt
+ttttt
