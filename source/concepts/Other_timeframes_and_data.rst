@@ -286,15 +286,16 @@ The function's signature is:
 
 .. code-block:: text
 
-    request.security(symbol, timeframe, expression, gaps, lookahead, ignore_resolve_errors, currency) → series int/float/bool/color
+    request.security(symbol, timeframe, expression, gaps, lookahead, ignore_resolve_errors, currency) → series int/float/bool/color/string
+    request.security(symbol, timeframe, expression, gaps, lookahead, ignore_resolve_errors, currency) → series int[]/float[]/bool[]/color[]/string[]
 
 ``symbol``
-   This is the ticker identifier of the symbol whose information is to be fetched. It is a "simple string" value and can be defined in multiple ways:
+   This is the ticker identifier of the symbol whose information is to be fetched. It musst be of "simple string" type and can be defined in multiple ways:
 
-      - With a literal string containing either a simple ticker, such as ``"IBM"``, ``"700"``, ``"BTCUSD"`` or ``"EURUSD"``.
-        When an exchange is not provided, ``"BATS"`` will be used as the default.
-        While this will work for certain instruments, it will not work with all tickers.
-      - With a literal string include both the exchange (or data provider) and ticker information, such as ``"NYSE:IBM"``, ``"BATS:IBM"`` or ``"NASDAQ:AAPL"``.
+      - With a literal string containing either a simple ticker like ``"IBM"`` or ``"EURUSD"``, 
+        or an exchange:symbol pair like ``"NYSE:IBM"`` or ``"OANDA:EURUSD"``.
+        When an exchange is not provided, a default exchange will be used when it is possible.
+        You will obtain more reliable results by specifying the exchange.
       - Using the `syminfo.ticker <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}ticker>`__ or
         `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__ built-in variables,
         which respectively return only the ticker or the exchange:ticker information of the chart's symbol.
@@ -1380,3 +1381,5 @@ Note that when you request financial data using the dividends and earnings funct
 .. [#hours] Requesting data of ``"1h"`` or ``"1H"`` timeframe would result in an error. Use ``"60"`` instead.
 
 .. [#seconds] These are the only second-based timeframes available. To use a second-based timeframe, the timeframe of the chart should be equal to or less than the requested timeframe.
+
+ttt
