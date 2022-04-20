@@ -269,7 +269,7 @@ Note that:
 
 
 
-\`request.security()\`
+\`request.security()\`aaa
 ----------------------
 
 The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
@@ -1381,6 +1381,3 @@ Note that when you request financial data using the dividends and earnings funct
 .. [#hours] Requesting data of ``"1h"`` or ``"1H"`` timeframe would result in an error. Use ``"60"`` instead.
 
 .. [#seconds] These are the only second-based timeframes available. To use a second-based timeframe, the timeframe of the chart should be equal to or less than the requested timeframe.
-
-ttt
-ttttt
