@@ -721,6 +721,61 @@ Note that:
   For this example you would use "/"Economic.USGDP"/" in the symbol search box.
 
 
+  
+\`request.dividends()\`, \`request.earnings()\` and \`request.splits()\`
+------------------------------------------------------------------------
+
+An easy method to determine the financial strength of a stock is using earnings data so we offer three options to receive the latest earnings data for a given stock: 
+request.dividends(), request.earnings() and request.splits(). Much of the underlying data of a stock can be interpreted using these metrics but also keep in mind
+that not all stocks will have these stats available. Small cap stocks for example are not known for giving out dividends. Below we have included an example
+that creates a handy table containing the latest earnings data for each stock using these three metrics. 
+
+  //@version=5
+  indicator("Dividends, Splits, and Earnings Example")
+
+  dividends = request.dividends(syminfo.tickerid)
+  splitsNum = request.splits(syminfo.tickerid, splits.numerator)
+  splitsDenom = request.splits(syminfo.tickerid, splits.denominator)
+  earnings = request.earnings(syminfo.tickerid)
+
+  plot(earnings, color=color.blue)
+  plot(dividends, color=color.red)
+
+  if barstate.islast
+      string tableText = "Current Stats \n\n Dividends: " + str.tostring(dividends) + "\n Splits: " + str.tostring(splitsNum) + 
+      "/" + str.tostring(splitsDenom) + " \n Earnings: " + str.tostring(earnings)
+      var table t = table.new(position.middle_right, 1, 3), table.cell(t, 0, 0, tableText, bgcolor = color.lime)
+
+Note that:
+
+- For the `ticker` parameter, you need to specifically use the symbol with the market instead of just the symbol ticker. e.g. "NASDAQ:AAPL" instead of "AAPL". 
+- Also don't use syminfo.ticker because you will receive a runtime error so make sure you use syminfo.tickerid instead.
+- When you request financial data using the dividends and earnings functions, the new value is returned on the bar where the report was published.
+- When you use request.splits(), you need to specify the split type by using splits.denominator or splits.numerator.
+- We are creating the table only when we are on the latest bar so we are saving allocated memory by only creating the table when it is necessary.
+
+
+
+\`request.quandl()\`
+--------------------
+
+TradingView has partnered with many fintech companies to provide our users with vast amounts of information on everything from crypto to stocks and much much more.
+One of our partners is Quandl and we have an example below that shows you how easy it is use this request function to be able to pull one of the many thousands
+of feeds available through Quandl. This is an example showing you how to view the amount of shares currently being shorted for the Apple stock. 
+
+  //@version=5
+  indicator("Quandl Example")
+  f = request.quandl("FINRA/FNSQ_AAPL", barmerge.gaps_on, 0)
+  plot(f)
+
+  Note that:
+
+  - For the `ticker` parameter, you need to specifically use the Quandl symbol matching the data that you want to import.
+  - For the `index` parameter, you need to make sure to match the index information given on `Quandl <https://data.nasdaq.com/search?filters=%5B%22Quandl%22%5D>`__
+
+
+
+
 \`request.financial()\`
 -----------------------
 
@@ -1360,20 +1415,6 @@ Statistics
 
 
 
-
-\`request.dividends()\`, \`request.earnings()\` and \`request.splits()\`
-------------------------------------------------------------------------
-
-Note that when you request financial data using the dividends and earnings functions, the new value is returned on the bar where the report was published.
-
-
-
-\`request.quandl()\`
---------------------
-
-
-
-
 .. rubric:: Footnotes
 
 .. [#minutes] Actually the highest supported minute timeframe is "1440" (which is the number of minutes in 24 hours).
@@ -1381,6 +1422,3 @@ Note that when you request financial data using the dividends and earnings funct
 .. [#hours] Requesting data of ``"1h"`` or ``"1H"`` timeframe would result in an error. Use ``"60"`` instead.
 
 .. [#seconds] These are the only second-based timeframes available. To use a second-based timeframe, the timeframe of the chart should be equal to or less than the requested timeframe.
-
-ttt
-ttttt
