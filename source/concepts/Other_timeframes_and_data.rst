@@ -269,7 +269,7 @@ Note that:
 
 
 
-\`request.security()\`
+\`request.security()\`aaa
 ----------------------
 
 The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
