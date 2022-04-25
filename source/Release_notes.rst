@@ -63,6 +63,9 @@ New matrix functions were added:
 * `matrix.is_stochastic() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}is_stochastic>`__  - Determines if the matrix is stochastic.
 * `matrix.is_square() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}is_square>`__  - Determines if the matrix is square (it has the same number of rows and columns).
 
+New parameter of the ``strategy()`` function were added:
+
+* `risk_free_rate <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__  - The risk-free rate of return is the annual percentage change in the value of an investment with minimal or zero risk, used to calculate the Sharpe and Sortino ratios.
 
 March 2022
 -------------
