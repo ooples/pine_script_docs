@@ -263,9 +263,9 @@ Note that:
 - On historical bars, the red line is showing the 1min highs before they actually occur (see #1 and #2, where it is most obvious).
 - In realtime (the bars after #3 with the silver background), there is no difference between the plots because there are no futures bars to look into.
 
-.. note:: In Pine v1 and v2, ``security()`` did not include a ``lookahead`` parameter, but it behaved as it does in later versions of Pine
+.. note:: In Pine Script™ v1 and v2, ``security()`` did not include a ``lookahead`` parameter, but it behaved as it does in later versions of Pine Script™
    with ``lookahead = barmerge.lookahead_on``, which means it was systematically using future data. 
-   Scripts written with Pine v1 or v2 and using ``security()`` should therefore be treated with caution, unless they offset the series fetched, e.g., using ``close[1]``.
+   Scripts written with Pine Script™ v1 or v2 and using ``security()`` should therefore be treated with caution, unless they offset the series fetched, e.g., using ``close[1]``.
 
 
 
@@ -277,7 +277,7 @@ function is used to request data from other contexts than the chart's. Those dif
 
 - Other symbols
 - Spreads
-- Other timeframes (see the page on :ref:`Timeframes <PageTimeframes>` to timeframe specifications in Pine)
+- Other timeframes (see the page on :ref:`Timeframes <PageTimeframes>` to timeframe specifications in Pine Script™)
 - Other chart types (see the page on :ref:`Non-standard chart data <PageNonStandardChartsData>`)
 - Other chart types or sessions, through ``ticker.*()`` functions
   (see this page's :ref:`Other contexts, with \`ticker.new()\` <PageOtherTimeframesAndData_OtherContextsWithTickerNew>` section)
@@ -446,8 +446,8 @@ can be:
 Arrays
 """"""
 
-One relatively new feature on Pine is the inclusion of arrays which we will go over in depth in a separate article. In short, arrays
-are a fairly complicated topic so not a recommended area to cover for a new Pine coder. They are special data structures that are
+One relatively new feature on Pine Script™ is the inclusion of arrays which we will go over in depth in a separate article. In short, arrays
+are a fairly complicated topic so not a recommended area to cover for a new Pine Script™ programmer. They are special data structures that are
 one-dimensional and can be used to hold a collection of multiple values. 
 
   //@version=5
@@ -556,7 +556,7 @@ for security functions apply when using function calls, so for example you would
 
 Note that: this is a bit more complicated example that plots the sum amount of bars that were higher than X bars ago and vice versa. We are using a 
 user defined function to create a tuple with our output which is the sum of up bars and the sum of down bars. We pass in a variable
-from the tuple and Pine handles the heavy lifting for us.
+from the tuple and Pine Script™ handles the heavy lifting for us.
 
 
 Tuples

@@ -1,6 +1,6 @@
 .. _IndexPinePrimer:
 
-Pine primer
+Pine Script™ primer
 ===========
 
 .. toctree::

@@ -13,7 +13,7 @@ Sessions
 Introduction
 ------------
 
-Session information is usable in two different ways in Pine:
+Session information is usable in two different ways in Pine Script™:
 
 1. **Session strings** containing from-to start times and day information that can be used in functions
    such as `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and
@@ -31,12 +31,12 @@ Session information is usable in two different ways in Pine:
    This notion of *regular* and *extended* sessions is the same one used in the chart's interface,
    in the "Chart Settings/Symbol/Session" field, for example. 
 
-In the following sections, we cover both methods of using session information in Pine.
+In the following sections, we cover both methods of using session information in Pine Script™.
 
 Note that:
 
 - Not all user accounts on TradingView have access to extended session information.
-- There is no special "session" type in Pine. Session strings are of "string" type,
+- There is no special "session" type in Pine Script™. Session strings are of "string" type,
   but they must conform to the session string syntax.
 
 
@@ -65,7 +65,7 @@ where:
 - <days> is a set of digits from 1 to 7 that specifies on which days the session is valid.
   1 is Sunday, 7 is Saturday. 
   
-.. note:: **The default days are**: ``1234567``, which is different in Pine v5 than in earlier versions where 
+.. note:: **The default days are**: ``1234567``, which is different in Pine Script™ v5 than in earlier versions where 
    ``23456`` (weekdays) is used. For v5 code to reproduce the behavior from previous versions,
    it should explicitly mention weekdays, as in ``"0930-1700:23456"``.
 
@@ -111,7 +111,7 @@ Using session strings
 Session properties defined with session strings are independent from the exchange-defined sessions determining when an instrument can be traded.
 Programmers have full liberty in creating whatever session definitions suit their purpose,
 which is usually to detect when bars belong to specific time periods.
-This is accomplished in Pine by using one of the following two signatures of the
+This is accomplished in Pine Script™ by using one of the following two signatures of the
 `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ function:
 
 .. code-block:: text

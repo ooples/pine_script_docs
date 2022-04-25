@@ -1,6 +1,6 @@
 .. _PageToPineVersion3:
 
-To Pine version 3
+To Pine Script™ version 3
 =================
 
 This document helps to migrate Pine Script code from ``@version=2`` to
@@ -23,7 +23,7 @@ This indicator is calculated based on historical data and looks somewhat
 the high price of the entire day. This could be useful in some cases for
 analysis, but doesn't work for backtesting strategies.
 
-We worked on this and made changes in Pine version 3. If this indicator is
+We worked on this and made changes in Pine Script™ version 3. If this indicator is
 compiled with ``//@version=3`` directive, we get a completely different
 picture: |images/V3.png|
 
@@ -31,19 +31,19 @@ The old behaviour is still available though. We added a parameter to the
 ``security`` function (the fifth one) called ``lookahead``.
 
 It can take on the form of two different values:
-``barmerge.lookahead_off`` (and this is the default for Pine version 3) or
-``barmerge.lookahead_on`` (which is the default for Pine version 2).
+``barmerge.lookahead_off`` (and this is the default for Pine Script™ version 3) or
+``barmerge.lookahead_on`` (which is the default for Pine Script™ version 2).
 
 Self-referenced variables are removed
 -------------------------------------
 
-Pine version 2 pieces of code, containing a self-referencing variable::
+Pine Script™ version 2 pieces of code, containing a self-referencing variable::
 
     //@version=2
     //...
     s = nz(s[1]) + close
 
-Compiling this piece of code with Pine version 3 will give you an
+Compiling this piece of code with Pine Script™ version 3 will give you an
 ``Undeclared identifier 's'`` error. It should be rewritten as::
 
     //@version=3
@@ -52,7 +52,7 @@ Compiling this piece of code with Pine version 3 will give you an
     s := nz(s[1]) + close
 
 ``s`` is now a *mutable variable* that is initialized at line 3. At line 3
-the initial value gives the Pine compiler the information about the
+the initial value gives the Pine Script™ compiler the information about the
 variable type. It's a float in this example.
 
 In some cases you may initialize that mutable variable (like ``s``) with
@@ -70,9 +70,9 @@ Forward-referenced variables are removed
     f = e + close
 
 In this example ``f`` is a forward-referencing variable, because it's
-referenced at line 3 before it was declared and initialized. In Pine version 3
+referenced at line 3 before it was declared and initialized. In Pine Script™ version 3
 this will give you an error ``Undeclared identifier 'f'``. This example
-should be rewritten in Pine version 3 as follows::
+should be rewritten in Pine Script™ version 3 as follows::
 
     //@version=3
     //...
@@ -85,7 +85,7 @@ Resolving a problem with a mutable variable in a security expression
 --------------------------------------------------------------------
 
 When you migrate script to version 3 it's possible that after removing
-self-referencing and forward-referencing variables the Pine compiler
+self-referencing and forward-referencing variables the Pine Script™ compiler
 will give you an error::
 
     //@version=3
@@ -96,7 +96,7 @@ will give you an error::
 
 ``Cannot use mutable variable as an argument for security function!``
 
-This limitation exists since mutable variables were introduced in Pine,
+This limitation exists since mutable variables were introduced in Pine Script™,
 i.e., in version 2. It can be resolved as before: wrap the code with a mutable
 variable in a function::
 
@@ -134,11 +134,11 @@ This approach leads to unintentional errors in more complicated scripts.
 That's why we no longer allow implicit conversion of booleans to
 numbers.
 
-If you try to compile this example as a Pine v3 code, you'll get an
+If you try to compile this example as a Pine Script™ v3 code, you'll get an
 error:
 ``Cannot call `operator +` with arguments (series__bool, series__bool); <...>``
 It means that you cannot use the addition operator with boolean values.
-To make this example work in Pine v3 you can do the following::
+To make this example work in Pine Script™ v3 you can do the following::
 
     //@version=3
     study("My Script")

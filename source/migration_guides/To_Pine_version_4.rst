@@ -1,6 +1,6 @@
 .. _PageToPineVersion4:
 
-To Pine version 4
+To Pine Script™ version 4
 =================
 
 This is a guide to converting Pine Script code from ``@version=3`` to ``@version=4``.
@@ -8,7 +8,7 @@ This is a guide to converting Pine Script code from ``@version=3`` to ``@version
 Converter
 ---------
 
-Pine Editor comes with an utility to automatically convert v3 indicators and strategies to v4. To access it, open a script with ``//@version=3`` in it and select the ``Convert to v4`` option in the ``More`` dropdown menu:
+Pine Script™ Editor comes with an utility to automatically convert v3 indicators and strategies to v4. To access it, open a script with ``//@version=3`` in it and select the ``Convert to v4`` option in the ``More`` dropdown menu:
 
 .. image:: images/v3_to_v4_convert_button.png
 

@@ -11,7 +11,7 @@ Introduction
 ------------
 
 The way scripts can obtain information about the chart and symbol they are currently running on 
-is through a subset of Pine's :ref:`built-in variables <PageBuiltInFunctions_BuiltInVariables>`.
+is through a subset of Pine Script™'s :ref:`built-in variables <PageBuiltInFunctions_BuiltInVariables>`.
 The ones we cover here allow scripts to access information relating to:
 
 - The chart's prices and volume
@@ -24,7 +24,7 @@ The ones we cover here allow scripts to access information relating to:
 Prices and volume
 -----------------
 
-The Pine built-ins for OHLCV values are:
+The Pine Script™ built-ins for OHLCV values are:
 
 - `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__: the bar's opening price.
 - `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__: the bar's highest price,
@@ -64,7 +64,7 @@ the values of the above variables (except `open <https://www.tradingview.com/pin
 will vary between successive iterations of the script on the realtime bar, 
 because they represent their **current** value at one point in time during the progress of the realtime bar.
 This may lead to one form of :ref:`repainting <PageRepainting>`.
-See the page on Pine's :ref:`execution model <PageExecutionModel>` for more details.
+See the page on Pine Script™'s :ref:`execution model <PageExecutionModel>` for more details.
 
 The `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ :ref:`history-referencing operator <PageOperators_HistoryReferencingOperator>` 
 can be used to refer to past values of the built-in variables, e.g., ``close[1]`` refers to the 
@@ -183,7 +183,7 @@ Two additional built-ins return more specific timeframe information:
   and a yearly chart will return ``12`` (months). The value of this variable cannot be used as an argument to ``timeframe`` parameters in
   built-in functions, as they expect a string in timeframe specifications format.
 - `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__
-  returns a string in Pine's timeframe specification format.
+  returns a string in Pine Script™'s timeframe specification format.
 
 See the page on :ref:`Timeframes <PageTimeframes>` for more information.
 

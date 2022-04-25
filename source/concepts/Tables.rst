@@ -12,7 +12,7 @@ Introduction
 ------------
 
 Tables are objects that can be used to position information in specific and fixed locations in a script's visual space. 
-Contrary to all other plots or objects drawn in Pine, 
+Contrary to all other plots or objects drawn in Pine Script™, 
 tables are not anchored to specific bars; they *float* in a script's space, whether in overlay or pane mode, in studies or strategies,
 independently of the chart bars being viewed or the zoom factor used. 
 
@@ -278,7 +278,7 @@ Note that:
 
 - We define a maximum lookback period as a ``MAX_LOOKBACK`` constant. This is an important value and we use it for two purposes: 
   to specify the number of columns we will create in our one-row table, and to specify the lookback period required for the ``_src`` argument in our function, 
-  so that we force Pine to create a historical buffer size that will allow us to refer to the required quantity of past values of ``_src`` in our 
+  so that we force Pine Script™ to create a historical buffer size that will allow us to refer to the required quantity of past values of ``_src`` in our 
   `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ loop.
 - We offer users the possibility of configuring the bull/bear colors in the inputs and we use ``inline`` to place the color selections on the same line.
 - Inside our function, we enclose our table-creation code in an 

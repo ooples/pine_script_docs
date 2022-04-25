@@ -27,10 +27,10 @@ Pine Script |version| User Manual
    Where_can_I_get_more_information
 
 
-.. TODO: Need pages about Pine Editor (Open, New, Save, Add To Chart)
+.. TODO: Need pages about Pine Script™ Editor (Open, New, Save, Add To Chart)
 .. TODO: Delete gotcha - operation could not be reverted
-.. TODO: Notes about Pine souce code versioning. How to revert to any previous version
-.. TODO: Pine publishing gotcha https://jira.xtools.tv/browse/JV-193
+.. TODO: Notes about Pine Script™ souce code versioning. How to revert to any previous version
+.. TODO: Pine Script™ publishing gotcha https://jira.xtools.tv/browse/JV-193
 
 .. 
    usrman TOC
@@ -38,9 +38,9 @@ Pine Script |version| User Manual
    •• indicates pages that will be added post-v5 rollout.
    -  indicates pages that must be completed before the rollout.
    
-   Welcome to Pine
+   Welcome to Pine Script™
    
-   Pine Primer
+   Pine Script™ Primer
     First steps
     First indicator
     ••First strategy
@@ -95,8 +95,8 @@ Pine Script |version| User Manual
     Style guide
     Debugging
     ••Optimization
-    ••The Pine compiler
-    ••The Pine runtime
+    ••The Pine Script™ compiler
+    ••The Pine Script™ runtime
     Publishing
     ••Limitations
    
