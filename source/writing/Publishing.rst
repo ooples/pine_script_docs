@@ -6,7 +6,7 @@ Publishing scripts
 
 Programmers who wish to share their Pine scripts with other traders can publish them.
 
-.. note:: If you write scripts for your personal use, there is no need to publish them; you can save them in the Pine Editor and use the "Add to Chart" button to add your script to your chart.
+.. note:: If you write scripts for your personal use, there is no need to publish them; you can save them in the Pine Script™ Editor and use the "Add to Chart" button to add your script to your chart.
 
 
 
@@ -88,7 +88,7 @@ The access type you can select from will vary with the type of account you hold.
 Open
 """"
 
-The Pine code of scripts published **open** is visible to all users. 
+The Pine Script™ code of scripts published **open** is visible to all users. 
 Open-source scripts on TradingView use the Mozilla license by default, but you may choose any license you want. 
 You can find information on licensing at `GitHub <https://help.github.com/articles/licensing-a-repository/>`__.
 

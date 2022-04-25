@@ -18,7 +18,7 @@
    :height: 50
 
 
-Pine small logo with macro
+Pine Script™ small logo with macro
 ==========================
 
 |TVLogoHeader|

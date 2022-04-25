@@ -3,13 +3,13 @@
 Time series
 ===========
 
-Much of the power of Pine stems from the fact that it is designed to process *time series* efficiently. 
-Time series are not a form or a type; they are the fundamental structure Pine uses to store the successive values of a variable over time, 
+Much of the power of Pine Script™ stems from the fact that it is designed to process *time series* efficiently. 
+Time series are not a form or a type; they are the fundamental structure Pine Script™ uses to store the successive values of a variable over time, 
 where each value is tethered to a point in time. Since charts are composed of bars, each representing a particular point in time, 
 time series are the ideal data structure to work with values that may change with time. 
 
-The notion of time series is intimately linked to Pine's :ref:`execution model <PageExecutionModel>` and :ref:`type system <PageTypeSystem>` concepts. 
-Understanding all three is key to making the most of the power of Pine.
+The notion of time series is intimately linked to Pine Script™'s :ref:`execution model <PageExecutionModel>` and :ref:`type system <PageTypeSystem>` concepts. 
+Understanding all three is key to making the most of the power of Pine Script™.
 
 Take the built-in `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ variable, 
 which contains the "open" price of each bar in the dataset, the *dataset* being all the bars on any given chart. 
@@ -22,9 +22,9 @@ When a script is executing on a given bar, ``open[1]`` refers to the value of th
 time series on the previous bar.
 
 While time series may remind programmers of arrays, they are totally different. 
-Pine does use an array data structure, but it is a completely different concept than a time series.
+Pine Script™ does use an array data structure, but it is a completely different concept than a time series.
 
-Time series in Pine, combined with its special type of runtime engine and built-in functions, 
+Time series in Pine Script™, combined with its special type of runtime engine and built-in functions, 
 are what makes it easy to compute the cumulative total of `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ 
 values without using a `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ loop, with only ``ta.cum(close)``. 
 This is possible because although ``ta.cum(close)`` appears rather static in a script, it is in fact executed on each bar, 
@@ -48,19 +48,19 @@ which will repeat on each bar, successively plotting on the chart the value of `
 for each bar.
 
 Do not confuse "time series" with the "series" form. 
-The *time series* concept explains how consecutive values of variables are stored in Pine; the "series" form denotes variables whose values can change bar to bar. 
+The *time series* concept explains how consecutive values of variables are stored in Pine Script™; the "series" form denotes variables whose values can change bar to bar. 
 Consider, for example, the `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__ 
 built-in variable which is of form "simple" and type "string", so "simple string". 
 The "simple" form entails that the variable's value is known on bar zero (the first bar where the script executes) 
 and will not change during the script's execution on all the chart's bars. The variable's value is the chart's timeframe in string format, 
 so ``"D"`` for a 1D chart, for example. Even though its value cannot change during the script, 
-it would be syntactically correct in Pine (though not very useful) to refer to its value 10 bars ago using ``timeframe.period[10]``. 
+it would be syntactically correct in Pine Script™ (though not very useful) to refer to its value 10 bars ago using ``timeframe.period[10]``. 
 This is possible because the successive values of `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__  
 for each bar are stored in a time series, even though all the values in that particular time series are similar. 
 Note, however, that when the `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ operator is used to access past values of a variable, 
 it yields a result of "series" form, even though the variable without an offset is of another form, 
 such as "simple" in the case of `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__.
 
-When you grasp how time series can be efficiently handled using Pine's syntax and its :ref:`execution model <PageExecutionModel>`, 
+When you grasp how time series can be efficiently handled using Pine Script™'s syntax and its :ref:`execution model <PageExecutionModel>`, 
 you can define complex calculations using little code.
 
