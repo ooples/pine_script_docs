@@ -55,7 +55,7 @@ Keep in mind that:
 Background
 ^^^^^^^^^^
 
-The different methods Pine Script™ coders can use today to create alert events in their script are the result of successive enhancements deployed throughout Pine Script™'s evolution. 
+The different methods Pine Script™ programmers can use today to create alert events in their script are the result of successive enhancements deployed throughout Pine Script™'s evolution. 
 The `alertcondition() <https://www.tradingview.com/pine-script-reference/v5/#fun_alertcondition>`__ function, which works in indicators only, 
 was the first feature allowing Pine Script™ programmers to create alert events. 
 Then came order fill alerts for strategies, which trigger when the broker emulator creates *order fill events*. 
