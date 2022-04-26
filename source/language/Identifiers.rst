@@ -20,7 +20,7 @@ Here are some examples::
     maxLen
     3barsDown  // NOT VALID!
 
-The :ref:`Pine Style Guide <PageStyleGuide>` recommends using uppercase SNAKE_CASE for constants, and camelCase for other identifiers::
+The :ref:`Pine Script™ Style Guide <PageStyleGuide>` recommends using uppercase SNAKE_CASE for constants, and camelCase for other identifiers::
 
     GREEN_COLOR = #4CAF50
     MAX_LOOKBACK = 100

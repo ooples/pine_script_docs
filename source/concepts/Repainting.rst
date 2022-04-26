@@ -84,14 +84,14 @@ Why? Because it needs to be qualified. Instead, one could ask:
 What's important is that you understand how the tools you use work, 
 and if their behavior is compatible with your objectives, repainting or not.
 As you will learn if you read this page, repainting is a complex matter. 
-It has many faces and many causes. Even if you don't program in Pine,
+It has many faces and many causes. Even if you don't program in Pine Script™,
 this page will help you understand the array of causes that can lead to repainting,
 and hopefully enable more meaningful discussions with script authors.
 
 
 
-For Pine coders
-^^^^^^^^^^^^^^^
+For Pine Script™ programmers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As we discussed in the previous section, not all types of repainting behavior need to be avoided at all costs,
 and as we will see in the following text, some can't.
@@ -443,7 +443,7 @@ Starting points
 ^^^^^^^^^^^^^^^
 
 Scripts begin executing on the chart's first historical bar, and then execute on each bar sequentially, 
-as is explained in this manual's page on Pine's :ref:`execution model <PageExecutionModel>`.
+as is explained in this manual's page on Pine Script™'s :ref:`execution model <PageExecutionModel>`.
 If the first bar changes, then the script will often not calculate the same way it did when the dataset began at a different point in time.
 
 The following factors have an impact on the quantity of bars you see on your charts, and their *starting point*:

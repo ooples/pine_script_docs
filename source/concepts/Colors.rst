@@ -11,12 +11,12 @@ Colors
 Introduction
 ------------
 
-Script visuals can play a critical role in the usability of the indicators we write in Pine. 
+Script visuals can play a critical role in the usability of the indicators we write in Pine Script™. 
 Well-designed plots and drawings make indicators easier to use and understand. 
 Good visual designs establish a visual hierarchy that allows the more important information to stand out, and the less important one to not get in the way.
 
-Using colors in Pine can be as simple as you want, or as involved as your concept requires. 
-The 4,294,967,296 possible assemblies of color and transparency available in Pine can be applied to:
+Using colors in Pine Script™ can be as simple as you want, or as involved as your concept requires. 
+The 4,294,967,296 possible assemblies of color and transparency available in Pine Script™ can be applied to:
 
 - Any element you can plot or draw in an indicator's visual space, be it lines, fills, text or candles.
 - The background of a script's visual space, whether the script is running in its own pane, or in overlay mode on the chart.
@@ -24,18 +24,18 @@ The 4,294,967,296 possible assemblies of color and transparency available in Pin
 
 A script can only color the elements it places in its own visual space. The only exception to this rule is that a pane indicator can color chart bars or candles.
 
-Pine has built-in colors such as `color.green <https://www.tradingview.com/pine-script-reference/v5/#var_color{dot}green>`__, 
+Pine Script™ has built-in colors such as `color.green <https://www.tradingview.com/pine-script-reference/v5/#var_color{dot}green>`__, 
 as well as functions like `color.rgb() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}rgb>`__ which allow you to dynamically generate any color in the RGBA color space.
 
 
 Transparency
 ^^^^^^^^^^^^
 
-Each color in Pine is defined by four values:
+Each color in Pine Script™ is defined by four values:
 
 - Its red, green and blue components (0-255), following the `RGB color model <https://en.wikipedia.org/wiki/RGB_color_space>`__.
-- Its transparency (0-100), often referred to as the Alpha channel outside Pine, as defined in the `RGBA color model <https://en.wikipedia.org/wiki/RGB_color_space>`__. 
-  Even though transparency in Pine is expressed in the 0-100 range, its value can be a "float" when used in functions, which gives you access to the 256 underlying values of the alpha channel.
+- Its transparency (0-100), often referred to as the Alpha channel outside Pine Script™, as defined in the `RGBA color model <https://en.wikipedia.org/wiki/RGB_color_space>`__. 
+  Even though transparency in Pine Script™ is expressed in the 0-100 range, its value can be a "float" when used in functions, which gives you access to the 256 underlying values of the alpha channel.
 
 The transparency of a color defines how opaque it is: zero is fully opaque, 100 makes the color—whichever it is—invisible. 
 Modulating transparency can be crucial in more involved color visuals or when using backgrounds, to control which colors dominate the others, and how they mix together when superimposed.
@@ -49,12 +49,12 @@ Z-index
 When you place elements in a script's visual space, they have relative depth on the *z* axis; some will appear on top of others. 
 The *z-index* is a value that represents the position of elements on the *z* axis. Elements with the highest z-index appear on top.
 
-Elements drawn in Pine are divided in groups. Each group has its own position in the *z* space, and **within the same group**, 
+Elements drawn in Pine Script™ are divided in groups. Each group has its own position in the *z* space, and **within the same group**, 
 elements created last in the script's logic will appear on top of other elements from the same group. 
 An element of one group cannot be placed outside the region of the *z* space attributed to its group, 
 so a plot can never appear on top of a table, for example, because tables have the highest z-index.
 
-This lists the groups of visual elements in Pine, ordered by increasing z-index, 
+This lists the groups of visual elements in Pine Script™, ordered by increasing z-index, 
 so background colors are always at the bottom of *z* space, and tables will always appear on top of all other elements:
 
 - Background colors
@@ -79,7 +79,7 @@ Constant colors
 ---------------
 
 
-There are 17 built-in colors in Pine. This table lists their names, hexadecimal equivalent, 
+There are 17 built-in colors in Pine Script™. This table lists their names, hexadecimal equivalent, 
 and RGB values as arguments to `color.rgb() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}rgb>`__:
 
 +---------------+---------+--------------------------+
@@ -140,7 +140,7 @@ color with a transparency of 40, but expressed in different ways. All five metho
     
 
 .. note:: The last two `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ calls specify transparency using the ``transp`` parameter. 
-   This use should be avoided as the ``transp`` is deprecated in Pine v5. 
+   This use should be avoided as the ``transp`` is deprecated in Pine Script™ v5. 
    Using the ``transp`` parameter to define transparency is not as flexible because it requires an argument of *input integer* type, 
    which entails it must be known before the script is executed, and so cannot be calculated dynamically, as your script executes bar to bar. 
    Additionally, if you use a ``color`` argument that already includes transparency information, 
@@ -149,7 +149,7 @@ color with a transparency of 40, but expressed in different ways. All five metho
 
 The colors in the previous script do not vary as the script executes bar to bar. 
 Sometimes, however, colors need to be created as the script executes on each bar because they depend on conditions that are unknown at compile time, 
-or when the script begins execution on bar zero. For those cases, Pine programmers have two options:
+or when the script begins execution on bar zero. For those cases, Pine Script™ programmers have two options:
 
 #. Use conditional statements to select colors from a few pre-determined base colors.
 #. Build new colors dynamically, by calculating them as the script executes bar to bar, to implement color gradations, for example.
@@ -362,7 +362,7 @@ Note that:
 - The color progression calculated by `color.from_gradient() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}from_gradient>`__ is linear. 
   If the value of the series is halfway between the ``bottom_value`` and ``top_value`` arguments, 
   the generated color's RGBA components will also be halfway between those of ``bottom_color`` and ``top_color``.
-- Many common indicator calculations are available in Pine as built-in functions. 
+- Many common indicator calculations are available in Pine Script™ as built-in functions. 
   Here we use `ta.cci() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}cci>`__ instead of calculating it the long way.
 
 The argument used for ``value`` in `color.from_gradient() <https://www.tradingview.com/pine-script-reference/v5/#fun_color{dot}from_gradient>`__ 
@@ -548,7 +548,7 @@ When you make everything stand out, nothing does. Make room for some elements to
 
 Providing a selection of color presets in your inputs — rather than a single color that can be changed — can help color-challenged users. 
 Our `Technical Ratings <https://www.tradingview.com/script/Jdw7wW2g-Technical-Ratings/>`__ demonstrates one way of achieving this. 
-The `Pine Color Magic and Chart Theme Simulator <https://www.tradingview.com/script/yyDYIrRQ-Pine-Color-Magic-and-Chart-Theme-Simulator/>`__ script provides a good selection of base colors to build from.
+The `Pine Script™ Color Magic and Chart Theme Simulator <https://www.tradingview.com/script/yyDYIrRQ-Pine-Color-Magic-and-Chart-Theme-Simulator/>`__ script provides a good selection of base colors to build from.
 
 
 

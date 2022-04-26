@@ -49,7 +49,7 @@ Script could not be translated from: null
     study($)
 
 Usually this error occurs in version 1 pine scripts, and means that code
-is incorrect. Pine of version 2 (and higher) is better at
+is incorrect. Pine Script™ of version 2 (and higher) is better at
 explaining errors of this kind. So you can try to switch to version 2 by
 adding a :ref:`special attribute <PageScriptStructure_Version>` in the first line. You'll get
 ``line 2: no viable alternative at character '$'``
@@ -166,13 +166,13 @@ can be сonverted into::
     var3 = expr1 + expr2
 
 
-Pine cannot determine the referencing length of a series. Try using max_bars_back in the indicator or strategy function
+Pine Script™ cannot determine the referencing length of a series. Try using max_bars_back in the indicator or strategy function
 -------------------------------------------------------------------------------------------------------------------
 
-The error appears in cases where Pine wrongly autodetects the required 
+The error appears in cases where Pine Script™ wrongly autodetects the required 
 maximum length of series used in a script. This happens when a script's 
-flow of execution does not allow Pine to inspect the use of series in 
-branches of conditional statements (``if``, ``iff`` or ``?``), and Pine
+flow of execution does not allow Pine Script™ to inspect the use of series in 
+branches of conditional statements (``if``, ``iff`` or ``?``), and Pine Script™
 cannot automatically detect how far back the series is referenced. Here 
 is an example of a script causing this problem::
 
@@ -183,7 +183,7 @@ is an example of a script causing this problem::
         test := ta.roc(close, 20)
     plot(test)
 
-In order to help Pine with detection, you should add the ``max_bars_back`` 
+In order to help Pine Script™ with detection, you should add the ``max_bars_back`` 
 parameter to the script's ``indicator`` or ``strategy`` function::
 
     //@version=5

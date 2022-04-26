@@ -16,8 +16,8 @@ Introduction
 When loops are not needed
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Pine's runtime and its built-in functions make loops unnecessary in many situations. 
-Budding Pine programmers not yet familiar with the Pine runtime and built-ins 
+Pine Script™'s runtime and its built-in functions make loops unnecessary in many situations. 
+Budding Pine Script™ programmers not yet familiar with the Pine Script™ runtime and built-ins 
 who want to calculate the average of the last 10 
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ values will often write code such as::
 
@@ -31,19 +31,19 @@ who want to calculate the average of the last 10
     plot(inefficientMA)
 
 A `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__
-loop is unnecessary and inefficient to accomplish tasks like this in Pine.
+loop is unnecessary and inefficient to accomplish tasks like this in Pine Script™.
 This is how it should be done. This code is shorter *and* will run much faster
 because it does not use a loop and uses the 
 `ta.sma() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}sma>`__
 built-in function to accomplish the task::
 
     //@version=5
-    indicator("The Pine MA", "", true)
+    indicator("The Pine Script™ MA", "", true)
     thePineMA = ta.sma(close, 10)
     plot(thePineMA)
 
 Counting the occurrences of a condition in the last bars is also a task 
-which beginning Pine programmers often think must be done with a loop.
+which beginning Pine Script™ programmers often think must be done with a loop.
 To count the number of up bars in the last 10 bars, they will use::
 
     //@version=5
@@ -55,7 +55,7 @@ To count the number of up bars in the last 10 bars, they will use::
             upBars := upBars + 1
     plot(upBars)
    
-The efficient way to write this in Pine (for the programmer bacause it saves time, 
+The efficient way to write this in Pine Script™ (for the programmer bacause it saves time, 
 to achieve the fastest-loading charts, and to share our common resources most equitably),
 is to use the `math.sum() <https://www.tradingview.com/pine-script-reference/v5/#fun_math{dot}sum>`__
 built-in function to accomplish the task::
@@ -77,7 +77,7 @@ What's happening in there is:
 When loops are necessary
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Loops exist for good reason because even in Pine, they are necessary in some cases.
+Loops exist for good reason because even in Pine Script™, they are necessary in some cases.
 These cases typically include:
 
 - The manipulation of arrays.
@@ -87,7 +87,7 @@ These cases typically include:
   Since the current bar's `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__
   is only known on the bar the script is running on,
   a loop is necessary to go back in time and analyze past bars.
-- Performing calculations on past bars that cannot be accomplished using Pine's built-in functions,
+- Performing calculations on past bars that cannot be accomplished using Pine Script™'s built-in functions,
   like the Pearson correlation coefficient.
 
 
@@ -111,7 +111,7 @@ where:
 
 - Parts enclosed in square brackets (``[]``) can appear zero or one time, and those enclosed in curly braces (``{}``) can appear zero or more times.
 - <declaration_mode> is the variable's :ref:`declaration mode <PageVariableDeclarations_DeclarationModes>`
-- <type> is optional, as in almost all Pine variable declarations (see :ref:`types <PageTypeSystem_Types>`)
+- <type> is optional, as in almost all Pine Script™ variable declarations (see :ref:`types <PageTypeSystem_Types>`)
 - <identifier> is a variable's :ref:`name <PageIdentifiers>`
 - <expression> can be a literal, a variable, an expression or a function call.
 - <local_block_loop> consists of zero or more statements followed by a return value, which can be a tuple of values.
@@ -134,7 +134,7 @@ statement to look back a user-defined amount of bars to determine how many bars 
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ of the last bar on the chart. 
 A `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ loop is necessary here, 
 since the script only has access to the reference value on the chart's last bar. 
-Pine's runtime cannot, here, be used to calculate on the fly, as the script is executing bar to bar::
+Pine Script™'s runtime cannot, here, be used to calculate on the fly, as the script is executing bar to bar::
 
     //@version=5
     indicator("`for` loop")
@@ -154,7 +154,7 @@ Pine's runtime cannot, here, be used to calculate on the fly, as the script is e
 This example uses a loop in its ``checkLinesForBreaches()`` function
 to go through an array of pivot lines and delete them when price crosses them.
 A loop is necessary here because all the lines in each of the ``hiPivotLines`` and ``loPivotLines``
-arrays must be checked on each bar, and there is no Pine built-in that can do this for us::
+arrays must be checked on each bar, and there is no Pine Script™ built-in that can do this for us::
 
     //@version=5
     MAX_LINES_COUNT = 100
@@ -233,7 +233,7 @@ where:
 
 - Parts enclosed in square brackets (``[]``) can appear zero or one time.
 - <declaration_mode> is the variable's :ref:`declaration mode <PageVariableDeclarations_DeclarationModes>`
-- <type> is optional, as in almost all Pine variable declarations (see :ref:`types <PageTypeSystem_Types>`)
+- <type> is optional, as in almost all Pine Script™ variable declarations (see :ref:`types <PageTypeSystem_Types>`)
 - <identifier> is a variable's :ref:`name <PageIdentifiers>`
 - <expression> can be a literal, a variable, an expression or a function call. 
   It is evaluated at each iteration of the loop. When it evaluates to ``true``,
