@@ -115,7 +115,7 @@ Let's repeat the same process as before to copy that code in a new indicator:
 - Click "Save" and choose a name for your script different than the previous one.
 - Click "Add to Chart" in the Editor's menu bar. The "MACD #2" indicator appears in a separate *Pane* under the "MACD #1" indicator.
 
-Your second Pine Script™ is running on your chart. If you double-click on the indicator's name on your chart, 
+Your second Pine script is running on your chart. If you double-click on the indicator's name on your chart, 
 you will bring up the script's "Settings/Inputs" tab, where you can now change the slow and fast lengths:
 
 .. image:: images/FirstIndicator-Version2.png
