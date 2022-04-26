@@ -999,7 +999,7 @@ April 2014
 February 2014
 ^^^^^^^^^^^^^
 
-* Added support for inputs, allowing users to edit the indicator inputs through the properties window, without needing to edit the Pine Script™ script.
+* Added support for inputs, allowing users to edit the indicator inputs through the properties window, without needing to edit the Pine script.
 * Added self-referencing variables.
 * Added support for multiline functions.
 * Implemented the type-casting mechanism, automatically casting constant and simple float and int values to series when it is required.

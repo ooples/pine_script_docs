@@ -31,7 +31,7 @@ and both can generate :ref:`alert events <PageAlerts>`.
 How scripts are executed
 ------------------------
 
-A Pine Script™ script is **not** like programs in many programming languages that execute once and then stop. 
+A Pine script is **not** like programs in many programming languages that execute once and then stop. 
 In the Pine Script™ *runtime* environment, a script runs in the equivalent of an invisible loop 
 where it is executed once on each bar of whatever chart you are on, from left to right. 
 Chart bars that have already closed when the script executes on them are called *historical bars*. 
