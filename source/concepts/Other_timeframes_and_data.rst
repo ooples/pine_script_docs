@@ -290,7 +290,7 @@ The function's signature is:
     request.security(symbol, timeframe, expression, gaps, lookahead, ignore_resolve_errors, currency) → series int[]/float[]/bool[]/color[]/string[]
 
 ``symbol``
-   This is the ticker identifier of the symbol whose information is to be fetched. It musst be of "simple string" type and can be defined in multiple ways:
+   This is the ticker identifier of the symbol whose information is to be fetched. It must be of "simple string" type and can be defined in multiple ways:
 
       - With a literal string containing either a simple ticker like ``"IBM"`` or ``"EURUSD"``, 
         or an exchange:symbol pair like ``"NYSE:IBM"`` or ``"OANDA:EURUSD"``.
