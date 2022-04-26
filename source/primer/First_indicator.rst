@@ -26,7 +26,7 @@ To open the Editor, click on the "Pine Script™ Editor" tab at the bottom of yo
 First version
 -------------
 
-We will now create our first working Pine Script™, an implementation of the
+We will now create our first working Pine script, an implementation of the
 `MACD <https://www.tradingview.com/support/solutions/43000502344-macd-moving-average-convergence-divergence/>`__ indicator in Pine Script™:
 
 .. code-block:: pine
@@ -49,7 +49,7 @@ We will now create our first working Pine Script™, an implementation of the
 - Click "Save" and choose a name for your script. Your script is now saved in TradingView's cloud, but under your account's name. Nobody but you can use it.
 - Click "Add to Chart" in the Editor's menu bar. The MACD indicator appears in a separate *Pane* under your chart.
 
-Your first Pine Script™ is running on your chart, which should look like this:
+Your first Pine script is running on your chart, which should look like this:
 
 .. image:: images/FirstIndicator-Version1.png
 
