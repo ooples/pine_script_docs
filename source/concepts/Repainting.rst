@@ -91,7 +91,7 @@ and hopefully enable more meaningful discussions with script authors.
 
 
 For Pine Script™ programmers
-^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As we discussed in the previous section, not all types of repainting behavior need to be avoided at all costs,
 and as we will see in the following text, some can't.

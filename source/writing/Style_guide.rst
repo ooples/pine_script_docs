@@ -14,7 +14,7 @@ Introduction
 This style guide provides recommendations on how to name variables and organize your Pine scripts in a standard way that works well. 
 Scripts that follow our best practices will be easier to read, understand and maintain. 
 
-Every Pine Script™ programmer is, of course, free to use all or as many of our recommendations as he pleases. 
+Every Pine Script™ programmer is, of course, free to use all or as many of our recommendations as they please. 
 As Ed Seykota says: *Follow the rules without question, and know when to break the rules*.
 
 
