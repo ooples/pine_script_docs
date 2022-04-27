@@ -47,7 +47,7 @@ unless ``precision =`` is also used, in which case it will override
 the effect of ``format.inherit``. When ``format.price`` is used, 
 the default precision will be "2", unless one is specified using ``precision =``. When
 ``format.volume`` is used, the format is equivalent to ``precision = 0`` used in 
-earlier versions of Pine, where "5183" becomes "5.183K".
+earlier versions of Pine Script™, where "5183" becomes "5.183K".
 
 ``precision`` is the number of digits after the floating point 
 used to format study values.
@@ -72,5 +72,5 @@ had been used.
 
 .. rubric:: Footnote
 
-.. [#strategy] Pine also has a `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
+.. [#strategy] Pine Script™ also has a `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
    annotation function which is used to create a :ref:`strategy <PageStrategies>` rather than an indicator.

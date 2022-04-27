@@ -131,7 +131,7 @@ The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/
 
 ``series``
    It is the only mandatory parameter. Its argument must be of "series int/float" type.
-   Note that because the auto-casting rules in Pine convert in the int 🠆 float 🠆 bool direction,
+   Note that because the auto-casting rules in Pine Script™ convert in the int 🠆 float 🠆 bool direction,
    a "bool" type variable cannot be used as is; it must be converted to an "int" or a "float" for use as an argument.
    For example, if ``newDay`` is of "bool" type, 
    then ``newDay ? 1 : 0`` can be used to plot 1 when the variable is ``true``, and zero when it is ``false``.
@@ -322,7 +322,7 @@ We'll look here at a few examples.
 
 The value of the ``color`` parameter in `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ can be a constant, 
 such as one of the built-in :ref:`constant colors <PageColors_ConstantColors>` or a :ref:`color literal <PageTypeSystem_Color>`.
-In Pine, the form-type of such colors is called **"const color"** (see the :ref:`Type system <PageTypeSystem>` page). 
+In Pine Script™, the form-type of such colors is called **"const color"** (see the :ref:`Type system <PageTypeSystem>` page). 
 They are known at compile time::
 
     //@version=5
@@ -401,7 +401,7 @@ Note that:
 Levels
 ------
 
-Pine has an `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ 
+Pine Script™ has an `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ 
 function to plot horizontal lines (see the page on :ref:`Levels <PageLevels>`).
 `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ 
 is useful because it has some line styles unavailable with `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__,

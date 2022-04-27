@@ -70,7 +70,7 @@ Note that:
   the local block returns the ``NO_COLOR`` color so that no background is displayed in that case.
 - We first initialize constants using our base colors, which include the ``40`` transparency
   in hex notation at the end. 40 in the hexadecimal notation on the reversed 00-FF scale for transparency
-  corresponds to 75 in Pine's 0-100 decimal scale for transparency.
+  corresponds to 75 in Pine Script™'s 0-100 decimal scale for transparency.
 - We provide color inputs allowing script users to change the default colors we propose.
 
 In our next example, we generate a gradient for the background of a CCI line::

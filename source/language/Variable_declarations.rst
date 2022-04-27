@@ -27,7 +27,7 @@ where:
 - <declaration_mode> is the variable's :ref:`declaration mode <PageVariableDeclarations_DeclarationModes>`.
   It can be `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ or 
   `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__, or nothing.
-- <type> is optional, as in almost all Pine variable declarations (see :ref:`types <PageTypeSystem_Types>`).
+- <type> is optional, as in almost all Pine Script™ variable declarations (see :ref:`types <PageTypeSystem_Types>`).
 - <identifier> is the variable's :ref:`name <PageIdentifiers>`.
 - <expression> can be a literal, a variable, an expression or a function call.
 - <structure> can be an `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
@@ -58,7 +58,7 @@ These are all valid variable declarations. The last one requires four lines::
   When you see similar lines using the :ref:`:= <PageOperators_ReassignmentOperator>` reassignment operator, 
   the code is **reassigning** a value to a variable that was **already declared**.
   Those are **variable reassignments**.
-  Be sure you understand the distinction as this is a common stumbling block for newcomers to Pine. 
+  Be sure you understand the distinction as this is a common stumbling block for newcomers to Pine Script™. 
   See the next :ref:`Variable reassignment <PageVariableDeclarations_VariableReassignment>` section for details.
 
 The formal syntax of a variable declaration is:
@@ -159,8 +159,8 @@ Note that:
   as that of the global scope, but actually be a very confusing independent entity that would persist
   only for the length of the local block, and then disappear without a trace.
 
-All user-defined variables in Pine are *mutable*, which means their value can be changed using the :ref:`:= <PageOperators_ReassignmentOperator>` reassignment operator.
-Assigning a new value to a variable may change its *form* (see the page on Pine's :ref:`type system <PageTypeSystem>` for more information).
+All user-defined variables in Pine Script™ are *mutable*, which means their value can be changed using the :ref:`:= <PageOperators_ReassignmentOperator>` reassignment operator.
+Assigning a new value to a variable may change its *form* (see the page on Pine Script™'s :ref:`type system <PageTypeSystem>` for more information).
 A variable can be assigned a new value as many times as needed during the script's execution on one bar,
 so a script can contain any number of reassignments of one variable.
 A variable's :ref:`declaration mode <PageVariableDeclarations_DeclarationModes>` determines how new values assigned to a variable will be saved.
@@ -173,7 +173,7 @@ Declaration modes
 -----------------
 
 Understanding the impact that declaration modes have on the behavior of variables requires
-prior knowledge of Pine's :ref:`execution model <PageExecutionModel>`.
+prior knowledge of Pine Script™'s :ref:`execution model <PageExecutionModel>`.
 
 When you declare a variable, if a declaration mode is specified, it must come first.
 Three modes can be used:
@@ -272,15 +272,15 @@ unless the initialization involves calculations that take longer than the mainte
 
 Understanding the behavior of variables using the 
 `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ declaration mode
-requires prior knowledge of Pine's :ref:`execution model <PageExecutionModel>` and :ref:`bar states <PageBarStates>`.
+requires prior knowledge of Pine Script™'s :ref:`execution model <PageExecutionModel>` and :ref:`bar states <PageBarStates>`.
 
 The `varip <https://www.tradingview.com/pine-script-reference/v5/#op_varip>`__ 
 keyword can be used to declare variables that escape the *rollback process*, 
-which is explained in the page on Pine's :ref:`execution model <PageExecutionModel>`.
+which is explained in the page on Pine Script™'s :ref:`execution model <PageExecutionModel>`.
 
 Whereas scripts only execute once at the close of historical bars, when a script is running in realtime, 
 it executes every time the chart's feed detects a price or volume update. 
-At every realtime update, Pine's runtime normally resets the values of a script's variables to their last committed value, 
+At every realtime update, Pine Script™'s runtime normally resets the values of a script's variables to their last committed value, 
 i.e., the value they held when the previous bar closed. 
 This is generally handy, as each realtime script execution starts from a known state, which simplifies script logic.
 
