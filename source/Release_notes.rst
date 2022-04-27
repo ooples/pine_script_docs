@@ -989,7 +989,7 @@ July 2014
 June 2014
 ^^^^^^^^^
 
-* Added Pine Script sharing, enabling coders and traders to share their scripts with the rest of the TradingView community.
+* Added Pine Script sharing, enabling programmers and traders to share their scripts with the rest of the TradingView community.
 
 April 2014
 ^^^^^^^^^^
