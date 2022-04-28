@@ -11,6 +11,19 @@ This page contains release notes of notable changes in Pine Script.
 April 2022
 -------------
 
+New ``request.`` function was added:
+
+* `request.economic() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}economic>`__ - Economic data includes information such as the state of a country's economy or of a particular industry.
+
+New ``chart.`` built-in variables were added:
+
+* `chart.is_heikinashi <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_heikinashi>`__ - Returns true if the chart type is Heikin Ashi, false otherwise.
+* `chart.is_kagi <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_kagi>`__ - Returns true if the chart type is Kagi, false otherwise.
+* `chart.is_linebreak <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_linebreak>`__ - Returns true if the chart type is Line break, false otherwise.
+* `chart.is_pnf <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_pnf>`__ - Returns true if the chart type is Point & figure, false otherwise.
+* `chart.is_range <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_range>`__ - Returns true if the chart type is Range, false otherwise.
+* `chart.is_renko <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_renko>`__ - Returns true if the chart type is Renko, false otherwise.
+
 New matrix functions were added:
 
 * `matrix.new<type> <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix%7Bdot%7Dnew%3Ctype%3E>`__ - Creates a new matrix object. A matrix is a two-dimensional data structure containing rows and columns. All elements in the matrix must be of the type specified in the type template (“<type>”).
