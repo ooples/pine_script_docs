@@ -14,7 +14,7 @@ Introduction
 This style guide provides recommendations on how to name variables and organize your Pine scripts in a standard way that works well. 
 Scripts that follow our best practices will be easier to read, understand and maintain. 
 
-Every Pine Script™ programmer is, of course, free to use all or as many of our recommendations as he pleases. 
+Every Pine Script™ programmer is, of course, free to use all or as many of our recommendations as they please. 
 As Ed Seykota says: *Follow the rules without question, and know when to break the rules*.
 
 
@@ -160,7 +160,7 @@ Placing the documentation inside the function, as opposed to outside of it as is
 
 This is where the script's core calculations and logic should be placed. 
 Code can be easier to read when variable declarations are placed near the code segment using the variables. 
-Some coders prefer to place all their non-constant variable declarations at the beginning of this section, 
+Some programmers prefer to place all their non-constant variable declarations at the beginning of this section, 
 which is not always possible for all variables, as some may require some calculations to have been executed before their declaration.
 
 

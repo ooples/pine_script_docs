@@ -11,7 +11,7 @@ First steps
 Introduction
 ------------
 
-Welcome to the `Pine Script User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__, 
+Welcome to the `Pine Script™ User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__, 
 which will accompany you in your journey to learn to program your own trading tools in Pine Script™.
 Welcome also to the very active community of Pine Script™ programmers on TradingView.
 

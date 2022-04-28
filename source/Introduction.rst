@@ -9,9 +9,9 @@ Welcome to Pine Script™ |version|
    :width: 240
    :height: 240
 
-**Pine Script** is `TradingView <https://www.tradingview.com/>`__'s programming language. It allows traders to create their own trading tools and run them on our servers. 
+**Pine Script™** is `TradingView <https://www.tradingview.com/>`__'s programming language. It allows traders to create their own trading tools and run them on our servers. 
 We designed Pine Script™ as a lightweight, yet powerful, language for developing indicators and strategies that you can then backtest. 
-Most of TradingView's built-in indicators are written in Pine Script™, and our thriving community of Pine Script™ coders has published more than 100,000 `Community Scripts <https://www.tradingview.com/scripts/>`__.
+Most of TradingView's built-in indicators are written in Pine Script™, and our thriving community of Pine Script™ programmers has published more than 100,000 `Community Scripts <https://www.tradingview.com/scripts/>`__.
 
 It’s our explicit goal to keep Pine Script™ accessible and easy to understand for the broadest possible audience. 
 Pine Script™ is cloud-based and therefore different from client-side programming languages. 

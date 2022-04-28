@@ -22,7 +22,7 @@ import pine_lexer
 
 # -- Project information -----------------------------------------------------
 
-project = u'Pine Script User Manual'
+project = u'Pine Script™ User Manual'
 copyright = str(datetime.now().year) + u', TradingView'
 author = u''
 
@@ -141,7 +141,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'pine_script_docs.tex', u'Pine Script User Manual',
+    (master_doc, 'pine_script_docs.tex', u'Pine Script™ User Manual',
      u'vvolkov', 'manual'),
 ]
 

@@ -7,7 +7,7 @@
 
 .. Helpful doc https://devguide.python.org/documenting/#restructuredtext-primer
 
-Pine Script |version| User Manual
+Pine Script™ |version| User Manual
 *********************************
 
 .. toctree::
