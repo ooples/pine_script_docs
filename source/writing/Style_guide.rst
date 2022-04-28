@@ -160,7 +160,7 @@ Placing the documentation inside the function, as opposed to outside of it as is
 
 This is where the script's core calculations and logic should be placed. 
 Code can be easier to read when variable declarations are placed near the code segment using the variables. 
-Some coders prefer to place all their non-constant variable declarations at the beginning of this section, 
+Some programmers prefer to place all their non-constant variable declarations at the beginning of this section, 
 which is not always possible for all variables, as some may require some calculations to have been executed before their declaration.
 
 
