@@ -6,7 +6,7 @@ Release notes
 .. contents:: :local:
     :depth: 1
 
-This page contains release notes of notable changes in Pine Script.
+This page contains release notes of notable changes in Pine Script™.
 
 April 2022
 -------------
@@ -396,7 +396,7 @@ New functions were added:
 * ``array.from()`` - takes a variable number of arguments with one of the types: ``int``, ``float``, ``bool``, ``string``, ``label``, ``line``, ``color``, ``box``, ``table`` and returns an array of the corresponding type. 
 
 A new ``box`` drawing has been added to Pine Script™, making it possible to draw rectangles on charts using the Pine Script™ syntax. 
-For more details see the `Pine Script reference <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ and the :ref:`Lines and boxes <PageLinesAndBoxes>` User Manual page.
+For more details see the `Pine Script™ reference <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ and the :ref:`Lines and boxes <PageLinesAndBoxes>` User Manual page.
 
 The ``color.new`` function can now accept series and input arguments, in which case, the colors will be calculated at runtime. For more information about this, see our :ref:`Colors <PageColors>` User Manual page.
 
@@ -847,7 +847,7 @@ June 2019
 
 * Renaming of built-ins and a version 3 to 4 converter utility
 * ``max_bars_back`` function to control series variables internal history buffer sizes
-* Pine Script documentation versioning
+* Pine Script™ documentation versioning
 
 
 
@@ -886,7 +886,7 @@ April 2017
 
 March 2017
 ^^^^^^^^^^
-* Pine Script v3 is here! Some important changes:
+* Pine Script™ v3 is here! Some important changes:
   
   * Changes to the default behavior of the ``security()`` function: it can no longer access the future data by default. This can be changes with the ``lookahead`` parameter.
   * An implicit conversion of boolean values to numeric values was replaced with an implicit conversion of numeric values (integer and float) to boolean values.
@@ -946,7 +946,7 @@ January 2016
 
 October 2015
 ^^^^^^^^^^^^
-* Pine has graduated to v2! The new version of Pine Script added support for ``if`` statements, making it easier to write more readable and concise code.
+* Pine has graduated to v2! The new version of Pine Script™ added support for ``if`` statements, making it easier to write more readable and concise code.
 
 September 2015
 ^^^^^^^^^^^^^^
@@ -987,12 +987,12 @@ August 2014
 July 2014
 ^^^^^^^^^
 * Added three new plotting functions, ``plotshape()``, ``plotchar()``, and ``plotarrow()`` for situations when you need to highlight specific bars on a chart without drawing a line.
-* Integrated QUANDL data into Pine Script. The data can be accessed by passing the QUANDL ticker to the ``security`` function.
+* Integrated QUANDL data into Pine Script™. The data can be accessed by passing the QUANDL ticker to the ``security`` function.
 
 June 2014
 ^^^^^^^^^
 
-* Added Pine Script sharing, enabling programmers and traders to share their scripts with the rest of the TradingView community.
+* Added Pine Script™ sharing, enabling programmers and traders to share their scripts with the rest of the TradingView community.
 
 April 2014
 ^^^^^^^^^^

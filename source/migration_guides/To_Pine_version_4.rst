@@ -3,7 +3,7 @@
 To Pine Script™ version 4
 =================
 
-This is a guide to converting Pine Script code from ``@version=3`` to ``@version=4``.
+This is a guide to converting Pine Script™ code from ``@version=3`` to ``@version=4``.
 
 Converter
 ---------
@@ -17,7 +17,7 @@ Not all scripts can be automatically converted from v3 to v4. If you want to con
 Renaming of built-in constants, variables, and functions
 --------------------------------------------------------
 
-In Pine Script v4 the following built-in constants, variables, and functions were renamed:
+In Pine Script™ v4 the following built-in constants, variables, and functions were renamed:
 
 - Color constants (e.g ``red``) are moved to the ``color.*`` namespace (e.g. ``color.red``).
 - The ``color`` function has been renamed to ``color.new``.
@@ -34,7 +34,7 @@ The reason behind renaming all of the above was to structure the standard langua
 
 Explicit variable type declaration
 ----------------------------------
-In Pine Script v4 it's no longer possible to create variables with an unknown data type at the time of their declaration. This was done to avoid a number of issues that arise when the variable type changes after its initialization with the na value. From now on, you need to explicitly specify their type using keywords or type functions (for example, ``float``) when declaring variables with the na value::
+In Pine Script™ v4 it's no longer possible to create variables with an unknown data type at the time of their declaration. This was done to avoid a number of issues that arise when the variable type changes after its initialization with the na value. From now on, you need to explicitly specify their type using keywords or type functions (for example, ``float``) when declaring variables with the na value::
 
   //@version=4
   study("Green Candle Close")

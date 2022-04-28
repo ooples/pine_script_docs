@@ -57,7 +57,7 @@ The solution to our conundrum requires:
 Arithmetic operators
 --------------------
 
-There are five arithmetic operators in Pine Script:
+There are five arithmetic operators in Pine Script™:
 
 +-------+------------------------------------+
 | ``+`` | Addition and string concatenation  |
@@ -88,7 +88,7 @@ The ``+`` operator also serves as the concatenation operator for strings. ``"EUR
 Comparison operators
 --------------------
 
-There are six comparison operators in Pine Script:
+There are six comparison operators in Pine Script™:
 
 +--------+---------------------------------+
 | ``<``  | Less Than                       |
@@ -120,7 +120,7 @@ Examples::
 Logical operators
 -----------------
 
-There are three logical operators in Pine Script:
+There are three logical operators in Pine Script™:
 
 +---------+---------------------------------+
 | ``not`` | Negation                        |
