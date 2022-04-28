@@ -19,10 +19,10 @@ help:
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 syncpackages:
-	pip install --user -r requirements.txt
+	pip3 install --user -r requirements.txt
 
 install_hooks:
 	cp -r ./git-hooks/. ./.git/hooks
 
 install_tools:
-	pip install sphinx==4.5.0
+	pip install sphinx==1.8.6
