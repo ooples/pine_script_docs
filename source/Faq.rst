@@ -24,7 +24,7 @@ You may see that variable ``c`` is a Heikin Ashi *close* price which is not
 the same as real OHLC price. Because ``close`` built-in variable is always
 a value that corresponds to a visible bar (or candle) on the chart.
 
-So, how do we get the real OHLC prices in Pine Script code, if current
+So, how do we get the real OHLC prices in Pine Script™ code, if current
 chart type is non-standard? We should use ``request.security`` function in
 combination with ``ticker.new`` function. Here is an example::
 
@@ -81,7 +81,7 @@ Plot a dynamic horizontal line
 ------------------------------
 
 There is function ``hline`` in pine. But it is now limited to only plot
-constant value. Here is a Pine Script with workaround to plot changing
+constant value. Here is a Pine Script™ with workaround to plot changing
 hline::
 
     //@version=5
