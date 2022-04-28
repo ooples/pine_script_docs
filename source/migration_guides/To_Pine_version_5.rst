@@ -1,6 +1,6 @@
 .. _PageToPineVersion5:
 
-To Pine version 5
+To Pine Script™ version 5
 =================
 
 .. contents:: :local:
@@ -11,8 +11,8 @@ To Pine version 5
 Introduction
 ------------
 
-This guide documents the **changes** made to Pine from v4 to v5. It will guide you in the adaptation of existing Pine scripts to Pine v5. 
-See our :ref:`Release notes <PageReleaseNotes_October2021>` for a list of the **new** features in Pine v5.
+This guide documents the **changes** made to Pine Script™ from v4 to v5. It will guide you in the adaptation of existing Pine scripts to Pine Script™ v5. 
+See our :ref:`Release notes <PageReleaseNotes_October2021>` for a list of the **new** features in Pine Script™ v5.
 
 The most frequent adaptations required to convert older scripts to v5 are:
 
@@ -28,7 +28,7 @@ The most frequent adaptations required to convert older scripts to v5 are:
 v4 to v5 converter
 ------------------
 
-The Pine Editor includes a utility to automatically convert v4 scripts to v5. To access it, open a script with ``//@version=4`` in it and select the "Convert to v5" option in the "More" menu identified by three dots at the top-right of the Editor's pane:
+The Pine Script™ Editor includes a utility to automatically convert v4 scripts to v5. To access it, open a script with ``//@version=4`` in it and select the "Convert to v5" option in the "More" menu identified by three dots at the top-right of the Editor's pane:
 
 .. image:: images/v4_to_v5_convert_button.png
 
@@ -162,7 +162,7 @@ The `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`_
 Some function parameters now require built-in arguments
 -------------------------------------------------------
 
-In v4, built-in constants such as ``plot.style_area`` used as arguments when calling Pine functions corresponded to pre-defined values of a specific type. For example, the value of ``barmerge.lookahead_on`` was ``true``, so you could use ``true`` instead of the named constant when supplying an argument to the ``lookahead`` parameter in a `security() <https://www.tradingview.com/pine-script-reference/v4/#fun_security>`__ function call. We found this to be a common source of confusion, which caused unsuspecting programmers to produce code yielding unintended results.
+In v4, built-in constants such as ``plot.style_area`` used as arguments when calling Pine Script™ functions corresponded to pre-defined values of a specific type. For example, the value of ``barmerge.lookahead_on`` was ``true``, so you could use ``true`` instead of the named constant when supplying an argument to the ``lookahead`` parameter in a `security() <https://www.tradingview.com/pine-script-reference/v4/#fun_security>`__ function call. We found this to be a common source of confusion, which caused unsuspecting programmers to produce code yielding unintended results.
 
 In v5, the use of correct built-in named constants as arguments to function parameters requiring them is mandatory::
 

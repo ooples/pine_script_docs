@@ -103,7 +103,7 @@ Note that `barstate.islast <https://www.tradingview.com/pine-script-reference/v5
 `barstate.isnew <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isnew>`__ 
 is ``true`` on all historical bars and on the realtime bar's first (opening) update.
 
-All historical bars are considered *new* bars because the Pine runtime executes your script on each bar sequentially, from the chart's first bar in time, to the last.
+All historical bars are considered *new* bars because the Pine Script™ runtime executes your script on each bar sequentially, from the chart's first bar in time, to the last.
 Each historical bar is thus *discovered* by your script as it executes, bar to bar.
 
 `barstate.isnew <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isnew>`__ 

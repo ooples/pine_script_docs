@@ -4,7 +4,7 @@ Bar coloring
 ============
 
 The `barcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_barcolor>`__ function lets you color chart bars.
-It is the only Pine function that allows a script running in a pane to affect the chart.
+It is the only Pine Script™ function that allows a script running in a pane to affect the chart.
 
 The function's signature is::
 

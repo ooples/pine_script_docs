@@ -1,4 +1,4 @@
-Pine v5 grammar
+Pine Script™ v5 grammar
 ===============
 
 ``{}`` Curly braces content can be repeated zero or more times: {, <parameter>}

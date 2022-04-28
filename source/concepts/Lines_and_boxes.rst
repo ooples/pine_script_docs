@@ -10,7 +10,7 @@ Lines and boxes
 Introduction
 ------------
 
-Lines and boxes are only available in v4 and higher versions of Pine.
+Lines and boxes are only available in v4 and higher versions of Pine Script™.
 They are useful to draw support and resistance levels, trend lines, price ranges.
 Multiple small line segments are also useful to draw complex geometric forms.
 
@@ -20,13 +20,13 @@ drawing objects at points in the past that are detected a variable number of bar
 Lines and boxes are objects, like :ref:`labels <PageTextAndShapes_Labels>` and :ref:`tables <PageTables>`.
 Like them, they are referred to using an ID, which acts like a pointer. 
 Line IDs are of "line" type, and box IDs are of "box" type.
-As with other Pine objects, lines and box IDs are "time series" and all the functions used to manage them accept "series" arguments,
+As with other Pine Script™ objects, lines and box IDs are "time series" and all the functions used to manage them accept "series" arguments,
 which makes them very flexible.
 
 .. note:: On TradingView charts, a complete set of *Drawing Tools*
   allows users to create and modify drawings using mouse actions. While they may sometimes look similar to
-  drawing objects created with Pine code, they are unrelated entities.
-  Lines and boxes created using Pine code cannot be modified with mouse actions, 
+  drawing objects created with Pine Script™ code, they are unrelated entities.
+  Lines and boxes created using Pine Script™ code cannot be modified with mouse actions, 
   and hand-drawn drawings from the chart user interface are not visible from Pine scripts.
 
 Lines can be horizontal or at an angle, while boxes are always rectangular. 
@@ -499,7 +499,7 @@ Note that:
   to cap the user value.
 - We use the ``myRSIRises`` and ``myRSIFalls`` variables to hold the states determining when we create a new level.
   After that, we delete the oldest line in the `line.all <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}all>`__
-  built-in array that is automatically maintained by the Pine runtime and contains the ID of all the visible lines drawn by our script.
+  built-in array that is automatically maintained by the Pine Script™ runtime and contains the ID of all the visible lines drawn by our script.
   We use the `array.get() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}get>`__
   function to retrieve the array element at index zero (the oldest visible line ID).
   We then use `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`__
@@ -801,7 +801,7 @@ Realtime behavior
 -----------------
 
 Lines and boxes are subject to both *commit* and *rollback* actions, which affect the behavior of a script when it executes
-in the realtime bar. See the page on Pine's :ref:`Execution model <PageExecutionModel>`.
+in the realtime bar. See the page on Pine Script™'s :ref:`Execution model <PageExecutionModel>`.
 
 This script demonstrates the effect of rollback when running in the realtime bar::
 
@@ -825,7 +825,7 @@ Total number of objects
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 Lines and boxes consume server resources, which is why there is a limit to the total number of drawings
-per indicator or strategy. When too many are created, old ones are automatically deleted by the Pine runtime,
+per indicator or strategy. When too many are created, old ones are automatically deleted by the Pine Script™ runtime,
 in a process referred to as *garbage collection*.
 
 This code creates a line on every bar::
@@ -884,14 +884,14 @@ This code's intention, for example, is to ignore all historical bars and create 
     if barstate.isrealtime
         label.new(bar_index[300], na, text = "Label", yloc = yloc.abovebar)
 
-It will, however, fail at runtime. The reason for the error is that Pine cannot determine the buffer size
+It will, however, fail at runtime. The reason for the error is that Pine Script™ cannot determine the buffer size
 for historical values of the ``time`` plot, even though the ``time`` built-in variable isn't mentioned in the code.
 This is due to the fact that the built-in variable ``bar_index`` uses the ``time`` series in its inner workings.
 Accessing the value of the bar index 300 bars back requires that the history buffer size of the ``time`` series
 be of size 300 or more.
 
-In Pine, there is a mechanism that automaticaly detects the required historical buffer size for most cases.
-Autodetection works by letting Pine code access historical values any number of bars back for a limited duration.
+In Pine Script™, there is a mechanism that automaticaly detects the required historical buffer size for most cases.
+Autodetection works by letting Pine Script™ code access historical values any number of bars back for a limited duration.
 In this script's case, the ``if barstate.isrealtime`` condition prevents any such accesses to occur,
 so the required historical buffer size cannot be inferred and the code fails.
 
@@ -905,7 +905,7 @@ The solution to this conundrum is to use the `max_bars_back <https://www.trading
     if barstate.isrealtime
         label.new(bar_index[300], na, text = "Label", yloc = yloc.abovebar)
 
-Such occurrences are confusing, but rare. In time, the Pine team hopes to eliminate them.
+Such occurrences are confusing, but rare. In time, the Pine Script™ team hopes to eliminate them.
 
 
 

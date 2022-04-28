@@ -17,7 +17,7 @@ All standard chart types use a timeframe: "Bars", "Candles", "Hollow Candles", "
 One non-standard chart type also uses timeframes: "Heikin Ashi".
 
 Programmers interested in accessing data from multiple timeframes will need to become familiar with how
-timeframes are expressed in Pine, and how to use them.
+timeframes are expressed in Pine Script™, and how to use them.
 
 **Timeframe strings** come into play in different contexts:
 
@@ -41,7 +41,7 @@ timeframes are expressed in Pine, and how to use them.
 - Many built-in variables provide information on the timeframe used by the chart the script is running on.
   See the :ref:`Chart timeframe <PageChartInformation_ChartTimeframe>` section for more information on them,
   including `timeframe.period <https://www.tradingview.com/pine-script-reference/v5/#var_timeframe{dot}period>`__
-  which returns a string in Pine's timeframe specification format.
+  which returns a string in Pine Script™'s timeframe specification format.
 
 
 
@@ -120,7 +120,7 @@ Note that:
   which entails its result cannot be transformed in a timeframe string for use with
   `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__,
   as its ``timeframe`` parameter requires a "simple string".
-  See the page on Pine's :ref:`Type system <PageTypeSystem>` for more information on Pine forms and types.
+  See the page on Pine Script™'s :ref:`Type system <PageTypeSystem>` for more information on Pine Script™ forms and types.
 - Next, we validate the timeframes to ensure that the input timeframe is equal to or higher than the chart's timeframe.
   If it is not, we generate a runtime error.
 - We finally print the two timeframe values converted to minutes.
