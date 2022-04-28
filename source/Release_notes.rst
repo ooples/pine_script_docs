@@ -11,11 +11,11 @@ This page contains release notes of notable changes in Pine Script.
 April 2022
 -------------
 
-New request function was added:
+New ``request.`` function was added:
 
 * `request.economic() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}economic>`__ - Economic data includes information such as the state of a country's economy or of a particular industry.
 
-New chart built-in variables were added:
+New ``chart.`` built-in variables were added:
 
 * `chart.is_heikinashi <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_heikinashi>`__ - Returns true if the chart type is Heikin Ashi, false otherwise.
 * `chart.is_kagi <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_kagi>`__ - Returns true if the chart type is Kagi, false otherwise.
