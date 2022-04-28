@@ -1135,7 +1135,7 @@ Zig Zag
 
 ::
 
-	//@version=5
+  //@version=5
   indicator('Zig Zag', overlay=true)
 
   dev_threshold = input.float(title='Deviation (%)', defval=5, minval=1, maxval=100)
