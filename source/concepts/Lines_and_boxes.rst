@@ -1135,123 +1135,122 @@ Zig Zag
 
 ::
 
-	//@version=5
-	indicator('Zig Zag', overlay=true)
+  //@version=5
+  indicator('Zig Zag', overlay=true)
 
-	dev_threshold = input.float(title='Deviation (%)', defval=5, minval=1, maxval=100)
-	depth = input.int(title='Depth', defval=10, minval=1)
+  dev_threshold = input.float(title='Deviation (%)', defval=5, minval=1, maxval=100)
+  depth = input.int(title='Depth', defval=10, minval=1)
 
-	pivots(src, length, isHigh) =>
-		p = nz(src[length])
+  pivots(src, length, isHigh) =>
+      p = nz(src[length])
 
-		if length == 0
-			[bar_index, p]
-		else
-			isFound = true
-			for i = 0 to length - 1 by 1
-				if isHigh and src[i] > p
-					isFound := false
-					isFound
-				if not isHigh and src[i] < p
-					isFound := false
-					isFound
+      if length == 0
+          [bar_index, p]
+      else
+          isFound = true
+          for i = 0 to length - 1 by 1
+              if isHigh and src[i] > p
+                  isFound := false
+                  isFound
+              if not isHigh and src[i] < p
+                  isFound := false
+                  isFound
 
-			for i = length + 1 to 2 * length by 1
-				if isHigh and src[i] >= p
-					isFound := false
-					isFound
-				if not isHigh and src[i] <= p
-					isFound := false
-					isFound
+          for i = length + 1 to 2 * length by 1
+              if isHigh and src[i] >= p
+                  isFound := false
+                  isFound
+              if not isHigh and src[i] <= p
+                  isFound := false
+                  isFound
 
-			if isFound and length * 2 <= bar_index
-				[bar_index[length], p]
-			else
-				[int(na), float(na)]
+          if isFound and length * 2 <= bar_index
+              [bar_index[length], p]
+          else
+              [int(na), float(na)]
 
-	[iH, pH] = pivots(high, math.floor(depth / 2), true)
-	[iL, pL] = pivots(low, math.floor(depth / 2), false)
+  [iH, pH] = pivots(high, math.floor(depth / 2), true)
+  [iL, pL] = pivots(low, math.floor(depth / 2), false)
 
-	calc_dev(base_price, price) =>
-		100 * (price - base_price) / base_price
+  calc_dev(base_price, price) =>
+      100 * (price - base_price) / base_price
 
-	var line lineLast = na
-	var int iLast = 0
-	var float pLast = 0
-	var bool isHighLast = true  // otherwise the last pivot is a low pivot
-	var int linesCount = 0
+  var line lineLast = na
+  var int iLast = 0
+  var float pLast = 0
+  var bool isHighLast = true  // otherwise the last pivot is a low pivot
+  var int linesCount = 0
 
-	pivotFound(dev, isHigh, index, price) =>
-		if isHighLast == isHigh and not na(lineLast)
-			// same direction
-			if isHighLast ? price > pLast : price < pLast
-				if linesCount <= 1
-					line.set_xy1(lineLast, index, price)
-				line.set_xy2(lineLast, index, price)
-				[lineLast, isHighLast, false]
-			else
-				[line(na), bool(na), false]
-		else
-			// reverse the direction (or create the very first line)
-			if na(lineLast)
-				id = line.new(index, price, index, price, color=color.red, width=2)
-				[id, isHigh, true]
-			else
-				// price move is significant
-				if math.abs(dev) >= dev_threshold
-					id = line.new(iLast, pLast, index, price, color=color.red, width=2)
-					[id, isHigh, true]
-				else
-					[line(na), bool(na), false]
+  pivotFound(dev, isHigh, index, price) =>
+      if isHighLast == isHigh and not na(lineLast)
+          // same direction
+          if isHighLast ? price > pLast : price < pLast
+              if linesCount <= 1
+                  line.set_xy1(lineLast, index, price)
+              line.set_xy2(lineLast, index, price)
+              [lineLast, isHighLast, false]
+          else
+              [line(na), bool(na), false]
+      else
+          // reverse the direction (or create the very first line)
+          if na(lineLast)
+              id = line.new(index, price, index, price, color=color.red, width=2)
+              [id, isHigh, true]
+          else
+              // price move is significant
+              if math.abs(dev) >= dev_threshold
+                  id = line.new(iLast, pLast, index, price, color=color.red, width=2)
+                  [id, isHigh, true]
+              else
+                  [line(na), bool(na), false]
 
-	if not na(iH) and not na(iL) and iH == iL
-		dev1 = calc_dev(pLast, pH)
-		[id2, isHigh2, isNew2] = pivotFound(dev1, true, iH, pH)
-		if isNew2
-			linesCount := linesCount + 1
-			linesCount
-		if not na(id2)
-			lineLast := id2
-			isHighLast := isHigh2
-			iLast := iH
-			pLast := pH
-			pLast
+  if not na(iH) and not na(iL) and iH == iL
+      dev1 = calc_dev(pLast, pH)
+      [id2, isHigh2, isNew2] = pivotFound(dev1, true, iH, pH)
+      if isNew2
+          linesCount := linesCount + 1
+          linesCount
+      if not na(id2)
+          lineLast := id2
+          isHighLast := isHigh2
+          iLast := iH
+          pLast := pH
+          pLast
 
-		dev2 = calc_dev(pLast, pL)
-		[id1, isHigh1, isNew1] = pivotFound(dev2, false, iL, pL)
-		if isNew1
-			linesCount := linesCount + 1
-			linesCount
-		if not na(id1)
-			lineLast := id1
-			isHighLast := isHigh1
-			iLast := iL
-			pLast := pL
-			pLast
-	else
-
-		if not na(iH)
-			dev1 = calc_dev(pLast, pH)
-			[id, isHigh, isNew] = pivotFound(dev1, true, iH, pH)
-			if isNew
-				linesCount := linesCount + 1
-				linesCount
-			if not na(id)
-				lineLast := id
-				isHighLast := isHigh
-				iLast := iH
-				pLast := pH
-				pLast
-		else
-			if not na(iL)
-				dev2 = calc_dev(pLast, pL)
-				[id, isHigh, isNew] = pivotFound(dev2, false, iL, pL)
-				if isNew
-					linesCount := linesCount + 1
-					linesCount
-				if not na(id)
-					lineLast := id
-					isHighLast := isHigh
-					iLast := iL
-					pLast := pL
-					pLast
+      dev2 = calc_dev(pLast, pL)
+      [id1, isHigh1, isNew1] = pivotFound(dev2, false, iL, pL)
+      if isNew1
+          linesCount := linesCount + 1
+          linesCount
+      if not na(id1)
+          lineLast := id1
+          isHighLast := isHigh1
+          iLast := iL
+          pLast := pL
+          pLast
+  else
+      if not na(iH)
+          dev1 = calc_dev(pLast, pH)
+          [id, isHigh, isNew] = pivotFound(dev1, true, iH, pH)
+          if isNew
+              linesCount := linesCount + 1
+              linesCount
+          if not na(id)
+              lineLast := id
+              isHighLast := isHigh
+              iLast := iH
+              pLast := pH
+              pLast
+      else
+          if not na(iL)
+              dev2 = calc_dev(pLast, pL)
+              [id, isHigh, isNew] = pivotFound(dev2, false, iL, pL)
+              if isNew
+                  linesCount := linesCount + 1
+                  linesCount
+              if not na(id)
+                  lineLast := id
+                  isHighLast := isHigh
+                  iLast := iL
+                  pLast := pL
+                  pLast

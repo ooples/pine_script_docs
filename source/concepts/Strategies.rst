@@ -367,7 +367,7 @@ the same way as when trading with a real broker.
 OCA groups
 ----------
 
-It is possible to put orders in 2 different One-Cancells-All (OCA) groups in Pine Script.
+It is possible to put orders in 2 different One-Cancells-All (OCA) groups in Pine Script™.
 
 `strategy.oca.cancel <https://www.tradingview.com/pine-script-reference/v5/#var_strategy{dot}oca{dot}cancel>`__
    As soon as an order from the group is filled

@@ -18,7 +18,7 @@ In this page we present an overview of some of Pine Script™'s built-in variabl
 They will be covered in more detail in the pages of this manual covering specific themes.
 
 All Pine Script™ built-in variables and functions are defined in the 
-`Pine Script™ Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__. 
+`Pine Script™ v5 Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__. 
 It is called a "Reference Manual" because it is the definitive reference on the Pine Script™ language.
 It is an essential tool that will accompany you anytime you code in Pine Script™,
 whether you are a beginner or an expert. If you are learning your first programming language,
@@ -195,7 +195,7 @@ Other functions return a result, but we don't always use it, e.g.:
 `array.pop() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}pop>`__,
 `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__, etc.
 
-All Pine Script™ built-in functions are defined in the `Pine Script™ Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__. 
+All Pine Script™ built-in functions are defined in the `Pine Script™ v5 Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__. 
 You can click on any of the function names listed here to go to its entry in the Reference Manual, 
 which documents the function's signature, i.e., the list of *parameters* it accepts and the form-type of the value(s) it returns 
 (a function can return more than one result). The Reference Manual entry will also list, for each parameter:

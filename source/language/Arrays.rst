@@ -679,7 +679,7 @@ Error handling
 --------------
 
 Malformed ``array.*()`` call syntax in Pine scripts will cause the usual **compiler** error messages to appear in Pine Script™ Editor's console, at the bottom of the window, 
-when you save a script. Refer to the `Pine Script™ Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__ 
+when you save a script. Refer to the `Pine Script™ v5 Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__ 
 when in doubt regarding the exact syntax of function calls.
 
 Scripts using arrays can also throw **runtime** errors, which appear in place of the indicator's name on charts. 
