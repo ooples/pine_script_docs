@@ -11,9 +11,9 @@ This page contains release notes of notable changes in Pine Script.
 April 2022
 -------------
 
-The ``display`` argument was added to the ``barcolor.``, ``hline.``, ``bgcolor.``, ``fill.`` functions. It can turn the display on and off.
+Added the ``display`` parameter to the following functions: `barcolor <https://www.tradingview.com/pine-script-reference/v5/#fun_barcolor>`__, `bgcolor <https://www.tradingview.com/pine-script-reference/v5/#fun_bgcolor>`__, `fill <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__, `hline <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__.
 
-New ``request.`` function was added:
+New function was added:
 
 * `request.economic() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}economic>`__ - Economic data includes information such as the state of a country's economy or of a particular industry.
 
@@ -80,7 +80,7 @@ New matrix functions were added:
 * `matrix.is_stochastic() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}is_stochastic>`__  - Determines if the matrix is stochastic.
 * `matrix.is_square() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}is_square>`__  - Determines if the matrix is square (it has the same number of rows and columns).
 
-New parameter of the ``strategy()`` function were added:
+A new parameter of the ``strategy()`` function was added:
 
 * `risk_free_rate <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__  - The risk-free rate of return is the annual percentage change in the value of an investment with minimal or zero risk, used to calculate the Sharpe and Sortino ratios.
 
