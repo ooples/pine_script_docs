@@ -11,12 +11,16 @@ This page contains release notes of notable changes in Pine Script.
 April 2022
 -------------
 
+The ``display`` argument was added to the ``barcolor.``, ``hline.``, ``bgcolor.``, ``fill.`` functions. It can turn the display on and off.
+
 New ``request.`` function was added:
 
 * `request.economic() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}economic>`__ - Economic data includes information such as the state of a country's economy or of a particular industry.
 
-New ``chart.`` built-in variables were added:
+New built-in variables were added:
 
+* `strategy.max_runup <https://www.tradingview.com/pine-script-reference/v5/#var_strategy{dot}max_runup>`__ - Returns the maximum equity run-up value for the whole trading interval.
+* `syminfo.volumetype <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}volumetype>`__ - Returns the volume type of the current symbol.
 * `chart.is_heikinashi <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_heikinashi>`__ - Returns true if the chart type is Heikin Ashi, false otherwise.
 * `chart.is_kagi <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_kagi>`__ - Returns true if the chart type is Kagi, false otherwise.
 * `chart.is_linebreak <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_linebreak>`__ - Returns true if the chart type is Line break, false otherwise.
