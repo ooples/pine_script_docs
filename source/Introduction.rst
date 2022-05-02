@@ -11,7 +11,7 @@ Welcome to Pine Script™ |version|
 =================================
 
 .. image:: images/Pine_Script_logo_text.png
-   :alt: Pine Script logo
+   :alt: Pine Script™ logo
    :align: right
    :width: 240
    :height: 240

@@ -19,7 +19,7 @@ Description
 -----------
 
 On TradingView you may choose from our built-in scripts, from the user-published scripts in
-the *Public Library*, or write your own custom scripts using Pine Script.
+the *Public Library*, or write your own custom scripts using Pine Script™.
 You can search the
 library for scripts before writing one. You may also ask users
 who publish scripts for help by sending them a private message (PM) on

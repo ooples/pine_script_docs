@@ -17,7 +17,7 @@ First steps
 Introduction
 ------------
 
-Welcome to the `Pine Script™ User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__, 
+Welcome to the `Pine Script™ v5 User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__, 
 which will accompany you in your journey to learn to program your own trading tools in Pine Script™.
 Welcome also to the very active community of Pine Script™ programmers on TradingView.
 
@@ -150,7 +150,7 @@ using the "Open/New default built-in script..." menu selection.
 Writing scripts
 ---------------
 
-We have built Pine Script to empower both budding and seasoned traders to create their own trading tools. 
+We have built Pine Script™ to empower both budding and seasoned traders to create their own trading tools. 
 We have designed it so it is relatively easy to learn for first-time programmers 
 — although learning a first programming language, like trading, is rarely **very** easy for anyone —  
 yet powerful enough for knowledgeable programmers to build tools of moderate complexity.

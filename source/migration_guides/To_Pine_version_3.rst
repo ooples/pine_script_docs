@@ -10,7 +10,7 @@
 To Pine Script™ version 3
 =========================
 
-This document helps to migrate Pine Script code from ``@version=2`` to
+This document helps to migrate Pine Script™ code from ``@version=2`` to
 ``@version=3``.
 
 Default behaviour of security function has changed
@@ -117,7 +117,7 @@ variable in a function::
 Math operations with booleans are forbidden
 -------------------------------------------
 
-In Pine Script v2 there were rules of implicit conversion of booleans
+In Pine Script™ v2 there were rules of implicit conversion of booleans
 into numeric types. In v3 this is forbidden. There is a conversion of
 numeric types into booleans instead (0 and ``na`` values are ``false``, all
 the other numbers are ``true``). Example (In v2 this code compiles fine)::

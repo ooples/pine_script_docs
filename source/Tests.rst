@@ -1,7 +1,7 @@
 .. _PageTests:
 
 .. |TVLogoHeader| image:: /images/Pine_Script_logo_small.png
-   :alt: Pine Script
+   :alt: Pine Script™
    :align: right
    :width: 50
    :height: 50
@@ -12,7 +12,7 @@
 
 
 .. image:: /images/Pine_Script_logo_small.png
-   :alt: Pine Script
+   :alt: Pine Script™
    :align: right
    :width: 50
    :height: 50

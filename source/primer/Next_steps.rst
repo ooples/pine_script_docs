@@ -100,16 +100,16 @@ Getting around the Pine Script™ documentation
 While reading code from published scripts is no doubt useful, spending time in our documentation will be necessary to attain any degree of proficiency in Pine Script™.
 Our two main sources of documentation on Pine Script™ are:
 
-- This `Pine Script™ User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__
-- Our `Pine Script™ Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__
+- This `Pine Script™ v5 User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__
+- Our `Pine Script™ v5 Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__
 
-The `Pine Script™ User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__ is in HTML format and in English only.
+The `Pine Script™ v5 User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__ is in HTML format and in English only.
 
-The `Pine Script™ Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__ documents what each variable, function or Pine Script™ keyword does.
+The `Pine Script™ v5 Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__ documents what each variable, function or Pine Script™ keyword does.
 It is an essential tool for all Pine Script™ programmers; your life will be miserable if you try to write scripts of any reasonable complexity without consulting it.
 It exists in two formats: the HTML format we just linked to, 
 and the popup version, which can be accessed from the Pine Script™ Editor, by either :kbd:`ctrl` + :kbd:`clicking` on a keyword, 
-or by using the Editor's "More/Pine Script reference (pop-up)" menu. The Reference Manual is translated in other languages.
+or by using the Editor's "More/Pine Script™ reference (pop-up)" menu. The Reference Manual is translated in other languages.
 
 
 There are five different versions of Pine Script™. Ensure the documentation you use corresponds to the Pine Script™ version you are coding with.
@@ -119,12 +119,12 @@ There are five different versions of Pine Script™. Ensure the documentation yo
 Where to go from here?
 ----------------------
 
-This `Pine Script™ User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__ contains numerous examples of code used to illustrate the concepts we discuss.
+This `Pine Script™ v5 User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__ contains numerous examples of code used to illustrate the concepts we discuss.
 By going through it, you will be able to both learn the foundations of Pine Script™ and study the example scripts. 
 Reading about key concepts and trying them out right away with real code is a productive way to learn any programming language.
 As you hopefully have already done in the :ref:`First indicator <PageFirstIndicator>` page, copy this documentation’s examples in the Editor and play with them. Explore! You won’t break anything.
 
-This is how the `Pine Script™ User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__ you are reading is organized:
+This is how the `Pine Script™ v5 User Manual <https://www.tradingview.com/pine-script-docs/en/v5/index.html>`__ you are reading is organized:
 
 - The :ref:`Language <IndexLanguage>` section explains the main components of the Pine Script™ language and how scripts execute.
 - The :ref:`Concepts <IndexConcepts>` section is more task-oriented. It explains how to do things in Pine Script™.

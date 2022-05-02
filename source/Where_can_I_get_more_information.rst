@@ -19,7 +19,7 @@ Where can I get more information?
   TradingView built-in scripts in the dropdown list.
 
 * There is a TradingView public chat dedicated to
-  `Pine Script <https://www.tradingview.com/chat/#BfmVowG1TZkKO235>`__
+  `Pine Script™ <https://www.tradingview.com/chat/#BfmVowG1TZkKO235>`__
   where active developers of our community help each other out.
 
 * Information about major releases and modifications to Pine Script™
