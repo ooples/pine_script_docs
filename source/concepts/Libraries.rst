@@ -1,5 +1,12 @@
 .. _PageLibraries:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/index.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Libraries
 =========
 
@@ -247,3 +254,8 @@ Note that:
 - We use a second call to ``allTime.hi()``, but this time using `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ as its argument, 
   to plot the highest `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ in the chart's history.
 
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

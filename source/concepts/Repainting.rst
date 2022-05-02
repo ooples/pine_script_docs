@@ -1,5 +1,12 @@
 .. _PageRepainting:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/index.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Repainting
 ==========
 
@@ -482,3 +489,9 @@ When the chart is refreshed or the script is re-executed on those elapsed realti
 they will then be built and calculated using the historical data, which will contain those usually small price revisions, if any have been made.
 
 Historical data may also be revised for other reasons, e.g., for stock splits.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

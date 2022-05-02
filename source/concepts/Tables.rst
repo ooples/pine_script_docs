@@ -1,5 +1,12 @@
 .. _PageTables:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/index.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Tables
 ======
 
@@ -304,3 +311,9 @@ Tips
 - When creating tables in strategy scripts, keep in mind that unless the strategy uses ``calc_on_every_tick = true``, table code enclosed in `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ `barstate.islast <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islast>`__ blocks will not execute on each realtime update, so the table will not display as you expect.
 - Keep in mind that successive calls to `table.cell() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}cell>`__ overwrite the cell's properties specified by previous `table.cell() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}cell>`__ calls. Use the setter functions to modify a cell's properties.
 - Remember to control the execution of your table code wisely by restricting it to the necessary bars only. This saves server resources and your charts will display faster, so everybody wins.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

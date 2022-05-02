@@ -1,5 +1,12 @@
 .. _PageTextAndShapes:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/index.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Text and shapes
 ===============
 
@@ -757,3 +764,9 @@ Only the last label created before the realtime bar's close will be committed, a
 .. |label_style_label_upper_right_t| image:: images/TextAndShapes-LabelStyles-labelupperright_t.png
 .. |label_style_label_center_t| image:: images/TextAndShapes-LabelStyles-labelcenter_t.png
 .. |label_style_none_t| image:: images/TextAndShapes-LabelStyles-none_t.png
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

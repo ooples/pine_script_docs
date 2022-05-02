@@ -22,15 +22,15 @@ import pine_lexer
 
 # -- Project information -----------------------------------------------------
 
-project = u'Pine Script™ User Manual'
+project = u'Pine Script™ v5 User Manual'
 copyright = str(datetime.now().year) + u', TradingView'
 author = u''
 
 # The short X.Y version
-version = u'5' # Could be referenced from *.rst with |version| macro
+version = u'v5' # Could be referenced from *.rst with |version| macro
 
 # The full version, including alpha/beta/rc tags
-release = u'5' # Could be referenced from *.rst with |release| macro
+release = u'v5' # Could be referenced from *.rst with |release| macro
 
 
 # -- General configuration ---------------------------------------------------
@@ -141,7 +141,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'pine_script_docs.tex', u'Pine Script™ User Manual',
+    (master_doc, 'pine_script_docs.tex', u'Pine Script™ v5 User Manual',
      u'vvolkov', 'manual'),
 ]
 

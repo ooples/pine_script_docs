@@ -1,5 +1,12 @@
 .. _PageErrorMessages:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/index.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Error messages
 ==============
 
@@ -239,3 +246,9 @@ the time series received from this bar will be used to position the drawings on 
 Therefore, if it is impossible to determine the correct size of the buffer, this error may occur.
 To avoid this, you need to use ``max_bars_back(time, n)``.
 This behavior is described in more detail in the section about :ref:`drawings <max-bars-back-of-time>`.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

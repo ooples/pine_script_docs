@@ -1,5 +1,12 @@
 .. _PageIdentifiers:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/index.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Identifiers
 ===========
 
@@ -28,3 +35,8 @@ The :ref:`Pine Script™ Style Guide <PageStyleGuide>` recommends using uppercas
     // Returns 1 if the argument is `true`, 0 if it is `false` or `na`.
     zeroOne(boolValue) => boolValue ? 1 : 0
     
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

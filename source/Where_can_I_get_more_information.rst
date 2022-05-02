@@ -1,5 +1,12 @@
 .. _PageWhereCanIGetMoreInformation:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/index.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Where can I get more information?
 =================================
 
@@ -33,3 +40,9 @@ External resources
   Topics include plotting, alerts, strategy orders, and complete example indicators and strategies.
 - `Backtest Rookies <https://backtest-rookies.com/category/tradingview>`__ publishes good quality blog articles focusing on realizing specific tasks in Pine Script™.
 - You can ask questions about programming in Pine Script™ in the ``[pine-script]`` tag on `StackOverflow <https://stackoverflow.com/questions/tagged/pine-script>`__.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

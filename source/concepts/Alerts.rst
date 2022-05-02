@@ -1,7 +1,8 @@
 .. _PageAlerts:
 
 .. image:: /images/Pine_Script_logo_small.png
-   :alt: Pine Script
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/index.html
    :align: right
    :width: 50
    :height: 50
@@ -566,6 +567,8 @@ There is no panacea; avoiding this type of repainting **always** entails waiting
 
 Note that other types of repainting such as those documented in our :ref:`Repainting <PageRepainting>` section may not be preventable by simply triggering alerts on the close of realtime bars.
 
+
 .. image:: /images/TradingView-Logo-Block.svg
-    :width: 400px
+    :width: 200px
     :align: center
+    :target: https://www.tradingview.com/

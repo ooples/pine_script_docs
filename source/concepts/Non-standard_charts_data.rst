@@ -1,5 +1,12 @@
 .. _PageNonStandardChartsData:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/index.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Non-standard charts data
 ========================
 
@@ -183,3 +190,9 @@ think of them as synthetic OHLC PnF values::
 
 .. [#ticks] On TradingView, Renko, Line Break, Kagi and PnF chart types are generated from OHLC values from a lower timeframe.
    These chart types thus represent only an approximation of what they would be like if they were generated from tick data.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

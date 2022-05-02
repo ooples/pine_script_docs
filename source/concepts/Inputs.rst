@@ -1,5 +1,12 @@
 .. _PageInputs:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/index.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Inputs
 ======
 
@@ -603,3 +610,9 @@ Note that:
   Unicode spaces are necessary because ordinary spaces would be stripped from the label.
   You can achieve precise alignment by combining different quantities and types of Unicode spaces.
   See here for a list of `Unicode spaces <https://jkorpela.fi/chars/spaces.html>`__ of different widths.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

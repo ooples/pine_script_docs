@@ -1,5 +1,12 @@
 .. _PagePlots:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/index.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Plots
 =====
 
@@ -583,3 +590,9 @@ Note that:
 - The manipulations we make here are typical of the compromises required to bring two indicators
   with different scales in the same visual space, even when their values, contrary to 
   `MACD <https://www.tradingview.com/u/?solution=43000502344>`__, are bounded in a fixed range.
+
+
+  .. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

@@ -1,5 +1,12 @@
 .. _PageReleaseNotes:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/index.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Release notes
 =============
 
@@ -1021,3 +1028,9 @@ February 2014
 ----
 
 * The first version of Pine Script™ is introduced to all TradingView users, initially as an open beta, on December 13th.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

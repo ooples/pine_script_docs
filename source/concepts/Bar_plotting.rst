@@ -1,5 +1,12 @@
 .. _PageBarPlotting:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/index.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Bar plotting
 ============
 
@@ -136,3 +143,9 @@ This plots conventional bars using the same coloring logic as in the second exam
     plotbar(open, high, low, close, color = paletteColor)
 
 .. image:: images/BarPlotting-Plotbar-1.png
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

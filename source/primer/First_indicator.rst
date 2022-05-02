@@ -1,5 +1,12 @@
 .. _PageFirstIndicator:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/index.html
+   :align: right
+   :width: 50
+   :height: 50
+
 First indicator
 ===============
 
@@ -7,7 +14,7 @@ First indicator
     :depth: 3
 
 The Pine Script™ Editor
----------------
+-----------------------
 
 The Pine Script™ Editor is where you will be working on your scripts. While you can use any text editor you want to write your Pine scripts,
 using our Editor has many advantages:
@@ -151,3 +158,8 @@ Next
 
 We now recommend you go to our :ref:`Next Steps <PageNextSteps>` page.
 
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

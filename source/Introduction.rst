@@ -1,7 +1,14 @@
 .. _PageWelcomeToPine:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/index.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Welcome to Pine Script™ |version|
-=========================
+=================================
 
 .. image:: images/Pine_Script_logo_text.png
    :alt: Pine Script logo
@@ -21,3 +28,8 @@ Because each script uses computational resources in the cloud, we must impose li
 We strive to set as few limits as possible, but will of course have to implement as many as needed for the platform to run smoothly. 
 Limitations apply to the amount of data requested from additional symbols, execution time, memory usage and script size.
 
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

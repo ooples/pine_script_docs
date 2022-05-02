@@ -1,5 +1,12 @@
 .. _PageDeclarationStatements:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/index.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Declaration statements
 ======================
 
@@ -74,3 +81,9 @@ had been used.
 
 .. [#strategy] Pine Script™ also has a `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
    annotation function which is used to create a :ref:`strategy <PageStrategies>` rather than an indicator.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/
