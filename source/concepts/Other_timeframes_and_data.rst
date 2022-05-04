@@ -651,6 +651,9 @@ realtime data, we take the *close* of the previous day without shifting the
 Requesting data from a lower timeframe
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+\`request.security_lower_tf()\`
+-------------------------------
+
 The `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ 
 function was designed to request data of a timeframe *higher*
 than the current chart timeframe. On a *60 minutes* chart,
@@ -733,9 +736,14 @@ Note that:
 ------------------------------------------------------------------------
 
 An easy method to determine the financial strength of a stock is using earnings data so we offer three options to receive the latest earnings data for a given stock: 
-request.dividends(), request.earnings() and request.splits(). Much of the underlying data of a stock can be interpreted using these metrics but also keep in mind
-that not all stocks will have these stats available. Small cap stocks for example are not known for giving out dividends. Below we have included an example
-that creates a handy table containing the latest earnings data for each stock using these three metrics. 
+request.dividends(), request.earnings() and request.splits(). Much of the underlying data of a stock can be interpreted using these metrics but also keep in mind that not all stocks will have these stats available. 
+Small cap stocks for example are not known for giving out dividends. 
+
+It is important to remember that data for these functions is only available as the data comes in. This differs 
+from the financial data originating from the `request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__ function in 
+that the underlying financial data becomes available according to the current fiscal period for the underlying financial instrument.
+
+Below we have included an example that creates a handy table containing the latest earnings data for each stock using these three metrics. 
 
   //@version=5
   indicator("Dividends, Splits, and Earnings Example")
@@ -767,27 +775,47 @@ Note that:
 --------------------
 
 TradingView has partnered with many fintech companies to provide our users with vast amounts of information on everything from crypto to stocks and much much more.
-One of our partners is Quandl and we have an example below that shows you how easy it is use this request function to be able to pull one of the many thousands
-of feeds available through Quandl. This is an example showing you how to view the amount of shares currently being shorted for the Apple stock. 
+One of our partners is Quandl and we have an example below that shows you how easy it is use this request function. Quandl has hundreds of thousands of available
+feeds and was recently purchased by Nasdaq so the url may be changed to reflect that. Below we have an example showing you a small glimpse of the vast amount of data available. 
 
   //@version=5
   indicator("Quandl Example")
-  f = request.quandl("FINRA/FNSQ_AAPL", barmerge.gaps_on, 0)
-  plot(f)
+
+  // We are displaying FRED (Federal Reserve Economic Data) from Quandl showing the Federal Funds Rate as well as the current unemployment rate.
+  f1 = request.quandl("FRED/FEDFUNDS", barmerge.gaps_off, 0)
+  f2 = request.quandl("FRED/UNRATE", barmerge.gaps_off, 0)
+
+  // Here we are displaying Bitcoin data showing the miner's revenue rate as well as the difficulty of completing the calculations.
+  b1 = request.quandl("BCHAIN/MIREV", barmerge.gaps_off, 0)
+  b2 = request.quandl("BCHAIN/DIFF", barmerge.gaps_off, 0)
+
+  // The following 2 examples shows how to properly use the index parameter.
+  // We are displaying Quandl data for University of Michigan Consumer Surveys with index 0 is a percentage of consumers 
+  who believe it is a good time to buy a house, and index 2 is a percentage of consumers who believe it is a bad time to buy a house.
+  m1 = request.quandl("UMICH/SOC35", barmerge.gaps_off, 0)
+  m2 = request.quandl("UMICH/SOC35", barmerge.gaps_off, 2)
+
+  plot(na)
 
   Note that:
-
+  - The `barmerge.gaps_off` is used to remove any `na` values so we don't have any gaps in the plotted data.
   - For the `ticker` parameter, you need to specifically use the Quandl symbol matching the data that you want to import.
   - For the `index` parameter, you need to make sure to match the index information given on `Quandl <https://data.nasdaq.com/search?filters=%5B%22Quandl%22%5D>`__
-
+  - For a full list of available Quandl data feeds, you can go `here <https://data.nasdaq.com/search?filters=%5B%22Quandl%22%5D>`__.
 
 
 
 \`request.financial()\`
 -----------------------
 
-This function returns a financial metric from `FactSet <https://www.factset.com/>`__ for a given fiscal period. More than 200 financial metrics are available, although not for every symbol or fiscal period. 
+This function returns a financial metric from `FactSet <https://www.factset.com/>`__ for a given fiscal period. More than 200 financial 
+metrics are available, although not for every symbol or fiscal period. 
 Note that financial data is also available on TradingView through the chart's `"Fundamental metrics for stocks" button <https://www.tradingview.com/?solution=43000543506>`__ in the top menu.
+
+It is important to remember that data for this function is only available according to the current fiscal period for the underlying 
+financial instrument. This differs from the `request.dividends() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}dividends>`__, 
+`request.earnings() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}earnings>`__, and 
+`request.splits() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}splits>`__ functions in that the underlying financial data becomes available immediately. 
 
 The signature of `request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__ is: 
 
