@@ -130,6 +130,12 @@ New functions were added:
 
 * `input.text_area() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}text_area>`__ - adds multiline text input area to the Script settings.
 
+* `strategy.closedtrades.entry_id() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}entry_id>`__ - returns the id of the closed trade's entry.
+
+* `strategy.closedtrades.exit_id() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}exit_id>`__ - returns the id of the closed trade's exit.
+
+* `strategy.opentrades.entry_id() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}opentrades{dot}entry_id>`__ - returns the id of the open trade's entry.
+
 January 2022
 -------------
 
