@@ -3,7 +3,7 @@
 
 # You can set these variables from the command line.
 SPHINXOPTS    =
-SPHINXBUILD   = python -m sphinx
+SPHINXBUILD   = python3 -m sphinx
 SOURCEDIR     = source
 BUILDDIR      = build
 
@@ -19,7 +19,7 @@ help:
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 syncpackages:
-	pip install --user -r requirements.txt
+	pip3 install --user -r requirements.txt
 
 install_hooks:
 	cp -r ./git-hooks/. ./.git/hooks

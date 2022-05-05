@@ -18,6 +18,23 @@ This page contains release notes of notable changes in Pine Script™.
 April 2022
 -------------
 
+Added the ``display`` parameter to the following functions: `barcolor <https://www.tradingview.com/pine-script-reference/v5/#fun_barcolor>`__, `bgcolor <https://www.tradingview.com/pine-script-reference/v5/#fun_bgcolor>`__, `fill <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__, `hline <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__.
+
+A new function was added:
+
+* `request.economic() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}economic>`__ - Economic data includes information such as the state of a country's economy or of a particular industry.
+
+New built-in variables were added:
+
+* `strategy.max_runup <https://www.tradingview.com/pine-script-reference/v5/#var_strategy{dot}max_runup>`__ - Returns the maximum equity run-up value for the whole trading interval.
+* `syminfo.volumetype <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}volumetype>`__ - Returns the volume type of the current symbol.
+* `chart.is_heikinashi <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_heikinashi>`__ - Returns true if the chart type is Heikin Ashi, false otherwise.
+* `chart.is_kagi <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_kagi>`__ - Returns true if the chart type is Kagi, false otherwise.
+* `chart.is_linebreak <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_linebreak>`__ - Returns true if the chart type is Line break, false otherwise.
+* `chart.is_pnf <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_pnf>`__ - Returns true if the chart type is Point & figure, false otherwise.
+* `chart.is_range <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_range>`__ - Returns true if the chart type is Range, false otherwise.
+* `chart.is_renko <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_renko>`__ - Returns true if the chart type is Renko, false otherwise.
+
 New matrix functions were added:
 
 * `matrix.new<type> <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix%7Bdot%7Dnew%3Ctype%3E>`__ - Creates a new matrix object. A matrix is a two-dimensional data structure containing rows and columns. All elements in the matrix must be of the type specified in the type template (“<type>”).
@@ -70,9 +87,9 @@ New matrix functions were added:
 * `matrix.is_stochastic() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}is_stochastic>`__  - Determines if the matrix is stochastic.
 * `matrix.is_square() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}is_square>`__  - Determines if the matrix is square (it has the same number of rows and columns).
 
-New parameter of the ``strategy()`` function were added:
+Added a new parameter for the `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__ function:
 
-* `risk_free_rate <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__  - The risk-free rate of return is the annual percentage change in the value of an investment with minimal or zero risk, used to calculate the Sharpe and Sortino ratios.
+* ``risk_free_rate`` - The risk-free rate of return is the annual percentage change in the value of an investment with minimal or zero risk, used to calculate the Sharpe and Sortino ratios.
 
 March 2022
 -------------
@@ -119,6 +136,12 @@ New functions were added:
 * `timeframe.in_seconds(timeframe) <https://www.tradingview.com/pine-script-reference/v5/#fun_timeframe{dot}in_seconds>`__ - converts the timeframe passed to the ``timeframe`` argument into seconds.
 
 * `input.text_area() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}text_area>`__ - adds multiline text input area to the Script settings.
+
+* `strategy.closedtrades.entry_id() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}entry_id>`__ - returns the id of the closed trade's entry.
+
+* `strategy.closedtrades.exit_id() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}exit_id>`__ - returns the id of the closed trade's exit.
+
+* `strategy.opentrades.entry_id() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}opentrades{dot}entry_id>`__ - returns the id of the open trade's entry.
 
 January 2022
 -------------
