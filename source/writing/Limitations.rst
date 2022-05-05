@@ -1,5 +1,12 @@
 .. _PageLimitations:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Limitations
 ===========
 
@@ -84,3 +91,9 @@ Runtime
 •	syminfo.ticker does not work properly on spreads. When a non-standard chart uses a spread, the function returns "Cannot get a 'ticker' of a spread symbol",.
 •	External Indicator input: only one is allowed per script.
 •	& not allowed in options= strings
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

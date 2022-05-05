@@ -1,7 +1,14 @@
 .. _PageToPineVersion3:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 50
+   :height: 50
+
 To Pine Script™ version 3
-=================
+=========================
 
 This document helps to migrate Pine Script™ code from ``@version=2`` to
 ``@version=3``.
@@ -156,3 +163,8 @@ converts any boolean value to a number if you really need this.
 
 .. |images/V3.png| image:: images/V3.png
 
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

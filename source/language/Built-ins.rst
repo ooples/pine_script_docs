@@ -1,5 +1,12 @@
 .. _PageBuiltInFunctions:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Built-ins
 =========
 
@@ -261,3 +268,9 @@ Mixing things up this way is not allowed::
 To learn how to do this, one needs to understand Pine Script™'s :ref:`type system <PageTypeSystem>`.
 The Reference Manual entry for each built-in function includes an "ARGUMENTS" section
 which lists the form-type required for the argument supplied to each of the function's parameters.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

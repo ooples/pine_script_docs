@@ -19,7 +19,7 @@
 
 
 Pine Script™ small logo with macro
-==========================
+==================================
 
 |TVLogoHeader|
 

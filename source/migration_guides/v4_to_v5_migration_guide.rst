@@ -1,7 +1,14 @@
 .. _PageToPineVersion5:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 50
+   :height: 50
+
 To Pine Script™ version 5
-=================
+=========================
 
 .. contents:: :local:
     :depth: 1
@@ -676,3 +683,9 @@ No namespace change
 +------------------------------------------------------+--------------------------------------------------------+
 | ``tonumber(x)``                                      | ``str.tonumber(string)``                               |
 +------------------------------------------------------+--------------------------------------------------------+
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

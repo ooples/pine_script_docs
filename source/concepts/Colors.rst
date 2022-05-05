@@ -1,5 +1,12 @@
 .. _PageColors:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Colors
 ======
 
@@ -650,3 +657,9 @@ to generate a calculated transparency in the `plot() <https://www.tradingview.co
 The second input uses as its default the built-in `color.blue <https://www.tradingview.com/pine-script-reference/v5/#var_color{dot}blue>`__ color 
 we previously used in the `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call, 
 and simply use it as is in the second `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

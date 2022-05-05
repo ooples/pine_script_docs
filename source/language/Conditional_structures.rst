@@ -1,5 +1,12 @@
 .. _PageConditionalStructures:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Conditional structures
 ======================
 
@@ -379,3 +386,9 @@ which is the `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`
 value, cast to an integer using `int() <https://www.tradingview.com/pine-script-reference/v5/#fun_int>`__.
 This way, they both return an "int", which is not assigned to any variable.
 Without these additions to our code, it would not compile.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

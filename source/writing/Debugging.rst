@@ -1,5 +1,12 @@
 .. _PageDebugging:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Debugging
 =========
 
@@ -464,3 +471,9 @@ an empty call to the function with the cursor placed so all that's left to do is
     print()
 
 Note: AutoHotkey works only on Windows systems. Keyboard Maestro or others can be substituted on Apple systems.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

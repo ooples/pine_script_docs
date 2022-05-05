@@ -1,5 +1,12 @@
 .. _PageTimeSeries:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Time series
 ===========
 
@@ -64,3 +71,8 @@ such as "simple" in the case of `timeframe.period <https://www.tradingview.com/p
 When you grasp how time series can be efficiently handled using Pine Script™'s syntax and its :ref:`execution model <PageExecutionModel>`, 
 you can define complex calculations using little code.
 
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

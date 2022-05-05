@@ -1,5 +1,12 @@
 .. _PageStrategies:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Strategies
 ==========
 
@@ -562,3 +569,9 @@ MVS is calculated according to the following formula: MVS = last_price * point_v
 margin_percent is a parameter that can be set in the strategy settings.
 
 If margin == strategy.equity, then we can no longer open new positions. If margin > strategy.equity, then the margin call occurs, forcibly closing part or all of the positions until the margin < strategy.equity condition is met.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

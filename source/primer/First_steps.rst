@@ -1,5 +1,11 @@
 .. _PageFirstSteps:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 50
+   :height: 50
 
 First steps
 ===========
@@ -156,3 +162,9 @@ Pine Script™ allows you to write three types of scripts:
 - **Libraries** which are used by more advanced programmers to package oft-used functions that can be reused by other scripts.
 
 The next step we recommend is to write your :ref:`first indicator <PageFirstIndicator>`.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/
