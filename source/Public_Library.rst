@@ -1,3 +1,12 @@
+.. _PagePublicLibrary:
+
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Public Library
 ==============
 
@@ -100,3 +109,8 @@ entering your search criteria.
 .. |Search_field| image:: images/PublicLibrary-Search_field.png
 .. |Search| image:: images/PublicLibrary-Search.png
 
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

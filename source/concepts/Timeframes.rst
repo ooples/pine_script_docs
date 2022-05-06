@@ -1,5 +1,12 @@
 .. _PageTimeframes:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Timeframes
 ==========
 
@@ -124,3 +131,9 @@ Note that:
 - Next, we validate the timeframes to ensure that the input timeframe is equal to or higher than the chart's timeframe.
   If it is not, we generate a runtime error.
 - We finally print the two timeframe values converted to minutes.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

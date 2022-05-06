@@ -1,3 +1,12 @@
+.. _PagePublishing:
+
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Publishing scripts
 ==================
 
@@ -165,3 +174,9 @@ In the following example, we will **not** be updating the publication's chart:
 .. |PublishingScripts-PreparingAPublication-4| image:: images/PublishingScripts-PreparingAPublication-4.png
 .. |PublishingScripts-UpdatingAPublication-1| image:: images/PublishingScripts-UpdatingAPublication-1.png
 .. |PublishingScripts-UpdatingAPublication-2| image:: images/PublishingScripts-UpdatingAPublication-2.png
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

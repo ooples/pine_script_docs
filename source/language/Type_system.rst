@@ -1,5 +1,12 @@
 .. _PageTypeSystem:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Type system
 ===========
 
@@ -647,3 +654,9 @@ Explicit type-casting can also be useful when declaring variables and initializi
     lbl = label(na)
     // Explicitly declare the type of the new variable.
     label lbl = na
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

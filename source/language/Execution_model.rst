@@ -1,5 +1,12 @@
 .. _PageExecutionModel:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Execution model
 ===============
 
@@ -254,3 +261,9 @@ Not all built-in functions need to be executed every bar. These are the function
 .. rubric:: Footnotes
 
 .. [#all_available_bars] The upper limit for the total number of historical bars is about 10000 for *Pro/Pro+* users and about 20000 for *Premium* users. *Free* users are able to see about 5000 bars.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

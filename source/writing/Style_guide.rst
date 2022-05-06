@@ -1,5 +1,12 @@
 .. _PageStyleGuide:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Style guide
 ===========
 
@@ -263,3 +270,9 @@ Using explicit typing can also make it easier for readers to find their way in l
     bool newAllTimeHi = ta.change(allTimeHi)
     plot(allTimeHi)
     plotchar(newAllTimeHi, "newAllTimeHi", "•", location.top, size = size.tiny)
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

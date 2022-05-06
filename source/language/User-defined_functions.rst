@@ -1,5 +1,12 @@
 .. _PageUserDefinedFunctions:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 50
+   :height: 50
+
 User-defined functions
 ======================
 
@@ -180,3 +187,9 @@ User-defined functions can use any of the Pine Script™ built-ins, except:
 `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__,
 `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ and
 `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

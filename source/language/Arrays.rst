@@ -1,5 +1,12 @@
 .. _PageArrays:
 
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 50
+   :height: 50
+
 Arrays
 ======
 
@@ -799,3 +806,8 @@ the parent array's indices 3 to 4, is pointing out of the parent array's boundar
     c = array.indexof(b, 2)
     plot(c)
 
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/
