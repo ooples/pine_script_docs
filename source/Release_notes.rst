@@ -8,6 +8,15 @@ Release notes
 
 This page contains release notes of notable changes in Pine Script™.
 
+May 2022
+-------------
+
+New functions were added:
+
+* `syminfo.prefix() <https://www.tradingview.com/pine-script-reference/v5/#fun_syminfo{dot}prefix>`__ - returns exchange prefix of the passed `symbol`, e.g. "NASDAQ" for "NASDAQ:AAPL".
+* `syminfo.ticker() <https://www.tradingview.com/pine-script-reference/v5/#fun_syminfo{dot}ticker>`__ - returns `symbol` name without exchange prefix, e.g. "AAPL" for the passed symbol "NASDAQ:AAPL".
+
+
 April 2022
 -------------
 
