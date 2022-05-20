@@ -14,8 +14,8 @@
    :alt: Pine Script™ logo
    :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
    :align: right
-   :width: 75
-   :height: 75
+   :width: 100
+   :height: 100
 
 
 Pine Script™ small logo with macro
