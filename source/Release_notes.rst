@@ -18,7 +18,7 @@ This page contains release notes of notable changes in Pine Script™.
 May 2022
 -------------
 
-`Arrays <https://www.tradingview.com/pine-script-reference/v5/#op_array>`__ and `matrices <https://www.tradingview.com/pine-script-reference/v5/#op_matrix>`__ are now supported for accessing history. The example below shows a call to the history of the matrix 10 bars ago::
+The historical states of `arrays <https://www.tradingview.com/pine-script-reference/v5/#op_array>`__ and `matrices <https://www.tradingview.com/pine-script-reference/v5/#op_matrix>`__ can now be referenced with the  `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ operator. In the example below, we reference the historic state of a matrix 10 bars ago::
 
 	//@version=5
 	indicator("")
@@ -29,19 +29,19 @@ May 2022
 	plot(x)
 	plot(close)
 
-Added overload for `ta.change() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}change>`__ function. Now the function can take values of `int <https://www.tradingview.com/pine-script-reference/v5/#op_int>`__ and `bool <https://www.tradingview.com/pine-script-reference/v5/#op_bool>`__ types and return the difference between the current value and the previous one for new types.
+The `ta.change() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}change>`__ function now can take values of `int <https://www.tradingview.com/pine-script-reference/v5/#op_int>`__ and `bool <https://www.tradingview.com/pine-script-reference/v5/#op_bool>`__ types as its ``source`` parameter and return the difference in the respective type.
 
 New built-in variables were added:
 
 * `chart.bg_color <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}bg_color>`__ - Returns the color of the chart's background from the ``"Chart settings/Appearance/Background"`` field.
 * `chart.fg_color <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}fg_color>`__ - Returns a color providing optimal contrast with `chart.bg_color <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}bg_color>`__.
 * `chart.is_standard <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_standard>`__ - Returns true if the chart type is bars, candles, hollow candles, line, area or baseline, false otherwise.
-* `currency.USDT <https://www.tradingview.com/pine-script-reference/v5/#var_currency{dot}USDT>`__ - A new base currency USDT.
+* `currency.USDT <https://www.tradingview.com/pine-script-reference/v5/#var_currency{dot}USDT>`__ - A constant for the Tether currency code.
 
 New functions were added:
 
-* `syminfo.prefix() <https://www.tradingview.com/pine-script-reference/v5/#fun_syminfo{dot}prefix>`__ - returns exchange prefix of the passed `symbol`, e.g. "NASDAQ" for "NASDAQ:AAPL".
-* `syminfo.ticker() <https://www.tradingview.com/pine-script-reference/v5/#fun_syminfo{dot}ticker>`__ - returns `symbol` name without exchange prefix, e.g. "AAPL" for the passed symbol "NASDAQ:AAPL".
+* `syminfo.prefix() <https://www.tradingview.com/pine-script-reference/v5/#fun_syminfo{dot}prefix>`__ - returns the exchange prefix of the ``symbol`` passed to it, e.g. "NASDAQ" for "NASDAQ:AAPL".
+* `syminfo.ticker() <https://www.tradingview.com/pine-script-reference/v5/#fun_syminfo{dot}ticker>`__ - returns the ticker of the ``symbol`` passed to it without the exchange prefix, e.g. "AAPL" for "NASDAQ:AAPL".
 
 
 April 2022
