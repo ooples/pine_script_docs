@@ -17,6 +17,12 @@
    :width: 50
    :height: 50
 
+   .. image:: images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :align: right
+   :width: 240
+   :height: 240
+
 
 Pine Script™ small logo with macro
 ==================================
@@ -51,7 +57,7 @@ kbd directive :kbd:`ctrl` + :kbd:`s`
 Animated GIF
 """"""""""""
 
-.. image:: /image/Test-GIF-01.gif
+.. image:: /images/Test-GIF-01.gif
 
    
 
