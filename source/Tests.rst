@@ -17,11 +17,12 @@
    :width: 50
    :height: 50
 
-   .. image:: images/Pine_Script_logo.svg
+.. image:: /images/Pine_Script_logo.svg
    :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
    :align: right
-   :width: 240
-   :height: 240
+   :width: 50
+   :height: 50
 
 
 Pine Script™ small logo with macro
