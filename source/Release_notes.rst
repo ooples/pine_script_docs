@@ -18,6 +18,8 @@ This page contains release notes of notable changes in Pine Script™.
 May 2022
 -------------
 
+Fixed behaviour of `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ function when stop loss triggered at prices outside the bars price range.
+
 The historical states of `arrays <https://www.tradingview.com/pine-script-reference/v5/#op_array>`__ and `matrices <https://www.tradingview.com/pine-script-reference/v5/#op_matrix>`__ can now be referenced with the  `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ operator. In the example below, we reference the historic state of a matrix 10 bars ago::
 
 	//@version=5
