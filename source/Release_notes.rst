@@ -25,7 +25,7 @@ The historical states of `arrays <https://www.tradingview.com/pine-script-refere
 	m = matrix.new<float>(1, 1, close)
 	float x = na
 	if bar_index > 10
- 	   x := matrix.get(m[10], 0, 0)
+ 	    x := matrix.get(m[10], 0, 0)
 	plot(x)
 	plot(close)
 
