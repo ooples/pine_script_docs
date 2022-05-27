@@ -42,6 +42,9 @@ New functions were added:
 
 * `syminfo.prefix() <https://www.tradingview.com/pine-script-reference/v5/#fun_syminfo{dot}prefix>`__ - returns the exchange prefix of the ``symbol`` passed to it, e.g. "NASDAQ" for "NASDAQ:AAPL".
 * `syminfo.ticker() <https://www.tradingview.com/pine-script-reference/v5/#fun_syminfo{dot}ticker>`__ - returns the ticker of the ``symbol`` passed to it without the exchange prefix, e.g. "AAPL" for "NASDAQ:AAPL".
+* `request.security_lower_tf() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security_lower_tf>`__ - requests data from a lower timeframe than the chart's.
+
+Added ``use_bar_magnifier`` parameter for the `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__  function. When true, the Broker Emulator uses lower timeframe data during history backtesting to achieve more realistic results.
 
 
 April 2022
