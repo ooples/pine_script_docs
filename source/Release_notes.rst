@@ -48,6 +48,17 @@ Added ``use_bar_magnifier`` parameter for the `strategy() <https://www.tradingvi
 
 Fixed behaviour of `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ function when stop loss triggered at prices outside the bars price range.
 
+Added new ``comment`` and ``alert`` message parameters for the `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ function: 
+
+* ``comment_profit`` - additional notes on the order if the exit was triggered by crossing ``profit`` or ``limit`` specifically.
+* ``comment_loss`` - additional notes on the order if the exit was triggered by crossing ``stop`` or ``loss`` specifically.
+* ``comment_trailing`` - additional notes on the order if the exit was triggered by crossing ``trail_offset`` specifically.
+* ``alert_profit`` - text that will replace the ``'{{strategy.order.alert_message}}'`` placeholder if the exit was triggered by crossing ``profit`` or ``limit`` specifically. 
+* ``alert_loss`` - text that will replace the ``'{{strategy.order.alert_message}}'`` placeholder if the exit was triggered by crossing ``stop`` or ``loss`` specifically.
+* ``alert_trailing`` - text that will replace the ``'{{strategy.order.alert_message}}'`` placeholder if the exit was triggered by crossing ``trail_offset`` specifically. 
+
+
+
 
 April 2022
 -------------
