@@ -18,6 +18,8 @@ This page contains release notes of notable changes in Pine Script™.
 May 2022
 -------------
 
+`Matrix <https://www.tradingview.com/pine-script-reference/v5/#op_matrix>`__ support has been added to the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function.
+
 The historical states of `arrays <https://www.tradingview.com/pine-script-reference/v5/#op_array>`__ and `matrices <https://www.tradingview.com/pine-script-reference/v5/#op_matrix>`__ can now be referenced with the  `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ operator. In the example below, we reference the historic state of a matrix 10 bars ago::
 
 	//@version=5
