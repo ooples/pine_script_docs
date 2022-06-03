@@ -1,4 +1,4 @@
-.. _PageFaqAlerts:
+.. _PageAlertsFaq:
 
 .. image:: /images/Pine_Script_logo.svg
    :alt: Pine Script™ logo
@@ -9,6 +9,7 @@
 
 Alerts FAQ
 ==========
+
 
 .. contents:: :local:
     :depth: 3

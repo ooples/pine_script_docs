@@ -76,6 +76,8 @@ Script execution time
 Script execution time isn't to be confused with script compile time. A script will be compiled once and then it passess off the script to a separate process to be executed on each bar of data. There are actually differences in max execution time 
 limits depending on your account type so free users have a max of 20 seconds to execute their script and any paid user will have a max of 40 seconds to execute their script. 
 
+// example below
+
 
 Chart visuals
 -------------
@@ -91,6 +93,11 @@ display the newer table. This means that there is a hard limit of 9 tables that 
 
 Plot limits
 ^^^^^^^^^^^
+
+A fairly misleading limitation in Pine Script™ is the max limit of plotting 64 objects on a chart. Most users assume that it is as simple as only calling any plot functions no more than the 64 times but what most users aren't aware of is that each 
+plot function can actually use multiple plots. Perfect example of this would be either the plotbar or plotcandle functions since they actually plot 4 objects per function. A bar or candle of course is made up of 4 variables: Open, High, Low, and Close.
+Some functions like hline() or tables you would assume are counted towards this plotting limit since they are visually added to a chart but they aren't actually plotted on the chart. Other functions like plotchar() can change based on the underlying information
+used. If you are plotting 
 
 
 Line, box, and label limits
@@ -151,7 +158,8 @@ Variables
 
 Variables are objects that store data in programming languages and can be initialized in many different ways depending on the language you are using. In Pine Script™ we have a max of 1000 variables allowed per scope and there are two scopes in every script. You 
 have a global scope which would be variables accessible from anywhere in the script and a local scope which would be variables accessible from a local block like an if statement or inside a loop. Since variables have to be created manually then exceeding 1000
-variables per scope would mean your script would be thousands of lines long so chances are you will never see this associated error.
+variables per scope would mean your script would be thousands of lines long so chances are you will never see this associated error. Keep in mind that variables in Pine Script™ are the only factor that directly contributes to how much physical memory your script uses.
+
 
 Scripts
 -------
@@ -163,6 +171,18 @@ Local blocks
 You might be asking yourself: what is a local block? As we discussed in the variables section, each script will have a local scope and a global scope. The local scope is what is inside a local block so in other words, if statements, loops, etc. There is a max of 
 500 local blocks allowed which is one of those limits that will be very difficult to surpass. 
 
+    //@version=5
+    indicator("")
+    int length = 14
+    var volSma = float(na)
+    if close > open
+        volSma := ta.wma(volume, length)
+    plot(volSma)
+
+    Note that: 
+    
+    - We are calculating the volume wma only when the close is higher than the open to save on processing time
+
 
 Max bars back
 ^^^^^^^^^^^^^
@@ -171,7 +191,7 @@ When we create a script that depends on past data then it is vital that we make 
 execute the script and this is where max_bars_back comes in. For example if you are use close[499] in your script then the compiler knows that you will need at least 500 past values of close for each bar. However if you create a series integar 
 variable called y and use this instead of the 499 then the compiler isn't able to automatically detect how much past values of close we will need for the script to execute. This is why sometimes you will see an error message telling you that Pine Script™ can't
 determine the length of a reference series. An easy solution for this common issue is to increase the max_bars_back to a number high enough so that the compiler will always have enough past references for any variable in the script. The max value you can set it to is 5000
-and the default is ?
+and the default is 0.
 
 
 Max bars forward
@@ -223,7 +243,7 @@ Backtesting
 ^^^^^^^^^^^
 
 This particular limitation only applies to strategy scripts and in most cases you probably won't see the error message associated with this limit. You have a max of 9,000 orders that can be placed when you run a backtesting script. 
-There is a new user feature that was recently launched for Premium users only called Deep Backtesting. If you use this new feature, this will increase your max limit from 9,000 orders to over 1 million orders.
+There is a new user feature that was recently launched for Premium users only called Deep Backtesting. If you use this new feature, this will increase your max limit from 9,000 orders to 200,000 orders.
 
 .. image:: /images/TradingView-Logo-Block.svg
     :width: 200px

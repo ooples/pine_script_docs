@@ -219,7 +219,7 @@ where:
 
 - The <username>/<libraryName>/<libraryVersion> path will uniquely identify the library.
 - The <libraryVersion> must be specified explicitly. To ensure the reliability of scripts using libraries, there is no way to automatically use the latest version of a library.
-  Every time a library is updated by its author, its version number increases. If you intend to use the latest version of the library, 
+  Every time a library update is published by its author, the library's version number increases. If you intend to use the latest version of the library, 
   the <libraryVersion> value will require updating in the `import <https://www.tradingview.com/pine-script-reference/v5/#op_import>`__ statement.
 - The ``as <alias>`` part is optional. When used, it defines the namespace that will refer to the library's functions. 
   For example, if you import a library using the ``allTime`` alias as we do in the example below, you will refer to that library's functions as ``allTime.<function_mame>()``. 
