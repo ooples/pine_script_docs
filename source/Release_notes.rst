@@ -18,10 +18,48 @@ This page contains release notes of notable changes in Pine Script™.
 May 2022
 -------------
 
+`Matrix <https://www.tradingview.com/pine-script-reference/v5/#op_matrix>`__ support has been added to the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function.
+
+The historical states of `arrays <https://www.tradingview.com/pine-script-reference/v5/#op_array>`__ and `matrices <https://www.tradingview.com/pine-script-reference/v5/#op_matrix>`__ can now be referenced with the  `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ operator. In the example below, we reference the historic state of a matrix 10 bars ago::
+
+	//@version=5
+	indicator("")
+	m = matrix.new<float>(1, 1, close)
+	float x = na
+	if bar_index > 10
+ 	    x := matrix.get(m[10], 0, 0)
+	plot(x)
+	plot(close)
+
+The `ta.change() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}change>`__ function now can take values of `int <https://www.tradingview.com/pine-script-reference/v5/#op_int>`__ and `bool <https://www.tradingview.com/pine-script-reference/v5/#op_bool>`__ types as its ``source`` parameter and return the difference in the respective type.
+
+New built-in variables were added:
+
+* `chart.bg_color <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}bg_color>`__ - Returns the color of the chart's background from the ``"Chart settings/Appearance/Background"`` field.
+* `chart.fg_color <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}fg_color>`__ - Returns a color providing optimal contrast with `chart.bg_color <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}bg_color>`__.
+* `chart.is_standard <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_standard>`__ - Returns true if the chart type is bars, candles, hollow candles, line, area or baseline, false otherwise.
+* `currency.USDT <https://www.tradingview.com/pine-script-reference/v5/#var_currency{dot}USDT>`__ - A constant for the Tether currency code.
+
 New functions were added:
 
-* `syminfo.prefix() <https://www.tradingview.com/pine-script-reference/v5/#fun_syminfo{dot}prefix>`__ - returns exchange prefix of the passed `symbol`, e.g. "NASDAQ" for "NASDAQ:AAPL".
-* `syminfo.ticker() <https://www.tradingview.com/pine-script-reference/v5/#fun_syminfo{dot}ticker>`__ - returns `symbol` name without exchange prefix, e.g. "AAPL" for the passed symbol "NASDAQ:AAPL".
+* `syminfo.prefix() <https://www.tradingview.com/pine-script-reference/v5/#fun_syminfo{dot}prefix>`__ - returns the exchange prefix of the ``symbol`` passed to it, e.g. "NASDAQ" for "NASDAQ:AAPL".
+* `syminfo.ticker() <https://www.tradingview.com/pine-script-reference/v5/#fun_syminfo{dot}ticker>`__ - returns the ticker of the ``symbol`` passed to it without the exchange prefix, e.g. "AAPL" for "NASDAQ:AAPL".
+* `request.security_lower_tf() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security_lower_tf>`__ - requests data from a lower timeframe than the chart's.
+
+Added ``use_bar_magnifier`` parameter for the `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__  function. When ``true``, the `Broker Emulator <https://www.tradingview.com/pine-script-docs/en/v5/concepts/Strategies.html#broker-emulator>`__ uses lower timeframe data during history backtesting to achieve more realistic results.
+
+Fixed behaviour of `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ function when stop loss triggered at prices outside the bars price range.
+
+Added new ``comment`` and ``alert`` message parameters for the `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ function: 
+
+* ``comment_profit`` - additional notes on the order if the exit was triggered by crossing ``profit`` or ``limit`` specifically.
+* ``comment_loss`` - additional notes on the order if the exit was triggered by crossing ``stop`` or ``loss`` specifically.
+* ``comment_trailing`` - additional notes on the order if the exit was triggered by crossing ``trail_offset`` specifically.
+* ``alert_profit`` - text that will replace the ``'{{strategy.order.alert_message}}'`` placeholder if the exit was triggered by crossing ``profit`` or ``limit`` specifically. 
+* ``alert_loss`` - text that will replace the ``'{{strategy.order.alert_message}}'`` placeholder if the exit was triggered by crossing ``stop`` or ``loss`` specifically.
+* ``alert_trailing`` - text that will replace the ``'{{strategy.order.alert_message}}'`` placeholder if the exit was triggered by crossing ``trail_offset`` specifically. 
+
+
 
 
 April 2022
