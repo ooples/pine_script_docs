@@ -15,6 +15,19 @@ Release notes
 
 This page contains release notes of notable changes in Pine Script™.
 
+June 2022
+-------------
+
+New built-in variables were added:
+
+* `session.isfirstbar <https://www.tradingview.com/pine-script-reference/v5/#var_session{dot}isfirstbar>`__ - returns true if the current bar is the first bar of the day's session, false otherwise.
+* `session.islastbar <https://www.tradingview.com/pine-script-reference/v5/#var_session{dot}islastbar>`__ - returns true if the current bar is the last bar of the day's session, false otherwise.
+* `session.isfirstbar_regular <https://www.tradingview.com/pine-script-reference/v5/#var_session{dot}isfirstbar_regular>`__ - returns true on the first regular session bar of the day, false otherwise.
+* `session.islastbar_regular <https://www.tradingview.com/pine-script-reference/v5/#var_session{dot}islastbar_regular>`__ - returns true on the last regular session bar of the day, false otherwise.
+
+
+
+
 May 2022
 -------------
 
