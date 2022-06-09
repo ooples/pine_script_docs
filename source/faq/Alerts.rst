@@ -24,6 +24,8 @@ Two steps are required:
 
 See the User Manual page on alertcondition(). Code to create an alert condition looks like:
 
+::
+
     triggerCondition = close > close[1]
     alertcondition(triggerCondition, title = "Create Alert dialog box name", message = "Text sent with alert.")
 

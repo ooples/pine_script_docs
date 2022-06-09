@@ -55,8 +55,6 @@ so your script will compile much faster after the very first time. Keep in mind 
 we will issue a warning. There is a max of 3 warnings and after the final warning, if you still try to compile the script again without fixing the underlying issues then we will issue a ban of one hour. 
 This means that you won't be able to compile any scripts until the ban period is complete. It is always good code practice to never repeat code so if you do have repeating code then try to merge this code into one location like a custom function.
 
-// example below
-
 
 
 Loop execution time
@@ -68,15 +66,13 @@ nested loops so we will explain with some examples below as well as a hypothetic
 of another loop then we throw the error when either timer surpasses the time limit. Of course this means that the parent loop will timeout first and if this does happen in your script then the easiest solution is to break down this parent loop
 into smaller loops that don't execute as much code. 
 
-// example below
+
 
 Script execution time
 ^^^^^^^^^^^^^^^^^^^^^
 
 Script execution time isn't to be confused with script compile time. A script will be compiled once and then it passess off the script to a separate process to be executed on each bar of data. There are actually differences in max execution time 
 limits depending on your account type so free users have a max of 20 seconds to execute their script and any paid user will have a max of 40 seconds to execute their script. 
-
-// example below
 
 
 Chart visuals
@@ -95,9 +91,93 @@ Plot limits
 ^^^^^^^^^^^
 
 A fairly misleading limitation in Pine Script™ is the max limit of plotting 64 objects on a chart. Most users assume that it is as simple as only calling any plot functions no more than the 64 times but what most users aren't aware of is that each 
-plot function can actually use multiple plots. Perfect example of this would be either the plotbar or plotcandle functions since they actually plot 4 objects per function. A bar or candle of course is made up of 4 variables: Open, High, Low, and Close.
+plot function can actually use multiple plots. A perfect example of this would be either the plotbar or plotcandle functions since they actually plot 4 objects per function. A bar or candle of course is made up of 4 variables: Open, High, Low, and Close.
 Some functions like hline() or tables you would assume are counted towards this plotting limit since they are visually added to a chart but they aren't actually plotted on the chart. Other functions like plotchar() can change based on the underlying information
-used. If you are plotting 
+used.
+
+    //@version=5
+    indicator("Plot count example")
+
+    bool isUp = close > open
+    color isUpColor = isUp ? color.green : color.red
+    bool isDn = close < open
+    color isDnColor = isDn ? color.red : color.green
+
+    // uses one plot count for close series
+    plot(close, color = color.white)
+
+    // uses two plot counts (1 for close series and 1 for color series)
+    plot(close, color = isUpColor)
+
+    // uses one plot count for close series
+    plotarrow(close, colorup = color.green, colordown = color.red)
+
+    // uses two plot counts (1 for close series and 1 for colorup series)
+    plotarrow(close, colorup = isUpColor)
+
+    // uses three plot counts (1 for close series, 1 for colorup series, and 1 for colordown series)
+    plotarrow(close, colorup = isUpColor, colordown = isDnColor)
+
+    // uses four plot counts for open, high, low, and close series
+    plotbar(open, high, low, close, color = color.white)
+
+    // uses five plot counts for open, high, low, close, and color series
+    plotbar(open, high, low, close, color = isUpColor)
+
+    // uses four plot counts for open, high, low, and close series
+    plotcandle(open, high, low, close, color = color.white, wickcolor = color.white, bordercolor = color.purple)
+
+    // uses five plot counts for open, high, low, close, and color series
+    plotcandle(open, high, low, close, color = isUpColor, wickcolor = color.white, bordercolor = color.purple)
+
+    // uses six plot counts for open, high, low, close, color, and wickcolor series
+    plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = color.purple)
+
+    // uses seven plot counts for open, high, low, close, color, wickcolor, and bordercolor series
+    plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
+
+    // uses one plot count for close series
+    plotchar(close, color = color.white, text = '⭐', textcolor = color.white)
+
+    // uses two plot counts for close, and color series
+    plotchar(close, color = isUpColor, text = '⭐', textcolor = color.white)
+
+    // uses three plot counts for close, color, and textcolor series
+    plotchar(close, color = isUpColor, text = '⭐', textcolor = isUp ? color.yellow : color.white)
+
+    // uses one plot count for close series
+    plotshape(close, color = color.white, textcolor = color.white)
+
+    // uses two plot counts for close, and color series
+    plotshape(close, color = isUpColor, textcolor = color.white)
+
+    // uses three plot counts for close, color, and textcolor series
+    plotshape(close, color = isUpColor, textcolor = isUp ? color.yellow : color.white)
+
+    Note that: 
+
+    - This is a full list of all plot count combinations for each plot function so feel free to use this list as a reference guide.
+
+
+    //@version=5
+    indicator("Plot count limits example")
+
+    bool isUp = close > open
+    color isUpColor = isUp ? color.green : color.red
+
+    // uses seven plot counts for open, high, low, close, color, wickcolor, and bordercolor series
+    plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
+    plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
+    plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
+    plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
+    plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
+    plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
+    plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
+    plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
+    plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
+
+    // including this last line will throw an error stating maximum number of 64 plot elements were reached and that the script contains 70
+    plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
 
 
 Line, box, and label limits
@@ -106,8 +186,15 @@ Line, box, and label limits
 One of the most overlooked script settings is the abilities to set the max_lines_count, max_boxes_count, and max_labels_count. The default for all 3 is set to 50 but you are allowed to increase that to a max of 500. Pine Script™ utilizes
 a very efficient garbage collection system so by default you will only ever be able to view the last 50 labels as an example. Below we have an example showing how to increase these limits in the indicator settings.
 
-// example below
+    //@version=5
+    indicator("Label Limits Example", max_labels_count = 100, overlay=true)
+    cond = close > open ? 1 : close < open ? -1 : 0
+    label.new(bar_index, close, yloc = cond > 0 ? yloc.abovebar : yloc.belowbar, style = cond > 0 ? label.style_arrowup : label.style_arrowdown, 
+        color = cond > 0 ? color.green : color.red, size = size.huge)
 
+    Note that:
+
+    - Only the last 100 bars will have labels on them and this is because of the garbage collection process that Pine Script™ does in the back-end to only show the most recent labels.
 
 
 Request.*() calls
@@ -122,8 +209,8 @@ For example, if you are looking at a 1H chart and you want to use 1M data in you
 a 1D chart on BTC and requesting the 1S data for each bar will give you a max of 86,400 intrabars. 
 
 
-Request calls (need ideas for better naming)
-^^^^^^^^^^^^^^^^^
+Request calls
+^^^^^^^^^^^^^
 
 All function calls using the request namespace such as request.security(), request.security_lower_tf(), request.quandl(), request.financial(), etc are all treated the same on the compiler. This means that since there is a hard limit of 40 
 request calls per script then this can either be 40 request.security() calls or a combination like 34 request.quandl() calls and 6 request.financial() calls. 
@@ -143,14 +230,13 @@ Due to various optimizations, there is no way to check the length of the IL that
 To work around the limit, you can offload some code into a library and use the library functions in your script instead. Replacing duplicate code with functions should also shorten the length of the IL tokens.
 
 
-Array size
-^^^^^^^^^^
+Arrays and matrices
+^^^^^^^^^^^^^^^^^^^
 
-Arrays are a complicated topic for new Pine Script™ programmers so make sure to take a good look at the arrays page if you need a refresher. We will give a very brief explainer of arrays to better explain the limits. Arrays are a custom collection of data that
-is similar to a data series in that it can hold data in the background while your script is executing on each bar. However that is where most of the similarities end. For a data series, we use the historical operator [] to pull a value from X bars back. For example
-if we want to use the close from 2 bars back then we would use close[2] but if you were to do this on an array, you would get the third value from the start of the array since arrays start from the 0 index. Arrays are much easier to work with overall because 
-there are many built-in functions that you can execute on an array. For more information on the full list of array functions then please check out the full array user manual page. There is a max of 100,000 objects inside an array and below we will show how to
-properly utilize these limits inside your script.
+Arrays and matrices are both very complicated topics for new Pine Script™ programmers so make sure to take a good look at the `arrays page <https://www.tradingview.com/pine-script-docs/en/v5/language/Arrays.html>`__ or the `matrices page <https://www.tradingview.com/pine-script-docs/en/v5/language/Arrays.html>`__ if you need a refresher. 
+Arrays and matrices are both special objects that are collections of data in slightly different data formats. Arrays can be thought of as a variation of a data time series and matrices add an extra dimension to this concept which allows for arrays inside arrays. Both types have the same limit where you have a max of 100,000 elements 
+allowed inside each collection object. 
+
 
 
 Variables
@@ -160,6 +246,19 @@ Variables are objects that store data in programming languages and can be initia
 have a global scope which would be variables accessible from anywhere in the script and a local scope which would be variables accessible from a local block like an if statement or inside a loop. Since variables have to be created manually then exceeding 1000
 variables per scope would mean your script would be thousands of lines long so chances are you will never see this associated error. Keep in mind that variables in Pine Script™ are the only factor that directly contributes to how much physical memory your script uses.
 
+    //@version=5
+    indicator("Variables scope example", overlay = true)
+    float ema = ta.ema(close, 14) // declared in global scope
+
+    upperBand = ema, lowerBand = ema
+    if close > open
+        float trueRange = ta.tr // declared in local scope
+        upperBand += trueRange
+        lowerBand -= trueRange
+        
+    plot(upperBand, color = color.yellow)
+    plot(lowerBand, color = color.yellow)
+
 
 Scripts
 -------
@@ -168,16 +267,22 @@ Scripts
 Local blocks
 ^^^^^^^^^^^^
 
-You might be asking yourself: what is a local block? As we discussed in the variables section, each script will have a local scope and a global scope. The local scope is what is inside a local block so in other words, if statements, loops, etc. There is a max of 
+You might be asking yourself: what is a local block? As we discussed in the variables section, each script will have a local scope and a global scope. The local block is another way to describe a local scope so in other words, if statements, loops, etc. There is a max of 
 500 local blocks allowed which is one of those limits that will be very difficult to surpass. 
 
     //@version=5
-    indicator("")
+    indicator("Local block example")
     int length = 14
-    var volSma = float(na)
+    var volMa = float(na)
     if close > open
-        volSma := ta.wma(volume, length)
-    plot(volSma)
+        volMa := ta.wma(volume, length)
+    
+    // we can simplify the above by removing the local block and using a ternary instead
+    var volMaAlt = float(na)
+    volMaAlt := close > open ? ta.wma(volume, length) : nz(volMaAlt[1])
+
+    plot(volMa)
+    plot(volMaAlt)
 
     Note that: 
     
