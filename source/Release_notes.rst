@@ -15,6 +15,28 @@ Release notes
 
 This page contains release notes of notable changes in Pine Script™.
 
+June 2022
+-------------
+
+Two new parameters for the built-in `ta.vwap() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}vwap>`_ function were added:
+
+* ``anchor`` - Specifies the condition that triggers the reset of VWAP calculations. When ``true``, calculations reset; when ``false``, calculations proceed using the values accumulated since the previous reset.
+* ``stdev_mult`` -  If specified, the `ta.vwap() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}vwap>`_ calculates the standard deviation bands based on the main VWAP series and returns a ``[vwap, upper_band, lower_band]`` tuple.
+
+New built-in functions were added:
+
+* `timeframe.change() <https://www.tradingview.com/pine-script-reference/v5/#fun_timeframe{dot}change>`_ - Returns ``true`` on the first bar of a new ``timeframe``, ``false`` otherwise.
+* `ta.pivot_point_levels() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}pivot_point_levels>`_  - Returns a float array with numerical values representing 11 pivot point levels: ``[P, R1, S1, R2, S2, R3, S3, R4, S4, R5, S5]``. Levels absent from the specified ``type`` return na values.
+
+New built-in variables were added:
+
+* `session.isfirstbar <https://www.tradingview.com/pine-script-reference/v5/#var_session{dot}isfirstbar>`__ - returns ``true`` if the current bar is the first bar of the day's session, ``false`` otherwise.
+* `session.islastbar <https://www.tradingview.com/pine-script-reference/v5/#var_session{dot}islastbar>`__ - returns ``true`` if the current bar is the last bar of the day's session, ``false`` otherwise.
+* `session.isfirstbar_regular <https://www.tradingview.com/pine-script-reference/v5/#var_session{dot}isfirstbar_regular>`__ - returns ``true`` on the first regular session bar of the day, ``false`` otherwise.
+* `session.islastbar_regular <https://www.tradingview.com/pine-script-reference/v5/#var_session{dot}islastbar_regular>`__ - returns ``true`` on the last regular session bar of the day, ``false`` otherwise.
+
+
+
 May 2022
 -------------
 
