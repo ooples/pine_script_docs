@@ -104,7 +104,7 @@ Note that:
   `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ with relative to the opening bar's
   same values. This entails that our script is repainting, as the boxe's color on past bars will change,
   depending on the current bar's values.
-- We artifically make the return type of both branches of our `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
+- We artificially make the return type of both branches of our `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
   structure ``int(na)`` so the compiler doesn't complain about them not returning the same type.
   This occurs because `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`__
   in the first branch returns a result of type "box", 

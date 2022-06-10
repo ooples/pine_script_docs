@@ -170,7 +170,7 @@ Input types
 -----------
 
 The next sections explain what each input function does.
-As we procede, we will explore the different ways you can use input functions and organize their display.
+As we proceed, we will explore the different ways you can use input functions and organize their display.
 
 
 Simple input

@@ -80,8 +80,7 @@ Each type of script has distinct requirements:
 
 - Indicators must contain at least one function call which produces output on the chart
   (e.g., `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__, 
-  `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__,
-  `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__,
+  `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__,
   `barcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_barcolor>`__,
   `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__, etc.).
 - Strategies must contain at least one ``strategy.*()`` call, e.g., 

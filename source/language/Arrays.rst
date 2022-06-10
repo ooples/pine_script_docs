@@ -695,7 +695,7 @@ We discuss those runtime errors in this section.
 Index xx is out of bounds. Array size is yy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This will most probably be the most frequent error you encounter. It will happen when you reference an inexistent array index. 
+This will most probably be the most frequent error you encounter. It will happen when you reference an nonexistent array index. 
 The "xx" value will be the value of the faulty index you tried to use, and "yy" will be the size of the array. 
 Recall that array indices start at zero—not one—and end at the array's size, minus one. An array of size 3's last valid index is thus ``2``.
 

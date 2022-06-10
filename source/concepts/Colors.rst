@@ -141,7 +141,7 @@ color with a transparency of 40, but expressed in different ways. All five metho
     // ————  Transparency is included in the color-generating function's arguments.
     plot(ta.sma(close, 30), "30", color.new(color.olive, 40))
     plot(ta.sma(close, 50), "50", color.rgb(128, 128, 0, 40))
-	// ————  Use `transp` parameter (deprecated and advised against)
+	  // ————  Use `transp` parameter (deprecated and advised against)
     plot(ta.sma(close, 70), "70", color.olive, transp = 40)
     plot(ta.sma(close, 90), "90", #808000, transp = 40)
     
@@ -414,7 +414,7 @@ Here, we enhance our CCI indicator by coloring the band using the number of bars
 Note that:
 
 - The signal plot uses the same base colors and gradient as in our previous example. 
-  We have however increased the witdth of the line from the default 1 to 2. 
+  We have however increased the width of the line from the default 1 to 2. 
   It is the most important component of our visuals; increasing its width is a way to give it more prominence, 
   and ensure users are not distracted by the band, which has become busier than it was in its original, flat beige color.
 - The fill must remain unobtrusive for two reasons. First, it is of secondary importance to the visuals, as it provides complementary information, i.e., 
