@@ -159,7 +159,7 @@ Sometimes, however, colors need to be created as the script executes on each bar
 or when the script begins execution on bar zero. For those cases, Pine Script™ programmers have two options:
 
 #. Use conditional statements to select colors from a few pre-determined base colors.
-#. Build new colors dynamically, by calculating them as the script executes bar to bar, to implement color gradations, for example.
+#. Build new colors dynamically, by calculating them as the script executes bar to bar, to implement color gradients, for example.
 
 
 

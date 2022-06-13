@@ -16,7 +16,7 @@ Release notes
 This page contains release notes of notable changes in Pine Script™.
 
 June 2022
--------------
+---------
 
 Two new parameters for the built-in `ta.vwap() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}vwap>`_ function were added:
 
@@ -38,7 +38,7 @@ New built-in variables were added:
 
 
 May 2022
--------------
+--------
 
 `Matrix <https://www.tradingview.com/pine-script-reference/v5/#op_matrix>`__ support has been added to the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function.
 
