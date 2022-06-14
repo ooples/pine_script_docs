@@ -49,7 +49,7 @@ in an overlay script:
 Note that:
 
 - The first `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call plots a 1-pixel blue line across the bar highs.
-- The secong plots crosses at the mid-point of bodies. The crosses are colored lime when the bar is up and purple when it is down.
+- The second plots crosses at the mid-point of bodies. The crosses are colored lime when the bar is up and purple when it is down.
   The argument used for ``linewidth`` is ``6`` but it is not a pixel value; just a relative size.
 - The third call plots a 3-pixel wide step line following the low point of bodies.
 - The fourth call plot a gray circle at the bars' `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__.
@@ -114,7 +114,7 @@ Note that:
 
 `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ 
 calls must always be placed in a line's first position, which entails they are always in the script's global scope.
-They cannot be placed in user-defined functions or structures like `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
+They can't be placed in user-defined functions or structures like `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
 `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__, etc. 
 Calls to `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ **can**, however, 
 be designed to plot conditionally in two ways, which we cover in the :ref:`Conditional plots <PagePlots_ConditionalPlots>`

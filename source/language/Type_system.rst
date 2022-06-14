@@ -431,7 +431,7 @@ and `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_labe
 
 These functions all return an ID that uniquely identifies each drawing object. 
 The ID's type is "series line", "series label", "series box" and "series table", respectively, and an ID can exist in no other form than "series". 
-Drawing IDs act like pointer in that they are used to reference a specific instance of a drawing in all the related functions of its namespace. 
+Drawing IDs act like a pointer in that they are used to reference a specific instance of a drawing in all the related functions of its namespace. 
 The line ID returned by a `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ 
 call is then used to refer to that line using `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`__, for example.
 
@@ -506,6 +506,8 @@ Tuples can be useful to request multiple values in one `request.security() <http
 
 or:
 
+::
+    
     [op, hi, lo, cl] = request.security(syminfo.tickerid, "D", [math.round_to_mintick(open), math.round_to_mintick(high), math.round_to_mintick(low), math.round_to_mintick(close)])
 
 or this form if no rounding is required::

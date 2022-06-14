@@ -170,7 +170,7 @@ Input types
 -----------
 
 The next sections explain what each input function does.
-As we procede, we will explore the different ways you can use input functions and organize their display.
+As we proceed, we will explore the different ways you can use input functions and organize their display.
 
 
 Simple input
@@ -180,8 +180,9 @@ Simple input
 generic function that supports the fundamental Pine Script™ types: "int", "float", "bool", "color" and "string".
 It also supports "source" inputs, which are price-related values such as
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__,
-`hl2 <https://www.tradingview.com/pine-script-reference/v5/#hl2>`__, and
-`hlc3 <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__,
+`hl2 <https://www.tradingview.com/pine-script-reference/v5/#hl2>`__,
+`hlc3 <https://www.tradingview.com/pine-script-reference/v5/#var_hlc3>`__, and
+`hlcc4 <https://www.tradingview.com/pine-script-reference/v5/#var_hlcc4>`__,
 or which can be used to receive the output value of another script.
 
 Its signature is:

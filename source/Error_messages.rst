@@ -96,13 +96,13 @@ indent::
     plot(1)
 
 
-Loop is too long (> 200 ms)
+Loop is too long (> 500 ms)
 ---------------------------
 
 We limit the computation time of loop on every historical bar and
 realtime tick to protect our servers from infinite or very long loops.
 This limit also fail-fast indicators that will take too long to compute.
-For example, if you'll have 5000 bars, and indicator takes 200 milliseconds to
+For example, if you'll have 5000 bars, and indicator takes 500 milliseconds to
 compute on each of bars, it would have result in more than 16 minutes of
 loading.
 
@@ -174,7 +174,7 @@ can be сonverted into::
 
 
 Pine Script™ cannot determine the referencing length of a series. Try using max_bars_back in the indicator or strategy function
--------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------
 
 The error appears in cases where Pine Script™ wrongly autodetects the required 
 maximum length of series used in a script. This happens when a script's 

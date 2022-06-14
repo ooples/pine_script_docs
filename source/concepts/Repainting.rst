@@ -133,7 +133,7 @@ On realtime bars (bars running when the instrument's market is open), however, t
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__,
 `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ and
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ values are not fixed;
-they can changes values many times before the realtime bar closes and its HLC values are fixed. They are *fluid*.
+they can change values many times before the realtime bar closes and its HLC values are fixed. They are *fluid*.
 This leads to a script sometimes working differently on historical data and in real time, 
 where only the `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ price will not change during the bar.
 

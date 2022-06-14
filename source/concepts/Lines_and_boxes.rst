@@ -84,7 +84,7 @@ This script draws both lines and boxes:
         line.set_x2(hiLine, bar_index)
         line.set_x2(loLine, bar_index)
         box.set_right(hiLoBox, bar_index)
-        // Change the color of the boxe's background depending on whether high/low is higher/lower than the box. 
+        // Change the color of the boxes' background depending on whether high/low is higher/lower than the box. 
         boxColor = high > hi ? color.green : low < lo ? color.red : color.silver
         box.set_bgcolor(hiLoBox, color.new(boxColor, 50))
         int(na)
@@ -99,12 +99,12 @@ Note that:
 - Every time we create two new lines and a box, we save their ID in variables ``hiLine``, ``loLine`` and ``hiLoBox``,
   which we then use in the calls to the setter functions to prolong these objects as new bars come in during the
   higher timeframe.
-- We change the color of the boxe's background (``boxColor``) using the position of the bar's
+- We change the color of the boxes' background (``boxColor``) using the position of the bar's
   `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and
   `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ with relative to the opening bar's
-  same values. This entails that our script is repainting, as the boxe's color on past bars will change,
+  same values. This entails that our script is repainting, as the boxes' color on past bars will change,
   depending on the current bar's values.
-- We artifically make the return type of both branches of our `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
+- We artificially make the return type of both branches of our `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
   structure ``int(na)`` so the compiler doesn't complain about them not returning the same type.
   This occurs because `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`__
   in the first branch returns a result of type "box", 
@@ -570,7 +570,7 @@ Five parameters affect this behavior: ``left``, ``top``, ``right``, ``bottom`` a
    `time_close <https://www.tradingview.com/pine-script-reference/v5/#var_time_close>`__ (closing time) values.
 
 ``top`` and ``bottom``
-   They are the *y* coordinates of the boxe's top and bottom levels (boxes are always rectangular).
+   They are the *y* coordinates of the boxes' top and bottom levels (boxes are always rectangular).
    While they are called price levels, they must be of values that make sense in the script's visual space.
    For an RSI indicator, they would typically be between 0 and 100, for example.
    When an indicator is running as an overlay, then the price scale will usually be that of the chart's symbol.
@@ -1008,130 +1008,130 @@ Linear Regression
 
 ::
 
-	//@version=5
-	indicator('Linear Regression', shorttitle='LinReg', overlay=true)
+    //@version=5
+    indicator('Linear Regression', shorttitle='LinReg', overlay=true)
 
-	upperMult = input(title='Upper Deviation', defval=2)
-	lowerMult = input(title='Lower Deviation', defval=-2)
+    upperMult = input(title='Upper Deviation', defval=2)
+    lowerMult = input(title='Lower Deviation', defval=-2)
 
-	useUpperDev = input(title='Use Upper Deviation', defval=true)
-	useLowerDev = input(title='Use Lower Deviation', defval=true)
-	showPearson = input(title='Show Pearson\'s R', defval=true)
-	extendLines = input(title='Extend Lines', defval=false)
+    useUpperDev = input(title='Use Upper Deviation', defval=true)
+    useLowerDev = input(title='Use Lower Deviation', defval=true)
+    showPearson = input(title='Show Pearson\'s R', defval=true)
+    extendLines = input(title='Extend Lines', defval=false)
 
-	len = input(title='Count', defval=100)
-	src = input(title='Source', defval=close)
+    len = input(title='Count', defval=100)
+    src = input(title='Source', defval=close)
 
-	extend = extendLines ? extend.right : extend.none
+    extend = extendLines ? extend.right : extend.none
 
-	calcSlope(src, len) =>
-		if not barstate.islast or len <= 1
-			[float(na), float(na), float(na)]
-		else
-			sumX = 0.0
-			sumY = 0.0
-			sumXSqr = 0.0
-			sumXY = 0.0
-			for i = 0 to len - 1 by 1
-				val = src[i]
-				per = i + 1.0
-				sumX := sumX + per
-				sumY := sumY + val
-				sumXSqr := sumXSqr + per * per
-				sumXY := sumXY + val * per
-				sumXY
-			slope = (len * sumXY - sumX * sumY) / (len * sumXSqr - sumX * sumX)
-			average = sumY / len
-			intercept = average - slope * sumX / len + slope
-			[slope, average, intercept]
+    calcSlope(src, len) =>
+        if not barstate.islast or len <= 1
+            [float(na), float(na), float(na)]
+        else
+            sumX = 0.0
+            sumY = 0.0
+            sumXSqr = 0.0
+            sumXY = 0.0
+            for i = 0 to len - 1 by 1
+                val = src[i]
+                per = i + 1.0
+                sumX := sumX + per
+                sumY := sumY + val
+                sumXSqr := sumXSqr + per * per
+                sumXY := sumXY + val * per
+                sumXY
+            slope = (len * sumXY - sumX * sumY) / (len * sumXSqr - sumX * sumX)
+            average = sumY / len
+            intercept = average - slope * sumX / len + slope
+            [slope, average, intercept]
 
-	[s, a, i] = calcSlope(src, len)
+    [s, a, intercpt] = calcSlope(src, len)
 
-	startPrice = i + s * (len - 1)
-	endPrice = i
-	var line baseLine = na
+    startPrice = intercpt + s * (len - 1)
+    endPrice = intercpt
+    var line baseLine = na
 
-	if na(baseLine) and not na(startPrice)
-		baseLine := line.new(bar_index - len + 1, startPrice, bar_index, endPrice, width=1, extend=extend, color=color.red)
-		baseLine
-	else
-		line.set_xy1(baseLine, bar_index - len + 1, startPrice)
-		line.set_xy2(baseLine, bar_index, endPrice)
-		na
+    if na(baseLine) and not na(startPrice)
+        baseLine := line.new(bar_index - len + 1, startPrice, bar_index, endPrice, width = 1, extend=extend, color = color.red)
+        baseLine
+    else
+        line.set_xy1(baseLine, bar_index - len + 1, startPrice)
+        line.set_xy2(baseLine, bar_index, endPrice)
+        na
 
-	calcDev(src, len, slope, average, intercept) =>
-		upDev = 0.0
-		dnDev = 0.0
-		stdDevAcc = 0.0
-		dsxx = 0.0
-		dsyy = 0.0
-		dsxy = 0.0
+    calcDev(src, len, slope, average, intercept) =>
+        upDev = 0.0
+        dnDev = 0.0
+        stdDevAcc = 0.0
+        dsxx = 0.0
+        dsyy = 0.0
+        dsxy = 0.0
 
-		periods = len - 1
+        periods = len - 1
 
-		daY = intercept + slope * periods / 2
-		val = intercept
+        daY = intercept + slope * periods / 2
+        val = intercept
 
-		for i = 0 to periods by 1
-			price = high[i] - val
-			if price > upDev
-				upDev := price
-				upDev
+        for i = 0 to periods by 1
+            price = high[i] - val
+            if price > upDev
+                upDev := price
+                upDev
 
-			price := val - low[i]
-			if price > dnDev
-				dnDev := price
-				dnDev
+            price := val - low[i]
+            if price > dnDev
+                dnDev := price
+                dnDev
+        
+            price := src[i]
+            dxt = price - average
+            dyt = val - daY
+        
+            price := price - val
+            stdDevAcc := stdDevAcc + price * price
+            dsxx := dsxx + dxt * dxt
+            dsyy := dsyy + dyt * dyt
+            dsxy := dsxy + dxt * dyt
+            val := val + slope
+            val
 
-			price := src[i]
-			dxt = price - average
-			dyt = val - daY
+        stdDev = math.sqrt(stdDevAcc / (periods == 0 ? 1 : periods))
+        pearsonR = dsxx == 0 or dsyy == 0 ? 0 : dsxy / math.sqrt(dsxx * dsyy)
+        [stdDev, pearsonR, upDev, dnDev]
 
-			price := price - val
-			stdDevAcc := stdDevAcc + price * price
-			dsxx := dsxx + dxt * dxt
-			dsyy := dsyy + dyt * dyt
-			dsxy := dsxy + dxt * dyt
-			val := val + slope
-			val
+    [stdDev, pearsonR, upDev, dnDev] = calcDev(src, len, s, a, intercpt)
 
-		stdDev = math.sqrt(stdDevAcc / (periods == 0 ? 1 : periods))
-		pearsonR = dsxx == 0 or dsyy == 0 ? 0 : dsxy / math.sqrt(dsxx * dsyy)
-		[stdDev, pearsonR, upDev, dnDev]
+    upperStartPrice = startPrice + (useUpperDev ? upperMult * stdDev : upDev)
+    upperEndPrice = endPrice + (useUpperDev ? upperMult * stdDev : upDev)
+    var line upper = na
 
-	[stdDev, pearsonR, upDev, dnDev] = calcDev(src, len, s, a, i)
+    lowerStartPrice = startPrice + (useLowerDev ? lowerMult * stdDev : -dnDev)
+    lowerEndPrice = endPrice + (useLowerDev ? lowerMult * stdDev : -dnDev)
+    var line lower = na
 
-	upperStartPrice = startPrice + (useUpperDev ? upperMult * stdDev : upDev)
-	upperEndPrice = endPrice + (useUpperDev ? upperMult * stdDev : upDev)
-	var line upper = na
+    if na(upper) and not na(upperStartPrice)
+        upper := line.new(bar_index - len + 1, upperStartPrice, bar_index, upperEndPrice, width=1, extend=extend, color=#0000ff)
+        upper
+    else
+        line.set_xy1(upper, bar_index - len + 1, upperStartPrice)
+        line.set_xy2(upper, bar_index, upperEndPrice)
+        na
 
-	lowerStartPrice = startPrice + (useLowerDev ? lowerMult * stdDev : -dnDev)
-	lowerEndPrice = endPrice + (useLowerDev ? lowerMult * stdDev : -dnDev)
-	var line lower = na
+    if na(lower) and not na(lowerStartPrice)
+        lower := line.new(bar_index - len + 1, lowerStartPrice, bar_index, lowerEndPrice, width=1, extend=extend, color=#0000ff)
+        lower
+    else
+        line.set_xy1(lower, bar_index - len + 1, lowerStartPrice)
+        line.set_xy2(lower, bar_index, lowerEndPrice)
+        na
 
-	if na(upper) and not na(upperStartPrice)
-		upper := line.new(bar_index - len + 1, upperStartPrice, bar_index, upperEndPrice, width=1, extend=extend, color=#0000ff)
-		upper
-	else
-		line.set_xy1(upper, bar_index - len + 1, upperStartPrice)
-		line.set_xy2(upper, bar_index, upperEndPrice)
-		na
-
-	if na(lower) and not na(lowerStartPrice)
-		lower := line.new(bar_index - len + 1, lowerStartPrice, bar_index, lowerEndPrice, width=1, extend=extend, color=#0000ff)
-		lower
-	else
-		line.set_xy1(lower, bar_index - len + 1, lowerStartPrice)
-		line.set_xy2(lower, bar_index, lowerEndPrice)
-		na
-
-	// Pearson's R
-	var label r = na
-	transparent = color.new(color.white, 100)
-	label.delete(r[1])
-	if showPearson and not na(pearsonR)
-		r := label.new(bar_index - len + 1, lowerStartPrice, str.tostring(pearsonR, '#.################'), color=transparent, textcolor=#0000ff, size=size.normal, style=label.style_label_up)
-		r
+    // Pearson's R
+    var label r = na
+    transparent = color.new(color.white, 100)
+    label.delete(r[1])
+    if showPearson and not na(pearsonR)
+        r := label.new(bar_index - len + 1, lowerStartPrice, str.tostring(pearsonR, '#.################'), color=transparent, textcolor=#0000ff, size=size.normal, style=label.style_label_up)
+        r
 
 
 

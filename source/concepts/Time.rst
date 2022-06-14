@@ -101,10 +101,10 @@ There are also built-in **functions** that can:
 Time zones
 ^^^^^^^^^^
 
-TragingViewers can change the time zone used to display bar times on their charts.
+TradingViewers can change the time zone used to display bar times on their charts.
 Pine scripts have no visiblity over this setting.
 While there is a `syminfo.timezone <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}timezone>`__
-variable to return the time zone of the exchange where the chart's intrument is traded,
+variable to return the time zone of the exchange where the chart's instrument is traded,
 there is **no** ``chart.timezone`` equivalent.
 
 When displaying times on the chart, this shows one way of providing users a way of adjusting your script's time values to those of their chart.
