@@ -18,7 +18,7 @@ This page contains release notes of notable changes in Pine Script™.
 June 2022
 ---------
 
-The behavior of the argument used with the qty_percent parameter of `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ has changed . Previously, the percentages used on successive exit orders of the same position were calculated from the remaining position at any given time. Instead, the percentages now always apply to the initial position size. When executing the following strategy, for example::
+The behavior of the argument used with the ``qty_percent`` parameter of `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ has changed . Previously, the percentages used on successive exit orders of the same position were calculated from the remaining position at any given time. Instead, the percentages now always apply to the initial position size. When executing the following strategy, for example::
 
 	//@version=5
 	strategy("strategy.exit() example", overlay = true)
