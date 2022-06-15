@@ -18,6 +18,16 @@ This page contains release notes of notable changes in Pine Script™.
 June 2022
 ---------
 
+The behavior of the argument used with the qty_percent parameter of `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ has changed . Previously, the percentages used on successive exit orders of the same position were calculated from the remaining position at any given time. Instead, the percentages now always apply to the initial position size. When executing the following strategy, for example::
+
+	//@version=5
+	strategy("strategy.exit() example", overlay = true)
+	strategy.entry("Long", strategy.long, qty = 100)
+	strategy.exit("Exit Long1", "Long", trail_points = 50, trail_offset = 0, qty_percent = 20)
+	strategy.exit("Exit Long2", "Long", trail_points = 100, trail_offset = 0, qty_percent = 20)
+    
+20% of the initial position will be closed on each `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ call. Before, the first call would exit 20% of the initial position, and the second would exit 20% of the remaining 80% of the position, so only 16% of the initial position.
+
 Two new parameters for the built-in `ta.vwap() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}vwap>`_ function were added:
 
 * ``anchor`` - Specifies the condition that triggers the reset of VWAP calculations. When ``true``, calculations reset; when ``false``, calculations proceed using the values accumulated since the previous reset.
@@ -45,7 +55,7 @@ May 2022
 The historical states of `arrays <https://www.tradingview.com/pine-script-reference/v5/#op_array>`__ and `matrices <https://www.tradingview.com/pine-script-reference/v5/#op_matrix>`__ can now be referenced with the  `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ operator. In the example below, we reference the historic state of a matrix 10 bars ago::
 
 	//@version=5
-	indicator("")
+	indicator("matrix.new<float> example")
 	m = matrix.new<float>(1, 1, close)
 	float x = na
 	if bar_index > 10
