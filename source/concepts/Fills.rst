@@ -18,11 +18,9 @@ Introduction
 
 There are two different mechanisms dedicated to filling the space between Pine visuals:
 
-- The `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__
-function lets you color the background between either 
+- The `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ function lets you color the background between either 
 two plots plotted using `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
 or two horizontal lines plotted using `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__.
-
 - linefills affect the space between lines created via the `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ function. 
 
 \`plot()\` and \`hline()\` fills
