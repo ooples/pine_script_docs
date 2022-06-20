@@ -23,7 +23,7 @@ two plots plotted using `plot() <https://www.tradingview.com/pine-script-referen
 or two horizontal lines plotted using `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__.
 
 
-plot() and hline() fills
+\`plot()\` and \`hline()\` fills
 ------------------------
 
 
