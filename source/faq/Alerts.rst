@@ -52,13 +52,22 @@ How can I include values that change in my alerts?
 
 Numeric values plotted by an indicator can be inserted in alert text using placeholders. If you use:
 
+::
+
     plot(myRsi, "rsiLine")
+
 in your script, then you can include that plot’s value in an alert message by using:
 
+::
+
     alertcondition(close > open, message='RSI value is: {{plot("rsiLine")}}')
+
 If you are not already plotting a value which you must include in an alert message, you can plot it using this method so that plotting the value will not affect the price scale unless you use:
 
+::
+    
     plotchar(myRsi, "myRsi", "", location.top)
+
 You can use other pre-defined placeholders to include variable information in alert messages. See this TV blog post on variable alerts for more information.
 
     Note that there is still no way to include variable text in an alert message.
