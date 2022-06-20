@@ -16,6 +16,7 @@ Alerts FAQ
 
 
 
+
 How do I make an alert available from my script?
 ------------------------------------------------
 
@@ -47,6 +48,7 @@ When TradingView creates an alert, it saves a snapshot of the environment that w
     * Current version of the script. Subsequent updates to the script’s code will not affect the alerts created with prior versions
 
 Note that while alert condition code will compile in strategy scripts, alerts are only functional in studies.
+
 
 
 
