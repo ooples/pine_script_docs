@@ -16,18 +16,18 @@ Fills
 Introduction
 ------------
 
-There are two different mechanisms dedicated to filling the space between Pine objects. Plot fills affect objects created via the `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ or `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ 
-functions, while linefills affect the space between lines created via the `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ function.
-
-Plot fills
-----------
-
-The `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__
+There are two different mechanisms dedicated to filling the space between Pine visuals. Plot fills affect objects created via the `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ or `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ 
+functions, while linefills affect the space between lines created via the `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ function. The `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__
 function lets you color the background between either 
 two plots plotted using `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
 or two horizontal lines plotted using `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__.
 
-The function has two signatures:
+
+Plot and hline fills
+--------------------
+
+
+The `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ function has two signatures:
 
 .. code-block:: text
 
@@ -37,7 +37,7 @@ The function has two signatures:
 The arguments used for the ``plot1``, ``plot2``, ``hline1`` and ``hline2`` parameters must be the IDs returned by the `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ and `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ calls.
 The `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ function is the only built-in function where these IDs are used.
 
-See in this first example how the returning values of the
+See in this first example how the IDs returned by the 
 `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ and
 `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ calls
 are captured in the ``p1``, ``p2``, ``p3``, and ``h1``, ``h2``, ``h3`` and ``h4`` variables
