@@ -16,12 +16,13 @@ Fills
 Introduction
 ------------
 
-There are two different mechanisms dedicated to filling the space between Pine visuals. Plot fills affect objects created via the `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ or `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ 
-functions, while linefills affect the space between lines created via the `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ function. The `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__
-function lets you color the background between either 
-two plots plotted using `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
-or two horizontal lines plotted using `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__.
+There are two different mechanisms dedicated to filling the space between Pine visuals:
 
+- The `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ function lets you color the background between either 
+  two plots plotted using `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
+  or two horizontal lines plotted using `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__.
+- The `linefill.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}new>`__ function fills the space between lines created with
+  `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__. 
 
 \`plot()\` and \`hline()\` fills
 ------------------------
@@ -95,8 +96,8 @@ calculating the color on each bar, as in this example::
 .. image:: images/Fills-Fill-3.png
 
 
-Linefills
----------
+Line fills
+----------
 
 Linefills are objects that allow you to fill the space between two line drawings created via the `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ function. A linefill object is displayed on the chart when the `linefill.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}new>`__ function is called. The function has the following signature::
 
