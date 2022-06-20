@@ -53,6 +53,7 @@ How can I include values that change in my alerts?
 Numeric values plotted by an indicator can be inserted in alert text using placeholders. If you use:
 
     plot(myRsi, "rsiLine")
+
 in your script, then you can include that plot’s value in an alert message by using:
 
     alertcondition(close > open, message='RSI value is: {{plot("rsiLine")}}')
