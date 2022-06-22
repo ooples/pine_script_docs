@@ -11,7 +11,7 @@ Error messages
 ==============
 
 .. contents:: :local:
-    :depth: 2
+    :depth: 3
 
 
 

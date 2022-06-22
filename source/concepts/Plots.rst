@@ -11,7 +11,7 @@ Plots
 =====
 
 .. contents:: :local:
-    :depth: 1
+    :depth: 3
 
 
 

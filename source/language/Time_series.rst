@@ -10,6 +10,11 @@
 Time series
 ===========
 
+.. contents:: :local:
+    :depth: 3
+
+    
+
 Much of the power of Pine Script™ stems from the fact that it is designed to process *time series* efficiently. 
 Time series are not a form or a type; they are the fundamental structure Pine Script™ uses to store the successive values of a variable over time, 
 where each value is tethered to a point in time. Since charts are composed of bars, each representing a particular point in time, 

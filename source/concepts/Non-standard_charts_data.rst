@@ -11,7 +11,7 @@ Non-standard charts data
 ========================
 
 .. contents:: :local:
-    :depth: 2
+    :depth: 3
 
 
 

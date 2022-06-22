@@ -28,6 +28,12 @@ Pine Script™ small logo with macro
 Tests
 =====
 
+Alerts page with page reference below header: 
+:ref:`Alerts faq <PageAlertsFaq>`
+
+Conditions page with page reference above header:
+:ref:`Conditions faq <PageConditionsFaq>`
+
 Texttext Texttext Texttext Texttext Texttext Texttext Texttext Texttext Texttext 
 Texttext Texttext Texttext Texttext Texttext Texttext Texttext Texttext 
 Texttext Texttext Texttext Texttext Texttext Texttext Texttext Texttext Texttext Texttext Texttext 

@@ -10,6 +10,10 @@
 Identifiers
 ===========
 
+.. contents:: :local:
+    :depth: 3
+    
+
 Identifiers are names used for user-defined variables and functions:
 
 - They must begin with an uppercase (``A-Z``) or lowercase (``a-z``) letter, or an underscore (``_``).
