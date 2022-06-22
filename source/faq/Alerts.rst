@@ -14,6 +14,9 @@ Alerts FAQ
 .. contents:: :local:
     :depth: 3
 
+
+
+
 How do I make an alert available from my script?
 ------------------------------------------------
 
@@ -28,7 +31,7 @@ See the User Manual page on alertcondition(). Code to create an alert condition 
 
     triggerCondition = close > close[1]
     alertcondition(triggerCondition, title = "Create Alert dialog box name", message = "Text sent with alert.")
-    
+
 When you need to create multiple alerts you can repeat the method above for every alert you want your indicator to generate, but you can also use the method shown in this indicator. Here, all the different alert conditions 
 are bunched up in one alertcondition() statement. In this case, you must provide the means for users to first select which conditions will trigger the alert in the Inputs dialog box. When all the required conditions are 
 selected, the user creates an alert using the only alert this indicator makes available, but since TradingView remembers the state of the Inputs when creating an alert, only the selected conditions will trigger the alert once it’s 
@@ -45,6 +48,8 @@ When TradingView creates an alert, it saves a snapshot of the environment that w
     * Current version of the script. Subsequent updates to the script’s code will not affect the alerts created with prior versions
 
 Note that while alert condition code will compile in strategy scripts, alerts are only functional in studies.
+
+
 
 
 How can I include values that change in my alerts?
