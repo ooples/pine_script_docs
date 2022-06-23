@@ -16,6 +16,18 @@ Data structures FAQ
     :depth: 3
 
 
+How can I work with arrays in Pine?
+-----------------------------------
+
+
+
+How can I split a string into characters?
+-----------------------------------------
+
+
+
+
+
 
 .. image:: /images/TradingView-Logo-Block.svg
     :width: 200px

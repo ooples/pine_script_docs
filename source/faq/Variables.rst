@@ -16,6 +16,23 @@ Variables FAQ
     :depth: 3
 
 
+What is the variable name for the current price?
+------------------------------------------------
+
+
+
+What is the code for an up bar?
+-------------------------------
+
+
+
+Why do the OHLC built-ins sometimes return different values than the ones shown on the chart?
+---------------------------------------------------------------------------------------------
+
+
+
+
+
 
 .. image:: /images/TradingView-Logo-Block.svg
     :width: 200px

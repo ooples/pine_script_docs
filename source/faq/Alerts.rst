@@ -78,6 +78,21 @@ You can use other pre-defined placeholders to include variable information in al
     Note that there is still no way to include variable text in an alert message.
 
 
+
+I have a custom script that generates alerts. How do I run it on many symbols?
+------------------------------------------------------------------------------
+
+
+
+Is it possible to use a string that varies as an argument to the alertcondition() function’s message= parameter?
+----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
 .. image:: /images/TradingView-Logo-Block.svg
     :width: 200px
     :align: center
