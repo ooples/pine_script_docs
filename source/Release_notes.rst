@@ -33,6 +33,8 @@ Two new parameters for the built-in `ta.vwap() <https://www.tradingview.com/pine
 * ``anchor`` - Specifies the condition that triggers the reset of VWAP calculations. When ``true``, calculations reset; when ``false``, calculations proceed using the values accumulated since the previous reset.
 * ``stdev_mult`` -  If specified, the `ta.vwap() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}vwap>`_ calculates the standard deviation bands based on the main VWAP series and returns a ``[vwap, upper_band, lower_band]`` tuple.
 
+New overloaded versions of the `strategy.close() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}close>`_  and `strategy.close_all() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}close_all>`_ functions with the ``immediately`` parameter. When ``immediately`` is set to ``true``, the closing order will be executed on the tick where it has been placed, ignoring the strategy parameters that restrict the order execution to the open of the next bar.
+
 New built-in functions were added:
 
 * `timeframe.change() <https://www.tradingview.com/pine-script-reference/v5/#fun_timeframe{dot}change>`_ - Returns ``true`` on the first bar of a new ``timeframe``, ``false`` otherwise.
