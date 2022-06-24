@@ -20,7 +20,7 @@ Sessions
 Introduction
 ------------
 
-Session information is usable in two different ways in Pine Script™:
+Session information is usable in three different ways in Pine Script™:
 
 1. **Session strings** containing from-to start times and day information that can be used in functions
    such as `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and
