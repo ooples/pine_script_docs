@@ -1,4 +1,4 @@
-.. _PageOtherDataAndTimeframesFaq:
+.. _PageOtherTimeframesFaq:
 
 .. image:: /images/Pine_Script_logo.svg
    :alt: Pine Script™ logo
@@ -8,8 +8,8 @@
    :height: 100
 
 
-Other data and timeframes FAQ
-=============================
+Other timeframes (MTF) FAQ
+==========================
 
 
 .. contents:: :local:

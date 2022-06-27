@@ -8,8 +8,8 @@
    :height: 100
 
 
-Times, dates, sessions FAQ
-==========================
+Times, dates and sessions FAQ
+=============================
 
 
 .. contents:: :local:
