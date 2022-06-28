@@ -1,4 +1,4 @@
-.. _PageChartVisualsFaq:
+.. _PageVisualsFaq:
 
 .. image:: /images/Pine_Script_logo.svg
    :alt: Pine Script™ logo
@@ -8,8 +8,8 @@
    :height: 100
 
 
-Chart visuals FAQ
-=================
+Visuals FAQ
+===========
 
 
 .. contents:: :local:
