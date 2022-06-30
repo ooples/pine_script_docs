@@ -548,7 +548,7 @@ used to calculate the profits.
 
 In real-time, yesterday's session close rate is used.
 
-Leverage
+Margin
 --------
 
 When you open any position, the margin required to maintain the position will be calculated. If there are not enough funds, then a margin call occurs - the forced closure of part or all of the positions by a market order so that there is again enough funds to maintain the positions.
