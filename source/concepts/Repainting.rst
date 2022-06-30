@@ -1,5 +1,12 @@
 .. _PageRepainting:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Repainting
 ==========
 
@@ -84,14 +91,14 @@ Why? Because it needs to be qualified. Instead, one could ask:
 What's important is that you understand how the tools you use work, 
 and if their behavior is compatible with your objectives, repainting or not.
 As you will learn if you read this page, repainting is a complex matter. 
-It has many faces and many causes. Even if you don't program in Pine,
+It has many faces and many causes. Even if you don't program in Pine Script™,
 this page will help you understand the array of causes that can lead to repainting,
 and hopefully enable more meaningful discussions with script authors.
 
 
 
-For Pine coders
-^^^^^^^^^^^^^^^
+For Pine Script™ programmers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As we discussed in the previous section, not all types of repainting behavior need to be avoided at all costs,
 and as we will see in the following text, some can't.
@@ -126,7 +133,7 @@ On realtime bars (bars running when the instrument's market is open), however, t
 `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__,
 `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ and
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ values are not fixed;
-they can changes values many times before the realtime bar closes and its HLC values are fixed. They are *fluid*.
+they can change values many times before the realtime bar closes and its HLC values are fixed. They are *fluid*.
 This leads to a script sometimes working differently on historical data and in real time, 
 where only the `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__ price will not change during the bar.
 
@@ -443,7 +450,7 @@ Starting points
 ^^^^^^^^^^^^^^^
 
 Scripts begin executing on the chart's first historical bar, and then execute on each bar sequentially, 
-as is explained in this manual's page on Pine's :ref:`execution model <PageExecutionModel>`.
+as is explained in this manual's page on Pine Script™'s :ref:`execution model <PageExecutionModel>`.
 If the first bar changes, then the script will often not calculate the same way it did when the dataset began at a different point in time.
 
 The following factors have an impact on the quantity of bars you see on your charts, and their *starting point*:
@@ -482,3 +489,9 @@ When the chart is refreshed or the script is re-executed on those elapsed realti
 they will then be built and calculated using the historical data, which will contain those usually small price revisions, if any have been made.
 
 Historical data may also be revised for other reasons, e.g., for stock splits.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

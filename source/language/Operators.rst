@@ -1,5 +1,12 @@
 .. _PageOperators:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Operators
 =========
 
@@ -57,7 +64,7 @@ The solution to our conundrum requires:
 Arithmetic operators
 --------------------
 
-There are five arithmetic operators in Pine Script:
+There are five arithmetic operators in Pine Script™:
 
 +-------+------------------------------------+
 | ``+`` | Addition and string concatenation  |
@@ -88,7 +95,7 @@ The ``+`` operator also serves as the concatenation operator for strings. ``"EUR
 Comparison operators
 --------------------
 
-There are six comparison operators in Pine Script:
+There are six comparison operators in Pine Script™:
 
 +--------+---------------------------------+
 | ``<``  | Less Than                       |
@@ -120,7 +127,7 @@ Examples::
 Logical operators
 -----------------
 
-There are three logical operators in Pine Script:
+There are three logical operators in Pine Script™:
 
 +---------+---------------------------------+
 | ``not`` | Negation                        |
@@ -210,7 +217,7 @@ built-in variable two bars away from the current bar, one would use ``volume[2]`
 
 Because series grow dynamically, as the script moves on sucessive bars, the offset used with the operator will refer to different bars.
 Let’s see how the value returned by the same offset is dynamic, and why series are very different from arrays.
-In Pine, the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ variable, or ``close[0]`` which is equivalent,
+In Pine Script™, the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ variable, or ``close[0]`` which is equivalent,
 holds the value of the current bar's "close".
 If your code is now executing on the **third** bar of the *dataset* (the set of all bars on your chart), ``close`` will contain the price at the close of that bar,
 ``close[1]`` will contain the price at the close of the preceding bar (the dataset's second bar),
@@ -223,31 +230,31 @@ used in your code will now refer to the "close" of the third bar in the dataset.
 The close of the first bar in the dataset will now be ``close[3]``, 
 and this time ``close[4]`` will return `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__.
 
-In the Pine runtime environment, as your code is executed once for each historical bar in the dataset,
-starting from the left of the chart, Pine is adding a new element in the series at index 0
+In the Pine Script™ runtime environment, as your code is executed once for each historical bar in the dataset,
+starting from the left of the chart, Pine Script™ is adding a new element in the series at index 0
 and pushing the pre-existing elements in the series one index further away.
 Arrays, in comparison, can have constant or variable sizes, and their content or indexing structure
-is not modified by the runtime environment. Pine series are thus very different from arrays and
+is not modified by the runtime environment. Pine Script™ series are thus very different from arrays and
 only share familiarity with them through their indexing syntax.
 
 When the market for the chart's symbol is open and the script is executing on the chart's last bar, the *realtime bar*, 
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ returns the value of the current price. 
 It will only contain the actual closing price of the realtime bar the last time the script is executed on that bar, when it closes.
 
-Pine has a variable that contains the number of the bar the script is executing on: 
+Pine Script™ has a variable that contains the number of the bar the script is executing on: 
 `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__.
 On the first bar, `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__ 
 is equal to 0 and it increases by 1 on each successive bar the script executes on.
 On the last bar, `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__ is equal to the number of bars in the dataset minus one.
 
 There is another important consideration to keep in mind when using the ``[]`` operator in
-Pine. We have seen cases when a history reference may return the `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
+Pine Script™. We have seen cases when a history reference may return the `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__
 value. `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ represents a value which is not a number and
 using it in any expression will produce a result that is also `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ (similar
 to `NaN <https://en.wikipedia.org/wiki/NaN>`__).
 Such cases often happen during the script's calculations in the
 early bars of the dataset, but can also occur in later bars under certain conditions.
-If your Pine code does not explicitly provide for handling these special cases,
+If your Pine Script™ code does not explicitly provide for handling these special cases,
 they can introduce invalid results in your script's calculations
 which can ripple through all the way to the realtime bar.
 The `na <https://www.tradingview.com/pine-script-reference/v5/#fun_na>`__ and
@@ -350,7 +357,7 @@ the section on the :ref:`\`var\` declaration mode <PageVariableDeclarations_Var>
 Note that:
 
 - We declare ``pHi`` with this code: ``var float pHi = na``. The `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ 
-  keyword tells Pine that we only want that variable initialized with `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ on the dataset's first bar. 
+  keyword tells Pine Script™ that we only want that variable initialized with `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`__ on the dataset's first bar. 
   The ``float`` keyword tells the compiler we are declaring a variable of type "float". This is necessary because, contrary to most cases, 
   the compiler cannot automatically determine the type of the value on the right side of the ``=`` sign.
 - While the variable declaration will only be executed on the first bar because it uses `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__, 
@@ -377,3 +384,8 @@ Note that:
 
 See the :ref:`Variable reassignment <PageVariableDeclarations_VariableReassignment>` section for more information on how to reassign values to variables.
 
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

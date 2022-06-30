@@ -1,5 +1,12 @@
 .. _PageStrategies:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Strategies
 ==========
 
@@ -14,8 +21,8 @@ strategy trading on historical data) and *forwardtesting* (emulation
 of a strategy trading on realtime data) according to your
 algorithms.
 
-A strategy written in Pine has many of the same capabilities
-as a Pine *indicator*. When you write a strategy, it must start
+A strategy written in Pine Script™ has many of the same capabilities
+as a Pine Script™ *indicator*. When you write a strategy, it must start
 with the `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
 function call. Strategies may plot data,
 but they can also place, modify and cancel orders. They also have
@@ -367,7 +374,7 @@ the same way as when trading with a real broker.
 OCA groups
 ----------
 
-It is possible to put orders in 2 different One-Cancells-All (OCA) groups in Pine Script.
+It is possible to put orders in 2 different One-Cancells-All (OCA) groups in Pine Script™.
 
 `strategy.oca.cancel <https://www.tradingview.com/pine-script-reference/v5/#var_strategy{dot}oca{dot}cancel>`__
    As soon as an order from the group is filled
@@ -561,6 +568,7 @@ Position Size * Entry Price
 
 2. Calculate the Market Value of Security (MVS).
 
+
 Position Size * Current Price
 
 3. Calculate the Open Profit. If the trade direction is short and Open Profit is a positive number, the result should still be negative, so we multiply the absolute value of our calculation by -1.
@@ -620,3 +628,8 @@ Our first entry happened on the opening of the bar on 16 Sep 2010. We buy 682438
 9. Shares to cover the loss: TRUNCATE(-108276.76 / 3.9) = TRUNCATE(-27763.27) = -27763
 
 10. Margin Call Size: -27763 * 4 = - 111052
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

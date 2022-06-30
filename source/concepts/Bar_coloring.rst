@@ -1,10 +1,17 @@
 .. _PageBarColoring:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Bar coloring
 ============
 
 The `barcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_barcolor>`__ function lets you color chart bars.
-It is the only Pine function that allows a script running in a pane to affect the chart.
+It is the only Pine Script™ function that allows a script running in a pane to affect the chart.
 
 The function's signature is::
 
@@ -35,3 +42,7 @@ Note that:
   ternary operator expressions to select the color.
 
 
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

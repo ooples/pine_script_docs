@@ -1,6 +1,6 @@
-# Pine v5 User Manual
+# Pine Script™ v5 User Manual
 
-This repo contains the source for the [Pine v5 User Manual](https://www.tradingview.com/pine-script-docs/en/v5/index.html) of TradingView's Pine programming language, which deprecates the [Pine v4 User Manual](https://www.tradingview.com/pine-script-docs/en/v4/index.html). The source uses [reStructuredText markup](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html) and we use [Sphinx](https://www.sphinx-doc.org/en/master/) to build the final HTML content.
+This repo contains the source for the [Pine Script™ v5 User Manual](https://www.tradingview.com/pine-script-docs/en/v5/index.html) of TradingView's Pine programming language, which deprecates the [Pine Script™ v4 User Manual](https://www.tradingview.com/pine-script-docs/en/v4/index.html). The source uses [reStructuredText markup](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html) and we use [Sphinx](https://www.sphinx-doc.org/en/master/) to build the final HTML content.
 
 
 ## How to build html docs

@@ -1,5 +1,12 @@
 .. _PageDebugging:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Debugging
 =========
 
@@ -11,12 +18,12 @@ Debugging
 Introduction
 ------------
 
-TradingView's close integration between the Pine Editor and charts allows for efficient and interactive debugging of Pine code. 
-Once a Pine programmer understands the most appropriate technique to use in each situation, he will be able to debug scripts quickly and thoroughly. 
-This page demonstrates the most useful techniques to debug Pine code.
+TradingView's close integration between the Pine Script™ Editor and charts allows for efficient and interactive debugging of Pine Script™ code. 
+Once a Pine Script™ programmer understands the most appropriate technique to use in each situation, he will be able to debug scripts quickly and thoroughly. 
+This page demonstrates the most useful techniques to debug Pine Script™ code.
 
-If you are not yet familiar with Pine's execution model, it is important that you read the :ref:`Execution model <Page_ExecutionModel>` page of this User Manual 
-so you understand how your debugging code will behave in the Pine environment.
+If you are not yet familiar with Pine Script™'s execution model, it is important that you read the :ref:`Execution model <Page_ExecutionModel>` page of this User Manual 
+so you understand how your debugging code will behave in the Pine Script™ environment.
 
 
 
@@ -117,7 +124,7 @@ where:
 Displaying strings
 ------------------
 
-Pine labels must be used to display strings. Labels only appear in the script's display area; strings shown in labels do not appear in the Data Window or anywhere else.
+Pine Script™ labels must be used to display strings. Labels only appear in the script's display area; strings shown in labels do not appear in the Data Window or anywhere else.
 
 
 Labels on each bar
@@ -209,7 +216,7 @@ Note that:
   Using different combinations of positions and characters allows the simultaneous identification of multiple conditions on a single bar.
   **This is one of our preferred methods to identify conditions on the chart.**
 - **Method #3** also uses a `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ call, but this time the character is positioned on the RSI line. 
-  In order to achieve this, we use `location.absolute <https://www.tradingview.com/pine-script-reference/v5/#var_location{dot}absolute>`__ and Pine's 
+  In order to achieve this, we use `location.absolute <https://www.tradingview.com/pine-script-reference/v5/#var_location{dot}absolute>`__ and Pine Script™'s 
   `?: <https://www.tradingview.com/pine-script-reference/v5/#op_{question}{colon}>`__ ternary conditional operator to define a conditional expression 
   where a *y* position is used only when our ``rIsLow`` condition is true. When it is not true, ``na`` is used, so no character is displayed.
 - **Method #4** uses `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ to plot a blue up arrow in the top part of the indicator's display area when our condition is met.
@@ -289,7 +296,7 @@ In this script we have written the ``hlca()`` function to calculate a weighed av
 We need to inspect the value of ``hlca`` in the function's local scope as the function calculates, bar to bar. 
 We cannot access the ``hlca`` variable used inside the function from the script's global scope. 
 We thus need another mechanism to pull that variable's value from inside the function's local scope, while still being able to use the function's result.
-We can use Pine's ability to have functions return a tuple to gain access to the variable::
+We can use Pine Script™'s ability to have functions return a tuple to gain access to the variable::
 
     //@version=5
     indicator("Debugging from inside functions", "", true)
@@ -433,7 +440,7 @@ When loops with numerous iterations make displaying all their values impractical
 Tips
 ----
 
-The two techniques we use most frequently to debug our Pine code are::
+The two techniques we use most frequently to debug our Pine Script™ code are::
 
     plotchar(v, "v", "", location.top, size = size.tiny)
 
@@ -442,11 +449,11 @@ to plot variables of type *float*, *int* or *bool* in the indicator's values and
     print(txt) => var _label = label.new(bar_index, na, txt, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left), label.set_xy(_label, bar_index, ta.highest(10)[1]), label.set_text(_label, txt)
     print(stringName)
 
-As we use AutoHotkey for Windows to speed repetitive tasks, we include these lines in our AutoHotkey script (this is **not** Pine code):
+As we use AutoHotkey for Windows to speed repetitive tasks, we include these lines in our AutoHotkey script (this is **not** Pine Script™ code):
 
 .. code-block:: ahk
 
-    ; ————— This is AHK code, not Pine. —————
+    ; ————— This is AHK code, not Pine Script™. —————
     ^+f:: SendInput plotchar(^v, "^v", "", location.top, size = size.tiny){Return}
     ^+p:: SendInput print(txt) => var lbl = label.new(bar_index, na, txt, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left), label.set_xy(lbl, bar_index, highest(10)[1]), label.set_text(lbl, txt)`nprint(){Left}
 
@@ -464,3 +471,9 @@ an empty call to the function with the cursor placed so all that's left to do is
     print()
 
 Note: AutoHotkey works only on Windows systems. Keyboard Maestro or others can be substituted on Apple systems.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

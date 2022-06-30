@@ -1,5 +1,12 @@
 .. _PageConditionalStructures:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Conditional structures
 ======================
 
@@ -10,7 +17,7 @@ Conditional structures
 Introduction
 ------------
 
-The conditional structures in Pine are `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ and
+The conditional structures in Pine Script™ are `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ and
 `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__. They can be used:
 
 - For their side effects, i.e., when they don't return a value but do things,
@@ -23,7 +30,7 @@ and `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ s
 `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__
 inside another structure.
 
-Some Pine built-in functions cannot be called from within the local blocks of conditional structures. They are:
+Some Pine Script™ built-in functions cannot be called from within the local blocks of conditional structures. They are:
 `alertcondition() <https://www.tradingview.com/pine-script-reference/v5/#fun_alertcondition>`__,
 `barcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_barcolor>`__,
 `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__,
@@ -128,7 +135,7 @@ Note that:
   `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ function call,
   which returns a label ID pointing to the label it creates. 
   We use that call to set the label's properties because once set, they will persist until we change them.
-- What happens next is that on each successive bar the Pine runtime will skip the initialization of ``ourLabel``, 
+- What happens next is that on each successive bar the Pine Script™ runtime will skip the initialization of ``ourLabel``, 
   and the `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
   structure's condition (`barstate.islast <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islast>`__)
   is evaluated. It returns ``false`` on all bars until the last one, 
@@ -167,7 +174,7 @@ where:
 
 - Parts enclosed in square brackets (``[]``) can appear zero or one time, and those enclosed in curly braces (``{}``) can appear zero or more times.
 - <declaration_mode> is the variable's :ref:`declaration mode <PageVariableDeclarations_DeclarationModes>`
-- <type> is optional, as in almost all Pine variable declarations (see :ref:`types <PageTypeSystem_Types>`)
+- <type> is optional, as in almost all Pine Script™ variable declarations (see :ref:`types <PageTypeSystem_Types>`)
 - <identifier> is the variable's :ref:`name <PageIdentifiers>`
 - <expression> can be a literal, a variable, an expression or a function call.
 - <local_block> consists of zero or more statements followed by a return value, which can be a tuple of values.
@@ -233,7 +240,7 @@ where:
 
 - Parts enclosed in square brackets (``[]``) can appear zero or one time, and those enclosed in curly braces (``{}``) can appear zero or more times.
 - <declaration_mode> is the variable's :ref:`declaration mode <PageVariableDeclarations_DeclarationModes>`
-- <type> is optional, as in almost all Pine variable declarations (see :ref:`types <PageTypeSystem_Types>`)
+- <type> is optional, as in almost all Pine Script™ variable declarations (see :ref:`types <PageTypeSystem_Types>`)
 - <identifier> is the variable's :ref:`name <PageIdentifiers>`
 - <expression> can be a literal, a variable, an expression or a function call.
 - <local_block> consists of zero or more statements followed by a return value, which can be a tuple of values.
@@ -379,3 +386,9 @@ which is the `na <https://www.tradingview.com/pine-script-reference/v5/#var_na>`
 value, cast to an integer using `int() <https://www.tradingview.com/pine-script-reference/v5/#fun_int>`__.
 This way, they both return an "int", which is not assigned to any variable.
 Without these additions to our code, it would not compile.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

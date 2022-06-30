@@ -1,5 +1,12 @@
 .. _PageArrays:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Arrays
 ======
 
@@ -13,19 +20,19 @@ Introduction
 
 Arrays can be used to store multiple values in one data structure. Think of them as a better way to handle cases where you would
 otherwise need a set of variables named ``price00``, ``price01`` and ``price02``. Arrays are an advanced feature used for scripts 
-requiring intricate data-handling. If you are a beginning Pine programmer, we recommend you become familiar with other, 
-more accessible Pine features before you tackle arrays.
+requiring intricate data-handling. If you are a beginning Pine Script™ programmer, we recommend you become familiar with other, 
+more accessible Pine Script™ features before you tackle arrays.
 
-Pine arrays are one-dimensional. All elements of an array are of the same type, which can be 
+Pine Script™ arrays are one-dimensional. All elements of an array are of the same type, which can be 
 "int", "float", "bool", "color", "string", "line", "label", "box" or "table", always of "series" form. 
 Arrays are referenced using an array ID similar to line or label IDs. 
-Pine does not use an indexing operator to reference individual array elements;
+Pine Script™ does not use an indexing operator to reference individual array elements;
 instead, functions like `array.get() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}get>`__ 
 and `array.set() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}set>`__ are used to read and write values of array elements. 
-Array values can be used in all Pine expressions and functions where a value of "series" form is allowed.
+Array values can be used in all Pine Script™ expressions and functions where a value of "series" form is allowed.
 
 Elements within an array are referred to using an *index*, which starts at 0 and extends to the number or elements in the array, minus one.
-Arrays in Pine can be sized dynamically, so the number of elements in the array can be modified within one iteration of the script on a bar,
+Arrays in Pine Script™ can be sized dynamically, so the number of elements in the array can be modified within one iteration of the script on a bar,
 and vary across bars. Multiple arrays can be used in the same script. The size of arrays is limited to 100,000.
 
 .. note:: We will use *beginning* of an array to designate index 0, and *end* of an array to designate the array's element with the highest index value. We will also extend the meaning of *array* to include array IDs, for the sake of brevity.
@@ -243,7 +250,7 @@ Scope
 -----
 
 Arrays can be declared in a script's global scope, as well as in the local scope of a function or an ``if`` branch.
-One major distinction between Pine arrays and variables declared in the global scope, is that global arrays can be modified from within the local scope of a function.
+One major distinction between Pine Script™ arrays and variables declared in the global scope, is that global arrays can be modified from within the local scope of a function.
 This new capability can be used to implement global variables that can be both read and set from within any function in the script. 
 We use it here to calculate progressively lower or higher levels::
 
@@ -273,12 +280,12 @@ We use it here to calculate progressively lower or higher levels::
 History referencing
 -------------------
 
-Past instances of array IDs or elements cannot be referenced directly using Pine's 
+Past instances of array IDs or elements cannot be referenced directly using Pine Script™'s 
 `[ ] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ 
 history-referencing operator. 
 One **cannot** write: ``array.get(a[1], 0)`` to fetch the value of the array's first element on the previous bar.
 
-In Pine, however, each call to a function leaves behind a series trail of function results on previous bars. 
+In Pine Script™, however, each call to a function leaves behind a series trail of function results on previous bars. 
 This series can in turn be used when working with arrays. One can thus write: ``ma = ta.sma(array.get(a, 0), 20)`` to calculate 
 the simple moving average of the value returned by the ``array.get(a, 0)`` call on the last 20 bars.
 
@@ -287,7 +294,7 @@ For ``previousClose1`` we use the result of the ``array.get(a, 0)`` function cal
 Since on the previous bar the array's only element was initialized to that bar's ``close`` (as it is on every bar), 
 referring to ``array.get(a, 0)[1]`` returns that bar's ``close``, i.e., the value of the ``array.get(a, 0)`` call on the previous bar.
 
-For ``previousClose2`` we use the history-referencing operator to fetch the previous bar's ``close`` in normal Pine fashion::
+For ``previousClose2`` we use the history-referencing operator to fetch the previous bar's ``close`` in normal Pine Script™ fashion::
 
     //@version=5
     indicator("History referencing")
@@ -306,7 +313,7 @@ For ``ma1`` we use `ta.sma() <https://www.tradingview.com/pine-script-reference/
 on the series of values returned by the ``array.get(a, 0)`` function call on each bar. 
 Since at this point in the script the call returns the current bar's ``close``, 
 that is the value used for the average's calculation. 
-We evaluate ``ma2`` using the usual way we would calculate a simple average in Pine::
+We evaluate ``ma2`` using the usual way we would calculate a simple average in Pine Script™::
 
     //@version=5
     indicator("History referencing")
@@ -388,7 +395,7 @@ Using an array as a stack
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Stacks are LIFO (last in, first out) constructions. They behave somewhat like a vertical pile of books to which books can only be added or removed one at a time,
-always from the top. Pine arrays can be used as a stack, in which case you will use the 
+always from the top. Pine Script™ arrays can be used as a stack, in which case you will use the 
 `array.push() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}push>`__ and 
 `array.pop() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}pop>`__ 
 functions to add and remove elements at the end of the array.
@@ -479,8 +486,8 @@ but this does not cause runtime errors. Let's look at our code::
 Calculations on arrays
 ----------------------
 
-While series variables can be viewed as a horizontal set of values stretching back in time, Pine's one-dimensional arrays can be viewed as vertical structures 
-residing on each bar. As an array's set of elements is not a :ref:`time series <PageTypeSystem_TimeSeries>`, Pine's usual mathematical functions are not allowed on them. Special-purpose functions must be used to operate on all of an array's values. The available functions are: 
+While series variables can be viewed as a horizontal set of values stretching back in time, Pine Script™'s one-dimensional arrays can be viewed as vertical structures 
+residing on each bar. As an array's set of elements is not a :ref:`time series <PageTypeSystem_TimeSeries>`, Pine Script™'s usual mathematical functions are not allowed on them. Special-purpose functions must be used to operate on all of an array's values. The available functions are: 
 `array.avg() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}avg>`__, 
 `array.covariance() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}covariance>`__,
 `array.min() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}min>`__, 
@@ -493,7 +500,7 @@ residing on each bar. As an array's set of elements is not a :ref:`time series <
 `array.sum() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}sum>`__, 
 `array.variance() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}variance>`__.
 
-Note that contrary to the usual mathematical functions in Pine, those used on arrays do not return ``na`` when some of the values they 
+Note that contrary to the usual mathematical functions in Pine Script™, those used on arrays do not return ``na`` when some of the values they 
 calculate on have ``na`` values. There are a few exceptions to this rule:
 
     * When all array elements have ``na`` value or the array contains no elements, ``na`` is returned. ``array.standardize()`` however, will return an empty array.
@@ -678,8 +685,8 @@ We can also find the last occurrence of a value with
 Error handling
 --------------
 
-Malformed ``array.*()`` call syntax in Pine scripts will cause the usual **compiler** error messages to appear in Pine Editor's console, at the bottom of the window, 
-when you save a script. Refer to the `Pine Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__ 
+Malformed ``array.*()`` call syntax in Pine scripts will cause the usual **compiler** error messages to appear in Pine Script™ Editor's console, at the bottom of the window, 
+when you save a script. Refer to the `Pine Script™ v5 Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__ 
 when in doubt regarding the exact syntax of function calls.
 
 Scripts using arrays can also throw **runtime** errors, which appear in place of the indicator's name on charts. 
@@ -688,7 +695,7 @@ We discuss those runtime errors in this section.
 Index xx is out of bounds. Array size is yy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This will most probably be the most frequent error you encounter. It will happen when you reference an inexistent array index. 
+This will most probably be the most frequent error you encounter. It will happen when you reference an nonexistent array index. 
 The "xx" value will be the value of the faulty index you tried to use, and "yy" will be the size of the array. 
 Recall that array indices start at zero—not one—and end at the array's size, minus one. An array of size 3's last valid index is thus ``2``.
 
@@ -799,3 +806,8 @@ the parent array's indices 3 to 4, is pointing out of the parent array's boundar
     c = array.indexof(b, 2)
     plot(c)
 
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

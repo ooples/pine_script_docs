@@ -1,5 +1,12 @@
 .. _PageBackgrounds:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Backgrounds
 ===========
 
@@ -70,7 +77,7 @@ Note that:
   the local block returns the ``NO_COLOR`` color so that no background is displayed in that case.
 - We first initialize constants using our base colors, which include the ``40`` transparency
   in hex notation at the end. 40 in the hexadecimal notation on the reversed 00-FF scale for transparency
-  corresponds to 75 in Pine's 0-100 decimal scale for transparency.
+  corresponds to 75 in Pine Script™'s 0-100 decimal scale for transparency.
 - We provide color inputs allowing script users to change the default colors we propose.
 
 In our next example, we generate a gradient for the background of a CCI line::
@@ -123,3 +130,8 @@ Note that:
   call plots the thin, 1-pixel wide black line.
 
 See the :ref:`Colors <PageColors>` page for more examples of backgrounds.
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

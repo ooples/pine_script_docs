@@ -1,5 +1,12 @@
 .. _PageNonStandardChartsData:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Non-standard charts data
 ========================
 
@@ -111,7 +118,7 @@ A new brick is only drawn after the price passes the top or bottom by a predeter
 The `ticker.renko() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}renko>`__
 function creates a ticker id which can be used with 
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
-to fetch Renko values, but there is no Pine function to draw Renko bars on the chart::
+to fetch Renko values, but there is no Pine Script™ function to draw Renko bars on the chart::
 
     //@version=5
     indicator("", "", true)
@@ -129,7 +136,7 @@ price changes [#ticks]_.
 The `ticker.linebreak() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}linebreak>`__
 function creates a ticker id which can be used with 
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
-to fetch "Line Break" values, but there is no Pine function to draw such bars on the chart::
+to fetch "Line Break" values, but there is no Pine Script™ function to draw such bars on the chart::
 
     //@version=5
     indicator("", "", true)
@@ -148,7 +155,7 @@ beyond a predetermined amount.
 The `ticker.kagi() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}kagi>`__
 function creates a ticker id which can be used with 
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
-to fetch "Kagi" values, but there is no Pine function to draw such bars on the chart::
+to fetch "Kagi" values, but there is no Pine Script™ function to draw such bars on the chart::
 
     //@version=5
     indicator("", "", true)
@@ -167,7 +174,7 @@ rises, and O's are plotted when price drops.
 The `ticker.pointfigure() <https://www.tradingview.com/pine-script-reference/v5/#fun_ticker{dot}pointfigure>`__
 function creates a ticker id which can be used with 
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
-to fetch "PnF" values, but there is no Pine function to draw such bars on the chart.
+to fetch "PnF" values, but there is no Pine Script™ function to draw such bars on the chart.
 Every column of X's or O's is represented with four numbers. You may
 think of them as synthetic OHLC PnF values::
 
@@ -183,3 +190,9 @@ think of them as synthetic OHLC PnF values::
 
 .. [#ticks] On TradingView, Renko, Line Break, Kagi and PnF chart types are generated from OHLC values from a lower timeframe.
    These chart types thus represent only an approximation of what they would be like if they were generated from tick data.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

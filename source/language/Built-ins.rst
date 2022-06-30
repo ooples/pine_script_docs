@@ -1,5 +1,12 @@
 .. _PageBuiltInFunctions:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Built-ins
 =========
 
@@ -10,20 +17,20 @@ Built-ins
 Introduction
 ------------
 
-Pine has hundreds of *built-in* variables and functions. 
+Pine Script™ has hundreds of *built-in* variables and functions. 
 They provide your scripts with valuable information and make calculations for you, dispensing you from coding them.
-The better you know the Pine built-ins, the more you will be able to do with your Pine scripts.
+The better you know the Pine Script™ built-ins, the more you will be able to do with your Pine scripts.
 
-In this page we present an overview of some of Pine's built-in variables and functions.
+In this page we present an overview of some of Pine Script™'s built-in variables and functions.
 They will be covered in more detail in the pages of this manual covering specific themes.
 
-All Pine built-in variables and functions are defined in the 
-`Pine Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__. 
-It is called a "Reference Manual" because it is the definitive reference on the Pine language.
-It is an essential tool that will accompany you anytime you code in Pine,
+All Pine Script™ built-in variables and functions are defined in the 
+`Pine Script™ v5 Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__. 
+It is called a "Reference Manual" because it is the definitive reference on the Pine Script™ language.
+It is an essential tool that will accompany you anytime you code in Pine Script™,
 whether you are a beginner or an expert. If you are learning your first programming language,
 make the `Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__
-your friend. Ignoring it will make your programming experience with Pine difficult and frustrating — as
+your friend. Ignoring it will make your programming experience with Pine Script™ difficult and frustrating — as
 it would with any other programming language.
 
 Variables and functions in the same family share the same *namespace*, which is a prefix to the function's name. 
@@ -195,7 +202,7 @@ Other functions return a result, but we don't always use it, e.g.:
 `array.pop() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}pop>`__,
 `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__, etc.
 
-All Pine built-in functions are defined in the `Pine Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__. 
+All Pine Script™ built-in functions are defined in the `Pine Script™ v5 Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__. 
 You can click on any of the function names listed here to go to its entry in the Reference Manual, 
 which documents the function's signature, i.e., the list of *parameters* it accepts and the form-type of the value(s) it returns 
 (a function can return more than one result). The Reference Manual entry will also list, for each parameter:
@@ -239,7 +246,7 @@ Note that:
 - We use the built-in variable `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ as the argument for the ``source`` parameter.
 - We use ``20`` as the argument for the ``length`` parameter.
 - If placed in the global scope (i.e., starting in a line's first position), 
-  it will be executed by the Pine runtime on each bar of the chart.
+  it will be executed by the Pine Script™ runtime on each bar of the chart.
 
 We can also use the parameter names when calling the function. Parameter names are called *keyword arguments* when used in a function call::
 
@@ -248,7 +255,7 @@ We can also use the parameter names when calling the function. Parameter names a
 You can change the position of arguments when using keyword arguments, but only if you use them for all your arguments. 
 When calling functions with many parameters such as `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
 you can also forego keyword arguments for the first arguments, as long as you don't skip any. If you skip some, 
-you must then use keyword arguments so the Pine compiler can figure out which parameter they correspond to, e.g.::
+you must then use keyword arguments so the Pine Script™ compiler can figure out which parameter they correspond to, e.g.::
 
     indicator("Example", "Ex", true, max_bars_back = 100)
 
@@ -256,8 +263,14 @@ Mixing things up this way is not allowed::
 
     indicator(precision = 3, "Example") // Compilation error!
     
-**When calling Pine built-ins, it is critical to ensure that the arguments you use are of the form and type required, which will vary for each parameter.**
+**When calling Pine Script™ built-ins, it is critical to ensure that the arguments you use are of the form and type required, which will vary for each parameter.**
 
-To learn how to do this, one needs to understand Pine's :ref:`type system <PageTypeSystem>`.
+To learn how to do this, one needs to understand Pine Script™'s :ref:`type system <PageTypeSystem>`.
 The Reference Manual entry for each built-in function includes an "ARGUMENTS" section
 which lists the form-type required for the argument supplied to each of the function's parameters.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

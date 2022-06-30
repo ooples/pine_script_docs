@@ -1,5 +1,12 @@
 .. _PageInputs:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Inputs
 ======
 
@@ -10,8 +17,7 @@ Inputs
 Introduction
 ------------
 
-Script inputs are the means by which Pine scripts can receive user inputs,
-which allows Pine programmers to write more flexible scripts because their behavior can adapt to user preferences.
+Inputs allow scripts to receive values that users can change. Using them for key values will make your scripts more adaptable to user preferences.
 
 The following script plots a 20-period `simple moving average (SMA) <https://www.tradingview.com/u/?solution=43000502589>`__
 using ``ta.sma(close, 20)``. While it is simple to write, it is not very flexible because that specific MA is all it will ever plot::
@@ -82,7 +88,7 @@ Input function definitions typically contain many parameters,
 which allow you to control the default value of inputs, their limits, 
 and their organization in the "Inputs" tab.
 
-An ``input*.()`` call being just another function call in Pine, its result can be combined with
+An ``input*.()`` call being just another function call in Pine Script™, its result can be combined with
 :ref:`arithmetic <PageOperators_ArithmeticOperators>`, :ref:`comparison <ComparisonOperators>`,
 :ref:`logical <PageOperators_LogicalOperators>` or :ref:`ternary <PageOperators_TernaryOperator>`
 operators to form an expression to be assigned to the variable. Here, we compare the result of our call to
@@ -164,18 +170,19 @@ Input types
 -----------
 
 The next sections explain what each input function does.
-As we procede, we will explore the different ways you can use input functions and organize their display.
+As we proceed, we will explore the different ways you can use input functions and organize their display.
 
 
 Simple input
 ^^^^^^^^^^^^
 
 `input() <https://www.tradingview.com/pine-script-reference/v5/#fun_input>`__ is a simple, 
-generic function that supports the fundamental Pine types: "int", "float", "bool", "color" and "string".
+generic function that supports the fundamental Pine Script™ types: "int", "float", "bool", "color" and "string".
 It also supports "source" inputs, which are price-related values such as
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__,
-`hl2 <https://www.tradingview.com/pine-script-reference/v5/#hl2>`__, and
-`hlc3 <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__,
+`hl2 <https://www.tradingview.com/pine-script-reference/v5/#hl2>`__,
+`hlc3 <https://www.tradingview.com/pine-script-reference/v5/#var_hlc3>`__, and
+`hlcc4 <https://www.tradingview.com/pine-script-reference/v5/#var_hlcc4>`__,
 or which can be used to receive the output value of another script.
 
 Its signature is:
@@ -293,7 +300,7 @@ Note that:
 - We have added an input using `input.bool() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}bool>`__
   to set the value of ``showBBInput``.
 - We use the ``inline`` parameter in that input and in the one for ``bbFactorInput`` to bring them on the same line.
-  We use ``"01"`` for its argument in both cases. That is how the Pine compiler recognizes that they belong on the same line.
+  We use ``"01"`` for its argument in both cases. That is how the Pine Script™ compiler recognizes that they belong on the same line.
   The particular string used as an argument is unimportant and does not appear anywhere in the "Inputs" tab;
   it is only used to identify which inputs go on the same line.
 - We have vertically aligned the ``title`` arguments of our ``input.*()`` calls to make them easier to read.
@@ -604,3 +611,9 @@ Note that:
   Unicode spaces are necessary because ordinary spaces would be stripped from the label.
   You can achieve precise alignment by combining different quantities and types of Unicode spaces.
   See here for a list of `Unicode spaces <https://jkorpela.fi/chars/spaces.html>`__ of different widths.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

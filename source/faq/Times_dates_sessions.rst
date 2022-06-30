@@ -1,4 +1,4 @@
-.. _PageFormattingValues:
+.. _PageTimesDatesSessionsFaq:
 
 .. image:: /images/Pine_Script_logo.svg
    :alt: Pine Script™ logo
@@ -7,11 +7,14 @@
    :width: 100
    :height: 100
 
-Formatting values
-=================
+
+Times, dates, sessions FAQ
+==========================
+
 
 .. contents:: :local:
-    :depth: 2
+    :depth: 3
+
 
 
 .. image:: /images/TradingView-Logo-Block.svg

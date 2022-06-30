@@ -1,5 +1,12 @@
 .. _PagePlots:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Plots
 =====
 
@@ -42,7 +49,7 @@ in an overlay script:
 Note that:
 
 - The first `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ call plots a 1-pixel blue line across the bar highs.
-- The secong plots crosses at the mid-point of bodies. The crosses are colored lime when the bar is up and purple when it is down.
+- The second plots crosses at the mid-point of bodies. The crosses are colored lime when the bar is up and purple when it is down.
   The argument used for ``linewidth`` is ``6`` but it is not a pixel value; just a relative size.
 - The third call plots a 3-pixel wide step line following the low point of bodies.
 - The fourth call plot a gray circle at the bars' `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__.
@@ -107,7 +114,7 @@ Note that:
 
 `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ 
 calls must always be placed in a line's first position, which entails they are always in the script's global scope.
-They cannot be placed in user-defined functions or structures like `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
+They can't be placed in user-defined functions or structures like `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__,
 `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__, etc. 
 Calls to `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ **can**, however, 
 be designed to plot conditionally in two ways, which we cover in the :ref:`Conditional plots <PagePlots_ConditionalPlots>`
@@ -131,7 +138,7 @@ The parameters of `plot() <https://www.tradingview.com/pine-script-reference/v5/
 
 ``series``
    It is the only mandatory parameter. Its argument must be of "series int/float" type.
-   Note that because the auto-casting rules in Pine convert in the int 🠆 float 🠆 bool direction,
+   Note that because the auto-casting rules in Pine Script™ convert in the int 🠆 float 🠆 bool direction,
    a "bool" type variable cannot be used as is; it must be converted to an "int" or a "float" for use as an argument.
    For example, if ``newDay`` is of "bool" type, 
    then ``newDay ? 1 : 0`` can be used to plot 1 when the variable is ``true``, and zero when it is ``false``.
@@ -322,7 +329,7 @@ We'll look here at a few examples.
 
 The value of the ``color`` parameter in `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ can be a constant, 
 such as one of the built-in :ref:`constant colors <PageColors_ConstantColors>` or a :ref:`color literal <PageTypeSystem_Color>`.
-In Pine, the form-type of such colors is called **"const color"** (see the :ref:`Type system <PageTypeSystem>` page). 
+In Pine Script™, the form-type of such colors is called **"const color"** (see the :ref:`Type system <PageTypeSystem>` page). 
 They are known at compile time::
 
     //@version=5
@@ -401,7 +408,7 @@ Note that:
 Levels
 ------
 
-Pine has an `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ 
+Pine Script™ has an `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ 
 function to plot horizontal lines (see the page on :ref:`Levels <PageLevels>`).
 `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ 
 is useful because it has some line styles unavailable with `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__,
@@ -583,3 +590,9 @@ Note that:
 - The manipulations we make here are typical of the compromises required to bring two indicators
   with different scales in the same visual space, even when their values, contrary to 
   `MACD <https://www.tradingview.com/u/?solution=43000502344>`__, are bounded in a fixed range.
+
+
+  .. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

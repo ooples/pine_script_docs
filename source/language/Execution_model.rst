@@ -1,22 +1,29 @@
 .. _PageExecutionModel:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Execution model
 ===============
 
 .. contents:: :local:
     :depth: 2
 
-The execution model of the Pine runtime is intimately linked to Pine's :ref:`time series <PageTimeSeries>` and :ref:`type system <PageTypeSystem>`. 
-Understanding all three is key to making the most of the power of Pine.
+The execution model of the Pine Script™ runtime is intimately linked to Pine Script™'s :ref:`time series <PageTimeSeries>` and :ref:`type system <PageTypeSystem>`. 
+Understanding all three is key to making the most of the power of Pine Script™.
 
 The execution model determines how your script is executed on charts, and thus how the code you write in scripts works. 
-Your Pine code would do nothing were it not for Pine's runtime, which kicks in after your code has compiled and it is executed on your chart 
+Your Pine Script™ code would do nothing were it not for Pine Script™'s runtime, which kicks in after your code has compiled and it is executed on your chart 
 because one of the :ref:`events triggering the execution of a script <PageExecutionModel_Events>` has occurred.
 
-When a Pine script is loaded on a chart it executes once on each historical bar using the available OHLCV (open, high, low, close, volume) values for each bar. 
+When a Pine Script™ is loaded on a chart it executes once on each historical bar using the available OHLCV (open, high, low, close, volume) values for each bar. 
 Once the script's execution reaches the rightmost bar in the dataset, if trading is currently active on the chart's symbol, 
-then Pine *indicators* will execute once every time an *update* occurs, i.e., price or volume changes. 
-Pine *strategies* will by default only execute when the rightmost bar closes, but they can also be configured to execute on every update, like indicators do.
+then Pine Script™ *indicators* will execute once every time an *update* occurs, i.e., price or volume changes. 
+Pine Script™ *strategies* will by default only execute when the rightmost bar closes, but they can also be configured to execute on every update, like indicators do.
 
 All symbol/timeframe pairs have a dataset comprising a limited number of bars. 
 When you scroll a chart to the left to see the dataset's earlier bars, the corresponding bars are loaded on the chart. 
@@ -72,7 +79,7 @@ The process then repeats until all historical bars in the dataset are processed 
 Calculation based on realtime bars
 ----------------------------------
 
-The behavior of a Pine script on the realtime bar is very different than on historical bars. 
+The behavior of a Pine Script™ on the realtime bar is very different than on historical bars. 
 Recall that the realtime bar is the rightmost bar on the chart when trading is active on the chart's symbol. 
 Also, recall that strategies can behave in two different ways in the realtime bar. 
 By default, they only execute when the realtime bar closes, but the ``calc_on_every_tick`` parameter of the 
@@ -84,7 +91,7 @@ scripts execute every time an update occurs during a realtime bar. This entails 
 
 **Note:** In the realtime bar, the ``close`` variable always represents the **current price**. 
 Similarly, the ``high`` and ``low`` built-in variables represent the highest high and lowest low reached since the realtime bar's beginning. 
-The Pine built-in variables will only represent the realtime bar's final values on the bar's last update.
+The Pine Script™ built-in variables will only represent the realtime bar's final values on the bar's last update.
 
 Let's follow our script example in the realtime bar.
 
@@ -122,7 +129,7 @@ Events triggering the execution of a script
 A script is executed on the complete set of bars on the chart when one of the following events occurs:
 
     * A new symbol or timeframe is loaded on a chart.
-    * A script is saved or added to the chart, from the Pine Editor or the chart's "Indicators & strategies" dialog box.
+    * A script is saved or added to the chart, from the Pine Script™ Editor or the chart's "Indicators & strategies" dialog box.
     * A value is modified in the script's "Settings/Inputs" dialog box.
     * A value is modified in a strategy's "Settings/Properties" dialog box.
     * A browser refresh event is detected.
@@ -147,17 +154,17 @@ when the same bars have become historical bars. This behavior is one of the poss
 More information
 ----------------
 
-- The Pine built-in ``barstate.*`` variables that provide information on :ref:`the type of bar or the event <PageBarStates>` 
+- The Pine Script™ built-in ``barstate.*`` variables that provide information on :ref:`the type of bar or the event <PageBarStates>` 
   where the script is executing. The page where they are documented also contains a script that allows you to visualize 
   the difference between elapsed realtime and historical bars, for example.
 - The :ref:`Strategies <PageStrategies>` page explains the details of strategy calculations, which are not identical to those of indicators.
 
 
 
-Execution of Pine functions and historical context inside function blocks
+Execution of Pine Script™ functions and historical context inside function blocks
 -------------------------------------------------------------------------
 
-The history of series variables used inside Pine functions is created through each successive call to the function. 
+The history of series variables used inside Pine Script™ functions is created through each successive call to the function. 
 If the function is not called on each bar the script runs on, 
 this will result in disparities between the historic values of series inside vs outside the function's local block. 
 Hence, series referenced inside and outside the function using the same index value will not refer to the same point in history if the function is not called on each bar.
@@ -254,3 +261,9 @@ Not all built-in functions need to be executed every bar. These are the function
 .. rubric:: Footnotes
 
 .. [#all_available_bars] The upper limit for the total number of historical bars is about 10000 for *Pro/Pro+* users and about 20000 for *Premium* users. *Free* users are able to see about 5000 bars.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

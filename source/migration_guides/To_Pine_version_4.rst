@@ -1,14 +1,21 @@
 .. _PageToPineVersion4:
 
-To Pine version 4
-=================
+.. image:: /images/Pine_Script_logo_small.png
+   :alt: Pine Script™
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 50
+   :height: 50
 
-This is a guide to converting Pine Script code from ``@version=3`` to ``@version=4``.
+To Pine Script™ version 4
+=========================
+
+This is a guide to converting Pine Script™ code from ``@version=3`` to ``@version=4``.
 
 Converter
 ---------
 
-Pine Editor comes with an utility to automatically convert v3 indicators and strategies to v4. To access it, open a script with ``//@version=3`` in it and select the ``Convert to v4`` option in the ``More`` dropdown menu:
+Pine Script™ Editor comes with an utility to automatically convert v3 indicators and strategies to v4. To access it, open a script with ``//@version=3`` in it and select the ``Convert to v4`` option in the ``More`` dropdown menu:
 
 .. image:: images/v3_to_v4_convert_button.png
 
@@ -17,7 +24,7 @@ Not all scripts can be automatically converted from v3 to v4. If you want to con
 Renaming of built-in constants, variables, and functions
 --------------------------------------------------------
 
-In Pine Script v4 the following built-in constants, variables, and functions were renamed:
+In Pine Script™ v4 the following built-in constants, variables, and functions were renamed:
 
 - Color constants (e.g ``red``) are moved to the ``color.*`` namespace (e.g. ``color.red``).
 - The ``color`` function has been renamed to ``color.new``.
@@ -34,7 +41,7 @@ The reason behind renaming all of the above was to structure the standard langua
 
 Explicit variable type declaration
 ----------------------------------
-In Pine Script v4 it's no longer possible to create variables with an unknown data type at the time of their declaration. This was done to avoid a number of issues that arise when the variable type changes after its initialization with the na value. From now on, you need to explicitly specify their type using keywords or type functions (for example, ``float``) when declaring variables with the na value::
+In Pine Script™ v4 it's no longer possible to create variables with an unknown data type at the time of their declaration. This was done to avoid a number of issues that arise when the variable type changes after its initialization with the na value. From now on, you need to explicitly specify their type using keywords or type functions (for example, ``float``) when declaring variables with the na value::
 
   //@version=4
   study("Green Candle Close")
@@ -43,3 +50,9 @@ In Pine Script v4 it's no longer possible to create variables with an unknown da
   if close > open
       src := close
   plot(src)
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

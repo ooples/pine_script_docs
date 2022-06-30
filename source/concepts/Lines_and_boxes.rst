@@ -1,5 +1,12 @@
 .. _PageLinesAndBoxes:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Lines and boxes
 ===============
 
@@ -10,7 +17,7 @@ Lines and boxes
 Introduction
 ------------
 
-Lines and boxes are only available in v4 and higher versions of Pine.
+Lines and boxes are only available in v4 and higher versions of Pine Script™.
 They are useful to draw support and resistance levels, trend lines, price ranges.
 Multiple small line segments are also useful to draw complex geometric forms.
 
@@ -20,13 +27,13 @@ drawing objects at points in the past that are detected a variable number of bar
 Lines and boxes are objects, like :ref:`labels <PageTextAndShapes_Labels>` and :ref:`tables <PageTables>`.
 Like them, they are referred to using an ID, which acts like a pointer. 
 Line IDs are of "line" type, and box IDs are of "box" type.
-As with other Pine objects, lines and box IDs are "time series" and all the functions used to manage them accept "series" arguments,
+As with other Pine Script™ objects, lines and box IDs are "time series" and all the functions used to manage them accept "series" arguments,
 which makes them very flexible.
 
 .. note:: On TradingView charts, a complete set of *Drawing Tools*
   allows users to create and modify drawings using mouse actions. While they may sometimes look similar to
-  drawing objects created with Pine code, they are unrelated entities.
-  Lines and boxes created using Pine code cannot be modified with mouse actions, 
+  drawing objects created with Pine Script™ code, they are unrelated entities.
+  Lines and boxes created using Pine Script™ code cannot be modified with mouse actions, 
   and hand-drawn drawings from the chart user interface are not visible from Pine scripts.
 
 Lines can be horizontal or at an angle, while boxes are always rectangular. 
@@ -77,7 +84,7 @@ This script draws both lines and boxes:
         line.set_x2(hiLine, bar_index)
         line.set_x2(loLine, bar_index)
         box.set_right(hiLoBox, bar_index)
-        // Change the color of the boxe's background depending on whether high/low is higher/lower than the box. 
+        // Change the color of the boxes' background depending on whether high/low is higher/lower than the box. 
         boxColor = high > hi ? color.green : low < lo ? color.red : color.silver
         box.set_bgcolor(hiLoBox, color.new(boxColor, 50))
         int(na)
@@ -92,12 +99,12 @@ Note that:
 - Every time we create two new lines and a box, we save their ID in variables ``hiLine``, ``loLine`` and ``hiLoBox``,
   which we then use in the calls to the setter functions to prolong these objects as new bars come in during the
   higher timeframe.
-- We change the color of the boxe's background (``boxColor``) using the position of the bar's
+- We change the color of the boxes' background (``boxColor``) using the position of the bar's
   `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ and
   `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__ with relative to the opening bar's
-  same values. This entails that our script is repainting, as the boxe's color on past bars will change,
+  same values. This entails that our script is repainting, as the boxes' color on past bars will change,
   depending on the current bar's values.
-- We artifically make the return type of both branches of our `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
+- We artificially make the return type of both branches of our `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__
   structure ``int(na)`` so the compiler doesn't complain about them not returning the same type.
   This occurs because `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`__
   in the first branch returns a result of type "box", 
@@ -499,7 +506,7 @@ Note that:
   to cap the user value.
 - We use the ``myRSIRises`` and ``myRSIFalls`` variables to hold the states determining when we create a new level.
   After that, we delete the oldest line in the `line.all <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}all>`__
-  built-in array that is automatically maintained by the Pine runtime and contains the ID of all the visible lines drawn by our script.
+  built-in array that is automatically maintained by the Pine Script™ runtime and contains the ID of all the visible lines drawn by our script.
   We use the `array.get() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}get>`__
   function to retrieve the array element at index zero (the oldest visible line ID).
   We then use `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`__
@@ -563,7 +570,7 @@ Five parameters affect this behavior: ``left``, ``top``, ``right``, ``bottom`` a
    `time_close <https://www.tradingview.com/pine-script-reference/v5/#var_time_close>`__ (closing time) values.
 
 ``top`` and ``bottom``
-   They are the *y* coordinates of the boxe's top and bottom levels (boxes are always rectangular).
+   They are the *y* coordinates of the boxes' top and bottom levels (boxes are always rectangular).
    While they are called price levels, they must be of values that make sense in the script's visual space.
    For an RSI indicator, they would typically be between 0 and 100, for example.
    When an indicator is running as an overlay, then the price scale will usually be that of the chart's symbol.
@@ -801,7 +808,7 @@ Realtime behavior
 -----------------
 
 Lines and boxes are subject to both *commit* and *rollback* actions, which affect the behavior of a script when it executes
-in the realtime bar. See the page on Pine's :ref:`Execution model <PageExecutionModel>`.
+in the realtime bar. See the page on Pine Script™'s :ref:`Execution model <PageExecutionModel>`.
 
 This script demonstrates the effect of rollback when running in the realtime bar::
 
@@ -825,7 +832,7 @@ Total number of objects
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 Lines and boxes consume server resources, which is why there is a limit to the total number of drawings
-per indicator or strategy. When too many are created, old ones are automatically deleted by the Pine runtime,
+per indicator or strategy. When too many are created, old ones are automatically deleted by the Pine Script™ runtime,
 in a process referred to as *garbage collection*.
 
 This code creates a line on every bar::
@@ -884,14 +891,14 @@ This code's intention, for example, is to ignore all historical bars and create 
     if barstate.isrealtime
         label.new(bar_index[300], na, text = "Label", yloc = yloc.abovebar)
 
-It will, however, fail at runtime. The reason for the error is that Pine cannot determine the buffer size
+It will, however, fail at runtime. The reason for the error is that Pine Script™ cannot determine the buffer size
 for historical values of the ``time`` plot, even though the ``time`` built-in variable isn't mentioned in the code.
 This is due to the fact that the built-in variable ``bar_index`` uses the ``time`` series in its inner workings.
 Accessing the value of the bar index 300 bars back requires that the history buffer size of the ``time`` series
 be of size 300 or more.
 
-In Pine, there is a mechanism that automaticaly detects the required historical buffer size for most cases.
-Autodetection works by letting Pine code access historical values any number of bars back for a limited duration.
+In Pine Script™, there is a mechanism that automaticaly detects the required historical buffer size for most cases.
+Autodetection works by letting Pine Script™ code access historical values any number of bars back for a limited duration.
 In this script's case, the ``if barstate.isrealtime`` condition prevents any such accesses to occur,
 so the required historical buffer size cannot be inferred and the code fails.
 
@@ -905,7 +912,7 @@ The solution to this conundrum is to use the `max_bars_back <https://www.trading
     if barstate.isrealtime
         label.new(bar_index[300], na, text = "Label", yloc = yloc.abovebar)
 
-Such occurrences are confusing, but rare. In time, the Pine team hopes to eliminate them.
+Such occurrences are confusing, but rare. In time, the Pine Script™ team hopes to eliminate them.
 
 
 
@@ -1001,130 +1008,130 @@ Linear Regression
 
 ::
 
-	//@version=5
-	indicator('Linear Regression', shorttitle='LinReg', overlay=true)
+    //@version=5
+    indicator('Linear Regression', shorttitle='LinReg', overlay=true)
 
-	upperMult = input(title='Upper Deviation', defval=2)
-	lowerMult = input(title='Lower Deviation', defval=-2)
+    upperMult = input(title='Upper Deviation', defval=2)
+    lowerMult = input(title='Lower Deviation', defval=-2)
 
-	useUpperDev = input(title='Use Upper Deviation', defval=true)
-	useLowerDev = input(title='Use Lower Deviation', defval=true)
-	showPearson = input(title='Show Pearson\'s R', defval=true)
-	extendLines = input(title='Extend Lines', defval=false)
+    useUpperDev = input(title='Use Upper Deviation', defval=true)
+    useLowerDev = input(title='Use Lower Deviation', defval=true)
+    showPearson = input(title='Show Pearson\'s R', defval=true)
+    extendLines = input(title='Extend Lines', defval=false)
 
-	len = input(title='Count', defval=100)
-	src = input(title='Source', defval=close)
+    len = input(title='Count', defval=100)
+    src = input(title='Source', defval=close)
 
-	extend = extendLines ? extend.right : extend.none
+    extend = extendLines ? extend.right : extend.none
 
-	calcSlope(src, len) =>
-		if not barstate.islast or len <= 1
-			[float(na), float(na), float(na)]
-		else
-			sumX = 0.0
-			sumY = 0.0
-			sumXSqr = 0.0
-			sumXY = 0.0
-			for i = 0 to len - 1 by 1
-				val = src[i]
-				per = i + 1.0
-				sumX := sumX + per
-				sumY := sumY + val
-				sumXSqr := sumXSqr + per * per
-				sumXY := sumXY + val * per
-				sumXY
-			slope = (len * sumXY - sumX * sumY) / (len * sumXSqr - sumX * sumX)
-			average = sumY / len
-			intercept = average - slope * sumX / len + slope
-			[slope, average, intercept]
+    calcSlope(src, len) =>
+        if not barstate.islast or len <= 1
+            [float(na), float(na), float(na)]
+        else
+            sumX = 0.0
+            sumY = 0.0
+            sumXSqr = 0.0
+            sumXY = 0.0
+            for i = 0 to len - 1 by 1
+                val = src[i]
+                per = i + 1.0
+                sumX := sumX + per
+                sumY := sumY + val
+                sumXSqr := sumXSqr + per * per
+                sumXY := sumXY + val * per
+                sumXY
+            slope = (len * sumXY - sumX * sumY) / (len * sumXSqr - sumX * sumX)
+            average = sumY / len
+            intercept = average - slope * sumX / len + slope
+            [slope, average, intercept]
 
-	[s, a, i] = calcSlope(src, len)
+    [s, a, intercpt] = calcSlope(src, len)
 
-	startPrice = i + s * (len - 1)
-	endPrice = i
-	var line baseLine = na
+    startPrice = intercpt + s * (len - 1)
+    endPrice = intercpt
+    var line baseLine = na
 
-	if na(baseLine) and not na(startPrice)
-		baseLine := line.new(bar_index - len + 1, startPrice, bar_index, endPrice, width=1, extend=extend, color=color.red)
-		baseLine
-	else
-		line.set_xy1(baseLine, bar_index - len + 1, startPrice)
-		line.set_xy2(baseLine, bar_index, endPrice)
-		na
+    if na(baseLine) and not na(startPrice)
+        baseLine := line.new(bar_index - len + 1, startPrice, bar_index, endPrice, width = 1, extend=extend, color = color.red)
+        baseLine
+    else
+        line.set_xy1(baseLine, bar_index - len + 1, startPrice)
+        line.set_xy2(baseLine, bar_index, endPrice)
+        na
 
-	calcDev(src, len, slope, average, intercept) =>
-		upDev = 0.0
-		dnDev = 0.0
-		stdDevAcc = 0.0
-		dsxx = 0.0
-		dsyy = 0.0
-		dsxy = 0.0
+    calcDev(src, len, slope, average, intercept) =>
+        upDev = 0.0
+        dnDev = 0.0
+        stdDevAcc = 0.0
+        dsxx = 0.0
+        dsyy = 0.0
+        dsxy = 0.0
 
-		periods = len - 1
+        periods = len - 1
 
-		daY = intercept + slope * periods / 2
-		val = intercept
+        daY = intercept + slope * periods / 2
+        val = intercept
 
-		for i = 0 to periods by 1
-			price = high[i] - val
-			if price > upDev
-				upDev := price
-				upDev
+        for i = 0 to periods by 1
+            price = high[i] - val
+            if price > upDev
+                upDev := price
+                upDev
 
-			price := val - low[i]
-			if price > dnDev
-				dnDev := price
-				dnDev
+            price := val - low[i]
+            if price > dnDev
+                dnDev := price
+                dnDev
+        
+            price := src[i]
+            dxt = price - average
+            dyt = val - daY
+        
+            price := price - val
+            stdDevAcc := stdDevAcc + price * price
+            dsxx := dsxx + dxt * dxt
+            dsyy := dsyy + dyt * dyt
+            dsxy := dsxy + dxt * dyt
+            val := val + slope
+            val
 
-			price := src[i]
-			dxt = price - average
-			dyt = val - daY
+        stdDev = math.sqrt(stdDevAcc / (periods == 0 ? 1 : periods))
+        pearsonR = dsxx == 0 or dsyy == 0 ? 0 : dsxy / math.sqrt(dsxx * dsyy)
+        [stdDev, pearsonR, upDev, dnDev]
 
-			price := price - val
-			stdDevAcc := stdDevAcc + price * price
-			dsxx := dsxx + dxt * dxt
-			dsyy := dsyy + dyt * dyt
-			dsxy := dsxy + dxt * dyt
-			val := val + slope
-			val
+    [stdDev, pearsonR, upDev, dnDev] = calcDev(src, len, s, a, intercpt)
 
-		stdDev = math.sqrt(stdDevAcc / (periods == 0 ? 1 : periods))
-		pearsonR = dsxx == 0 or dsyy == 0 ? 0 : dsxy / math.sqrt(dsxx * dsyy)
-		[stdDev, pearsonR, upDev, dnDev]
+    upperStartPrice = startPrice + (useUpperDev ? upperMult * stdDev : upDev)
+    upperEndPrice = endPrice + (useUpperDev ? upperMult * stdDev : upDev)
+    var line upper = na
 
-	[stdDev, pearsonR, upDev, dnDev] = calcDev(src, len, s, a, i)
+    lowerStartPrice = startPrice + (useLowerDev ? lowerMult * stdDev : -dnDev)
+    lowerEndPrice = endPrice + (useLowerDev ? lowerMult * stdDev : -dnDev)
+    var line lower = na
 
-	upperStartPrice = startPrice + (useUpperDev ? upperMult * stdDev : upDev)
-	upperEndPrice = endPrice + (useUpperDev ? upperMult * stdDev : upDev)
-	var line upper = na
+    if na(upper) and not na(upperStartPrice)
+        upper := line.new(bar_index - len + 1, upperStartPrice, bar_index, upperEndPrice, width=1, extend=extend, color=#0000ff)
+        upper
+    else
+        line.set_xy1(upper, bar_index - len + 1, upperStartPrice)
+        line.set_xy2(upper, bar_index, upperEndPrice)
+        na
 
-	lowerStartPrice = startPrice + (useLowerDev ? lowerMult * stdDev : -dnDev)
-	lowerEndPrice = endPrice + (useLowerDev ? lowerMult * stdDev : -dnDev)
-	var line lower = na
+    if na(lower) and not na(lowerStartPrice)
+        lower := line.new(bar_index - len + 1, lowerStartPrice, bar_index, lowerEndPrice, width=1, extend=extend, color=#0000ff)
+        lower
+    else
+        line.set_xy1(lower, bar_index - len + 1, lowerStartPrice)
+        line.set_xy2(lower, bar_index, lowerEndPrice)
+        na
 
-	if na(upper) and not na(upperStartPrice)
-		upper := line.new(bar_index - len + 1, upperStartPrice, bar_index, upperEndPrice, width=1, extend=extend, color=#0000ff)
-		upper
-	else
-		line.set_xy1(upper, bar_index - len + 1, upperStartPrice)
-		line.set_xy2(upper, bar_index, upperEndPrice)
-		na
-
-	if na(lower) and not na(lowerStartPrice)
-		lower := line.new(bar_index - len + 1, lowerStartPrice, bar_index, lowerEndPrice, width=1, extend=extend, color=#0000ff)
-		lower
-	else
-		line.set_xy1(lower, bar_index - len + 1, lowerStartPrice)
-		line.set_xy2(lower, bar_index, lowerEndPrice)
-		na
-
-	// Pearson's R
-	var label r = na
-	transparent = color.new(color.white, 100)
-	label.delete(r[1])
-	if showPearson and not na(pearsonR)
-		r := label.new(bar_index - len + 1, lowerStartPrice, str.tostring(pearsonR, '#.################'), color=transparent, textcolor=#0000ff, size=size.normal, style=label.style_label_up)
-		r
+    // Pearson's R
+    var label r = na
+    transparent = color.new(color.white, 100)
+    label.delete(r[1])
+    if showPearson and not na(pearsonR)
+        r := label.new(bar_index - len + 1, lowerStartPrice, str.tostring(pearsonR, '#.################'), color=transparent, textcolor=#0000ff, size=size.normal, style=label.style_label_up)
+        r
 
 
 
@@ -1135,123 +1142,128 @@ Zig Zag
 
 ::
 
-	//@version=5
-	indicator('Zig Zag', overlay=true)
+  //@version=5
+  indicator('Zig Zag', overlay=true)
 
-	dev_threshold = input.float(title='Deviation (%)', defval=5, minval=1, maxval=100)
-	depth = input.int(title='Depth', defval=10, minval=1)
+  dev_threshold = input.float(title='Deviation (%)', defval=5, minval=1, maxval=100)
+  depth = input.int(title='Depth', defval=10, minval=1)
 
-	pivots(src, length, isHigh) =>
-		p = nz(src[length])
+  pivots(src, length, isHigh) =>
+      p = nz(src[length])
 
-		if length == 0
-			[bar_index, p]
-		else
-			isFound = true
-			for i = 0 to length - 1 by 1
-				if isHigh and src[i] > p
-					isFound := false
-					isFound
-				if not isHigh and src[i] < p
-					isFound := false
-					isFound
+      if length == 0
+          [bar_index, p]
+      else
+          isFound = true
+          for i = 0 to length - 1 by 1
+              if isHigh and src[i] > p
+                  isFound := false
+                  isFound
+              if not isHigh and src[i] < p
+                  isFound := false
+                  isFound
 
-			for i = length + 1 to 2 * length by 1
-				if isHigh and src[i] >= p
-					isFound := false
-					isFound
-				if not isHigh and src[i] <= p
-					isFound := false
-					isFound
+          for i = length + 1 to 2 * length by 1
+              if isHigh and src[i] >= p
+                  isFound := false
+                  isFound
+              if not isHigh and src[i] <= p
+                  isFound := false
+                  isFound
 
-			if isFound and length * 2 <= bar_index
-				[bar_index[length], p]
-			else
-				[int(na), float(na)]
+          if isFound and length * 2 <= bar_index
+              [bar_index[length], p]
+          else
+              [int(na), float(na)]
 
-	[iH, pH] = pivots(high, math.floor(depth / 2), true)
-	[iL, pL] = pivots(low, math.floor(depth / 2), false)
+  [iH, pH] = pivots(high, math.floor(depth / 2), true)
+  [iL, pL] = pivots(low, math.floor(depth / 2), false)
 
-	calc_dev(base_price, price) =>
-		100 * (price - base_price) / base_price
+  calc_dev(base_price, price) =>
+      100 * (price - base_price) / base_price
 
-	var line lineLast = na
-	var int iLast = 0
-	var float pLast = 0
-	var bool isHighLast = true  // otherwise the last pivot is a low pivot
-	var int linesCount = 0
+  var line lineLast = na
+  var int iLast = 0
+  var float pLast = 0
+  var bool isHighLast = true  // otherwise the last pivot is a low pivot
+  var int linesCount = 0
 
-	pivotFound(dev, isHigh, index, price) =>
-		if isHighLast == isHigh and not na(lineLast)
-			// same direction
-			if isHighLast ? price > pLast : price < pLast
-				if linesCount <= 1
-					line.set_xy1(lineLast, index, price)
-				line.set_xy2(lineLast, index, price)
-				[lineLast, isHighLast, false]
-			else
-				[line(na), bool(na), false]
-		else
-			// reverse the direction (or create the very first line)
-			if na(lineLast)
-				id = line.new(index, price, index, price, color=color.red, width=2)
-				[id, isHigh, true]
-			else
-				// price move is significant
-				if math.abs(dev) >= dev_threshold
-					id = line.new(iLast, pLast, index, price, color=color.red, width=2)
-					[id, isHigh, true]
-				else
-					[line(na), bool(na), false]
+  pivotFound(dev, isHigh, index, price) =>
+      if isHighLast == isHigh and not na(lineLast)
+          // same direction
+          if isHighLast ? price > pLast : price < pLast
+              if linesCount <= 1
+                  line.set_xy1(lineLast, index, price)
+              line.set_xy2(lineLast, index, price)
+              [lineLast, isHighLast, false]
+          else
+              [line(na), bool(na), false]
+      else
+          // reverse the direction (or create the very first line)
+          if na(lineLast)
+              id = line.new(index, price, index, price, color=color.red, width=2)
+              [id, isHigh, true]
+          else
+              // price move is significant
+              if math.abs(dev) >= dev_threshold
+                  id = line.new(iLast, pLast, index, price, color=color.red, width=2)
+                  [id, isHigh, true]
+              else
+                  [line(na), bool(na), false]
 
-	if not na(iH) and not na(iL) and iH == iL
-		dev1 = calc_dev(pLast, pH)
-		[id2, isHigh2, isNew2] = pivotFound(dev1, true, iH, pH)
-		if isNew2
-			linesCount := linesCount + 1
-			linesCount
-		if not na(id2)
-			lineLast := id2
-			isHighLast := isHigh2
-			iLast := iH
-			pLast := pH
-			pLast
+  if not na(iH) and not na(iL) and iH == iL
+      dev1 = calc_dev(pLast, pH)
+      [id2, isHigh2, isNew2] = pivotFound(dev1, true, iH, pH)
+      if isNew2
+          linesCount := linesCount + 1
+          linesCount
+      if not na(id2)
+          lineLast := id2
+          isHighLast := isHigh2
+          iLast := iH
+          pLast := pH
+          pLast
 
-		dev2 = calc_dev(pLast, pL)
-		[id1, isHigh1, isNew1] = pivotFound(dev2, false, iL, pL)
-		if isNew1
-			linesCount := linesCount + 1
-			linesCount
-		if not na(id1)
-			lineLast := id1
-			isHighLast := isHigh1
-			iLast := iL
-			pLast := pL
-			pLast
-	else
+      dev2 = calc_dev(pLast, pL)
+      [id1, isHigh1, isNew1] = pivotFound(dev2, false, iL, pL)
+      if isNew1
+          linesCount := linesCount + 1
+          linesCount
+      if not na(id1)
+          lineLast := id1
+          isHighLast := isHigh1
+          iLast := iL
+          pLast := pL
+          pLast
+  else
+      if not na(iH)
+          dev1 = calc_dev(pLast, pH)
+          [id, isHigh, isNew] = pivotFound(dev1, true, iH, pH)
+          if isNew
+              linesCount := linesCount + 1
+              linesCount
+          if not na(id)
+              lineLast := id
+              isHighLast := isHigh
+              iLast := iH
+              pLast := pH
+              pLast
+      else
+          if not na(iL)
+              dev2 = calc_dev(pLast, pL)
+              [id, isHigh, isNew] = pivotFound(dev2, false, iL, pL)
+              if isNew
+                  linesCount := linesCount + 1
+                  linesCount
+              if not na(id)
+                  lineLast := id
+                  isHighLast := isHigh
+                  iLast := iL
+                  pLast := pL
+                  pLast
 
-		if not na(iH)
-			dev1 = calc_dev(pLast, pH)
-			[id, isHigh, isNew] = pivotFound(dev1, true, iH, pH)
-			if isNew
-				linesCount := linesCount + 1
-				linesCount
-			if not na(id)
-				lineLast := id
-				isHighLast := isHigh
-				iLast := iH
-				pLast := pH
-				pLast
-		else
-			if not na(iL)
-				dev2 = calc_dev(pLast, pL)
-				[id, isHigh, isNew] = pivotFound(dev2, false, iL, pL)
-				if isNew
-					linesCount := linesCount + 1
-					linesCount
-				if not na(id)
-					lineLast := id
-					isHighLast := isHigh
-					iLast := iL
-					pLast := pL
-					pLast
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

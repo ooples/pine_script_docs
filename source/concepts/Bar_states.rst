@@ -1,5 +1,12 @@
 .. _PageBarStates:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Bar states
 ==========
 
@@ -103,7 +110,7 @@ Note that `barstate.islast <https://www.tradingview.com/pine-script-reference/v5
 `barstate.isnew <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isnew>`__ 
 is ``true`` on all historical bars and on the realtime bar's first (opening) update.
 
-All historical bars are considered *new* bars because the Pine runtime executes your script on each bar sequentially, from the chart's first bar in time, to the last.
+All historical bars are considered *new* bars because the Pine Script™ runtime executes your script on each bar sequentially, from the chart's first bar in time, to the last.
 Each historical bar is thus *discovered* by your script as it executes, bar to bar.
 
 `barstate.isnew <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}isnew>`__ 
@@ -219,3 +226,8 @@ This last example shows how the realtime bar's label will turn yellow after the 
 This is the way the label will usually appear on realtime bars:
 
 .. image:: images/BarStates-Example-03.png
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

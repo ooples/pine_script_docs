@@ -1,5 +1,12 @@
 .. _PageFills:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Fills
 =====
 
@@ -80,5 +87,62 @@ calculating the color on each bar, as in this example::
 
 .. image:: images/Fills-Fill-3.png
 
+
+Linefills
+=========
+
+Linefills are objects that allow you to fill the space between two line drawings created via the `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ function. A linefill object is displayed on the chart when the `linefill.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}new>`__ function is called. The function has the following signature::
+
+	linefill.new(line1, line2, color) → series linefill
+
+The ``line1`` and ``line2`` arguments specify the two lines to fill between, while ``color`` is responsible for the color of the resulting linefill object. Any two-line pair can only have one linefill between them, so successive calls to `linefill.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}new>`__ on the same pair of lines will replace the previous linefill with a new one. The function returns the ID of the ``linefill`` object it created; said ID can be assigned to a variable and passed to the `linefill.set_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}set_color>`__ function to change the color without creating a new object.
+
+The behavior of linefills is dependent on the lines they are attached to. Linefill cannot be moved directly, but it will move if the lines that it is tied to change their coordinates. If both lines extend in the same direction, the linefill will follow their extensions.
+
+Note that:
+
+- The direction of the line extension in Pine Script™ is based on the X values of both line's coordinates, where ``left`` is the side of the lower ``X`` coordinate and (or the first one, if both ``X`` coordinates are equal). If a line is extended left via the ``extend.left`` constant, but its ``X1`` coordinate is higher than its ``X2`` coordinate, the line will be visually extended right on the chart. This behavior is inherited by the ``linefill`` object, so two lines can have the ``extend.left`` property and the linefill between them will also be extended, even if the lines themselves are visually extended into different directions on the chart.
+
+In the example below, our indicator draws two lines connecting the last two high and low pivot points of the chart. We extend the lines to the right to project the short-term movement of the chart, and fill the space between them to enhance the visibility of the channel the lines create:
+
+.. image:: images/Fills-Linefill-1.png
+
+::
+
+	//@version=5
+	indicator("Channel", overlay = true)
+
+	LEN_LEFT = 15
+	LEN_RIGHT = 5
+	pH = ta.pivothigh(LEN_LEFT, LEN_RIGHT)
+	pL = ta.pivotlow(LEN_LEFT, LEN_RIGHT)
+
+	// Bar indices of pivot points
+	pH_x1 = ta.valuewhen(pH, bar_index, 1) - LEN_RIGHT
+	pH_x2 = ta.valuewhen(pH, bar_index, 0) - LEN_RIGHT
+	pL_x1 = ta.valuewhen(pL, bar_index, 1) - LEN_RIGHT
+	pL_x2 = ta.valuewhen(pL, bar_index, 0) - LEN_RIGHT
+	// Price values of pivot points
+	pH_y1 = ta.valuewhen(pH, pH, 1)
+	pH_y2 = ta.valuewhen(pH, pH, 0)
+	pL_y1 = ta.valuewhen(pL, pL, 1)
+	pL_y2 = ta.valuewhen(pL, pL, 0)
+
+	if barstate.islastconfirmedhistory
+	    // Lines
+	    lH = line.new(pH_x1, pH_y1, pH_x2, pH_y2, extend = extend.right)
+	    lL = line.new(pL_x1, pL_y1, pL_x2, pL_y2, extend = extend.right)
+	    // Fill
+	    fillColor = switch
+		pH_y2 > pH_y1 and pL_y2 > pL_y1 => color.green
+		pH_y2 < pH_y1 and pL_y2 < pL_y1 => color.red
+		=> color.silver
+	    linefill.new(lH, lL, color.new(fillColor, 90))}
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/
 
 

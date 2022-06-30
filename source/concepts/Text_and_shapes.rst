@@ -1,5 +1,12 @@
 .. _PageTextAndShapes:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Text and shapes
 ===============
 
@@ -10,7 +17,7 @@ Text and shapes
 Introduction
 ------------
 
-You may display text or shapes using five different ways with Pine:
+You may display text or shapes using five different ways with Pine Script™:
 
 
 - `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__
@@ -49,7 +56,7 @@ Which one to use depends on your needs:
   each `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ call
   can use a "series" offset that can be calculated on the fly.
 
-These are a few things to keep in mind concerning Pine strings:
+These are a few things to keep in mind concerning Pine Script™ strings:
 
 - Since the ``text`` parameter in both 
   `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
@@ -58,10 +65,10 @@ These are a few things to keep in mind concerning Pine strings:
 - To include "series" values in text displayed using `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__,
   they will first need to be converted to strings using 
   `str.tostring() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}tostring>`__.
-- The concatenation operator for strings in Pine is ``+``. It is used to join string components into one string, e.g.,
+- The concatenation operator for strings in Pine Script™ is ``+``. It is used to join string components into one string, e.g.,
   ``msg = "Chart symbol: " + syminfo.tickerid`` 
   (where `syminfo.tickerid <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}tickerid>`__
-  is a Pine built-in variable that returns the chart's exchange and symbol information in string format).
+  is a Pine Script™ built-in variable that returns the chart's exchange and symbol information in string format).
 - Characters displayed by all these functions can be Unicode characters, which may include Unicode symbols.
   See this `Exploring Unicode <https://www.tradingview.com/script/0rFQOCKf-Exploring-Unicode/>`__
   script to get an idea of what can be done with Unicode characters.
@@ -70,7 +77,7 @@ These are a few things to keep in mind concerning Pine strings:
 - Text from Pine scripts always displays on the chart in the Trebuchet MS font, which is used in many TradingView texts,
   including this one.
 
-This script displays text using the four methods available in Pine::
+This script displays text using the four methods available in Pine Script™::
 
     //@version=5
     indicator("Four displays of text", overlay = true)
@@ -306,19 +313,19 @@ so you can see what values are used to determine the position and size of the ar
 Labels
 ------
 
-Labels are only available in v4 and higher versions of Pine. They work very differently than 
+Labels are only available in v4 and higher versions of Pine Script™. They work very differently than 
 `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ and
 `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__.
 
 Labels are objects, like :ref:`lines and boxes <PageLinesAndBoxes>`, or :ref:`tables <PageTables>`.
 Like them, they are referred to using an ID, which acts like a pointer. Label IDs are of "label" type.
-As with other Pine objects, labels IDs are "time series" and all the functions used to manage them accept "series" arguments,
+As with other Pine Script™ objects, labels IDs are "time series" and all the functions used to manage them accept "series" arguments,
 which makes them very flexible.
 
 .. note:: On TradingView charts, a complete set of *Drawing Tools*
   allows users to create and modify drawings using mouse actions. While they may sometimes look similar to
-  drawing objects created with Pine code, they are unrelated entities.
-  Drawing objects created using Pine code cannot be modified with mouse actions, 
+  drawing objects created with Pine Script™ code, they are unrelated entities.
+  Drawing objects created using Pine Script™ code cannot be modified with mouse actions, 
   and hand-drawn drawings from the chart user interface are not visible from Pine scripts.
 
 Labels are advantageous because:
@@ -641,7 +648,7 @@ Note that:
   This is necessary. Without it, the value returned by `ta.highest() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}highest>`__
   would always include the current value of ``myRSI``, so ``myRSI`` would never be higher than the function's return value.
 - After that, we delete the oldest label in the `label.all <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}all>`__
-  array that is automatically maintained by the Pine runtime and contains the ID of all the visible labels drawn by our script.
+  array that is automatically maintained by the Pine Script™ runtime and contains the ID of all the visible labels drawn by our script.
   We use the `array.get() <https://www.tradingview.com/pine-script-reference/v5/#fun_array{dot}get>`__
   function to retrieve the array element at index zero (the oldest visible label ID).
   We then use `label.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}delete>`__
@@ -674,7 +681,7 @@ Realtime behavior
 ^^^^^^^^^^^^^^^^^
 
 Labels are subject to both *commit* and *rollback* actions, which affect the behavior of a script when it executes
-in the realtime bar. See the page on Pine's :ref:`Execution model <Page_ExecutionModel>`.
+in the realtime bar. See the page on Pine Script™'s :ref:`Execution model <Page_ExecutionModel>`.
 
 This script demonstrates the effect of rollback when running in the realtime bar::
 
@@ -757,3 +764,9 @@ Only the last label created before the realtime bar's close will be committed, a
 .. |label_style_label_upper_right_t| image:: images/TextAndShapes-LabelStyles-labelupperright_t.png
 .. |label_style_label_center_t| image:: images/TextAndShapes-LabelStyles-labelcenter_t.png
 .. |label_style_none_t| image:: images/TextAndShapes-LabelStyles-none_t.png
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

@@ -1,5 +1,12 @@
 .. _PageLevels:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Levels
 ======
 
@@ -116,3 +123,9 @@ Note that:
   for each of the four different fills we want, between four different pairs of levels.
 - We use ``color.teal`` in our second fill because it produces a green that fits 
   the color scheme better than the ``color.green`` used for the 25 level.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

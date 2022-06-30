@@ -1,5 +1,12 @@
 .. _PageFaq:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 FAQ
 ===
 
@@ -24,7 +31,7 @@ You may see that variable ``c`` is a Heikin Ashi *close* price which is not
 the same as real OHLC price. Because ``close`` built-in variable is always
 a value that corresponds to a visible bar (or candle) on the chart.
 
-So, how do we get the real OHLC prices in Pine Script code, if current
+So, how do we get the real OHLC prices in Pine Script™ code, if current
 chart type is non-standard? We should use ``request.security`` function in
 combination with ``ticker.new`` function. Here is an example::
 
@@ -81,7 +88,7 @@ Plot a dynamic horizontal line
 ------------------------------
 
 There is function ``hline`` in pine. But it is now limited to only plot
-constant value. Here is a Pine Script with workaround to plot changing
+constant value. Here is a Pine Script™ with workaround to plot changing
 hline::
 
     //@version=5
@@ -214,3 +221,8 @@ You can use the script below to avoid gaps in a series::
     plot(series, style = plot.style_linebr, color = color.red)  // series has na values
     plot(vw)  // all na values are replaced with the last non-empty value
 
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

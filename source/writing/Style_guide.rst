@@ -1,5 +1,12 @@
 .. _PageStyleGuide:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Style guide
 ===========
 
@@ -14,7 +21,7 @@ Introduction
 This style guide provides recommendations on how to name variables and organize your Pine scripts in a standard way that works well. 
 Scripts that follow our best practices will be easier to read, understand and maintain. 
 
-Every Pine programmer is, of course, free to use all or as many of our recommendations as he pleases. 
+Every Pine Script™ programmer is, of course, free to use all or as many of our recommendations as they please. 
 As Ed Seykota says: *Follow the rules without question, and know when to break the rules*.
 
 
@@ -33,7 +40,7 @@ We recommend the use of:
 Script organization
 -------------------
 
-The Pine compiler is quite forgiving of the positioning of specific statements or compiler directives in the script. While other arrangements are syntactically correct, this is how we recommend organizing scripts:
+The Pine Script™ compiler is quite forgiving of the positioning of specific statements or compiler directives in the script. While other arrangements are syntactically correct, this is how we recommend organizing scripts:
 
 .. code-block:: text
 
@@ -65,7 +72,7 @@ which preempt the author's license.
 <version>
 ^^^^^^^^^
 
-This is the compiler directive defining the version of Pine the script will use. If none is present, v1 is used. For v5, use::
+This is the compiler directive defining the version of Pine Script™ the script will use. If none is present, v1 is used. For v5, use::
 
     //@version=5
 
@@ -83,7 +90,7 @@ This is the call to `indicator() <https://www.tradingview.com/pine-script-refere
 <import_statements>
 ^^^^^^^^^^^^^^^^^^^
 
-If your script uses one or more :ref:`Pine libraries <PageLibraries>`, your `import <https://www.tradingview.com/pine-script-reference/v5/#op_import>`__ statements belong here.
+If your script uses one or more :ref:`Pine Script™ libraries <PageLibraries>`, your `import <https://www.tradingview.com/pine-script-reference/v5/#op_import>`__ statements belong here.
 
 
 
@@ -120,7 +127,7 @@ Placing that section at the beginning of the script also corresponds to how they
 <function_declarations>
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-All user-defined functions must be defined in the script's global scope; nested function definitions are not allowed in Pine.
+All user-defined functions must be defined in the script's global scope; nested function definitions are not allowed in Pine Script™.
 
 Optimal function design should minimize the use of global variables in the function's scope, as they undermine function portability. 
 When it cannot be avoided, those functions must follow the global variable declarations in the code, which entails they cannot always be placed in the <function_declarations> section. 
@@ -160,7 +167,7 @@ Placing the documentation inside the function, as opposed to outside of it as is
 
 This is where the script's core calculations and logic should be placed. 
 Code can be easier to read when variable declarations are placed near the code segment using the variables. 
-Some coders prefer to place all their non-constant variable declarations at the beginning of this section, 
+Some programmers prefer to place all their non-constant variable declarations at the beginning of this section, 
 which is not always possible for all variables, as some may require some calculations to have been executed before their declaration.
 
 
@@ -263,3 +270,9 @@ Using explicit typing can also make it easier for readers to find their way in l
     bool newAllTimeHi = ta.change(allTimeHi)
     plot(allTimeHi)
     plotchar(newAllTimeHi, "newAllTimeHi", "•", location.top, size = size.tiny)
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

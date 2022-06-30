@@ -1,5 +1,12 @@
 .. _PageTypeSystem:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Type system
 ===========
 
@@ -11,10 +18,10 @@ Type system
 Introduction
 ------------
 
-Pine's type system is important because it determines what sort of values can be used when calling Pine functions, which is a requirement to do pretty much anything in Pine.
+Pine Script™'s type system is important because it determines what sort of values can be used when calling Pine Script™ functions, which is a requirement to do pretty much anything in Pine Script™.
 While it is possible to write very simple scripts without knowing anything about the type system, 
 a reasonable understanding of it is necessary to achieve any degree of profiency with the language, 
-and in-depth knowledge of its subtleties will allow you to exploit the full potential of Pine.
+and in-depth knowledge of its subtleties will allow you to exploit the full potential of Pine Script™.
 
 The type system uses the *form type* pair to qualify the type of all values, be they literals, a variable, the result of an expression, 
 the value returned by functions or the arguments supplied when calling a function.
@@ -25,8 +32,8 @@ The *type* denotes the nature of a value.
 
 .. note:: We will often use "type" to refer to the "form type" pair.
 
-The type system is intimately linked to Pine's :ref:`execution model <PageExecutionModel>` and :ref:`time series <PageTimeSeries>` concepts. 
-Understanding all three is key to making the most of the power of Pine.
+The type system is intimately linked to Pine Script™'s :ref:`execution model <PageExecutionModel>` and :ref:`time series <PageTimeSeries>` concepts. 
+Understanding all three is key to making the most of the power of Pine Script™.
 
 
 
@@ -35,9 +42,9 @@ Understanding all three is key to making the most of the power of Pine.
 Forms
 ^^^^^
 
-Pine **forms** identify when a variable's value is known. They are:
+Pine Script™ **forms** identify when a variable's value is known. They are:
 
-- "const" for values known at compile time (when adding an indicator to a chart or saving it in the Pine Editor)
+- "const" for values known at compile time (when adding an indicator to a chart or saving it in the Pine Script™ Editor)
 - "input" for values known at input time (when values are changed in a script's "Settings/Inputs" tab)
 - "simple" for values known at bar zero (when the script begins execution on the chart's first historical bar)
 - "series" for values known on each bar (any time during the execution of a script on any bar)
@@ -59,7 +66,7 @@ Variables of "const", "input" or "simple" forms cannot change values once execut
 Types
 ^^^^^
 
-Pine **types** identify the nature of a value. They are:
+Pine Script™ **types** identify the nature of a value. They are:
 
 - The fundamental types: "int", "float", "bool", "color" and "string"
 - The special types: "plot", "hline", "line", "label", "box", "table", "array"
@@ -71,10 +78,10 @@ The special types all contain IDs referring to an object of the type's name, e.g
 The "void" type means no value is returned.     
 Tuples are a syntactic arrangement of variables, e.g., ``[macdLine, signalLine, histLine]``.
 
-The Pine compiler can automatically convert some types into others when a value is not of the required type. The auto-casting rules are: **int** 🠆 **float** 🠆 **bool**. 
+The Pine Script™ compiler can automatically convert some types into others when a value is not of the required type. The auto-casting rules are: **int** 🠆 **float** 🠆 **bool**. 
 See the :ref:`Type casting <PageTypeSystem_TypeCasting>` section of this page for more information on type casting.
 
-Except in function signatures, Pine forms are implicit in code; they are never declared because they are always determined by the compiler. 
+Except in function signatures, Pine Script™ forms are implicit in code; they are never declared because they are always determined by the compiler. 
 Types, however, can be specified when declaring variables, e.g.::
 
     //@version=5
@@ -101,10 +108,10 @@ const
 """""
 
 Values of "const" form must be known at compile time, before your script has access to any information related to the symbol/timeframe information it is running on. 
-Compilation occurs when you save a script in the Pine Editor, which doesn't even require it to already be running on your chart. "const" variables cannot change during the execution of a script.
+Compilation occurs when you save a script in the Pine Script™ Editor, which doesn't even require it to already be running on your chart. "const" variables cannot change during the execution of a script.
 
 Variables of "const" form can be intialized using a *literal* value, or calculated from expressions using only literal values or other variables of "const" form. 
-Pine's :ref:`Style guide <PageStyleGuide>` recommends using upper case SNAKE_CASE to name variables of "const" form. 
+Pine Script™'s :ref:`Style guide <PageStyleGuide>` recommends using upper case SNAKE_CASE to name variables of "const" form. 
 While it is not a requirement, "const" variables are often declared using the 
 `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ keyword so they are only initialized on the first bar of the dataset. 
 See the :ref:`section on \`var\` <PageVariableDeclarations_Var>` for more information.
@@ -117,7 +124,7 @@ These are examples of literal values:
 - *literal string*: ``"A text literal"``, ``"Embedded single quotes 'text'"``, ``'Embedded double quotes "text"'``
 - *literal color*: ``#FF55C6``, ``#FF55C6ff``
 
-.. note:: In Pine, the built-in variables ``open``, ``high``, ``low``, ``close``, ``volume``, ``time``,
+.. note:: In Pine Script™, the built-in variables ``open``, ``high``, ``low``, ``close``, ``volume``, ``time``,
     ``hl2``, ``hlc3``, ``ohlc4``, etc., are not of "const" form. Because they change bar to bar, they are of *series* form.
 
 The "const" form is a requirement for the arguments to the ``title`` and ``shorttitle`` parameters in 
@@ -225,11 +232,11 @@ as would be the result of expressions calculated using them.
 Functions such as `barssince() <https://www.tradingview.com/pine-script-reference/v5/#fun_barssince>`__ or 
 `crossover() <https://www.tradingview.com/pine-script-reference/v5/#fun_crossover>`__ yield a result of "series" form because it varies bar to bar, 
 as does that of the `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ history-referencing operator used to access past values of a time series. 
-While the "series" form is the most common form used in Pine, it is not always allowed as arguments to Pine built-in functions.
+While the "series" form is the most common form used in Pine Script™, it is not always allowed as arguments to Pine Script™ built-in functions.
 
 Suppose you want to display the value of pivots on your chart. This will require converting values into strings, 
 so the string values your code will be using will be of "series string" type. 
-Pine's `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ function 
+Pine Script™'s `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ function 
 can be used to place such "series string" text on the chart because its ``text`` parameter accepts arguments of "series" form::
 
     //@version=5
@@ -252,7 +259,7 @@ Note that:
   using ``bar_index[pivotBarsInput]`` (the `bar_index <https://www.tradingview.com/pine-script-reference/v5/#var_bar_index>`__'s value, 
   offset ``pivotBarsInput`` bars back). In real time, these prices would only appear ``pivotBarsInput`` bars after the actual pivot.
 - We print a blue dot using `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ when a pivot is detected in our code.
-- Pine's `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ can also be used to position text on the chart, 
+- Pine Script™'s `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ can also be used to position text on the chart, 
   but because its ``text`` parameter requires a "const string" argument, 
   we could not have used it in place of `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ in our script.
 
@@ -294,7 +301,7 @@ Floating-point literals contain a delimiter (the symbol ``.``) and may also cont
     1.6e-19    // 1.6 * 10^-19 (a very small value)
 
 
-The internal precision of floats in Pine is 1e-10.
+The internal precision of floats in Pine Script™ is 1e-10.
 
 
 
@@ -335,7 +342,7 @@ Examples::
     #FF0000ff    // same as #FF0000, fully opaque red color
     #FF000000    // completely transparent color
 
-Pine also has :ref:`built-in color constants <PageColors_ConstantColors>` such as 
+Pine Script™ also has :ref:`built-in color constants <PageColors_ConstantColors>` such as 
 `color.green <https://www.tradingview.com/pine-script-reference/v5/#var_color{dot}green>`__, 
 `color.red <https://www.tradingview.com/pine-script-reference/v5/#var_color{dot}red>`__, 
 `color.orange <https://www.tradingview.com/pine-script-reference/v5/#var_color{dot}orange>`__, 
@@ -362,7 +369,7 @@ Here is an example::
               color.new(color.blue, 80)
     bgcolor(bgColor)
 
-See the page on :ref:`colors <PageColors>` for more information on using colors in Pine.
+See the page on :ref:`colors <PageColors>` for more information on using colors in Pine Script™.
 
 
 
@@ -395,7 +402,7 @@ You can concatenate strings using the ``+`` operator.
 plot and hline
 """"""""""""""
 
-Pine's `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ function fills the space between two lines with a color. 
+Pine Script™'s `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ function fills the space between two lines with a color. 
 Both lines must have been plotted with either `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ or 
 `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ function calls. 
 Each plotted line is referred to in the `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ 
@@ -416,7 +423,7 @@ Note that there is no ``plot`` or ``hline`` keyword to explicitly declare the ty
 line, label, box and table
 """"""""""""""""""""""""""
 
-Drawings were introduced in Pine v4. These objects are created with the
+Drawings were introduced in Pine Script™ v4. These objects are created with the
 `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__,
 and `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__,
 `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`__ and
@@ -424,7 +431,7 @@ and `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_labe
 
 These functions all return an ID that uniquely identifies each drawing object. 
 The ID's type is "series line", "series label", "series box" and "series table", respectively, and an ID can exist in no other form than "series". 
-Drawing IDs act like pointer in that they are used to reference a specific instance of a drawing in all the related functions of its namespace. 
+Drawing IDs act like a pointer in that they are used to reference a specific instance of a drawing in all the related functions of its namespace. 
 The line ID returned by a `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ 
 call is then used to refer to that line using `line.delete() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}delete>`__, for example.
 
@@ -433,10 +440,10 @@ call is then used to refer to that line using `line.delete() <https://www.tradin
 array
 """""
 
-Arrays in Pine are identified by an array ID. There is no single type representing an array ID, 
-but rather an overloaded version of a subset of Pine types which represents the type of an array's elements. 
+Arrays in Pine Script™ are identified by an array ID. There is no single type representing an array ID, 
+but rather an overloaded version of a subset of Pine Script™ types which represents the type of an array's elements. 
 These type names are constructed by appending the ``[]`` suffix (not to be confused with the 
-`[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ history-referencing operator) to one of the Pine types allowed for array elements:
+`[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ history-referencing operator) to one of the Pine Script™ types allowed for array elements:
 
 - ``int[]``
 - ``float[]``
@@ -460,11 +467,11 @@ An array containing elements of type "int" initalized with one element of value 
 void
 """"
 
-There is a "void" type in Pine. Functions having only side-effects and returning no usable result return the "void" type. 
+There is a "void" type in Pine Script™. Functions having only side-effects and returning no usable result return the "void" type. 
 An example of such a function is `alert() <https://www.tradingview.com/pine-script-reference/v5/#fun_alert>`__; 
 it does something (triggers an alert event), but it returns no useful value.
 
-A "void" result cannot be used in an expression or assigned to a variable. No ``void`` keyword exists in Pine, as variables cannot be declared using the "void" type.
+A "void" result cannot be used in an expression or assigned to a variable. No ``void`` keyword exists in Pine Script™, as variables cannot be declared using the "void" type.
 
 
 
@@ -499,6 +506,8 @@ Tuples can be useful to request multiple values in one `request.security() <http
 
 or:
 
+::
+    
     [op, hi, lo, cl] = request.security(syminfo.tickerid, "D", [math.round_to_mintick(open), math.round_to_mintick(high), math.round_to_mintick(low), math.round_to_mintick(close)])
 
 or this form if no rounding is required::
@@ -524,11 +533,11 @@ They cannot be used in ternaries, however, because the return values of a ternar
 \`na\` value
 ------------
 
-In Pine there is a special value called `na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__, which is an acronym for *not available*, meaning
+In Pine Script™ there is a special value called `na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__, which is an acronym for *not available*, meaning
 the value of an expression or variable is undefined. It is similar to the ``null`` value in Java, or ``None`` in Python.
 
 `na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__ values can be automatically cast to almost any type. 
-In some cases, however, the Pine compiler cannot automatically infer a type for an 
+In some cases, however, the Pine Script™ compiler cannot automatically infer a type for an 
 `na <https://www.tradingview.com/pine-script-reference/v4/#var_na>`__ value because more that one automatic type-casting rule can be applied. 
 For example::
 
@@ -588,7 +597,7 @@ where we are replacing any `na <https://www.tradingview.com/pine-script-referenc
 Type casting
 ------------
 
-There is an automatic type-casting mechanism in Pine which can *cast* (or convert) certain types to another. 
+There is an automatic type-casting mechanism in Pine Script™ which can *cast* (or convert) certain types to another. 
 The auto-casting rules are: **int** 🠆 **float** 🠆 **bool**, which means that when a "float" is required, an "int" can be used in its place, 
 and when a "bool" value is required, an "int" or "float" value can be used in its place.
 
@@ -604,7 +613,7 @@ Note that:
   The ``true``/``false`` value of that "bool" argument determines if the function plots a shape or not.
 - We are here calling `plotshape(() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ with 
   `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ as its first argument. 
-  This would not be allowed without Pine's auto-casting rules, which allow a "float" to be cast to a "bool". 
+  This would not be allowed without Pine Script™'s auto-casting rules, which allow a "float" to be cast to a "bool". 
   When a "float" is cast to a bool, any non-zero values are converted to ``true``, and zero values are converted to ``false``. 
   As a result of this, our code will plot an "X" on all bars, as long as `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ is not equal to zero.
 
@@ -647,3 +656,9 @@ Explicit type-casting can also be useful when declaring variables and initializi
     lbl = label(na)
     // Explicitly declare the type of the new variable.
     label lbl = na
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

@@ -1,5 +1,12 @@
 .. _PageUserDefinedFunctions:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 User-defined functions
 ======================
 
@@ -11,9 +18,9 @@ User-defined functions
 Introduction
 ------------
 
-User-defined functions are functions that you write, as opposed to the built-in functions in Pine. 
+User-defined functions are functions that you write, as opposed to the built-in functions in Pine Script™. 
 They are useful to define calculations that you must do repetitevely, or that you want to isolate from your script's main section of calculations. 
-Think of user-defined functions as a way to extend the capabilities of Pine, when no built-in function will do what you need.
+Think of user-defined functions as a way to extend the capabilities of Pine Script™, when no built-in function will do what you need.
 
 You can write your functions in two ways:
 
@@ -24,7 +31,7 @@ Functions can be located in two places:
 
 - If a function is only used in one script, you can include it in the script where it is used.
   See our :ref:`Style guide <PageStyleGuide_FunctionDeclarations>` for recommendations on where to place functions in your script.
-- You can create a :ref:`Pine library <PageLibraries>` to include your functions, which makes them reusable in other scripts without having to copy their code.
+- You can create a :ref:`Pine Script™ library <PageLibraries>` to include your functions, which makes them reusable in other scripts without having to copy their code.
   Distinct requirements exist for library functions. They are explained in the page on :ref:`libraries <PageLibraries>`.
 
 Whether they use one line or multiple lines, user-defined functions have the following characteristics:
@@ -75,7 +82,7 @@ The type of variable ``c`` is *series* because the addition of a *series* and *l
 Multi-line functions
 --------------------
 
-Pine also supports multi-line functions with the following syntax:
+Pine Script™ also supports multi-line functions with the following syntax:
 
 .. code-block:: text
 
@@ -138,7 +145,7 @@ declared in the global scope from the scope of a function (except for
 self-referencing recursive calls), one can say
 that the local scope is embedded into the global scope.
 
-In Pine, nested functions are not allowed, i.e., one cannot declare a
+In Pine Script™, nested functions are not allowed, i.e., one cannot declare a
 function inside another one. All user functions are declared in the
 global scope. Local scopes cannot intersect with each other.
 
@@ -168,7 +175,7 @@ Special syntax is required for calling such functions:
 Limitations
 -----------
 
-User-defined functions can use any of the Pine built-ins, except:
+User-defined functions can use any of the Pine Script™ built-ins, except:
 `barcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_barcolor>`__,
 `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__,
 `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__,
@@ -180,3 +187,9 @@ User-defined functions can use any of the Pine built-ins, except:
 `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__,
 `plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__ and
 `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

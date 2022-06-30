@@ -1,5 +1,12 @@
 .. _PageTables:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Tables
 ======
 
@@ -12,7 +19,7 @@ Introduction
 ------------
 
 Tables are objects that can be used to position information in specific and fixed locations in a script's visual space. 
-Contrary to all other plots or objects drawn in Pine, 
+Contrary to all other plots or objects drawn in Pine Script™, 
 tables are not anchored to specific bars; they *float* in a script's space, whether in overlay or pane mode, in studies or strategies,
 independently of the chart bars being viewed or the zoom factor used. 
 
@@ -278,7 +285,7 @@ Note that:
 
 - We define a maximum lookback period as a ``MAX_LOOKBACK`` constant. This is an important value and we use it for two purposes: 
   to specify the number of columns we will create in our one-row table, and to specify the lookback period required for the ``_src`` argument in our function, 
-  so that we force Pine to create a historical buffer size that will allow us to refer to the required quantity of past values of ``_src`` in our 
+  so that we force Pine Script™ to create a historical buffer size that will allow us to refer to the required quantity of past values of ``_src`` in our 
   `for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ loop.
 - We offer users the possibility of configuring the bull/bear colors in the inputs and we use ``inline`` to place the color selections on the same line.
 - Inside our function, we enclose our table-creation code in an 
@@ -304,3 +311,9 @@ Tips
 - When creating tables in strategy scripts, keep in mind that unless the strategy uses ``calc_on_every_tick = true``, table code enclosed in `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ `barstate.islast <https://www.tradingview.com/pine-script-reference/v5/#var_barstate{dot}islast>`__ blocks will not execute on each realtime update, so the table will not display as you expect.
 - Keep in mind that successive calls to `table.cell() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}cell>`__ overwrite the cell's properties specified by previous `table.cell() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}cell>`__ calls. Use the setter functions to modify a cell's properties.
 - Remember to control the execution of your table code wisely by restricting it to the necessary bars only. This saves server resources and your charts will display faster, so everybody wins.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

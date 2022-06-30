@@ -1,5 +1,12 @@
 .. _PageIdentifiers:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Identifiers
 ===========
 
@@ -20,7 +27,7 @@ Here are some examples::
     maxLen
     3barsDown  // NOT VALID!
 
-The :ref:`Pine Style Guide <PageStyleGuide>` recommends using uppercase SNAKE_CASE for constants, and camelCase for other identifiers::
+The :ref:`Pine Script™ Style Guide <PageStyleGuide>` recommends using uppercase SNAKE_CASE for constants, and camelCase for other identifiers::
 
     GREEN_COLOR = #4CAF50
     MAX_LOOKBACK = 100
@@ -28,3 +35,8 @@ The :ref:`Pine Style Guide <PageStyleGuide>` recommends using uppercase SNAKE_CA
     // Returns 1 if the argument is `true`, 0 if it is `false` or `na`.
     zeroOne(boolValue) => boolValue ? 1 : 0
     
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

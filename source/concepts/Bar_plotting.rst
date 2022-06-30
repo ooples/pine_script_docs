@@ -1,5 +1,12 @@
 .. _PageBarPlotting:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Bar plotting
 ============
 
@@ -126,7 +133,7 @@ The signature of `plotbar() <https://www.tradingview.com/pine-script-reference/v
     plotbar(open, high, low, close, title, color, editable, show_last, display) → void
 
 Note that `plotbar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotbar>`__
-has no paremeter for ``bordercolor`` or ``wickcolor``, as there are no borders or wicks on conventional bars.
+has no parameter for ``bordercolor`` or ``wickcolor``, as there are no borders or wicks on conventional bars.
 
 This plots conventional bars using the same coloring logic as in the second example of the previous section::
 
@@ -136,3 +143,9 @@ This plots conventional bars using the same coloring logic as in the second exam
     plotbar(open, high, low, close, color = paletteColor)
 
 .. image:: images/BarPlotting-Plotbar-1.png
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

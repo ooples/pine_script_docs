@@ -1,5 +1,12 @@
 .. _PageDeclarationStatements:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Declaration statements
 ======================
 
@@ -47,7 +54,7 @@ unless ``precision =`` is also used, in which case it will override
 the effect of ``format.inherit``. When ``format.price`` is used, 
 the default precision will be "2", unless one is specified using ``precision =``. When
 ``format.volume`` is used, the format is equivalent to ``precision = 0`` used in 
-earlier versions of Pine, where "5183" becomes "5.183K".
+earlier versions of Pine Script™, where "5183" becomes "5.183K".
 
 ``precision`` is the number of digits after the floating point 
 used to format study values.
@@ -72,5 +79,11 @@ had been used.
 
 .. rubric:: Footnote
 
-.. [#strategy] Pine also has a `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
+.. [#strategy] Pine Script™ also has a `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__
    annotation function which is used to create a :ref:`strategy <PageStrategies>` rather than an indicator.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

@@ -1,5 +1,12 @@
 .. _PageTime:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Time
 ====
 
@@ -15,16 +22,16 @@ Introduction
 Four references
 ^^^^^^^^^^^^^^^
 
-Four different references come into play when using date and time values in Pine:
+Four different references come into play when using date and time values in Pine Script™:
 
-#. **UTC**: The native format for time values in Pine is the **Unix time in milliseconds**. 
+#. **UTC**: The native format for time values in Pine Script™ is the **Unix time in milliseconds**. 
    Unix time is the time elapsed since the **Unix Epoch on January 1st, 1970 at UTC**.
    See here for the `current Unix time in seconds <https://www.unixtimestamp.com/>`__
    and here for more information on `Unix Time <https://en.wikipedia.org/wiki/Unix_time>`__.
    A value for the Unix time is called a *timestamp*.
    Unix timestamps are always expressed in the UTC (or "GMT", or "GMT+0") time zone.
    They are measured from a fixed reference, i.e., the Unix Epoch, and do not vary with time zones.
-   Some Pine built-ins use the UTC time zone as a reference.
+   Some Pine Script™ built-ins use the UTC time zone as a reference.
 #. **Exchange time zone**: A second time-related key reference for traders is the time zone of the exchange where an instrument is traded.
    Some built-ins like `hour <https://www.tradingview.com/pine-script-reference/v5/#var_hour>`__
    return values in the exchange's time zone.
@@ -47,7 +54,7 @@ Scripts do not have visibility on the user's time zone setting on his chart.
 Time built-ins
 ^^^^^^^^^^^^^^
 
-Pine has built-in **variables** to:
+Pine Script™ has built-in **variables** to:
 
 - Get timestamp information from the current bar (UTC time zone): 
   `time <https://www.tradingview.com/pine-script-reference/v5/#var_time>`__ and
@@ -94,10 +101,10 @@ There are also built-in **functions** that can:
 Time zones
 ^^^^^^^^^^
 
-TragingViewers can change the time zone used to display bar times on their charts.
+TradingViewers can change the time zone used to display bar times on their charts.
 Pine scripts have no visiblity over this setting.
 While there is a `syminfo.timezone <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}timezone>`__
-variable to return the time zone of the exchange where the chart's intrument is traded,
+variable to return the time zone of the exchange where the chart's instrument is traded,
 there is **no** ``chart.timezone`` equivalent.
 
 When displaying times on the chart, this shows one way of providing users a way of adjusting your script's time values to those of their chart.
@@ -246,7 +253,7 @@ it returns the starting time of the last trading day in the bar (e.g., at 1W it 
 It works in realtime, but also when a script executes on historical bars. 
 In realtime, your scripts will only perceive changes when they execute on feed updates.
 When no updates occur the script is idle, so it cannot update its display.
-See the page on Pine's :ref:`execution model <PageExecutionModel>` for more information.
+See the page on Pine Script™'s :ref:`execution model <PageExecutionModel>` for more information.
 
 This script uses the values of `timenow <https://www.tradingview.com/pine-script-reference/v5/#var_timenow>`__
 and `time_close <https://www.tradingview.com/pine-script-reference/v5/#var_time_close>`__
@@ -551,3 +558,8 @@ These are examples of various formats:
       timenow, timenow, timenow, timenow, 
       timenow - time, time_close - timenow), label.style_label_left)
 
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

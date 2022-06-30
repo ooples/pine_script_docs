@@ -1,15 +1,121 @@
 .. _PageReleaseNotes:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Release notes
 =============
 
 .. contents:: :local:
     :depth: 1
 
-This page contains release notes of notable changes in Pine Script.
+This page contains release notes of notable changes in Pine Script™.
+
+June 2022
+---------
+
+The behavior of the argument used with the ``qty_percent`` parameter of `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ has changed. Previously, the percentages used on successive exit orders of the same position were calculated from the remaining position at any given time. Instead, the percentages now always apply to the initial position size. When executing the following strategy, for example::
+
+	//@version=5
+	strategy("strategy.exit() example", overlay = true)
+	strategy.entry("Long", strategy.long, qty = 100)
+	strategy.exit("Exit Long1", "Long", trail_points = 50, trail_offset = 0, qty_percent = 20)
+	strategy.exit("Exit Long2", "Long", trail_points = 100, trail_offset = 0, qty_percent = 20)
+    
+20% of the initial position will be closed on each `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ call. Before, the first call would exit 20% of the initial position, and the second would exit 20% of the remaining 80% of the position, so only 16% of the initial position.
+
+Two new parameters for the built-in `ta.vwap() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}vwap>`_ function were added:
+
+* ``anchor`` - Specifies the condition that triggers the reset of VWAP calculations. When ``true``, calculations reset; when ``false``, calculations proceed using the values accumulated since the previous reset.
+* ``stdev_mult`` -  If specified, the `ta.vwap() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}vwap>`_ calculates the standard deviation bands based on the main VWAP series and returns a ``[vwap, upper_band, lower_band]`` tuple.
+
+New overloaded versions of the `strategy.close() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}close>`_  and `strategy.close_all() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}close_all>`_ functions with the ``immediately`` parameter. When ``immediately`` is set to ``true``, the closing order will be executed on the tick where it has been placed, ignoring the strategy parameters that restrict the order execution to the open of the next bar.
+
+New built-in functions were added:
+
+* `timeframe.change() <https://www.tradingview.com/pine-script-reference/v5/#fun_timeframe{dot}change>`_ - Returns ``true`` on the first bar of a new ``timeframe``, ``false`` otherwise.
+* `ta.pivot_point_levels() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}pivot_point_levels>`_  - Returns a float array with numerical values representing 11 pivot point levels: ``[P, R1, S1, R2, S2, R3, S3, R4, S4, R5, S5]``. Levels absent from the specified ``type`` return na values.
+
+New built-in variables were added:
+
+* `session.isfirstbar <https://www.tradingview.com/pine-script-reference/v5/#var_session{dot}isfirstbar>`__ - returns ``true`` if the current bar is the first bar of the day's session, ``false`` otherwise.
+* `session.islastbar <https://www.tradingview.com/pine-script-reference/v5/#var_session{dot}islastbar>`__ - returns ``true`` if the current bar is the last bar of the day's session, ``false`` otherwise.
+* `session.isfirstbar_regular <https://www.tradingview.com/pine-script-reference/v5/#var_session{dot}isfirstbar_regular>`__ - returns ``true`` on the first regular session bar of the day, ``false`` otherwise.
+* `session.islastbar_regular <https://www.tradingview.com/pine-script-reference/v5/#var_session{dot}islastbar_regular>`__ - returns ``true`` on the last regular session bar of the day, ``false`` otherwise.
+* `chart.left_visible_bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}left_visible_bar_time>`__ - returns the ``time`` of the leftmost bar currently visible on the chart.
+* `chart.right_visible_bar_time <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}right_visible_bar_time>`__ - returns the ``time`` of the rightmost bar currently visible on the chart.
+
+
+May 2022
+--------
+
+`Matrix <https://www.tradingview.com/pine-script-reference/v5/#op_matrix>`__ support has been added to the `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ function.
+
+The historical states of `arrays <https://www.tradingview.com/pine-script-reference/v5/#op_array>`__ and `matrices <https://www.tradingview.com/pine-script-reference/v5/#op_matrix>`__ can now be referenced with the  `[] <https://www.tradingview.com/pine-script-reference/v5/#op_[]>`__ operator. In the example below, we reference the historic state of a matrix 10 bars ago::
+
+	//@version=5
+	indicator("matrix.new<float> example")
+	m = matrix.new<float>(1, 1, close)
+	float x = na
+	if bar_index > 10
+ 	    x := matrix.get(m[10], 0, 0)
+	plot(x)
+	plot(close)
+
+The `ta.change() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}change>`__ function now can take values of `int <https://www.tradingview.com/pine-script-reference/v5/#op_int>`__ and `bool <https://www.tradingview.com/pine-script-reference/v5/#op_bool>`__ types as its ``source`` parameter and return the difference in the respective type.
+
+New built-in variables were added:
+
+* `chart.bg_color <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}bg_color>`__ - Returns the color of the chart's background from the ``"Chart settings/Appearance/Background"`` field.
+* `chart.fg_color <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}fg_color>`__ - Returns a color providing optimal contrast with `chart.bg_color <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}bg_color>`__.
+* `chart.is_standard <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_standard>`__ - Returns true if the chart type is bars, candles, hollow candles, line, area or baseline, false otherwise.
+* `currency.USDT <https://www.tradingview.com/pine-script-reference/v5/#var_currency{dot}USDT>`__ - A constant for the Tether currency code.
+
+New functions were added:
+
+* `syminfo.prefix() <https://www.tradingview.com/pine-script-reference/v5/#fun_syminfo{dot}prefix>`__ - returns the exchange prefix of the ``symbol`` passed to it, e.g. "NASDAQ" for "NASDAQ:AAPL".
+* `syminfo.ticker() <https://www.tradingview.com/pine-script-reference/v5/#fun_syminfo{dot}ticker>`__ - returns the ticker of the ``symbol`` passed to it without the exchange prefix, e.g. "AAPL" for "NASDAQ:AAPL".
+* `request.security_lower_tf() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security_lower_tf>`__ - requests data from a lower timeframe than the chart's.
+
+Added ``use_bar_magnifier`` parameter for the `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__  function. When ``true``, the `Broker Emulator <https://www.tradingview.com/pine-script-docs/en/v5/concepts/Strategies.html#broker-emulator>`__ uses lower timeframe data during history backtesting to achieve more realistic results.
+
+Fixed behaviour of `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ function when stop loss triggered at prices outside the bars price range.
+
+Added new ``comment`` and ``alert`` message parameters for the `strategy.exit() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}exit>`__ function: 
+
+* ``comment_profit`` - additional notes on the order if the exit was triggered by crossing ``profit`` or ``limit`` specifically.
+* ``comment_loss`` - additional notes on the order if the exit was triggered by crossing ``stop`` or ``loss`` specifically.
+* ``comment_trailing`` - additional notes on the order if the exit was triggered by crossing ``trail_offset`` specifically.
+* ``alert_profit`` - text that will replace the ``'{{strategy.order.alert_message}}'`` placeholder if the exit was triggered by crossing ``profit`` or ``limit`` specifically. 
+* ``alert_loss`` - text that will replace the ``'{{strategy.order.alert_message}}'`` placeholder if the exit was triggered by crossing ``stop`` or ``loss`` specifically.
+* ``alert_trailing`` - text that will replace the ``'{{strategy.order.alert_message}}'`` placeholder if the exit was triggered by crossing ``trail_offset`` specifically. 
+
+
+
 
 April 2022
 -------------
+
+Added the ``display`` parameter to the following functions: `barcolor <https://www.tradingview.com/pine-script-reference/v5/#fun_barcolor>`__, `bgcolor <https://www.tradingview.com/pine-script-reference/v5/#fun_bgcolor>`__, `fill <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__, `hline <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__.
+
+A new function was added:
+
+* `request.economic() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}economic>`__ - Economic data includes information such as the state of a country's economy or of a particular industry.
+
+New built-in variables were added:
+
+* `strategy.max_runup <https://www.tradingview.com/pine-script-reference/v5/#var_strategy{dot}max_runup>`__ - Returns the maximum equity run-up value for the whole trading interval.
+* `syminfo.volumetype <https://www.tradingview.com/pine-script-reference/v5/#var_syminfo{dot}volumetype>`__ - Returns the volume type of the current symbol.
+* `chart.is_heikinashi <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_heikinashi>`__ - Returns true if the chart type is Heikin Ashi, false otherwise.
+* `chart.is_kagi <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_kagi>`__ - Returns true if the chart type is Kagi, false otherwise.
+* `chart.is_linebreak <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_linebreak>`__ - Returns true if the chart type is Line break, false otherwise.
+* `chart.is_pnf <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_pnf>`__ - Returns true if the chart type is Point & figure, false otherwise.
+* `chart.is_range <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_range>`__ - Returns true if the chart type is Range, false otherwise.
+* `chart.is_renko <https://www.tradingview.com/pine-script-reference/v5/#var_chart{dot}is_renko>`__ - Returns true if the chart type is Renko, false otherwise.
 
 New matrix functions were added:
 
@@ -63,9 +169,9 @@ New matrix functions were added:
 * `matrix.is_stochastic() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}is_stochastic>`__  - Determines if the matrix is stochastic.
 * `matrix.is_square() <https://www.tradingview.com/pine-script-reference/v5/#fun_matrix{dot}is_square>`__  - Determines if the matrix is square (it has the same number of rows and columns).
 
-New parameter of the ``strategy()`` function were added:
+Added a new parameter for the `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__ function:
 
-* `risk_free_rate <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__  - The risk-free rate of return is the annual percentage change in the value of an investment with minimal or zero risk, used to calculate the Sharpe and Sortino ratios.
+* ``risk_free_rate`` - The risk-free rate of return is the annual percentage change in the value of an investment with minimal or zero risk, used to calculate the Sharpe and Sortino ratios.
 
 March 2022
 -------------
@@ -113,6 +219,12 @@ New functions were added:
 
 * `input.text_area() <https://www.tradingview.com/pine-script-reference/v5/#fun_input{dot}text_area>`__ - adds multiline text input area to the Script settings.
 
+* `strategy.closedtrades.entry_id() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}entry_id>`__ - returns the id of the closed trade's entry.
+
+* `strategy.closedtrades.exit_id() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}closedtrades{dot}exit_id>`__ - returns the id of the closed trade's exit.
+
+* `strategy.opentrades.entry_id() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy{dot}opentrades{dot}entry_id>`__ - returns the id of the open trade's entry.
+
 January 2022
 -------------
 
@@ -127,7 +239,7 @@ December 2021
 
 Linefills
 ^^^^^^^^^
-The space between lines drawn in Pine can now be filled! We’ve added a new ``linefill`` drawing type, along with a number of functions dedicated to manipulating it. 
+The space between lines drawn in Pine Script™ can now be filled! We’ve added a new ``linefill`` drawing type, along with a number of functions dedicated to manipulating it. 
 Linefills are created by passing two lines and a color to the ``linefill.new()`` function, and their behavior is based on the lines they're tied to: 
 they extend in the same direction as the lines, move when their lines move, and are deleted when one of the two lines is deleted.
 
@@ -146,7 +258,7 @@ New linefill-related functions:
 New functions for string manipulation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Added a number of new functions that provide more ways to process strings, and introduce regular expressions to Pine:
+Added a number of new functions that provide more ways to process strings, and introduce regular expressions to Pine Script™:
 
 * `str.contains(source, str) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}contains>`__ - Determines if the ``source`` string contains the ``str`` substring.
 * `str.pos(source, str) <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}pos>`__ - Returns the position of the ``str`` string in the ``source`` string.
@@ -265,22 +377,22 @@ The following functions are affected:
 
 October 2021
 --------------
-Pine v5 is here! 
+Pine Script™ v5 is here! 
 This is a list of the **new** features added to the language, and a few of the **changes** made.
-See the :ref:`Migration guide to Pine v5 <PageToPineVersion5>` for a complete list of the **changes** in v5.
+See the :ref:`Migration guide to Pine Script™ v5 <PageToPineVersion5>` for a complete list of the **changes** in v5.
 
 
 New features
 ^^^^^^^^^^^^^
 Libraries are a new type of publication. They allow you to create custom functions for reuse in other scripts. See this manual's page on :ref:`Libraries <PageLibraries>`.
 
-Pine now supports `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ structures!
+Pine Script™ now supports `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ structures!
 They provide a more convenient and readable alternative to long ternary operators and `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__ statements.
 
 `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ loops are here! 
 They allow you to create a loop that will only stop when its controlling condition is false, or a ``break`` command is used in the loop.
 
-New built-in array variables are maintained by the Pine runtime to hold the IDs of all the active objects of the same type drawn by your script. They are 
+New built-in array variables are maintained by the Pine Script™ runtime to hold the IDs of all the active objects of the same type drawn by your script. They are 
 `label.all <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}all>`__,
 `line.all <https://www.tradingview.com/pine-script-reference/v5/#var_line{dot}all>`__,
 `box.all <https://www.tradingview.com/pine-script-reference/v5/#var_box{dot}all>`__ and
@@ -321,8 +433,8 @@ New variables and functions provide better script visibility on strategy informa
 A new `earnings.standardized <https://www.tradingview.com/pine-script-reference/v5/#var_earnings{dot}standardized>`__ constant for the 
 `request.earnings() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}earnings>`__ function allows requesting standardized earnings data.
 
-A v4 to v5 converter is now included in the Pine Editor. 
-See the :ref:`Migration guide to Pine v5 <PageToPineVersion5>` for more information on converting your scripts to v5.
+A v4 to v5 converter is now included in the Pine Script™ Editor. 
+See the :ref:`Migration guide to Pine Script™ v5 <PageToPineVersion5>` for more information on converting your scripts to v5.
 
 The `Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__ 
 now includes the systematic mention of the form and type (e.g., "simple int") required for each function parameter.
@@ -335,9 +447,9 @@ Many built-in variables, functions and function arguments were renamed or moved 
 The venerable ``study()``, for example, is now `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
 and ``security()`` is now `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__.
 New namespaces now group related functions and variables together.
-This consolidation implements a more rational nomenclature and provides an orderly space to accommodate the many additions planned for Pine. 
+This consolidation implements a more rational nomenclature and provides an orderly space to accommodate the many additions planned for Pine Script™. 
 
-See the :ref:`Migration guide to Pine v5 <PageToPineVersion5>` for a complete list of the **changes** made in v5.
+See the :ref:`Migration guide to Pine Script™ v5 <PageToPineVersion5>` for a complete list of the **changes** made in v5.
 
 .. _PageReleaseNotes_September2021:
 
@@ -395,8 +507,8 @@ New functions were added:
 * ``color.r(color)``, ``color.g(color)``, ``color.b(color)``, ``color.t(color)`` - retrieves the value of one of the color components.
 * ``array.from()`` - takes a variable number of arguments with one of the types: ``int``, ``float``, ``bool``, ``string``, ``label``, ``line``, ``color``, ``box``, ``table`` and returns an array of the corresponding type. 
 
-A new ``box`` drawing has been added to Pine, making it possible to draw rectangles on charts using the Pine syntax. 
-For more details see the `Pine Script reference <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ and the :ref:`Lines and boxes <PageLinesAndBoxes>` User Manual page.
+A new ``box`` drawing has been added to Pine Script™, making it possible to draw rectangles on charts using the Pine Script™ syntax. 
+For more details see the `Pine Script™ reference <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ and the :ref:`Lines and boxes <PageLinesAndBoxes>` User Manual page.
 
 The ``color.new`` function can now accept series and input arguments, in which case, the colors will be calculated at runtime. For more information about this, see our :ref:`Colors <PageColors>` User Manual page.
 
@@ -624,7 +736,7 @@ Please note that you need to reapply the indicator in order for the `resolution`
 .. image:: images/ReleaseNotes-new_label_styles.png
 
 
-* Find and Replace was added to Pine Editor. To use this, press CTRL+F (find) or CTRL+H (find and replace).
+* Find and Replace was added to Pine Script™ Editor. To use this, press CTRL+F (find) or CTRL+H (find and replace).
 
 .. image:: images/ReleaseNotes-FindReplace.jpg
 
@@ -678,7 +790,7 @@ Added a detailed description of all the fields in the `Strategy Tester Report <h
 February 2020
 ^^^^^^^^^^^^^
 
-* New Pine indicator VWAP Anchored was added. Now you can specify the time period: Session, Month, Week, Year.
+* New Pine Script™ indicator VWAP Anchored was added. Now you can specify the time period: Session, Month, Week, Year.
 
 * Fixed a problem with calculating ``percentrank`` function. Now it can return a zero value, which did not happen before due to an incorrect calculation.
 
@@ -734,7 +846,7 @@ December 2019
 ^^^^^^^^^^^^^
 * Warning messages were added.
 
-  For example, if you don't specify exit parameters for ``strategy.exit`` - ``profit``, ``limit``, ``loss``, ``stop`` or one of the following pairs: ``trail_offset`` and ``trail_price`` / ``trail_points`` - you will see a warning message in the console in the Pine editor.
+  For example, if you don't specify exit parameters for ``strategy.exit`` - ``profit``, ``limit``, ``loss``, ``stop`` or one of the following pairs: ``trail_offset`` and ``trail_price`` / ``trail_points`` - you will see a warning message in the console in the Pine Script™ editor.
 * Increased the maximum number of arguments in ``max``, ``min``, ``avg`` functions. Now you can use up to ten arguments in these functions.  
 
 October 2019
@@ -817,7 +929,7 @@ The behavior of some functions, variables and operators has changed:
 
 * Changes to the evaluation of ternary operator branches:
 
-  In Pine v3, during the execution of a ternary operator, both its branches are calculated, so when this script is added to the chart, a long position is opened, even if the long() function is not called::
+  In Pine Script™ v3, during the execution of a ternary operator, both its branches are calculated, so when this script is added to the chart, a long position is opened, even if the long() function is not called::
 
     //@version=3
     strategy(title = "My Strategy")
@@ -828,7 +940,7 @@ The behavior of some functions, variables and operators has changed:
     c := true ? 1 : long()
     plot(c)
     
-  Pine v4 contains built-in functions with side effects ( ``line.new`` and ``label.new`` ). If calls to these functions are present in both branches of a ternary operator, both function calls would be executed following v3 conventions. Thus, in Pine v4, only the branch corresponding to the evaluated condition is calculated. While this provides a viable solution in some cases, it will modify the behavior of scripts which depended on the fact that both branches of a ternary were evaluated. The solution is to pre-evaluate expressions prior to the ternary operator. The conversion utility takes this requirement into account when converting scripts from v3 to v4, so that script behavior will be identical in v3 and v4.
+  Pine Script™ v4 contains built-in functions with side effects ( ``line.new`` and ``label.new`` ). If calls to these functions are present in both branches of a ternary operator, both function calls would be executed following v3 conventions. Thus, in Pine Script™ v4, only the branch corresponding to the evaluated condition is calculated. While this provides a viable solution in some cases, it will modify the behavior of scripts which depended on the fact that both branches of a ternary were evaluated. The solution is to pre-evaluate expressions prior to the ternary operator. The conversion utility takes this requirement into account when converting scripts from v3 to v4, so that script behavior will be identical in v3 and v4.
 
 
 
@@ -847,7 +959,7 @@ June 2019
 
 * Renaming of built-ins and a version 3 to 4 converter utility
 * ``max_bars_back`` function to control series variables internal history buffer sizes
-* Pine Script documentation versioning
+* Pine Script™ documentation versioning
 
 
 
@@ -886,7 +998,7 @@ April 2017
 
 March 2017
 ^^^^^^^^^^
-* Pine Script v3 is here! Some important changes:
+* Pine Script™ v3 is here! Some important changes:
   
   * Changes to the default behavior of the ``security()`` function: it can no longer access the future data by default. This can be changes with the ``lookahead`` parameter.
   * An implicit conversion of boolean values to numeric values was replaced with an implicit conversion of numeric values (integer and float) to boolean values.
@@ -915,7 +1027,7 @@ December 2016
 
 October 2016
 ^^^^^^^^^^^^
-* Introduded indicator revisions. Each time an indicator is saved, it gets a new revision, and it is possible to easily switch to any past revision from the Pine Editor.
+* Introduded indicator revisions. Each time an indicator is saved, it gets a new revision, and it is possible to easily switch to any past revision from the Pine Script™ Editor.
 
 September 2016
 ^^^^^^^^^^^^^^
@@ -932,12 +1044,12 @@ March 2016
 February 2016
 ^^^^^^^^^^^^^
 * Added ``for`` loops and keywords ``break`` and ``continue``.
-* Pine now supports mutable variables! Use the ``:=`` operator to assign a new value to a variable that has already been defined.
+* Pine Script™ now supports mutable variables! Use the ``:=`` operator to assign a new value to a variable that has already been defined.
 * Multiple improvements and bug fixes for strategies.
 
 January 2016
 ^^^^^^^^^^^^
-* A new ``alertcondition()`` function allows for creating custom alert conditions in Pine-based indicators.
+* A new ``alertcondition()`` function allows for creating custom alert conditions in Pine Script™-based indicators.
 
 
 
@@ -946,11 +1058,11 @@ January 2016
 
 October 2015
 ^^^^^^^^^^^^
-* Pine has graduated to v2! The new version of Pine Script added support for ``if`` statements, making it easier to write more readable and concise code.
+* Pine has graduated to v2! The new version of Pine Script™ added support for ``if`` statements, making it easier to write more readable and concise code.
 
 September 2015
 ^^^^^^^^^^^^^^
-* Added backtesting functionality to Pine. It is now possible to create trading strategies, i.e. scripts that can send, modify and cancel orders to buy or sell. Strategies allow you to perform backtesting (emulation of strategy trading on historical data) and forward testing (emulation of strategy trading on real-time data) according to your algorithms. Detailed information about the strategy's calculations and the order fills can be seen in the newly added Strategy Tester tab.
+* Added backtesting functionality to Pine Script™. It is now possible to create trading strategies, i.e. scripts that can send, modify and cancel orders to buy or sell. Strategies allow you to perform backtesting (emulation of strategy trading on historical data) and forward testing (emulation of strategy trading on real-time data) according to your algorithms. Detailed information about the strategy's calculations and the order fills can be seen in the newly added Strategy Tester tab.
 
 July 2015
 ^^^^^^^^^
@@ -987,12 +1099,12 @@ August 2014
 July 2014
 ^^^^^^^^^
 * Added three new plotting functions, ``plotshape()``, ``plotchar()``, and ``plotarrow()`` for situations when you need to highlight specific bars on a chart without drawing a line.
-* Integrated QUANDL data into Pine Script. The data can be accessed by passing the QUANDL ticker to the ``security`` function.
+* Integrated QUANDL data into Pine Script™. The data can be accessed by passing the QUANDL ticker to the ``security`` function.
 
 June 2014
 ^^^^^^^^^
 
-* Added Pine Script sharing, enabling coders and traders to share their scripts with the rest of the TradingView community.
+* Added Pine Script™ sharing, enabling programmers and traders to share their scripts with the rest of the TradingView community.
 
 April 2014
 ^^^^^^^^^^
@@ -1020,4 +1132,10 @@ February 2014
 2013
 ----
 
-* The first version of Pine is introduced to all TradingView users, initially as an open beta, on December 13th.
+* The first version of Pine Script™ is introduced to all TradingView users, initially as an open beta, on December 13th.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

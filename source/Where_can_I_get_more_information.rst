@@ -1,21 +1,28 @@
 .. _PageWhereCanIGetMoreInformation:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Where can I get more information?
 =================================
 
-* A description of all the Pine operators, variables and functions can be found in the
+* A description of all the Pine Script™ operators, variables and functions can be found in the
   `Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__.
 
 * Use the code from one of TradingView's built-in scripts to start from. Open a new chart and click the
-  *Pine Editor* button on the toolbar. Once in the editor
+  *Pine Script™ Editor* button on the toolbar. Once in the editor
   window, click the *New* button. You'll find the
   TradingView built-in scripts in the dropdown list.
 
 * There is a TradingView public chat dedicated to
-  `Pine Script <https://www.tradingview.com/chat/#BfmVowG1TZkKO235>`__
+  `Pine Script™ <https://www.tradingview.com/chat/#BfmVowG1TZkKO235>`__
   where active developers of our community help each other out.
 
-* Information about major releases and modifications to Pine
+* Information about major releases and modifications to Pine Script™
   Script (as well as other features) is regularly published on
   `TradingView's blog <https://www.tradingview.com/blog/en/category/market-analysis/pine/>`__.
 
@@ -27,9 +34,15 @@ Where can I get more information?
 External resources
 ------------------
 
-- The `PineCoders <https://www.tradingview.com/u/PineCoders/#published-scripts>`__ account on TradingView publishes useful information for Pine coders.
+- The `PineCoders <https://www.tradingview.com/u/PineCoders/#published-scripts>`__ account on TradingView publishes useful information for Pine Script™ programmers.
   They also have content on their `website <https://www.pinecoders.com/>`__.
-- `Kodify <https://kodify.net/tradingview-programming-articles>`__ has TradingView tutorials on various topics for beginners and more experienced coders alike.
+- `Kodify <https://kodify.net/tradingview-programming-articles>`__ has TradingView tutorials on various topics for beginners and more experienced programmers alike.
   Topics include plotting, alerts, strategy orders, and complete example indicators and strategies.
-- `Backtest Rookies <https://backtest-rookies.com/category/tradingview>`__ publishes good quality blog articles focusing on realizing specific tasks in Pine.
-- You can ask questions about programming in Pine in the ``[pine-script]`` tag on `StackOverflow <https://stackoverflow.com/questions/tagged/pine-script>`__.
+- `Backtest Rookies <https://backtest-rookies.com/category/tradingview>`__ publishes good quality blog articles focusing on realizing specific tasks in Pine Script™.
+- You can ask questions about programming in Pine Script™ in the ``[pine-script]`` tag on `StackOverflow <https://stackoverflow.com/questions/tagged/pine-script>`__.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

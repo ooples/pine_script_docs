@@ -1,5 +1,12 @@
 .. _PageErrorMessages:
 
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Error messages
 ==============
 
@@ -49,7 +56,7 @@ Script could not be translated from: null
     study($)
 
 Usually this error occurs in version 1 pine scripts, and means that code
-is incorrect. Pine of version 2 (and higher) is better at
+is incorrect. Pine Script™ of version 2 (and higher) is better at
 explaining errors of this kind. So you can try to switch to version 2 by
 adding a :ref:`special attribute <PageScriptStructure_Version>` in the first line. You'll get
 ``line 2: no viable alternative at character '$'``
@@ -89,13 +96,13 @@ indent::
     plot(1)
 
 
-Loop is too long (> 200 ms)
+Loop is too long (> 500 ms)
 ---------------------------
 
 We limit the computation time of loop on every historical bar and
 realtime tick to protect our servers from infinite or very long loops.
 This limit also fail-fast indicators that will take too long to compute.
-For example, if you'll have 5000 bars, and indicator takes 200 milliseconds to
+For example, if you'll have 5000 bars, and indicator takes 500 milliseconds to
 compute on each of bars, it would have result in more than 16 minutes of
 loading.
 
@@ -166,13 +173,13 @@ can be сonverted into::
     var3 = expr1 + expr2
 
 
-Pine cannot determine the referencing length of a series. Try using max_bars_back in the indicator or strategy function
--------------------------------------------------------------------------------------------------------------------
+Pine Script™ cannot determine the referencing length of a series. Try using max_bars_back in the indicator or strategy function
+-------------------------------------------------------------------------------------------------------------------------------
 
-The error appears in cases where Pine wrongly autodetects the required 
+The error appears in cases where Pine Script™ wrongly autodetects the required 
 maximum length of series used in a script. This happens when a script's 
-flow of execution does not allow Pine to inspect the use of series in 
-branches of conditional statements (``if``, ``iff`` or ``?``), and Pine
+flow of execution does not allow Pine Script™ to inspect the use of series in 
+branches of conditional statements (``if``, ``iff`` or ``?``), and Pine Script™
 cannot automatically detect how far back the series is referenced. Here 
 is an example of a script causing this problem::
 
@@ -183,7 +190,7 @@ is an example of a script causing this problem::
         test := ta.roc(close, 20)
     plot(test)
 
-In order to help Pine with detection, you should add the ``max_bars_back`` 
+In order to help Pine Script™ with detection, you should add the ``max_bars_back`` 
 parameter to the script's ``indicator`` or ``strategy`` function::
 
     //@version=5
@@ -239,3 +246,9 @@ the time series received from this bar will be used to position the drawings on 
 Therefore, if it is impossible to determine the correct size of the buffer, this error may occur.
 To avoid this, you need to use ``max_bars_back(time, n)``.
 This behavior is described in more detail in the section about :ref:`drawings <max-bars-back-of-time>`.
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/

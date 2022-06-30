@@ -1,3 +1,12 @@
+.. _PagePublishing:
+
+.. image:: /images/Pine_Script_logo.svg
+   :alt: Pine Script™ logo
+   :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
+   :align: right
+   :width: 100
+   :height: 100
+
 Publishing scripts
 ==================
 
@@ -6,7 +15,7 @@ Publishing scripts
 
 Programmers who wish to share their Pine scripts with other traders can publish them.
 
-.. note:: If you write scripts for your personal use, there is no need to publish them; you can save them in the Pine Editor and use the "Add to Chart" button to add your script to your chart.
+.. note:: If you write scripts for your personal use, there is no need to publish them; you can save them in the Pine Script™ Editor and use the "Add to Chart" button to add your script to your chart.
 
 
 
@@ -88,7 +97,7 @@ The access type you can select from will vary with the type of account you hold.
 Open
 """"
 
-The Pine code of scripts published **open** is visible to all users. 
+The Pine Script™ code of scripts published **open** is visible to all users. 
 Open-source scripts on TradingView use the Mozilla license by default, but you may choose any license you want. 
 You can find information on licensing at `GitHub <https://help.github.com/articles/licensing-a-repository/>`__.
 
@@ -165,3 +174,9 @@ In the following example, we will **not** be updating the publication's chart:
 .. |PublishingScripts-PreparingAPublication-4| image:: images/PublishingScripts-PreparingAPublication-4.png
 .. |PublishingScripts-UpdatingAPublication-1| image:: images/PublishingScripts-UpdatingAPublication-1.png
 .. |PublishingScripts-UpdatingAPublication-2| image:: images/PublishingScripts-UpdatingAPublication-2.png
+
+
+.. image:: /images/TradingView-Logo-Block.svg
+    :width: 200px
+    :align: center
+    :target: https://www.tradingview.com/
