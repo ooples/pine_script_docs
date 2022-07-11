@@ -128,10 +128,9 @@ The behavior of linefills is dependent on the lines they are attached to.
 Linefills cannot be moved directly; their coordinates follow those of the lines they are tied to. 
 If both lines extend in the same direction, the linefill will also extend.
 
-Note that the direction of the line extension in Pine Script™ is based on the X values of both line's coordinates, 
-where ``left`` is the side of the lower ``X`` coordinate and (or the first one, if both ``X`` coordinates are equal). 
-If a line is extended left via the ``extend.left`` constant, but its ``X1`` coordinate is higher than its ``X2`` coordinate, 
-the line will be visually extended right on the chart. 
+Note that the direction of the line extensions in Pine Script™ is dependent on the ``x1`` coordinate of a line being less than its ``x2`` coordinate.
+If a line's ``x1`` value is greater than its ``x2`` value and ``extend.left`` is used, the line will actually extend to the right
+because the right side is assumed to be the side of the highest of the *x* coordinates.
 This behavior is inherited by the ``linefill`` object, so two lines can have the ``extend.left`` property and 
 the linefill between them will also be extended, even if the lines themselves are visually extended into different directions on the chart.
 
@@ -168,9 +167,9 @@ and fill the space between them to enhance the visibility of the channel the lin
 	    lL = line.new(pL_x1, pL_y1, pL_x2, pL_y2, extend = extend.right)
 	    // Fill
 	    fillColor = switch
-		pH_y2 > pH_y1 and pL_y2 > pL_y1 => color.green
-		pH_y2 < pH_y1 and pL_y2 < pL_y1 => color.red
-		=> color.silver
+            pH_y2 > pH_y1 and pL_y2 > pL_y1 => color.green
+            pH_y2 < pH_y1 and pL_y2 < pL_y1 => color.red
+            => color.silver
 	    linefill.new(lH, lL, color.new(fillColor, 90))}
 
 
