@@ -126,7 +126,7 @@ The function returns the ID of the ``linefill`` object it created, which can be 
 
 The behavior of linefills is dependent on the lines they are attached to. 
 Linefills cannot be moved directly; their coordinates follow those of the lines they are tied to. 
-If both lines extend in the same direction, the linefill will also follow their extensions.
+If both lines extend in the same direction, the linefill will also extend.
 
 Note that:
 
