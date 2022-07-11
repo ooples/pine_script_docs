@@ -128,9 +128,7 @@ The behavior of linefills is dependent on the lines they are attached to.
 Linefills cannot be moved directly; their coordinates follow those of the lines they are tied to. 
 If both lines extend in the same direction, the linefill will also extend.
 
-Note that:
-
-- The direction of the line extension in Pine Script™ is based on the X values of both line's coordinates, 
+Note that the direction of the line extension in Pine Script™ is based on the X values of both line's coordinates, 
 where ``left`` is the side of the lower ``X`` coordinate and (or the first one, if both ``X`` coordinates are equal). 
 If a line is extended left via the ``extend.left`` constant, but its ``X1`` coordinate is higher than its ``X2`` coordinate, 
 the line will be visually extended right on the chart. 
