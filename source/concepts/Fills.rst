@@ -128,11 +128,9 @@ The behavior of linefills is dependent on the lines they are attached to.
 Linefills cannot be moved directly; their coordinates follow those of the lines they are tied to. 
 If both lines extend in the same direction, the linefill will also extend.
 
-Note that the direction of the line extensions in Pine Script™ is dependent on the ``x1`` coordinate of a line being less than its ``x2`` coordinate.
-If a line's ``x1`` value is greater than its ``x2`` value and ``extend.left`` is used, the line will actually extend to the right
-because the right side is assumed to be the side of the highest of the *x* coordinates.
-This behavior is inherited by the ``linefill`` object, so two lines can have the ``extend.left`` property and 
-the linefill between them will also be extended, even if the lines themselves are visually extended into different directions on the chart.
+Note that for line extensions to work correctly, a line's ``x1`` coordinate must be less than its ``x2`` coordinate.
+If a line's ``x1`` argument is greater than its ``x2`` argument and ``extend.left`` is used, the line will actually extend to the right
+because ``x2`` is assumed to be the rightmost *x* coordinate.
 
 In the example below, our indicator draws two lines connecting the last two high and low pivot points of the chart. 
 We extend the lines to the right to project the short-term movement of the chart, 
