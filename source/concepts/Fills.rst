@@ -35,14 +35,20 @@ The `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ 
     fill(plot1, plot2, color, title, editable, show_last, fillgaps) → void
     fill(hline1, hline2, color, title, editable, fillgaps) → void
 
-The arguments used for the ``plot1``, ``plot2``, ``hline1`` and ``hline2`` parameters must be the IDs returned by the `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ and `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ calls.
+The arguments used for the ``plot1``, ``plot2``, ``hline1`` and ``hline2`` parameters must be the IDs returned by the 
+`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ and 
+`hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ calls.
 The `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ function is the only built-in function where these IDs are used.
 
 See in this first example how the IDs returned by the 
 `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__ and
 `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ calls
 are captured in the ``p1``, ``p2``, ``p3``, and ``h1``, ``h2``, ``h3`` and ``h4`` variables
-for reuse as `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ arguments::
+for reuse as `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__ arguments:
+
+.. image:: images/Fills-Fill-1.png
+
+::
 
     //@version=5
     indicator("Example 1")
@@ -58,14 +64,16 @@ for reuse as `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_
     fill(h1, h2, color.new(color.yellow, 90))
     fill(h3, h4, color.new(color.lime, 90))
 
-.. image:: images/Fills-Fill-1.png
-
 
 Because `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__
 requires two IDs from the same function,
 we sometimes need to use a `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
 call where we would have otherwise used an `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__
-call, as in this example::
+call, as in this example:
+
+.. image:: images/Fills-Fill-2.png
+
+::
 
     //@version=5
     indicator("Example 2")
@@ -77,13 +85,15 @@ call, as in this example::
     zeroPlotID = plot(0, "Zero", color.silver, 1, plot.style_circles)
     fill(oscPlotID, zeroPlotID, color.new(color.blue, 90))
 
-.. image:: images/Fills-Fill-2.png
-
 
 Because a "series color" can be used as an argument for the ``color`` parameter in
 `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__,
 you can use constants like ``color.red`` or ``#FF001A``, as well as expressions 
-calculating the color on each bar, as in this example::
+calculating the color on each bar, as in this example:
+
+.. image:: images/Fills-Fill-3.png
+
+::
 
     //@version=5
     indicator("Example 3", "", true)
@@ -93,25 +103,43 @@ calculating the color on each bar, as in this example::
     p2PlotID = plot(line2)
     fill(p1PlotID, p2PlotID, line1 > line2 ? color.new(color.green, 90) : color.new(color.red, 90))
 
-.. image:: images/Fills-Fill-3.png
-
 
 Line fills
 ----------
 
-Linefills are objects that allow you to fill the space between two line drawings created via the `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ function. A linefill object is displayed on the chart when the `linefill.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}new>`__ function is called. The function has the following signature::
+Linefills are objects that allow you to fill the space between two line drawings created via 
+the `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ function. 
+A linefill object is displayed on the chart when the 
+`linefill.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}new>`__ function is called. 
+The function has the following signature:
+
+.. code-block:: text
 
 	linefill.new(line1, line2, color) → series linefill
 
-The ``line1`` and ``line2`` arguments specify the two lines to fill between, while ``color`` is responsible for the color of the resulting linefill object. Any two-line pair can only have one linefill between them, so successive calls to `linefill.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}new>`__ on the same pair of lines will replace the previous linefill with a new one. The function returns the ID of the ``linefill`` object it created; said ID can be assigned to a variable and passed to the `linefill.set_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}set_color>`__ function to change the color without creating a new object.
+The ``line1`` and ``line2`` arguments are the line IDs of the two lines to fill between. The ``color`` argument is the color of the fill. 
+Any two-line pair can only have one linefill between them, so successive calls to 
+`linefill.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}new>`__ 
+on the same pair of lines will replace the previous linefill with a new one. 
+The function returns the ID of the ``linefill`` object it created, which can be saved in a variable for use in 
+`linefill.set_color() <https://www.tradingview.com/pine-script-reference/v5/#fun_linefill{dot}set_color>`__ call that will change the color of an existing linefill.
 
-The behavior of linefills is dependent on the lines they are attached to. Linefill cannot be moved directly, but it will move if the lines that it is tied to change their coordinates. If both lines extend in the same direction, the linefill will follow their extensions.
+The behavior of linefills is dependent on the lines they are attached to. 
+Linefills cannot be moved directly; their coordinates follow those of the lines they are tied to. 
+If both lines extend in the same direction, the linefill will also follow their extensions.
 
 Note that:
 
-- The direction of the line extension in Pine Script™ is based on the X values of both line's coordinates, where ``left`` is the side of the lower ``X`` coordinate and (or the first one, if both ``X`` coordinates are equal). If a line is extended left via the ``extend.left`` constant, but its ``X1`` coordinate is higher than its ``X2`` coordinate, the line will be visually extended right on the chart. This behavior is inherited by the ``linefill`` object, so two lines can have the ``extend.left`` property and the linefill between them will also be extended, even if the lines themselves are visually extended into different directions on the chart.
+- The direction of the line extension in Pine Script™ is based on the X values of both line's coordinates, 
+where ``left`` is the side of the lower ``X`` coordinate and (or the first one, if both ``X`` coordinates are equal). 
+If a line is extended left via the ``extend.left`` constant, but its ``X1`` coordinate is higher than its ``X2`` coordinate, 
+the line will be visually extended right on the chart. 
+This behavior is inherited by the ``linefill`` object, so two lines can have the ``extend.left`` property and 
+the linefill between them will also be extended, even if the lines themselves are visually extended into different directions on the chart.
 
-In the example below, our indicator draws two lines connecting the last two high and low pivot points of the chart. We extend the lines to the right to project the short-term movement of the chart, and fill the space between them to enhance the visibility of the channel the lines create:
+In the example below, our indicator draws two lines connecting the last two high and low pivot points of the chart. 
+We extend the lines to the right to project the short-term movement of the chart, 
+and fill the space between them to enhance the visibility of the channel the lines create:
 
 .. image:: images/Fills-Linefill-1.png
 
