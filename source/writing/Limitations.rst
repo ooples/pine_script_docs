@@ -95,6 +95,9 @@ plot function can actually use multiple plots. A perfect example of this would b
 Some functions like hline() or tables you would assume are counted towards this plotting limit since they are visually added to a chart but they aren't actually plotted on the chart. Other functions like plotchar() can change based on the underlying information
 used.
 
+
+:: 
+
     //@version=5
     indicator("Plot count example")
 
@@ -154,10 +157,11 @@ used.
     // uses three plot counts for close, color, and textcolor series
     plotshape(close, color = isUpColor, textcolor = isUp ? color.yellow : color.white)
 
-    Note that: 
 
-    - This is a full list of all plot count combinations for each plot function so feel free to use this list as a reference guide.
+Note that: 
+	- This is a full list of all plot count combinations for each plot function so feel free to use this list as a reference guide.
 
+::
 
     //@version=5
     indicator("Plot count limits example")
@@ -186,13 +190,15 @@ Line, box, and label limits
 One of the most overlooked script settings is the abilities to set the max_lines_count, max_boxes_count, and max_labels_count. The default for all 3 is set to 50 but you are allowed to increase that to a max of 500. Pine Script™ utilizes
 a very efficient garbage collection system so by default you will only ever be able to view the last 50 labels as an example. Below we have an example showing how to increase these limits in the indicator settings.
 
+::
+
     //@version=5
     indicator("Label Limits Example", max_labels_count = 100, overlay=true)
     cond = close > open ? 1 : close < open ? -1 : 0
     label.new(bar_index, close, yloc = cond > 0 ? yloc.abovebar : yloc.belowbar, style = cond > 0 ? label.style_arrowup : label.style_arrowdown, 
         color = cond > 0 ? color.green : color.red, size = size.huge)
 
-    Note that:
+Note that:
 
     - Only the last 100 bars will have labels on them and this is because of the garbage collection process that Pine Script™ does in the back-end to only show the most recent labels.
 
@@ -246,6 +252,8 @@ Variables are objects that store data in programming languages and can be initia
 have a global scope which would be variables accessible from anywhere in the script and a local scope which would be variables accessible from a local block like an if statement or inside a loop. Since variables have to be created manually then exceeding 1000
 variables per scope would mean your script would be thousands of lines long so chances are you will never see this associated error. Keep in mind that variables in Pine Script™ are the only factor that directly contributes to how much physical memory your script uses.
 
+::
+
     //@version=5
     indicator("Variables scope example", overlay = true)
     float ema = ta.ema(close, 14) // declared in global scope
@@ -270,6 +278,8 @@ Local blocks
 You might be asking yourself: what is a local block? As we discussed in the variables section, each script will have a local scope and a global scope. The local block is another way to describe a local scope so in other words, if statements, loops, etc. There is a max of 
 500 local blocks allowed which is one of those limits that will be very difficult to surpass. 
 
+::
+
     //@version=5
     indicator("Local block example")
     int length = 14
@@ -284,7 +294,7 @@ You might be asking yourself: what is a local block? As we discussed in the vari
     plot(volMa)
     plot(volMaAlt)
 
-    Note that: 
+Note that: 
     
     - We are calculating the volume wma only when the close is higher than the open to save on processing time
 
@@ -305,6 +315,8 @@ Max bars forward
 Contrary to the name, this limitation doesn't work in quite the same way as the above max_bars_back. This is a special case that only works with future data. Here is an example that shows you how to create a line that projects forward using this concept. We are 
 projecting a line into the future that displays the current slope of the last two high values projected into the future using our forwardBars input. We are also drawing a line on the last bar which helps us to not only save resources but also slightly speeds 
 up the script execution time.
+
+::
 
     //@version=5
     indicator('[Example_ForwardBar]', overlay=true)

@@ -555,21 +555,79 @@ used to calculate the profits.
 
 In real-time, yesterday's session close rate is used.
 
-Leverage
+Margin
 --------
 
-When you open any position, the margin required to maintain the position will be calculated. If there are not enough funds, then a margin call occurs - the forced closure of part or all of the positions by a market order so that there is again enough funds to maintain the positions.
+Margin for Long/Short positions (parameters: margin_long, margin_short) specifies the margin for each trade, i.e., the percent of the position that the trader must fund. For example, if the Margin for long positions is set to 25%, the trader has to have enough funds to cover 25% of the open trade and can potentially spend up to 400% of their equity on every trade.
 
-It is calculated by the formula: 
+If a trade has been opened and it starts losing money to the extent where the trader's funds are not enough to cover their portion of the trade, a Margin Call occurs and forcibly liquidates a part of the original position. The precise number of units that will be liquidated is 4 times the amount it takes to simply cover the loss. It is calculated via the following algorithm:
 
-margin = MVS * margin_percent, where margin is cash collateral for opening a position, in %, and MVS is the current market value of the security. 
+1. Calculate Money Spent, the amount of money the trader has spent on opening the position.
 
-MVS is calculated according to the following formula: MVS = last_price * point_value * contracts. 
+Position Size * Entry Price
 
-margin_percent is a parameter that can be set in the strategy settings.
+2. Calculate the Market Value of Security (MVS).
 
-If margin == strategy.equity, then we can no longer open new positions. If margin > strategy.equity, then the margin call occurs, forcibly closing part or all of the positions until the margin < strategy.equity condition is met.
 
+Position Size * Current Price
+
+3. Calculate the Open Profit. If the trade direction is short and Open Profit is a positive number, the result should still be negative, so we multiply the absolute value of our calculation by -1.
+
+ABS(MVS - Money Spent) * -1
+
+4. Calculate the Equity, i.e., the money available to the trader at the current moment.
+
+Initial Capital + Net Profit + Open Profit
+
+5. Convert Margin Percent to Margin Ratio.
+
+Margin Percent / 100
+
+6. Calculate Margin, i.e., the exact amount of money needed to cover their part of the open position.
+
+MVS * Margin Ratio
+
+7. Calculate Available Funds, i.e., the amount of lost money the trader cannot cover with their current equity.
+
+Equity - Margin
+
+8. Calculate the total amount of money the trader has lost.
+
+Available Funds / Margin Ratio
+
+9. Calculate how many units the trader would need to sell to cover the loss. The value is truncated to the same decimal point as the minimum contract size for the current symbol.
+
+TRUNCATE(Step #8 / Current Price)
+
+10. Calculate how many units the broker will sell to cover the loss. Our emulated broker sells 4 times as many units as necessary to make sure the margin call isn't constantly triggered if the losses continue. This value will be positive for short trades because the broker buys units to cover the loss instead of selling them.
+
+Step #9 * 4
+
+To examine this calculation in detail, let's add the built-in Supertrend Strategy to the NASDAQ:TSLA chart on the 1D timeframe. Set Order size to 300% of equity and Margin for long positions to 25%.
+
+.. image:: images/Strategy_margin.png
+
+Our first entry happened on the opening of the bar on 16 Sep 2010. We buy 682438 units (Position size) for 4.43 USD (Entry price). Then, on 23 Sep 2010, when the price was at 3.9 (Current price), 111052 units were forcibly liquidated via margin call.
+
+1. Money spent: 682438 * 4.43 = 3023200.34
+
+2. MVS: 682438 * 3.9 = 2661508.2
+
+3. Open Profit: −361692.14
+
+4. Equity: 1000000 + 0 − 361692.14 = 638307.86
+
+5. Margin Ratio: 25 / 100 = 0.25
+
+6. Margin: 2661508.2 * 0.25 = 665377.05
+
+7. Available Funds: 638307.86 - 665377.05 = -27069.19
+
+8. Money Lost: -27069.19 / 0.25 = -108276.76
+
+9. Shares to cover the loss: TRUNCATE(-108276.76 / 3.9) = TRUNCATE(-27763.27) = -27763
+
+10. Margin Call Size: -27763 * 4 = - 111052
 
 .. image:: /images/TradingView-Logo-Block.svg
     :width: 200px
