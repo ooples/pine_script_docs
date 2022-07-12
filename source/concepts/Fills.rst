@@ -136,7 +136,7 @@ In the example below, our indicator draws two lines connecting the last two high
 We extend the lines to the right to project the short-term movement of the chart, 
 and fill the space between them to enhance the visibility of the channel the lines create:
 
-.. image:: images/Fills-Linefill-01.png
+.. image:: images/Fills-Linefill-01.pn
 
 ::
 
