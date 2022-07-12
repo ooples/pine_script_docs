@@ -12,7 +12,7 @@ FAQ
 
 
 .. contents:: :local:
-    :depth: 2
+    :depth: 3
 
 Get real OHLC price on a Heikin Ashi chart
 ------------------------------------------

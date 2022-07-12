@@ -11,7 +11,7 @@ Formatting values
 =================
 
 .. contents:: :local:
-    :depth: 2
+    :depth: 3
 
 
 .. image:: /images/TradingView-Logo-Block.svg

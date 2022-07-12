@@ -8,7 +8,12 @@
    :height: 100
 
 Pine Script™ v5 grammar
-===============
+=======================
+
+.. contents:: :local:
+    :depth: 3
+
+
 
 ``{}`` Curly braces content can be repeated zero or more times: {, <parameter>}
 

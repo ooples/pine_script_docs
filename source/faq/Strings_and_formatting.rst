@@ -16,6 +16,26 @@ Strings and formatting FAQ
     :depth: 3
 
 
+How can I place text on chart?
+------------------------------
+
+
+
+How can I lift plotshape() text up?
+-----------------------------------
+
+
+
+How can I position text on either side of a single bar?
+-------------------------------------------------------
+
+
+
+How can I print a value at the top right of the chart?
+------------------------------------------------------
+
+
+
 
 .. image:: /images/TradingView-Logo-Block.svg
     :width: 200px

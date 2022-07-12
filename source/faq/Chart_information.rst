@@ -17,6 +17,7 @@ Chart information FAQ
 
 
 
+
 .. image:: /images/TradingView-Logo-Block.svg
     :width: 200px
     :align: center

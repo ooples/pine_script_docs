@@ -11,7 +11,7 @@ Plots
 =====
 
 .. contents:: :local:
-    :depth: 1
+    :depth: 3
 
 
 
@@ -542,7 +542,7 @@ The same distorted plots would occur if we placed the `RSI <https://www.tradingv
 
 
 Merging two indicators
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^
 
 If you are planning to merge two signals in one script, first consider the scale of each.
 It is impossible, for example, to correctly plot an 

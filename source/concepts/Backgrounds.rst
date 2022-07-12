@@ -11,7 +11,7 @@ Backgrounds
 ===========
 
 .. contents:: :local:
-    :depth: 2
+    :depth: 3
 
 
 The `bgcolor() <https://www.tradingview.com/pine-script-reference/v5/#fun_bgcolor>`__

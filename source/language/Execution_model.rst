@@ -11,7 +11,8 @@ Execution model
 ===============
 
 .. contents:: :local:
-    :depth: 2
+    :depth: 3
+    
 
 The execution model of the Pine Script™ runtime is intimately linked to Pine Script™'s :ref:`time series <PageTimeSeries>` and :ref:`type system <PageTypeSystem>`. 
 Understanding all three is key to making the most of the power of Pine Script™.

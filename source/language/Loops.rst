@@ -11,7 +11,7 @@ Loops
 =====
 
 .. contents:: :local:
-    :depth: 2
+    :depth: 3
 
 
 
