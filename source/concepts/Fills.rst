@@ -136,18 +136,18 @@ In the example below, our indicator draws two lines connecting the last two high
 We extend the lines to the right to project the short-term movement of the chart, 
 and fill the space between them to enhance the visibility of the channel the lines create:
 
-.. image:: images/Fills-Linefill-1.png
+.. image:: images/Fills-Linefill-01.png
 
 ::
 
     //@version=5
     indicator("Channel", overlay = true)
-    
+
     LEN_LEFT = 15
     LEN_RIGHT = 5
     pH = ta.pivothigh(LEN_LEFT, LEN_RIGHT)
     pL = ta.pivotlow(LEN_LEFT, LEN_RIGHT)
-    
+
     // Bar indices of pivot points
     pH_x1 = ta.valuewhen(pH, bar_index, 1) - LEN_RIGHT
     pH_x2 = ta.valuewhen(pH, bar_index, 0) - LEN_RIGHT
@@ -158,7 +158,7 @@ and fill the space between them to enhance the visibility of the channel the lin
     pH_y2 = ta.valuewhen(pH, pH, 0)
     pL_y1 = ta.valuewhen(pL, pL, 1)
     pL_y2 = ta.valuewhen(pL, pL, 0)
-    
+
     if barstate.islastconfirmedhistory
         // Lines
         lH = line.new(pH_x1, pH_y1, pH_x2, pH_y2, extend = extend.right)
