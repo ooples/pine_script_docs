@@ -161,8 +161,8 @@ and fill the space between them to enhance the visibility of the channel the lin
     
     if barstate.islastconfirmedhistory
         // Lines
-        lH = line.new(pH_x2, pH_y1, pH_x1, pH_y2, extend = extend.right)
-        lL = line.new(pL_x2, pL_y1, pL_x1, pL_y2, extend = extend.right)
+        lH = line.new(pH_x1, pH_y1, pH_x2, pH_y2, extend = extend.right)
+        lL = line.new(pL_x1, pL_y1, pL_x2, pL_y2, extend = extend.right)
         // Fill
         fillColor = switch
             pH_y2 > pH_y1 and pL_y2 > pL_y1 => color.green
