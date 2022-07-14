@@ -1,11 +1,13 @@
-.. _PageToPineVersion4:
-
 .. image:: /images/Pine_Script_logo_small.png
    :alt: Pine Script™
    :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
    :align: right
    :width: 50
    :height: 50
+
+
+.. _PageToPineVersion4:
+
 
 To Pine Script™ version 4
 =========================
