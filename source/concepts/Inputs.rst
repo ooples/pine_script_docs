@@ -1,5 +1,3 @@
-.. _PageInputs:
-
 .. image:: /images/Pine_Script_logo.svg
    :alt: Pine Script™ logo
    :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
@@ -7,11 +5,15 @@
    :width: 100
    :height: 100
 
+
+.. _PageInputs:
+
+
 Inputs
 ======
 
 .. contents:: :local:
-    :depth: 2
+    :depth: 3
 
 
 Introduction

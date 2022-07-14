@@ -1,5 +1,3 @@
-.. _PageExecutionModel:
-
 .. image:: /images/Pine_Script_logo.svg
    :alt: Pine Script™ logo
    :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
@@ -7,11 +5,16 @@
    :width: 100
    :height: 100
 
+
+.. _PageExecutionModel:
+
+
 Execution model
 ===============
 
 .. contents:: :local:
-    :depth: 2
+    :depth: 3
+    
 
 The execution model of the Pine Script™ runtime is intimately linked to Pine Script™'s :ref:`time series <PageTimeSeries>` and :ref:`type system <PageTypeSystem>`. 
 Understanding all three is key to making the most of the power of Pine Script™.

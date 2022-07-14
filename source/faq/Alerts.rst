@@ -1,5 +1,3 @@
-.. _PageAlertsFaq:
-
 .. image:: /images/Pine_Script_logo.svg
    :alt: Pine Script™ logo
    :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
@@ -7,12 +5,17 @@
    :width: 100
    :height: 100
 
+.. _PageAlertsFaq:
+
 Alerts FAQ
 ==========
 
 
 .. contents:: :local:
     :depth: 3
+
+
+
 
 How do I make an alert available from my script?
 ------------------------------------------------
@@ -47,21 +50,47 @@ When TradingView creates an alert, it saves a snapshot of the environment that w
 Note that while alert condition code will compile in strategy scripts, alerts are only functional in studies.
 
 
+
+
 How can I include values that change in my alerts?
 --------------------------------------------------
 
 Numeric values plotted by an indicator can be inserted in alert text using placeholders. If you use:
 
+::
+
     plot(myRsi, "rsiLine")
+
 in your script, then you can include that plot’s value in an alert message by using:
 
+::
+
     alertcondition(close > open, message='RSI value is: {{plot("rsiLine")}}')
+
 If you are not already plotting a value which you must include in an alert message, you can plot it using this method so that plotting the value will not affect the price scale unless you use:
 
+::
+    
     plotchar(myRsi, "myRsi", "", location.top)
+
 You can use other pre-defined placeholders to include variable information in alert messages. See this TV blog post on variable alerts for more information.
 
     Note that there is still no way to include variable text in an alert message.
+
+
+
+I have a custom script that generates alerts. How do I run it on many symbols?
+------------------------------------------------------------------------------
+
+
+
+Is it possible to use a string that varies as an argument to the alertcondition() function’s message= parameter?
+----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
 
 
 .. image:: /images/TradingView-Logo-Block.svg

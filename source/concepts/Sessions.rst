@@ -1,5 +1,3 @@
-.. _PageSessions:
-
 .. image:: /images/Pine_Script_logo.svg
    :alt: Pine Script™ logo
    :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
@@ -7,20 +5,24 @@
    :width: 100
    :height: 100
 
+
+.. _PageSessions:
+
+
 ..    include:: <isonum.txt>
 
 Sessions
 ========
 
 .. contents:: :local:
-    :depth: 2
+    :depth: 3
 
 
 
 Introduction
 ------------
 
-Session information is usable in two different ways in Pine Script™:
+Session information is usable in three different ways in Pine Script™:
 
 1. **Session strings** containing from-to start times and day information that can be used in functions
    such as `time() <https://www.tradingview.com/pine-script-reference/v5/#fun_time>`__ and

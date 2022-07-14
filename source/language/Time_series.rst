@@ -1,5 +1,3 @@
-.. _PageTimeSeries:
-
 .. image:: /images/Pine_Script_logo.svg
    :alt: Pine Script™ logo
    :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
@@ -7,8 +5,17 @@
    :width: 100
    :height: 100
 
+
+.. _PageTimeSeries:
+
+
 Time series
 ===========
+
+.. contents:: :local:
+    :depth: 3
+
+    
 
 Much of the power of Pine Script™ stems from the fact that it is designed to process *time series* efficiently. 
 Time series are not a form or a type; they are the fundamental structure Pine Script™ uses to store the successive values of a variable over time, 

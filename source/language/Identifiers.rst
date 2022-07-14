@@ -1,5 +1,3 @@
-.. _PageIdentifiers:
-
 .. image:: /images/Pine_Script_logo.svg
    :alt: Pine Script™ logo
    :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
@@ -7,8 +5,16 @@
    :width: 100
    :height: 100
 
+
+.. _PageIdentifiers:
+
+
 Identifiers
 ===========
+
+.. contents:: :local:
+    :depth: 3
+    
 
 Identifiers are names used for user-defined variables and functions:
 

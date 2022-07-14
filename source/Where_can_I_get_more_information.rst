@@ -1,5 +1,3 @@
-.. _PageWhereCanIGetMoreInformation:
-
 .. image:: /images/Pine_Script_logo.svg
    :alt: Pine Script™ logo
    :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
@@ -7,8 +5,16 @@
    :width: 100
    :height: 100
 
+
+.. _PageWhereCanIGetMoreInformation:
+
+
 Where can I get more information?
 =================================
+
+.. contents:: :local:
+    :depth: 3
+    
 
 * A description of all the Pine Script™ operators, variables and functions can be found in the
   `Reference Manual <https://www.tradingview.com/pine-script-reference/v5/>`__.

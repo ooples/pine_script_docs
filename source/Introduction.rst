@@ -1,5 +1,3 @@
-.. _PageWelcomeToPine:
-
 Welcome to Pine Script™ |version|
 =================================
 
@@ -8,6 +6,10 @@ Welcome to Pine Script™ |version|
    :align: right
    :width: 240
    :height: 240
+
+
+.. _PageWelcomeToPine:
+
 
 **Pine Script™** is `TradingView <https://www.tradingview.com/>`__'s programming language. It allows traders to create their own trading tools and run them on our servers. 
 We designed Pine Script™ as a lightweight, yet powerful, language for developing indicators and strategies that you can then backtest. 

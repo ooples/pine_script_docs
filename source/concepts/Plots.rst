@@ -1,5 +1,3 @@
-.. _PagePlots:
-
 .. image:: /images/Pine_Script_logo.svg
    :alt: Pine Script™ logo
    :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
@@ -7,11 +5,15 @@
    :width: 100
    :height: 100
 
+
+.. _PagePlots:
+
+
 Plots
 =====
 
 .. contents:: :local:
-    :depth: 1
+    :depth: 3
 
 
 
@@ -542,7 +544,7 @@ The same distorted plots would occur if we placed the `RSI <https://www.tradingv
 
 
 Merging two indicators
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^
 
 If you are planning to merge two signals in one script, first consider the scale of each.
 It is impossible, for example, to correctly plot an 
