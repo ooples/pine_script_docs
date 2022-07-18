@@ -300,7 +300,6 @@ Note that:
     
     - We are calculating the volume wma only when the close is higher than the open to save on processing time
 
-
 Max bars back
 ^^^^^^^^^^^^^
 
@@ -350,9 +349,9 @@ As discussed in more detail on our historical references page, the historical op
 historical bars based on your account status. I will put the full breakdown of the limits per account type below. 
 
 These are the account-specific bar limits:
-	*20000 historical bars for the Premium plan.
-	*10000 historical bars for Pro and Pro+ plans.
-	*5000 historical bars for other plans.
+	- 20000 historical bars for the Premium plan.
+	- 10000 historical bars for Pro and Pro+ plans.
+	- 5000 historical bars for other plans.
 
 This means that if you have a Free plan for your account then you are limited to 5000 historical bars so if you try close[5001] then you will receive an historical bar error.
 
