@@ -195,7 +195,7 @@ a very efficient garbage collection system so by default you will only ever be a
 ::
 
     //@version=5
-    indicator("Label Limits Example", max_labels_count = 100, overlay=true)
+    indicator("Label limits example", max_labels_count = 100, overlay=true)
     cond = close > open ? 1 : close < open ? -1 : 0
     label.new(bar_index, close, yloc = cond > 0 ? yloc.abovebar : yloc.belowbar, style = cond > 0 ? label.style_arrowup : label.style_arrowdown, 
         color = cond > 0 ? color.green : color.red, size = size.huge)
@@ -205,23 +205,30 @@ Note that:
     - Only the last 100 bars will have labels on them and this is because of the garbage collection process that Pine Script™ does in the back-end to only show the most recent labels.
 
 
-Request.*() calls
+request.*() calls
 -----------------
 
 
 Intrabars
 ^^^^^^^^^
 
-This limitation only applies to the request.security_lower_tf function and this is because when you request data from a lower timeframe compared to the chart's timeframe, you will have multiple bars of data for each current bar. 
-For example, if you are looking at a 1H chart and you want to use 1M data in your script then you will receive up to 60 1M intrabars for each 1H bar. We have a max of 100,000 intrabars allowed so for reference this means that viewing
-a 1D chart on BTC and requesting the 1S data for each bar will give you a max of 86,400 intrabars. 
+This limitation only applies to the `request.security_lower_tf() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security_lower_tf>`__ function and this is 
+because when you request data from a lower timeframe compared to the chart's timeframe, you will have multiple bars of data for each current bar. 
+For example, if you are looking at a 1H chart and you want to use 1M data in your script then you will receive up to 60 1M intrabars for each 1H bar. 
+We have a max of 100,000 intrabars allowed so for reference this means that viewing a 1D chart on BTC and requesting the 1S data for each bar will give you a max of 86,400 intrabars. 
 
 
 Request calls
 ^^^^^^^^^^^^^
 
-All function calls using the request namespace such as request.security(), request.security_lower_tf(), request.quandl(), request.financial(), etc are all treated the same on the compiler. This means that since there is a hard limit of 40 
-request calls per script then this can either be 40 request.security() calls or a combination like 34 request.quandl() calls and 6 request.financial() calls. 
+All function calls using the request namespace such as `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__, 
+`request.security_lower_tf() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security_lower_tf>`__, 
+`request.quandl() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}quandl>`__, 
+`request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__, etc are all treated the same on the compiler. 
+This means that since there is a hard limit of 40 request calls per script then this can either be 40 
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls or a combination like 34 
+`request.quandl() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}quandl>`__ calls and 6 
+`request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__ calls. 
 
 
 
@@ -320,7 +327,7 @@ up the script execution time.
 ::
 
     //@version=5
-    indicator('[Example_ForwardBar]', overlay=true)
+    indicator('Max bars forward example', overlay=true)
 
     //Functions
     f_drawLine(t1, t2, Y1, Y2) =>
@@ -349,9 +356,9 @@ As discussed in more detail on our historical references page, the historical op
 historical bars based on your account status. I will put the full breakdown of the limits per account type below. 
 
 These are the account-specific bar limits:
-	- 20000 historical bars for the Premium plan.
-	- 10000 historical bars for Pro and Pro+ plans.
-	- 5000 historical bars for other plans.
+ - 20000 historical bars for the Premium plan.
+ - 10000 historical bars for Pro and Pro+ plans.
+ - 5000 historical bars for other plans.
 
 This means that if you have a Free plan for your account then you are limited to 5000 historical bars so if you try close[5001] then you will receive an historical bar error.
 
