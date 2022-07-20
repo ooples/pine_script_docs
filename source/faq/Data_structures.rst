@@ -1,11 +1,12 @@
-.. _PageDataStructuresFaq:
-
 .. image:: /images/Pine_Script_logo.svg
    :alt: Pine Script™ logo
    :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
    :align: right
    :width: 100
    :height: 100
+
+
+.. _PageDataStructuresFaq:
 
 
 Data structures FAQ
@@ -16,15 +17,17 @@ Data structures FAQ
     :depth: 3
 
 
-How can I work with arrays in Pine?
------------------------------------
+
+How can I work with arrays in Pine Script™?
+-------------------------------------------
+
+Since arrays are a very complicated and advanced topic, 
+it is best to take a look at the Pine Script™ User Manual’s `page on arrays <https://www.tradingview.com/pine-script-docs/en/v5/language/Arrays.html>`__.
 
 
 
-How can I split a string into characters?
------------------------------------------
-
-
+Does Pine Script™ have objects?
+-------------------------------
 
 
 

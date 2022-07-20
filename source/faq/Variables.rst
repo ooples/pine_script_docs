@@ -16,6 +16,7 @@ Variables and operators FAQ
     :depth: 3
 
 
+
 What is the variable name for the current price?
 ------------------------------------------------
 
