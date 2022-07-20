@@ -43,6 +43,16 @@ Time
 
 
 
+Script execution time
+^^^^^^^^^^^^^^^^^^^^^
+
+Script execution time isn't to be confused with script compile time. 
+A script will be compiled once and then it passess off the script to a separate process to be executed on each bar of data. 
+There are actually differences in max execution time limits depending on your account type so free users have a max of 20 seconds to execute their script 
+and any paid user will have a max of 40 seconds to execute their script. 
+
+
+
 Script compile time
 ^^^^^^^^^^^^^^^^^^^
 
@@ -70,29 +80,8 @@ into smaller loops that don't execute as much code.
 
 
 
-Script execution time
-^^^^^^^^^^^^^^^^^^^^^
-
-Script execution time isn't to be confused with script compile time. 
-A script will be compiled once and then it passess off the script to a separate process to be executed on each bar of data. 
-There are actually differences in max execution time limits depending on your account type so free users have a max of 20 seconds to execute their script 
-and any paid user will have a max of 40 seconds to execute their script. 
-
-
-
 Chart visuals
 -------------
-
-
-
-Table limits
-^^^^^^^^^^^^
-
-In Pine Script™ there are 9 possible locations to choose for a table location: ``position.bottom_center``, ``position.bottom_left``, ``position.bottom_right``, 
-``position.middle_center``, ``position.middle_left``, ``position.middle_right``, ``position.top_center``, ``position.top_left``, or ``position.top_right``. 
-If you place two tables in the same position on a chart then you will only see the most recent table added to that position. 
-Pine Script™ will override the older table in that same position and only display the newer table. 
-This means that there is a hard limit of 9 tables that you are able to add to a chart as long as you place each table in a different position.
 
 
 
@@ -196,6 +185,7 @@ Other functions like `plotchar() <https://www.tradingview.com/pine-script-refere
     plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
 
 
+
 Line, box, and label limits
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -215,18 +205,20 @@ Below we have an example showing how to increase these limits in the indicator s
 .. note:: Only the last 100 bars will have labels on them and this is because of the garbage collection process that Pine Script™ does in the back-end to only show the most recent labels.
 
 
+
+Table limits
+^^^^^^^^^^^^
+
+In Pine Script™ there are 9 possible locations to choose for a table location: ``position.bottom_center``, ``position.bottom_left``, ``position.bottom_right``, 
+``position.middle_center``, ``position.middle_left``, ``position.middle_right``, ``position.top_center``, ``position.top_left``, or ``position.top_right``. 
+If you place two tables in the same position on a chart then you will only see the most recent table added to that position. 
+Pine Script™ will override the older table in that same position and only display the newer table. 
+This means that there is a hard limit of 9 tables that you are able to add to a chart as long as you place each table in a different position.
+
+
+
 request.*() calls
 -----------------
-
-
-
-Intrabars
-^^^^^^^^^
-
-This limitation only applies to the `request.security_lower_tf() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security_lower_tf>`__ function and this is 
-because when you request data from a lower timeframe compared to the chart's timeframe, you will have multiple bars of data for each current bar. 
-For example, if you are looking at a 1H chart and you want to use 1M data in your script then you will receive up to 60 1M intrabars for each 1H bar. 
-We have a max of 100,000 intrabars allowed so for reference this means that viewing a 1D chart on BTC and requesting the 1S data for each bar will give you a max of 86,400 intrabars. 
 
 
 
@@ -241,6 +233,16 @@ This means that since there is a hard limit of 40 request calls per script then 
 `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls or a combination like 34 
 `request.quandl() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}quandl>`__ calls and 6 
 `request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__ calls. 
+
+
+
+Intrabars
+^^^^^^^^^
+
+This limitation only applies to the `request.security_lower_tf() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security_lower_tf>`__ function and this is 
+because when you request data from a lower timeframe compared to the chart's timeframe, you will have multiple bars of data for each current bar. 
+For example, if you are looking at a 1H chart and you want to use 1M data in your script then you will receive up to 60 1M intrabars for each 1H bar. 
+We have a max of 100,000 intrabars allowed so for reference this means that viewing a 1D chart on BTC and requesting the 1S data for each bar will give you a max of 86,400 intrabars. 
 
 
 
@@ -306,33 +308,6 @@ Scripts
 
 
 
-Local blocks
-^^^^^^^^^^^^
-
-You might be asking yourself: what is a local block? As we discussed in the variables section, each script will have a local scope and a global scope. 
-The local block is another way to describe a local scope so in other words, if statements, loops, etc. 
-There is a max of 500 local blocks allowed which is one of those limits that will be very difficult to surpass. 
-
-::
-
-    //@version=5
-    indicator("Local block example")
-    int length = 14
-    var volMa = float(na)
-    if close > open
-        volMa := ta.wma(volume, length)
-    
-    // we can simplify the above by removing the local block and using a ternary instead
-    var volMaAlt = float(na)
-    volMaAlt := close > open ? ta.wma(volume, length) : nz(volMaAlt[1])
-
-    plot(volMa)
-    plot(volMaAlt)
-
-.. note:: We are calculating the volume wma only when the close is higher than the open to save on processing time
-
-
-
 Max bars back
 ^^^^^^^^^^^^^
 
@@ -380,6 +355,43 @@ We are also drawing a line on the last bar which helps us to not only save resou
 
 
 
+Local blocks
+^^^^^^^^^^^^
+
+You might be asking yourself: what is a local block? As we discussed in the variables section, each script will have a local scope and a global scope. 
+The local block is another way to describe a local scope so in other words, if statements, loops, etc. 
+There is a max of 500 local blocks allowed which is one of those limits that will be very difficult to surpass. 
+
+::
+
+    //@version=5
+    indicator("Local block example")
+    int length = 14
+    var volMa = float(na)
+    if close > open
+        volMa := ta.wma(volume, length)
+    
+    // we can simplify the above by removing the local block and using a ternary instead
+    var volMaAlt = float(na)
+    volMaAlt := close > open ? ta.wma(volume, length) : nz(volMaAlt[1])
+
+    plot(volMa)
+    plot(volMaAlt)
+
+.. note:: We are calculating the volume wma only when the close is higher than the open to save on processing time
+
+
+
+Backtesting
+^^^^^^^^^^^
+
+This particular limitation only applies to strategy scripts and in most cases you probably won't see the error message associated with this limit. 
+You have a max of 9,000 orders that can be placed when you run a backtesting script. 
+There is a new user feature that was recently launched for Premium users only called Deep Backtesting. 
+If you use this new feature, this will increase your max limit from 9,000 orders to 200,000 orders.
+
+
+
 Historical bars
 ^^^^^^^^^^^^^^^
 
@@ -395,14 +407,6 @@ These are the account-specific bar limits:
 This means that if you have a Free plan for your account then you are limited to 5000 historical bars so if you try ``close[5001]`` then you will receive an historical bar error.
 
 
-
-Backtesting
-^^^^^^^^^^^
-
-This particular limitation only applies to strategy scripts and in most cases you probably won't see the error message associated with this limit. 
-You have a max of 9,000 orders that can be placed when you run a backtesting script. 
-There is a new user feature that was recently launched for Premium users only called Deep Backtesting. 
-If you use this new feature, this will increase your max limit from 9,000 orders to 200,000 orders.
 
 .. image:: /images/TradingView-Logo-Block.svg
     :width: 200px
