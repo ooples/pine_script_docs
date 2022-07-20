@@ -22,9 +22,9 @@ Introduction
 
 As is mentioned in our :ref:`Welcome <PageWelcomeToPine>` page:
 
-    Because each script uses computational resources in the cloud, we must impose limits in order to share these resources fairly among our users. 
+    *Because each script uses computational resources in the cloud, we must impose limits in order to share these resources fairly among our users. 
     We strive to set as few limits as possible, but will of course have to implement as many as needed for the platform to run smoothly. 
-    Limitations apply to the amount of data requested from additional symbols, execution time, memory usage and script size.
+    Limitations apply to the amount of data requested from additional symbols, execution time, memory usage and script size.*
 
 If you develop complex scripts using Pine Script™, sooner or later you will run into some of the limitations we impose.
 This section provides you with an overview of the limitations that you may encounter.
@@ -171,8 +171,7 @@ Other functions like `plotchar() <https://www.tradingview.com/pine-script-refere
     plotshape(close, color = isUpColor, textcolor = isUp ? color.yellow : color.white)
 
 
-.. note::
-    This is a full list of all plot count combinations for each plot function so feel free to use this list as a reference guide.
+.. note:: This is a full list of all plot count combinations for each plot function so feel free to use this list as a reference guide.
 
 ::
 
@@ -213,9 +212,7 @@ Below we have an example showing how to increase these limits in the indicator s
     label.new(bar_index, close, yloc = cond > 0 ? yloc.abovebar : yloc.belowbar, style = cond > 0 ? label.style_arrowup : label.style_arrowdown, 
         color = cond > 0 ? color.green : color.red, size = size.huge)
 
-Note that:
-
-    - Only the last 100 bars will have labels on them and this is because of the garbage collection process that Pine Script™ does in the back-end to only show the most recent labels.
+.. note:: Only the last 100 bars will have labels on them and this is because of the garbage collection process that Pine Script™ does in the back-end to only show the most recent labels.
 
 
 request.*() calls
@@ -332,9 +329,7 @@ There is a max of 500 local blocks allowed which is one of those limits that wil
     plot(volMa)
     plot(volMaAlt)
 
-Note that: 
-    
-    - We are calculating the volume wma only when the close is higher than the open to save on processing time
+.. note:: We are calculating the volume wma only when the close is higher than the open to save on processing time
 
 
 
