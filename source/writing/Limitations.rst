@@ -92,7 +92,9 @@ A fairly misleading limitation in Pine Script™ is the max limit of plotting 64
 Most users assume that it is as simple as only calling any plot functions no more than the 64 times but what most users aren't aware of is that each 
 plot function can actually use multiple plots. 
 A perfect example of this would be either the plotbar or plotcandle functions since they actually plot 4 objects per function. 
-A bar or candle of course is made up of 4 variables: ``open``, ``high``, ``low``, and ``close``.
+A bar or candle of course is made up of 4 variables: `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__, 
+`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__, `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__, and 
+`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__.
 Some functions like `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ or tables you would assume are counted towards this plotting 
 limit since they are visually added to a chart but they aren't actually plotted on the chart. 
 Other functions like `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ can change based on the underlying information used.
@@ -209,8 +211,15 @@ Below we have an example showing how to increase these limits in the indicator s
 Table limits
 ^^^^^^^^^^^^
 
-In Pine Script™ there are 9 possible locations to choose for a table location: ``position.bottom_center``, ``position.bottom_left``, ``position.bottom_right``, 
-``position.middle_center``, ``position.middle_left``, ``position.middle_right``, ``position.top_center``, ``position.top_left``, or ``position.top_right``. 
+In Pine Script™ there are 9 possible locations to choose for a table location: 
+`position.bottom_center <https://www.tradingview.com/pine-script-reference/v5/#var_position{dot}bottom_center>`__, 
+`position.bottom_left <https://www.tradingview.com/pine-script-reference/v5/#var_position{dot}bottom_left>`__, 
+`position.bottom_right <https://www.tradingview.com/pine-script-reference/v5/#var_position{dot}bottom_right>`__, 
+`position.middle_center <https://www.tradingview.com/pine-script-reference/v5/#var_position{dot}middle_center>`__, 
+`position.middle_left <https://www.tradingview.com/pine-script-reference/v5/#var_position{dot}middle_left>`__, 
+`position.top_center <https://www.tradingview.com/pine-script-reference/v5/#var_position{dot}top_center>`__, 
+`position.top_left <https://www.tradingview.com/pine-script-reference/v5/#var_position{dot}top_left>`__, 
+or `position.top_right <https://www.tradingview.com/pine-script-reference/v5/#var_position{dot}top_right>`__.
 If you place two tables in the same position on a chart then you will only see the most recent table added to that position. 
 Pine Script™ will override the older table in that same position and only display the newer table. 
 This means that there is a hard limit of 9 tables that you are able to add to a chart as long as you place each table in a different position.
@@ -313,9 +322,11 @@ Max bars back
 
 When we create a script that depends on past data then it is vital that we make sure that there is enough previous data to be able to perform the needed calculations. 
 A common error that users receive is that there isn't enough data to be able to properly execute the script and this is where ``max_bars_back`` comes in. 
-For example if you are use ``close[499]`` in your script then the compiler knows that you will need at least 500 past values of ``close`` for each bar. 
-However if you create a series integar variable called y and use this instead of the 499 then the compiler isn't able to automatically detect how much past values of ``close`` 
-we will need for the script to execute. This is why sometimes you will see an error message telling you that Pine Script™ can't determine the length of a reference series. 
+For example if you are use ``close[499]`` in your script then the compiler knows that you will need at least 500 past values of 
+`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ for each bar. 
+However if you create a series integar variable called y and use this instead of the 499 then the compiler isn't able to automatically detect how much past values of 
+`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ we will need for the script to execute. 
+This is why sometimes you will see an error message telling you that Pine Script™ can't determine the length of a reference series. 
 An easy solution for this common issue is to increase the ``max_bars_back`` to a number high enough so that the compiler will always have enough past references for 
 any variable in the script. The max value you can set it to is 5000 and the default is 0.
 
@@ -326,24 +337,25 @@ Max bars forward
 
 Contrary to the name, this limitation doesn't work in quite the same way as the above ``max_bars_back``. This is a special case that only works with future data. 
 Here is an example that shows you how to create a line that projects forward using this concept. 
-We are projecting a line into the future that displays the current slope of the last two ``high`` values projected into the future using our forwardBars input. 
+We are projecting a line into the future that displays the current slope of the last two `high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__ values 
+projected into the future using our ``forwardBars`` input. 
 We are also drawing a line on the last bar which helps us to not only save resources but also slightly speeds up the script execution time.
 
 ::
 
     //@version=5
-    indicator('Max bars forward example', overlay=true)
+    indicator("Max bars forward example", overlay=true)
 
     //Functions
     drawLine(t1, t2, Y1, Y2) =>
         //init variables on last bar only
         if barstate.islast
-            var line proj_line = line.new(x1=t1, y1=Y1, x2=t2, y2=Y2, xloc=xloc.bar_index, extend=extend.none, color=color.silver, style=line.style_dashed)
+            var line proj_line = line.new(x1 = t1, y1 = Y1, x2 = t2, y2 = Y2, xloc = xloc.bar_index, extend = extend.none, color = color.silver, style = line.style_dashed)
             line.set_xy1(proj_line, t1, Y1)
             line.set_xy2(proj_line, t2, Y2)
         
     //Declare Input Variables
-    forwardBars = input.int(defval=10, title='Forward Bars to Display', minval=0, step=1, maxval=499) + 1
+    forwardBars = input.int(defval = 10, title = "Forward Bars to Display", minval = 0, step = 1, maxval = 499) + 1
 
     //Main logic
     float signal = high
@@ -358,7 +370,7 @@ We are also drawing a line on the last bar which helps us to not only save resou
 Local blocks
 ^^^^^^^^^^^^
 
-You might be asking yourself: what is a local block? As we discussed in the variables section, each script will have a local scope and a global scope. 
+As we discussed in the variables section, each script will have a local scope and a global scope. 
 The local block is another way to describe a local scope so in other words, if statements, loops, etc. 
 There is a max of 500 local blocks allowed which is one of those limits that will be very difficult to surpass. 
 
@@ -396,8 +408,8 @@ Historical bars
 ^^^^^^^^^^^^^^^
 
 As discussed in more detail on our historical references page, the historical operator will give you the value from X bars ago. 
-So for our example above in the array size section, ``close[2]`` will give you the ``close`` price 2 bars ago. There is a limit for 
-historical bars based on your account status. I will put the full breakdown of the limits per account type below. 
+So for our example above in the array size section, ``close[2]`` will give you the `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ price 2 bars ago. 
+There is a limit for historical bars based on your account status. I will put the full breakdown of the limits per account type below. 
 
 These are the account-specific bar limits:
  - 20000 historical bars for the Premium plan.

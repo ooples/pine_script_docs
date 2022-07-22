@@ -142,6 +142,35 @@ Invite-Only scripts are also closed source but they differ because they have an 
 Why do historical references not work in loops?
 -----------------------------------------------
 
+Any variables defined inside loops will only hold the value of the last iteration in the history. 
+Hence, using the historical references of these values within the loop will lead to incorrect calculations as the historical values are not as expected.
+Below we have an example showing how historical references inside loops don't work as expected and a workaround that will correct the issue:
+
+::
+
+    //@version=5
+    indicator("Historical reference inside loop error")
+
+    // incorrect way to handle historical references inside a loop
+    int sum1 = 0
+    for i = 1 to 10
+        temp = i
+        sum1 += temp[1]
+        
+    // correct way to do a workaround for the above example
+    int sum2 = 0
+    for i = 1 to 10
+        sum2 += i - 1
+
+    plot(sum1)
+    plot(sum2)
+
+.. note:: In the above code, even if the ``temp`` variable in a loop has values from 1-10, ``temp[1]`` will always be 10 (value of ``temp`` in last iteration). Hence, sum1 will calculate to be 100 instead of the correct 45.
+
+
+
+Is Pine Script™ an object-oriented language?
+--------------------------------------------
 
 
 

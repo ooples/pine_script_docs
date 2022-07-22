@@ -26,12 +26,6 @@ it is best to take a look at the Pine Script™ User Manual’s `page on arrays 
 
 
 
-Does Pine Script™ have objects?
--------------------------------
-
-
-
-
 .. image:: /images/TradingView-Logo-Block.svg
     :width: 200px
     :align: center

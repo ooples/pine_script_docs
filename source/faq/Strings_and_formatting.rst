@@ -36,11 +36,11 @@ You can display text using one of the following methods:
         ::
 
             //@version=5
-            indicator('', '', true)
+            indicator("", "", true)
             bool barUp = close > open
-            bool barDn = close < open
-            plotchar(barUp, 'Up', '▲', location.top, size = size.tiny)
-            plotchar(barDn, 'Down', '▼', location.bottom, size = size.tiny)
+            bool barDn = not barUp
+            plotchar(barUp, "Up", "▲", location.top, size = size.tiny)
+            plotchar(barDn, "Down", "▼", location.bottom, size = size.tiny)
 
         We need two distinct calls here because the argument to the char parameter in `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ 
         must be of “input string” type, which means it can be determined by an input, but not calculated dynamically at runtime. This for example, would not work:
@@ -62,10 +62,11 @@ You can display text using one of the following methods:
         ::
 
             //@version=5
-            indicator('', '', true)
+            indicator("", "", true)
             bool barUp = close > open
-            bool barDn = close < open
-            label.new(bar_index, na, barUp ? '▲' : '▼', yloc = barUp ? yloc.belowbar : yloc.abovebar, color = na, textcolor = color.blue)
+            bool barDn = not barUp
+            label.new(bar_index, na, barUp ? "▲" : "▼", yloc = barUp ? yloc.belowbar : yloc.abovebar, color = na, textcolor = color.blue)
+
  - Tables
         Tables are useful to display text that floats in a fixed position of the indicator’s visual space, untethered to chart bars.
 
@@ -83,23 +84,23 @@ The special Unicode character needs to be the last one in the string for text go
 ::
 
     //@version=5
-    indicator('Lift text', '', true)
+    indicator("Lift text", "", true)
     // Use U+200E (Decimal 8206) as a non-printing space after the last "\n".
     // The line will become difficult to edit in the editor, but the character will be there.
     // You can use https://unicode-table.com/en/tools/generator/ to generate a character you can copy/paste.
-    plotshape(true, '', shape.arrowup, location.abovebar, color.new(color.green, 0), text='A')
-    plotshape(true, '', shape.arrowup, location.abovebar, color.new(color.lime, 0), text='B\n‎')
-    plotshape(true, '', shape.arrowdown, location.belowbar, color.new(color.red, 0), text='C')
-    plotshape(true, '', shape.arrowdown, location.belowbar, color.new(color.maroon, 0), text='‎\nD')
+    plotshape(true, "", shape.arrowup, location.abovebar, color.new(color.green, 0), text = "A")
+    plotshape(true, "", shape.arrowup, location.abovebar, color.new(color.lime, 0), text = "B\n‎")
+    plotshape(true, "", shape.arrowdown, location.belowbar, color.new(color.red, 0), text = "C")
+    plotshape(true, "", shape.arrowdown, location.belowbar, color.new(color.maroon, 0), text = "‎\nD")
 
 
 
 How can I position text on either side of a single bar?
 -------------------------------------------------------
 
-By choosing label styles like `style = label.style_label_left`, we can determine on which side of the bar the label is positioned. 
+By choosing label styles like ``style = label.style_label_left``, we can determine on which side of the bar the label is positioned. 
 Note that since the 'left'/'right' in there specifies the pointer’s position, 'left' has the side effect of positioning the label on the right side of the bar. 
-The text’s alignment in the label can be controlled using `textalign = text.align_right`, and finally, 
+The text’s alignment in the label can be controlled using ``textalign = text.align_right``, and finally, 
 we can make the label’s background color transparent so we only display the text:
 
 .. image:: images/Faq-Strings-02.png
@@ -107,14 +108,14 @@ we can make the label’s background color transparent so we only display the te
 ::
 
     //@version=5
-    indicator('', '', true)
+    indicator("", "", true)
     print(_txt, _pos, _align) =>
         var _lbl = label.new(bar_index, ta.highest(10)[1], _txt, xloc.bar_index, yloc.price, #00000000, _pos, color.gray, size.huge, _align)
         label.set_xy(_lbl, bar_index, ta.highest(10)[1])
         label.set_text(_lbl, _txt)
-    print('123\nRL', label.style_label_left, text.align_left)
-    print('123\nLR', label.style_label_right, text.align_right)
-    print('123\nC', label.style_label_center, text.align_center)
+    print("123\nRL", label.style_label_left, text.align_left)
+    print("123\nLR", label.style_label_right, text.align_right)
+    print("123\nC", label.style_label_center, text.align_center)
 
 
 
@@ -135,17 +136,17 @@ This splits the string into an array of characters:
 ::
 
     //@version=5
-    indicator('Split a string into characters')
+    indicator("Split a string into characters")
     print(_text) =>
         var _label = label.new(bar_index, na, _text, xloc.bar_index, yloc.price, color(na), label.style_none, color.gray, size.large, text.align_left)
         label.set_xy(_label, bar_index, ta.highest(10)[1])
         label.set_text(_label, _text)
 
-    i_sourceString = input('123456789')
-    arrayOfCharacters = str.split(i_sourceString, '')
+    sourceString = input("123456789")
+    charactersArray = str.split(sourceString, "")
 
-    print('i_sourceString: [' + i_sourceString + ']\n')
-    print('arrayOfCharacters: ' + str.tostring(arrayOfCharacters))
+    print("sourceString: [" + sourceString + "]\n")
+    print("charactersArray: " + str.tostring(charactersArray))
 
 
 
