@@ -459,6 +459,8 @@ One relatively new feature on Pine Script™ is the inclusion of arrays which we
 are a fairly complicated topic so not a recommended area to cover for a new Pine Script™ programmer. They are special data structures that are
 one-dimensional and can be used to hold a collection of multiple values. 
 
+::
+
   //@version=5
   indicator("New 60 Minute Highs")
   var highs = array.new_float(0)
@@ -546,6 +548,8 @@ A more advanced way of using the `request.security() <https://www.tradingview.co
 would be to pass in a user defined function into the ``expression`` parameter. This would allow you to create a custom function and then
 use this function to plot the results for different timeframes or for different symbols on the same chart. Keep in mind that the same limitations
 for security functions apply when using function calls, so for example you wouldn't be able to use a custom function that returns a string.
+
+::
 
     //@version=5
     indicator("`request.security()` User Defined Function Example")
@@ -672,6 +676,8 @@ function so you will now receive an array containing all of the minute bars in t
 all of the available intrabars sorted by the timestamp in ascending order. However if you were to request a lower timeframe that is equal or 
 higher than the current timeframe, you would get a runtime error. You can now do further calculations on this array as per our example below.
 
+::
+
   //@version=5
   indicator("`request.security_lower_tf()` Example")
   float travel = math.abs(high - low)
@@ -720,6 +726,8 @@ The first two parameters require a "simple string" argument. They are:
 
 This example plots the current US GDP values
 
+::
+
   //@version=5
   indicator("Economic Data Example")
   e = request.economic("US", "GDP")
@@ -746,6 +754,8 @@ from the financial data originating from the `request.financial() <https://www.t
 that the underlying financial data becomes available according to the current fiscal period for the underlying financial instrument.
 
 Below we have included an example that creates a handy table containing the latest earnings data for each stock using these three metrics. 
+
+::
 
   //@version=5
   indicator("Dividends, Splits, and Earnings Example")
@@ -779,6 +789,8 @@ Note that:
 TradingView has partnered with many fintech companies to provide our users with vast amounts of information on everything from crypto to stocks and much much more.
 One of our partners is Quandl and we have an example below that shows you how easy it is use this request function. Quandl has hundreds of thousands of available
 feeds and was recently purchased by Nasdaq so the url may be changed to reflect that. Below we have an example showing you a small glimpse of the vast amount of data available. 
+
+::
 
   //@version=5
   indicator("Quandl Example")
