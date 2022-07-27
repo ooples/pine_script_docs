@@ -17,6 +17,39 @@ Release notes
 
 This page contains release notes of notable changes in Pine Script™.
 
+July 2022
+---------
+
+It is now possible to fine-tune where a script's plot values are displayed through the introduction of 
+new arguments for the ``display`` parameter of the 
+`plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__, 
+`plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__, 
+`plotshape() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotshape>`__, 
+`plotarrow() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotarrow>`__, 
+`plotcandle() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__, and
+`plotbar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotbar>`__ functions.
+
+Four new arguments were added, complementing the previously available 
+`display.all <https://www.tradingview.com/pine-script-reference/v5/#var_display{dot}all>`__ and 
+`display.none <https://www.tradingview.com/pine-script-reference/v5/#var_display{dot}none>`__:
+
+- `display.data_window <https://www.tradingview.com/pine-script-reference/v5/#var_display{dot}data_window>`__
+  displays the plot values in the Data Window, one of the items available from the chart's right sidebar.
+- `display.pane <https://www.tradingview.com/pine-script-reference/v5/#var_display{dot}pane>`__
+  displays the plot in the pane where the script resides, as defined in with the ``overlay`` parameter of the script's 
+  `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__, 
+  `strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__, or 
+  `library() <https://www.tradingview.com/pine-script-reference/v5/#fun_library>`__ declaration statement.
+- `display.price_scale <https://www.tradingview.com/pine-script-reference/v5/#var_display{dot}price_scale>`__
+  controls the display of the plot's label and price in the price scale, if the chart's settings allow them.
+- `display.status_line <https://www.tradingview.com/pine-script-reference/v5/#var_display{dot}status_line>`__
+  displays the plot values in the script's status line, next to the script's name on the chart, if the chart's settings allow them.
+
+The ``display`` parameter supports the addition and subtraction of its arguments:
+
+- ``display.all - display.status_line`` will display the plot's information everywhere except in the script's status line.
+- ``display.price_scale + display.status_line`` will display the plot in the price scale and status line only.
+
 June 2022
 ---------
 
