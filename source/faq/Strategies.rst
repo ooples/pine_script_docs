@@ -17,6 +17,7 @@ Strategies FAQ
     :depth: 3
 
 
+
 Why are my orders executed on the bar following my triggers?
 ------------------------------------------------------------
 
