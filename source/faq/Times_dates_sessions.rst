@@ -17,6 +17,7 @@ Times, dates and sessions FAQ
     :depth: 3
 
 
+
 How can I get the time of the first bar in the dataset?
 -------------------------------------------------------
 
@@ -42,7 +43,7 @@ How can I detect if a bar’s date is today?
 
 
 
-How can I plot a value starting n months/years back?
+How can I plot a value starting X months/years back?
 ----------------------------------------------------
 
 

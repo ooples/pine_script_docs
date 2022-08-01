@@ -212,30 +212,19 @@ In such cases, a for loop must be used to go back in time and analyse past bars.
 ::
 
     //@version=5
-    indicator("Pivot Points High Low", shorttitle = "Pivots HL", overlay = true)
+    indicator("Pivot Points High Low", shorttitle = "Pivots HL2", overlay = true)
 
     lenH = input.int(title = "Length High", defval = 10, minval = 1)
     lenL = input.int(title = "Length Low", defval = 10, minval = 1)
 
     getPivotLevel(src, len, isHigh, pivotStyle, pivotYloc, pivotColor) =>
-        p = nz(src[len])
-        isFound = true
-        for i = 0 to len - 1 by 1
-            if isHigh and src[i] > p
-                isFound := false
-
-            if not isHigh and src[i] < p
-                isFound := false
-
-        for i = len + 1 to 2 * len by 1
-            if isHigh and src[i] >= p
-                isFound := false
-
-            if not isHigh and src[i] <= p
-                isFound := false
-
-        if isFound
-            label.new(bar_index[len], p, str.tostring(p), style = pivotStyle, yloc = pivotYloc, color = pivotColor)
+        pHi = ta.pivothigh(src, len, len)
+        pLo = ta.pivotlow(src, len, len)
+        
+        if isHigh and not na(pHi)
+            label.new(bar_index[len], pHi, str.tostring(pHi), style = pivotStyle, yloc = pivotYloc, color = pivotColor)
+        else if not isHigh and not na(pLo)
+            label.new(bar_index[len], pLo, str.tostring(pLo), style = pivotStyle, yloc = pivotYloc, color = pivotColor)
 
     getPivotLevel(high, lenH, true, label.style_label_down, yloc.abovebar, color.lime)
     getPivotLevel(low, lenL, false, label.style_label_up, yloc.belowbar, color.red)
