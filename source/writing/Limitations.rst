@@ -43,40 +43,37 @@ Time
 
 
 
-Script execution time
-^^^^^^^^^^^^^^^^^^^^^
-
-Script execution time isn't to be confused with script compile time. 
-A script will be compiled once and then it passess off the script to a separate process to be executed on each bar of data. 
-There are actually differences in max execution time limits depending on your account type so free users have a max of 20 seconds to execute their script 
-and any paid user will have a max of 40 seconds to execute their script. 
-
-
-
 Script compile time
 ^^^^^^^^^^^^^^^^^^^
 
-When a script is run on a chart, you may not be aware that we compile it in an effort to save resources. 
-We will go into more detail below in our Script size section but just know that when a script contains many objects like loops or variables, 
-then it will take more time for us to be able to compile it. We restrict total compilation time for any script at a max of 2 minutes. 
-We run the compilation step once and then it gets cached so your script will compile much faster after the very first time. 
-Keep in mind that if your script compilation exceeds this limit then we will issue a warning. 
-There is a max of 3 warnings and after the final warning, if you still try to compile the script again without fixing the underlying issues then we will issue a ban of one hour. 
-This means that you won't be able to compile any scripts until the ban period is complete. 
-It is always good code practice to never repeat code so if you do have repeating code then try to merge this code into one location like a custom function.
+Scripts must compile before they are executed on charts. Compilation occurs when you save a script from the editor or when you add a script to the chart.
+A two-minute limit is imposed on compilation time, which will depend on the size and complexity of your script, 
+and whether or not a cached version of a previous compilation is available.
+When a compile exceeds the two-minute limit, a warning is issued. 
+Heed that warning by shortening your script because after three consecutives warnings a one-hour ban on compilation attempts is enforced.
+The first thing to consider when optimizing code is to avoid repetitions by using functions to encapsulate oft-used segments, 
+and call functions instead of repeating code.
+
+
+
+Script execution time
+^^^^^^^^^^^^^^^^^^^^^
+
+Once a script is compiled it can be executed. 
+See the :ref:`Events triggering the execution of a script <PageExecutionModel_Events>` for a list of the events triggering the execution of a script.
+The time alloted for the script to execute on all bars of a dataset varies with account types. The limit is 20 seconds for basic accounts, 40 for others.
 
 
 
 Loop execution time
 ^^^^^^^^^^^^^^^^^^^
 
-Loops can be very useful in programming but can also take quite awhile to execute if you have a particularly complicated loop. 
-There is a max of 500 milliseconds per loop in Pine Script™ which means you will receive a timeout error if any loop in your script exceeds this time. 
-Keep in mind that this timeout is for each bar so this doesn't mean that your script will only have 500 milliseconds to execute all loops in your entire script. 
-Of course you may wonder about situations involving nested loops so we will explain with some examples below as well as a hypothetical example. 
-We set an invisible timer per loop so if you have a loop inside of another loop then we throw the error when either timer surpasses the time limit. 
-Of course this means that the parent loop will timeout first and if this does happen in your script then the easiest solution is to break down this parent loop
-into smaller loops that don't execute as much code. 
+The execution time for any loop on any single bar is limited to 500 milliseconds. 
+The outer loop of embedded loops counts as one loop, so it will time out first. 
+Keep in mind that even though a loop may execute under the 500 ms time limit on a given bar, 
+the time it takes to execute on all the dataset's bars may nonetheless cause your script to exceed the total execution time limit. 
+For example, the limit on total execution time will make it impossible for you script to execute a 400 ms loop on each bar of a 20,000-bar dataset
+because your script would then need 8,000 seconds to execute.
 
 
 
@@ -88,17 +85,25 @@ Chart visuals
 Plot limits
 ^^^^^^^^^^^
 
-A fairly misleading limitation in Pine Script™ is the max limit of plotting 64 objects on a chart. 
-Most users assume that it is as simple as only calling any plot functions no more than the 64 times but what most users aren't aware of is that each 
-plot function can actually use multiple plots. 
-A perfect example of this would be either the plotbar or plotcandle functions since they actually plot 4 objects per function. 
-A bar or candle of course is made up of 4 variables: `open <https://www.tradingview.com/pine-script-reference/v5/#var_open>`__, 
-`high <https://www.tradingview.com/pine-script-reference/v5/#var_high>`__, `low <https://www.tradingview.com/pine-script-reference/v5/#var_low>`__, and 
-`close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__.
-Some functions like `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__ or tables you would assume are counted towards this plotting 
-limit since they are visually added to a chart but they aren't actually plotted on the chart. 
-Other functions like `plotchar() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotchar>`__ can change based on the underlying information used.
+A maximum of 64 plot counts is allowed per script. The functions generating plot counts are:
 
+- `plot() <https://www.tradingview.com/pine-script-reference/v5/#fun_plot>`__
+- ...(add all relevant functions in this list)
+- `alertcondition() <https://www.tradingview.com/pine-script-reference/v5/#fun_alertcondition>`__
+
+The following functions do not generate plot counts:
+
+- `hline() <https://www.tradingview.com/pine-script-reference/v5/#fun_hline>`__
+- `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`__
+- `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__
+- ...(add all relevant functions in this list)
+
+One function call can generate from one to seven plot counts, depending on the function and how it is called. 
+When your script exceeds the maximum of 64 plot counts, the runtime error message will display the plot count generated by your script. 
+Once you reach that point, you can determine how many plot counts a function call generates by commenting it out in a script. 
+As long as your script still throws an error, you will be able to see how the actual plot count decreases after you have commented out a line.
+
+The following example shows different function calls and the number of plot counts each one will generate:
 
 :: 
 
@@ -110,108 +115,96 @@ Other functions like `plotchar() <https://www.tradingview.com/pine-script-refere
     bool isDn = not isUp
     color isDnColor = isDn ? color.red : color.green
 
-    // uses one plot count for close series
+    // Uses one plot count.
     plot(close, color = color.white)
 
-    // uses two plot counts (1 for close series and 1 for color series)
+    // Uses two plot counts: one for the `close` series and one for the `color` series.
+    // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Model all following comments on this ▲ one.
     plot(close, color = isUpColor)
 
     // uses one plot count for close series
     plotarrow(close, colorup = color.green, colordown = color.red)
-
+    
     // uses two plot counts (1 for close series and 1 for colorup series)
     plotarrow(close, colorup = isUpColor)
-
+    
     // uses three plot counts (1 for close series, 1 for colorup series, and 1 for colordown series)
-    plotarrow(close, colorup = isUpColor, colordown = isDnColor)
-
+    plotarrow(close - open, colorup = isUpColor, colordown = isDnColor)
+    
     // uses four plot counts for open, high, low, and close series
     plotbar(open, high, low, close, color = color.white)
-
+    
     // uses five plot counts for open, high, low, close, and color series
     plotbar(open, high, low, close, color = isUpColor)
-
+    
     // uses four plot counts for open, high, low, and close series
     plotcandle(open, high, low, close, color = color.white, wickcolor = color.white, bordercolor = color.purple)
-
+    
     // uses five plot counts for open, high, low, close, and color series
     plotcandle(open, high, low, close, color = isUpColor, wickcolor = color.white, bordercolor = color.purple)
-
+    
     // uses six plot counts for open, high, low, close, color, and wickcolor series
     plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = color.purple)
-
+    
     // uses seven plot counts for open, high, low, close, color, wickcolor, and bordercolor series
     plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
-
+    
     // uses one plot count for close series
-    plotchar(close, color = color.white, text = '⭐', textcolor = color.white)
-
+    plotchar(close, color = color.white, text = "|", textcolor = color.white)
+    
     // uses two plot counts for close, and color series
-    plotchar(close, color = isUpColor, text = '⭐', textcolor = color.white)
-
+    plotchar(close, color = isUpColor, text = "—", textcolor = color.white)
+    
     // uses three plot counts for close, color, and textcolor series
-    plotchar(close, color = isUpColor, text = '⭐', textcolor = isUp ? color.yellow : color.white)
-
+    plotchar(close, color = isUpColor, text = "O", textcolor = isUp ? color.yellow : color.white)
+    
     // uses one plot count for close series
     plotshape(close, color = color.white, textcolor = color.white)
-
+    
     // uses two plot counts for close, and color series
     plotshape(close, color = isUpColor, textcolor = color.white)
-
+    
     // uses three plot counts for close, color, and textcolor series
     plotshape(close, color = isUpColor, textcolor = isUp ? color.yellow : color.white)
+    
+    // Use one plot count.
+    alertcondition(close > open, "close > open", "Up bar alert")
+    
+    // Use one plot count.
+    bgcolor(isUp ? color.yellow : color.white)
 
-
-.. note:: This is a full list of all plot count combinations for each plot function so feel free to use this list as a reference guide.
-
-::
-
-    //@version=5
-    indicator("Plot count limits example")
-
-    bool isUp = close > open
-    color isUpColor = isUp ? color.green : color.red
-
-    // uses seven plot counts for open, high, low, close, color, wickcolor, and bordercolor series
-    plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
-    plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
-    plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
-    plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
-    plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
-    plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
-    plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
-    plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
-    plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
-
-    // including this last line will throw an error stating maximum number of 64 plot elements were reached and that the script contains 70
-    plotcandle(open, high, low, close, color = isUpColor, wickcolor = isUpColor , bordercolor = isUp ? color.lime : color.maroon)
+The example generates a plot count of 54. If you add three instances of the last call to 
+`plotcandle() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__ 
+the script will throw an error stating the script now uses 75 plot counts, because the three additional calls to 
+`plotcandle() <https://www.tradingview.com/pine-script-reference/v5/#fun_plotcandle>`__ 
+each generate seven plot counts, and 54 + 21 is 75.
 
 
 
 Line, box, and label limits
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-One of the most overlooked script settings is the abilities to set the ``max_lines_count``, ``max_boxes_count``, and ``max_labels_count``. 
-The default for all 3 is set to 50 but you are allowed to increase that to a max of 500. 
-Pine Script™ utilizes a very efficient garbage collection system so by default you will only ever be able to view the last 50 labels as an example. 
-Below we have an example showing how to increase these limits in the indicator settings.
+
+Contrary to plots which can cover the entire dataset, by default, only the last 50 lines drawn by a script are visible on charts.
+The same goes for boxes and labels. You can bring the quantity of last remaining drawing objects preserved on charts up to 500 by using the 
+``max_lines_count``, ``max_boxes_count`` or ``max_labels_count`` parameters in the 
+`indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__ or
+`strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__ declaration statements.
+
+In this example we set the maximum quantity of last labels shown on the chart to 100:
 
 ::
 
     //@version=5
-    indicator("Label limits example", max_labels_count = 100, overlay=true)
-    cond = close > open ? 1 : close < open ? -1 : 0
-    label.new(bar_index, close, yloc = cond > 0 ? yloc.abovebar : yloc.belowbar, style = cond > 0 ? label.style_arrowup : label.style_arrowdown, 
-        color = cond > 0 ? color.green : color.red, size = size.huge)
-
-.. note:: Only the last 100 bars will have labels on them and this is because of the garbage collection process that Pine Script™ does in the back-end to only show the most recent labels.
+    indicator("Label limits example", max_labels_count = 100, overlay = true)
+    label.new(bar_index, high, str.tostring(high, format.mintick))
 
 
 
 Table limits
 ^^^^^^^^^^^^
 
-In Pine Script™ there are 9 possible locations to choose for a table location: 
+A maximum of nine tables can be displayed by a script, one for each of the possible locations: 
 `position.bottom_center <https://www.tradingview.com/pine-script-reference/v5/#var_position{dot}bottom_center>`__, 
 `position.bottom_left <https://www.tradingview.com/pine-script-reference/v5/#var_position{dot}bottom_left>`__, 
 `position.bottom_right <https://www.tradingview.com/pine-script-reference/v5/#var_position{dot}bottom_right>`__, 
@@ -219,39 +212,44 @@ In Pine Script™ there are 9 possible locations to choose for a table location:
 `position.middle_left <https://www.tradingview.com/pine-script-reference/v5/#var_position{dot}middle_left>`__, 
 `position.top_center <https://www.tradingview.com/pine-script-reference/v5/#var_position{dot}top_center>`__, 
 `position.top_left <https://www.tradingview.com/pine-script-reference/v5/#var_position{dot}top_left>`__, 
-or `position.top_right <https://www.tradingview.com/pine-script-reference/v5/#var_position{dot}top_right>`__.
-If you place two tables in the same position on a chart then you will only see the most recent table added to that position. 
-Pine Script™ will override the older table in that same position and only display the newer table. 
-This means that there is a hard limit of 9 tables that you are able to add to a chart as long as you place each table in a different position.
+or `position.top_right <https://www.tradingview.com/pine-script-reference/v5/#var_position{dot}top_right>`__. 
+If you place two tables in the same position, only the most recently added table will be visible. 
 
 
 
-request.*() calls
------------------
+\`request.*()\` calls
+---------------------
 
 
 
-Request calls
-^^^^^^^^^^^^^
+Number of calls
+^^^^^^^^^^^^^^^
 
-All function calls using the request namespace such as `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__, 
+A script cannot make more than 40 calls to functions in the `request.*` namespace. All instances of calls to these functions are counted, 
+even if they are included in code blocks or functions that are never actually used in the script's logic. The functions counting towards this limit are: 
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__, 
 `request.security_lower_tf() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security_lower_tf>`__, 
 `request.quandl() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}quandl>`__, 
-`request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__, etc are all treated the same on the compiler. 
-This means that since there is a hard limit of 40 request calls per script then this can either be 40 
-`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__ calls or a combination like 34 
-`request.quandl() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}quandl>`__ calls and 6 
-`request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__ calls. 
+`request.financial() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}financial>`__, 
+`request.dividends() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}dividends>`__, 
+`request.earnings() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}earnings>`__ and 
+`request.splits() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}splits>`__. 
 
 
 
 Intrabars
 ^^^^^^^^^
 
-This limitation only applies to the `request.security_lower_tf() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security_lower_tf>`__ function and this is 
-because when you request data from a lower timeframe compared to the chart's timeframe, you will have multiple bars of data for each current bar. 
-For example, if you are looking at a 1H chart and you want to use 1M data in your script then you will receive up to 60 1M intrabars for each 1H bar. 
-We have a max of 100,000 intrabars allowed so for reference this means that viewing a 1D chart on BTC and requesting the 1S data for each bar will give you a max of 86,400 intrabars. 
+When accessing lower timeframes, with 
+`request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__
+or `request.security_lower_tf() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security_lower_tf>`__, 
+a maximum of 100,000 intrabars can be used in calculations. 
+
+The quantity of chart bars covered with 100,000 intrabars will vary with the ratio of the chart's timeframe to the lower timeframe used, 
+and with the average number of intrabars contained in each chart bar. 
+For example, when using a 1min lower timeframe, chart bars at the 60min timeframe of an active 24x7 market will usually contain 60 intrabars each. 
+Because 100,000 / 60 = 1666.67, the quantity of chart bars covered by the 100,000 intrabars will typically be 1666.
+On markets where 60min chart bars do not always contain 60 1min intrabars, more chart bars will be covered.
 
 
 
@@ -263,57 +261,43 @@ Memory
 Script size
 ^^^^^^^^^^^
 
-Before a script is executed, it is compiled into an Intermediate Language (IL). 
-Using an IL allows Pine Script™ to work with longer scripts and to optimize the script before we begin executing it.
-There is a hard limit on the length that the individual script can have in its IL form: 60,000 tokens for a regular indicator or strategy, and 1 million tokens for a library.
-Due to various optimizations, there is no way to check the length of the IL that any specific script will generate. 
-Compiling using the IL will remove unused code and comments, shortens variable and function names, calculates some expressions where possible, etc.
-To work around the limit, you can offload some code into a library and use the library functions in your script instead. 
-Replacing duplicate code with functions should also shorten the length of the IL tokens.
+Before a script is executed, it is compiled into a tokenized Intermediate Language (IL). 
+Using an IL allows Pine Script™ to accommodate longer scripts by applying various optimizations before it is executed. 
+The compiled form of indicators and strategies is limited to 60,000 tokens; libraries have a limit of 1 million tokens. 
+There is no way to inspect the number of tokens created during compilation; you will only know your script exceeds the limit when the compiler reaches it.
+
+Replacing code repetitions with function calls and using libraries to offload some of the workload 
+are the most efficient ways to decrease the number of tokens your compiled script will generate.
+
+The size of variable names and comments do not affect the number of compiled tokens.
 
 
 
 Arrays and matrices
 ^^^^^^^^^^^^^^^^^^^
 
-Arrays and matrices are both very complicated topics for new Pine Script™ programmers so make sure to take a good look at the 
-`arrays page <https://www.tradingview.com/pine-script-docs/en/v5/language/Arrays.html>`__ or the 
-`matrices page <https://www.tradingview.com/pine-script-docs/en/v5/language/Arrays.html>`__ if you need a refresher. 
-Arrays and matrices are both special objects that are collections of data in slightly different data formats. 
-Arrays can be thought of as a variation of a data time series and matrices add an extra dimension to this concept which allows for arrays inside arrays. 
-Both types have the same limit where you have a max of 100,000 elements allowed inside each collection object. 
+Arrays and matrices are limited to 100,000 elements.
 
 
 
 Variables
 ^^^^^^^^^
 
-Variables are objects that store data in programming languages and can be initialized in many different ways depending on the language you are using. 
-In Pine Script™ we have a max of 1000 variables allowed per scope and there are two scopes in every script. 
-You have a global scope which would be variables accessible from anywhere in the script and a local scope which would be variables accessible from a local block 
-like an if statement or inside a loop. Since variables have to be created manually then exceeding 1000
-variables per scope would mean your script would be thousands of lines long so chances are you will never see this associated error. 
-Keep in mind that variables in Pine Script™ are the only factor that directly contributes to how much physical memory your script uses.
+A maximum of 1000 variables are allowed per scope. Pine scripts always contain one global scope, and can contain zero or more local scopes. 
+Local scopes are created by indented code such as can be found in functions or 
+`if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__, 
+`switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__, 
+`for <https://www.tradingview.com/pine-script-reference/v5/#op_for>`__ or 
+`while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ structures, which allow for one or more local blocks. 
+Each local block counts as one local scope.
 
-::
-
-    //@version=5
-    indicator("Variables scope example", overlay = true)
-    float ema = ta.ema(close, 14) // declared in global scope
-
-    upperBand = ema, lowerBand = ema
-    if close > open
-        float trueRange = ta.tr // declared in local scope
-        upperBand += trueRange
-        lowerBand -= trueRange
-        
-    plot(upperBand, color = color.yellow)
-    plot(lowerBand, color = color.yellow)
+The branches of a conditional expression using a 
+`?: <https://www.tradingview.com/pine-script-reference/v5/#op_{question}{colon}>`__ ternary operator do not count as local blocks.
 
 
 
-Scripts
--------
+Other limits
+------------
 
 
 
