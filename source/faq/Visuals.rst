@@ -17,6 +17,7 @@ Visuals FAQ
     :depth: 3
 
 
+
 Why can’t I use a plot in an if or for statement?
 -------------------------------------------------
 
@@ -56,6 +57,8 @@ The same limitations apply to `plotchar() <https://www.tradingview.com/pine-scri
 Can I plot diagonals between two points on the chart?
 -----------------------------------------------------
 
+Yes, using the `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ function. 
+`Trendlines - JD <https://www.tradingview.com/script/mpeEgn5J-Trendlines-JD/>`__ by Duyck
 
 
 
@@ -106,10 +109,27 @@ they are used to ensure your code is doing what you expect and can save you a lo
 How do I plot a support or a trend line?
 ----------------------------------------
 
+To plot a continuous line in Pine Script™, you need to either:
+
+ - Look back into elapsed bars to find an occurrence that will return the same value over consecutive bars so you can plot it.
+ - Find levels and save them so that you can plot them. In this case your saving mechanism will determine how many levels you can save.
+ - You may also use the `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ function.
+
+These are some examples:
+
+ - `Trendlines - JD <https://www.tradingview.com/script/mpeEgn5J-Trendlines-JD/>`__ by Duyck
+ - `Pivots MTF <https://www.tradingview.com/script/VYzEUnYB-Pivots-MTF-LucF/>`__ by LucF
+ - `Auto-Support v0.2 <https://www.tradingview.com/script/hBrQx1tG-Auto-Support-v-0-2/>`__ by jamc
+ - `S/R Barry <https://www.tradingview.com/script/EHqtQi2g-S-R-Barry/>`__ by likebike
+
 
 
 How can I use colors in my indicator plots?
 -------------------------------------------
+
+See `Working with colours <https://kodify.net/tradingview/colours/>`__ by Kodify. 
+Our Resources page has a `list of color pickers <https://www.pinecoders.com/resources/#color-pickers-or-tools>`__ to help you choose colors. 
+midtownsk8rguy has a complete set of custom colors in `Pine Color Magic and Chart Theme Simulator <https://www.tradingview.com/script/yyDYIrRQ-Pine-Color-Magic-and-Chart-Theme-Simulator/>`__.
 
 
 
@@ -130,8 +150,10 @@ If your script only works correctly in overlay mode and you want to prevent user
 
 
 
-Can I use plot() calls in a for loop?
--------------------------------------
+Can I use plot() calls inside a for loop?
+-----------------------------------------
+
+No, but you can use the `line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ function inside for loops.
 
 
 
@@ -161,10 +183,30 @@ How can I toggle hline() plots on and off?
 How can I plot color gradients?
 -------------------------------
 
+There are no built-in functions to generate color gradients in Pine Script™ yet. Gradients progressing horizontally across bars are much easier to implement and run faster. 
+These are a few examples:
+
+ - `Color Gradient (16 colors) Framework - PineCoders FAQ <>`__
+ - `Color Gradient Framework - PineCoders FAQ <>`__
+ - `[e2] Color Gradient Function <https://www.tradingview.com/script/VSGvuDEF-e2-Color-Gradient-Function/>`__
+ - `[RS]Color Gradient Function <https://www.tradingview.com/script/nUq3gvD5-RS-Color-Gradient-Function/>`__
+ - `[RS]Function - RGB Color (low resolution) <https://www.tradingview.com/script/nUq3gvD5-RS-Color-Gradient-Function/>`__
+
+To produce gradients progressing in vertical space on the same bar you will need to use a progession of plots, each with a different color. 
+Doing so requires many plot statements and scripts using this technique will run slower than ones producing horizontal gradients. Examples:
+
+ - `Trend Following Bar <https://www.tradingview.com/script/UGgNcgNi-Trend-Following-Bar/>`__
+ - `Angled Volume Profile [feeble] <https://www.tradingview.com/script/OGwqa3DI-Angled-Volume-Profile-feeble/>`__
+ - `Stochastic Heat Map <https://www.tradingview.com/script/7PRbCBjk-Stochastic-Heat-Map/>`__
+
 
 
 How can I draw lines or labels into the future?
 -----------------------------------------------
+
+For this, you will need to use ``xloc = xloc.bar_time`` in `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`__ or 
+`line.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_line{dot}new>`__ because the default is ``xloc = xloc.bar_index``, 
+which does not allow positioning drawings in the future. See our `Time Offset Calculation Framework <>`__ for functions that will help you with this. 
 
 
 
@@ -208,6 +250,15 @@ but we will use a function which allows us to save lines:
 
 Is it possible to draw geometric shapes?
 ----------------------------------------
+
+Yes it’s possible. See these examples:
+
+ - `[RS]Function - Geometric Line Drawings <https://www.tradingview.com/script/KhKqjR0J-RS-Function-Geometric-Line-Drawings/>`__ by RicardoSantos.
+ - `Periodic Ellipses <https://www.tradingview.com/script/ynUlUbP7-Periodic-Ellipses/>`__ by alexgrover.
+ - `Euler Cubes - Cubᵋ <https://www.tradingview.com/script/eIs1vcDX-Golden-ratio-Cubes-GoRaC/>`__ by fikira.
+ - `Penrose Diagram <https://www.tradingview.com/script/N8flt7gC-Penrose-Diagram/>`__ by DayTradingOil.
+ - `Speedometer Toolbox <https://www.tradingview.com/script/1T498Yog-Speedometer-Toolbox/>`__ by rumpypumpydumpy.
+ - `Auto Fib Speed Resistance Fans <https://www.tradingview.com/script/FnxXRrPG-Auto-Pitchfork-Fib-Retracement-and-Zig-Zag-by-DGT/>`__ by dgtrd.
 
 
 
