@@ -43,8 +43,8 @@ Time
 
 
 
-Script compile time
-^^^^^^^^^^^^^^^^^^^
+Script compilation
+^^^^^^^^^^^^^^^^^^
 
 Scripts must compile before they are executed on charts. Compilation occurs when you save a script from the editor or when you add a script to the chart.
 A two-minute limit is imposed on compilation time, which will depend on the size and complexity of your script, 
@@ -56,8 +56,8 @@ and call functions instead of repeating code.
 
 
 
-Script execution time
-^^^^^^^^^^^^^^^^^^^^^
+Script execution
+^^^^^^^^^^^^^^^^
 
 Once a script is compiled it can be executed. 
 See the :ref:`Events triggering the execution of a script <PageExecutionModel_Events>` for a list of the events triggering the execution of a script.
@@ -65,8 +65,8 @@ The time alloted for the script to execute on all bars of a dataset varies with 
 
 
 
-Loop execution time
-^^^^^^^^^^^^^^^^^^^
+Loop execution
+^^^^^^^^^^^^^^
 
 The execution time for any loop on any single bar is limited to 500 milliseconds. 
 The outer loop of embedded loops counts as one loop, so it will time out first. 
