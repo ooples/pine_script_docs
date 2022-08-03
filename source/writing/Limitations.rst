@@ -22,9 +22,9 @@ Introduction
 
 As is mentioned in our :ref:`Welcome <PageWelcomeToPine>` page:
 
-    *Because each script uses computational resources in the cloud, we must impose limits in order to share these resources fairly among our users. 
-    We strive to set as few limits as possible, but will of course have to implement as many as needed for the platform to run smoothly. 
-    Limitations apply to the amount of data requested from additional symbols, execution time, memory usage and script size.*
+  *Because each script uses computational resources in the cloud, we must impose limits in order to share these resources fairly among our users. 
+  We strive to set as few limits as possible, but will of course have to implement as many as needed for the platform to run smoothly. 
+  Limitations apply to the amount of data requested from additional symbols, execution time, memory usage and script size.*
 
 If you develop complex scripts using Pine Script™, sooner or later you will run into some of the limitations we impose.
 This section provides you with an overview of the limitations that you may encounter.
@@ -126,7 +126,6 @@ The following example shows different function calls and the number of plot coun
     plot(close, color = color.white)
 
     // Uses two plot counts for the `close` and `color` series.
-    // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Model all following comments on this ▲ one.
     plot(close, color = isUpColor)
 
     // Uses one plot count for the `close` series.
