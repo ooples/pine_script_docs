@@ -10,3 +10,4 @@ Writing scripts
    Style_guide
    Debugging
    Publishing
+   Limitations
