@@ -85,7 +85,9 @@ The standard license comments appearing at the beginning of scripts are:
 <version>
 ^^^^^^^^^
 
-This is the compiler directive defining the version of Pine Script™ the script will use. If none is present, v1 is used. For v5, use::
+This is the compiler directive defining the version of Pine Script™ the script will use. If none is present, v1 is used. For v5, use
+
+::
 
     //@version=5
 
@@ -96,7 +98,7 @@ This is the compiler directive defining the version of Pine Script™ the script
 
 This is the mandatory declaration statement which defines the type of your script. It must be a call to either  
 `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__, 
-`strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__ or  
+`strategy() <https://www.tradingview.com/pine-script-reference/v5/#fun_strategy>`__, or  
 `library() <https://www.tradingview.com/pine-script-reference/v5/#fun_library>`__.
 
 
@@ -160,14 +162,14 @@ In this example:
 - The ``RST*`` and ``LTF*`` constants will be used as tuple elements in the ``options`` argument of ``input.*()`` calls.
 - The ``TT_*`` constants will be used as ``tooltip`` arguments in ``input.*()`` calls. Note how we use a line continuation for long string literals.
 - We do not use `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ to initialize constants.
-  The Pine Script™ runtime being optimized to handle declarations on each bar, 
+  The Pine Script™ runtime is optimized to handle declarations on each bar, but
   using `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ to initialize a variable only the first time it is declared 
-  actually incurs a minor penalty on script performance because of the maintenance that
+  incurs a minor penalty on script performance because of the maintenance that
   `var <https://www.tradingview.com/pine-script-reference/v5/#op_var>`__ variables require on further bars.
 
 Note that:
 
-- Literals used in more than one place in a script should always be declared used to initialize a constant. 
+- Literals used in more than one place in a script should always be declared as a constant. 
   Using the constant rather than the literal makes it more readable if it is given a meaningful name, and the practice makes code easier to maintain. 
   Even though the quantity of milliseconds in a day is unlikely to change in the future, ``MS_IN_DAY`` is more meaningful than ``1000 * 60 * 60 * 24``.
 - Constants only used in the local block of a function or `if <https://www.tradingview.com/pine-script-reference/v5/#op_if>`__, 
@@ -181,7 +183,7 @@ Note that:
 It is **much** easier to read scripts when all their inputs are in the same code section. 
 Placing that section at the beginning of the script also reflects how they are processed at runtime, i.e., before the rest of the script is executed.
 
-Suffixing input variable names with "Input" makes them more readily identifiable when they are used later in the script:
+Suffixing input variable names with ``input`` makes them more readily identifiable when they are used later in the script:
 ``maLengthInput``, ``bearColorInput``, ``showAvgInput``, etc.
 
 ::
@@ -204,7 +206,7 @@ Suffixing input variable names with "Input" makes them more readily identifiable
 All user-defined functions must be defined in the script's global scope; nested function definitions are not allowed in Pine Script™.
 
 Optimal function design should minimize the use of global variables in the function's scope, as they undermine function portability. 
-When it cannot be avoided, those functions must follow the global variable declarations in the code, which entails they cannot always be placed in the <function_declarations> section. 
+When it can't be avoided, those functions must follow the global variable declarations in the code, which entails they can't always be placed in the <function_declarations> section. 
 Such dependencies on global variables should ideally be documented in the function's comments.
 
 It will also help readers if you document the function's objective, parameters and result. 
@@ -263,7 +265,7 @@ Strategies are easier to read when strategy calls are grouped in the same sectio
 ^^^^^^^^^
 
 This section should ideally include all the statements producing the script's visuals, whether they be plots, drawings, background colors, candle-plotting, etc. 
-See the User Manual's section on :ref:`here <PageColors_ZIndex>` for more information on how the relative depth of visuals is determined.
+See the Pine Script™ User Manual's section on :ref:`here <PageColors_ZIndex>` for more information on how the relative depth of visuals is determined.
 
 
 
@@ -278,7 +280,9 @@ Spacing
 -------
 
 A space should be used on both sides of all operators, except unary operators (``-1``). 
-A space is also recommended after all commas and when using named function arguments, as in ``plot(series = close)``::
+A space is also recommended after all commas and when using named function arguments, as in ``plot(series = close)``
+
+::
 
     int a = close > open ? 1 : -1
     var int newLen = 2
@@ -290,7 +294,7 @@ A space is also recommended after all commas and when using named function argum
 
 
 
-Line Wrapping
+Line wrapping
 -------------
 
 Line wrapping can make long lines easier to read. 
@@ -310,7 +314,7 @@ Vertical alignment
 ------------------
 
 Vertical alignment using tabs or spaces can be useful in code sections containing many similar lines such as constant declarations or inputs. 
-They can make mass edits much easier using the Editor's multi-cursor feature (:kbd:`ctrl` + :kbd:`alt` + :kbd:`🠅`/:kbd:`🠇`):
+They can make mass edits much easier using the Pine Script™ Editor's multi-cursor feature (:kbd:`ctrl` + :kbd:`alt` + :kbd:`🠅`/:kbd:`🠇`):
 
 ::
 
