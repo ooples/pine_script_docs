@@ -47,7 +47,7 @@ because it does not use a loop and uses the
 built-in function to accomplish the task::
 
     //@version=5
-    indicator("The Pine Script™ MA", "", true)
+    indicator("Efficient MA", "", true)
     thePineMA = ta.sma(close, 10)
     plot(thePineMA)
 
@@ -56,7 +56,7 @@ which beginning Pine Script™ programmers often think must be done with a loop.
 To count the number of up bars in the last 10 bars, they will use::
 
     //@version=5
-    indicator("INEFFICIENT SUM")
+    indicator("INEFFICIENT sum")
     MA_LENGTH = 10
     upBars = 0.0
     for offset = 0 to MA_LENGTH - 1
@@ -64,13 +64,13 @@ To count the number of up bars in the last 10 bars, they will use::
             upBars := upBars + 1
     plot(upBars)
    
-The efficient way to write this in Pine Script™ (for the programmer bacause it saves time, 
+The efficient way to write this in Pine Script™ (for the programmer because it saves time, 
 to achieve the fastest-loading charts, and to share our common resources most equitably),
 is to use the `math.sum() <https://www.tradingview.com/pine-script-reference/v5/#fun_math{dot}sum>`__
 built-in function to accomplish the task::
 
     //@version=5
-    indicator("INEFFICIENT SUM")
+    indicator("Efficient sum")
     upBars = math.sum(close > open ? 1 : 0, 10)     
     plot(upBars)
 

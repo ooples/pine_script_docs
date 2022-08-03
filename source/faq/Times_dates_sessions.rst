@@ -1,5 +1,3 @@
-.. _PageTimesDatesSessionsFaq:
-
 .. image:: /images/Pine_Script_logo.svg
    :alt: Pine Script™ logo
    :target: https://www.tradingview.com/pine-script-docs/en/v5/Introduction.html
@@ -8,12 +6,16 @@
    :height: 100
 
 
+.. _PageTimesDatesSessionsFaq:
+
+
 Times, dates and sessions FAQ
 =============================
 
 
 .. contents:: :local:
     :depth: 3
+
 
 
 How can I get the time of the first bar in the dataset?
@@ -41,7 +43,7 @@ How can I detect if a bar’s date is today?
 
 
 
-How can I plot a value starting n months/years back?
+How can I plot a value starting X months/years back?
 ----------------------------------------------------
 
 
