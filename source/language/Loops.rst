@@ -31,7 +31,7 @@ who want to calculate the average of the last 10
 `close <https://www.tradingview.com/pine-script-reference/v5/#var_close>`__ values will often write code such as::
 
     //@version=5
-    indicator("INEFFICENT MA", "", true)
+    indicator("Inefficient MA", "", true)
     MA_LENGTH = 10
     sumOfCloses = 0.0
     for offset = 0 to MA_LENGTH - 1
@@ -56,7 +56,7 @@ which beginning Pine Script™ programmers often think must be done with a loop.
 To count the number of up bars in the last 10 bars, they will use::
 
     //@version=5
-    indicator("INEFFICIENT sum")
+    indicator("Inefficient sum")
     MA_LENGTH = 10
     upBars = 0.0
     for offset = 0 to MA_LENGTH - 1
