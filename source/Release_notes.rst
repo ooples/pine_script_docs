@@ -17,6 +17,14 @@ Release notes
 
 This page contains release notes of notable changes in Pine Script™.
 
+August 2022
+---------
+
+New built-in functions were added:
+
+* `ta.min() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}min>`_ - Returns the all-time low value of ``source`` from the beginning of the chart up to the current bar.
+* `ta.max() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}max>`_ - Returns the all-time high value of ``source`` from the beginning of the chart up to the current bar.
+
 July 2022
 ---------
 
