@@ -20,6 +20,21 @@ This page contains release notes of notable changes in Pine Script™.
 August 2022
 ---------
 
+Now you can customize the text of your drawings using the new font styles. The following tools will help you:
+
+New argument for `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_, `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_, `table.cell() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}cell>`_ functions - ``text_font``. It sets the font family of the text.
+
+New built-in variables:
+
+* `text.font_default <https://www.tradingview.com/pine-script-reference/v5/#var_text{dot}font_default>`_ - Default text font for `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_, `box.set_text_font() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_text_font>`_, `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_, `label.set_text_font() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_text_font>`_, `table.cell() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}cell>`_ and `table.cell_set_text_font() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}cell_set_text_font>`_ functions.
+* `text.font_monospace <https://www.tradingview.com/pine-script-reference/v5/#var_text{dot}font_monospace>`_ - Monospace text font for `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_, `box.set_text_font() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_text_font>`_, `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_, `label.set_text_font() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_text_font>`_, `table.cell() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}cell>`_ and `table.cell_set_text_font() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}cell_set_text_font>`_ functions.
+
+You can also apply new styles to the text of drawings using new built-in functions:
+
+* `box.set_text_font() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_text_font>`_ - The function sets the font family of the text inside the box.
+* `label.set_text_font() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}set_text_font>`_ - The function sets the font family of the text inside the label.
+* `table.cell_set_text_font() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}cell_set_text_font>`_ - The function sets the font family of the text inside the cell.
+
 New built-in functions were added:
 
 * `ta.min() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}min>`_ - Returns the all-time low value of ``source`` from the beginning of the chart up to the current bar.
