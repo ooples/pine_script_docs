@@ -20,6 +20,16 @@ This page contains release notes of notable changes in Pine Script™.
 August 2022
 ---------
 
+New parameter for `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ function was added:
+
+* ``text_wrap`` - It defines whether the text is presented in a single line, extending past the width of the box if necessary, or wrapped so every line is no wider than the box itself.
+
+This parameter supports two arguments:
+
+* `text.wrap_none <https://www.tradingview.com/pine-script-reference/v5/#var_text{dot}wrap_none>`_ - Disabled wrapping mode for `box.new <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ and `box.set_text_wrap <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_text_wrap>`_ functions.
+
+* `text.wrap_auto <https://www.tradingview.com/pine-script-reference/v5/#var_text{dot}wrap_auto>`_ - Automatic wrapping mode for `box.new <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ and `box.set_text_wrap <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_text_wrap>`_ functions.
+
 New built-in functions were added:
 
 * `ta.min() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}min>`_ - Returns the all-time low value of ``source`` from the beginning of the chart up to the current bar.
