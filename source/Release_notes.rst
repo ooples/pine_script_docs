@@ -18,7 +18,7 @@ Release notes
 This page contains release notes of notable changes in Pine Script™.
 
 August 2022
----------
+-----------
 
 A new parameter for the `ta.pivot_point_levels() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}pivot_point_levels>`_ function was added:
 
@@ -303,11 +303,14 @@ Added new functions to clone drawings:
 * `label.copy() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}copy>`__ 
 * `box.copy() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}copy>`__ 
 
+2021
+----
+
 December 2021
--------------
+^^^^^^^^^^^^^
 
 Linefills
-^^^^^^^^^
+~~~~~~~~~
 The space between lines drawn in Pine Script™ can now be filled! We’ve added a new ``linefill`` drawing type, along with a number of functions dedicated to manipulating it. 
 Linefills are created by passing two lines and a color to the ``linefill.new()`` function, and their behavior is based on the lines they're tied to: 
 they extend in the same direction as the lines, move when their lines move, and are deleted when one of the two lines is deleted.
@@ -325,7 +328,7 @@ New linefill-related functions:
 
 
 New functions for string manipulation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Added a number of new functions that provide more ways to process strings, and introduce regular expressions to Pine Script™:
 
@@ -342,7 +345,7 @@ Added a number of new functions that provide more ways to process strings, and i
 
 
 Textboxes
-^^^^^^^^^
+~~~~~~~~~
 
 Box drawings now supports text. The `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`__ function has five new parameters for text manipulation: 
 ``text``, ``text_size``, ``text_color``, ``text_valign``, and ``text_halign``. Additionally, five new functions to set the text properties of existing boxes were added:
@@ -354,7 +357,7 @@ Box drawings now supports text. The `box.new() <https://www.tradingview.com/pine
 * `box.set_text_halign() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}set_text_halign>`__
 
 New built-in variables
-^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~
 
 Added new built-in variables that return the ``bar_index`` and ``time`` values of the last bar in the dataset. Their values are known at the beginning of the script's calculation:
 
@@ -366,10 +369,10 @@ New built-in ``source`` variable:
 * `hlcc4 <https://www.tradingview.com/pine-script-reference/v5/#var_hlcc4>`__ - A shortcut for ``(high + low + close + close)/4``. It averages the high and low values with the double-weighted close.
 
 November 2021
--------------
+^^^^^^^^^^^^^
 
 for...in
-^^^^^^^^
+~~~~~~~~
 
 Added a new `for...in <https://www.tradingview.com/pine-script-reference/v5/#op_for{dot}{dot}{dot}in>`__ operator to iterate over all elements of an array::
 
@@ -387,7 +390,7 @@ Added a new `for...in <https://www.tradingview.com/pine-script-reference/v5/#op_
 	plot(highest(a1))
 	
 Function overloads
-^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~
 Added function overloads. Several functions in a script can now share the same name, as long one of the following conditions is true:
 
 * Each overload has a different number of parameters::
@@ -433,7 +436,7 @@ Added function overloads. Several functions in a script can now share the same n
 	plot(mult(7, 4, 2))
 
 Currency conversion
-^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~
 Added a new `currency` argument to most ``request.*()`` functions. If specified, price values returned by the function will be converted from the source currency to the target currency. 
 The following functions are affected:
 
@@ -445,14 +448,14 @@ The following functions are affected:
 .. _PageReleaseNotes_October2021:
 
 October 2021
---------------
+^^^^^^^^^^^^
 Pine Script™ v5 is here! 
 This is a list of the **new** features added to the language, and a few of the **changes** made.
 See the :ref:`Migration guide to Pine Script™ v5 <PageToPineVersion5>` for a complete list of the **changes** in v5.
 
 
 New features
-^^^^^^^^^^^^^
+~~~~~~~~~~~~
 Libraries are a new type of publication. They allow you to create custom functions for reuse in other scripts. See this manual's page on :ref:`Libraries <PageLibraries>`.
 
 Pine Script™ now supports `switch <https://www.tradingview.com/pine-script-reference/v5/#op_switch>`__ structures!
@@ -511,7 +514,7 @@ now includes the systematic mention of the form and type (e.g., "simple int") re
 The :ref:`User Manual <IndexUserManual>` was reorganized and new content was added.
 
 Changes
-^^^^^^^
+~~~~~~~
 Many built-in variables, functions and function arguments were renamed or moved to new namespaces in v5. 
 The venerable ``study()``, for example, is now `indicator() <https://www.tradingview.com/pine-script-reference/v5/#fun_indicator>`__,
 and ``security()`` is now `request.security() <https://www.tradingview.com/pine-script-reference/v5/#fun_request{dot}security>`__.
@@ -523,14 +526,14 @@ See the :ref:`Migration guide to Pine Script™ v5 <PageToPineVersion5>` for a c
 .. _PageReleaseNotes_September2021:
 
 September 2021
----------
+^^^^^^^^^^^^^^
 New parameter has been added for the ``dividends()``, ``earnings()``, ``financial()``, ``quandl()``, ``security()``, and ``splits()`` functions:
 
 * ``ignore_invalid_symbol`` - determines the behavior of the function if the specified symbol is not found: if ``false``, the script will halt and return a runtime error; if ``true``, the function will return ``na`` and execution will continue.
 
 
 July 2021
----------
+^^^^^^^^^
 ``tostring`` now accepts "bool" and "string" types.
 
 New argument for ``time`` and ``time_close`` functions was added:
@@ -545,7 +548,7 @@ New argument for ``study`` and ``strategy`` functions was added:
 
 
 June 2021
----------
+^^^^^^^^^
 New variable was added:
 
 * ``barstate.islastconfirmedhistory`` - returns ``true`` if script is executing on the dataset's last bar when market is closed, or script is executing on the bar immediately preceding the real-time bar, if market is open. Returns ``false`` otherwise.
@@ -562,7 +565,7 @@ Expanded ``tostring()`` functionality. The function now accepts three new format
 
 
 May 2021
---------
+^^^^^^^^
 Improved backtesting functionality by adding the Leverage mechanism.
 
 Added support for table drawings and functions for working with them. 
@@ -584,7 +587,7 @@ The ``color.new`` function can now accept series and input arguments, in which c
 
 
 April 2021
-----------
+^^^^^^^^^^
 New math constants were added: 
 
 * ``math.pi`` - is a named constant for Archimedes' constant. It is equal to 3.1415926535897932.
@@ -612,7 +615,7 @@ New functions were added:
 
 
 March 2021
-----------
+^^^^^^^^^^
 New assignment operators were added:
 
 * ``+=``  - addition assignment
@@ -651,7 +654,7 @@ New arguments for the study() function were added:
 
 
 February 2021
--------------
+^^^^^^^^^^^^^
 New variable was added:
 
 * ``time_tradingday`` - the beginning time of the trading day the current bar belongs to.
@@ -659,7 +662,7 @@ New variable was added:
 
 
 January 2021
-------------
+^^^^^^^^^^^^
 The following functions now accept a series length parameter:
 
 * `bb() <https://www.tradingview.com/pine-script-reference/v4/#fun_bb>`__
