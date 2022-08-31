@@ -20,6 +20,8 @@ This page contains release notes of notable changes in Pine Script™.
 August 2022
 -----------
 
+New label style `label.style_text_outline <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}style_text_outline>`_ was added.
+
 A new parameter for the `ta.pivot_point_levels() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}pivot_point_levels>`_ function was added:
 
 * ``developing`` - If ``false``, the values are those calculated the last time the anchor condition was true. They remain constant until the anchor condition becomes true again. If ``true``, the pivots are developing, i.e., they constantly recalculate on the data developing between the point of the last anchor (or bar zero if the anchor condition was never true) and the current bar. Cannot be ``true`` when ``type`` is set to ``"Woodie"``.
