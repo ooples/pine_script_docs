@@ -20,7 +20,7 @@ This page contains release notes of notable changes in Pine Script™.
 August 2022
 -----------
 
-New label style `label.style_text_outline <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}style_text_outline>`_ was added.
+A new label style `label.style_text_outline <https://www.tradingview.com/pine-script-reference/v5/#var_label{dot}style_text_outline>`_ was added.
 
 A new parameter for the `ta.pivot_point_levels() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}pivot_point_levels>`_ function was added:
 
@@ -41,7 +41,7 @@ New built-in functions were added:
 * `ta.min() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}min>`_ - Returns the all-time low value of ``source`` from the beginning of the chart up to the current bar.
 * `ta.max() <https://www.tradingview.com/pine-script-reference/v5/#fun_ta{dot}max>`_ - Returns the all-time high value of ``source`` from the beginning of the chart up to the current bar.
 
-New declaration ``//@strategy_alert_message`` in the script allows to automatically add specified text into `Create Alert` window. 
+A new annotation ``//@strategy_alert_message`` was added. If the annotation is added to the strategy, the text written after it will be automatically set as the default alert message in the `Create Alert` window. 
 ::
 
 
