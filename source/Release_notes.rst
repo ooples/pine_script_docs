@@ -22,7 +22,7 @@ September 2022
 
 The ``text_font_family`` parameter now allows the selection of a monospace font in `label.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_label{dot}new>`_, `box.new() <https://www.tradingview.com/pine-script-reference/v5/#fun_box{dot}new>`_ and `table.cell() <https://www.tradingview.com/pine-script-reference/v5/#fun_table{dot}cell>`_ function calls, which makes it easier to align text vertically. Its arguments can be:
 
-* `font.family_default <https://www.tradingview.com/pine-script-reference/v5/#var_font{dot}family_default>`_ - Specifies the default Trebuchet MS font.
+* `font.family_default <https://www.tradingview.com/pine-script-reference/v5/#var_font{dot}family_default>`_ - Specifies the default font.
 * `font.family_monospace <https://www.tradingview.com/pine-script-reference/v5/#var_font{dot}family_monospace>`_ - Specifies a monospace font.
 
 The accompanying setter functions are:
