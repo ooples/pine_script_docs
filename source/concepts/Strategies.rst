@@ -538,7 +538,7 @@ profit target or stop loss.
         strategy.entry("LE", strategy.long, 1000)
         strategy.exit("LX", "LE", profit = 1, loss = 1)
     profit = strategy.netprofit
-    plot(abs((profit - profit[1])*100), "1 point profit", color = color.blue, linewidth = 2)
+    plot(math.abs((profit - profit[1])*100), "1 point profit", color = color.blue, linewidth = 2)
     plot(1 / close[1], "prev usdeur", color = color.red)
 
 After adding this strategy to the chart we can see that the plot lines
