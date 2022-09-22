@@ -38,12 +38,14 @@ A simple strategy example
 
 ::
 
-    //@version=5
-    strategy("test")
-    if bar_index < 100
-        strategy.entry("buy", strategy.long, 10, when = strategy.position_size <= 0)
-        strategy.entry("sell", strategy.short, 10, when = strategy.position_size > 0)
-    plot(strategy.equity)
+   // @version=5
+   strategy("test")
+   if bar_index < 100
+       if strategy.position_size <= 0
+           strategy.entry("buy", strategy.long, 10)
+       else
+           strategy.entry("sell", strategy.short, 10)
+   plot(strategy.initial_capital + strategy.netprofit + strategy.openprofit)
 
 As soon as the script is compiled and applied to a chart, you can see
 filled order marks on it and how your balance was changing during
@@ -198,10 +200,12 @@ Example 1::
 
     //@version=5
     strategy("revers demo")
-    if bar_index  < 100
-        strategy.entry("buy", strategy.long, 4, when = strategy.position_size <= 0)
-        strategy.entry("sell", strategy.short, 6, when = strategy.position_size > 0)
-    plot(strategy.equity)
+    if bar_index < 100
+        if strategy.position_size <= 0
+            strategy.entry("buy", strategy.long, 4)
+        else
+            strategy.entry("sell", strategy.short, 6)
+    plot(strategy.initial_capital + strategy.netprofit + strategy.openprofit)
 
 The above strategy constantly reverses market position from +4 to -6,
 back and forth, which the plot shows.
@@ -210,7 +214,8 @@ Example 2::
 
     //@version=5
     strategy("exit once demo")
-    strategy.entry("buy", strategy.long, 4, when=strategy.position_size <= 0)
+    if strategy.position_size <= 0
+        strategy.entry("buy", strategy.long, 4)
     strategy.exit("bracket", "buy",  2, profit = 10, stop = 10)
 
 This strategy demonstrates a case where a market position is never
@@ -222,10 +227,10 @@ Example 3::
 
     //@version=5
     strategy("Partial exit demo")
-    if bar_index < 100
-        strategy.entry("buy", strategy.long, 4, when = strategy.position_size <= 0)
-    strategy.exit("bracket1", "buy",  2, profit = 10, stop = 10)
-    strategy.exit("bracket2", "buy",  profit = 20, stop = 20)
+    if bar_index < 100 and strategy.position_size <= 0
+        strategy.entry("buy", strategy.long, 4)
+    strategy.exit("bracket1", "buy", 2, profit = 10, stop = 10)
+    strategy.exit("bracket2", "buy", profit = 20, stop = 20)
 
 This code generates 2 levels of brackets (2 take profit orders and 2
 stop loss orders). Both levels are activated at the same time: first
@@ -262,8 +267,10 @@ Example::
     //@version=5
     strategy("next bar open execution demo")
     if bar_index < 100
-        strategy.order("buy", strategy.long, when = strategy.position_size == 0)
-        strategy.order("sell", strategy.short, when = strategy.position_size != 0)
+        if strategy.position_size == 0
+            strategy.order("buy", strategy.long)
+        else
+            strategy.order("sell", strategy.short)
 
 If this code is applied to a chart, all orders are filled at the open of
 every bar.
@@ -329,13 +336,12 @@ example::
 
     //@version=5
     strategy("exit Demo", pyramiding = 2, overlay = true)
-    strategy.entry("Buy1", strategy.long, 5,
-                   when = strategy.position_size == 0 and year > 2014)
-    strategy.entry("Buy2", strategy.long,
-                   10, stop = strategy.position_avg_price +
-                   strategy.position_avg_price*0.1,
-                   when = strategy.position_size == 5)
-    strategy.exit("bracket", loss = 10, profit = 10, when = strategy.position_size == 15)
+    if strategy.position_size == 0 and year > 2014 
+        strategy.entry("Buy1", strategy.long, 5)
+    else if strategy.position_size == 5 
+        strategy.entry("Buy2", strategy.long, 10, stop = strategy.position_avg_price + strategy.position_avg_price * 0.1)
+    else if strategy.position_size == 15 
+        strategy.exit("bracket", loss = 10, profit = 10)
 
 The code given above places 2 orders sequentially: "Buy1" at market
 price and "Buy2" at a 10% higher price (stop order). The exit order is placed
@@ -348,13 +354,13 @@ Another example::
 
     //@version=5
     strategy("exit Demo", pyramiding=2, overlay = true)
-    strategy.entry("Buy1", strategy.long, 5, when = strategy.position_size == 0)
-    strategy.entry("Buy2", strategy.long,
-                   10, stop = strategy.position_avg_price +
-                   strategy.position_avg_price*0.1,
-                   when = strategy.position_size == 5)
-    strategy.close("Buy2",when=strategy.position_size == 15)
-    strategy.exit("bracket", "Buy1", loss = 10, profit = 10, when=strategy.position_size == 15)
+    if strategy.position_size == 0
+        strategy.entry("Buy1", strategy.long, 5)
+    else if strategy.position_size == 5
+        strategy.entry("Buy2", strategy.long, 10, stop = strategy.position_avg_price + strategy.position_avg_price * 0.1)
+    else if strategy.position_size == 15
+        strategy.close("Buy2")
+        strategy.exit("bracket", "Buy1", loss = 10, profit = 10)
     plot(strategy.position_avg_price)
 
 -  It opens a 5-contract long position with the order "Buy1".
@@ -504,9 +510,11 @@ Example (MSFT, 1D)::
 
     //@version=5
     strategy("allow_entry_in demo", overlay = true)
-    if year > 2014
-        strategy.entry("LE", strategy.long, when = strategy.position_size <= 0)
-        strategy.entry("SE", strategy.short, when = strategy.position_size > 0)
+    if bar_index < 800
+        if strategy.position_size <= 0
+            strategy.entry("LE", strategy.long)
+        else 
+            strategy.entry("SE", strategy.short)
     strategy.risk.allow_entry_in(strategy.direction.long)
 
 As short entries are prohibited by the risk rules,
@@ -534,11 +542,11 @@ profit target or stop loss.
 
     //@version=5
     strategy("Currency test", currency = currency.EUR)
-    if year > 2020
+    if bar_index < 800
         strategy.entry("LE", strategy.long, 1000)
         strategy.exit("LX", "LE", profit = 1, loss = 1)
     profit = strategy.netprofit
-    plot(abs((profit - profit[1])*100), "1 point profit", color = color.blue, linewidth = 2)
+    plot(math.abs((profit - profit[1])*100), "1 point profit", color = color.blue, linewidth = 2)
     plot(1 / close[1], "prev usdeur", color = color.red)
 
 After adding this strategy to the chart we can see that the plot lines
