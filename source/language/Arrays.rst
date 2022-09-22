@@ -243,7 +243,7 @@ A `while <https://www.tradingview.com/pine-script-reference/v5/#op_while>`__ sta
         i = 0
         while i < array.size(a)
     	    array.set(a, i, i)
-        	i += 1
+       	    i += 1
     plot(array.sum(a))
 
 
