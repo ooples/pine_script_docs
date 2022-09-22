@@ -227,11 +227,10 @@ Example 3::
 
     //@version=5
     strategy("Partial exit demo")
-    if bar_index < 100
-        if strategy.position_size <= 0
-            strategy.entry("buy", strategy.long, 4)
-    strategy.exit("bracket1", "buy",  2, profit = 10, stop = 10)
-    strategy.exit("bracket2", "buy",  profit = 20, stop = 20)
+    if bar_index < 100 and strategy.position_size <= 0
+        strategy.entry("buy", strategy.long, 4)
+    strategy.exit("bracket1", "buy", 2, profit = 10, stop = 10)
+    strategy.exit("bracket2", "buy", profit = 20, stop = 20)
 
 This code generates 2 levels of brackets (2 take profit orders and 2
 stop loss orders). Both levels are activated at the same time: first
@@ -337,10 +336,12 @@ example::
 
     //@version=5
     strategy("exit Demo", pyramiding = 2, overlay = true)
-    switch strategy.position_size 
-        0 and year > 2014 => strategy.entry("Buy1", strategy.long, 5)
-        5 => strategy.entry("Buy2", strategy.long,10, stop = strategy.position_avg_price + strategy.position_avg_price*0.1)
-        15 => strategy.exit("bracket", loss = 10, profit = 10)
+    if strategy.position_size == 0 and year > 2014 
+        strategy.entry("Buy1", strategy.long, 5)
+    else if strategy.position_size == 5 
+        strategy.entry("Buy2", strategy.long, 10, stop = strategy.position_avg_price + strategy.position_avg_price * 0.1)
+    else if strategy.position_size == 15 
+        strategy.exit("bracket", loss = 10, profit = 10)
 
 The code given above places 2 orders sequentially: "Buy1" at market
 price and "Buy2" at a 10% higher price (stop order). The exit order is placed
@@ -353,10 +354,13 @@ Another example::
 
     //@version=5
     strategy("exit Demo", pyramiding=2, overlay = true)
-    switch strategy.position_size
-        0 => strategy.entry("Buy1", strategy.long, 5)
-        5 => strategy.entry("Buy2", strategy.long, 10, stop = strategy.position_avg_price + strategy.position_avg_price*0.1)
-        15 => strategy.close("Buy2"), strategy.exit("bracket", "Buy1", loss = 10, profit = 10)
+    if strategy.position_size == 0
+        strategy.entry("Buy1", strategy.long, 5)
+    else if strategy.position_size == 5
+        strategy.entry("Buy2", strategy.long, 10, stop = strategy.position_avg_price + strategy.position_avg_price * 0.1)
+    else if strategy.position_size == 15
+        strategy.close("Buy2")
+        strategy.exit("bracket", "Buy1", loss = 10, profit = 10)
     plot(strategy.position_avg_price)
 
 -  It opens a 5-contract long position with the order "Buy1".
