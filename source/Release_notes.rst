@@ -17,6 +17,10 @@ Release notes
 
 This page contains release notes of notable changes in Pine Script™.
 
+October 2022
+------------
+Pine Script™ now has a new, more powerful and better-integrated editor. Read `our blog <https://www.tradingview.com/blog/en/new-vsc-style-pine-script-editor-34159/>`_ to find out everything to know about all the new features and upgrades.
+
 September 2022
 -------------
 
