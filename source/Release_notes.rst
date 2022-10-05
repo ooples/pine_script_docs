@@ -21,6 +21,8 @@ October 2022
 ------------
 Pine Script™ now has a new, more powerful and better-integrated editor. Read `our blog <https://www.tradingview.com/blog/en/new-vsc-style-pine-script-editor-34159/>`_ to find out everything to know about all the new features and upgrades.
 
+New overload for the `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`_ function were added. Now it can create vertical gradients. More info about it in the `blog post <https://www.tradingview.com/blog/en/pine-script-vertical-gradients-33586/>`_.
+
 September 2022
 -------------
 
