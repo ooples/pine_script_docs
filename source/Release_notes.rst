@@ -23,6 +23,10 @@ Pine Script™ now has a new, more powerful and better-integrated editor. Read `
 
 New overload for the `fill() <https://www.tradingview.com/pine-script-reference/v5/#fun_fill>`_ function was added. Now it can create vertical gradients. More info about it in the `blog post <https://www.tradingview.com/blog/en/pine-script-vertical-gradients-33586/>`_.
 
+New built-in function was added:
+
+* `str.format_time() <https://www.tradingview.com/pine-script-reference/v5/#fun_str{dot}format_time>`_ - Converts a timestamp to a formatted string using the specified format and time zone.
+
 September 2022
 -------------
 
