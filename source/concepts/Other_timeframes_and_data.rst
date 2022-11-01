@@ -8,8 +8,6 @@
 
 .. _PageOtherTimeframesAndData:
 
-aaa
-
 Other timeframes and data
 =========================
 
